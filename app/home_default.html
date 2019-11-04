@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Home - Default</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
+
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet'/>
+    <link rel="stylesheet" type="text/css" href="styles/main.css"/>
+</head>
+<body class="homepage-layout">
+    <!-- brand header -->
+    <header class="brand-header">
+        <div class="container">
+            <h1 class="text-hide"><a href="#">ITC Trade Strategy Map</a></h1>
+
+            <h2>TRADE AND DEVELOPMENT POLICIES AT YOUR FINGERTIPS</h2>
+        </div>
+    </header>
+    <!-- navbar -->
+    <nav class="navbar navbar-default navbar-default-nomargin">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="home_default.html">Home</a></li>
+                    <li><a href="search_advanced.html">Search</a></li>
+                    <li><a href="research.html">Publications</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="feedback.html">Contact us</a></li>
+                </ul>
+
+
+                <div class="navbar-form navbar-left navbar-search" role="search">
+                    <div class="form-group">
+                        <input type="text" class="input-sm form-control" placeholder="Search">
+                    </div>
+                    <a href="search_details.html" class="btn btn-primary"><i class="fa fa-search"></i> </a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="language-selector">
+                        <ul class="list-inline ">
+                            <li class="active">
+                                <a href="#"><span class="label label-primary">EN</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="label label-default infobubble"
+                                                  title="Coming soon">FR</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="label label-default infobubble"
+                                                  title="Coming soon">ES</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a href="login.html"><i class="fa fa-power-off"></i> Login</a></li>
+                    <!--						<li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">John Moore <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                  <li><a href="#">Option 1</a></li>
+                                                  <li><a href="#">Option 2</a></li>
+                                                  <li class="divider"></li>
+                                                  <li><a href="#"><i class="fa fa-power-off"></i> Log out</a></li>
+                                                </ul>
+                                            </li>-->
+                </ul>
+            </div>
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- middle content section -->
+
+
+    <div class="intro hidden-xs hidden-sm">
+    <div class="alert alert-overlay">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+    class="sr-only">Close</span></button>
+    <p class="lead">The Export Strategy Map currently includes 155 countries, corresponding to all ITC
+    Priority Countries plus Romania. Overall, the database covers the entirety of Africa and Latin
+    America and most Asian countries. <a href="#">More...</a> </p>
+    </div>
+    </div>
+
+
+    <section id="map" class="map-container map-container-home"></section>
+
+    <main>
+        <section class="filters">
+            <div class="container">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="search-controls-wrapper">
+                                <div class="search-controls">
+                                    <div class="row" role="form">
+                                        <div class="col-xs-12 col-md-10">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-3">
+                                                    <select class="input-sm">
+                                                        <option value="">Region</option>
+                                                        <option value="region2">Region1</option>
+                                                        <option>Region2</option>
+                                                        <option>Region3</option>
+                                                        <option>Region4</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-3">
+
+                                                    <select id="country-001" placeholder="Country" class=" input-sm">
+                                                        <option value="">Country</option>
+                                                        <option value="12">Nairobi</option>
+                                                        <option value="13">Pune</option>
+                                                        <option value="14">Geneva</option>
+                                                    </select>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-3">
+
+                                                    <select class="input-sm" id="sector-002">
+                                                        <option value="">Sector</option>
+                                                        <option value="2">Business Process Outsourcing</option>
+                                                        <option>Cocoa</option>
+                                                        <option>Coffee</option>
+                                                        <option>Cotton</option>
+                                                        <option>Creative Services</option>
+                                                        <option>Essential Oils</option>
+                                                        <option>Ethical Fashion</option>
+                                                        <option>Floriculture</option>
+                                                        <option>Fruits and Vegetables</option>
+                                                        <option>Information and Communication Technology</option>
+                                                        <option>Leather</option>
+                                                        <option>Medicinal Plants</option>
+                                                        <option>Organic Products</option>
+                                                        <option>Pharmaceuticals</option>
+                                                        <option>Spices</option>
+                                                        <option>Textiles and Clothing</option>
+                                                        <option>Tourism</option>
+                                                        <option>Others</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-3">
+                                                    <select id="country-001" placeholder="Document type" class="input-sm">
+                                                        <option value="">Document type</option>
+                                                        <option value="12">Type2</option>
+                                                        <option value="13">Type3</option>
+                                                        <option value="14">Typ4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-2 ">
+                                            <div class="text-center">
+                                            <br class="hidden-md hidden-lg"/>
+                                            <a href="javascript:;" class="btn btn-primary  btn-filter btn-xs collapsed" data-toggle="collapse" data-target=".results-table" ><i class="fa fa-filter"></i> Apply filters</a>
+                                            <a href="javascript:;" class="btn-clear-filters" title="Clear filters">                                                <i class="fa fa-times-circle"></i>
+                                            </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-table results-table-preview collapse">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-xs-12">
+                        <div class="charts">
+                            <div class="card">
+                                <span class="card-title">Charts</span>
+                                <div class="card-content ">
+                                    <div id="charts-carousel" class="charts-carousel carousel slide" data-ride="carousel" data-interval="0">
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="item active">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4">
+                                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive"
+                                                             alt=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#charts-carousel" role="button"
+                                           data-slide="prev">
+                                            <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#charts-carousel" role="button"
+                                           data-slide="next">
+                                            <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#charts-carousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#charts-carousel" data-slide-to="1"></li>
+                                            <li data-target="#charts-carousel" data-slide-to="2"></li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-content">
+                    <div id="custom-toolbar" class="row">
+                      <div class="col-md-5" ></div>
+                      <div class="col-md-3" style="text-align:right;" >
+                        <a href="#" style="margin-right:9px;" title="Print chart" class="btn btn-default" data-toggle="tooltip"><i class="fa fa-print" ></i></a>
+                            <span class="dropdown pull-right">
+                              <button href="#" title="Export data" data-toggle="dropdown" class="btn btn-default">
+                                <i class="fa fa-download fa-fw"></i> Export results
+                                <i class="fa fa-caret-down"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#"><i class="fa fa-file-excel-o"></i> XLS</a></li>
+                                <li><a href="#"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+                                <li><a href="#"><i class="fa fa-file-text-o"></i> CSV</a></li>
+                              </ul>
+                            </span>
+
+                      </div>
+                      <div class="col-md-2">
+                        <select id="sorter">
+                          <option value="region left" selected="selected">Order by: Region</option>
+                          <option value="country left">Order by: Country</option>
+                          <option value="countryCode left">Order by: Country Code</option>
+                          <option value="title middle">Order by: Title</option>
+                          <option value="year right" >Order by: Year</option>
+                          <option value="lastUpdate right">Order by: Last Update</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2">
+                        <select id="sorter-how">
+                          <option value="asc" selected="selected">Ascending</option>
+                          <option value="desc">Descending</option>
+                        </select>
+
+                      </div>
+
+
+                    </div>
+
+
+                        <!-- results table -->
+                        <!-- this utilizes bootstrap-table with lots of filtering/sorting options and ability to load remote JSON -->
+                        <!-- http://wenzhixin.net.cn/p/bootstrap-table/ -->
+
+<table class="table table-default table-sortable table-no-hover table-disable-hover"
+
+
+
+
+
+       >
+                            <thead>
+                            <tr>
+                                <th class="col-xs-4"  >
+                                </th>
+                                <th class="col-xs-4">
+                                </th>
+                                <th class="col-xs-4">
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="charts ">
+            <div class="container">
+                <div class="row eq-height-grid">
+                    <div class="col-xs-12 col-sm-4" >
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4" >
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="card">
+                            <ul class="list-teaser list-teaser-arrow">
+                                <li>
+                                    <a href="#">
+                                        <span class="date">20 Jan. 2014</span>
+                                        <h5>News item title</h5>
+
+                                        <p>News item teaser text lorem ipsum lorem ipsum lorem ipsum...</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="date">20 Jan. 2014</span>
+                                        <h5>News item title</h5>
+
+                                        <p>News item teaser text lorem ipsum lorem ipsum lorem ipsum...</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="date">20 Jan. 2014</span>
+                                        <h5>News item title</h5>
+
+                                        <p>News item teaser text lorem ipsum lorem ipsum lorem ipsum...</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <p class="text-center">
+                                <a href="#" class="text-muted"><i class="fa fa-ellipsis-h fa-2x"></i> </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; International Trade Centre 2014</p>
+        </div>
+    </footer>
+
+
+    <script src="js/vendor/jquery-1.10.1.min.js"></script>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/bootstrap-modalmanager.js"></script>
+<script src="js/vendor/selectize.js"></script>
+<script src="bower_components/animated-scrollto/animatedScrollTo.js"></script>
+<script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="js/commons.js"></script>
+<script src="js/result-table.js"></script>
+
+
+
+<script type="text/javascript">
+
+    var currently_selected_country = "none";
+
+    function set_currently_selected_country(value) {
+        currently_selected_country = value;
+    }
+
+
+    $(window).load(function () {
+
+        var map = L.map('map', {
+            attributionControl: false,
+            scrollWheelZoom: false,
+            zoom: 3,
+            minZoom: 2,
+            maxZoom: 6,
+            continuousWorld: 'true'
+        }).setView([10.505, 25.09], 3);
+
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/zimmerman2014.hmj09g6h/{z}/{x}/{y}.png', {
+            maxZoom: 6
+        }).addTo(map);
+
+        $('select').selectize({
+            openOnFocus: true,
+        });
+
+        $('[data-toggle="tooltip"]').tooltip({});
+
+
+    $('.btn-filter').click(function(evt){
+
+
+
+
+
+
+    init_table(
+        function(){
+
+            $("body,html").animate({scrollTop: parseInt($('.bootstrap-table').position().top)}, '0', 'swing');
+            evaluate_show_less("short-text full-text");
+
+        });
+
+    });
+    $('html').click(function() {
+    var e =$(".alert");
+    if(e){
+    e.hide();
+    }
+    //Hide the menus if visible
+    });
+    });
+
+</script>
+</body>
+</html>

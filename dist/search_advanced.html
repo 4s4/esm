@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Search details</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script src="https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css" rel="stylesheet">
+
+</head>
+<body>
+<form role="form">
+    <!-- brand header -->
+    <header class="brand-header">
+        <div class="container">
+            <h1 class="text-hide"><a href="#">ITC Export Strategy Map</a></h1>
+
+            <h2>TRADE AND DEVELOPMENT POLICIES AT YOUR FINGERTIPS</h2>
+        </div>
+    </header>
+    <!-- navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="home_default.html">Home</a></li>
+                    <li class="active"><a href="search_advanced.html">Search</a></li>
+                    <li><a href="research.html">Publications</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="feedback.html">Contact us</a></li>
+                </ul>
+
+
+                <div class="navbar-form navbar-left navbar-search" role="search">
+                    <div class="form-group">
+                        <input type="text" class="input-sm form-control" placeholder="Search">
+                    </div>
+                    <a href="search_details.html" class="btn btn-primary"><i class="fa fa-search"></i> </a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="language-selector">
+                        <ul class="list-inline">
+                            <li class="active">
+                                <a href="#"><span class="label label-primary">EN</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="label label-default infobubble" title="Coming soon">FR</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="label label-default infobubble" title="Coming soon">ES</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a href="login.html"><i class="fa fa-power-off"></i> Login</a></li>
+                    <!--						<li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">John Moore <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                  <li><a href="#">Option 1</a></li>
+                                                  <li><a href="#">Option 2</a></li>
+                                                  <li class="divider"></li>
+                                                  <li><a href="#"><i class="fa fa-power-off"></i> Log out</a></li>
+                                                </ul>
+                                            </li>-->
+                </ul>
+            </div>
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+
+
+        <!-- BREADCRUMB TRAIL -->
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">Search</a></li>
+        </ol>
+        <!-- END BREADCRUMBS -->
+        <h2>Search documents</h2>
+
+    </div>
+
+    <!-- middle content section -->
+    <section class="search-controls search-controls-full">
+        <div class="container">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <fieldset class="col-xs-6">
+                            <!--<legend>Key variables</legend>-->
+
+                            <div class="row" style="display: block">
+                                <div class="form-group col-xs-6" data-toggle="tooltip" title="Official country name.">
+                                    <label for="country_name">Country</label>
+                                    <select id="country_name" placeholder="Country">
+                                        <option value="">Country</option>
+                                        <option value="12">Nairobi</option>
+                                        <option value="13">Pune</option>
+                                        <option value="14">Geneva</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-xs-6" data-toggle="tooltip" title="Geographic region where the country belongs.">
+                                    <label for="region">Region</label>
+                                    <input id="region" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row" data-toggle="tooltip" title="Year of approval of the document.">
+                                <label for="year">Year</label>
+                                <input type="text" class="slider col-xs-6" id="year" value="" data-range="true" data-slider-min="2002" data-slider-max="2015" data-slider-step="1" data-slider-value="[2006,2010]" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="hide">
+                            </div>
+
+                            <div class="form-group" data-toggle="tooltip" title="Document type. " style="display: block">
+                                <label for="document_type" class="col-xs-6">Type of Document</label>
+                                <select id="document_type" multiple="multiple">
+                                    <option value=""></option>
+                                    <option value="22">type1</option>
+                                    <option value="23">type2</option>
+                                    <option value="24">type3</option>
+                                </select>
+                                <br>
+                                <br>
+                            </div>
+
+                            <div class="row" style="display: block">
+                            <div class="form-group col-xs-6" data-toggle="tooltip" title="Year of implementation (start)">
+                                <label for="start">Start Year of Implementation</label>
+                                <input type="text" class="slider" id="start" value="" data-range="true" data-slider-min="2002" data-slider-max="2015" data-slider-step="1" data-slider-value="2003" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="hide">
+                            </div>
+                            <div class="form-group col-xs-6" data-toggle="tooltip" title="Year of implementation (end)">
+                                <label for="year-end">End Year of Implementation</label>
+                                <input type="text" class="slider" id="year-end" value="" data-range="true" data-slider-min="2002" data-slider-max="2015" data-slider-step="1" data-slider-value="2006" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="hide">
+                            </div>
+                            </div>
+
+
+                            <div class="form-group" data-toggle="tooltip" title="Priority sectors of the document (as written in the text)">
+                                <label for="priority_sector">Priority Sectors</label>
+                                <input id="priority_sector" class="form-control" type="text">
+                            </div>
+                            <div class="form-group" data-toggle="tooltip" title="SITC Rev. 4 2-digit priority sectors">
+                                <label for="sitc2">Priority Sectors - SITC Revision 4</label>
+                                <input id="sitc2" class="form-control" type="text">
+                            </div>
+                            <div class="form-group" data-toggle="tooltip" title="Sector categories to be displayed in the TSM">
+                                <label for="sector_category">Sector Name and Sector Type in ITC’s classification of sectors.</label>
+                                <input id="sector_category" class="form-control" type="text">
+                            </div>
+                                <div class="form-group row" data-toggle="tooltip" title="Date in which the record has been last updated." style="display: block !important">
+                                    <label for="update" class="col-xs-6" style="width: 100px;display: inline">Last Update</label>
+                                    <input id="update" class="form-control col-xs-6" type="text" style="width: 100px;display: inline">
+                                </div>
+
+
+
+
+                            <!--end generated fields -->
+
+
+                            <div class="form-group row">
+                                <label class="col-xs-12">Year of implementation</label>
+
+                                <div class="col-xs-12">
+                                    <input type="text" class="slider col-xs-6" value="" data-range="true" data-slider-min="2002" data-slider-max="2015" data-slider-step="1" data-slider-value="[2006,2010]" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show">
+                                    <label>2009</label>
+                                    <label>2015</label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="col-xs-3">
+                            <!--<legend>Thematic focus</legend>-->
+
+                            <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on poverty reduction">
+                                <label>
+                                    <input type="checkbox" id="poverty_reduction">
+                                    Poverty Reduction</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on gender equality">
+                                <label>
+                                    <input type="checkbox" id="gender">
+                                    Gender</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on youth integration">
+                                <label>
+                                    <input type="checkbox" id="youth">
+                                    Youth</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on environmental sustainability">
+                                <label>
+                                    <input type="checkbox" id="environment">
+                                    Environment</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document focuses on regional integration.">
+                                <label>
+                                    <input type="checkbox" id="regional_integration">
+                                    Regional Integration</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade finance and/or access to credit.">
+                                <label>
+                                    <input type="checkbox" id="trade_finance">
+                                    Trade Finance</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade information and/or market intelligence.">
+                                <label>
+                                    <input type="checkbox" id="trade_information">
+                                    Trade Information</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document focuses on standards and/or quality management.">
+                                <label>
+                                    <input type="checkbox" id="quality">
+                                    Quality</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on Technical and Vocational Education and Training (TVET).">
+                                <label>
+                                    <input type="checkbox" id="tvet">
+                                    TVET</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade facilitation.">
+                                <label>
+                                    <input type="checkbox" id="trade_facilitation">
+                                    Trade Facilitation</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade promotion.">
+                                <label>
+                                    <input type="checkbox" id="trade_promotion">
+                                    Trade Promotion</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document focuses primarily on trade.">
+                                <label>
+                                    <input type="checkbox" id="trade_focus">
+                                    Focus on Trade</label></div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="Regional strategy.">
+                                <label>
+                                    <input type="checkbox" id="regional" class="">
+                                    Regional Document
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="Title of the document">
+                                <label>
+                                    <input type="checkbox" id="regional" class="">
+                                    Title
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="Brief description of the document">
+                                <label>
+                                    <input type="checkbox" id="regional" class="">
+                                    Description of the Document
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The country is a Least Developed Country (LDC)">
+                                <label>
+                                    <input type="checkbox" id="regional" class="">
+                                    Least Developed Country
+                                </label>
+                            </div>
+
+
+                            <div class="checkbox" data-toggle="tooltip" title="The country is a Land-Locked Least Developed Country (LLDC)">
+                                <label>
+                                    <input type="checkbox" id="regional" class="">
+                                    Land-Locked Least Developed Country
+                                </label>
+                            </div>
+
+
+                        </fieldset>
+
+                        <fieldset class="col-xs-3">
+                            <!--<legend>Process/institutional</legend>-->
+
+                            <div class="checkbox" data-toggle="tooltip" title="Authority responsible for the elaboration and implementation of the document.">
+                                <label>
+                                    <input type="checkbox" id="counterpart">
+                                    Authority
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="Strategy document facilitated by ITC.">
+                                <label>
+                                    <input type="checkbox" id="itc">
+                                    Document facilitated by the International Trade Centre (ITC)
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document includes a detailed plan of action.">
+                                <label>
+                                    <input type="checkbox" id="action_plan">
+                                    Plan of Action
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document provides for a National Export Council (NEC) or a similar type of institution.">
+                                <label>
+                                    <input type="checkbox" id="nec">
+                                    National Export Council (NEC) or similar
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="Resources have been allocated for the implementation of the document’s plan of action.">
+                                <label>
+                                    <input type="checkbox" id="allocated_resources">
+                                    Resources Allocated
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document has been elaborated through a participatory process.">
+                                <label>
+                                    <input type="checkbox" id="participatory">
+                                    Participatory
+                                </label>
+                            </div>
+
+                            <div class="checkbox" data-toggle="tooltip" title="The document is fully owned by the country.">
+                                <label>
+                                    <input type="checkbox" id="country_owned">
+                                    Country Ownership
+                                </label>
+                            </div>
+
+
+                        </fieldset>
+
+                    </div>
+
+
+
+                    <div class="row">
+                        <br>
+                        <div class="text-center">
+                            <button class="btn btn-primary">Apply filters</button>
+                            <a href="javascript:;" class="btn-clear-filters" title="Clear filters">                                                <i class="fa fa-times-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="overlay"></div>
+                <div class="expander">
+                    <button class="btn btn-link"><i class="fa fa-ellipsis-h fa-2x"></i></button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="map-container map-container-details">
+        <div class="container">
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <section class="results-table results-table-preview">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="charts">
+                        <div class="card">
+                            <span class="card-title">Charts</span>
+                            <div class="card-content">
+                                <div id="charts-carousel" class="charts-carousel carousel slide" data-ride="carousel" data-interval="0">
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item active">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#charts-carousel" role="button" data-slide="prev">
+                                        <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#charts-carousel" role="button" data-slide="next">
+                                        <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#charts-carousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#charts-carousel" data-slide-to="1"></li>
+                                        <li data-target="#charts-carousel" data-slide-to="2"></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <ul id="custom-toolbar" class="custom-table-toolbar">
+                        <li>
+                            <span class="dropdown pull-right">
+                                <button href="#" title="Export data" data-toggle="dropdown" class="btn btn-default">
+                                    <i class="fa fa-download fa-fw"></i> Export results
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="fa fa-file-excel-o"></i> XLS</a></li>
+                                    <li><a href="#"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+                                    <li><a href="#"><i class="fa fa-file-text-o"></i> CSV</a></li>
+                                </ul>
+                            </span>
+                        </li>
+                        <li>
+                            <a href="#" title="Print chart" class="btn btn-default" data-toggle="tooltip"><i class="fa fa-print"></i></a>
+                        </li>
+                    </ul>
+
+
+                    <!-- results table -->
+                    <!-- this utilizes bootstrap-table with lots of filtering/sorting options and ability to load remote JSON -->
+                    <!-- http://wenzhixin.net.cn/p/bootstrap-table/ -->
+
+                    <table class="table table-default table-striped table-sortable" data-show-columns="true" data-sort-name="name" data-sort-order="desc">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-1" data-field="region">
+                                blah
+                            </th>
+                            <th class="col-xs-1">
+                            </th>
+                            <th class="col-xs-1">
+                            </th>
+                            <th class="col-xs-1">
+                            </th>
+                            <th class="col-xs-2">
+                            </th>
+                            <th class="col-xs-2">
+                            </th>
+                            <th class="col-xs-4">
+
+
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Africa</td>
+                            <td>
+                                Angola
+                            </td>
+                            <td>
+                                2006
+                            </td>
+                            <td><span class="label label-default">UNAAF</span></td>
+                            <td>
+                                <a href="search_details.html#">Diagnostic Trade Integration Study - Angola</a>
+                            </td>
+                            <td>
+                                <span class="label label-default">Coffee</span>
+                                <span class="label label-default">Cashew</span>
+                                <span class="label label-default">Farming</span>
+                                <span class="label label-default">Lorem</span>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Africa</td>
+                            <td>
+                                Benin
+                            </td>
+                            <td>
+                                2005
+                            </td>
+                            <td><span class="label label-default">UNAAF</span></td>
+                            <td>
+                                <a href="search_details.html#">Diagnostic Trade Integration Study - Benin</a>
+                            </td>
+                            <td>
+                                <span class="label label-default">Coffee</span>
+                                <span class="label label-default">Cashew</span>
+                                <span class="label label-default">Farming</span>
+                                <span class="label label-default">Lorem</span>
+                            </td>
+                            <td>
+                                Agro-Processing Industry, Cashew, Cotton, Fisheries, Pineapple, Shea, Shrimp Farming,
+                                Tourism
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Africa</td>
+                            <td>
+                                Burkina Faso
+                            </td>
+                            <td>
+                                2007
+                            </td>
+                            <td><span class="label label-default">UNAAF</span></td>
+                            <td>
+                                <a href="search_details.html#">The Challenge of Export Diversification for a Landlocked
+                                    Country</a>
+                            </td>
+                            <td>
+                                <span class="label label-default">Coffee</span>
+                                <span class="label label-default">Cashew</span>
+                                <span class="label label-default">Farming</span>
+                                <span class="label label-default">Lorem</span>
+                            </td>
+                            <td>
+                                Black-Eyed Pea, Cereals, Copper, Cotton, Fruits, Gold, Hides and Skins, Livestock,
+                                Oilseeds, Textile Industry, Vegetable Oil, Vegetables, Zinc
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Africa</td>
+                            <td>
+                                Burundi
+                            </td>
+                            <td>
+                                2004
+                            </td>
+                            <td><span class="label label-default">UNAAF</span></td>
+                            <td>
+                                <a href="search_details.html">Étude diagnostique sur l’intégration commerciale -
+                                    Burundi</a>
+                            </td>
+                            <td>
+                                <span class="label label-default">Coffee</span>
+                                <span class="label label-default">Cashew</span>
+                                <span class="label label-default">Farming</span>
+                                <span class="label label-default">Lorem</span>
+                            </td>
+                            <td>
+                                Coffee, Cotton, Financial Services, Floriculture, Food Processing, Fruits,
+                                Manufacturing, Tea, Telecommunication Services, Transport Services, Vegetables
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Asia</td>
+                            <td>
+                                Cambodia
+                            </td>
+                            <td>
+                                2007
+                            </td>
+                            <td><span class="label label-default">UNAAF</span></td>
+                            <td>
+                                <a href="search_details.html">Cambodia Trade Integration Strategy - Executive
+                                    Summary</a>
+                            </td>
+                            <td>
+                                <span class="label label-default">Coffee</span>
+                                <span class="label label-default">Cashew</span>
+                                <span class="label label-default">Farming</span>
+                                <span class="label label-default">Lorem</span>
+                            </td>
+                            <td>
+                                Beer, Business processes/web-based services, Cashew, Cassava, Corn, Fisheries, Footwear,
+                                Fruits, Garment Industry, Labour Services, Light Manufacturing, Livestock, Rice
+                                (including organic rice), Rubber, Silk, Silk Handicrafts, Soybeans, Tourism, Transport
+                                and transport-related services, Vegetables, Wood Industry
+                            </td>
+                        </tr>
+
+                        </tbody>
+
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; International Trade Centre 2015</p>
+        </div>
+    </footer>
+</form>
+<script src="js/vendor/jquery-1.10.1.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/bootstrap-modalmanager.js"></script>
+<script src="js/vendor/selectize.js"></script>
+
+<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+<script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="bower_components/bootstrap3-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script src="js/result-table.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var map = L.map('map', {
+            attributionControl: false,
+            scrollWheelZoom: false,
+            zoom: 3,
+            minZoom: 2,
+            maxZoom: 6,
+            continuousWorld: 'true'
+        }).setView([10.505, 25.09], 3);
+
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/zimmerman2014.hmj09g6h/{z}/{x}/{y}.png', {
+            maxZoom: 6
+        }).addTo(map);
+
+
+        $('select').selectize({
+            openOnFocus: true
+        });
+
+        $('#update').datepicker();
+
+        $('[data-toggle="tooltip"]').tooltip({
+            container: 'body'
+        });
+
+//        $('ul.tree.root').find('ul.tree').hide();
+//        $('.tree-toggler').click(function () {
+//            $(this).parent().children('ul.tree').toggle(300);
+//        });
+
+        $('.slider').slider({});
+
+        $('.pagination-detail').empty();
+
+    });
+
+
+</script>
+</body>
+</html>

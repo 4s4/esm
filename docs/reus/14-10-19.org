@@ -1,0 +1,80 @@
+
+* Reu 14-10-19
+
+** decisión: la página de home y la página de data se unifican
+
+ - cuando se unan, la página final se tendría que parecer más a la actual home que a la actual data
+ - el mapa debe encabezar la nueva página (mayor prioridad al mapa)
+*** sobre el menu superior/buscador: 
+ Por ahora las 4 opciones están bien
+ - regiones: geográficas y económicas
+ - country
+ - sector
+ - type
+
+
+*** sobre las opciones de busqueda:
+    "mantenemos" el fold/unfold de panels y los tres grandes bloques también pero la opción de año activo se movería al menú superior/buscador
+
+**** sobre las opciones de document-field:
+
+***** implementation period: 
+ - en lugar de usar las bolitas, sustituir por un input field de tipo númerico (aunque al backend se enviaría el mismo tipo de dato ~period:2003,2004~ para así no implicar cambios en el backend api https://tradestrategymap.org/search/PopulateAdvanceSearchFilter)
+ - cambiaría de nombre a ... (año activo?)
+***** authority: desaparece (confirmado)
+***** latest update: desaparece
+
+***** year approval: permanece,
+ TODO: ¿por qué aparece el límite de 2016?
+
+***** thematic focus:
+  las opciones actuales se quedan e incluso pueden crecer
+
+***** design process:
+  se deja cerrado (? se irá viendo) ... 
+
+***** apply filters: desaparece  
+ la opción de resetear opciones "x" ya se verá si la mantenemos
+
+ 
+*** graficos:
+ todos los gráficos se refieren a proyectos ~activos~, (inside implementation period)
+
+  - se deben referir al "año" activo y no solo al 2019
+  - moverlos a la derecha de la página o al pie de página (footer)
+  - primer y cuarto gráficos desaparecen
+
+*** resultados
+ - permanece descripción
+ - permanece info situada a la izquierda (region y country con imagen)
+ - permanecen los sectores
+ - permanece el Type
+ - sacar el año (?)
+ - mantener el period
+ - sacar el last update
+ - incluir los matchs de "thematic focus" (validado)
+
+
+** navegacion mapa
+  
+*** TODO la info del pop up debería ser el quinto gráfico de la pagina busqueda
+
+
+*** Revisar librería actual de mapas
+
+  - [X] Investigar versión en uso y última versión. 
+ 
+ _mapbox_
+
+   https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.js
+   current 2.2.2
+
+   actual v3.2.0: https://github.com/mapbox/mapbox.js/releases 
+
+   Changelog
+   https://github.com/mapbox/mapbox.js/blob/publisher-production/CHANGELOG.md
+
+**** TODO Actualizar a última versión y revisar si arregla problemas de usabilidad
+ - el tooltip/pop-up no sale bien colocado:
+   https://docs.mapbox.com/mapbox.js/example/v1.0.0/custom-popup/
+

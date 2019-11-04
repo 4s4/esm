@@ -1,0 +1,59 @@
+*  list [12/15]
+
+** TODO intentar desplegar 
+ prototype deploy with github webpages & js
+ 
+** DONE actualizar mapbox
+   CLOSED: [2019-10-27 Sun 23:38]
+ 
+** DONE research issue de tooltip ...
+   CLOSED: [2019-10-27 Sun 23:38]
+   - no hay issue, sino que marca en honolulú
+   - possible fix: debug of which path should be the "normal" EEUU one (defining new js vars for each EEUU path, then add or remove from full combined path), once that we know which path should point the tool-tip then add a hard coded js conditional
+ 
+** DONE research if tooltip can contain complex elements like charts
+   CLOSED: [2019-10-27 Sun 23:38]
+ it's possible to add HTML but still not sure about how complex should/could be the data inside, we could face usability problems
+ 
+** DONE unir home and search en la misma pagina
+   CLOSED: [2019-10-27 Sun 23:38]
+ 
+** DONE mover el mapa encima de las opciones de busqueda
+   CLOSED: [2019-10-27 Sun 23:38]
+ 
+** DONE eliminar "design process"
+   CLOSED: [2019-10-27 Sun 23:38]
+ 
+** DONE eliminar "Document fiel"/authority
+   CLOSED: [2019-10-27 Sun 23:39]
+ 
+** DONE remove languages selector
+** DONE research integration of the client with the backend part
+   CLOSED: [2019-10-27 Sun 23:42]
+so we have to replace manually the code in the views ... just search of specific parts of the client side in be code to find out the references
+** DONE research generation of css doc styles
+   CLOSED: [2019-11-04 Mon 21:45]
+using https://kss-node.github.io/kss-node/
+https://github.com/kss-node/kss-node/wiki/quick-start-guide
+https://github.com/kss-node/kss-node
+https://github.com/kss-node/kss-node/tree/master/demo
+*** grunt
+https://github.com/kss-node/grunt-kss
+*** resources
+https://github.com/kss-node/kss-node/wiki/KSS-style-guide-example-pages
+https://kss-scheibo.scheibitz.com/
+https://github.com/scheibome/kss-scheibo
+
+(not in use but seems interesting http://1026.github.io/kss-node-template-such-as-github/styleguide/ ... but not in npm :/ https://github.com/1026/kss-node-template-such-as-github)
+** TODO research proper org-mode todo flow
+** DONE make a security copy of the code
+   CLOSED: [2019-10-27 Sun 23:47]
+using git + dropbox so far
+** TODO configure git account with repo
+** DONE review backend tech
+   CLOSED: [2019-10-29 Tue 11:00]
+bases datos: sql server, lucene
+.net framework
+versiones more or less updated
+
+

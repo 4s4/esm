@@ -1,0 +1,211 @@
+/*  Standards Map customization */
+/* pre-3.0.1 variables  */
+* {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body {
+  background: white;
+}
+hr {
+  clear: both;
+}
+nav,
+.module-nav,
+.module-help,
+.block-help,
+.criteria-widget,
+.standards-chooser,
+.reference-control,
+.panel-filter > .panel-heading {
+  display: none !important;
+}
+section {
+  display: block;
+  page-break-after: always;
+  overflow: auto;
+  clear: both;
+}
+section:last-child {
+  page-break-after: auto;
+}
+section > h2 {
+  border-bottom: 1px solid #3081c8;
+  padding-bottom: .5em;
+}
+section > h2 small {
+  display: block;
+}
+time {
+  display: block;
+  margin: 0 0 0 0 ;
+  float: right;
+}
+div > h4:first-child {
+  margin-top: 0;
+}
+h4 {
+  font-weight: bold;
+  color: #002b54;
+  margin-bottom: .25em;
+}
+h3 {
+  font-weight: bold;
+  color: #002b54;
+}
+address {
+  margin-bottom: .25em;
+  font-weight: normal;
+}
+h4 + h2 {
+  margin-top: 0;
+}
+.footnotes {
+  border-top: 1px solid #3081c8;
+  padding-top: .5em;
+}
+.brand-header {
+  height: 100px !important;
+  display: block;
+  overflow: hidden !important;
+}
+.brand-header h1,
+.brand-header h2,
+.brand-header .container {
+  background: none !important;
+}
+.brand-header .container {
+  margin-top: 25px !important;
+  margin-left: 20px;
+}
+.brand-header > .container:before {
+  content: url(../img/sm-branding.png);
+  float: right;
+  right: 0;
+  top: 0;
+  height: 100px !important;
+  position: absolute;
+  top: -10px;
+}
+.brand-header h1 {
+  width: 160px !important;
+  height: 100px;
+  margin: 0;
+  padding: 0;
+  float: left;
+  border: none !important;
+  background: none;
+}
+.brand-header h1:before {
+  content: url(../img/itc-logo.png);
+  width: 160px;
+  height: 100px !important;
+  display: block;
+  margin-top: 10px;
+}
+.brand-header h2 {
+  position: absolute;
+  left: 180px;
+  top: 10px;
+  width: 420px !important;
+  height: 60px;
+  font-size: 15px;
+  font-weight: normal;
+  border-left: 1px solid #efefef;
+  white-space: normal;
+  padding: 40px 0 0 20px !important;
+}
+.brand-header h2:before {
+  content: url(../img/standards-map-heading.png);
+  position: absolute;
+  top: 10px;
+  display: block;
+  height: 60px !important;
+}
+.compare > .panel {
+  border-left: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  /*.lh-border-radius(0);*/
+}
+.review-table-heading {
+  background: white !important;
+  border: none !important;
+}
+.review-table-heading .first-column {
+  border: none !important;
+}
+.review-table-heading .first-column p {
+  display: none !important;
+}
+.review-table-heading .standard-collection {
+  border-left: none !important;
+}
+.review-table-heading .standard-collection li {
+  border-left-color: #ECF6FF;
+  /*border-top: 1px solid #ccc;*/
+}
+.review-table-heading .standard-collection li:first-child {
+  border-left: none !important;
+}
+.graphs-table {
+  clear: left !important;
+}
+.graphs-table .compare-table > .panel-body {
+  border: none !important;
+  border-left: none !important;
+}
+.collapsible-table > .panel > .panel-heading {
+  background-color: #fff !important;
+}
+[data-toggle=collapse]:before {
+  content: "";
+  display: none !important;
+}
+[data-toggle=collapse].collapsed {
+  display: block;
+}
+[data-toggle=collapse].collapsed:before {
+  content: "";
+  display: none !important;
+}
+[data-toggle=collapse].collapsed.btn-expandable-control:before,
+[data-toggle=collapse].btn-expandable-control:before {
+  content: "";
+}
+.standard-collection li {
+  border: none !important;
+}
+.contact-details {
+  font-weight: normal;
+}
+.disclaimer {
+  font-style: italic;
+  font-size: 80%;
+}
+.certifications li {
+  margin-bottom: .75em;
+}
+.certifications li abbr {
+  font-weight: bold;
+}
+.table-softlines {
+  border-left: 0 !important;
+  border-right: 0 !important;
+  width: 80%;
+  margin-bottom: 0.5em;
+}
+.table-softlines th {
+  font-weight: normal;
+  padding-left: 0;
+  width: 40%;
+  margin-left: 0;
+}
+.table-softlines td {
+  padding-left: 1em;
+  font-weight: bold;
+  width: 40%;
+  margin-left: 0;
+  border-right: none !important;
+}

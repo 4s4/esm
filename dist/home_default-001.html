@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Home - Default</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script src="https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css" rel="stylesheet">
+
+
+    <!--<script src="js/vendor/less.js"></script>-->
+</head>
+<body>
+<form role="form">
+    <!-- brand header -->
+    <header class="brand-header">
+        <div class="container">
+            <h1 class="text-hide"><a href="#">ITC Trade Strategy Map</a></h1>
+
+            <h2>TRADE AND DEVELOPMENT POLICIES AT YOUR FINGERTIPS</h2>
+        </div>
+    </header>
+    <!-- navbar -->
+    <nav class="navbar navbar-default navbar-default-nomargin">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="home_default.html">Home</a></li>
+                    <li><a href="search_details.html">Advanced search</a></li>
+                    <li><a href="indicators.html">Indicators</a></li>
+                    <li><a href="research.html">Research</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="feedback.html">Contact us</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="language-selector">
+                        <ul class="list-inline">
+                            <li class="active">
+                                <a href="#"><span class="label label-primary">EN</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="label label-default infobubble" title="Coming soon">FR</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="label label-default infobubble" title="Coming soon">ES</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a href="login.html"><i class="fa fa-power-off"></i> Login</a></li>
+                    <!--						<li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">John Moore <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                  <li><a href="#">Option 1</a></li>
+                                                  <li><a href="#">Option 2</a></li>
+                                                  <li class="divider"></li>
+                                                  <li><a href="#"><i class="fa fa-power-off"></i> Log out</a></li>
+                                                </ul>
+                                            </li>-->
+                </ul>
+            </div>
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- middle content section -->
+
+
+    <section class="map">
+        <div class="intro">
+            <div class="alert alert-overlay">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <p class="lead">The Export Strategy Map currently includes 155 countries, corresponding to all ITC
+                    Priority Countries plus Romania. Overall, the database covers the entirety of Africa and Latin
+                    America and most Asian countries. </p>
+            </div>
+        </div>
+        <div id="map"></div>
+        <div class="">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="search-controls-wrapper">
+                        <div class="search-controls">
+                            <h2>Search the export strategy map</h2>
+
+                            <form class="form-inline" role="form">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3">
+                                        <input class="form-control input-sm" type="text" placeholder="Search">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-3">
+                                        <select>
+                                            <option value="1">Select a country</option>
+                                            <option value="2">Afghanistan</option>
+                                            <option>Albania</option>
+                                            <option>Algeria</option>
+                                            <option>Angola</option>
+                                            <option>Antigua and Barbuda</option>
+                                            <option>Argentina</option>
+                                            <option>Armenia</option>
+                                            <option>Azerbaijan</option>
+                                            <option>Bahamas</option>
+                                            <option>Bahrain</option>
+                                            <option>Bangladesh</option>
+                                            <option>Barbados</option>
+                                            <option>Belarus</option>
+                                            <option>Belize</option>
+                                            <option>Benin</option>
+                                            <option>Bhutan</option>
+                                            <option>Bolivia</option>
+                                            <option>Bosnia and Herzegovina</option>
+                                            <option>Botswana</option>
+                                            <option>Brazil</option>
+                                            <option>Burkina Faso</option>
+                                            <option>Burundi</option>
+                                            <option>Cambodia</option>
+                                            <option>Cameroon</option>
+                                            <option>Cape Verde</option>
+                                            <option>Central African Republic</option>
+                                            <option>Chad</option>
+                                            <option>Chile</option>
+                                            <option>China</option>
+                                            <option>Colombia</option>
+                                            <option>Comoros</option>
+                                            <option>Congo</option>
+                                            <option>Costa Rica</option>
+                                            <option>Côte d'Ivoire</option>
+                                            <option>Croatia</option>
+                                            <option>Cuba</option>
+                                            <option>Democratic People's Republic of Korea</option>
+                                            <option>Democratic Republic of Congo</option>
+                                            <option>Djibouti</option>
+                                            <option>Dominica</option>
+                                            <option>Dominican Republic</option>
+                                            <option>Ecuador</option>
+                                            <option>Egypt</option>
+                                            <option>El Salvador</option>
+                                            <option>Equatorial Guinea</option>
+                                            <option>Eritrea</option>
+                                            <option>Ethiopia</option>
+                                            <option>Federated States of Micronesia</option>
+                                            <option>Fiji</option>
+                                            <option>Gabon</option>
+                                            <option>Gambia</option>
+                                            <option>Georgia</option>
+                                            <option>Ghana</option>
+                                            <option>Grenada</option>
+                                            <option>Guatemala</option>
+                                            <option>Guinea</option>
+                                            <option>Guinea-Bissau</option>
+                                            <option>Guyana</option>
+                                            <option>Haiti</option>
+                                            <option>Honduras</option>
+                                            <option>India</option>
+                                            <option>Indonesia</option>
+                                            <option>Iraq</option>
+                                            <option>Islamic Republic of Iran</option>
+                                            <option>Jamaica</option>
+                                            <option>Jordan</option>
+                                            <option>Kazakhstan</option>
+                                            <option>Kenya</option>
+                                            <option>Kiribati</option>
+                                            <option>Kyrgyzstan</option>
+                                            <option>Lao People's Democratic Republic</option>
+                                            <option>Lebanon</option>
+                                            <option>Lesotho</option>
+                                            <option>Liberia</option>
+                                            <option>Libya</option>
+                                            <option>Madagascar</option>
+                                            <option>Malawi</option>
+                                            <option>Malaysia</option>
+                                            <option>Maldives</option>
+                                            <option>Mali</option>
+                                            <option>Marshall Islands</option>
+                                            <option>Mauritania</option>
+                                            <option>Mauritius</option>
+                                            <option>Mexico</option>
+                                            <option>Mongolia</option>
+                                            <option>Montenegro</option>
+                                            <option>Morocco</option>
+                                            <option>Mozambique</option>
+                                            <option>Myanmar</option>
+                                            <option>Namibia</option>
+                                            <option>Nauru</option>
+                                            <option>Nepal</option>
+                                            <option>Nicaragua</option>
+                                            <option>Niger</option>
+                                            <option>Nigeria</option>
+                                            <option>Occupied Palestinian Territory</option>
+                                            <option>Oman</option>
+                                            <option>Pakistan</option>
+                                            <option>Palau</option>
+                                            <option>Panama</option>
+                                            <option>Papua New Guinea</option>
+                                            <option>Paraguay</option>
+                                            <option>Peru</option>
+                                            <option>Philippines</option>
+                                            <option>Qatar</option>
+                                            <option>Republic of Korea</option>
+                                            <option>Republic of Moldova</option>
+                                            <option>Romania</option>
+                                            <option>Russian Federation</option>
+                                            <option>Rwanda</option>
+                                            <option>Saint Kitts and Nevis</option>
+                                            <option>Saint Lucia</option>
+                                            <option>Saint Vincent and Grenadines</option>
+                                            <option>Samoa</option>
+                                            <option>Sao Tome and Principe</option>
+                                            <option>Saudi Arabia</option>
+                                            <option>Senegal</option>
+                                            <option>Serbia</option>
+                                            <option>Seychelles</option>
+                                            <option>Sierra Leone</option>
+                                            <option>Singapore</option>
+                                            <option>Solomon Islands</option>
+                                            <option>South Africa</option>
+                                            <option>South Sudan</option>
+                                            <option>Sri Lanka</option>
+                                            <option>Sudan</option>
+                                            <option>Suriname</option>
+                                            <option>Swaziland</option>
+                                            <option>Syrian Arab Republic</option>
+                                            <option>Tajikistan</option>
+                                            <option>Thailand</option>
+                                            <option>The Former Yugoslav Republic of Macedonia</option>
+                                            <option>Timor-Leste</option>
+                                            <option>Togo</option>
+                                            <option>Tonga</option>
+                                            <option>Trinidad and Tobago</option>
+                                            <option>Tunisia</option>
+                                            <option>Turkey</option>
+                                            <option>Turkmenistan</option>
+                                            <option>Tuvalu</option>
+                                            <option>Uganda</option>
+                                            <option>Ukraine</option>
+                                            <option>United Arab Emirates</option>
+                                            <option>United Republic of Tanzania</option>
+                                            <option>Uruguay</option>
+                                            <option>Uzbekistan</option>
+                                            <option>Vanuatu</option>
+                                            <option>Venezuela</option>
+                                            <option>Viet Nam</option>
+                                            <option>Yemen</option>
+                                            <option>Zambia</option>
+                                            <option>Zimbabwe</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-2">
+
+                                        <select class="form-control input-sm">
+                                            <option value="1">
+                                                Sector
+                                            </option>
+                                            <option value="2">Business Process Outsourcing</option>
+                                            <option>Cocoa</option>
+                                            <option>Coffee</option>
+                                            <option>Cotton</option>
+                                            <option>Creative Services</option>
+                                            <option>Essential Oils</option>
+                                            <option>Ethical Fashion</option>
+                                            <option>Floriculture</option>
+                                            <option>Fruits and Vegetables</option>
+                                            <option>Information and Communication Technology</option>
+                                            <option>Leather</option>
+                                            <option>Medicinal Plants</option>
+                                            <option>Organic Products</option>
+                                            <option>Pharmaceuticals</option>
+                                            <option>Spices</option>
+                                            <option>Textiles and Clothing</option>
+                                            <option>Tourism</option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-2">
+                                        <select class="form-control input-sm">
+                                            <option value="1">Document type</option>
+                                            <option value="2">Diagnostic Trade Integration Study</option>
+                                            <option value="3">ITC National Export Strategy</option>
+                                            <option>ITC Sector Export Strategy</option>
+                                            <option>Poverty Reduction Strategy Paper</option>
+                                            <option>United Nations Development Assistance Framework</option>
+                                            <option>National Strategy</option>
+                                            <option>Others Strategy</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-2">
+                                        <select>
+                                            <option value="region1">Region</option>
+                                            <option value="region2">Region1</option>
+                                            <option>Region2</option>
+                                            <option>Region3</option>
+                                            <option>Region4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="charts">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3" style="height: 250px;overflow: hidden">
+                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive">
+                </div>
+                <div class="col-xs-12 col-sm-3" style="height: 250px;overflow: hidden">
+                    <img src="placeholders/2014-09-15_0843.png" class="img-responsive">
+                </div>
+                <div class="col-xs-12 col-sm-3" style="height: 250px;overflow: hidden">
+                    <img src="placeholders/2014-09-15_08432.png" class="img-responsive">
+                </div>
+                <div class="col-xs-12 col-sm-3">
+
+                    <ul class="list-teaser list-teaser-arrow">
+                        <li>
+                            <a href="#">
+                                <span class="date">20 Jan. 2014</span>
+                                <h5>News item title</h5>
+
+                                <p>News item teaser text lorem ipsum lorem ipsum lorem ipsum...</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="date">20 Jan. 2014</span>
+                                <h5>News item title</h5>
+
+                                <p>News item teaser text lorem ipsum lorem ipsum lorem ipsum...</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="date">20 Jan. 2014</span>
+                                <h5>News item title</h5>
+
+                                <p>News item teaser text lorem ipsum lorem ipsum lorem ipsum...</p>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+    </div></section>
+    <footer>
+        <div class="container">
+            <p>&copy; International Trade Centre 2014</p>
+        </div>
+    </footer>
+</form>
+
+
+<script src="js/vendor/jquery-1.10.1.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/bootstrap-modalmanager.js"></script>
+<script src="js/vendor/selectize.js"></script>
+
+
+<script type="text/javascript">
+
+    var currently_selected_country = "none";
+
+    function set_currently_selected_country(value) {
+        currently_selected_country = value;
+    }
+
+
+    $(window).load(function () {
+
+        var map = L.map('map', {
+            attributionControl: false,
+            scrollWheelZoom: false,
+            zoom: 3,
+            minZoom: 2,
+            maxZoom: 6,
+            continuousWorld: 'true'
+        }).setView([10.505, 25.09], 3);
+
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/zimmerman2014.hmj09g6h/{z}/{x}/{y}.png', {
+            maxZoom: 6
+        }).addTo(map);
+
+
+        $('select').selectize({
+            openOnFocus: true,
+        });
+
+        $('[data-toggle="tooltip"]').tooltip({});
+
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+* 15-10-19
+* [2/6] home
+** DONE design process 
+   CLOSED: [2019-10-27 Sun 22:55]
+desaparece, panel and options
+** TODO pop up mapa
+- la info del pop up debería ser el quinto gráfico de la pagina búsqueda 
+- cambiando a un bar chart horizontal
+- incluyendo datos y gráfica
+** TODO gráficos de la busqueda
+se valida que los queremos quitar de donde están pero no tenemos claro si moverlos a la derecha y abajo
+** TODO menu buscador/principal horizontal
+el desplegable, incluir sólo las categorias principales, mantiene el multiselect
+** DONE document-field
+   CLOSED: [2019-10-27 Sun 22:55]
+*** authority confirmado que se va
+** TODO fix sectors más grandes que el panel que los envuelve 
+¿correjir con una rejilla dinámica?
+
+
+
+* [4/5] Pagina detalle
+
+** DONE cabecera implementation period: en lugar de barra usar guión
+   CLOSED: [2019-10-27 Sun 23:00]
+ 2014/2019 => 2014-2019
+
+** DONE parte derecha perfecta... 
+ el design process también tiene sentido aquí aunque en la home los hemos descartado
+   CLOSED: [2019-10-27 Sun 23:00]
+
+** DONE descripción
+   CLOSED: [2019-10-27 Sun 23:10]
+no cambia
+
+** TODO [2/3] priority sectors
+
+*** DONE donde pone document que ponga sector
+    CLOSED: [2019-10-27 Sun 23:05]
+
+*** DONE eliminar la columna ITC (en ambos casos)
+    CLOSED: [2019-10-27 Sun 23:09]
+
+*** TODO eliminar code(?)
+
+
+** DONE [1/1] footer
+   CLOSED: [2019-10-27 Sun 23:13]
+
+*** DONE eliminar last updated
+    CLOSED: [2019-10-27 Sun 23:13]

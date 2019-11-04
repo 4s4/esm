@@ -1,0 +1,17 @@
+* 10-10-19
+** ideas
+ + juntar sección data y home en una sola
+***  el mapa como forma de navegación 
+    + aprovechar la ventana (pop up) blanca que se abre al clickear para ofrecer más info sobre los documentos/reports que vamos a encontrar
+*** posibilidad de eliminar los gráficos, todos o algunos
+*** opciones de busqueda
+- eliminar: latest-update
+- repensar: implementation period
+ 
+*** mejoras en la forma de la busqueda:
+- en la ventanita blanca/(pop up)  del mapa ofrecer el numero de docs, pero si se hace click, entonces ofrecer "info de estadistica". EJ: cuantos doc son de tipo ~youth~, o ~trade facilitation~  ....
+- cuando seleccionamos los checkbox automaticamente se dispara la busqueda del backend y ofrece la "info de estadistica"
+
+** proxima reu? 
+lunes por la tarde?
+
