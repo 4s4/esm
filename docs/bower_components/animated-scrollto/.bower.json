@@ -1,0 +1,16 @@
+{
+  "name": "animated-scrollto",
+  "version": "1.1.0",
+  "main": "animatedScrollTo.js",
+  "homepage": "https://github.com/madebysource/animated-scrollto",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.0",
+    "commit": "127830950d4974d7945c4ed6f6ac7d0d53169940"
+  },
+  "_source": "git://github.com/madebysource/animated-scrollto.git",
+  "_target": "~1.1.0",
+  "_originalSource": "animated-scrollto",
+  "_direct": true
+}

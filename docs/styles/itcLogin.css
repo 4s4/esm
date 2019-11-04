@@ -1,0 +1,123 @@
+﻿
+.loginWrapper
+{
+	background-color: White;
+	margin: 20px auto;
+	width: 20em;
+	padding: 1em;
+	
+	border: 1px solid #aaa;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.loginWrapper fieldset
+{
+	padding: 0.3em;
+	border: none;
+}
+.loginWrapper fieldset.password
+{
+	padding-bottom: 0.3em;
+}
+.loginWrapper fieldset.buttons
+{
+	border-top: 1px solid #aaa;
+	margin-top: 0.8em;
+}
+.loginWrapper fieldset.buttons .loginLinks
+{
+	float: left;
+}
+.loginWrapper fieldset.buttons .loginLinks a
+{
+	display: block;
+}
+.loginWrapper fieldset.buttons .loginButtons
+{
+	float: right;
+}
+.loginWrapper.errorBox
+{
+	font-size: 0.8em;
+	display: block;
+	padding: 0.4em;
+	margin-top: 0.4em;
+    color: red;
+    background-color: #fed;
+    border: 1px solid red;
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.loginWrapper fieldset.error ul li
+{
+	
+}
+.loginWrapper label
+{
+	display: inline-block;
+	width: 6.5em;
+}
+.loginWrapper input.textbox
+{
+	padding: 0.3em;
+	width: 13em;
+	
+	border: 1px solid #aaa;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.loginWrapper.loadingImage
+{
+	float: right;
+	margin-top: 1em;
+}
+
+        /**************************************************************************
+ * override default themeroller styles for the login box
+ */
+.ui-dialog-titlebar
+{
+	background-color: #002B54;
+    height: 51px;
+}
+.ui-dialog-titlebar .ui-dialog-title
+{
+	padding: 1em;
+	display: block;
+	float: left;
+	color: white;
+}
+/* the close button */
+.ui-dialog-titlebar-close span
+{
+	padding: 1em;
+	text-indent: 0;
+	float: right;
+}
+.ui-dialog-titlebar span.ui-state-hover
+{
+	color: White;
+}
+.ui-state-highlight, a.ui-state-highlight
+{
+	/*background-color: #222;*/
+	border: none;
+}
+.ui-widget-overlay {
+background-color: #aaa;
+opacity: .30;
+filter: Alpha(Opacity=30);
+top:0;
+position:absolute;
+height:100%;
+}
+
+/**/
+.loginuser {
+    margin:0; padding:12px 12px 13px 12px; display:block; color:#002b54; font-size:0.75em; font-weight: normal; text-decoration:none; text-transform:none; border-right: solid 1px #95a6b6;
+}

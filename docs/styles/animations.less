@@ -1,0 +1,42 @@
+
+
+/* animations start  */
+.open > .dropdown-menu {
+	.lh-transform(scale(1,1));  
+	.lh-transition-timing-function(cubic-bezier(0.86, 0, 0.07, 1));
+}
+
+.dropdown-menu {	
+	.lh-transform-origin(top);
+	.lh-animation-fill-mode(forwards);
+	.lh-transform(scale(1,0));  
+	.lh-transition(all .2s);
+	display: block;
+}
+.dropup .dropdown-menu {
+	.lh-transform-origin(bottom);
+	.lh-transition-timing-function(cubic-bezier(0.785, 0.135, 0.15, 0.86));
+}
+
+a {
+	.lh-transition(color .2s);
+	.lh-transition(background-color .2s);
+	.lh-transition-timing-function(cubic-bezier(0.785, 0.135, 0.15, 0.86));	
+}
+
+a:hover {
+	.lh-transition(color .05s);
+	.lh-transition(background-color .1s);
+	/*.lh-transition-timing-function(cubic-bezier(0.785, 0.135, 0.15, 0.86));*/
+}
+
+.selected-standards-widget.editable {
+	.lh-transition(width, 1s);
+	.lh-transition(height, 1s);
+}
+
+.backdrop {
+	.lh-transition(opacity, 1s);
+	.lh-transition(background-color, 1s);
+}
+

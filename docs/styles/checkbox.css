@@ -1,0 +1,25 @@
+.bootstrap-checkbox > button.btn {
+  padding: 0;
+  width: 35px;
+  text-align: left;
+}
+.bootstrap-checkbox > button.btn.displayAsButton {
+  width: auto!important;
+}
+.bootstrap-checkbox > .btn.btn-link {
+  text-decoration: none;
+}
+label.bootstrap-checkbox.disabled {
+  cursor: default;
+  color: #666;
+}
+.bootstrap-checkbox.disabled > [class^="label-"],
+.bootstrap-checkbox > .btn[disabled] {
+  cursor: not-allowed;
+}
+.bootstrap-checkbox {
+  overflow: auto;
+}
+.bootstrap-checkbox .fa {
+  font-size: 30px;
+}
