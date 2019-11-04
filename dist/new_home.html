@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+    <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+      <![endif]-->
+       <!--[if IE 7]>
+       <html class="no-js lt-ie9 lt-ie8">
+	 <![endif]-->
+	  <!--[if IE 8]>
+	  <html class="no-js lt-ie9">
+	    <![endif]-->
+	     <!--[if gt IE 8]><!-->
+	     <html class="no-js">
+	       <!--<![endif]-->
+	       <head>
+		 <meta charset="utf-8">
+		 <title>New Home</title>
+		 <meta name="description" content="">
+		 <meta name="viewport" content="width=device-width">
+		 <link rel="stylesheet" href="styles/bootstrap.css">
+		 <!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
+		 <link rel="stylesheet" type="text/css" href="styles/main.css">
+     <script src="js/vendor/modernizr-2.6.2.min.js">
+     <script src="js/jquery-2.1.4.js"></script>
+		 <script src="https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.js"></script>
+		 <link href="https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.css" rel="stylesheet">
+
+	       </head>
+	       <body>
+		 <!--<form role="form"> -->
+		   <!-- brand header -->
+		   <header class="brand-header">
+		     <div class="container">
+		       <h1 class="text-hide"><a href="#">ITC Export Strategy Map</a></h1>
+
+		       <h2>TRADE AND DEVELOPMENT POLICIES AT YOUR FINGERTIPS</h2>
+		     </div>
+		   </header>
+		   <!-- navbar -->
+		   <nav class="navbar navbar-default">
+		     <div class="container">
+		       <div class="navbar-header">
+			 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			   <span class="sr-only">Toggle navigation</span>
+			   <span class="icon-bar"></span>
+			   <span class="icon-bar"></span>
+			   <span class="icon-bar"></span>
+			 </button>
+		       </div>
+		       <div class="navbar-collapse collapse">
+			 <ul class="nav navbar-nav">
+			   <li class="active"><a href="new_home.html">Home</a></li>
+			   <li><a href="research.html">Publications</a></li>
+			   <li><a href="faq.html">FAQ</a></li>
+			   <li><a href="about.html">About</a></li>
+			   <li><a href="feedback.html">Contact us</a></li>
+			 </ul>
+
+
+			 <div class="navbar-form navbar-left navbar-search" role="search">
+			   <div class="form-group">
+			     <input type="text" class="input-sm form-control" placeholder="Search">
+			   </div>
+			   <a href="search_details.html" class="btn btn-primary"><i class="fa fa-search"></i> </a>
+			 </div>
+
+		       </div>
+		       <!--/.navbar-collapse -->
+		     </div>
+		   </nav>
+
+		   <div class="container">
+
+
+		     <!-- BREADCRUMB TRAIL -->
+		     <ol class="breadcrumb pull-right">
+		       <li><a href="#">Home</a></li>
+		     </ol>
+		     <!-- END BREADCRUMBS -->
+		     <h2>Search documents</h2>
+		     <section class="map-container map-container-details">
+                       <div class="container">
+			 <div id="map"></div>
+                       </div>
+		     </section>
+		     
+		   </div>
+
+
+		   <!-- middle content section -->
+		   <!--section class="search-controls search-controls-full" -->
+
+		   <section class="search-controls">
+		     <div class="container">
+		       <div class="card">
+			 <div class="card-content">
+
+
+			   <div class="row" style="margin-bottom:18px">
+			     <div class="col-xs-12">
+			       <div class="search-controls-wrapper">
+				 <div class="search-controls">
+				   <div class="row" role="form">
+				     <div class="col-xs-12 col-md-12">
+				       <div class="row">
+					 <div class="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
+					   <select class="input-sm" id="select_region">
+					     <option value="">Region</option>
+					     <option value="region2">Region1</option>
+					     <option>Region2</option>
+					     <option>Region3</option>
+					     <option>Region4</option>
+					   </select>
+					 </div>
+					 <div class="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
+
+					   <select id="select_country" placeholder="Country" class="input-sm">
+					     <option value="">Country</option>
+					     <option value="12">Nairobi</option>
+					     <option value="13">Pune</option>
+					     <option value="14">Geneva</option>
+					   </select>
+
+</div>
+<div class="col-xs-12 col-sm-3" data-toggle="tooltip" title="Sector ">
+
+  <select class="input-sm" id="select_sector">
+    <option value="">Sector</option>
+    <option value="2">Business Process Outsourcing</option>
+    <option>Cocoa</option>
+    <option>Coffee</option>
+    <option>Cotton</option>
+    <option>Creative Services</option>
+    <option>Essential Oils</option>
+  </select>
+</div>
+<div class="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document">
+  <select id="select_document_type" placeholder="Document type" class="input-sm">
+    <option value="">Document type</option>
+    <option value="12">Type2</option>
+    <option value="13">Type3</option>
+    <option value="14">Typ4</option>
+  </select>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- begin first -->
+
+
+
+
+<div class="row">
+
+  <div class="well search-tab">
+
+    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseDocument" aria-expanded="false" aria-controls="collapseDocument">
+      <span class="glyphicon glyphicon-plus collap plus-minus" aria-hidden="true"></span>
+    </a>
+    <a class="" role="button" data-toggle="collapse" href="#collapseDocument" aria-expanded="false" aria-controls="collapseDocument">
+      <span class="collapse-title">Document field</span></a>
+
+    <div class="collapse collapseDiv row" id="collapseDocument">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-3">
+       
+        
+        <div class="form-group slider-ip" data-toggle="tooltip" title="">
+          <label for="StrategyDate">Implementation period</label>
+          <br>
+          <input id="StrategyDate" type="text" class="slider" value="" data-range="true" data-slider-min="2002" data-slider-max="2015" data-slider-step="1" data-slider-value="[2006,2010]" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show">
+          <label>2009</label>
+          <label>2015</label>
+        </div>
+       <div data-toggle="tooltip" title="Year.">
+                    <select class="input-sm select-approval-Year" id="Year">
+                        <option value="">Year approval</option>
+                        <option value="2015">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <option value="2011">2011</option>
+                        <option value="2010">2010</option>
+                        <option value="2009">2009</option>
+                        <option value="2008">2008</option>
+                        <option value="2007">2007</option>
+                        <option value="2006">2006</option>
+                        <option value="2005">2005</option>
+                        <option value="2004">2004</option>
+                        <option value="2003">2003</option>
+                        <option value="2002">2002</option>
+                        <option value="2001">2001</option>
+                        <option value="2000">2000</option>
+                    </select>
+       </div>
+               <div class="sspace"></div>
+
+      </div>
+      <div class="col-xs-2">
+        <div data-toggle="tooltip" title="Date in which the record has been last updated.">
+          <select class="input-sm select-last-update" id="last_update">
+            <option value="">Latest update</option>
+            <option value="24H">24 Hrs</option>
+            <option value="1W">1 week</option>
+            <option value="1M">1 month</option>
+            <option value="6M">6 month</option>
+            <option value="1Y">1 year</option>
+            <option value="+1Y">more than 1 year</option>
+          </select>
+        </div>
+        <div class="sspace"></div>
+    
+
+      </div>
+      <div class="col-xs-2 s-last-document-field-column">
+  
+      </div>
+
+
+
+  </div></div>
+
+
+
+
+
+
+
+  <!-- end first -->
+
+
+  <div class="well search-tab">
+    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseTheme" aria-expanded="false" aria-controls="collapseTheme">
+      <span class="glyphicon glyphicon-plus collap plus-minus" aria-hidden="true"></span>
+    </a>
+    <a class="" role="button" data-toggle="collapse" href="#collapseTheme" aria-expanded="false" aria-controls="collapseTheme">
+
+      <span class="collapse-title">Thematic focus</span></a>
+    <div class="collapse collapseDiv row" id="collapseTheme">
+      <div class="col-xs-2"></div>
+
+      <div class="col-xs-2">
+        <div class="form-group" data-toggle="tooltip" title="">
+          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on environmental sustainability">
+            <label>
+              <input type="checkbox" id="environment">
+              Environment</label></div>
+          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on gender equality">
+            <label>
+              <input type="checkbox" id="gender">
+              Gender</label></div>
+          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on poverty reduction">
+            <label>
+              <input type="checkbox" id="poverty_reduction">
+              Poverty Reduction</label></div>
+        </div>
+      </div>
+
+      <div class="col-xs-2">
+        <div class="form-group" data-toggle="tooltip" title="">
+          <div class="checkbox" data-toggle="tooltip" title="The trade export strategy ">
+            <label>
+              <input type="checkbox" id="export_strategy">
+              Export Strategy</label></div>
+          <div class="checkbox" data-toggle="tooltip" title="Trade focus">
+            <label>
+              <input type="checkbox" id="trade_focus">
+              Focus on trade</label></div>
+          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on youth integration">
+            <label>
+              <input type="checkbox" id="youth">
+              Youth</label></div>
+        </div>
+      </div>
+
+      <div class="col-xs-2">
+        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade facilitation.">
+          <label>
+            <input type="checkbox" id="trade_facilitation">
+            Trade Facilitation</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade finance and/or access to credit.">
+          <label>
+            <input type="checkbox" id="trade_finance">
+            Trade Finance</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade information and/or market intelligence.">
+          <label>
+            <input type="checkbox" id="trade_information">
+            Trade Information</label></div>
+
+      </div>
+      <div class="col-xs-2">
+        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade promotion.">
+          <label>
+            <input type="checkbox" id="trade_promotion">
+            Trade Promotion</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The document focuses on standards and/or quality management.">
+          <label>
+            <input type="checkbox" id="quality">
+            Quality</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on Technical and Vocational Education and Training (TVET).">
+          <label>
+            <input type="checkbox" id="tvet">
+            TVET</label></div>
+
+      </div>
+      <div class="col-xs-2">
+        <div class="checkbox" data-toggle="tooltip" title="The document has a regional scope. The information included applies to a group of countries.">
+          <label>
+            <input type="checkbox" id="regional">
+            Regional Scope</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The document focuses on regional integration.">
+          <label>
+            <input type="checkbox" id="regional_integration">
+            Regional Integration </label></div>
+        <div class="checkbox" data-toggle="tooltip" title="select all theme options">
+          <label style="font-weight: bolder;text-decoration: underline">
+            <input type="checkbox" id="all_theme">
+            Select all</label></div>
+
+      </div>
+  </div></div>
+  <!-- end second -->
+</div>
+
+
+
+
+<!-- end third -->
+
+
+
+<div class="row filters" style="margin-top:0px">
+  <div class="text-center search-controls-wrapper">
+    <button class="btn btn-primary btn-filter" id="apply_filters">Apply filters</button>
+    <a href="javascript:;" id="clear_filters" class="btn-clear-filters" title="Clear filters"><i class="fa fa-times-circle"></i></a>
+  </div>
+</div>
+
+</div>
+<div class="overlay"></div>
+
+</div>
+
+
+</div>
+</section>
+
+
+
+<section class="results-table results-table-preview">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="charts">
+          <div class="card">
+            <span class="card-title">Charts</span>
+            <div class="card-content">
+              <div id="charts-carousel" class="charts-carousel carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                  <div class="item active">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                      <div class="col-xs-12 col-sm-4">
+                        <img src="placeholders/2014-09-15_08432.png" class="img-responsive" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#charts-carousel" role="button" data-slide="prev">
+                  <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#charts-carousel" role="button" data-slide="next">
+                  <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#charts-carousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#charts-carousel" data-slide-to="1"></li>
+                  <li data-target="#charts-carousel" data-slide-to="2"></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="card-table" class="card" style="display:none">
+      <div class="card-content">
+        <div class="row">
+          <div class="control-group" style="float:right;text-align:right;width:100%;margin-right:5px; padding-left:10px">
+	    <label for="show-columns">Show extra columns</label><br>
+	    <select id="show-columns" name="state[]" multiple="multiple" class="demo-default" placeholder="Include extra column...">
+	    </select>
+	  </div>
+        </div>
+
+        <div id="custom-toolbar" class="row">
+
+          <div class="col-md-3">
+            <ul class="custom-table-toolbar">
+              <li>
+                <span class="dropdown pull-right">
+                  <button href="#" title="Export data" data-toggle="dropdown" class="btn btn-default">
+                    <i class="fa fa-download fa-fw"></i> Export results
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#"><i class="fa fa-file-excel-o"></i> XLS</a></li>
+                    <li><a href="#"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+                    <li><a href="#"><i class="fa fa-file-text-o"></i> CSV</a></li>
+                  </ul>
+                </span>
+              </li>
+              <li>
+                <a href="#" title="Print chart" class="btn btn-default" data-toggle="tooltip"><i class="fa fa-print"></i></a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="col-md-5">
+            <select id="sorter">
+              <option value="region left" selected="selected">Order by: Region</option>
+              <option value="country left">Order by: Country</option>
+              <option value="countryCode left">Order by: Country Code</option>
+              <option value="title middle">Order by: Title</option>
+              <option value="year right">Order by: Year</option>
+              <option value="lastUpdate right">Order by: Last Update</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <select id="sorter-how">
+              <option value="asc" selected="selected">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+
+          </div>
+
+
+        </div>
+
+
+
+	<table id="juan" class="table-no-hover table-disable-hover search-table">
+          <thead>
+            <tr>
+              <th class="col-xs-4">
+              </th>
+              <th class="col-xs-4">
+              </th>
+              <th class="col-xs-4">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+
+          <tfoot>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer>
+  <div class="container">
+    <p>&copy; International Trade Centre 2015</p>
+  </div>
+</footer>
+<!--</form> -->
+<script src="js/vendor/jquery-1.10.1.min.js"></script>
+<script src="js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/bootstrap-modalmanager.js"></script>
+<script src="js/vendor/selectize.js"></script>
+
+<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+<script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="bower_components/bootstrap3-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="js/commons.js"></script>
+<script src="js/CommonUI.js"></script>
+<script src="js/afgan.js"></script>
+<script src="js/countries.js"></script>
+<script src="js/search-advanced.js"></script>
+<script src="js/result-table.js"></script>
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    var map;
+    $(document).ready(function () {
+        
+//        PopulateWorldMap(jsonHome);
+        PopulateFilteredMap(afganJson);
+    });
+    
+
+
+      $('select').selectize({
+	  openOnFocus: true
+      });
+
+      $('#update').datepicker();
+
+      $('[data-toggle="tooltip"]').tooltip({
+	  container: 'body'
+      });
+
+      //        $('ul.tree.root').find('ul.tree').hide();
+      //        $('.tree-toggler').click(function () {
+      //            $(this).parent().children('ul.tree').toggle(300);
+      //        });
+
+      $('.slider').slider({});
+
+      $('.pagination-detail').empty();
+
+  });
+
+
+
+
+  // change icon plus/minus on collapse or expand tabs
+
+  $('.collapseDiv').on('shown.bs.collapse', function (t) {
+
+      var th =$(t.target);
+      $('.collap',th.parent()).toggleClass('glyphicon-plus ');;
+      $('.collap',th.parent()).toggleClass('glyphicon-minus ');;
+
+  })
+
+  $('.collapseDiv').on('hidden.bs.collapse', function (t) {
+
+      var th =$(t.target);
+      $('.collap',th.parent()).toggleClass('glyphicon-plus ');;
+      $('.collap',th.parent()).toggleClass('glyphicon-minus ');;
+
+  })
+  evaluate_show_less("short-text full-text");
+
+
+</script>
+</body>
+
+
+</html>

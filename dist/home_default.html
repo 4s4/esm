@@ -18,11 +18,12 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="styles/bootstrap.css">
     <!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
+
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
     <script src="https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body class="homepage-layout">
     <!-- brand header -->
@@ -265,171 +266,62 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-content">
-                        <ul id="custom-toolbar" class="custom-table-toolbar">
-                            <li>
+                  <div class="card-content">
+                    <div id="custom-toolbar" class="row">
+                      <div class="col-md-5"></div>
+                      <div class="col-md-3" style="text-align:right">
+                        <a href="#" style="margin-right:9px" title="Print chart" class="btn btn-default" data-toggle="tooltip"><i class="fa fa-print"></i></a>
                             <span class="dropdown pull-right">
-                                <button href="#" title="Export data" data-toggle="dropdown" class="btn btn-default">
-                                    <i class="fa fa-download fa-fw"></i> Export results
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#"><i class="fa fa-file-excel-o"></i> XLS</a></li>
-                                    <li><a href="#"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
-                                    <li><a href="#"><i class="fa fa-file-text-o"></i> CSV</a></li>
-                                </ul>
+                              <button href="#" title="Export data" data-toggle="dropdown" class="btn btn-default">
+                                <i class="fa fa-download fa-fw"></i> Export results
+                                <i class="fa fa-caret-down"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#"><i class="fa fa-file-excel-o"></i> XLS</a></li>
+                                <li><a href="#"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+                                <li><a href="#"><i class="fa fa-file-text-o"></i> CSV</a></li>
+                              </ul>
                             </span>
-                            </li>
-                            <li>
-                                <a href="#" title="Print chart" class="btn btn-default" data-toggle="tooltip"><i class="fa fa-print"></i></a>
-                            </li>
-                        </ul>
+
+                      </div>
+                      <div class="col-md-2">
+                        <select id="sorter">
+                          <option value="region left" selected="selected">Order by: Region</option>
+                          <option value="country left">Order by: Country</option>
+                          <option value="countryCode left">Order by: Country Code</option>
+                          <option value="title middle">Order by: Title</option>
+                          <option value="year right">Order by: Year</option>
+                          <option value="lastUpdate right">Order by: Last Update</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2">
+                        <select id="sorter-how">
+                          <option value="asc" selected="selected">Ascending</option>
+                          <option value="desc">Descending</option>
+                        </select>
+
+                      </div>
+
+
+                    </div>
 
 
                         <!-- results table -->
                         <!-- this utilizes bootstrap-table with lots of filtering/sorting options and ability to load remote JSON -->
                         <!-- http://wenzhixin.net.cn/p/bootstrap-table/ -->
 
-                        <table class="table table-default table-striped table-sortable" data-show-columns="true" data-sort-name="name" data-sort-order="desc">
+<table class="table table-default table-sortable table-no-hover table-disable-hover">
                             <thead>
                             <tr>
-                                <th class="col-xs-1" data-field="region">
-                                    blah
+                                <th class="col-xs-4">
                                 </th>
-                                <th class="col-xs-1">
-                                </th>
-                                <th class="col-xs-1">
-                                </th>
-                                <th class="col-xs-1">
-                                </th>
-                                <th class="col-xs-2">
-                                </th>
-                                <th class="col-xs-2">
+                                <th class="col-xs-4">
                                 </th>
                                 <th class="col-xs-4">
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Africa</td>
-                                <td>
-                                    Angola
-                                </td>
-                                <td>
-                                    2006
-                                </td>
-                                <td><span class="label label-default">UNAAF</span></td>
-                                <td>
-                                    <a href="search_details.html#">Diagnostic Trade Integration Study - Angola</a>
-                                </td>
-                                <td>
-                                    <span class="label label-default">Coffee</span>
-                                    <span class="label label-default">Cashew</span>
-                                    <span class="label label-default">Farming</span>
-                                    <span class="label label-default">Lorem</span>
-                                </td>
-                                <td>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Africa</td>
-                                <td>
-                                    Benin
-                                </td>
-                                <td>
-                                    2005
-                                </td>
-                                <td><span class="label label-default">UNAAF</span></td>
-                                <td>
-                                    <a href="search_details.html#">Diagnostic Trade Integration Study - Benin</a>
-                                </td>
-                                <td>
-                                    <span class="label label-default">Coffee</span>
-                                    <span class="label label-default">Cashew</span>
-                                    <span class="label label-default">Farming</span>
-                                    <span class="label label-default">Lorem</span>
-                                </td>
-                                <td>
-                                    Agro-Processing Industry, Cashew, Cotton, Fisheries, Pineapple, Shea, Shrimp Farming,
-                                    Tourism
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Africa</td>
-                                <td>
-                                    Burkina Faso
-                                </td>
-                                <td>
-                                    2007
-                                </td>
-                                <td><span class="label label-default">UNAAF</span></td>
-                                <td>
-                                    <a href="search_details.html#">The Challenge of Export Diversification for a Landlocked
-                                        Country</a>
-                                </td>
-                                <td>
-                                    <span class="label label-default">Coffee</span>
-                                    <span class="label label-default">Cashew</span>
-                                    <span class="label label-default">Farming</span>
-                                    <span class="label label-default">Lorem</span>
-                                </td>
-                                <td>
-                                    Black-Eyed Pea, Cereals, Copper, Cotton, Fruits, Gold, Hides and Skins, Livestock,
-                                    Oilseeds, Textile Industry, Vegetable Oil, Vegetables, Zinc
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Africa</td>
-                                <td>
-                                    Burundi
-                                </td>
-                                <td>
-                                    2004
-                                </td>
-                                <td><span class="label label-default">UNAAF</span></td>
-                                <td>
-                                    <a href="search_details.html">Étude diagnostique sur l’intégration commerciale -
-                                        Burundi</a>
-                                </td>
-                                <td>
-                                    <span class="label label-default">Coffee</span>
-                                    <span class="label label-default">Cashew</span>
-                                    <span class="label label-default">Farming</span>
-                                    <span class="label label-default">Lorem</span>
-                                </td>
-                                <td>
-                                    Coffee, Cotton, Financial Services, Floriculture, Food Processing, Fruits,
-                                    Manufacturing, Tea, Telecommunication Services, Transport Services, Vegetables
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Asia</td>
-                                <td>
-                                    Cambodia
-                                </td>
-                                <td>
-                                    2007
-                                </td>
-                                <td><span class="label label-default">UNAAF</span></td>
-                                <td>
-                                    <a href="search_details.html">Cambodia Trade Integration Strategy - Executive
-                                        Summary</a>
-                                </td>
-                                <td>
-                                    <span class="label label-default">Coffee</span>
-                                    <span class="label label-default">Cashew</span>
-                                    <span class="label label-default">Farming</span>
-                                    <span class="label label-default">Lorem</span>
-                                </td>
-                                <td>
-                                    Beer, Business processes/web-based services, Cashew, Cassava, Corn, Fisheries, Footwear,
-                                    Fruits, Garment Industry, Labour Services, Light Manufacturing, Livestock, Rice
-                                    (including organic rice), Rubber, Silk, Silk Handicrafts, Soybeans, Tourism, Transport
-                                    and transport-related services, Vegetables, Wood Industry
-                                </td>
-                            </tr>
 
                             </tbody>
 
@@ -510,13 +402,15 @@
 
 
     <script src="js/vendor/jquery-1.10.1.min.js"></script>
+
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/vendor/bootstrap-modalmanager.js"></script>
 <script src="js/vendor/selectize.js"></script>
 <script src="bower_components/animated-scrollto/animatedScrollTo.js"></script>
 <script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
-
+<script src="js/commons.js"></script>
 <script src="js/result-table.js"></script>
+
 
 
 <script type="text/javascript">
@@ -550,21 +444,30 @@
         $('[data-toggle="tooltip"]').tooltip({});
 
 
-        $('.btn-filter').click(function(evt){
-            $('.results-table').collapse('toggle');
+    $('.btn-filter').click(function(evt){
 
-            animatedScrollTo(
-                    document.body, // element to scroll with (most of times you want to scroll with whole <body>)
-                    $('.filters').position().top - 40, // target scrollY (0 means top of the page)
-                    600, // duration in ms
-                    function() { // callback function that runs after the animation (optional)
-                        console.log('done!')
-                    }
-            );
+
+
+
+
+
+    init_table(
+        function(){
+
+            $("body,html").animate({scrollTop: parseInt($('.bootstrap-table').position().top)}, '0', 'swing');
+            evaluate_show_less("short-text full-text");
+
         });
 
     });
-
+    $('html').click(function() {
+    var e =$(".alert");
+    if(e){
+    e.hide();
+    }
+    //Hide the menus if visible
+    });
+    });
 
 </script>
 </body>
