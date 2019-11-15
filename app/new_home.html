@@ -69,8 +69,6 @@
 		   </nav>
 
 		   <div class="container">
-
-
 		     <!-- BREADCRUMB TRAIL -->
 		     <ol class="breadcrumb pull-right">
 		       <li><a href="#">Home</a></li>
@@ -78,11 +76,10 @@
 		     <!-- END BREADCRUMBS -->
 		     <h2>Search documents</h2>
 		     <section class="map-container map-container-details">
-                       <div class="container">
-			 <div id="map"></div>
-                       </div>
+          <div class="container">
+        	 <div id="map"></div>
+          </div>
 		     </section>
-		     
 		   </div>
 
 
@@ -90,275 +87,206 @@
 		   <!--section class="search-controls search-controls-full" -->
 
 		   <section class="search-controls ">
-		     <div class="container">
-		       <div class="card">
-			 <div class="card-content">
+		    <div class="container">
+		      <div class="card">
+            <div class="card-content">
+              <div class="row" style='margin-bottom:18px;'>
+                <div class="col-xs-12">
+                  <div class="search-controls-wrapper">
+              <div class="search-controls">
+                <div class="row" role="form">
+                  <div  id="main_select_filter"></div>
+                </div>
+              </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row ">
 
+<div class="well search-tab">
 
-			   <div class="row" style='margin-bottom:18px;'>
-			     <div class="col-xs-12">
-			       <div class="search-controls-wrapper">
-				 <div class="search-controls">
-				   <div class="row" role="form">
-				     <div class="col-xs-12 col-md-12">
-				       <div class="row">
-					 <div class="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
-					   <select class="input-sm" id="select_region">
-					     <option value="">Region</option>
-					     <option value="region2">Region1</option>
-					     <option>Region2</option>
-					     <option>Region3</option>
-					     <option>Region4</option>
-					   </select>
-					 </div>
-					 <div class="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
+  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseDocument" aria-expanded="false" aria-controls="collapseDocument">
+    <span class="glyphicon glyphicon-plus collap plus-minus" aria-hidden="true" ></span>
+  </a>
+  <a class="" role="button" data-toggle="collapse" href="#collapseDocument" aria-expanded="false" aria-controls="collapseDocument">
+    <span class="collapse-title">Document field</span></a>
 
-					   <select id="select_country" placeholder="Country" class=" input-sm" >
-					     <option value="">Country</option>
-					     <option value="12">Nairobi</option>
-					     <option value="13">Pune</option>
-					     <option value="14">Geneva</option>
-					   </select>
-</select>
-</div>
-<div class="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >
-
-  <select class="input-sm" id="select_sector">
-    <option value="">Sector</option>
-    <option value="2">Business Process Outsourcing</option>
-    <option>Cocoa</option>
-    <option>Coffee</option>
-    <option>Cotton</option>
-    <option>Creative Services</option>
-    <option>Essential Oils</option>
-  </select>
-</div>
-<div class="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
-  <select id="select_document_type" placeholder="Document type" class="input-sm">
-    <option value="">Document type</option>
-    <option value="12">Type2</option>
-    <option value="13">Type3</option>
-    <option value="14">Typ4</option>
-  </select>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-<!-- begin first -->
-
-
-
-
-<div class="row ">
-
-  <div class="well search-tab">
-
-    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseDocument" aria-expanded="false" aria-controls="collapseDocument">
-      <span class="glyphicon glyphicon-plus collap plus-minus" aria-hidden="true" ></span>
-    </a>
-    <a class="" role="button" data-toggle="collapse" href="#collapseDocument" aria-expanded="false" aria-controls="collapseDocument">
-      <span class="collapse-title">Document field</span></a>
-
-    <div class="collapse collapseDiv row" id="collapseDocument">
-      <div class="col-xs-2"></div>
-      <div class="col-xs-3">
-       
-        
-        <div class="form-group slider-ip" data-toggle="tooltip" title="">
-          <label for="StrategyDate">Implementation period</label>
-          <br>
-          <input id="StrategyDate" type="text" class="slider " value=""
-                 data-range="true"
-                 data-slider-min="2002"
-                 data-slider-max="2015"
-                 data-slider-step="1"
-                 data-slider-value="[2006,2010]"
-                 data-slider-orientation="horizontal"
-                 data-slider-selection="after"
-                 data-slider-tooltip="show"
-                 />
-          <label>2009</label>
-          <label>2015</label>
-        </div>
-       <div data-toggle="tooltip" title="Year.">
-                    <select class="input-sm select-approval-Year" id="Year">
-                        <option value="">Year approval</option>
-                        <option value="2015">2016</option>
-                        <option value="2015">2015</option>
-                        <option value="2014">2014</option>
-                        <option value="2013">2013</option>
-                        <option value="2012">2012</option>
-                        <option value="2011">2011</option>
-                        <option value="2010">2010</option>
-                        <option value="2009">2009</option>
-                        <option value="2008">2008</option>
-                        <option value="2007">2007</option>
-                        <option value="2006">2006</option>
-                        <option value="2005">2005</option>
-                        <option value="2004">2004</option>
-                        <option value="2003">2003</option>
-                        <option value="2002">2002</option>
-                        <option value="2001">2001</option>
-                        <option value="2000">2000</option>
-                    </select>
-       </div>
-               <div class="sspace" ></div>
-
+  <div class="collapse collapseDiv row" id="collapseDocument">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-3">
+     
+      
+      <div class="form-group slider-ip" data-toggle="tooltip" title="">
+        <label for="StrategyDate">Implementation period</label>
+        <br>
+        <input id="StrategyDate" type="text" class="slider " value=""
+               data-range="true"
+               data-slider-min="2002"
+               data-slider-max="2015"
+               data-slider-step="1"
+               data-slider-value="[2006,2010]"
+               data-slider-orientation="horizontal"
+               data-slider-selection="after"
+               data-slider-tooltip="show"
+               />
+        <label>2009</label>
+        <label>2015</label>
       </div>
-      <div class="col-xs-2" >
-        <div data-toggle="tooltip" title="Date in which the record has been last updated.">
-          <select class="input-sm select-last-update" id="last_update">
-            <option value="">Latest update</option>
-            <option value="24H">24 Hrs</option>
-            <option value="1W">1 week</option>
-            <option value="1M">1 month</option>
-            <option value="6M">6 month</option>
-            <option value="1Y">1 year</option>
-            <option value="+1Y">more than 1 year</option>
-          </select>
-        </div>
-        <div class="sspace" ></div>
-    
+     <div data-toggle="tooltip" title="Year.">
+                  <select class="input-sm select-approval-Year" id="Year">
+                      <option value="">Year approval</option>
+                      <option value="2015">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                      <option value="2009">2009</option>
+                      <option value="2008">2008</option>
+                      <option value="2007">2007</option>
+                      <option value="2006">2006</option>
+                      <option value="2005">2005</option>
+                      <option value="2004">2004</option>
+                      <option value="2003">2003</option>
+                      <option value="2002">2002</option>
+                      <option value="2001">2001</option>
+                      <option value="2000">2000</option>
+                  </select>
+     </div>
+             <div class="sspace" ></div>
 
+    </div>
+    <div class="col-xs-2" >
+      <div data-toggle="tooltip" title="Date in which the record has been last updated.">
+        <select class="input-sm select-last-update" id="last_update">
+          <option value="">Latest update</option>
+          <option value="24H">24 Hrs</option>
+          <option value="1W">1 week</option>
+          <option value="1M">1 month</option>
+          <option value="6M">6 month</option>
+          <option value="1Y">1 year</option>
+          <option value="+1Y">more than 1 year</option>
+        </select>
       </div>
-      <div class="col-xs-2 s-last-document-field-column "  >
+      <div class="sspace" ></div>
   
+
+    </div>
+    <div class="col-xs-2 s-last-document-field-column "  >
+
+    </div>
+
+
+
+</div>
+</div>
+
+<div class="well search-tab"  >
+  <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseTheme" aria-expanded="false" aria-controls="collapseTheme">
+    <span class="glyphicon glyphicon-plus collap plus-minus" aria-hidden="true" ></span>
+  </a>
+  <a class="" role="button" data-toggle="collapse" href="#collapseTheme" aria-expanded="false" aria-controls="collapseTheme">
+
+    <span class="collapse-title">Thematic focus</span></a>
+  <div class="collapse collapseDiv row" id="collapseTheme">
+    <div class="col-xs-2"></div>
+
+    <div class="col-xs-2">
+      <div class="form-group" data-toggle="tooltip" title="">
+        <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on environmental sustainability">
+          <label>
+            <input type="checkbox" id="environment"/>
+            Environment</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on gender equality">
+          <label>
+            <input type="checkbox" id="gender"/>
+            Gender</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on poverty reduction">
+          <label>
+            <input type="checkbox" id="poverty_reduction"/>
+            Poverty Reduction</label></div>
       </div>
+    </div>
 
+    <div class="col-xs-2">
+      <div class="form-group" data-toggle="tooltip" title="">
+        <div class="checkbox" data-toggle="tooltip" title="The trade export strategy ">
+          <label>
+            <input type="checkbox" id="export_strategy"/>
+            Export Strategy</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="Trade focus">
+          <label>
+            <input type="checkbox" id="trade_focus"/>
+            Focus on trade</label></div>
+        <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on youth integration">
+          <label>
+            <input type="checkbox" id="youth"/>
+            Youth</label></div>
+      </div>
+    </div>
 
+    <div class="col-xs-2">
+      <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade facilitation.">
+        <label>
+          <input type="checkbox" id="trade_facilitation"  />
+          Trade Facilitation</label></div>
+      <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade finance and/or access to credit.">
+        <label>
+          <input type="checkbox" id="trade_finance"/>
+          Trade Finance</label></div>
+      <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade information and/or market intelligence.">
+        <label>
+          <input type="checkbox" id="trade_information"/>
+          Trade Information</label></div>
 
-  </div></div>
+    </div>
+    <div class="col-xs-2">
+      <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade promotion.">
+        <label>
+          <input type="checkbox" id="trade_promotion"/>
+          Trade Promotion</label></div>
+      <div class="checkbox" data-toggle="tooltip" title="The document focuses on standards and/or quality management.">
+        <label>
+          <input type="checkbox" id="quality"/>
+          Quality</label></div>
+      <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on Technical and Vocational Education and Training (TVET).">
+        <label>
+          <input type="checkbox" id="tvet"/>
+          TVET</label></div>
 
+    </div>
+    <div class="col-xs-2">
+      <div class="checkbox" data-toggle="tooltip" title="The document has a regional scope. The information included applies to a group of countries.">
+        <label>
+          <input type="checkbox" id="regional"/>
+          Regional Scope</label></div>
+      <div class="checkbox" data-toggle="tooltip" title="The document focuses on regional integration.">
+        <label>
+          <input type="checkbox" id="regional_integration"/>
+          Regional Integration </label></div>
+      <div class="checkbox" data-toggle="tooltip" title="select all theme options">
+        <label style="font-weight: bolder;text-decoration: underline;">
+          <input type="checkbox" id="all_theme"/>
+          Select all</label></div>
 
-
-
-
-
-
-  <!-- end first -->
-
-
-  <div class="well search-tab"  >
-    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseTheme" aria-expanded="false" aria-controls="collapseTheme">
-      <span class="glyphicon glyphicon-plus collap plus-minus" aria-hidden="true" ></span>
-    </a>
-    <a class="" role="button" data-toggle="collapse" href="#collapseTheme" aria-expanded="false" aria-controls="collapseTheme">
-
-      <span class="collapse-title">Thematic focus</span></a>
-    <div class="collapse collapseDiv row" id="collapseTheme">
-      <div class="col-xs-2"></div>
-
-      <div class="col-xs-2">
-        <div class="form-group" data-toggle="tooltip" title="">
-          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on environmental sustainability">
-            <label>
-              <input type="checkbox" id="environment"/>
-              Environment</label></div>
-          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on gender equality">
-            <label>
-              <input type="checkbox" id="gender"/>
-              Gender</label></div>
-          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on poverty reduction">
-            <label>
-              <input type="checkbox" id="poverty_reduction"/>
-              Poverty Reduction</label></div>
+    </div>
+</div></div>
+<!-- end second -->
+              </div>
+              <div class="row filters" style="margin-top:0px;">
+                <div class="text-center search-controls-wrapper">
+                  <button class="btn btn-primary btn-filter" id="apply_filters">Apply filters</button>
+                  <a href="javascript:;" id="clear_filters" class="btn-clear-filters" title="Clear filters"><i class="fa fa-times-circle"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="col-xs-2">
-        <div class="form-group" data-toggle="tooltip" title="">
-          <div class="checkbox" data-toggle="tooltip" title="The trade export strategy ">
-            <label>
-              <input type="checkbox" id="export_strategy"/>
-              Export Strategy</label></div>
-          <div class="checkbox" data-toggle="tooltip" title="Trade focus">
-            <label>
-              <input type="checkbox" id="trade_focus"/>
-              Focus on trade</label></div>
-          <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on youth integration">
-            <label>
-              <input type="checkbox" id="youth"/>
-              Youth</label></div>
+        <div class="overlay"></div>
         </div>
-      </div>
-
-      <div class="col-xs-2">
-        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade facilitation.">
-          <label>
-            <input type="checkbox" id="trade_facilitation"  />
-            Trade Facilitation</label></div>
-        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade finance and/or access to credit.">
-          <label>
-            <input type="checkbox" id="trade_finance"/>
-            Trade Finance</label></div>
-        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade information and/or market intelligence.">
-          <label>
-            <input type="checkbox" id="trade_information"/>
-            Trade Information</label></div>
-
-      </div>
-      <div class="col-xs-2">
-        <div class="checkbox" data-toggle="tooltip" title="The document focuses on trade promotion.">
-          <label>
-            <input type="checkbox" id="trade_promotion"/>
-            Trade Promotion</label></div>
-        <div class="checkbox" data-toggle="tooltip" title="The document focuses on standards and/or quality management.">
-          <label>
-            <input type="checkbox" id="quality"/>
-            Quality</label></div>
-        <div class="checkbox" data-toggle="tooltip" title="The strategy focuses on Technical and Vocational Education and Training (TVET).">
-          <label>
-            <input type="checkbox" id="tvet"/>
-            TVET</label></div>
-
-      </div>
-      <div class="col-xs-2">
-        <div class="checkbox" data-toggle="tooltip" title="The document has a regional scope. The information included applies to a group of countries.">
-          <label>
-            <input type="checkbox" id="regional"/>
-            Regional Scope</label></div>
-        <div class="checkbox" data-toggle="tooltip" title="The document focuses on regional integration.">
-          <label>
-            <input type="checkbox" id="regional_integration"/>
-            Regional Integration </label></div>
-        <div class="checkbox" data-toggle="tooltip" title="select all theme options">
-          <label style="font-weight: bolder;text-decoration: underline;">
-            <input type="checkbox" id="all_theme"/>
-            Select all</label></div>
-
-      </div>
-  </div></div>
-  <!-- end second -->
-</div>
-
-
-
-
-<!-- end third -->
-
-
-
-<div class="row filters" style="margin-top:0px;">
-  <div class="text-center search-controls-wrapper">
-    <button class="btn btn-primary btn-filter" id="apply_filters">Apply filters</button>
-    <a href="javascript:;" id="clear_filters" class="btn-clear-filters" title="Clear filters"><i class="fa fa-times-circle"></i></a>
-  </div>
-</div>
-
-</div>
-<div class="overlay"></div>
-
-</div>
-
-
-</div>
-</section>
+        </div>
+       </section>
 
 
 
@@ -563,10 +491,11 @@
     });
     
 
-
+      /*
       $('select').selectize({
 	  openOnFocus: true
       });
+*/
 
       $('#update').datepicker();
 
@@ -609,6 +538,17 @@
 
 
 </script>
+<div id="like_button_container"></div>
+<div  id="main_select_filter"></div>
+
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="js/r.js"></script>
+
+<script>
+  ReactDOM.render(React.createElement(LikeButton), $('#like_button_container')[0]);
+  ReactDOM.render(React.createElement(MainSelectFilters), $('#main_select_filter')[0]);
+  </script>
 </body>
 
 

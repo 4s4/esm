@@ -27,6 +27,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
         tasks: ['coffee']
       },
+      jsx: {
+      files: ['<%= yeoman.app %>/jsx/{,*/}*.jsx'],
+      tasks: ['babel:jsx', 'browserify:dist']
+      },
       less: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
         tasks: ['less']
@@ -41,11 +45,45 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/*.html',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.app %>}/js/r.js',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
+    browserify: {
+      "transform": [
+        [
+          "babelify",
+          {
+            "presets": [
+               "es2016"
+            ]
+          }
+        ]
+      ],  
+      dist: {
+        files: {
+          'app/js/r.js': ['app/js/r/*.js']
+        }
+      }
+    },
+    
+    babel: {
+      options: {
+        plugins: ['transform-react-jsx'],
+        presets: ['@babel/preset-env']
+      },
+      jsx: {
+        files: [{
+          expand: true,
+          cwd: 'app/jsx/', // Custom folder
+          src: ['*.jsx'],
+          dest: 'app/js/r/', // Custom folder
+          ext: '.js'
+        }]
+      }
+    },    
     connect: {
       options: {
         port: 9001,
@@ -138,11 +176,14 @@ module.exports = function (grunt) {
     kss: {
       options: {
         verbose: true,
+        title: 'jor',
+        custom: ["Colors", "Wrapper", "RequireJS", "BodyClass"],
+        homepage: "../kss_homepage.md",
         builder: 'node_modules/kss-scheibo/kss_styleguide/scheibo-template/'
       },
       dist: {
         src: ['<%= yeoman.app %>/styles/'],
-        dest: '<%= yeoman.app %>/styles/main.html',
+        dest: '<%= yeoman.app %>/styles/styleguide',
       }
     },
     // not used since Uglify task does concat,
@@ -284,6 +325,8 @@ module.exports = function (grunt) {
       'coffee',
       'less',
       'kss',
+      'babel:jsx',
+      'browserify:dist',
       'copy:server',
       'connect:livereload',
       'watch'
