@@ -61,23 +61,12 @@ class DocumentField extends Component {
                             <option value="2001">2001</option>
                             <option value="2000">2000</option>
                         </select>
-          </div>
+                    </div>
                 <div className="sspace" ></div>
               </div>
               <div className="col-xs-2" >
-              <div data-toggle="tooltip" title="Date in which the record has been last updated.">
-                <select className="input-sm select-last-update" id="last_update">
-                  <option value="">Latest update</option>
-                  <option value="24H">24 Hrs</option>
-                  <option value="1W">1 week</option>
-                  <option value="1M">1 month</option>
-                  <option value="6M">6 month</option>
-                  <option value="1Y">1 year</option>
-                  <option value="+1Y">more than 1 year</option>
-                </select>
-              </div>
                <div className="sspace" ></div>
-          </div>
+              </div>
               <div className="col-xs-2 s-last-document-field-column "  ></div>
             </div>
           </div>;
