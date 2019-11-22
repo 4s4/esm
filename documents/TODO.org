@@ -47,6 +47,10 @@ https://kss-scheibo.scheibitz.com/
 https://github.com/scheibome/kss-scheibo
 
 (not in use but seems interesting http://1026.github.io/kss-node-template-such-as-github/styleguide/ ... but not in npm :/ https://github.com/1026/kss-node-template-such-as-github)
+*** public version 
+https://4s4.github.io/esm/styles/main.html/section-main.html
+
+
 ** DONE make a security copy of the code
    CLOSED: [2019-10-27 Sun 23:47]
 using git + dropbox so far

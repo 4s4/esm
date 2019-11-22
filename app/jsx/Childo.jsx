@@ -1,8 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
 import Select from 'react-select';
-import {options} from './data';
-
 
 class Childo extends Component {
   constructor(props) {
@@ -10,22 +8,18 @@ class Childo extends Component {
     this.state = { selectedOption: null,  };
     this.onChange = this.onChange.bind(this);
   }
-
-
   onChange (selectedOption) {
-    console.log("arghh");
-    this.setState(
-      { selectedOption },
-      () => console.log(`Option selected:`, this.state.selectedOption)
-    );
+    this.props.onChange(this.props.placeholder, selectedOption);
   };
 
   render() {
+    const options = this.props.options;
     return <div>
       <Select
-        value={this.state.selectedOption}
+        value={this.props.value}
         onChange={this.onChange}
         options={options}
+        placeholder={this.props.placeholder}
         isMulti={true}
       />
     </div>
