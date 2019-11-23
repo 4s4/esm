@@ -155,20 +155,17 @@ export const sectors = [
 
 
 
-]
+];
 
 export const types = [
-  {label: "National", value:"10000000-0000-0000-0000-000000000000", options: [{isDisabled:true}] },
-  {label: "International", value:"00000000-0000-0000-0000-000000000000", 
-   options: [{ value:"DTIS", label:"DTIS" },
-	     { value:"NES-ITC", label:"NES-ITC" },
-	     { value:"Other", label:"Other" },
-	     { value:"PRSP", label:"PRSP" },
-	     { value:"SES-ITC", label:"SES-ITC" },
-	     { value:"UNDAF", label:"UNDAF" }
-  ] },
-  
-
+    {label: "National", value:"10000000-0000-0000-0000-000000000000", level: 0 },
+    {label: "International", value:"00000000-0000-0000-0000-000000000000", level:0},
+    { value:"DTIS", label:"DTIS", level:1 },
+	     { value:"NES-ITC", label:"NES-ITC", level:1 },
+	     { value:"Other", label:"Other", level:1 },
+	     { value:"PRSP", label:"PRSP", level:1 },
+	     { value:"SES-ITC", label:"SES-ITC", level:1 },
+	     { value:"UNDAF", label:"UNDAF", level:1 }
 ];
 
 export const regions = [
@@ -499,3 +496,16 @@ export const countries =[
   { value: "940df73e-bc90-40b2-a499-a1f8a7c53470", label: "Zambia" },
   { value: "940d48bf-fea6-4a42-9e24-8e5799a3a5c5", label: "Zimbabwe" }
 ]
+
+export const d = [
+  { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
+  { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
+  { value: 'purple', label: 'Purple', color: '#5243AA' },
+  { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
+  { value: 'orange', label: 'Orange', color: '#FF8B00' },
+  { value: 'yellow', label: 'Yellow', color: '#FFC400' },
+  { value: 'green', label: 'Green', color: '#36B37E' },
+  { value: 'forest', label: 'Forest', color: '#00875A' },
+  { value: 'slate', label: 'Slate', color: '#253858' },
+  { value: 'silver', label: 'Silver', color: '#666666' },
+];

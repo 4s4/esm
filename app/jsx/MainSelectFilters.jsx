@@ -16,6 +16,8 @@ class MainSelectFilters extends Component {
   }
 
   render() {
+    
+
     return <div className="col-xs-12 col-md-12">
             <div className="row">
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
@@ -28,7 +30,9 @@ class MainSelectFilters extends Component {
                 <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}/>
               </div>
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
-              <Childo options={types} placeholder="Type" onChange={this.props.onChange} value={this.props.types}/>
+              <Childo 
+              options={types} 
+              placeholder="Type" onChange={this.props.onChange} value={this.props.types}/>
               </div>
             </div>
           </div>;
