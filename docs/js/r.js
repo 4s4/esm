@@ -18,6 +18,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -60,12 +66,89 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var dot = function dot() {
+        var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#ccc';
+        return {
+          alignItems: 'center',
+          display: 'flex',
+          ':before': {
+            backgroundColor: color,
+            borderRadius: 10,
+            content: '" "',
+            display: 'block',
+            marginRight: 8,
+            height: 10,
+            width: 10
+          }
+        };
+      };
+
+      var colourStyles = {
+        control: function control(styles) {
+          return _objectSpread({}, styles, {
+            backgroundColor: 'white'
+          });
+        },
+        option: function option(styles, _ref) {
+          var data = _ref.data,
+              isDisabled = _ref.isDisabled,
+              isFocused = _ref.isFocused,
+              isSelected = _ref.isSelected;
+
+          //    const color = data.color ? '#ff69b4' : "#EFEFEF";
+          if (data.level === 1) {
+            console.log(data);
+            return _objectSpread({}, styles, {
+              backgroundColor: 'red',
+              marginLeft: '20px'
+            });
+          } else {
+            return styles;
+          }
+          /*        return {
+                    ...styles,
+                    backgroundColor: isDisabled
+                      ? null
+                      : isSelected
+                      ? data.color
+                      : isFocused
+                      ? color.alpha(0.1).css()
+                      : null,
+                    color: isDisabled
+                      ? '#ccc'
+                      : isSelected
+                      ? chroma.contrast(color, 'white') > 2
+                        ? 'white'
+                        : 'black'
+                      : data.color,
+                    cursor: isDisabled ? 'not-allowed' : 'default',
+              
+                    ':active': {
+                      ...styles[':active'],
+                      backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
+                    },
+                  }; */
+
+        },
+        input: function input(styles) {
+          return _objectSpread({}, styles, {}, dot());
+        },
+        placeholder: function placeholder(styles) {
+          return _objectSpread({}, styles, {}, dot());
+        },
+        singleValue: function singleValue(styles, _ref2) {
+          var data = _ref2.data;
+          return _objectSpread({}, styles, {}, dot(data.color));
+        }
+      };
       var options = this.props.options;
       return _react["default"].createElement("div", null, _react["default"].createElement(_reactSelect["default"], {
         value: this.props.value,
         onChange: this.onChange,
         options: options,
+        defaultMenuIsOpen: false,
         placeholder: this.props.placeholder,
+        styles: colourStyles,
         isMulti: true
       }));
     }
@@ -77,7 +160,7 @@ function (_Component) {
 var _default = Childo;
 exports["default"] = _default;
 
-},{"react":63,"react-select":60}],2:[function(require,module,exports){
+},{"react":65,"react-select":62}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -230,26 +313,6 @@ function (_Component) {
       })), _react["default"].createElement("div", {
         className: "col-xs-2"
       }, _react["default"].createElement("div", {
-        "data-toggle": "tooltip",
-        title: "Date in which the record has been last updated."
-      }, _react["default"].createElement("select", {
-        className: "input-sm select-last-update",
-        id: "last_update"
-      }, _react["default"].createElement("option", {
-        value: ""
-      }, "Latest update"), _react["default"].createElement("option", {
-        value: "24H"
-      }, "24 Hrs"), _react["default"].createElement("option", {
-        value: "1W"
-      }, "1 week"), _react["default"].createElement("option", {
-        value: "1M"
-      }, "1 month"), _react["default"].createElement("option", {
-        value: "6M"
-      }, "6 month"), _react["default"].createElement("option", {
-        value: "1Y"
-      }, "1 year"), _react["default"].createElement("option", {
-        value: "+1Y"
-      }, "more than 1 year"))), _react["default"].createElement("div", {
         className: "sspace"
       })), _react["default"].createElement("div", {
         className: "col-xs-2 s-last-document-field-column "
@@ -263,7 +326,7 @@ function (_Component) {
 var _default = DocumentField;
 exports["default"] = _default;
 
-},{"react":63}],3:[function(require,module,exports){
+},{"react":65}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -370,7 +433,7 @@ function (_Component) {
 var _default = MainSelectFilters;
 exports["default"] = _default;
 
-},{"./Childo":1,"./data":10,"react":63}],4:[function(require,module,exports){
+},{"./Childo":1,"./data":10,"react":65}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -484,7 +547,7 @@ function (_Component) {
 var _default = MainSelectFilters;
 exports["default"] = _default;
 
-},{"./Childo":1,"./data":10,"react":63}],5:[function(require,module,exports){
+},{"./Childo":1,"./data":10,"react":65}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -566,9 +629,9 @@ exports["default"] = _default;
 global.window.LikeButton = LikeButton;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Childo":1,"react":63}],6:[function(require,module,exports){
+},{"./Childo":1,"react":65}],6:[function(require,module,exports){
 arguments[4][5][0].apply(exports,arguments)
-},{"./Childo":1,"dup":5,"react":63}],7:[function(require,module,exports){
+},{"./Childo":1,"dup":5,"react":65}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -604,6 +667,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+require('es6-promise').polyfill();
+
+require('isomorphic-fetch');
+
 var SearchContainer =
 /*#__PURE__*/
 function (_Component) {
@@ -627,6 +694,19 @@ function (_Component) {
   }
 
   _createClass(SearchContainer, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      fetch('./js/data.json').then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+
+        return response.json();
+      }).then(function (stories) {
+        console.log(stories.length);
+      });
+    }
+  }, {
     key: "onSelectChange",
     value: function onSelectChange(selectType, vals) {
       if (selectType === "Region") {
@@ -712,7 +792,7 @@ function (_Component) {
 global.window.SearchContainer = SearchContainer;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./DocumentField":2,"./MainSelectFilters":4,"./ThematicFocus":9,"react":63}],8:[function(require,module,exports){
+},{"./DocumentField":2,"./MainSelectFilters":4,"./ThematicFocus":9,"es6-promise":41,"isomorphic-fetch":42,"react":65}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -941,7 +1021,7 @@ function (_Component) {
 var _default = ThematicFocus;
 exports["default"] = _default;
 
-},{"./Childo":1,"./data":10,"react":63}],9:[function(require,module,exports){
+},{"./Childo":1,"./data":10,"react":65}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1164,13 +1244,13 @@ function (_Component) {
 var _default = ThematicFocus;
 exports["default"] = _default;
 
-},{"react":63}],10:[function(require,module,exports){
+},{"react":65}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.countries = exports.regions = exports.types = exports.sectors = void 0;
+exports.d = exports.countries = exports.regions = exports.types = exports.sectors = void 0;
 var sectors = [{
   label: "Animal and vegetable oils, fats and waxes",
   options: [{
@@ -1754,31 +1834,35 @@ exports.sectors = sectors;
 var types = [{
   label: "National",
   value: "10000000-0000-0000-0000-000000000000",
-  options: [{
-    isDisabled: true
-  }]
+  level: 0
 }, {
   label: "International",
   value: "00000000-0000-0000-0000-000000000000",
-  options: [{
-    value: "DTIS",
-    label: "DTIS"
-  }, {
-    value: "NES-ITC",
-    label: "NES-ITC"
-  }, {
-    value: "Other",
-    label: "Other"
-  }, {
-    value: "PRSP",
-    label: "PRSP"
-  }, {
-    value: "SES-ITC",
-    label: "SES-ITC"
-  }, {
-    value: "UNDAF",
-    label: "UNDAF"
-  }]
+  level: 0
+}, {
+  value: "DTIS",
+  label: "DTIS",
+  level: 1
+}, {
+  value: "NES-ITC",
+  label: "NES-ITC",
+  level: 1
+}, {
+  value: "Other",
+  label: "Other",
+  level: 1
+}, {
+  value: "PRSP",
+  label: "PRSP",
+  level: 1
+}, {
+  value: "SES-ITC",
+  label: "SES-ITC",
+  level: 1
+}, {
+  value: "UNDAF",
+  label: "UNDAF",
+  level: 1
 }];
 exports.types = types;
 var regions = [{
@@ -2724,6 +2808,51 @@ var countries = [{
   label: "Zimbabwe"
 }];
 exports.countries = countries;
+var d = [{
+  value: 'ocean',
+  label: 'Ocean',
+  color: '#00B8D9',
+  isFixed: true
+}, {
+  value: 'blue',
+  label: 'Blue',
+  color: '#0052CC',
+  isDisabled: true
+}, {
+  value: 'purple',
+  label: 'Purple',
+  color: '#5243AA'
+}, {
+  value: 'red',
+  label: 'Red',
+  color: '#FF5630',
+  isFixed: true
+}, {
+  value: 'orange',
+  label: 'Orange',
+  color: '#FF8B00'
+}, {
+  value: 'yellow',
+  label: 'Yellow',
+  color: '#FFC400'
+}, {
+  value: 'green',
+  label: 'Green',
+  color: '#36B37E'
+}, {
+  value: 'forest',
+  label: 'Forest',
+  color: '#00875A'
+}, {
+  value: 'slate',
+  label: 'Slate',
+  color: '#253858'
+}, {
+  value: 'silver',
+  label: 'Silver',
+  color: '#666666'
+}];
+exports.d = d;
 
 },{}],11:[function(require,module,exports){
 function _arrayWithoutHoles(arr) {
@@ -3210,7 +3339,7 @@ var createCache = function createCache(options) {
 exports.default = createCache;
 
 }).call(this,require('_process'))
-},{"@emotion/sheet":36,"@emotion/stylis":37,"@emotion/weak-memoize":40,"_process":43}],31:[function(require,module,exports){
+},{"@emotion/sheet":36,"@emotion/stylis":37,"@emotion/weak-memoize":40,"_process":45}],31:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3602,7 +3731,7 @@ exports.jsx = jsx;
 exports.keyframes = keyframes;
 
 }).call(this,require('_process'))
-},{"@babel/runtime/helpers/inheritsLoose":19,"@emotion/cache":30,"@emotion/css":32,"@emotion/serialize":35,"@emotion/sheet":36,"@emotion/utils":39,"_process":43,"react":63}],32:[function(require,module,exports){
+},{"@babel/runtime/helpers/inheritsLoose":19,"@emotion/cache":30,"@emotion/css":32,"@emotion/serialize":35,"@emotion/sheet":36,"@emotion/utils":39,"_process":45,"react":65}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -4009,7 +4138,7 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
 exports.serializeStyles = serializeStyles;
 
 }).call(this,require('_process'))
-},{"@emotion/hash":33,"@emotion/memoize":34,"@emotion/unitless":38,"_process":43}],36:[function(require,module,exports){
+},{"@emotion/hash":33,"@emotion/memoize":34,"@emotion/unitless":38,"_process":45}],36:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4152,7 +4281,7 @@ function () {
 exports.StyleSheet = StyleSheet;
 
 }).call(this,require('_process'))
-},{"_process":43}],37:[function(require,module,exports){
+},{"_process":45}],37:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -4899,6 +5028,1192 @@ var weakMemoize = function weakMemoize(func) {
 exports.default = weakMemoize;
 
 },{}],41:[function(require,module,exports){
+(function (process,global){
+/*!
+ * @overview es6-promise - a tiny implementation of Promises/A+.
+ * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+ * @license   Licensed under MIT license
+ *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+ * @version   v4.2.8+1e68dce6
+ */
+
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.ES6Promise = factory());
+}(this, (function () { 'use strict';
+
+function objectOrFunction(x) {
+  var type = typeof x;
+  return x !== null && (type === 'object' || type === 'function');
+}
+
+function isFunction(x) {
+  return typeof x === 'function';
+}
+
+
+
+var _isArray = void 0;
+if (Array.isArray) {
+  _isArray = Array.isArray;
+} else {
+  _isArray = function (x) {
+    return Object.prototype.toString.call(x) === '[object Array]';
+  };
+}
+
+var isArray = _isArray;
+
+var len = 0;
+var vertxNext = void 0;
+var customSchedulerFn = void 0;
+
+var asap = function asap(callback, arg) {
+  queue[len] = callback;
+  queue[len + 1] = arg;
+  len += 2;
+  if (len === 2) {
+    // If len is 2, that means that we need to schedule an async flush.
+    // If additional callbacks are queued before the queue is flushed, they
+    // will be processed by this flush that we are scheduling.
+    if (customSchedulerFn) {
+      customSchedulerFn(flush);
+    } else {
+      scheduleFlush();
+    }
+  }
+};
+
+function setScheduler(scheduleFn) {
+  customSchedulerFn = scheduleFn;
+}
+
+function setAsap(asapFn) {
+  asap = asapFn;
+}
+
+var browserWindow = typeof window !== 'undefined' ? window : undefined;
+var browserGlobal = browserWindow || {};
+var BrowserMutationObserver = browserGlobal.MutationObserver || browserGlobal.WebKitMutationObserver;
+var isNode = typeof self === 'undefined' && typeof process !== 'undefined' && {}.toString.call(process) === '[object process]';
+
+// test for web worker but not in IE10
+var isWorker = typeof Uint8ClampedArray !== 'undefined' && typeof importScripts !== 'undefined' && typeof MessageChannel !== 'undefined';
+
+// node
+function useNextTick() {
+  // node version 0.10.x displays a deprecation warning when nextTick is used recursively
+  // see https://github.com/cujojs/when/issues/410 for details
+  return function () {
+    return process.nextTick(flush);
+  };
+}
+
+// vertx
+function useVertxTimer() {
+  if (typeof vertxNext !== 'undefined') {
+    return function () {
+      vertxNext(flush);
+    };
+  }
+
+  return useSetTimeout();
+}
+
+function useMutationObserver() {
+  var iterations = 0;
+  var observer = new BrowserMutationObserver(flush);
+  var node = document.createTextNode('');
+  observer.observe(node, { characterData: true });
+
+  return function () {
+    node.data = iterations = ++iterations % 2;
+  };
+}
+
+// web worker
+function useMessageChannel() {
+  var channel = new MessageChannel();
+  channel.port1.onmessage = flush;
+  return function () {
+    return channel.port2.postMessage(0);
+  };
+}
+
+function useSetTimeout() {
+  // Store setTimeout reference so es6-promise will be unaffected by
+  // other code modifying setTimeout (like sinon.useFakeTimers())
+  var globalSetTimeout = setTimeout;
+  return function () {
+    return globalSetTimeout(flush, 1);
+  };
+}
+
+var queue = new Array(1000);
+function flush() {
+  for (var i = 0; i < len; i += 2) {
+    var callback = queue[i];
+    var arg = queue[i + 1];
+
+    callback(arg);
+
+    queue[i] = undefined;
+    queue[i + 1] = undefined;
+  }
+
+  len = 0;
+}
+
+function attemptVertx() {
+  try {
+    var vertx = Function('return this')().require('vertx');
+    vertxNext = vertx.runOnLoop || vertx.runOnContext;
+    return useVertxTimer();
+  } catch (e) {
+    return useSetTimeout();
+  }
+}
+
+var scheduleFlush = void 0;
+// Decide what async method to use to triggering processing of queued callbacks:
+if (isNode) {
+  scheduleFlush = useNextTick();
+} else if (BrowserMutationObserver) {
+  scheduleFlush = useMutationObserver();
+} else if (isWorker) {
+  scheduleFlush = useMessageChannel();
+} else if (browserWindow === undefined && typeof require === 'function') {
+  scheduleFlush = attemptVertx();
+} else {
+  scheduleFlush = useSetTimeout();
+}
+
+function then(onFulfillment, onRejection) {
+  var parent = this;
+
+  var child = new this.constructor(noop);
+
+  if (child[PROMISE_ID] === undefined) {
+    makePromise(child);
+  }
+
+  var _state = parent._state;
+
+
+  if (_state) {
+    var callback = arguments[_state - 1];
+    asap(function () {
+      return invokeCallback(_state, child, callback, parent._result);
+    });
+  } else {
+    subscribe(parent, child, onFulfillment, onRejection);
+  }
+
+  return child;
+}
+
+/**
+  `Promise.resolve` returns a promise that will become resolved with the
+  passed `value`. It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    resolve(1);
+  });
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.resolve(1);
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  @method resolve
+  @static
+  @param {Any} value value that the returned promise will be resolved with
+  Useful for tooling.
+  @return {Promise} a promise that will become fulfilled with the given
+  `value`
+*/
+function resolve$1(object) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (object && typeof object === 'object' && object.constructor === Constructor) {
+    return object;
+  }
+
+  var promise = new Constructor(noop);
+  resolve(promise, object);
+  return promise;
+}
+
+var PROMISE_ID = Math.random().toString(36).substring(2);
+
+function noop() {}
+
+var PENDING = void 0;
+var FULFILLED = 1;
+var REJECTED = 2;
+
+function selfFulfillment() {
+  return new TypeError("You cannot resolve a promise with itself");
+}
+
+function cannotReturnOwn() {
+  return new TypeError('A promises callback cannot return that same promise.');
+}
+
+function tryThen(then$$1, value, fulfillmentHandler, rejectionHandler) {
+  try {
+    then$$1.call(value, fulfillmentHandler, rejectionHandler);
+  } catch (e) {
+    return e;
+  }
+}
+
+function handleForeignThenable(promise, thenable, then$$1) {
+  asap(function (promise) {
+    var sealed = false;
+    var error = tryThen(then$$1, thenable, function (value) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+      if (thenable !== value) {
+        resolve(promise, value);
+      } else {
+        fulfill(promise, value);
+      }
+    }, function (reason) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+
+      reject(promise, reason);
+    }, 'Settle: ' + (promise._label || ' unknown promise'));
+
+    if (!sealed && error) {
+      sealed = true;
+      reject(promise, error);
+    }
+  }, promise);
+}
+
+function handleOwnThenable(promise, thenable) {
+  if (thenable._state === FULFILLED) {
+    fulfill(promise, thenable._result);
+  } else if (thenable._state === REJECTED) {
+    reject(promise, thenable._result);
+  } else {
+    subscribe(thenable, undefined, function (value) {
+      return resolve(promise, value);
+    }, function (reason) {
+      return reject(promise, reason);
+    });
+  }
+}
+
+function handleMaybeThenable(promise, maybeThenable, then$$1) {
+  if (maybeThenable.constructor === promise.constructor && then$$1 === then && maybeThenable.constructor.resolve === resolve$1) {
+    handleOwnThenable(promise, maybeThenable);
+  } else {
+    if (then$$1 === undefined) {
+      fulfill(promise, maybeThenable);
+    } else if (isFunction(then$$1)) {
+      handleForeignThenable(promise, maybeThenable, then$$1);
+    } else {
+      fulfill(promise, maybeThenable);
+    }
+  }
+}
+
+function resolve(promise, value) {
+  if (promise === value) {
+    reject(promise, selfFulfillment());
+  } else if (objectOrFunction(value)) {
+    var then$$1 = void 0;
+    try {
+      then$$1 = value.then;
+    } catch (error) {
+      reject(promise, error);
+      return;
+    }
+    handleMaybeThenable(promise, value, then$$1);
+  } else {
+    fulfill(promise, value);
+  }
+}
+
+function publishRejection(promise) {
+  if (promise._onerror) {
+    promise._onerror(promise._result);
+  }
+
+  publish(promise);
+}
+
+function fulfill(promise, value) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+
+  promise._result = value;
+  promise._state = FULFILLED;
+
+  if (promise._subscribers.length !== 0) {
+    asap(publish, promise);
+  }
+}
+
+function reject(promise, reason) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+  promise._state = REJECTED;
+  promise._result = reason;
+
+  asap(publishRejection, promise);
+}
+
+function subscribe(parent, child, onFulfillment, onRejection) {
+  var _subscribers = parent._subscribers;
+  var length = _subscribers.length;
+
+
+  parent._onerror = null;
+
+  _subscribers[length] = child;
+  _subscribers[length + FULFILLED] = onFulfillment;
+  _subscribers[length + REJECTED] = onRejection;
+
+  if (length === 0 && parent._state) {
+    asap(publish, parent);
+  }
+}
+
+function publish(promise) {
+  var subscribers = promise._subscribers;
+  var settled = promise._state;
+
+  if (subscribers.length === 0) {
+    return;
+  }
+
+  var child = void 0,
+      callback = void 0,
+      detail = promise._result;
+
+  for (var i = 0; i < subscribers.length; i += 3) {
+    child = subscribers[i];
+    callback = subscribers[i + settled];
+
+    if (child) {
+      invokeCallback(settled, child, callback, detail);
+    } else {
+      callback(detail);
+    }
+  }
+
+  promise._subscribers.length = 0;
+}
+
+function invokeCallback(settled, promise, callback, detail) {
+  var hasCallback = isFunction(callback),
+      value = void 0,
+      error = void 0,
+      succeeded = true;
+
+  if (hasCallback) {
+    try {
+      value = callback(detail);
+    } catch (e) {
+      succeeded = false;
+      error = e;
+    }
+
+    if (promise === value) {
+      reject(promise, cannotReturnOwn());
+      return;
+    }
+  } else {
+    value = detail;
+  }
+
+  if (promise._state !== PENDING) {
+    // noop
+  } else if (hasCallback && succeeded) {
+    resolve(promise, value);
+  } else if (succeeded === false) {
+    reject(promise, error);
+  } else if (settled === FULFILLED) {
+    fulfill(promise, value);
+  } else if (settled === REJECTED) {
+    reject(promise, value);
+  }
+}
+
+function initializePromise(promise, resolver) {
+  try {
+    resolver(function resolvePromise(value) {
+      resolve(promise, value);
+    }, function rejectPromise(reason) {
+      reject(promise, reason);
+    });
+  } catch (e) {
+    reject(promise, e);
+  }
+}
+
+var id = 0;
+function nextId() {
+  return id++;
+}
+
+function makePromise(promise) {
+  promise[PROMISE_ID] = id++;
+  promise._state = undefined;
+  promise._result = undefined;
+  promise._subscribers = [];
+}
+
+function validationError() {
+  return new Error('Array Methods must be provided an Array');
+}
+
+var Enumerator = function () {
+  function Enumerator(Constructor, input) {
+    this._instanceConstructor = Constructor;
+    this.promise = new Constructor(noop);
+
+    if (!this.promise[PROMISE_ID]) {
+      makePromise(this.promise);
+    }
+
+    if (isArray(input)) {
+      this.length = input.length;
+      this._remaining = input.length;
+
+      this._result = new Array(this.length);
+
+      if (this.length === 0) {
+        fulfill(this.promise, this._result);
+      } else {
+        this.length = this.length || 0;
+        this._enumerate(input);
+        if (this._remaining === 0) {
+          fulfill(this.promise, this._result);
+        }
+      }
+    } else {
+      reject(this.promise, validationError());
+    }
+  }
+
+  Enumerator.prototype._enumerate = function _enumerate(input) {
+    for (var i = 0; this._state === PENDING && i < input.length; i++) {
+      this._eachEntry(input[i], i);
+    }
+  };
+
+  Enumerator.prototype._eachEntry = function _eachEntry(entry, i) {
+    var c = this._instanceConstructor;
+    var resolve$$1 = c.resolve;
+
+
+    if (resolve$$1 === resolve$1) {
+      var _then = void 0;
+      var error = void 0;
+      var didError = false;
+      try {
+        _then = entry.then;
+      } catch (e) {
+        didError = true;
+        error = e;
+      }
+
+      if (_then === then && entry._state !== PENDING) {
+        this._settledAt(entry._state, i, entry._result);
+      } else if (typeof _then !== 'function') {
+        this._remaining--;
+        this._result[i] = entry;
+      } else if (c === Promise$1) {
+        var promise = new c(noop);
+        if (didError) {
+          reject(promise, error);
+        } else {
+          handleMaybeThenable(promise, entry, _then);
+        }
+        this._willSettleAt(promise, i);
+      } else {
+        this._willSettleAt(new c(function (resolve$$1) {
+          return resolve$$1(entry);
+        }), i);
+      }
+    } else {
+      this._willSettleAt(resolve$$1(entry), i);
+    }
+  };
+
+  Enumerator.prototype._settledAt = function _settledAt(state, i, value) {
+    var promise = this.promise;
+
+
+    if (promise._state === PENDING) {
+      this._remaining--;
+
+      if (state === REJECTED) {
+        reject(promise, value);
+      } else {
+        this._result[i] = value;
+      }
+    }
+
+    if (this._remaining === 0) {
+      fulfill(promise, this._result);
+    }
+  };
+
+  Enumerator.prototype._willSettleAt = function _willSettleAt(promise, i) {
+    var enumerator = this;
+
+    subscribe(promise, undefined, function (value) {
+      return enumerator._settledAt(FULFILLED, i, value);
+    }, function (reason) {
+      return enumerator._settledAt(REJECTED, i, reason);
+    });
+  };
+
+  return Enumerator;
+}();
+
+/**
+  `Promise.all` accepts an array of promises, and returns a new promise which
+  is fulfilled with an array of fulfillment values for the passed promises, or
+  rejected with the reason of the first passed promise to be rejected. It casts all
+  elements of the passed iterable to promises as it runs this algorithm.
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = resolve(2);
+  let promise3 = resolve(3);
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // The array here would be [ 1, 2, 3 ];
+  });
+  ```
+
+  If any of the `promises` given to `all` are rejected, the first promise
+  that is rejected will be given as an argument to the returned promises's
+  rejection handler. For example:
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = reject(new Error("2"));
+  let promise3 = reject(new Error("3"));
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // Code here never runs because there are rejected promises!
+  }, function(error) {
+    // error.message === "2"
+  });
+  ```
+
+  @method all
+  @static
+  @param {Array} entries array of promises
+  @param {String} label optional string for labeling the promise.
+  Useful for tooling.
+  @return {Promise} promise that is fulfilled when all `promises` have been
+  fulfilled, or rejected if any of them become rejected.
+  @static
+*/
+function all(entries) {
+  return new Enumerator(this, entries).promise;
+}
+
+/**
+  `Promise.race` returns a new promise which is settled in the same way as the
+  first passed promise to settle.
+
+  Example:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 2');
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // result === 'promise 2' because it was resolved before promise1
+    // was resolved.
+  });
+  ```
+
+  `Promise.race` is deterministic in that only the state of the first
+  settled promise matters. For example, even if other promises given to the
+  `promises` array argument are resolved, but the first settled promise has
+  become rejected before the other promises became fulfilled, the returned
+  promise will become rejected:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      reject(new Error('promise 2'));
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // Code here never runs
+  }, function(reason){
+    // reason.message === 'promise 2' because promise 2 became rejected before
+    // promise 1 became fulfilled
+  });
+  ```
+
+  An example real-world use case is implementing timeouts:
+
+  ```javascript
+  Promise.race([ajax('foo.json'), timeout(5000)])
+  ```
+
+  @method race
+  @static
+  @param {Array} promises array of promises to observe
+  Useful for tooling.
+  @return {Promise} a promise which settles in the same way as the first passed
+  promise to settle.
+*/
+function race(entries) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (!isArray(entries)) {
+    return new Constructor(function (_, reject) {
+      return reject(new TypeError('You must pass an array to race.'));
+    });
+  } else {
+    return new Constructor(function (resolve, reject) {
+      var length = entries.length;
+      for (var i = 0; i < length; i++) {
+        Constructor.resolve(entries[i]).then(resolve, reject);
+      }
+    });
+  }
+}
+
+/**
+  `Promise.reject` returns a promise rejected with the passed `reason`.
+  It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    reject(new Error('WHOOPS'));
+  });
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.reject(new Error('WHOOPS'));
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  @method reject
+  @static
+  @param {Any} reason value that the returned promise will be rejected with.
+  Useful for tooling.
+  @return {Promise} a promise rejected with the given `reason`.
+*/
+function reject$1(reason) {
+  /*jshint validthis:true */
+  var Constructor = this;
+  var promise = new Constructor(noop);
+  reject(promise, reason);
+  return promise;
+}
+
+function needsResolver() {
+  throw new TypeError('You must pass a resolver function as the first argument to the promise constructor');
+}
+
+function needsNew() {
+  throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
+}
+
+/**
+  Promise objects represent the eventual result of an asynchronous operation. The
+  primary way of interacting with a promise is through its `then` method, which
+  registers callbacks to receive either a promise's eventual value or the reason
+  why the promise cannot be fulfilled.
+
+  Terminology
+  -----------
+
+  - `promise` is an object or function with a `then` method whose behavior conforms to this specification.
+  - `thenable` is an object or function that defines a `then` method.
+  - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
+  - `exception` is a value that is thrown using the throw statement.
+  - `reason` is a value that indicates why a promise was rejected.
+  - `settled` the final resting state of a promise, fulfilled or rejected.
+
+  A promise can be in one of three states: pending, fulfilled, or rejected.
+
+  Promises that are fulfilled have a fulfillment value and are in the fulfilled
+  state.  Promises that are rejected have a rejection reason and are in the
+  rejected state.  A fulfillment value is never a thenable.
+
+  Promises can also be said to *resolve* a value.  If this value is also a
+  promise, then the original promise's settled state will match the value's
+  settled state.  So a promise that *resolves* a promise that rejects will
+  itself reject, and a promise that *resolves* a promise that fulfills will
+  itself fulfill.
+
+
+  Basic Usage:
+  ------------
+
+  ```js
+  let promise = new Promise(function(resolve, reject) {
+    // on success
+    resolve(value);
+
+    // on failure
+    reject(reason);
+  });
+
+  promise.then(function(value) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Advanced Usage:
+  ---------------
+
+  Promises shine when abstracting away asynchronous interactions such as
+  `XMLHttpRequest`s.
+
+  ```js
+  function getJSON(url) {
+    return new Promise(function(resolve, reject){
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('GET', url);
+      xhr.onreadystatechange = handler;
+      xhr.responseType = 'json';
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.send();
+
+      function handler() {
+        if (this.readyState === this.DONE) {
+          if (this.status === 200) {
+            resolve(this.response);
+          } else {
+            reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
+          }
+        }
+      };
+    });
+  }
+
+  getJSON('/posts.json').then(function(json) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Unlike callbacks, promises are great composable primitives.
+
+  ```js
+  Promise.all([
+    getJSON('/posts'),
+    getJSON('/comments')
+  ]).then(function(values){
+    values[0] // => postsJSON
+    values[1] // => commentsJSON
+
+    return values;
+  });
+  ```
+
+  @class Promise
+  @param {Function} resolver
+  Useful for tooling.
+  @constructor
+*/
+
+var Promise$1 = function () {
+  function Promise(resolver) {
+    this[PROMISE_ID] = nextId();
+    this._result = this._state = undefined;
+    this._subscribers = [];
+
+    if (noop !== resolver) {
+      typeof resolver !== 'function' && needsResolver();
+      this instanceof Promise ? initializePromise(this, resolver) : needsNew();
+    }
+  }
+
+  /**
+  The primary way of interacting with a promise is through its `then` method,
+  which registers callbacks to receive either a promise's eventual value or the
+  reason why the promise cannot be fulfilled.
+   ```js
+  findUser().then(function(user){
+    // user is available
+  }, function(reason){
+    // user is unavailable, and you are given the reason why
+  });
+  ```
+   Chaining
+  --------
+   The return value of `then` is itself a promise.  This second, 'downstream'
+  promise is resolved with the return value of the first promise's fulfillment
+  or rejection handler, or rejected if the handler throws an exception.
+   ```js
+  findUser().then(function (user) {
+    return user.name;
+  }, function (reason) {
+    return 'default name';
+  }).then(function (userName) {
+    // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
+    // will be `'default name'`
+  });
+   findUser().then(function (user) {
+    throw new Error('Found user, but still unhappy');
+  }, function (reason) {
+    throw new Error('`findUser` rejected and we're unhappy');
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
+    // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
+  });
+  ```
+  If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
+   ```js
+  findUser().then(function (user) {
+    throw new PedagogicalException('Upstream error');
+  }).then(function (value) {
+    // never reached
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // The `PedgagocialException` is propagated all the way down to here
+  });
+  ```
+   Assimilation
+  ------------
+   Sometimes the value you want to propagate to a downstream promise can only be
+  retrieved asynchronously. This can be achieved by returning a promise in the
+  fulfillment or rejection handler. The downstream promise will then be pending
+  until the returned promise is settled. This is called *assimilation*.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // The user's comments are now available
+  });
+  ```
+   If the assimliated promise rejects, then the downstream promise will also reject.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // If `findCommentsByAuthor` fulfills, we'll have the value here
+  }, function (reason) {
+    // If `findCommentsByAuthor` rejects, we'll have the reason here
+  });
+  ```
+   Simple Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let result;
+   try {
+    result = findResult();
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+  findResult(function(result, err){
+    if (err) {
+      // failure
+    } else {
+      // success
+    }
+  });
+  ```
+   Promise Example;
+   ```javascript
+  findResult().then(function(result){
+    // success
+  }, function(reason){
+    // failure
+  });
+  ```
+   Advanced Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let author, books;
+   try {
+    author = findAuthor();
+    books  = findBooksByAuthor(author);
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+   function foundBooks(books) {
+   }
+   function failure(reason) {
+   }
+   findAuthor(function(author, err){
+    if (err) {
+      failure(err);
+      // failure
+    } else {
+      try {
+        findBoooksByAuthor(author, function(books, err) {
+          if (err) {
+            failure(err);
+          } else {
+            try {
+              foundBooks(books);
+            } catch(reason) {
+              failure(reason);
+            }
+          }
+        });
+      } catch(error) {
+        failure(err);
+      }
+      // success
+    }
+  });
+  ```
+   Promise Example;
+   ```javascript
+  findAuthor().
+    then(findBooksByAuthor).
+    then(function(books){
+      // found books
+  }).catch(function(reason){
+    // something went wrong
+  });
+  ```
+   @method then
+  @param {Function} onFulfilled
+  @param {Function} onRejected
+  Useful for tooling.
+  @return {Promise}
+  */
+
+  /**
+  `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
+  as the catch block of a try/catch statement.
+  ```js
+  function findAuthor(){
+  throw new Error('couldn't find that author');
+  }
+  // synchronous
+  try {
+  findAuthor();
+  } catch(reason) {
+  // something went wrong
+  }
+  // async with promises
+  findAuthor().catch(function(reason){
+  // something went wrong
+  });
+  ```
+  @method catch
+  @param {Function} onRejection
+  Useful for tooling.
+  @return {Promise}
+  */
+
+
+  Promise.prototype.catch = function _catch(onRejection) {
+    return this.then(null, onRejection);
+  };
+
+  /**
+    `finally` will be invoked regardless of the promise's fate just as native
+    try/catch/finally behaves
+  
+    Synchronous example:
+  
+    ```js
+    findAuthor() {
+      if (Math.random() > 0.5) {
+        throw new Error();
+      }
+      return new Author();
+    }
+  
+    try {
+      return findAuthor(); // succeed or fail
+    } catch(error) {
+      return findOtherAuther();
+    } finally {
+      // always runs
+      // doesn't affect the return value
+    }
+    ```
+  
+    Asynchronous example:
+  
+    ```js
+    findAuthor().catch(function(reason){
+      return findOtherAuther();
+    }).finally(function(){
+      // author was either found, or not
+    });
+    ```
+  
+    @method finally
+    @param {Function} callback
+    @return {Promise}
+  */
+
+
+  Promise.prototype.finally = function _finally(callback) {
+    var promise = this;
+    var constructor = promise.constructor;
+
+    if (isFunction(callback)) {
+      return promise.then(function (value) {
+        return constructor.resolve(callback()).then(function () {
+          return value;
+        });
+      }, function (reason) {
+        return constructor.resolve(callback()).then(function () {
+          throw reason;
+        });
+      });
+    }
+
+    return promise.then(callback, callback);
+  };
+
+  return Promise;
+}();
+
+Promise$1.prototype.then = then;
+Promise$1.all = all;
+Promise$1.race = race;
+Promise$1.resolve = resolve$1;
+Promise$1.reject = reject$1;
+Promise$1._setScheduler = setScheduler;
+Promise$1._setAsap = setAsap;
+Promise$1._asap = asap;
+
+/*global self*/
+function polyfill() {
+  var local = void 0;
+
+  if (typeof global !== 'undefined') {
+    local = global;
+  } else if (typeof self !== 'undefined') {
+    local = self;
+  } else {
+    try {
+      local = Function('return this')();
+    } catch (e) {
+      throw new Error('polyfill failed because global object is unavailable in this environment');
+    }
+  }
+
+  var P = local.Promise;
+
+  if (P) {
+    var promiseToString = null;
+    try {
+      promiseToString = Object.prototype.toString.call(P.resolve());
+    } catch (e) {
+      // silently ignored
+    }
+
+    if (promiseToString === '[object Promise]' && !P.cast) {
+      return;
+    }
+  }
+
+  local.Promise = Promise$1;
+}
+
+// Strange compat..
+Promise$1.polyfill = polyfill;
+Promise$1.Promise = Promise$1;
+
+return Promise$1;
+
+})));
+
+
+
+
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"_process":45}],42:[function(require,module,exports){
+// the whatwg-fetch polyfill installs the fetch() function
+// on the global object (window or self)
+//
+// Return that as the export for use in Webpack, Browserify etc.
+require('whatwg-fetch');
+module.exports = self.fetch.bind(self);
+
+},{"whatwg-fetch":72}],43:[function(require,module,exports){
 'use strict';
 
 function areInputsEqual(newInputs, lastInputs) {
@@ -4938,7 +6253,7 @@ function memoizeOne(resultFn, isEqual) {
 
 module.exports = memoizeOne;
 
-},{}],42:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -5030,7 +6345,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],43:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -5216,7 +6531,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],44:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -5322,7 +6637,7 @@ checkPropTypes.resetWarningCache = function() {
 module.exports = checkPropTypes;
 
 }).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":48,"_process":43}],45:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":50,"_process":45}],47:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -5388,7 +6703,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":48}],46:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":50}],48:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -5983,7 +7298,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 };
 
 }).call(this,require('_process'))
-},{"./checkPropTypes":44,"./lib/ReactPropTypesSecret":48,"_process":43,"object-assign":42,"react-is":55}],47:[function(require,module,exports){
+},{"./checkPropTypes":46,"./lib/ReactPropTypesSecret":50,"_process":45,"object-assign":44,"react-is":57}],49:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -6006,7 +7321,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./factoryWithThrowingShims":45,"./factoryWithTypeCheckers":46,"_process":43,"react-is":55}],48:[function(require,module,exports){
+},{"./factoryWithThrowingShims":47,"./factoryWithTypeCheckers":48,"_process":45,"react-is":57}],50:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -6020,7 +7335,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],49:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 (function (process){
 /** @license React v16.11.0
  * react-dom.development.js
@@ -33751,7 +35066,7 @@ module.exports = reactDom;
 }
 
 }).call(this,require('_process'))
-},{"_process":43,"object-assign":42,"prop-types/checkPropTypes":44,"react":63,"scheduler":68,"scheduler/tracing":69}],50:[function(require,module,exports){
+},{"_process":45,"object-assign":44,"prop-types/checkPropTypes":46,"react":65,"scheduler":70,"scheduler/tracing":71}],52:[function(require,module,exports){
 /** @license React v16.11.0
  * react-dom.production.min.js
  *
@@ -34043,7 +35358,7 @@ xe,ye,Ca.injectEventPluginsByName,fa,Sc,function(a){ya(a,Rc)},cb,db,Pd,Ba,Sj,{cu
 (function(a){var b=a.findFiberByHostInstance;return ok(n({},a,{overrideHookState:null,overrideProps:null,setSuspenseHandler:null,scheduleUpdate:null,currentDispatcherRef:Ea.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=ic(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null},findHostInstancesForRefresh:null,scheduleRefresh:null,scheduleRoot:null,setRefreshHandler:null,getCurrentFiber:null}))})({findFiberByHostInstance:Fc,bundleType:0,version:"16.11.0",
 rendererPackageName:"react-dom"});var Dk={default:Ck},Ek=Dk&&Ck||Dk;module.exports=Ek.default||Ek;
 
-},{"object-assign":42,"react":63,"scheduler":68}],51:[function(require,module,exports){
+},{"object-assign":44,"react":65,"scheduler":70}],53:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -34085,7 +35400,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":49,"./cjs/react-dom.production.min.js":50,"_process":43}],52:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":51,"./cjs/react-dom.production.min.js":52,"_process":45}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34354,7 +35669,7 @@ AutosizeInput.defaultProps = {
 };
 
 exports.default = AutosizeInput;
-},{"prop-types":47,"react":63}],53:[function(require,module,exports){
+},{"prop-types":49,"react":65}],55:[function(require,module,exports){
 (function (process){
 /** @license React v16.11.0
  * react-is.development.js
@@ -34594,7 +35909,7 @@ exports.isSuspense = isSuspense;
 }
 
 }).call(this,require('_process'))
-},{"_process":43}],54:[function(require,module,exports){
+},{"_process":45}],56:[function(require,module,exports){
 /** @license React v16.11.0
  * react-is.production.min.js
  *
@@ -34611,7 +35926,7 @@ exports.typeOf=y;exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextCon
 exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===v||a.$$typeof===w||a.$$typeof===x)};exports.isAsyncMode=function(a){return z(a)||y(a)===l};exports.isConcurrentMode=z;exports.isContextConsumer=function(a){return y(a)===k};exports.isContextProvider=function(a){return y(a)===h};
 exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return y(a)===n};exports.isFragment=function(a){return y(a)===e};exports.isLazy=function(a){return y(a)===t};exports.isMemo=function(a){return y(a)===r};exports.isPortal=function(a){return y(a)===d};exports.isProfiler=function(a){return y(a)===g};exports.isStrictMode=function(a){return y(a)===f};exports.isSuspense=function(a){return y(a)===p};
 
-},{}],55:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -34622,7 +35937,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-is.development.js":53,"./cjs/react-is.production.min.js":54,"_process":43}],56:[function(require,module,exports){
+},{"./cjs/react-is.development.js":55,"./cjs/react-is.production.min.js":56,"_process":45}],58:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -37499,7 +38814,7 @@ exports.defaultTheme = defaultTheme;
 exports.mergeStyles = mergeStyles;
 
 }).call(this,require('_process'))
-},{"../../chunk-efbed3c1.browser.cjs.js":58,"../../chunk-f83207f0.browser.cjs.js":59,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectSpread":22,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"@babel/runtime/helpers/toConsumableArray":28,"@emotion/core":31,"@emotion/css":32,"_process":43,"memoize-one":41,"react":63,"react-dom":51}],57:[function(require,module,exports){
+},{"../../chunk-efbed3c1.browser.cjs.js":60,"../../chunk-f83207f0.browser.cjs.js":61,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectSpread":22,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"@babel/runtime/helpers/toConsumableArray":28,"@emotion/core":31,"@emotion/css":32,"_process":45,"memoize-one":43,"react":65,"react-dom":53}],59:[function(require,module,exports){
 'use strict';
 
 function _interopDefault(ex) {
@@ -37662,7 +38977,7 @@ var manageState = function manageState(SelectComponent) {
 
 exports.manageState = manageState;
 
-},{"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"react":63}],58:[function(require,module,exports){
+},{"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"react":65}],60:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -39097,7 +40412,7 @@ exports.placeholderCSS = placeholderCSS;
 exports.valueContainerCSS = valueContainerCSS;
 
 }).call(this,require('_process'))
-},{"./chunk-f83207f0.browser.cjs.js":59,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectSpread":22,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"@babel/runtime/helpers/taggedTemplateLiteral":27,"@babel/runtime/helpers/typeof":29,"@emotion/core":31,"@emotion/css":32,"_process":43,"prop-types":47,"react":63,"react-dom":51,"react-input-autosize":52}],59:[function(require,module,exports){
+},{"./chunk-f83207f0.browser.cjs.js":61,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectSpread":22,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"@babel/runtime/helpers/taggedTemplateLiteral":27,"@babel/runtime/helpers/typeof":29,"@emotion/core":31,"@emotion/css":32,"_process":45,"prop-types":49,"react":65,"react-dom":53,"react-input-autosize":54}],61:[function(require,module,exports){
 'use strict';
 
 function _interopDefault(ex) {
@@ -39326,7 +40641,7 @@ exports.noop = noop;
 exports.scrollIntoView = scrollIntoView;
 exports.scrollTo = scrollTo;
 
-},{"@babel/runtime/helpers/typeof":29}],60:[function(require,module,exports){
+},{"@babel/runtime/helpers/typeof":29}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -39433,7 +40748,7 @@ exports.mergeStyles = reactSelect.mergeStyles;
 exports.NonceProvider = NonceProvider;
 exports.default = index;
 
-},{"./base/dist/react-select-306fdb60.browser.cjs.js":56,"./chunk-185dfbdc.browser.cjs.js":57,"./chunk-efbed3c1.browser.cjs.js":58,"./chunk-f83207f0.browser.cjs.js":59,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectSpread":22,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"@babel/runtime/helpers/taggedTemplateLiteral":27,"@babel/runtime/helpers/toConsumableArray":28,"@babel/runtime/helpers/typeof":29,"@emotion/cache":30,"@emotion/core":31,"@emotion/css":32,"memoize-one":41,"prop-types":47,"react":63,"react-dom":51,"react-input-autosize":52}],61:[function(require,module,exports){
+},{"./base/dist/react-select-306fdb60.browser.cjs.js":58,"./chunk-185dfbdc.browser.cjs.js":59,"./chunk-efbed3c1.browser.cjs.js":60,"./chunk-f83207f0.browser.cjs.js":61,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":17,"@babel/runtime/helpers/inherits":18,"@babel/runtime/helpers/objectSpread":22,"@babel/runtime/helpers/objectWithoutProperties":23,"@babel/runtime/helpers/possibleConstructorReturn":25,"@babel/runtime/helpers/taggedTemplateLiteral":27,"@babel/runtime/helpers/toConsumableArray":28,"@babel/runtime/helpers/typeof":29,"@emotion/cache":30,"@emotion/core":31,"@emotion/css":32,"memoize-one":43,"prop-types":49,"react":65,"react-dom":53,"react-input-autosize":54}],63:[function(require,module,exports){
 (function (process){
 /** @license React v16.11.0
  * react.development.js
@@ -41755,7 +43070,7 @@ module.exports = react;
 }
 
 }).call(this,require('_process'))
-},{"_process":43,"object-assign":42,"prop-types/checkPropTypes":44}],62:[function(require,module,exports){
+},{"_process":45,"object-assign":44,"prop-types/checkPropTypes":46}],64:[function(require,module,exports){
 /** @license React v16.11.0
  * react.production.min.js
  *
@@ -41782,7 +43097,7 @@ b,c){return W().useImperativeHandle(a,b,c)},useDebugValue:function(){},useLayout
 if(null!=b){void 0!==b.ref&&(g=b.ref,l=J.current);void 0!==b.key&&(d=""+b.key);if(a.type&&a.type.defaultProps)var f=a.type.defaultProps;for(k in b)K.call(b,k)&&!L.hasOwnProperty(k)&&(e[k]=void 0===b[k]&&void 0!==f?f[k]:b[k])}var k=arguments.length-2;if(1===k)e.children=c;else if(1<k){f=Array(k);for(var m=0;m<k;m++)f[m]=arguments[m+2];e.children=f}return{$$typeof:p,type:a.type,key:d,ref:g,props:e,_owner:l}},createFactory:function(a){var b=M.bind(null,a);b.type=a;return b},isValidElement:N,version:"16.11.0",
 __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentDispatcher:I,ReactCurrentBatchConfig:{suspense:null},ReactCurrentOwner:J,IsSomeRendererActing:{current:!1},assign:h}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default||Z;
 
-},{"object-assign":42}],63:[function(require,module,exports){
+},{"object-assign":44}],65:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -41793,7 +43108,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react.development.js":61,"./cjs/react.production.min.js":62,"_process":43}],64:[function(require,module,exports){
+},{"./cjs/react.development.js":63,"./cjs/react.production.min.js":64,"_process":45}],66:[function(require,module,exports){
 (function (process){
 /** @license React v0.17.0
  * scheduler-tracing.development.js
@@ -42218,7 +43533,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 }
 
 }).call(this,require('_process'))
-},{"_process":43}],65:[function(require,module,exports){
+},{"_process":45}],67:[function(require,module,exports){
 /** @license React v0.17.0
  * scheduler-tracing.production.min.js
  *
@@ -42230,7 +43545,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 
 'use strict';Object.defineProperty(exports,"__esModule",{value:!0});var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_wrap=function(a){return a};exports.unstable_subscribe=function(){};exports.unstable_unsubscribe=function(){};
 
-},{}],66:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 (function (process){
 /** @license React v0.17.0
  * scheduler.development.js
@@ -43259,7 +44574,7 @@ exports.unstable_Profiling = unstable_Profiling;
 }
 
 }).call(this,require('_process'))
-},{"_process":43}],67:[function(require,module,exports){
+},{"_process":45}],69:[function(require,module,exports){
 /** @license React v0.17.0
  * scheduler.production.min.js
  *
@@ -43283,7 +44598,7 @@ exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();i
 exports.unstable_wrapCallback=function(a){var b=S;return function(){var c=S;S=b;try{return a.apply(this,arguments)}finally{S=c}}};exports.unstable_getCurrentPriorityLevel=function(){return S};exports.unstable_shouldYield=function(){var a=exports.unstable_now();W(a);var b=M(O);return b!==R&&null!==R&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<R.expirationTime||k()};exports.unstable_requestPaint=aa;exports.unstable_continueExecution=function(){U||T||(U=!0,f(Y))};
 exports.unstable_pauseExecution=function(){};exports.unstable_getFirstCallbackNode=function(){return M(O)};exports.unstable_Profiling=null;
 
-},{}],68:[function(require,module,exports){
+},{}],70:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -43294,7 +44609,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":66,"./cjs/scheduler.production.min.js":67,"_process":43}],69:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":68,"./cjs/scheduler.production.min.js":69,"_process":45}],71:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -43305,4 +44620,537 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":64,"./cjs/scheduler-tracing.production.min.js":65,"_process":43}]},{},[1,10,2,3,4,5,6,7,8,9]);
+},{"./cjs/scheduler-tracing.development.js":66,"./cjs/scheduler-tracing.production.min.js":67,"_process":45}],72:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.WHATWGFetch = {})));
+}(this, (function (exports) { 'use strict';
+
+  var support = {
+    searchParams: 'URLSearchParams' in self,
+    iterable: 'Symbol' in self && 'iterator' in Symbol,
+    blob:
+      'FileReader' in self &&
+      'Blob' in self &&
+      (function() {
+        try {
+          new Blob();
+          return true
+        } catch (e) {
+          return false
+        }
+      })(),
+    formData: 'FormData' in self,
+    arrayBuffer: 'ArrayBuffer' in self
+  };
+
+  function isDataView(obj) {
+    return obj && DataView.prototype.isPrototypeOf(obj)
+  }
+
+  if (support.arrayBuffer) {
+    var viewClasses = [
+      '[object Int8Array]',
+      '[object Uint8Array]',
+      '[object Uint8ClampedArray]',
+      '[object Int16Array]',
+      '[object Uint16Array]',
+      '[object Int32Array]',
+      '[object Uint32Array]',
+      '[object Float32Array]',
+      '[object Float64Array]'
+    ];
+
+    var isArrayBufferView =
+      ArrayBuffer.isView ||
+      function(obj) {
+        return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+      };
+  }
+
+  function normalizeName(name) {
+    if (typeof name !== 'string') {
+      name = String(name);
+    }
+    if (/[^a-z0-9\-#$%&'*+.^_`|~]/i.test(name)) {
+      throw new TypeError('Invalid character in header field name')
+    }
+    return name.toLowerCase()
+  }
+
+  function normalizeValue(value) {
+    if (typeof value !== 'string') {
+      value = String(value);
+    }
+    return value
+  }
+
+  // Build a destructive iterator for the value list
+  function iteratorFor(items) {
+    var iterator = {
+      next: function() {
+        var value = items.shift();
+        return {done: value === undefined, value: value}
+      }
+    };
+
+    if (support.iterable) {
+      iterator[Symbol.iterator] = function() {
+        return iterator
+      };
+    }
+
+    return iterator
+  }
+
+  function Headers(headers) {
+    this.map = {};
+
+    if (headers instanceof Headers) {
+      headers.forEach(function(value, name) {
+        this.append(name, value);
+      }, this);
+    } else if (Array.isArray(headers)) {
+      headers.forEach(function(header) {
+        this.append(header[0], header[1]);
+      }, this);
+    } else if (headers) {
+      Object.getOwnPropertyNames(headers).forEach(function(name) {
+        this.append(name, headers[name]);
+      }, this);
+    }
+  }
+
+  Headers.prototype.append = function(name, value) {
+    name = normalizeName(name);
+    value = normalizeValue(value);
+    var oldValue = this.map[name];
+    this.map[name] = oldValue ? oldValue + ', ' + value : value;
+  };
+
+  Headers.prototype['delete'] = function(name) {
+    delete this.map[normalizeName(name)];
+  };
+
+  Headers.prototype.get = function(name) {
+    name = normalizeName(name);
+    return this.has(name) ? this.map[name] : null
+  };
+
+  Headers.prototype.has = function(name) {
+    return this.map.hasOwnProperty(normalizeName(name))
+  };
+
+  Headers.prototype.set = function(name, value) {
+    this.map[normalizeName(name)] = normalizeValue(value);
+  };
+
+  Headers.prototype.forEach = function(callback, thisArg) {
+    for (var name in this.map) {
+      if (this.map.hasOwnProperty(name)) {
+        callback.call(thisArg, this.map[name], name, this);
+      }
+    }
+  };
+
+  Headers.prototype.keys = function() {
+    var items = [];
+    this.forEach(function(value, name) {
+      items.push(name);
+    });
+    return iteratorFor(items)
+  };
+
+  Headers.prototype.values = function() {
+    var items = [];
+    this.forEach(function(value) {
+      items.push(value);
+    });
+    return iteratorFor(items)
+  };
+
+  Headers.prototype.entries = function() {
+    var items = [];
+    this.forEach(function(value, name) {
+      items.push([name, value]);
+    });
+    return iteratorFor(items)
+  };
+
+  if (support.iterable) {
+    Headers.prototype[Symbol.iterator] = Headers.prototype.entries;
+  }
+
+  function consumed(body) {
+    if (body.bodyUsed) {
+      return Promise.reject(new TypeError('Already read'))
+    }
+    body.bodyUsed = true;
+  }
+
+  function fileReaderReady(reader) {
+    return new Promise(function(resolve, reject) {
+      reader.onload = function() {
+        resolve(reader.result);
+      };
+      reader.onerror = function() {
+        reject(reader.error);
+      };
+    })
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader();
+    var promise = fileReaderReady(reader);
+    reader.readAsArrayBuffer(blob);
+    return promise
+  }
+
+  function readBlobAsText(blob) {
+    var reader = new FileReader();
+    var promise = fileReaderReady(reader);
+    reader.readAsText(blob);
+    return promise
+  }
+
+  function readArrayBufferAsText(buf) {
+    var view = new Uint8Array(buf);
+    var chars = new Array(view.length);
+
+    for (var i = 0; i < view.length; i++) {
+      chars[i] = String.fromCharCode(view[i]);
+    }
+    return chars.join('')
+  }
+
+  function bufferClone(buf) {
+    if (buf.slice) {
+      return buf.slice(0)
+    } else {
+      var view = new Uint8Array(buf.byteLength);
+      view.set(new Uint8Array(buf));
+      return view.buffer
+    }
+  }
+
+  function Body() {
+    this.bodyUsed = false;
+
+    this._initBody = function(body) {
+      this._bodyInit = body;
+      if (!body) {
+        this._bodyText = '';
+      } else if (typeof body === 'string') {
+        this._bodyText = body;
+      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+        this._bodyBlob = body;
+      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+        this._bodyFormData = body;
+      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+        this._bodyText = body.toString();
+      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+        this._bodyArrayBuffer = bufferClone(body.buffer);
+        // IE 10-11 can't handle a DataView body.
+        this._bodyInit = new Blob([this._bodyArrayBuffer]);
+      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+        this._bodyArrayBuffer = bufferClone(body);
+      } else {
+        this._bodyText = body = Object.prototype.toString.call(body);
+      }
+
+      if (!this.headers.get('content-type')) {
+        if (typeof body === 'string') {
+          this.headers.set('content-type', 'text/plain;charset=UTF-8');
+        } else if (this._bodyBlob && this._bodyBlob.type) {
+          this.headers.set('content-type', this._bodyBlob.type);
+        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        }
+      }
+    };
+
+    if (support.blob) {
+      this.blob = function() {
+        var rejected = consumed(this);
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return Promise.resolve(this._bodyBlob)
+        } else if (this._bodyArrayBuffer) {
+          return Promise.resolve(new Blob([this._bodyArrayBuffer]))
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as blob')
+        } else {
+          return Promise.resolve(new Blob([this._bodyText]))
+        }
+      };
+
+      this.arrayBuffer = function() {
+        if (this._bodyArrayBuffer) {
+          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
+        } else {
+          return this.blob().then(readBlobAsArrayBuffer)
+        }
+      };
+    }
+
+    this.text = function() {
+      var rejected = consumed(this);
+      if (rejected) {
+        return rejected
+      }
+
+      if (this._bodyBlob) {
+        return readBlobAsText(this._bodyBlob)
+      } else if (this._bodyArrayBuffer) {
+        return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
+      } else if (this._bodyFormData) {
+        throw new Error('could not read FormData body as text')
+      } else {
+        return Promise.resolve(this._bodyText)
+      }
+    };
+
+    if (support.formData) {
+      this.formData = function() {
+        return this.text().then(decode)
+      };
+    }
+
+    this.json = function() {
+      return this.text().then(JSON.parse)
+    };
+
+    return this
+  }
+
+  // HTTP methods whose capitalization should be normalized
+  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'];
+
+  function normalizeMethod(method) {
+    var upcased = method.toUpperCase();
+    return methods.indexOf(upcased) > -1 ? upcased : method
+  }
+
+  function Request(input, options) {
+    options = options || {};
+    var body = options.body;
+
+    if (input instanceof Request) {
+      if (input.bodyUsed) {
+        throw new TypeError('Already read')
+      }
+      this.url = input.url;
+      this.credentials = input.credentials;
+      if (!options.headers) {
+        this.headers = new Headers(input.headers);
+      }
+      this.method = input.method;
+      this.mode = input.mode;
+      this.signal = input.signal;
+      if (!body && input._bodyInit != null) {
+        body = input._bodyInit;
+        input.bodyUsed = true;
+      }
+    } else {
+      this.url = String(input);
+    }
+
+    this.credentials = options.credentials || this.credentials || 'same-origin';
+    if (options.headers || !this.headers) {
+      this.headers = new Headers(options.headers);
+    }
+    this.method = normalizeMethod(options.method || this.method || 'GET');
+    this.mode = options.mode || this.mode || null;
+    this.signal = options.signal || this.signal;
+    this.referrer = null;
+
+    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+      throw new TypeError('Body not allowed for GET or HEAD requests')
+    }
+    this._initBody(body);
+  }
+
+  Request.prototype.clone = function() {
+    return new Request(this, {body: this._bodyInit})
+  };
+
+  function decode(body) {
+    var form = new FormData();
+    body
+      .trim()
+      .split('&')
+      .forEach(function(bytes) {
+        if (bytes) {
+          var split = bytes.split('=');
+          var name = split.shift().replace(/\+/g, ' ');
+          var value = split.join('=').replace(/\+/g, ' ');
+          form.append(decodeURIComponent(name), decodeURIComponent(value));
+        }
+      });
+    return form
+  }
+
+  function parseHeaders(rawHeaders) {
+    var headers = new Headers();
+    // Replace instances of \r\n and \n followed by at least one space or horizontal tab with a space
+    // https://tools.ietf.org/html/rfc7230#section-3.2
+    var preProcessedHeaders = rawHeaders.replace(/\r?\n[\t ]+/g, ' ');
+    preProcessedHeaders.split(/\r?\n/).forEach(function(line) {
+      var parts = line.split(':');
+      var key = parts.shift().trim();
+      if (key) {
+        var value = parts.join(':').trim();
+        headers.append(key, value);
+      }
+    });
+    return headers
+  }
+
+  Body.call(Request.prototype);
+
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {};
+    }
+
+    this.type = 'default';
+    this.status = options.status === undefined ? 200 : options.status;
+    this.ok = this.status >= 200 && this.status < 300;
+    this.statusText = 'statusText' in options ? options.statusText : 'OK';
+    this.headers = new Headers(options.headers);
+    this.url = options.url || '';
+    this._initBody(bodyInit);
+  }
+
+  Body.call(Response.prototype);
+
+  Response.prototype.clone = function() {
+    return new Response(this._bodyInit, {
+      status: this.status,
+      statusText: this.statusText,
+      headers: new Headers(this.headers),
+      url: this.url
+    })
+  };
+
+  Response.error = function() {
+    var response = new Response(null, {status: 0, statusText: ''});
+    response.type = 'error';
+    return response
+  };
+
+  var redirectStatuses = [301, 302, 303, 307, 308];
+
+  Response.redirect = function(url, status) {
+    if (redirectStatuses.indexOf(status) === -1) {
+      throw new RangeError('Invalid status code')
+    }
+
+    return new Response(null, {status: status, headers: {location: url}})
+  };
+
+  exports.DOMException = self.DOMException;
+  try {
+    new exports.DOMException();
+  } catch (err) {
+    exports.DOMException = function(message, name) {
+      this.message = message;
+      this.name = name;
+      var error = Error(message);
+      this.stack = error.stack;
+    };
+    exports.DOMException.prototype = Object.create(Error.prototype);
+    exports.DOMException.prototype.constructor = exports.DOMException;
+  }
+
+  function fetch(input, init) {
+    return new Promise(function(resolve, reject) {
+      var request = new Request(input, init);
+
+      if (request.signal && request.signal.aborted) {
+        return reject(new exports.DOMException('Aborted', 'AbortError'))
+      }
+
+      var xhr = new XMLHttpRequest();
+
+      function abortXhr() {
+        xhr.abort();
+      }
+
+      xhr.onload = function() {
+        var options = {
+          status: xhr.status,
+          statusText: xhr.statusText,
+          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
+        };
+        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL');
+        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+        resolve(new Response(body, options));
+      };
+
+      xhr.onerror = function() {
+        reject(new TypeError('Network request failed'));
+      };
+
+      xhr.ontimeout = function() {
+        reject(new TypeError('Network request failed'));
+      };
+
+      xhr.onabort = function() {
+        reject(new exports.DOMException('Aborted', 'AbortError'));
+      };
+
+      xhr.open(request.method, request.url, true);
+
+      if (request.credentials === 'include') {
+        xhr.withCredentials = true;
+      } else if (request.credentials === 'omit') {
+        xhr.withCredentials = false;
+      }
+
+      if ('responseType' in xhr && support.blob) {
+        xhr.responseType = 'blob';
+      }
+
+      request.headers.forEach(function(value, name) {
+        xhr.setRequestHeader(name, value);
+      });
+
+      if (request.signal) {
+        request.signal.addEventListener('abort', abortXhr);
+
+        xhr.onreadystatechange = function() {
+          // DONE (success or failure)
+          if (xhr.readyState === 4) {
+            request.signal.removeEventListener('abort', abortXhr);
+          }
+        };
+      }
+
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit);
+    })
+  }
+
+  fetch.polyfill = true;
+
+  if (!self.fetch) {
+    self.fetch = fetch;
+    self.Headers = Headers;
+    self.Request = Request;
+    self.Response = Response;
+  }
+
+  exports.Headers = Headers;
+  exports.Request = Request;
+  exports.Response = Response;
+  exports.fetch = fetch;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+},{}]},{},[1,10,2,3,4,5,6,7,8,9]);

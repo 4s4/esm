@@ -32,6 +32,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+require('es6-promise').polyfill();
+
+require('isomorphic-fetch');
+
 var SearchContainer =
 /*#__PURE__*/
 function (_Component) {
@@ -55,6 +59,19 @@ function (_Component) {
   }
 
   _createClass(SearchContainer, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      fetch('./js/data.json').then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+
+        return response.json();
+      }).then(function (stories) {
+        console.log(stories.length);
+      });
+    }
+  }, {
     key: "onSelectChange",
     value: function onSelectChange(selectType, vals) {
       if (selectType === "Region") {

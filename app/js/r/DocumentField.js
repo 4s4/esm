@@ -150,26 +150,6 @@ function (_Component) {
       })), _react["default"].createElement("div", {
         className: "col-xs-2"
       }, _react["default"].createElement("div", {
-        "data-toggle": "tooltip",
-        title: "Date in which the record has been last updated."
-      }, _react["default"].createElement("select", {
-        className: "input-sm select-last-update",
-        id: "last_update"
-      }, _react["default"].createElement("option", {
-        value: ""
-      }, "Latest update"), _react["default"].createElement("option", {
-        value: "24H"
-      }, "24 Hrs"), _react["default"].createElement("option", {
-        value: "1W"
-      }, "1 week"), _react["default"].createElement("option", {
-        value: "1M"
-      }, "1 month"), _react["default"].createElement("option", {
-        value: "6M"
-      }, "6 month"), _react["default"].createElement("option", {
-        value: "1Y"
-      }, "1 year"), _react["default"].createElement("option", {
-        value: "+1Y"
-      }, "more than 1 year"))), _react["default"].createElement("div", {
         className: "sspace"
       })), _react["default"].createElement("div", {
         className: "col-xs-2 s-last-document-field-column "

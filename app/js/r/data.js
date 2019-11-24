@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.countries = exports.regions = exports.types = exports.sectors = void 0;
+exports.d = exports.countries = exports.regions = exports.types = exports.sectors = void 0;
 var sectors = [{
   label: "Animal and vegetable oils, fats and waxes",
   options: [{
@@ -587,31 +587,35 @@ exports.sectors = sectors;
 var types = [{
   label: "National",
   value: "10000000-0000-0000-0000-000000000000",
-  options: [{
-    isDisabled: true
-  }]
+  level: 0
 }, {
   label: "International",
   value: "00000000-0000-0000-0000-000000000000",
-  options: [{
-    value: "DTIS",
-    label: "DTIS"
-  }, {
-    value: "NES-ITC",
-    label: "NES-ITC"
-  }, {
-    value: "Other",
-    label: "Other"
-  }, {
-    value: "PRSP",
-    label: "PRSP"
-  }, {
-    value: "SES-ITC",
-    label: "SES-ITC"
-  }, {
-    value: "UNDAF",
-    label: "UNDAF"
-  }]
+  level: 0
+}, {
+  value: "DTIS",
+  label: "DTIS",
+  level: 1
+}, {
+  value: "NES-ITC",
+  label: "NES-ITC",
+  level: 1
+}, {
+  value: "Other",
+  label: "Other",
+  level: 1
+}, {
+  value: "PRSP",
+  label: "PRSP",
+  level: 1
+}, {
+  value: "SES-ITC",
+  label: "SES-ITC",
+  level: 1
+}, {
+  value: "UNDAF",
+  label: "UNDAF",
+  level: 1
 }];
 exports.types = types;
 var regions = [{
@@ -1557,3 +1561,48 @@ var countries = [{
   label: "Zimbabwe"
 }];
 exports.countries = countries;
+var d = [{
+  value: 'ocean',
+  label: 'Ocean',
+  color: '#00B8D9',
+  isFixed: true
+}, {
+  value: 'blue',
+  label: 'Blue',
+  color: '#0052CC',
+  isDisabled: true
+}, {
+  value: 'purple',
+  label: 'Purple',
+  color: '#5243AA'
+}, {
+  value: 'red',
+  label: 'Red',
+  color: '#FF5630',
+  isFixed: true
+}, {
+  value: 'orange',
+  label: 'Orange',
+  color: '#FF8B00'
+}, {
+  value: 'yellow',
+  label: 'Yellow',
+  color: '#FFC400'
+}, {
+  value: 'green',
+  label: 'Green',
+  color: '#36B37E'
+}, {
+  value: 'forest',
+  label: 'Forest',
+  color: '#00875A'
+}, {
+  value: 'slate',
+  label: 'Slate',
+  color: '#253858'
+}, {
+  value: 'silver',
+  label: 'Silver',
+  color: '#666666'
+}];
+exports.d = d;

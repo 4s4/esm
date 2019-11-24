@@ -4,6 +4,9 @@ import MainSelectFilter from './MainSelectFilters';
 import ThematicFocus from './ThematicFocus';
 import DocumentField from './DocumentField';
 
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -12,7 +15,20 @@ class SearchContainer extends Component {
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
   }
+  componentWillMount() {
+    fetch('./js/data.json')
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(function(stories) {
+      console.log(stories.length);
+    });
 
+  }
+  
   onSelectChange (selectType, vals) {
     if(selectType === "Region"){
       this.setState({ regions: vals });
