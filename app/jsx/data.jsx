@@ -158,14 +158,14 @@ export const sectors = [
 ];
 
 export const types = [
-    {label: "National", value:"10000000-0000-0000-0000-000000000000", level: 0 },
-    {label: "International", value:"00000000-0000-0000-0000-000000000000", level:0},
+    { value:"National", label: "National", level: 0 },
+    { value:"International", label: "International", level:0},
     { value:"DTIS", label:"DTIS", level:1 },
-	     { value:"NES-ITC", label:"NES-ITC", level:1 },
-	     { value:"Other", label:"Other", level:1 },
-	     { value:"PRSP", label:"PRSP", level:1 },
-	     { value:"SES-ITC", label:"SES-ITC", level:1 },
-	     { value:"UNDAF", label:"UNDAF", level:1 }
+    { value:"NES-ITC", label:"NES-ITC", level:1 },
+    { value:"Other", label:"Other", level:1 },
+    { value:"PRSP", label:"PRSP", level:1 },
+    { value:"SES-ITC", label:"SES-ITC", level:1 },
+    { value:"UNDAF", label:"UNDAF", level:1 }
 ];
 
 export const regions = [

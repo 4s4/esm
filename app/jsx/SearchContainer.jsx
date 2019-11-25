@@ -11,11 +11,19 @@ require('isomorphic-fetch');
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { regions:null, countries:null, sectors:null, types:null };
+    this.state = { reports: null, regions:null, countries:null, sectors:null, types:null, searchResults: null };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
+    this.saveReports = this.saveReports.bind(this);
+  }
+
+  saveReports(r){
+    console.log('save reports!');
+
+    this.setState( { reports: r });
   }
   componentWillMount() {
+    console.log('componentWillMount');
     fetch('./js/data.json')
     .then(function(response) {
       if (response.status >= 400) {
@@ -23,10 +31,8 @@ class SearchContainer extends Component {
       }
       return response.json();
     })
-    .then(function(stories) {
-      console.log(stories.length);
-    });
-
+    .then(this.saveReports);
+    
   }
   
   onSelectChange (selectType, vals) {
@@ -43,7 +49,10 @@ class SearchContainer extends Component {
   };
 
   search(){
-    alert(JSON.stringify(this.state));
+    const reportsLength = this.state.reports.length;
+    const { reports, ...picked} = this.state;
+    const search = {reportsLength, ...picked}
+    alert(JSON.stringify(search));
   }
 
   render() {
@@ -56,6 +65,7 @@ class SearchContainer extends Component {
                       <div className="row" role="form">
                         <div id="main_select_filter">
                         <MainSelectFilter onChange={this.onSelectChange} 
+                        reports={this.state.reports}
                         regions={this.state.regions} 
                         types={this.state.types}
                         countries={this.state.countries}
