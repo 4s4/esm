@@ -585,12 +585,12 @@ var sectors = [{
 }];
 exports.sectors = sectors;
 var types = [{
+  value: "National",
   label: "National",
-  value: "10000000-0000-0000-0000-000000000000",
   level: 0
 }, {
+  value: "International",
   label: "International",
-  value: "00000000-0000-0000-0000-000000000000",
   level: 0
 }, {
   value: "DTIS",

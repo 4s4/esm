@@ -455,6 +455,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -463,13 +465,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function countBy(col) {
+  return col.reduce(function (acc, curr) {
+    acc[curr] ? acc[curr]++ : acc[curr] = 1;
+    return acc;
+  }, {});
+}
+
+function countIt(reports, prop) {
+  //    console.log(this.props.reports.shift()); 
+  return countBy(reports.map(function (r) {
+    return r[prop];
+  }));
+}
 
 var MainSelectFilters =
 /*#__PURE__*/
@@ -483,20 +499,32 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MainSelectFilters).call(this, props));
     _this.state = {
-      liked: false
+      liked: false,
+      reports: props.reports
     };
-    _this.wow = _this.wow.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(MainSelectFilters, [{
-    key: "wow",
-    value: function wow(e) {
-      console.log('wow', e, this.state);
-    }
-  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      console.log('types', this.state.types);
+      var tt = [];
+
+      if (this.state.types) {
+        tt = _data.types.map(function (o) {
+          var picked = _extends({}, o);
+
+          console.log(picked);
+          picked.label += " (" + _this2.state.types[picked.value] + ")";
+          return picked;
+        });
+        console.log('data-types', _data.types);
+        console.log('tt-types', tt);
+      }
+
       return _react["default"].createElement("div", {
         className: "col-xs-12 col-md-12"
       }, _react["default"].createElement("div", {
@@ -533,11 +561,23 @@ function (_Component) {
         "data-toggle": "tooltip",
         title: "Type of Document"
       }, _react["default"].createElement(_Childo["default"], {
-        options: _data.types,
+        options: tt,
         placeholder: "Type",
         onChange: this.props.onChange,
         value: this.props.types
       }))));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      if (props.reports !== state.reports) {
+        return {
+          reports: props.reports,
+          types: countIt(props.reports, 'type')
+        };
+      }
+
+      return null;
     }
   }]);
 
@@ -651,6 +691,16 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -683,28 +733,38 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchContainer).call(this, props));
     _this.state = {
+      reports: null,
       regions: null,
       countries: null,
       sectors: null,
-      types: null
+      types: null,
+      searchResults: null
     };
     _this.onSelectChange = _this.onSelectChange.bind(_assertThisInitialized(_this));
     _this.search = _this.search.bind(_assertThisInitialized(_this));
+    _this.saveReports = _this.saveReports.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(SearchContainer, [{
+    key: "saveReports",
+    value: function saveReports(r) {
+      console.log('save reports!');
+      this.setState({
+        reports: r
+      });
+    }
+  }, {
     key: "componentWillMount",
     value: function componentWillMount() {
+      console.log('componentWillMount');
       fetch('./js/data.json').then(function (response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
         }
 
         return response.json();
-      }).then(function (stories) {
-        console.log(stories.length);
-      });
+      }).then(this.saveReports);
     }
   }, {
     key: "onSelectChange",
@@ -732,7 +792,17 @@ function (_Component) {
   }, {
     key: "search",
     value: function search() {
-      alert(JSON.stringify(this.state));
+      var reportsLength = this.state.reports.length;
+
+      var _this$state = this.state,
+          reports = _this$state.reports,
+          picked = _objectWithoutProperties(_this$state, ["reports"]);
+
+      var search = _objectSpread({
+        reportsLength: reportsLength
+      }, picked);
+
+      alert(JSON.stringify(search));
     }
   }, {
     key: "render",
@@ -759,6 +829,7 @@ function (_Component) {
         id: "main_select_filter"
       }, _react["default"].createElement(_MainSelectFilters["default"], {
         onChange: this.onSelectChange,
+        reports: this.state.reports,
         regions: this.state.regions,
         types: this.state.types,
         countries: this.state.countries,
@@ -1832,12 +1903,12 @@ var sectors = [{
 }];
 exports.sectors = sectors;
 var types = [{
+  value: "National",
   label: "National",
-  value: "10000000-0000-0000-0000-000000000000",
   level: 0
 }, {
+  value: "International",
   label: "International",
-  value: "00000000-0000-0000-0000-000000000000",
   level: 0
 }, {
   value: "DTIS",
