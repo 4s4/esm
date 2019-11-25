@@ -33,6 +33,7 @@
 (defn report []
   (-> (more-checks)
       (assoc :region (one cols/regions))
+      (assoc :type (one cols/types))
       (assoc :country (one cols/countries))
       (assoc :countryCode (one cols/country-codes))
       (assoc :title (one cols/titles))
@@ -46,7 +47,7 @@
   (let [data (atom [])]
     (doseq [_ (range 1800)]
       (swap! data conj (report)))
-    (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/data/resources/data.json")]
+    (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/app/js/data.json")]
       (.write wrtr (generate-string @data))
       )))
 
