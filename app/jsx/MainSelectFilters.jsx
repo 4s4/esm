@@ -32,19 +32,19 @@ class MainSelectFilters extends Component {
   }
 
   render() { 
-    console.log('types', this.state.types);
+//    console.log('types', this.state.types);
     let tt = [];
     if (this.state.types){
       tt = types.map(o => {
       const {...picked} = o;
-      console.log(picked);
+//      console.log(picked);
       picked.label+=" ("+this.state.types[picked.value]+")";
       return picked;
     })
     
-    console.log('data-types', types);
+//    console.log('data-types', types);
     
-    console.log('tt-types', tt);
+//    console.log('tt-types', tt);
   }
     return <div className="col-xs-12 col-md-12">
             <div className="row">
@@ -60,7 +60,8 @@ class MainSelectFilters extends Component {
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
               <Childo 
               options={tt} 
-              placeholder="Type" onChange={this.props.onChange} value={this.props.types}/>
+              placeholder="Type" onChange={this.props.onChange} value={this.props.types}
+              defaultMenuIsOpen={false}/>
               </div>
             </div>
           </div>;

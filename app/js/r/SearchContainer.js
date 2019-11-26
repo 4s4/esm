@@ -26,6 +26,8 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -58,7 +60,9 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchContainer).call(this, props));
     _this.state = {
+      qq: {},
       reports: null,
+      initialReports: null,
       regions: null,
       countries: null,
       sectors: null,
@@ -68,6 +72,7 @@ function (_Component) {
     _this.onSelectChange = _this.onSelectChange.bind(_assertThisInitialized(_this));
     _this.search = _this.search.bind(_assertThisInitialized(_this));
     _this.saveReports = _this.saveReports.bind(_assertThisInitialized(_this));
+    _this.onCheckBoxChange = _this.onCheckBoxChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -76,7 +81,8 @@ function (_Component) {
     value: function saveReports(r) {
       console.log('save reports!');
       this.setState({
-        reports: r
+        reports: r,
+        initialReports: r
       });
     }
   }, {
@@ -113,6 +119,45 @@ function (_Component) {
       }
 
       console.log(selectType, "Option selected:", vals);
+    }
+  }, {
+    key: "onCheckBoxChange",
+    value: function onCheckBoxChange(opt, v) {
+      var q = v ? function (r) {
+        return r[opt];
+      } : null;
+
+      var picked = _extends({}, this.state.qq);
+
+      if (v) {
+        picked[opt] = q;
+      } else {
+        delete picked[opt];
+      }
+
+      console.log('keys:', Object.keys(picked));
+      var queries = Object.values(picked);
+      var reports;
+
+      if (queries.length > 0) {
+        reports = this.state.initialReports.filter(function (r) {
+          return queries.reduce(function (c, f) {
+            if (c) {
+              return f(r);
+            }
+
+            return false;
+          }, true);
+        });
+      } else {
+        reports = this.state.initialReports;
+      }
+
+      this.setState({
+        qq: picked,
+        reports: reports
+      });
+      console.log('listening', opt, v, this.state.reports.length);
     }
   }, {
     key: "search",
@@ -161,7 +206,10 @@ function (_Component) {
         sectors: this.state.sectors
       }))))))), _react["default"].createElement("div", {
         className: "row "
-      }, _react["default"].createElement(_DocumentField["default"], null), _react["default"].createElement(_ThematicFocus["default"], null)), _react["default"].createElement("div", {
+      }, _react["default"].createElement(_DocumentField["default"], null), _react["default"].createElement(_ThematicFocus["default"], {
+        reports: this.state.reports,
+        onCheck: this.onCheckBoxChange
+      })), _react["default"].createElement("div", {
         className: "row filters",
         style: {
           marginTop: '0px'

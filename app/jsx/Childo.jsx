@@ -33,8 +33,8 @@ class Childo extends Component {
       option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     //    const color = data.color ? '#ff69b4' : "#EFEFEF";
         if(data.level === 1){
-          console.log(data);
-          return { ...styles, backgroundColor:'red', marginLeft: '20px'};
+          //console.log(data);
+          return { ...styles, backgroundColor:'pink', marginLeft: '20px'};
         }else{
           return styles;
         }
@@ -73,7 +73,7 @@ class Childo extends Component {
         value={this.props.value}
         onChange={this.onChange}
         options={options}
-        defaultMenuIsOpen={false}
+        defaultMenuIsOpen={this.props.defaultMenuIsOpen}
         placeholder={this.props.placeholder}
         styles={colourStyles}
         isMulti={true}
