@@ -15,6 +15,7 @@ class SearchContainer extends Component {
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
+    this.searchReports = this.searchReports.bind(this);
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
   }
 
@@ -43,23 +44,20 @@ class SearchContainer extends Component {
       this.setState( { countries: vals } );
     } else if(selectType === "Type") {
       this.setState( { types: vals } );
+      const { ...picked } = this.state.qq;
+      const dict= new Set(vals.map(o => o.value));
+      console.log(dict, dict.has('Other') );
+      picked['type'] = o => dict.has(o['type']);
+      this.searchReports(picked);
     } else if(selectType === "Sector") {
       this.setState( { sectors: vals } );
     }
     console.log(selectType, `Option selected:`, vals)
+
   };
 
-  onCheckBoxChange (opt, v){
-    const q = v ?  r => r[opt] : null;
-    const { ...picked } = this.state.qq;
-    if (v){
-      picked[opt] = q;
-    } else {
-      delete picked[opt];
-    }
-    console.log('keys:', Object.keys(picked));
-
-    const queries = Object.values(picked)
+  searchReports(qqs){
+    const queries = Object.values(qqs); 
     let reports;
     if (queries.length > 0){
       reports = this.state.initialReports.filter(
@@ -72,22 +70,33 @@ class SearchContainer extends Component {
             return false;
           }, true
           );
-
         }
-
       );
     } else {
       reports = this.state.initialReports;
     }
-    this.setState({qq: picked,
-                  reports,              
-                  })
-    console.log('listening' , opt, v, this.state.reports.length);
+    this.setState({reports, 
+      qq: qqs});
+    console.log('current results....' ,reports.length);
+
+  }
+
+  onCheckBoxChange (opt, v){
+    console.log('listening' , opt, v);
+    const q = v ?  r => r[opt] : null;
+    const { ...picked } = this.state.qq;
+    if (v){
+      picked[opt] = q;
+    } else {
+      delete picked[opt];
+    }
+    console.log('keys:', Object.keys(picked));
+    this.searchReports(picked);
   }
 
   search(){
     const reportsLength = this.state.reports.length;
-    const { reports, ...picked} = this.state;
+    const { reports, initialReports, ...picked} = this.state;
     const search = {reportsLength, ...picked}
     alert(JSON.stringify(search));
   }

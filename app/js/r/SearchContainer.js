@@ -72,6 +72,7 @@ function (_Component) {
     _this.onSelectChange = _this.onSelectChange.bind(_assertThisInitialized(_this));
     _this.search = _this.search.bind(_assertThisInitialized(_this));
     _this.saveReports = _this.saveReports.bind(_assertThisInitialized(_this));
+    _this.searchReports = _this.searchReports.bind(_assertThisInitialized(_this));
     _this.onCheckBoxChange = _this.onCheckBoxChange.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -112,6 +113,19 @@ function (_Component) {
         this.setState({
           types: vals
         });
+
+        var picked = _extends({}, this.state.qq);
+
+        var dict = new Set(vals.map(function (o) {
+          return o.value;
+        }));
+        console.log(dict, dict.has('Other'));
+
+        picked['type'] = function (o) {
+          return dict.has(o['type']);
+        };
+
+        this.searchReports(picked);
       } else if (selectType === "Sector") {
         this.setState({
           sectors: vals
@@ -121,22 +135,9 @@ function (_Component) {
       console.log(selectType, "Option selected:", vals);
     }
   }, {
-    key: "onCheckBoxChange",
-    value: function onCheckBoxChange(opt, v) {
-      var q = v ? function (r) {
-        return r[opt];
-      } : null;
-
-      var picked = _extends({}, this.state.qq);
-
-      if (v) {
-        picked[opt] = q;
-      } else {
-        delete picked[opt];
-      }
-
-      console.log('keys:', Object.keys(picked));
-      var queries = Object.values(picked);
+    key: "searchReports",
+    value: function searchReports(qqs) {
+      var queries = Object.values(qqs);
       var reports;
 
       if (queries.length > 0) {
@@ -154,10 +155,29 @@ function (_Component) {
       }
 
       this.setState({
-        qq: picked,
-        reports: reports
+        reports: reports,
+        qq: qqs
       });
-      console.log('listening', opt, v, this.state.reports.length);
+      console.log('current results....', reports.length);
+    }
+  }, {
+    key: "onCheckBoxChange",
+    value: function onCheckBoxChange(opt, v) {
+      console.log('listening', opt, v);
+      var q = v ? function (r) {
+        return r[opt];
+      } : null;
+
+      var picked = _extends({}, this.state.qq);
+
+      if (v) {
+        picked[opt] = q;
+      } else {
+        delete picked[opt];
+      }
+
+      console.log('keys:', Object.keys(picked));
+      this.searchReports(picked);
     }
   }, {
     key: "search",
@@ -166,7 +186,8 @@ function (_Component) {
 
       var _this$state = this.state,
           reports = _this$state.reports,
-          picked = _objectWithoutProperties(_this$state, ["reports"]);
+          initialReports = _this$state.initialReports,
+          picked = _objectWithoutProperties(_this$state, ["reports", "initialReports"]);
 
       var search = _objectSpread({
         reportsLength: reportsLength
