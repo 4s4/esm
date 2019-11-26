@@ -1328,67 +1328,51 @@ function (_Component) {
         title: "The document focuses on trade information and/or market intelligence."
       })), _react["default"].createElement("div", {
         className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }, _react["default"].createElement(CheckBox, {
+        id: "trade_promotion",
+        name: "Trade Promotion",
+        onChange: this.check,
+        count: this.state,
         title: "The document focuses on trade promotion."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_promotion"
-      }), "Trade Promotion")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "quality",
+        name: "Quality",
+        onChange: this.check,
+        count: this.state,
         title: "The document focuses on standards and/or quality management."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "quality"
-      }), "Quality")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "tvet",
+        name: "TVET",
+        onChange: this.check,
+        count: this.state,
         title: "The strategy focuses on Technical and Vocational Education and Training (TVET)."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "tvet"
-      }), "TVET"))), _react["default"].createElement("div", {
+      })), _react["default"].createElement("div", {
         className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }, _react["default"].createElement(CheckBox, {
+        id: "regional",
+        name: "Regional Scope",
+        onChange: this.check,
+        count: this.state,
         title: "The document has a regional scope. The information included applies to a group of countries."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "regional"
-      }), "Regional Scope")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "regional_integration",
+        name: "Regional Integration",
+        onChange: this.check,
+        count: this.state,
         title: "The document focuses on regional integration."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "regional_integration"
-      }), "Regional Integration")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "select all theme options"
-      }, _react["default"].createElement("label", {
-        style: {
-          fontWeight: "bolder",
-          textDecoration: "underline"
-        }
-      }, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "all_theme"
-      }), "Select all")))));
+      }))));
     }
   }], [{
     key: "getDerivedStateFromProps",
     value: function getDerivedStateFromProps(props, state) {
       if (props.reports !== state.reports) {
-        return {
-          reports: props.reports,
-          environment: countProp(props.reports, 'environment'),
-          gender: countProp(props.reports, 'gender'),
-          poverty_reduction: countProp(props.reports, 'poverty_reduction')
-        };
+        var kws = ['environment', 'gender', 'poverty_reduction', 'export_strategy', 'trade_focus', 'youth', 'trade_facilitation', 'trade_finance', 'trade_information', 'trade_promotion', 'quality', 'tvet', 'regional', 'regional_integration'];
+        return kws.reduce(function (c, o) {
+          c[o] = countProp(props.reports, o);
+          return c;
+        }, {
+          reports: props.reports
+        });
       }
 
       return null;

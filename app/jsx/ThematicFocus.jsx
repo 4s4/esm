@@ -29,12 +29,12 @@ class ThematicFocus extends Component {
     if (
       props.reports !== state.reports 
     ) {
-      return {
-        reports: props.reports,
-        environment: countProp(props.reports, 'environment'),
-        gender: countProp(props.reports, 'gender'),
-        poverty_reduction: countProp(props.reports, 'poverty_reduction'),
-      };
+      const kws = ['environment', 'gender', 'poverty_reduction', 'export_strategy', 'trade_focus',
+		   'youth', 'trade_facilitation', 'trade_finance', 'trade_information', 'trade_promotion', 'quality',
+		   'tvet', 'regional', 'regional_integration'];
+      return kws.reduce( (c, o) => {
+	c[o]=countProp(props.reports, o);
+	return c} , {reports: props.reports});
     }
     return null;
   }
@@ -96,44 +96,24 @@ class ThematicFocus extends Component {
           />
         </div>
         <div className="col-xs-2">
-          <div className="checkbox" data-toggle="tooltip" title="The document focuses on trade promotion.">
-            <label>
-              <input type="checkbox" id="trade_promotion"/>
-              Trade Promotion
-            </label>
-          </div>
-          <div className="checkbox" data-toggle="tooltip" title="The document focuses on standards and/or quality management.">
-            <label>
-              <input type="checkbox" id="quality"/>
-              Quality
-            </label>
-          </div>
-          <div className="checkbox" data-toggle="tooltip" title="The strategy focuses on Technical and Vocational Education and Training (TVET).">
-            <label>
-              <input type="checkbox" id="tvet"/>
-              TVET
-            </label>
-          </div>
+	  <CheckBox id="trade_promotion" name="Trade Promotion" onChange={this.check} count={this.state}
+                    title="The document focuses on trade promotion."
+          />
+	  <CheckBox id="quality" name="Quality" onChange={this.check} count={this.state}
+                    title="The document focuses on standards and/or quality management."
+          />
+	  <CheckBox id="tvet" name="TVET" onChange={this.check} count={this.state}
+                    title="The strategy focuses on Technical and Vocational Education and Training (TVET)."
+          />
+
         </div>
         <div className="col-xs-2">
-          <div className="checkbox" data-toggle="tooltip" title="The document has a regional scope. The information included applies to a group of countries.">
-            <label>
-              <input type="checkbox" id="regional"/>
-              Regional Scope
-            </label>
-          </div>
-          <div className="checkbox" data-toggle="tooltip" title="The document focuses on regional integration.">
-            <label>
-              <input type="checkbox" id="regional_integration"/>
-              Regional Integration
-            </label>
-          </div>
-          <div className="checkbox" data-toggle="tooltip" title="select all theme options">
-            <label style={{fontWeight: "bolder", textDecoration: "underline"}}>
-              <input type="checkbox" id="all_theme"/>
-              Select all
-            </label>
-          </div>
+	  <CheckBox id="regional" name="Regional Scope" onChange={this.check} count={this.state}
+                    title="The document has a regional scope. The information included applies to a group of countries."
+          />
+	  <CheckBox id="regional_integration" name="Regional Integration" onChange={this.check} count={this.state}
+                    title="The document focuses on regional integration."
+          />
         </div>
       </div>
     </div>);
