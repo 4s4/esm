@@ -96,9 +96,9 @@ function (_Component) {
 
           //    const color = data.color ? '#ff69b4' : "#EFEFEF";
           if (data.level === 1) {
-            console.log(data);
+            //console.log(data);
             return _objectSpread({}, styles, {
-              backgroundColor: 'red',
+              backgroundColor: 'pink',
               marginLeft: '20px'
             });
           } else {
@@ -145,7 +145,7 @@ function (_Component) {
         value: this.props.value,
         onChange: this.onChange,
         options: options,
-        defaultMenuIsOpen: false,
+        defaultMenuIsOpen: this.props.defaultMenuIsOpen,
         placeholder: this.props.placeholder,
         styles: colourStyles,
         isMulti: true

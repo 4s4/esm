@@ -74,19 +74,18 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log('types', this.state.types);
+      //    console.log('types', this.state.types);
       var tt = [];
 
       if (this.state.types) {
         tt = _data.types.map(function (o) {
-          var picked = _extends({}, o);
+          var picked = _extends({}, o); //      console.log(picked);
 
-          console.log(picked);
+
           picked.label += " (" + _this2.state.types[picked.value] + ")";
           return picked;
-        });
-        console.log('data-types', _data.types);
-        console.log('tt-types', tt);
+        }); //    console.log('data-types', types);
+        //    console.log('tt-types', tt);
       }
 
       return _react["default"].createElement("div", {
@@ -128,7 +127,8 @@ function (_Component) {
         options: tt,
         placeholder: "Type",
         onChange: this.props.onChange,
-        value: this.props.types
+        value: this.props.types,
+        defaultMenuIsOpen: false
       }))));
     }
   }], [{

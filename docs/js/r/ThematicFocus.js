@@ -29,6 +29,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function countProp(col, kw) {
+  if (col) {
+    return col.filter(function (o) {
+      return o[kw];
+    }).length;
+  } else {
+    return 0;
+  }
+}
+
+function CheckBox(props) {
+  return _react["default"].createElement("div", {
+    className: "checkbox",
+    "data-toggle": "tooltip",
+    title: props.title
+  }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
+    type: "checkbox",
+    id: props.id,
+    onChange: props.onChange(props.id)
+  }), props.name, " (", props.count[props.id] ? props.count[props.id] : 0, ")"));
+}
+
 var ThematicFocus =
 /*#__PURE__*/
 function (_Component) {
@@ -42,9 +64,11 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ThematicFocus).call(this, props));
     _this.state = {
       liked: false,
-      region: ''
+      region: '',
+      reports: []
     };
     _this.wow = _this.wow.bind(_assertThisInitialized(_this));
+    _this.check = _this.check.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -52,6 +76,15 @@ function (_Component) {
     key: "wow",
     value: function wow(e) {
       console.log('wow', e, this.state);
+    }
+  }, {
+    key: "check",
+    value: function check(kw) {
+      var _this2 = this;
+
+      return function (event) {
+        return _this2.props.onCheck(kw, event.target.checked);
+      };
     }
   }, {
     key: "render",
@@ -88,78 +121,69 @@ function (_Component) {
         className: "form-group",
         "data-toggle": "tooltip",
         title: ""
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }, _react["default"].createElement(CheckBox, {
+        id: "environment",
+        name: "Environment",
+        onChange: this.check,
+        count: this.state,
         title: "The strategy focuses on environmental sustainability"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "environment"
-      }), "Environment")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "gender",
+        name: "Gender",
+        onChange: this.check,
+        count: this.state,
         title: "The strategy focuses on gender equality"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "gender"
-      }), "Gender")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "poverty_reduction",
+        name: "Poverty Reduction",
+        onChange: this.check,
+        count: this.state,
         title: "The strategy focuses on poverty reduction"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "poverty_reduction"
-      }), "Poverty Reduction")))), _react["default"].createElement("div", {
+      }))), _react["default"].createElement("div", {
         className: "col-xs-2"
       }, _react["default"].createElement("div", {
         className: "form-group",
         "data-toggle": "tooltip",
         title: ""
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The trade export strategy "
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "export_strategy"
-      }), "Export Strategy")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }, _react["default"].createElement(CheckBox, {
+        id: "export_strategy",
+        name: "Export Strategy",
+        onChange: this.check,
+        count: this.state,
+        title: "The trade export strategy"
+      }), _react["default"].createElement(CheckBox, {
+        id: "trade_focus",
+        name: "Focus on trade",
+        onChange: this.check,
+        count: this.state,
         title: "Trade focus"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_focus"
-      }), "Focus on trade")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "youth",
+        name: "Youth",
+        onChange: this.check,
+        count: this.state,
         title: "The strategy focuses on youth integration"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "youth"
-      }), "Youth")))), _react["default"].createElement("div", {
+      }))), _react["default"].createElement("div", {
         className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }, _react["default"].createElement(CheckBox, {
+        id: "trade_facilitation",
+        name: "Trade Facilitation",
+        onChange: this.check,
+        count: this.state,
         title: "The document focuses on trade facilitation."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_facilitation"
-      }), "Trade Facilitation")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "trade_finance",
+        name: "Trade Finance",
+        onChange: this.check,
+        count: this.state,
         title: "The document focuses on trade finance and/or access to credit."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_finance"
-      }), "Trade Finance")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
+      }), _react["default"].createElement(CheckBox, {
+        id: "trade_information",
+        name: "Trade Information",
+        onChange: this.check,
+        count: this.state,
         title: "The document focuses on trade information and/or market intelligence."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_information"
-      }), "Trade Information"))), _react["default"].createElement("div", {
+      })), _react["default"].createElement("div", {
         className: "col-xs-2"
       }, _react["default"].createElement("div", {
         className: "checkbox",
@@ -211,6 +235,20 @@ function (_Component) {
         type: "checkbox",
         id: "all_theme"
       }), "Select all")))));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      if (props.reports !== state.reports) {
+        return {
+          reports: props.reports,
+          environment: countProp(props.reports, 'environment'),
+          gender: countProp(props.reports, 'gender'),
+          poverty_reduction: countProp(props.reports, 'poverty_reduction')
+        };
+      }
+
+      return null;
     }
   }]);
 
