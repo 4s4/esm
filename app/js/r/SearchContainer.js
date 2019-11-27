@@ -116,14 +116,18 @@ function (_Component) {
 
         var picked = _extends({}, this.state.qq);
 
-        var dict = new Set(vals.map(function (o) {
-          return o.value;
-        }));
-        console.log(dict, dict.has('Other'));
+        if (vals !== undefined && vals !== null) {
+          var dict = new Set(vals.map(function (o) {
+            return o.value;
+          }));
+          console.log(dict, dict.has('Other'));
 
-        picked['type'] = function (o) {
-          return dict.has(o['type']);
-        };
+          picked['type'] = function (o) {
+            return dict.has(o['type']);
+          };
+        } else {
+          delete picked['type'];
+        }
 
         this.searchReports(picked);
       } else if (selectType === "Sector") {
@@ -221,6 +225,7 @@ function (_Component) {
       }, _react["default"].createElement(_MainSelectFilters["default"], {
         onChange: this.onSelectChange,
         reports: this.state.reports,
+        initialReports: this.state.initialReports,
         regions: this.state.regions,
         types: this.state.types,
         countries: this.state.countries,

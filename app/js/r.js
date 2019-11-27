@@ -481,7 +481,6 @@ function countBy(col) {
 }
 
 function countIt(reports, prop) {
-  //    console.log(this.props.reports.shift()); 
   return countBy(reports.map(function (r) {
     return r[prop];
   }));
@@ -500,7 +499,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MainSelectFilters).call(this, props));
     _this.state = {
       liked: false,
-      reports: props.reports
+      reports: props.reports,
+      initialReports: props.initialReports
     };
     return _this;
   }
@@ -515,10 +515,11 @@ function (_Component) {
 
       if (this.state.types) {
         tt = _data.types.map(function (o) {
-          var picked = _extends({}, o); //      console.log(picked);
+          var picked = _extends({}, o);
 
-
-          picked.label += " (" + _this2.state.types[picked.value] + ")";
+          console.log(picked.value, picked.label, picked);
+          var c = _this2.state.types[picked.value] ? _this2.state.types[picked.value] : 0;
+          picked.label += " (".concat(c, ")");
           return picked;
         }); //    console.log('data-types', types);
         //    console.log('tt-types', tt);
@@ -573,7 +574,8 @@ function (_Component) {
       if (props.reports !== state.reports) {
         return {
           reports: props.reports,
-          types: countIt(props.reports, 'type')
+          initialReports: props.initialReports,
+          types: countIt(props.initialReports, 'type')
         };
       }
 
@@ -791,14 +793,18 @@ function (_Component) {
 
         var picked = _extends({}, this.state.qq);
 
-        var dict = new Set(vals.map(function (o) {
-          return o.value;
-        }));
-        console.log(dict, dict.has('Other'));
+        if (vals !== undefined && vals !== null) {
+          var dict = new Set(vals.map(function (o) {
+            return o.value;
+          }));
+          console.log(dict, dict.has('Other'));
 
-        picked['type'] = function (o) {
-          return dict.has(o['type']);
-        };
+          picked['type'] = function (o) {
+            return dict.has(o['type']);
+          };
+        } else {
+          delete picked['type'];
+        }
 
         this.searchReports(picked);
       } else if (selectType === "Sector") {
@@ -896,6 +902,7 @@ function (_Component) {
       }, _react["default"].createElement(_MainSelectFilters["default"], {
         onChange: this.onSelectChange,
         reports: this.state.reports,
+        initialReports: this.state.initialReports,
         regions: this.state.regions,
         types: this.state.types,
         countries: this.state.countries,

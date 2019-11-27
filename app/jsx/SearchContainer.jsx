@@ -45,10 +45,16 @@ class SearchContainer extends Component {
     } else if(selectType === "Type") {
       this.setState( { types: vals } );
       const { ...picked } = this.state.qq;
+      if (vals !== undefined && vals !== null ){
       const dict= new Set(vals.map(o => o.value));
       console.log(dict, dict.has('Other') );
       picked['type'] = o => dict.has(o['type']);
+      } else {
+        delete picked['type'];
+      }
+
       this.searchReports(picked);
+
     } else if(selectType === "Sector") {
       this.setState( { sectors: vals } );
     }
@@ -112,6 +118,7 @@ class SearchContainer extends Component {
                         <div id="main_select_filter">
                         <MainSelectFilter onChange={this.onSelectChange} 
                         reports={this.state.reports}
+                        initialReports={this.state.initialReports}
                         regions={this.state.regions} 
                         types={this.state.types}
                         countries={this.state.countries}

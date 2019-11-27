@@ -10,13 +10,12 @@ function countBy(col){
   }, {});
 }
 function countIt(reports, prop){
-  //    console.log(this.props.reports.shift()); 
       return countBy(reports.map(r => r[prop]));
     }
 class MainSelectFilters extends Component {
   constructor(props) {
     super(props);
-    this.state = { liked: false, reports: props.reports };
+    this.state = { liked: false, reports: props.reports, initialReports: props.initialReports  };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -25,7 +24,8 @@ class MainSelectFilters extends Component {
     ) {
       return {
         reports: props.reports,
-        types: countIt(props.reports, 'type')
+        initialReports: props.initialReports,
+        types: countIt(props.initialReports, 'type')
       };
     }
     return null;
@@ -37,8 +37,9 @@ class MainSelectFilters extends Component {
     if (this.state.types){
       tt = types.map(o => {
       const {...picked} = o;
-//      console.log(picked);
-      picked.label+=" ("+this.state.types[picked.value]+")";
+      console.log(picked.value, picked.label, picked);
+      const c = this.state.types[picked.value] ? this.state.types[picked.value] : 0;
+      picked.label+=` (${c})`;
       return picked;
     })
     
