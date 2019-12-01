@@ -63,21 +63,13 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ThematicFocus).call(this, props));
     _this.state = {
-      liked: false,
-      region: '',
       reports: []
     };
-    _this.wow = _this.wow.bind(_assertThisInitialized(_this));
     _this.check = _this.check.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ThematicFocus, [{
-    key: "wow",
-    value: function wow(e) {
-      console.log('wow', e, this.state);
-    }
-  }, {
     key: "check",
     value: function check(kw) {
       var _this2 = this;

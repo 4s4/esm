@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.countIt = countIt;
 exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
@@ -79,9 +80,9 @@ function (_Component) {
 
       if (this.state.types) {
         tt = _data.types.map(function (o) {
-          var picked = _extends({}, o);
+          var picked = _extends({}, o); //      console.log(picked.value, picked.label, picked);
 
-          console.log(picked.value, picked.label, picked);
+
           var c = _this2.state.types[picked.value] ? _this2.state.types[picked.value] : 0;
           picked.label += " (".concat(c, ")");
           return picked;
@@ -101,7 +102,9 @@ function (_Component) {
         options: _data.regions,
         placeholder: "Region",
         onChange: this.props.onChange,
-        value: this.props.regions
+        value: this.props.regions,
+        isMulti: true,
+        isClearable: true
       })), _react["default"].createElement("div", {
         className: "col-xs-12 col-sm-3",
         "data-toggle": "tooltip",
@@ -110,7 +113,9 @@ function (_Component) {
         options: _data.countries,
         placeholder: "Country",
         onChange: this.props.onChange,
-        value: this.props.countrie
+        value: this.props.countrie,
+        isMulti: true,
+        isClearable: true
       })), _react["default"].createElement("div", {
         className: "col-xs-12 col-sm-3",
         "data-toggle": "tooltip",
@@ -119,7 +124,9 @@ function (_Component) {
         options: _data.sectors,
         placeholder: "Sector",
         onChange: this.props.onChange,
-        value: this.props.sectors
+        value: this.props.sectors,
+        isMulti: true,
+        isClearable: true
       })), _react["default"].createElement("div", {
         className: "col-xs-12 col-sm-3",
         "data-toggle": "tooltip",
@@ -129,7 +136,9 @@ function (_Component) {
         placeholder: "Type",
         onChange: this.props.onChange,
         value: this.props.types,
-        defaultMenuIsOpen: false
+        defaultMenuIsOpen: false,
+        isMulti: true,
+        isClearable: false
       }))));
     }
   }], [{

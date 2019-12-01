@@ -67,13 +67,16 @@ function (_Component) {
       countries: null,
       sectors: null,
       types: null,
-      searchResults: null
+      searchResults: null,
+      approval_year: null,
+      active_year: null
     };
     _this.onSelectChange = _this.onSelectChange.bind(_assertThisInitialized(_this));
     _this.search = _this.search.bind(_assertThisInitialized(_this));
     _this.saveReports = _this.saveReports.bind(_assertThisInitialized(_this));
     _this.searchReports = _this.searchReports.bind(_assertThisInitialized(_this));
     _this.onCheckBoxChange = _this.onCheckBoxChange.bind(_assertThisInitialized(_this));
+    _this.onSelectYear = _this.onSelectYear.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -137,6 +140,48 @@ function (_Component) {
       }
 
       console.log(selectType, "Option selected:", vals);
+    }
+  }, {
+    key: "onSelectYear",
+    value: function onSelectYear(selectType, val) {
+      var v = val ? val.value : null;
+
+      var picked = _extends({}, this.state.qq);
+
+      if (selectType === "approval_year") {
+        this.setState({
+          approval_year: v
+        });
+
+        if (v) {
+          var q = v ? function (r) {
+            return r['year'] === v;
+          } : null;
+          picked['approval_year'] = q;
+        } else {
+          delete picked['approval_year'];
+        }
+      } else {
+        this.setState({
+          active_year: v
+        });
+
+        if (v) {
+          var _q = v ? function (r) {
+            var dates = r['implementationPeriod'].split('-').map(function (o) {
+              return parseInt(o, 10);
+            });
+            return v >= dates[0] && v <= dates[1];
+          } : null;
+
+          picked['active_year'] = _q;
+        } else {
+          delete picked['active_year'];
+        }
+      }
+
+      console.log(selectType, "Option selected:", val);
+      this.searchReports(picked);
     }
   }, {
     key: "searchReports",
@@ -232,7 +277,12 @@ function (_Component) {
         sectors: this.state.sectors
       }))))))), _react["default"].createElement("div", {
         className: "row "
-      }, _react["default"].createElement(_DocumentField["default"], null), _react["default"].createElement(_ThematicFocus["default"], {
+      }, _react["default"].createElement(_DocumentField["default"], {
+        reports: this.state.reports,
+        onChange: this.onSelectYear,
+        active_year: this.state.active_year,
+        approval_year: this.state.approval_year
+      }), _react["default"].createElement(_ThematicFocus["default"], {
         reports: this.state.reports,
         onCheck: this.onCheckBoxChange
       })), _react["default"].createElement("div", {

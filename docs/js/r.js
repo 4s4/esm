@@ -61,7 +61,7 @@ function (_Component) {
   _createClass(Childo, [{
     key: "onChange",
     value: function onChange(selectedOption) {
-      this.props.onChange(this.props.placeholder, selectedOption);
+      this.props.onChange(this.props.id || this.props.placeholder, selectedOption);
     }
   }, {
     key: "render",
@@ -143,13 +143,15 @@ function (_Component) {
       };
       var options = this.props.options;
       return _react["default"].createElement("div", null, _react["default"].createElement(_reactSelect["default"], {
+        id: this.props.id || this.props.placeholder,
         value: this.props.value,
         onChange: this.onChange,
         options: options,
         defaultMenuIsOpen: this.props.defaultMenuIsOpen,
         placeholder: this.props.placeholder,
         styles: colourStyles,
-        isMulti: true
+        isMulti: this.props.isMulti,
+        isClearable: this.props.isClearable
       }));
     }
   }]);
@@ -170,6 +172,12 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _Childo = _interopRequireDefault(require("./Childo"));
+
+var _MainSelectFilters = require("./MainSelectFilters");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -184,13 +192,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var range = function range(start, stop) {
+  var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  return Array(Math.ceil((stop - start) / step)).fill(start).map(function (x, y) {
+    return x + y * step;
+  });
+};
 
 var DocumentField =
 /*#__PURE__*/
@@ -204,19 +219,12 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DocumentField).call(this, props));
     _this.state = {
-      liked: false,
-      region: ''
+      reports: []
     };
-    _this.wow = _this.wow.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(DocumentField, [{
-    key: "wow",
-    value: function wow(e) {
-      console.log('wow', e, this.state);
-    }
-  }, {
     key: "render",
     value: function render() {
       return _react["default"].createElement("div", {
@@ -247,68 +255,27 @@ function (_Component) {
         className: "col-xs-2"
       }), _react["default"].createElement("div", {
         className: "col-xs-3"
-      }, _react["default"].createElement("div", {
-        className: "form-group slider-ip",
-        "data-toggle": "tooltip",
-        title: ""
       }, _react["default"].createElement("label", {
         "for": "StrategyDate"
-      }, "Implementation period"), _react["default"].createElement("br", null), _react["default"].createElement("input", {
-        id: "StrategyDate",
-        type: "text",
-        className: "slider ",
-        value: "",
-        "data-range": "true",
-        "data-slider-min": "2002",
-        "data-slider-max": "2015",
-        "data-slider-step": "1",
-        "data-slider-value": "[2006,2010]",
-        "data-slider-orientation": "horizontal",
-        "data-slider-selection": "after",
-        "data-slider-tooltip": "show"
-      }), _react["default"].createElement("label", null, "2009"), _react["default"].createElement("label", null, "2015")), _react["default"].createElement("div", {
-        "data-toggle": "tooltip",
-        title: "Year."
-      }, _react["default"].createElement("select", {
-        className: "input-sm select-approval-Year",
-        id: "Year"
-      }, _react["default"].createElement("option", {
-        value: ""
-      }, "Year approval"), _react["default"].createElement("option", {
-        value: "2015"
-      }, "2016"), _react["default"].createElement("option", {
-        value: "2015"
-      }, "2015"), _react["default"].createElement("option", {
-        value: "2014"
-      }, "2014"), _react["default"].createElement("option", {
-        value: "2013"
-      }, "2013"), _react["default"].createElement("option", {
-        value: "2012"
-      }, "2012"), _react["default"].createElement("option", {
-        value: "2011"
-      }, "2011"), _react["default"].createElement("option", {
-        value: "2010"
-      }, "2010"), _react["default"].createElement("option", {
-        value: "2009"
-      }, "2009"), _react["default"].createElement("option", {
-        value: "2008"
-      }, "2008"), _react["default"].createElement("option", {
-        value: "2007"
-      }, "2007"), _react["default"].createElement("option", {
-        value: "2006"
-      }, "2006"), _react["default"].createElement("option", {
-        value: "2005"
-      }, "2005"), _react["default"].createElement("option", {
-        value: "2004"
-      }, "2004"), _react["default"].createElement("option", {
-        value: "2003"
-      }, "2003"), _react["default"].createElement("option", {
-        value: "2002"
-      }, "2002"), _react["default"].createElement("option", {
-        value: "2001"
-      }, "2001"), _react["default"].createElement("option", {
-        value: "2000"
-      }, "2000"))), _react["default"].createElement("div", {
+      }, "Active year"), _react["default"].createElement(_Childo["default"], {
+        id: "active_year",
+        options: this.state.actives,
+        placeholder: "Select year ...",
+        onChange: this.props.onChange,
+        value: this.state.active_year,
+        isMulti: false,
+        isClearable: true
+      }), _react["default"].createElement("label", {
+        "for": "StrategyDate"
+      }, "Approval year"), _react["default"].createElement(_Childo["default"], {
+        id: "approval_year",
+        options: this.state.approvals,
+        placeholder: "Select year ...",
+        onChange: this.props.onChange,
+        value: this.state.approval_year,
+        isMulti: false,
+        isClearable: true
+      }), _react["default"].createElement("div", {
         className: "sspace"
       })), _react["default"].createElement("div", {
         className: "col-xs-2"
@@ -318,6 +285,64 @@ function (_Component) {
         className: "col-xs-2 s-last-document-field-column "
       })));
     }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      if (props.reports && props.reports !== state.reports) {
+        var approvals = props.reports.reduce(function (c, o) {
+          c.add(o['year']);
+          return c;
+        }, new Set());
+        var approvals_counts = (0, _MainSelectFilters.countIt)(props.reports, 'year');
+        approvals = Array.from(approvals).sort().map(function (o) {
+          return {
+            value: o,
+            label: "".concat(o, " (").concat(approvals_counts[o], ")"),
+            level: 0
+          };
+        });
+        var approval_year = approvals.filter(function (o) {
+          return o.value === props.approval_year;
+        });
+        var actives = props.reports.map(function (r) {
+          return r['implementationPeriod'].split("-");
+        }).reduce(function (c, o) {
+          range(parseInt(o[0], 10), parseInt(o[1], 10)).map(function (x) {
+            c.add(x);
+          });
+          return c;
+        }, new Set());
+        actives = Array.from(actives).sort().reduce(function (c, x) {
+          c[x] = 0;
+          return c;
+        }, {});
+        props.reports.map(function (r) {
+          var dates = r['implementationPeriod'].split("-");
+          range(parseInt(dates[0], 10), parseInt(dates[1], 10)).map(function (x) {
+            actives[x]++;
+          });
+        });
+        actives = Object.keys(actives).map(function (o) {
+          return {
+            value: o,
+            label: "".concat(o, " (").concat(actives[o], ")"),
+            level: 0
+          };
+        });
+        var active_year = actives.filter(function (o) {
+          return o.value === props.active_year;
+        });
+        return {
+          reports: props.reports,
+          approvals: approvals,
+          actives: actives,
+          active_year: active_year,
+          approval_year: approval_year
+        };
+      }
+
+      return null;
+    }
   }]);
 
   return DocumentField;
@@ -326,7 +351,7 @@ function (_Component) {
 var _default = DocumentField;
 exports["default"] = _default;
 
-},{"react":65}],3:[function(require,module,exports){
+},{"./Childo":1,"./MainSelectFilters":4,"react":65}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -439,6 +464,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.countIt = countIt;
 exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
@@ -515,9 +541,9 @@ function (_Component) {
 
       if (this.state.types) {
         tt = _data.types.map(function (o) {
-          var picked = _extends({}, o);
+          var picked = _extends({}, o); //      console.log(picked.value, picked.label, picked);
 
-          console.log(picked.value, picked.label, picked);
+
           var c = _this2.state.types[picked.value] ? _this2.state.types[picked.value] : 0;
           picked.label += " (".concat(c, ")");
           return picked;
@@ -537,7 +563,9 @@ function (_Component) {
         options: _data.regions,
         placeholder: "Region",
         onChange: this.props.onChange,
-        value: this.props.regions
+        value: this.props.regions,
+        isMulti: true,
+        isClearable: true
       })), _react["default"].createElement("div", {
         className: "col-xs-12 col-sm-3",
         "data-toggle": "tooltip",
@@ -546,7 +574,9 @@ function (_Component) {
         options: _data.countries,
         placeholder: "Country",
         onChange: this.props.onChange,
-        value: this.props.countrie
+        value: this.props.countrie,
+        isMulti: true,
+        isClearable: true
       })), _react["default"].createElement("div", {
         className: "col-xs-12 col-sm-3",
         "data-toggle": "tooltip",
@@ -555,7 +585,9 @@ function (_Component) {
         options: _data.sectors,
         placeholder: "Sector",
         onChange: this.props.onChange,
-        value: this.props.sectors
+        value: this.props.sectors,
+        isMulti: true,
+        isClearable: true
       })), _react["default"].createElement("div", {
         className: "col-xs-12 col-sm-3",
         "data-toggle": "tooltip",
@@ -565,7 +597,9 @@ function (_Component) {
         placeholder: "Type",
         onChange: this.props.onChange,
         value: this.props.types,
-        defaultMenuIsOpen: false
+        defaultMenuIsOpen: false,
+        isMulti: true,
+        isClearable: false
       }))));
     }
   }], [{
@@ -744,13 +778,16 @@ function (_Component) {
       countries: null,
       sectors: null,
       types: null,
-      searchResults: null
+      searchResults: null,
+      approval_year: null,
+      active_year: null
     };
     _this.onSelectChange = _this.onSelectChange.bind(_assertThisInitialized(_this));
     _this.search = _this.search.bind(_assertThisInitialized(_this));
     _this.saveReports = _this.saveReports.bind(_assertThisInitialized(_this));
     _this.searchReports = _this.searchReports.bind(_assertThisInitialized(_this));
     _this.onCheckBoxChange = _this.onCheckBoxChange.bind(_assertThisInitialized(_this));
+    _this.onSelectYear = _this.onSelectYear.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -814,6 +851,48 @@ function (_Component) {
       }
 
       console.log(selectType, "Option selected:", vals);
+    }
+  }, {
+    key: "onSelectYear",
+    value: function onSelectYear(selectType, val) {
+      var v = val ? val.value : null;
+
+      var picked = _extends({}, this.state.qq);
+
+      if (selectType === "approval_year") {
+        this.setState({
+          approval_year: v
+        });
+
+        if (v) {
+          var q = v ? function (r) {
+            return r['year'] === v;
+          } : null;
+          picked['approval_year'] = q;
+        } else {
+          delete picked['approval_year'];
+        }
+      } else {
+        this.setState({
+          active_year: v
+        });
+
+        if (v) {
+          var _q = v ? function (r) {
+            var dates = r['implementationPeriod'].split('-').map(function (o) {
+              return parseInt(o, 10);
+            });
+            return v >= dates[0] && v <= dates[1];
+          } : null;
+
+          picked['active_year'] = _q;
+        } else {
+          delete picked['active_year'];
+        }
+      }
+
+      console.log(selectType, "Option selected:", val);
+      this.searchReports(picked);
     }
   }, {
     key: "searchReports",
@@ -909,7 +988,12 @@ function (_Component) {
         sectors: this.state.sectors
       }))))))), _react["default"].createElement("div", {
         className: "row "
-      }, _react["default"].createElement(_DocumentField["default"], null), _react["default"].createElement(_ThematicFocus["default"], {
+      }, _react["default"].createElement(_DocumentField["default"], {
+        reports: this.state.reports,
+        onChange: this.onSelectYear,
+        active_year: this.state.active_year,
+        approval_year: this.state.approval_year
+      }), _react["default"].createElement(_ThematicFocus["default"], {
         reports: this.state.reports,
         onCheck: this.onCheckBoxChange
       })), _react["default"].createElement("div", {
@@ -1234,21 +1318,13 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ThematicFocus).call(this, props));
     _this.state = {
-      liked: false,
-      region: '',
       reports: []
     };
-    _this.wow = _this.wow.bind(_assertThisInitialized(_this));
     _this.check = _this.check.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ThematicFocus, [{
-    key: "wow",
-    value: function wow(e) {
-      console.log('wow', e, this.state);
-    }
-  }, {
     key: "check",
     value: function check(kw) {
       var _this2 = this;

@@ -60,7 +60,7 @@ function (_Component) {
   _createClass(Childo, [{
     key: "onChange",
     value: function onChange(selectedOption) {
-      this.props.onChange(this.props.placeholder, selectedOption);
+      this.props.onChange(this.props.id || this.props.placeholder, selectedOption);
     }
   }, {
     key: "render",
@@ -142,13 +142,15 @@ function (_Component) {
       };
       var options = this.props.options;
       return _react["default"].createElement("div", null, _react["default"].createElement(_reactSelect["default"], {
+        id: this.props.id || this.props.placeholder,
         value: this.props.value,
         onChange: this.onChange,
         options: options,
         defaultMenuIsOpen: this.props.defaultMenuIsOpen,
         placeholder: this.props.placeholder,
         styles: colourStyles,
-        isMulti: true
+        isMulti: this.props.isMulti,
+        isClearable: this.props.isClearable
       }));
     }
   }]);
