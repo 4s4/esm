@@ -21,8 +21,7 @@ function CheckBox(props){
 class ThematicFocus extends Component {
   constructor(props) {
     super(props);
-    this.state = { liked: false, region:'', reports:[] };
-    this.wow = this.wow.bind(this);
+    this.state = { reports:[] };
     this.check = this.check.bind(this);
   }
   static getDerivedStateFromProps(props, state) {
@@ -33,14 +32,10 @@ class ThematicFocus extends Component {
 		   'youth', 'trade_facilitation', 'trade_finance', 'trade_information', 'trade_promotion', 'quality',
 		   'tvet', 'regional', 'regional_integration'];
       return kws.reduce( (c, o) => {
-	c[o]=countProp(props.reports, o);
-	return c} , {reports: props.reports});
+	    c[o]=countProp(props.reports, o);
+	    return c} , {reports: props.reports});
     }
     return null;
-  }
-
-  wow (e) {
-    console.log('wow', e, this.state);
   }
 
   check(kw){

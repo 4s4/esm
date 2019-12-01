@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, createElement } from 'react';
+import React, { Component } from 'react';
 import Childo from './Childo';
 import {regions, countries, types, sectors} from './data';
 
@@ -37,7 +37,7 @@ class MainSelectFilters extends Component {
     if (this.state.types){
       tt = types.map(o => {
       const {...picked} = o;
-      console.log(picked.value, picked.label, picked);
+//      console.log(picked.value, picked.label, picked);
       const c = this.state.types[picked.value] ? this.state.types[picked.value] : 0;
       picked.label+=` (${c})`;
       return picked;
@@ -50,19 +50,23 @@ class MainSelectFilters extends Component {
     return <div className="col-xs-12 col-md-12">
             <div className="row">
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
-                <Childo options={regions} placeholder="Region" onChange={this.props.onChange} value={this.props.regions}/>
+                <Childo options={regions} placeholder="Region" onChange={this.props.onChange} value={this.props.regions}
+                isMulti={true}/>
               </div>
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
-                <Childo options={countries} placeholder="Country" onChange={this.props.onChange} value={this.props.countrie}/>
+                <Childo options={countries} placeholder="Country" onChange={this.props.onChange} value={this.props.countrie}
+                isMulti={true}/>
               </div>
               <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >
-                <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}/>
+                <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
+                isMulti={true}/>
               </div>
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
               <Childo 
               options={tt} 
               placeholder="Type" onChange={this.props.onChange} value={this.props.types}
-              defaultMenuIsOpen={false}/>
+              defaultMenuIsOpen={false}
+              isMulti={true}/>
               </div>
             </div>
           </div>;

@@ -76,7 +76,7 @@ class Childo extends Component {
         defaultMenuIsOpen={this.props.defaultMenuIsOpen}
         placeholder={this.props.placeholder}
         styles={colourStyles}
-        isMulti={true}
+        isMulti={this.props.isMulti}
       />
     </div>
     ;

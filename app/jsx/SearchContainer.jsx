@@ -17,6 +17,7 @@ class SearchContainer extends Component {
     this.saveReports = this.saveReports.bind(this);
     this.searchReports = this.searchReports.bind(this);
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
+    this.onSelectYear = this.onSelectYear.bind(this);
   }
 
   saveReports(r){
@@ -61,6 +62,12 @@ class SearchContainer extends Component {
     console.log(selectType, `Option selected:`, vals)
 
   };
+
+  onSelectYear (selectType, vals) {
+    console.log(selectType, `Option selected:`, vals)
+  };
+
+
 
   searchReports(qqs){
     const queries = Object.values(qqs); 
@@ -131,7 +138,7 @@ class SearchContainer extends Component {
                 </div>
               </div>
               <div className="row ">
-                <DocumentField />
+                <DocumentField reports={this.state.reports} onChange={this.onSelectYear}/>
                 <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
               </div>
               <div className="row filters" style={{ marginTop: '0px' }}>
