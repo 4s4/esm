@@ -1,6 +1,7 @@
 (ns data.core
   (:require [cheshire.core :refer :all]
             [clojure.java.io :as io]
+            [clojure.string :as str]
             [data.cols :as cols]))
 
 (def r (take 100 (cycle [true false false true])))
@@ -31,17 +32,18 @@
                   [:ldc :lldc :sids :pcc :environment :gender :poverty_reduction :youth :export_strategy :trade_focus :trade_facilitation :trade_finance :trade_information :trade_promotion :quality :tvet :regional :regional_integration :all_theme :action_plan :nec :allocated_resources :country_owned :itc :participatory :all_process]))
 
 (defn report []
-  (-> (more-checks)
-      (assoc :region (one cols/regions))
-      (assoc :type (one cols/types))
-      (assoc :country (one cols/countries))
-      (assoc :countryCode (one cols/country-codes))
-      (assoc :title (one cols/titles))
-      (assoc :description (one cols/descriptions))
-      (assoc :sectors (few cols/sectors))
-      (assoc :year (one cols/years))
-      (assoc :implementationPeriod (one cols/implementation-periods))
-      (assoc :lastUpdate (one cols/last-updates))))
+  (let [i-p (one cols/implementation-periods)]
+    (-> (more-checks)
+        (assoc :region (one cols/regions))
+        (assoc :type (one cols/types))
+        (assoc :country (one cols/countries))
+        (assoc :countryCode (one cols/country-codes))
+        (assoc :title (one cols/titles))
+        (assoc :description (one cols/descriptions))
+        (assoc :sectors (few cols/sectors))
+        (assoc :year (- (Integer/parseInt (first (str/split i-p #"-"))) (rand-int 3)))
+        (assoc :implementationPeriod i-p)
+        (assoc :lastUpdate (one cols/last-updates)))))
 
 (defn generate-file []
   (let [data (atom [])]
@@ -50,6 +52,7 @@
     (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/app/js/data.json")]
       (.write wrtr (generate-string @data))
       )))
+
 
 
 
