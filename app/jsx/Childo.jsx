@@ -9,7 +9,7 @@ class Childo extends Component {
     this.onChange = this.onChange.bind(this);
   }
   onChange (selectedOption) {
-    this.props.onChange(this.props.placeholder, selectedOption);
+    this.props.onChange(this.props.id || this.props.placeholder, selectedOption);
   };
 
   render() {
@@ -70,6 +70,7 @@ class Childo extends Component {
     const options = this.props.options;
     return <div>
       <Select
+        id={this.props.id || this.props.placeholder}
         value={this.props.value}
         onChange={this.onChange}
         options={options}
@@ -77,6 +78,7 @@ class Childo extends Component {
         placeholder={this.props.placeholder}
         styles={colourStyles}
         isMulti={this.props.isMulti}
+        isClearable={this.props.isClearable}
       />
     </div>
     ;

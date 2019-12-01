@@ -20,6 +20,10 @@ class DocumentField extends Component {
       let approvals = props.reports.reduce( (c, o) => {c.add(o['year']); return c;}, new Set());
       const approvals_counts= countIt(props.reports, 'year');
       approvals = Array.from(approvals).sort().map((o) => {return { value: o, label: `${o} (${approvals_counts[o]})`, level: 0 }});
+
+      const approval_year = approvals.filter( o => o.value === props.approval_year ); 
+
+
       let actives = props.reports.map( r => r['implementationPeriod'].split("-")).reduce( (c, o) => {
         range(parseInt(o[0], 10 ), parseInt(o[1], 10)).map(x => {
           c.add(x);
@@ -33,8 +37,8 @@ class DocumentField extends Component {
           actives[x]++;});
       });
       actives = Object.keys(actives).map((o) => {return { value: o, label: `${o} (${actives[o]})`, level: 0 }});
-
-      return {reports: props.reports, approvals, actives};
+      const active_year = actives.filter( o => o.value === props.active_year ); 
+      return {reports: props.reports, approvals, actives, active_year, approval_year};
     }
     return null;
   }
@@ -54,11 +58,11 @@ class DocumentField extends Component {
               <div className="col-xs-2"></div>
               <div className="col-xs-3">
               <label for="StrategyDate">Active year</label>
-                <Childo options={this.state.actives} placeholder="Select year ..." onChange={this.props.onChange} value={this.props.active_year}
-                  isMulti={false}/>
+                <Childo id="active_year" options={this.state.actives} placeholder="Select year ..." onChange={this.props.onChange} value={this.state.active_year}
+                  isMulti={false} isClearable={true}/>
               <label for="StrategyDate">Approval year</label>
-                <Childo options={this.state.approvals} placeholder="Select year ..." onChange={this.props.onChange} value={this.props.approval_year}
-                  isMulti={false}/>
+                <Childo id="approval_year" options={this.state.approvals} placeholder="Select year ..." onChange={this.props.onChange} value={this.state.approval_year}
+                  isMulti={false} isClearable={true}/>
                 <div className="sspace" ></div>
               </div>
               <div className="col-xs-2" >

@@ -51,22 +51,22 @@ class MainSelectFilters extends Component {
             <div className="row">
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
                 <Childo options={regions} placeholder="Region" onChange={this.props.onChange} value={this.props.regions}
-                isMulti={true}/>
+                isMulti={true} isClearable={true}/>
               </div>
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
                 <Childo options={countries} placeholder="Country" onChange={this.props.onChange} value={this.props.countrie}
-                isMulti={true}/>
+                isMulti={true} isClearable={true}/>
               </div>
               <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >
                 <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
-                isMulti={true}/>
+                isMulti={true} isClearable={true}/>
               </div>
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
               <Childo 
               options={tt} 
               placeholder="Type" onChange={this.props.onChange} value={this.props.types}
               defaultMenuIsOpen={false}
-              isMulti={true}/>
+              isMulti={true} isClearable={false}/>
               </div>
             </div>
           </div>;

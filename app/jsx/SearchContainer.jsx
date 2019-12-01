@@ -11,7 +11,7 @@ require('isomorphic-fetch');
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { qq:{}, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null };
+    this.state = { qq:{}, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
@@ -63,8 +63,34 @@ class SearchContainer extends Component {
 
   };
 
-  onSelectYear (selectType, vals) {
-    console.log(selectType, `Option selected:`, vals)
+  onSelectYear (selectType, val) {
+    const v = val ? val.value : null ;
+    const { ...picked } = this.state.qq;
+
+    if(selectType === "approval_year"){
+      this.setState({ approval_year: v });
+      if(v){
+        const q = v ?  r => r['year'] === v : null;
+        picked['approval_year'] = q;
+      } else {
+        delete picked['approval_year'];
+      }
+    } else {
+      this.setState({ active_year: v });
+      if(v){
+        const q = v ?  (r) => { 
+          const dates = r['implementationPeriod'].split('-').map(o => parseInt(o, 10));
+          return v >= dates[0] && v <= dates[1];
+          } : null;
+        picked['active_year'] = q;
+      } else {
+        delete picked['active_year'];
+      }
+
+    }
+    console.log(selectType, `Option selected:`, val)
+    this.searchReports(picked);
+
   };
 
 
@@ -138,7 +164,7 @@ class SearchContainer extends Component {
                 </div>
               </div>
               <div className="row ">
-                <DocumentField reports={this.state.reports} onChange={this.onSelectYear}/>
+                <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
                 <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
               </div>
               <div className="row filters" style={{ marginTop: '0px' }}>
