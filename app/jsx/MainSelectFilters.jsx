@@ -9,7 +9,7 @@ function countBy(col){
     return acc
   }, {});
 }
-function countIt(reports, prop){
+export function countIt(reports, prop){
       return countBy(reports.map(r => r[prop]));
     }
 class MainSelectFilters extends Component {

@@ -1,6 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import Childo from './Childo';
+import {countIt} from './MainSelectFilters';
 
 
 class DocumentField extends Component {
@@ -14,7 +15,8 @@ class DocumentField extends Component {
      props.reports && props.reports !== state.reports 
     ) {
       let approvals = props.reports.reduce( (c, o) => {c.add(o['year']); return c;}, new Set());
-      approvals = Array.from(approvals).sort().map((o) => {return { value: o, label: o, level: 0 }});
+      const approvals_counts= countIt(props.reports, 'year');
+      approvals = Array.from(approvals).sort().map((o) => {return { value: o, label: `${o} (${approvals_counts[o]})`, level: 0 }});
       let actives = props.reports.map( r => r['implementationPeriod'].split("-")).reduce( (c, o) => {c.add(o[0]); c.add(o[1]); return c;}, new Set());    
       actives = Array.from(actives).sort().map((o) => {return { value: o, label: o, level: 0 }});      
       return {reports: props.reports, approvals, actives};
