@@ -44,7 +44,8 @@
     "react-select": "3.0.8",
     "babelify": "10.0.0",
     "babel-preset-es2016": "^6.16.0",
-    "isomorphic-fetch": "2.2.1"
+    "isomorphic-fetch": "2.2.1",
+    "bootstrap-table": "1.15.5"
   },
   "engines": {
     "node": ">=0.8.0"

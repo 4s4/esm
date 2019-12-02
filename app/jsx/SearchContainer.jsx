@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import MainSelectFilter from './MainSelectFilters';
 import ThematicFocus from './ThematicFocus';
 import DocumentField from './DocumentField';
+import Charts from './Charts';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -141,40 +142,111 @@ class SearchContainer extends Component {
   }
 
   render() {
-    return <div className="card">
-            <div className="card-content">
-              <div className="row" style={{ marginBottom: '18px' }}>
-                <div className="col-xs-12">
-                  <div className="search-controls-wrapper">
-                    <div className="search-controls">
-                      <div className="row" role="form">
-                        <div id="main_select_filter">
-                        <MainSelectFilter onChange={this.onSelectChange} 
-                        reports={this.state.reports}
-                        initialReports={this.state.initialReports}
-                        regions={this.state.regions} 
-                        types={this.state.types}
-                        countries={this.state.countries}
-                        sectors={this.state.sectors}
-                        />
+    return <section class="search-controls ">
+            <div class="overlay"></div>
+              <div className="card">
+                <div className="card-content">
+                  <div className="row" style={{ marginBottom: '18px' }}>
+                    <div className="col-xs-12">
+                      <div className="search-controls-wrapper">
+                        <div className="search-controls">
+                          <div className="row" role="form">
+                            <div id="main_select_filter">
+                            <MainSelectFilter onChange={this.onSelectChange} 
+                            reports={this.state.reports}
+                            initialReports={this.state.initialReports}
+                            regions={this.state.regions} 
+                            types={this.state.types}
+                            countries={this.state.countries}
+                            sectors={this.state.sectors}
+                            />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <div className="row ">
+                    <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
+                    <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
+                  </div>
+                  <div className="row filters" style={{ marginTop: '0px' }}>
+                    <div className="text-center search-controls-wrapper">
+                      <button className="btn btn-primary btn-filter" id="apply_filters" onClick={this.search}>Apply filters</button>
+                      <a id="clear_filters" className="btn-clear-filters" title="Clear filters"><i className="fa fa-times-circle"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>            
+               <Charts />
+              <div id="card-table" class="card" style={{display:"none"}}>
+                <div class="card-content">
+                <div class="row">
+                  <div class="control-group" style={{float:"right", textAlign:"right", width:"100%", marginRight:"5px", paddingLeft:"10px"}} >
+                    <label for="show-columns">Show extra columns</label><br />
+                    <select id="show-columns" name="state[]" multiple class="demo-default"  placeholder="Include extra column...">
+                    </select>
+                  </div>
+                </div>
+                <div id="custom-toolbar" class="row">
+                  <div class="col-md-3">
+                    <ul class="custom-table-toolbar">
+                      <li>
+                        <span class="dropdown pull-right">
+                          <button href="#" title="Export data" data-toggle="dropdown" class="btn btn-default">
+                            <i class="fa fa-download fa-fw"></i> Export results
+                            <i class="fa fa-caret-down"></i>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="fa fa-file-excel-o"></i> XLS</a></li>
+                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
+                            <li><a href="#"><i class="fa fa-file-text-o"></i> CSV</a></li>
+                          </ul>
+                        </span>
+                      </li>
+                      <li>
+                        <a href="#" title="Print chart" class="btn btn-default" data-toggle="tooltip"><i class="fa fa-print" ></i></a>
+                      </li>
+
+                    </ul>
+                  </div>
+                  <div class="col-md-5">
+                    <select id="sorter">
+                      <option value="region left" selected="selected">Order by: Region</option>
+                      <option value="country left">Order by: Country</option>
+                      <option value="countryCode left">Order by: Country Code</option>
+                      <option value="title middle">Order by: Title</option>
+                      <option value="year right" >Order by: Year</option>
+                      <option value="lastUpdate right">Order by: Last Update</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <select id="sorter-how">
+                      <option value="asc" selected="selected">Ascending</option>
+                      <option value="desc">Descending</option>
+                    </select>
+
+                  </div>
+                </div>
+                <table id="juan" class=" table-no-hover table-disable-hover search-table"  >
+                  <thead>
+                    <tr>
+                      <th class="col-xs-4"  >
+                      </th>
+                      <th class="col-xs-4">
+                      </th>
+                      <th class="col-xs-4">
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                  </tfoot>
+                </table>
                 </div>
               </div>
-              <div className="row ">
-                <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
-                <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
-              </div>
-              <div className="row filters" style={{ marginTop: '0px' }}>
-                <div className="text-center search-controls-wrapper">
-                  <button className="btn btn-primary btn-filter" id="apply_filters" onClick={this.search}>Apply filters</button>
-                  <a id="clear_filters" className="btn-clear-filters" title="Clear filters"><i className="fa fa-times-circle"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>;
+            </section>;
   }
 }
 
