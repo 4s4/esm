@@ -6,7 +6,11 @@
 
 (def r (take 100 (cycle [true false false true])))
 
-(defn more-checks [] (reduce  (fn [c a] (assoc c (keyword a) (rand-nth r)))  {} ["ldc", "lldc", "sids", "pcc", "environment", "gender", "poverty_reduction", "youth", "export_strategy", "trade_focus", "trade_facilitation", "trade_finance", "trade_information", "trade_promotion", "quality", "tvet", "regional", "regional_integration", "all_theme", "action_plan", "nec", "allocated_resources", "country_owned", "itc", "participatory", "all_process"]))
+(defn more-checks []
+  (reduce  (fn [c a] (assoc c (keyword a) (rand-nth r)))  {}
+           ["environment" "gender" "poverty_reduction" "export_strategy" "trade_focus"
+	    "youth" "trade_facilitation" "trade_finance" "trade_information" "trade_promotion" "quality"
+	    "tvet" "regional" "regional_integration"]))
 
 (more-checks)
 
@@ -15,8 +19,6 @@
 
 (defn one [c]
  (first (shuffle c)))
-
-(map keyword ["ldc", "lldc", "sids", "pcc", "environment", "gender", "poverty_reduction", "youth", "export_strategy", "trade_focus", "trade_facilitation", "trade_finance", "trade_information", "trade_promotion", "quality", "tvet", "regional", "regional_integration", "all_theme", "action_plan", "nec", "allocated_resources", "country_owned", "itc", "participatory", "all_process"])
 
 
 (def keys* (apply conj
@@ -29,7 +31,7 @@
                    :year
                    :implementationPeriod
                    :lastUpdate]
-                  [:ldc :lldc :sids :pcc :environment :gender :poverty_reduction :youth :export_strategy :trade_focus :trade_facilitation :trade_finance :trade_information :trade_promotion :quality :tvet :regional :regional_integration :all_theme :action_plan :nec :allocated_resources :country_owned :itc :participatory :all_process]))
+                  [:environment :gender :poverty_reduction :export_strategy :trade_focus :youth :trade_facilitation :trade_finance :trade_information :trade_promotion :quality :tvet :regional :regional_integration]))
 
 (defn report []
   (let [i-p (one cols/implementation-periods)]
