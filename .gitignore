@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
-app/js/data.json
+app/js/*.json
+app/js/r/*.js
