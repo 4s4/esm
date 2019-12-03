@@ -7,6 +7,12 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactBootstrapTableNext = _interopRequireDefault(require("react-bootstrap-table-next"));
+
+var _reactBootstrapTable2Paginator = _interopRequireDefault(require("react-bootstrap-table2-paginator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -43,108 +49,150 @@ function (_Component) {
   _createClass(Results, [{
     key: "render",
     value: function render() {
+      var country = function country(c, cc) {
+        if (c.length < 7) {
+          return _react["default"].createElement("div", {
+            style: {
+              marginTop: "8px"
+            },
+            className: "left-first-colum-first-row"
+          }, _react["default"].createElement("span", {
+            className: "left-table-row-title"
+          }, "Country:"), _react["default"].createElement("div", {
+            className: "div-country"
+          }, _react["default"].createElement("span", {
+            className: "table-value boldi"
+          }, c), _react["default"].createElement("span", {
+            style: {
+              color: "black"
+            },
+            className: "table-value boldi"
+          }, "(", cc, ")")));
+        }
+
+        return _react["default"].createElement("div", null, _react["default"].createElement("div", {
+          style: {
+            marginTop: "8px",
+            borderBottom: "0px",
+            marginBottom: "-17px"
+          },
+          className: "left-first-colum-first-row"
+        }, _react["default"].createElement("span", {
+          className: "left-table-row-title"
+        }, "Country:"), _react["default"].createElement("div", {
+          style: {
+            "float": "right"
+          },
+          className: "hidden-div-country"
+        }, _react["default"].createElement("span", {
+          className: "table-value boldi"
+        }, "\xA0"), _react["default"].createElement("span", {
+          style: {
+            color: "black"
+          },
+          className: "table-value boldi"
+        }, "\xA0"))), _react["default"].createElement("div", {
+          style: {
+            marginTop: "8px"
+          },
+          className: "left-first-colum-first-row"
+        }, _react["default"].createElement("span", {
+          className: "left-table-row-title"
+        }, "\xA0"), _react["default"].createElement("div", {
+          className: "div-country"
+        }, _react["default"].createElement("span", {
+          className: "table-value boldi"
+        }, c), _react["default"].createElement("span", {
+          style: {
+            color: "black"
+          },
+          className: "table-value boldi"
+        }, "(", cc, ")"))));
+      };
+
+      var leftFormatter = function leftFormatter(c, o) {
+        return _react["default"].createElement("div", null, _react["default"].createElement("div", {
+          className: "left-first-colum-first-row"
+        }, _react["default"].createElement("span", {
+          className: "left-table-row-title"
+        }, "Region:"), _react["default"].createElement("div", {
+          className: "span-region table-value boldi"
+        }, o.region)), country(o.country, o.countryCode), _react["default"].createElement("div", {
+          style: {
+            marginTop: "18px",
+            padding: "10px",
+            border: "1px solid rgb(187, 187, 187)",
+            textAlign: "center"
+          }
+        }, _react["default"].createElement("img", {
+          className: "world",
+          src: "/img/maps/".concat(o.region, ".png")
+        })));
+      };
+
+      var rightFormatter = function rightFormatter(c, o) {
+        return _react["default"].createElement("div", null, _react["default"].createElement("div", {
+          className: "first-colum-first-row first-colum-first-row-bis"
+        }, _react["default"].createElement("span", {
+          className: "table-row-title "
+        }, "Type: "), _react["default"].createElement("span", {
+          style: {
+            "float": "right"
+          },
+          className: "table-value "
+        }, o.type), _react["default"].createElement("hr", {
+          className: "hr-table-column"
+        })), _react["default"].createElement("div", {
+          className: "left-first-colum-first-row"
+        }, _react["default"].createElement("span", {
+          className: "left-table-row-title"
+        }, "Year:"), _react["default"].createElement("div", {
+          className: "div-year"
+        }, _react["default"].createElement("span", {
+          className: "table-value boldi"
+        }, o.year))), _react["default"].createElement("div", {
+          className: "left-first-colum-first-row"
+        }, _react["default"].createElement("span", {
+          className: "left-table-row-title"
+        }, "Period:"), _react["default"].createElement("div", {
+          className: "div-ip"
+        }, _react["default"].createElement("span", {
+          className: "table-value boldi"
+        }, o.implementationPeriod))));
+      };
+
+      var columns = [{
+        formatter: leftFormatter,
+        sort: false
+      }, {
+        dataField: 'title',
+        sort: true
+      }, {
+        formatter: rightFormatter,
+        sort: false
+      }];
+      var defaultSorted = [{
+        dataField: 'title',
+        order: 'desc'
+      }];
+      var results = this.props.reports || [];
       return _react["default"].createElement("div", {
         id: "card-table",
         className: "card",
         style: {
-          display: "none"
+          display: "inherit"
         }
       }, _react["default"].createElement("div", {
         className: "card-content"
-      }, _react["default"].createElement("div", {
-        className: "row"
-      }, _react["default"].createElement("div", {
-        className: "control-group",
-        style: {
-          "float": "right",
-          textAlign: "right",
-          width: "100%",
-          marginRight: "5px",
-          paddingLeft: "10px"
-        }
-      }, _react["default"].createElement("label", {
-        htmlFor: "show-columns"
-      }, "Show extra columns"), _react["default"].createElement("br", null), _react["default"].createElement("select", {
-        id: "show-columns",
-        name: "state[]",
-        multiple: true,
-        className: "demo-default",
-        placeholder: "Include extra column..."
-      }))), _react["default"].createElement("div", {
-        id: "custom-toolbar",
-        className: "row"
-      }, _react["default"].createElement("div", {
-        className: "col-md-3"
-      }, _react["default"].createElement("ul", {
-        className: "custom-table-toolbar"
-      }, _react["default"].createElement("li", null, _react["default"].createElement("span", {
-        className: "dropdown pull-right"
-      }, _react["default"].createElement("button", {
-        href: "#",
-        title: "Export data",
-        "data-toggle": "dropdown",
-        className: "btn btn-default"
-      }, _react["default"].createElement("i", {
-        className: "fa fa-download fa-fw"
-      }), " Export results", _react["default"].createElement("i", {
-        className: "fa fa-caret-down"
-      })), _react["default"].createElement("ul", {
-        className: "dropdown-menu dropdown-menu-right"
-      }, _react["default"].createElement("li", null, _react["default"].createElement("a", {
-        href: "#"
-      }, _react["default"].createElement("i", {
-        className: "fa fa-file-excel-o"
-      }), " XLS")), _react["default"].createElement("li", null, _react["default"].createElement("a", {
-        href: "#"
-      }, _react["default"].createElement("i", {
-        className: "fa fa-file-pdf-o"
-      }), " PDF")), _react["default"].createElement("li", null, _react["default"].createElement("a", {
-        href: "#"
-      }, _react["default"].createElement("i", {
-        className: "fa fa-file-text-o"
-      }), " CSV"))))), _react["default"].createElement("li", null, _react["default"].createElement("a", {
-        href: "#",
-        title: "Print chart",
-        className: "btn btn-default",
-        "data-toggle": "tooltip"
-      }, _react["default"].createElement("i", {
-        className: "fa fa-print"
-      }))))), _react["default"].createElement("div", {
-        className: "col-md-5"
-      }, _react["default"].createElement("select", {
-        id: "sorter"
-      }, _react["default"].createElement("option", {
-        value: "region left",
-        defaultValue: "true"
-      }, "Order by: Region"), _react["default"].createElement("option", {
-        value: "country left"
-      }, "Order by: Country"), _react["default"].createElement("option", {
-        value: "countryCode left"
-      }, "Order by: Country Code"), _react["default"].createElement("option", {
-        value: "title middle"
-      }, "Order by: Title"), _react["default"].createElement("option", {
-        value: "year right"
-      }, "Order by: Year"), _react["default"].createElement("option", {
-        value: "lastUpdate right"
-      }, "Order by: Last Update"))), _react["default"].createElement("div", {
-        className: "col-md-4"
-      }, _react["default"].createElement("select", {
-        id: "sorter-how"
-      }, _react["default"].createElement("option", {
-        value: "asc",
-        defaultValue: "selected"
-      }, "Ascending"), _react["default"].createElement("option", {
-        value: "desc"
-      }, "Descending")))), _react["default"].createElement("table", {
-        id: "juan",
-        className: " table-no-hover table-disable-hover search-table"
-      }, _react["default"].createElement("thead", null, _react["default"].createElement("tr", null, _react["default"].createElement("th", {
-        className: "col-xs-4"
-      }), _react["default"].createElement("th", {
-        className: "col-xs-4"
-      }), _react["default"].createElement("th", {
-        className: "col-xs-4"
-      }))), _react["default"].createElement("tbody", null), _react["default"].createElement("tfoot", null))));
+      }, _react["default"].createElement(_reactBootstrapTableNext["default"], {
+        bootstrap4: true,
+        keyField: "id",
+        data: results,
+        columns: columns,
+        classes: "table-no-hover table-disable-hover search-table",
+        defaultSorted: defaultSorted,
+        pagination: (0, _reactBootstrapTable2Paginator["default"])()
+      })));
     }
   }]);
 

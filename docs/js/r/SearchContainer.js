@@ -8,6 +8,10 @@ var _ThematicFocus = _interopRequireDefault(require("./ThematicFocus"));
 
 var _DocumentField = _interopRequireDefault(require("./DocumentField"));
 
+var _Charts = _interopRequireDefault(require("./Charts"));
+
+var _Results = _interopRequireDefault(require("./Results"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -247,7 +251,11 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react["default"].createElement("div", {
+      return _react["default"].createElement("section", {
+        className: "search-controls "
+      }, _react["default"].createElement("div", {
+        className: "overlay"
+      }), _react["default"].createElement("div", {
         className: "card"
       }, _react["default"].createElement("div", {
         className: "card-content"
@@ -302,7 +310,9 @@ function (_Component) {
         title: "Clear filters"
       }, _react["default"].createElement("i", {
         className: "fa fa-times-circle"
-      }))))));
+      })))))), _react["default"].createElement(_Charts["default"], null), _react["default"].createElement(_Results["default"], {
+        reports: this.state.reports
+      }));
     }
   }]);
 

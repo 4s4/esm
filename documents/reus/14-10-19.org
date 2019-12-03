@@ -51,7 +51,7 @@
  - permanece el Type
  - sacar el año (?)
  - mantener el period
- - sacar el last update
+ - [X] sacar el last update
  - incluir los matchs de "thematic focus" (validado)
 
 

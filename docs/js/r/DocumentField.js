@@ -91,7 +91,7 @@ function (_Component) {
       }), _react["default"].createElement("div", {
         className: "col-xs-3"
       }, _react["default"].createElement("label", {
-        "for": "StrategyDate"
+        htmlFor: "StrategyDate"
       }, "Active year"), _react["default"].createElement(_Childo["default"], {
         id: "active_year",
         options: this.state.actives,
@@ -101,7 +101,7 @@ function (_Component) {
         isMulti: false,
         isClearable: true
       }), _react["default"].createElement("label", {
-        "for": "StrategyDate"
+        htmlFor: "StrategyDate"
       }, "Approval year"), _react["default"].createElement(_Childo["default"], {
         id: "approval_year",
         options: this.state.approvals,
