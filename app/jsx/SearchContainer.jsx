@@ -5,6 +5,9 @@ import ThematicFocus from './ThematicFocus';
 import DocumentField from './DocumentField';
 import Charts from './Charts';
 import Results from './Results';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -143,6 +146,26 @@ class SearchContainer extends Component {
   }
 
   render() {
+    const columns = [{
+      dataField: 'type',
+      text: 'Type',
+      sort: true
+    }, {
+      dataField: 'title',
+      text: 'Report Title',
+      sort: true
+    }, {
+      dataField: 'region',
+      text: 'Region',
+      sort: true
+    }];
+    
+    const defaultSorted = [{
+      dataField: 'title',
+      order: 'desc'
+    }];
+    const results = this.state.reports || [];
+    
     return <section className="search-controls ">
             <div className="overlay"></div>
               <div className="card">
@@ -181,6 +204,14 @@ class SearchContainer extends Component {
               </div>            
                <Charts />
                <Results />
+               <BootstrapTable
+                bootstrap4
+                keyField="id"
+                data={ results }
+                columns={ columns }
+                defaultSorted={ defaultSorted } 
+                pagination={ paginationFactory() }
+              />
             </section>;
   }
 }
