@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 
+//import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 class Results extends Component {
   constructor(props) {
@@ -37,6 +41,16 @@ class Results extends Component {
               </div>
               </div>);
     };
+    const wrap_show_less = (css, value) => {
+      return (<div className="text-container"> 
+                <div className={`text-content ${css}`}> {value} </div> 
+                <div className="show-more "> 
+                  <div className="rounded-box">
+                    <a style={{margin:"10px"}} href="#">show more</a>
+                  </div> 
+                </div>
+              </div> );
+    };
     const leftFormatter = (c, o) => { 
       return (<div>
                 <div className="left-first-colum-first-row" > 
@@ -45,7 +59,7 @@ class Results extends Component {
                 </div>
                 {country(o.country, o.countryCode)}
                 <div style={{ marginTop:"18px", padding:"10px", border:"1px solid rgb(187, 187, 187)", textAlign: "center" }} > 
-                  <img className="world" src={`/img/maps/${o.region}.png`} />
+                  <img className="world" src={`./img/maps/${o.region}.png`} />
                 </div>
               </div>);
     };
@@ -69,15 +83,44 @@ class Results extends Component {
                 </div> 
               </div>
         );
-    }
+    };
+    const sectorsFormatter = (value) => {
+      const screen_bigger = $( window ).width()>760;
+//      let chunk = 3;
+      let css_class = "col-sm-4";
+      if(screen_bigger){
+  //        chunk = 6;
+          css_class = "col-sm-2";
+      }
+      const row = (row_data, idx) => (<div key={idx} className="row" style={{marginLeft: "-38px", marginBottom: "10px"}}>{row_data}</div>);
+      const extractRowData = (value, idx) => {  
+            return (<div className={css_class} key={`one-${idx}`} >
+                      <div className={`label label-default label-table ${css_class}`} key={`two-${idx}`} >
+                        <div className="" key={`three-${idx}`} >{value}</div>
+                      </div>
+                    </div>);
+      };
+      
+      const r = (i, idx) => row(<ul id="grid" key={idx}>{extractRowData(i, idx)}</ul>, idx);
+      return (<div className="container-fluid">{value.map(r)}</div>);
+  }
+
+    const middleFormatter = (c, o) => {
+      return (<div className="middle-column">
+      <h2 className="middle-column-title"><a href="search_details.html#">{o.title}</a></h2>
+      {o.description}
+    <h3 className="middle-column-seectors" >Sectors:</h3>
+      {sectorsFormatter(o.sectors)}
+      </div>);
+    };
 
               
     const columns = [{
       formatter:leftFormatter,
       sort: false
     }, {
-      dataField: 'title',
-      sort: true
+      formatter:middleFormatter,
+      sort: false
     }, {
       formatter:rightFormatter,
       sort: false
@@ -144,14 +187,14 @@ class Results extends Component {
     </div>
     */}
     <BootstrapTable
-                bootstrap4
-                keyField="id"
-                data={ results }
-                columns={ columns }
-                classes="table-no-hover table-disable-hover search-table"
-                defaultSorted={ defaultSorted } 
-                pagination={ paginationFactory() }
-              />
+        bootstrap4
+        keyField="sectors"
+        data={ results }
+        columns={ columns }
+        classes="table-no-hover table-disable-hover search-table"
+        defaultSorted={ defaultSorted } 
+        pagination={ paginationFactory() }
+      />
     </div>
   </div>);
             }

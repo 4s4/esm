@@ -835,6 +835,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+//import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 var Results =
 /*#__PURE__*/
 function (_Component) {
@@ -910,6 +912,23 @@ function (_Component) {
         }, "(", cc, ")"))));
       };
 
+      var wrap_show_less = function wrap_show_less(css, value) {
+        return _react["default"].createElement("div", {
+          className: "text-container"
+        }, _react["default"].createElement("div", {
+          className: "text-content ".concat(css)
+        }, " ", value, " "), _react["default"].createElement("div", {
+          className: "show-more "
+        }, _react["default"].createElement("div", {
+          className: "rounded-box"
+        }, _react["default"].createElement("a", {
+          style: {
+            margin: "10px"
+          },
+          href: "#"
+        }, "show more"))));
+      };
+
       var leftFormatter = function leftFormatter(c, o) {
         return _react["default"].createElement("div", null, _react["default"].createElement("div", {
           className: "left-first-colum-first-row"
@@ -926,7 +945,7 @@ function (_Component) {
           }
         }, _react["default"].createElement("img", {
           className: "world",
-          src: "/img/maps/".concat(o.region, ".png")
+          src: "./img/maps/".concat(o.region, ".png")
         })));
       };
 
@@ -961,12 +980,70 @@ function (_Component) {
         }, o.implementationPeriod))));
       };
 
+      var sectorsFormatter = function sectorsFormatter(value) {
+        var screen_bigger = $(window).width() > 760; //      let chunk = 3;
+
+        var css_class = "col-sm-4";
+
+        if (screen_bigger) {
+          //        chunk = 6;
+          css_class = "col-sm-2";
+        }
+
+        var row = function row(row_data, idx) {
+          return _react["default"].createElement("div", {
+            key: idx,
+            className: "row",
+            style: {
+              marginLeft: "-38px",
+              marginBottom: "10px"
+            }
+          }, row_data);
+        };
+
+        var extractRowData = function extractRowData(value, idx) {
+          return _react["default"].createElement("div", {
+            className: css_class,
+            key: "one-".concat(idx)
+          }, _react["default"].createElement("div", {
+            className: "label label-default label-table ".concat(css_class),
+            key: "two-".concat(idx)
+          }, _react["default"].createElement("div", {
+            className: "",
+            key: "three-".concat(idx)
+          }, value)));
+        };
+
+        var r = function r(i, idx) {
+          return row(_react["default"].createElement("ul", {
+            id: "grid",
+            key: idx
+          }, extractRowData(i, idx)), idx);
+        };
+
+        return _react["default"].createElement("div", {
+          className: "container-fluid"
+        }, value.map(r));
+      };
+
+      var middleFormatter = function middleFormatter(c, o) {
+        return _react["default"].createElement("div", {
+          className: "middle-column"
+        }, _react["default"].createElement("h2", {
+          className: "middle-column-title"
+        }, _react["default"].createElement("a", {
+          href: "search_details.html#"
+        }, o.title)), o.description, _react["default"].createElement("h3", {
+          className: "middle-column-seectors"
+        }, "Sectors:"), sectorsFormatter(o.sectors));
+      };
+
       var columns = [{
         formatter: leftFormatter,
         sort: false
       }, {
-        dataField: 'title',
-        sort: true
+        formatter: middleFormatter,
+        sort: false
       }, {
         formatter: rightFormatter,
         sort: false
@@ -986,7 +1063,7 @@ function (_Component) {
         className: "card-content"
       }, _react["default"].createElement(_reactBootstrapTableNext["default"], {
         bootstrap4: true,
-        keyField: "id",
+        keyField: "sectors",
         data: results,
         columns: columns,
         classes: "table-no-hover table-disable-hover search-table",
