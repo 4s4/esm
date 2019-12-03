@@ -57,10 +57,10 @@ class DocumentField extends Component {
             <div className="collapse collapseDiv row" id="collapseDocument">
               <div className="col-xs-2"></div>
               <div className="col-xs-3">
-              <label for="StrategyDate">Active year</label>
+              <label htmlFor="StrategyDate">Active year</label>
                 <Childo id="active_year" options={this.state.actives} placeholder="Select year ..." onChange={this.props.onChange} value={this.state.active_year}
                   isMulti={false} isClearable={true}/>
-              <label for="StrategyDate">Approval year</label>
+              <label htmlFor="StrategyDate">Approval year</label>
                 <Childo id="approval_year" options={this.state.approvals} placeholder="Select year ..." onChange={this.props.onChange} value={this.state.approval_year}
                   isMulti={false} isClearable={true}/>
                 <div className="sspace" ></div>

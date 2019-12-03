@@ -142,8 +142,8 @@ class SearchContainer extends Component {
   }
 
   render() {
-    return <section class="search-controls ">
-            <div class="overlay"></div>
+    return <section className="search-controls ">
+            <div className="overlay"></div>
               <div className="card">
                 <div className="card-content">
                   <div className="row" style={{ marginBottom: '18px' }}>
@@ -179,40 +179,40 @@ class SearchContainer extends Component {
                 </div>
               </div>            
                <Charts />
-              <div id="card-table" class="card" style={{display:"none"}}>
-                <div class="card-content">
-                <div class="row">
-                  <div class="control-group" style={{float:"right", textAlign:"right", width:"100%", marginRight:"5px", paddingLeft:"10px"}} >
-                    <label for="show-columns">Show extra columns</label><br />
-                    <select id="show-columns" name="state[]" multiple class="demo-default"  placeholder="Include extra column...">
+              <div id="card-table" className="card" style={{display:"none"}}>
+                <div className="card-content">
+                <div className="row">
+                  <div className="control-group" style={{float:"right", textAlign:"right", width:"100%", marginRight:"5px", paddingLeft:"10px"}} >
+                    <label htmlFor="show-columns">Show extra columns</label><br />
+                    <select id="show-columns" name="state[]" multiple className="demo-default"  placeholder="Include extra column...">
                     </select>
                   </div>
                 </div>
-                <div id="custom-toolbar" class="row">
-                  <div class="col-md-3">
-                    <ul class="custom-table-toolbar">
+                <div id="custom-toolbar" className="row">
+                  <div className="col-md-3">
+                    <ul className="custom-table-toolbar">
                       <li>
-                        <span class="dropdown pull-right">
-                          <button href="#" title="Export data" data-toggle="dropdown" class="btn btn-default">
-                            <i class="fa fa-download fa-fw"></i> Export results
-                            <i class="fa fa-caret-down"></i>
+                        <span className="dropdown pull-right">
+                          <button href="#" title="Export data" data-toggle="dropdown" className="btn btn-default">
+                            <i className="fa fa-download fa-fw"></i> Export results
+                            <i className="fa fa-caret-down"></i>
                           </button>
-                          <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#"><i class="fa fa-file-excel-o"></i> XLS</a></li>
-                            <li><a href="#"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
-                            <li><a href="#"><i class="fa fa-file-text-o"></i> CSV</a></li>
+                          <ul className="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i className="fa fa-file-excel-o"></i> XLS</a></li>
+                            <li><a href="#"><i className="fa fa-file-pdf-o"></i> PDF</a></li>
+                            <li><a href="#"><i className="fa fa-file-text-o"></i> CSV</a></li>
                           </ul>
                         </span>
                       </li>
                       <li>
-                        <a href="#" title="Print chart" class="btn btn-default" data-toggle="tooltip"><i class="fa fa-print" ></i></a>
+                        <a href="#" title="Print chart" className="btn btn-default" data-toggle="tooltip"><i className="fa fa-print" ></i></a>
                       </li>
 
                     </ul>
                   </div>
-                  <div class="col-md-5">
+                  <div className="col-md-5">
                     <select id="sorter">
-                      <option value="region left" selected="selected">Order by: Region</option>
+                      <option value="region left" defaultValue="true">Order by: Region</option>
                       <option value="country left">Order by: Country</option>
                       <option value="countryCode left">Order by: Country Code</option>
                       <option value="title middle">Order by: Title</option>
@@ -220,22 +220,22 @@ class SearchContainer extends Component {
                       <option value="lastUpdate right">Order by: Last Update</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
+                  <div className="col-md-4">
                     <select id="sorter-how">
-                      <option value="asc" selected="selected">Ascending</option>
+                      <option value="asc" defaultValue="selected">Ascending</option>
                       <option value="desc">Descending</option>
                     </select>
 
                   </div>
                 </div>
-                <table id="juan" class=" table-no-hover table-disable-hover search-table"  >
+                <table id="juan" className=" table-no-hover table-disable-hover search-table"  >
                   <thead>
                     <tr>
-                      <th class="col-xs-4"  >
+                      <th className="col-xs-4"  >
                       </th>
-                      <th class="col-xs-4">
+                      <th className="col-xs-4">
                       </th>
-                      <th class="col-xs-4">
+                      <th className="col-xs-4">
                       </th>
                     </tr>
                   </thead>
