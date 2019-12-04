@@ -4,6 +4,7 @@ import MainSelectFilter from './MainSelectFilters';
 import ThematicFocus from './ThematicFocus';
 import DocumentField from './DocumentField';
 import Charts from './Charts';
+import Map from './Map';
 import Results from './Results';
 
 
@@ -144,7 +145,10 @@ class SearchContainer extends Component {
   }
 
   render() {    
-    return <section className="search-controls ">
+    return <div>
+          <Map />            
+    <div className="container">
+    <section className="search-controls ">
             <div className="overlay"></div>
               <div className="card">
                 <div className="card-content">
@@ -179,10 +183,10 @@ class SearchContainer extends Component {
                     </div>
                   </div>
                 </div>
-              </div>            
-               <Charts />
+              </div>
+               {/* <Charts /> */}
                <Results reports={this.state.reports} />
-            </section>;
+            </section></div></div>;
   }
 }
 
