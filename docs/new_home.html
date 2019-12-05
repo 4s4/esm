@@ -12,18 +12,17 @@
 	     <html class="no-js">
 	       <!--<![endif]-->
 	       <head>
-		 <meta charset="utf-8">
-		 <title>New Home</title>
-		 <meta name="description" content="">
-		 <meta name="viewport" content="width=device-width">
-		 <link rel="stylesheet" href="styles/bootstrap.css">
-		 <!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
-		 <link rel="stylesheet" type="text/css" href="styles/main.css"/>
-     <script src="js/vendor/modernizr-2.6.2.min.js" />
-     <script src="js/jquery-2.1.4.js"></script>
-		 <script src='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.js'></script>
-		 <link href='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.css' rel='stylesheet'/>
-
+			<meta charset="utf-8">
+			<title>New Home</title>
+			<meta name="description" content="">
+			<meta name="viewport" content="width=device-width">
+			<link rel="stylesheet" href="styles/bootstrap.css">
+			<!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
+			<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+			<script src="js/vendor/modernizr-2.6.2.min.js" />
+			<script src="js/jquery-2.1.4.js"></script>
+			<script src='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.js'></script>
+			<link href='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.css' rel='stylesheet'/>
 	       </head>
 	       <body>
 		 <!--<form role="form"> -->
@@ -67,27 +66,8 @@
 		       <!--/.navbar-collapse -->
 		     </div>
 		   </nav>
-
-		   <div class="container">
-		     <!-- BREADCRUMB TRAIL -->
-		     <ol class="breadcrumb pull-right">
-		       <li><a href="#">Home</a></li>
-		     </ol>
-		     <!-- END BREADCRUMBS -->
-		     <h2>Search documents</h2>
-		     <section class="map-container map-container-details">
-          <div class="container">
-        	 <div id="map"></div>
-          </div>
-		     </section>
-		   </div>
-
-
-		   <!-- middle content section -->
-		   <!--section class="search-controls search-controls-full" -->
-
-		    <div class="container" id="search_container">
-        </div>
+		   <div id="search_container">
+           </div>
 
 
 
@@ -127,7 +107,7 @@
     $(document).ready(function () {
         
 //        PopulateWorldMap(jsonHome);
-        PopulateFilteredMap(afganJson);
+//        PopulateFilteredMap(afganJson);
     });
     
 
