@@ -10,6 +10,8 @@ var _DocumentField = _interopRequireDefault(require("./DocumentField"));
 
 var _Charts = _interopRequireDefault(require("./Charts"));
 
+var _Map = _interopRequireDefault(require("./Map"));
+
 var _Results = _interopRequireDefault(require("./Results"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -106,6 +108,25 @@ function (_Component) {
       }).then(this.saveReports);
     }
   }, {
+    key: "selectSelect",
+    value: function selectSelect(vals, kw) {
+      var picked = _extends({}, this.state.qq);
+
+      if (vals !== undefined && vals !== null) {
+        var dict = new Set(vals.map(function (o) {
+          return o.value;
+        }));
+
+        picked[kw] = function (o) {
+          return dict.has(o[kw]);
+        };
+      } else {
+        delete picked[kw];
+      }
+
+      this.searchReports(picked);
+    }
+  }, {
     key: "onSelectChange",
     value: function onSelectChange(selectType, vals) {
       if (selectType === "Region") {
@@ -116,27 +137,12 @@ function (_Component) {
         this.setState({
           countries: vals
         });
+        this.selectSelect.bind(this)(vals, 'country');
       } else if (selectType === "Type") {
         this.setState({
           types: vals
         });
-
-        var picked = _extends({}, this.state.qq);
-
-        if (vals !== undefined && vals !== null) {
-          var dict = new Set(vals.map(function (o) {
-            return o.value;
-          }));
-          console.log(dict, dict.has('Other'));
-
-          picked['type'] = function (o) {
-            return dict.has(o['type']);
-          };
-        } else {
-          delete picked['type'];
-        }
-
-        this.searchReports(picked);
+        this.selectSelect.bind(this)(vals, 'type');
       } else if (selectType === "Sector") {
         this.setState({
           sectors: vals
@@ -251,7 +257,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react["default"].createElement("section", {
+      return _react["default"].createElement("div", null, _react["default"].createElement(_Map["default"], null), _react["default"].createElement("div", {
+        className: "container"
+      }, _react["default"].createElement("section", {
         className: "search-controls "
       }, _react["default"].createElement("div", {
         className: "overlay"
@@ -310,9 +318,9 @@ function (_Component) {
         title: "Clear filters"
       }, _react["default"].createElement("i", {
         className: "fa fa-times-circle"
-      })))))), _react["default"].createElement(_Charts["default"], null), _react["default"].createElement(_Results["default"], {
+      })))))), _react["default"].createElement(_Results["default"], {
         reports: this.state.reports
-      }));
+      }))));
     }
   }]);
 

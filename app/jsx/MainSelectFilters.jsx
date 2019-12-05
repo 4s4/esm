@@ -54,7 +54,7 @@ class MainSelectFilters extends Component {
                 isMulti={true} isClearable={true}/>
               </div>
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
-                <Childo options={countries} placeholder="Country" onChange={this.props.onChange} value={this.props.countrie}
+                <Childo options={countries} placeholder="Country" onChange={this.props.onChange} value={this.props.countries}
                 isMulti={true} isClearable={true}/>
               </div>
               <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >

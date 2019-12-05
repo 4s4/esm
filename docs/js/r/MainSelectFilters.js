@@ -113,7 +113,7 @@ function (_Component) {
         options: _data.countries,
         placeholder: "Country",
         onChange: this.props.onChange,
-        value: this.props.countrie,
+        value: this.props.countries,
         isMulti: true,
         isClearable: true
       })), _react["default"].createElement("div", {

@@ -11,6 +11,8 @@ var _reactBootstrapTableNext = _interopRequireDefault(require("react-bootstrap-t
 
 var _reactBootstrapTable2Paginator = _interopRequireDefault(require("react-bootstrap-table2-paginator"));
 
+var _data = require("./data");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -51,7 +53,11 @@ function (_Component) {
   _createClass(Results, [{
     key: "render",
     value: function render() {
-      var country = function country(c, cc) {
+      var country = function country(countryValue, cc) {
+        var c = _data.countries.filter(function (o) {
+          return o.value === countryValue;
+        })[0].label;
+
         if (c.length < 7) {
           return _react["default"].createElement("div", {
             style: {
@@ -69,7 +75,7 @@ function (_Component) {
               color: "black"
             },
             className: "table-value boldi"
-          }, "(", cc, ")")));
+          }, "( ", cc, ")")));
         }
 
         return _react["default"].createElement("div", null, _react["default"].createElement("div", {
@@ -109,7 +115,7 @@ function (_Component) {
             color: "black"
           },
           className: "table-value boldi"
-        }, "(", cc, ")"))));
+        }, "( ", cc, ")"))));
       };
 
       var wrap_show_less = function wrap_show_less(css, value) {

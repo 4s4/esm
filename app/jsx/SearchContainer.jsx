@@ -42,24 +42,28 @@ class SearchContainer extends Component {
     
   }
   
+  selectSelect(vals, kw){
+    const { ...picked } = this.state.qq;
+    if (vals !== undefined && vals !== null ){
+      const dict= new Set(vals.map(o => o.value));
+      picked[kw] = o => dict.has(o[kw]);
+    } else {
+      delete picked[kw];
+    }
+    this.searchReports(picked);
+
+
+  }
+
   onSelectChange (selectType, vals) {
     if(selectType === "Region"){
       this.setState({ regions: vals });
     } else if(selectType === "Country") {
       this.setState( { countries: vals } );
+      this.selectSelect.bind(this)(vals, 'country');
     } else if(selectType === "Type") {
       this.setState( { types: vals } );
-      const { ...picked } = this.state.qq;
-      if (vals !== undefined && vals !== null ){
-      const dict= new Set(vals.map(o => o.value));
-      console.log(dict, dict.has('Other') );
-      picked['type'] = o => dict.has(o['type']);
-      } else {
-        delete picked['type'];
-      }
-
-      this.searchReports(picked);
-
+      this.selectSelect.bind(this)(vals, 'type');
     } else if(selectType === "Sector") {
       this.setState( { sectors: vals } );
     }

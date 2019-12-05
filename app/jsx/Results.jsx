@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { countries } from './data';
 
 //import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,13 +15,14 @@ class Results extends Component {
   }
 
   render() {
-    const country= (c, cc) => {
+    const country= (countryValue, cc) => {
+      const c = countries.filter(o => o.value === countryValue)[0].label;
       if (c.length<7) {
         return (<div  style={{marginTop:"8px"}} className="left-first-colum-first-row">
                   <span className="left-table-row-title">Country:</span>
                   <div className="div-country"> 
                     <span className="table-value boldi">{c}</span> 
-                    <span style={{color:"black"}} className="table-value boldi">({cc})</span> 
+                    <span style={{color:"black"}} className="table-value boldi">( {cc})</span> 
                   </div>
                 </div>);
       }
@@ -36,7 +38,7 @@ class Results extends Component {
                 <span className="left-table-row-title">&nbsp;</span>
                 <div className="div-country"> 
                 <span  className="table-value boldi">{c}</span> 
-                <span style={{color:"black"}} className="table-value boldi">({cc})</span> 
+                <span style={{color:"black"}} className="table-value boldi">( {cc})</span> 
                 </div>
               </div>
               </div>);

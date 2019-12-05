@@ -11,6 +11,14 @@ var _reactMapGl = _interopRequireWildcard(require("react-map-gl"));
 
 var _Countries = require("./Countries");
 
+var _cities = require("./cities");
+
+var _cityPin = _interopRequireDefault(require("./city-pin"));
+
+var _reactHighcharts = _interopRequireDefault(require("react-highcharts"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -27,9 +35,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -57,15 +65,80 @@ function (_Component) {
         width: "100%",
         height: "300px",
         center: [15.505, 25.09]
-      }
+      },
+      popupInfo: null
     };
+    _this._renderCityMarker = _this._renderCityMarker.bind(_assertThisInitialized(_this));
+    _this._renderPopup = _this._renderPopup.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Map, [{
+    key: "_renderPopup",
+    value: function _renderPopup() {
+      var _this2 = this;
+
+      var popupInfo = this.state.popupInfo;
+      var config = {
+        chart: {
+          type: 'bar',
+          height: 200,
+          width: 200
+        },
+        title: {
+          text: undefined
+        },
+        xAxis: {
+          categories: ['Apples', 'Bananas', 'Oranges']
+        },
+        yAxis: {
+          title: {
+            text: undefined
+          }
+        },
+        series: [{
+          name: 'Afga',
+          data: [1, 0, 4]
+        }]
+      };
+      return popupInfo && _react["default"].createElement(_reactMapGl.Popup, {
+        tipSize: 5,
+        anchor: "top",
+        className: "YUPIE",
+        longitude: popupInfo.longitude,
+        latitude: popupInfo.latitude,
+        closeOnClick: false,
+        onClose: function onClose() {
+          return _this2.setState({
+            popupInfo: null
+          });
+        }
+      }, _react["default"].createElement(_reactHighcharts["default"], {
+        config: config
+      }));
+    }
+  }, {
+    key: "_renderCityMarker",
+    value: function _renderCityMarker(city, index) {
+      var _this3 = this;
+
+      return _react["default"].createElement(_reactMapGl.Marker, {
+        key: "marker-".concat(index),
+        longitude: city.longitude,
+        latitude: city.latitude
+      }, _react["default"].createElement(_cityPin["default"], {
+        size: 20,
+        onClick: function onClick() {
+          return _this3.setState({
+            popupInfo: city
+          });
+        }
+      }));
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
 
       var parkLayer = {
         id: 'states-fill',
@@ -95,7 +168,7 @@ function (_Component) {
         mapStyle: "mapbox://styles/mapbox/streets-v10",
         mapboxApiAccessToken: "pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA",
         onViewportChange: function onViewportChange(viewport) {
-          return _this2.setState({
+          return _this4.setState({
             viewport: viewport
           });
         }
@@ -105,7 +178,7 @@ function (_Component) {
           left: "10px",
           top: "10px"
         }
-      }, _react["default"].createElement(_reactMapGl.NavigationControl, null), _react["default"].createElement(_reactMapGl.Layer, parkLayer)))))));
+      }, _react["default"].createElement(_reactMapGl.NavigationControl, null), _react["default"].createElement(_reactMapGl.Layer, parkLayer)), _cities.cities.map(this._renderCityMarker), this._renderPopup())))));
     }
   }]);
 
