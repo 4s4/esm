@@ -144,16 +144,49 @@ function (_Component) {
       }));
     }
   }, {
+    key: "_renderCountry",
+    value: function _renderCountry(country, idx) {
+      var value = country.value,
+          label = country.label,
+          coords = country.coords;
+      var conf = {
+        id: "layer-".concat(idx),
+        type: 'fill',
+        key: "layer-".concat(idx),
+        metadata: {
+          value: value,
+          label: label,
+          coords: coords
+        },
+        source: {
+          type: 'geojson',
+          data: country.geoJSON
+        },
+        paint: {
+          "fill-color": "#1FCB4A",
+          "fill-opacity": 0.30
+        }
+      };
+      return _react["default"].createElement(_reactMapGl.Layer, _extends({
+        key: "layer-".concat(idx)
+      }, conf));
+    }
+  }, {
     key: "_onClick",
     value: function _onClick(event) {
       var feature = event.features && event.features[0];
 
       if (feature) {
-        //      console.log(feature);
-        if (feature.layer.id === "Afghanistan") {
-          console.log("selecting country value 010d6483-d82d-48de-88c4-030fc5e7f81e");
+        console.log("layer", feature.layer);
+
+        if (feature.layer.id.substring(0, 5) === "layer") {
+          var _feature$layer$metada = feature.layer.metadata,
+              label = _feature$layer$metada.label,
+              value = _feature$layer$metada.value,
+              coords = _feature$layer$metada.coords;
+          console.log("selecting country value", value);
           var reportsFiltered = this.props.reports.filter(function (o) {
-            return o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e";
+            return o.country === value;
           });
 
           var search = _utils.thematicFocusKeys.reduce(function (c, o) {
@@ -179,12 +212,12 @@ function (_Component) {
 
           this.setState({
             popupInfo: {
-              country: "010d6483-d82d-48de-88c4-030fc5e7f81e",
-              latitude: 61.210817,
+              country: value,
+              latitude: coords[1],
               xAxisCategories: xAxisCategories,
-              seriesName: feature.layer.id,
+              seriesName: label,
               seriesData: seriesData,
-              longitude: 35.650072
+              longitude: coords[0]
             }
           });
         } //      window.alert(`Clicked layer ${feature.layer.id}`); // eslint-disable-line no-alert
@@ -196,18 +229,6 @@ function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      var parkLayer = {
-        id: 'Afghanistan',
-        type: 'fill',
-        source: {
-          type: 'geojson',
-          data: _Countries.afganJson[0].GeoJSON
-        },
-        paint: {
-          "fill-color": "#1FCB4A",
-          "fill-opacity": 0.30
-        }
-      };
       return _react["default"].createElement("div", {
         className: "container"
       }, _react["default"].createElement("ol", {
@@ -235,7 +256,19 @@ function (_Component) {
           left: "10px",
           top: "10px"
         }
-      }, _react["default"].createElement(_reactMapGl.NavigationControl, null), _react["default"].createElement(_reactMapGl.Layer, parkLayer)), this._renderPopup())))));
+      }, _react["default"].createElement(_reactMapGl.NavigationControl, null)), _Countries.allCountries.map(function (o, idx) {
+        var coords = o.GeoJSON.features ? o.GeoJSON.features[0].geometry.coordinates[0][0] : o.GeoJSON[0].geometry.coordinates[0][0];
+
+        if (o.GeoJSON.features && !Array.isArray(coords[0])) {
+          return _this4._renderCountry({
+            geoJSON: o.GeoJSON,
+            value: o.CountryID,
+            label: o.CountryName,
+            coords: coords
+          }, idx);
+        } else {// console.log("ahhhh", o.CountryName, coords, o.GeoJSON)
+        }
+      }), this._renderPopup())))));
     }
   }]);
 

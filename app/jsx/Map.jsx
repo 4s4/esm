@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import ReactMapGL, {Layer, Marker, Popup, NavigationControl} from 'react-map-gl';
-import {afganJson, geoJson} from './Countries';
+import {afganJson, allCountries} from './Countries';
 import {cities} from './cities';
 import {countProp, thematicFocusKeys, thematicFocus} from './utils';
 import CityPin from './city-pin';
@@ -88,16 +88,33 @@ class Map extends Component {
     );
   };
 
+  _renderCountry(country, idx){
+    const {value, label, coords} = country;
+
+    const conf = {
+      id: `layer-${idx}`,
+      type: 'fill',
+      key: `layer-${idx}`,
+      metadata: {value, label, coords},
+      source: {type: 'geojson',  data: country.geoJSON},
+      paint: {
+        "fill-color": "#1FCB4A",
+        "fill-opacity": 0.30
+      }
+    };
+    return (<Layer key={`layer-${idx}`} {...conf}  ></Layer>);
+  }
   _onClick(event){
     const feature = event.features && event.features[0];
     if (feature) {
-//      console.log(feature);
-      if (feature.layer.id === "Afghanistan"){
-        console.log("selecting country value 010d6483-d82d-48de-88c4-030fc5e7f81e");
-        const reportsFiltered = this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e");
+       console.log("layer", feature.layer);
+      if (feature.layer.id.substring(0, 5) === "layer"){
+        const {label, value, coords} = feature.layer.metadata;
+        console.log("selecting country value", value);
+        const reportsFiltered = this.props.reports.filter( o => o.country === value);
         const search = thematicFocusKeys.reduce( (c, o) => {
           c[o]=countProp(reportsFiltered, o);
-          return c} , {});
+          return c; } , {});
 
           const keysSorted = Object.keys(search).sort(function(a,b){return search[b]-search[a]})
           console.log('sortedSearch', keysSorted);     // bar,me,you,foo
@@ -112,29 +129,19 @@ class Map extends Component {
 //        this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e").map(o => console.log(o));
           this.setState(
             {popupInfo: 
-              { country: "010d6483-d82d-48de-88c4-030fc5e7f81e",
-                latitude: 61.210817, 
+              { country: value,
+                latitude: coords[1], 
                 xAxisCategories, 
-                seriesName: feature.layer.id,
+                seriesName: label,
                 seriesData,
-                longitude: 35.650072 }});
+                longitude: coords[0]}});
         }
         //      window.alert(`Clicked layer ${feature.layer.id}`); // eslint-disable-line no-alert
       }
   };
   
   render() {
-      const parkLayer = {
-        id: 'Afghanistan',
-        type: 'fill',
-        source: {type: 'geojson',  data: afganJson[0].GeoJSON},
-        paint: {
-          "fill-color": "#1FCB4A",
-          "fill-opacity": 0.30
-        }
-      };
-     
-    
+
     return (
       <div className="container">
 <ol className="breadcrumb pull-right">
@@ -156,9 +163,20 @@ class Map extends Component {
     > 
         <div style={{position: 'absolute', left: "10px", top: "10px"}}>
           <NavigationControl />
-          <Layer {...parkLayer}  ></Layer>
-
         </div>
+        {allCountries.map( (o, idx) => {
+          const coords = o.GeoJSON.features ? o.GeoJSON.features[0].geometry.coordinates[0][0] : o.GeoJSON[0].geometry.coordinates[0][0]; 
+          if(o.GeoJSON.features && !Array.isArray(coords[0])){
+            return this._renderCountry({geoJSON: o.GeoJSON,
+              value: o.CountryID,
+              label: o.CountryName,
+              coords,
+            }, idx);
+          } else {
+           // console.log("ahhhh", o.CountryName, coords, o.GeoJSON)
+
+          }
+        } )}
         {/* cities.map(this._renderCityMarker) */}
         {this._renderPopup()}
 
