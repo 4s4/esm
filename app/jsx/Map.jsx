@@ -29,6 +29,7 @@ class Map extends Component {
     };
     this._renderCityMarker = this._renderCityMarker.bind(this);
     this._renderPopup = this._renderPopup.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
   _renderPopup() {
@@ -68,9 +69,7 @@ class Map extends Component {
           closeOnClick={false}
           onClose={() => this.setState({popupInfo: null})}
         >
-          <ReactHighcharts 
-  
-          config = {config}></ReactHighcharts>
+          <ReactHighcharts config ={config} />
         </Popup>
       )
     );
@@ -85,16 +84,34 @@ class Map extends Component {
     );
   };
 
+  _onClick(event){
+    const feature = event.features && event.features[0];
+    if (feature) {
+//      console.log(feature);
+      if (feature.layer.id === "Afghanistan"){
+        this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e").map(o => console.log(o));
+          console.log("selecting country value 010d6483-d82d-48de-88c4-030fc5e7f81e");
+          this.setState(
+            {popupInfo: 
+              { country: "010d6483-d82d-48de-88c4-030fc5e7f81e",
+                latitude: 61.210817, 
+                longitude: 35.650072 }});
+        }
+        //      window.alert(`Clicked layer ${feature.layer.id}`); // eslint-disable-line no-alert
+      }
+  };
+  
   render() {
       const parkLayer = {
-        id: 'states-fill',
+        id: 'Afghanistan',
         type: 'fill',
-        source: {type: 'geojson',  data: geoJson},
+        source: {type: 'geojson',  data: afganJson[0].GeoJSON},
         paint: {
           "fill-color": "#1FCB4A",
           "fill-opacity": 0.30
         }
       };
+     
     
     return (
       <div className="container">
@@ -110,16 +127,17 @@ class Map extends Component {
     
     <ReactMapGL
       {...this.state.viewport}
+      onClick={this._onClick}
       mapStyle="mapbox://styles/mapbox/streets-v10"
       mapboxApiAccessToken="pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA"
       onViewportChange={(viewport) => this.setState({viewport})}
     > 
         <div style={{position: 'absolute', left: "10px", top: "10px"}}>
           <NavigationControl />
-          <Layer {...parkLayer} ></Layer>
+          <Layer {...parkLayer}  ></Layer>
 
         </div>
-        {cities.map(this._renderCityMarker)}
+        {/* cities.map(this._renderCityMarker) */}
         {this._renderPopup()}
 
       </ReactMapGL>

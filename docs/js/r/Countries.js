@@ -24,7 +24,7 @@ var afganJson = [{
   "CountryID": "010d6483-d82d-48de-88c4-030fc5e7f81e",
   "CountryName": "Afghanistan",
   "CountryCode": "AFG",
-  "GeoJSON": JSON.stringify(geoJson),
+  "GeoJSON": geoJson,
   "RecordCount": 10,
   "FillOpacity": 0.36,
   "MinRecord": 1,

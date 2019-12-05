@@ -70,6 +70,7 @@ function (_Component) {
     };
     _this._renderCityMarker = _this._renderCityMarker.bind(_assertThisInitialized(_this));
     _this._renderPopup = _this._renderPopup.bind(_assertThisInitialized(_this));
+    _this._onClick = _this._onClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -136,16 +137,41 @@ function (_Component) {
       }));
     }
   }, {
+    key: "_onClick",
+    value: function _onClick(event) {
+      var feature = event.features && event.features[0];
+
+      if (feature) {
+        //      console.log(feature);
+        if (feature.layer.id === "Afghanistan") {
+          this.props.reports.filter(function (o) {
+            return o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e";
+          }).map(function (o) {
+            return console.log(o);
+          });
+          console.log("selecting country value 010d6483-d82d-48de-88c4-030fc5e7f81e");
+          this.setState({
+            popupInfo: {
+              country: "010d6483-d82d-48de-88c4-030fc5e7f81e",
+              latitude: 61.210817,
+              longitude: 35.650072
+            }
+          });
+        } //      window.alert(`Clicked layer ${feature.layer.id}`); // eslint-disable-line no-alert
+
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
 
       var parkLayer = {
-        id: 'states-fill',
+        id: 'Afghanistan',
         type: 'fill',
         source: {
           type: 'geojson',
-          data: _Countries.geoJson
+          data: _Countries.afganJson[0].GeoJSON
         },
         paint: {
           "fill-color": "#1FCB4A",
@@ -165,6 +191,7 @@ function (_Component) {
       }, _react["default"].createElement("div", {
         id: "map"
       }, _react["default"].createElement(_reactMapGl["default"], _extends({}, this.state.viewport, {
+        onClick: this._onClick,
         mapStyle: "mapbox://styles/mapbox/streets-v10",
         mapboxApiAccessToken: "pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA",
         onViewportChange: function onViewportChange(viewport) {
@@ -178,7 +205,7 @@ function (_Component) {
           left: "10px",
           top: "10px"
         }
-      }, _react["default"].createElement(_reactMapGl.NavigationControl, null), _react["default"].createElement(_reactMapGl.Layer, parkLayer)), _cities.cities.map(this._renderCityMarker), this._renderPopup())))));
+      }, _react["default"].createElement(_reactMapGl.NavigationControl, null), _react["default"].createElement(_reactMapGl.Layer, parkLayer)), this._renderPopup())))));
     }
   }]);
 
