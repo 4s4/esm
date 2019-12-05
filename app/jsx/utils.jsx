@@ -1,6 +1,21 @@
-export const thematicFocusKeys = ['environment', 'gender', 'poverty_reduction', 'export_strategy', 'trade_focus',
-'youth', 'trade_facilitation', 'trade_finance', 'trade_information', 'trade_promotion', 'quality',
-'tvet', 'regional', 'regional_integration'];
+export const thematicFocus = {
+  'environment': 'Environment',
+  'gender': 'Gender',
+  'poverty_reduction': 'Poverty Reduction',
+  'export_strategy': 'Export Strategy',
+  'trade_focus': 'Focus on trade',
+  'youth': 'Youth',
+  'trade_facilitation': 'Trade Facilitation',
+  'trade_finance': 'Trade Finance',
+  'trade_information': 'Trade Information',
+  'trade_promotion': 'Trade Promotion',
+  'quality': 'Quality',
+  'tvet': 'TVET',
+  'regional': 'Regional Scope',
+  'regional_integration': 'Regional Integration'};
+
+
+export const thematicFocusKeys = Object.keys(thematicFocus);
 
 
 export function countProp(col, kw) {

@@ -13,6 +13,8 @@ var _Countries = require("./Countries");
 
 var _cities = require("./cities");
 
+var _utils = require("./utils");
+
 var _cityPin = _interopRequireDefault(require("./city-pin"));
 
 var _reactHighcharts = _interopRequireDefault(require("react-highcharts"));
@@ -80,17 +82,21 @@ function (_Component) {
       var _this2 = this;
 
       var popupInfo = this.state.popupInfo;
+      var xAxisCategories = popupInfo ? popupInfo.xAxisCategories : [];
+      var seriesName = popupInfo ? popupInfo.seriesName : null;
+      var seriesData = popupInfo ? popupInfo.seriesData : [];
       var config = {
         chart: {
           type: 'bar',
           height: 200,
-          width: 200
+          width: 400
         },
         title: {
           text: undefined
         },
         xAxis: {
-          categories: ['Apples', 'Bananas', 'Oranges']
+          categories: xAxisCategories //['Apples', 'Bananas', 'Oranges']
+
         },
         yAxis: {
           title: {
@@ -98,8 +104,9 @@ function (_Component) {
           }
         },
         series: [{
-          name: 'Afga',
-          data: [1, 0, 4]
+          name: seriesName,
+          data: seriesData //[1, 0, 4]
+
         }]
       };
       return popupInfo && _react["default"].createElement(_reactMapGl.Popup, {
@@ -144,16 +151,39 @@ function (_Component) {
       if (feature) {
         //      console.log(feature);
         if (feature.layer.id === "Afghanistan") {
-          this.props.reports.filter(function (o) {
-            return o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e";
-          }).map(function (o) {
-            return console.log(o);
-          });
           console.log("selecting country value 010d6483-d82d-48de-88c4-030fc5e7f81e");
+          var reportsFiltered = this.props.reports.filter(function (o) {
+            return o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e";
+          });
+
+          var search = _utils.thematicFocusKeys.reduce(function (c, o) {
+            c[o] = (0, _utils.countProp)(reportsFiltered, o);
+            return c;
+          }, {});
+
+          var keysSorted = Object.keys(search).sort(function (a, b) {
+            return search[b] - search[a];
+          });
+          console.log('sortedSearch', keysSorted); // bar,me,you,foo
+
+          var dataChart = keysSorted.slice(0, keysSorted.length > 5 ? 5 : keysSorted.length);
+          var xAxisCategories = dataChart.map(function (o) {
+            return _utils.thematicFocus[o];
+          });
+          var seriesData = dataChart.reduce(function (c, o) {
+            c.push(search[o]);
+            return c;
+          }, []);
+          console.log('xAxisCategories', xAxisCategories, 'seriesData', seriesData);
+          console.log('search', search); //        this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e").map(o => console.log(o));
+
           this.setState({
             popupInfo: {
               country: "010d6483-d82d-48de-88c4-030fc5e7f81e",
               latitude: 61.210817,
+              xAxisCategories: xAxisCategories,
+              seriesName: feature.layer.id,
+              seriesData: seriesData,
               longitude: 35.650072
             }
           });

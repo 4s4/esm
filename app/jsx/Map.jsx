@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactMapGL, {Layer, Marker, Popup, NavigationControl} from 'react-map-gl';
 import {afganJson, geoJson} from './Countries';
 import {cities} from './cities';
+import {countProp, thematicFocusKeys, thematicFocus} from './utils';
 import CityPin from './city-pin';
 import ReactHighcharts from 'react-highcharts';
 
@@ -34,17 +35,20 @@ class Map extends Component {
 
   _renderPopup() {
     const {popupInfo} = this.state;
+    const xAxisCategories = popupInfo ? popupInfo.xAxisCategories : [];
+    const seriesName = popupInfo ? popupInfo.seriesName : null;
+    const seriesData = popupInfo ? popupInfo.seriesData : [];
     const config = {
       chart: {
           type: 'bar',
           height: 200,
-          width: 200,
+          width: 400,
       },
       title: {
           text: undefined,
       },
       xAxis: {
-          categories: ['Apples', 'Bananas', 'Oranges']
+          categories: xAxisCategories //['Apples', 'Bananas', 'Oranges']
       },
       yAxis: {
           title: {
@@ -53,8 +57,8 @@ class Map extends Component {
       },
 
       series: [{
-          name: 'Afga',
-          data: [1, 0, 4]
+          name: seriesName,
+          data: seriesData //[1, 0, 4]
       }]
   };
     
@@ -89,12 +93,30 @@ class Map extends Component {
     if (feature) {
 //      console.log(feature);
       if (feature.layer.id === "Afghanistan"){
-        this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e").map(o => console.log(o));
-          console.log("selecting country value 010d6483-d82d-48de-88c4-030fc5e7f81e");
+        console.log("selecting country value 010d6483-d82d-48de-88c4-030fc5e7f81e");
+        const reportsFiltered = this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e");
+        const search = thematicFocusKeys.reduce( (c, o) => {
+          c[o]=countProp(reportsFiltered, o);
+          return c} , {});
+
+          const keysSorted = Object.keys(search).sort(function(a,b){return search[b]-search[a]})
+          console.log('sortedSearch', keysSorted);     // bar,me,you,foo
+          const dataChart = keysSorted.slice(0, keysSorted.length > 5 ? 5 : keysSorted.length);
+          const xAxisCategories = dataChart.map(o => thematicFocus[o]);
+          const seriesData = dataChart.reduce( (c, o) => { c.push(search[o]); return c;}, []);
+
+          console.log('xAxisCategories', xAxisCategories, 'seriesData', seriesData);
+
+
+        console.log('search', search);
+//        this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e").map(o => console.log(o));
           this.setState(
             {popupInfo: 
               { country: "010d6483-d82d-48de-88c4-030fc5e7f81e",
                 latitude: 61.210817, 
+                xAxisCategories, 
+                seriesName: feature.layer.id,
+                seriesData,
                 longitude: 35.650072 }});
         }
         //      window.alert(`Clicked layer ${feature.layer.id}`); // eslint-disable-line no-alert
