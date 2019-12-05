@@ -1,13 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
+import {countProp, thematicFocusKeys} from './utils';
 
-function countProp(col, kw){
-  if(col){
-    return col.filter(o => o[kw]).length;
-  } else {
-    return 0;
-  }
-}
 
 function CheckBox(props){
   return <div className="checkbox" data-toggle="tooltip" title={props.title}>
@@ -28,10 +22,7 @@ class ThematicFocus extends Component {
     if (
       props.reports !== state.reports 
     ) {
-      const kws = ['environment', 'gender', 'poverty_reduction', 'export_strategy', 'trade_focus',
-		   'youth', 'trade_facilitation', 'trade_finance', 'trade_information', 'trade_promotion', 'quality',
-		   'tvet', 'regional', 'regional_integration'];
-      return kws.reduce( (c, o) => {
+      return thematicFocusKeys.reduce( (c, o) => {
 	    c[o]=countProp(props.reports, o);
 	    return c} , {reports: props.reports});
     }
