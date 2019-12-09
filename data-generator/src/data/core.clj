@@ -3,19 +3,20 @@
             [clojure.java.io :as io]
             [clojure.set :as set]
             [clojure.string :as str]
+            [clojure.pprint :refer (pprint)]
             [data.cols :as cols]))
 
-
 (defn extract-rec [data]
-  (let [fun (fn [f* cont collection]
+  (let [fun (fn [f* cont collection level]
               (reduce (fn [c {:keys [value label options] :as it}]
-                        (let [c (conj c (select-keys it [:label :value]))]
+                        (let [c (conj c (-> it
+                                            (select-keys [:label :value])
+                                            (assoc :level level)))]
                           (if (and (some? options) (not-empty options))
-                            (f* f* c options)
-                            c))
-                        
-                        ) cont collection))]
-    (fun fun #{} data)))
+                            (f* f* c options (inc level))
+                            c))) cont collection))]
+    (fun fun [] data 0)))
+
 
 (defn read-resource [resource-url]
   (parse-string (slurp (io/resource resource-url)) keyword))
@@ -23,8 +24,6 @@
 (defn extract [resource-json-file]
   (let [data (read-resource resource-json-file)]
     (extract-rec data)))
-
-
 
 
 

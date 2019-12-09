@@ -150,7 +150,7 @@ class SearchContainer extends Component {
 
   render() {    
     return <div>
-          <Map reports={this.state.initialReports} />            
+          {/* <Map reports={this.state.initialReports} /> */}
     <div className="container">
     <section className="search-controls ">
             <div className="overlay"></div>

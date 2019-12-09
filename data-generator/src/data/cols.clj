@@ -15,7 +15,7 @@
 
 (def sectors (set (map :value (parse-string (slurp (io/resource "sectors2.json")) keyword))))
 (def types
-  #{"National", "International","DTIS" , "NES-ITC", "Other", "PRSP", "SES-ITC", "UNDAF"})
+  (set (map :value (parse-string (slurp (io/resource "types2.json")) keyword))))
 (def years (set (range 2000 2011)))
 (def implementation-periods (set (map #(str % "-"(+ % (rand-int 20) )) (range 2000 2011))))
 (def last-updates #{"Fry Jul 13 2012" "Thu May 28 2015"})

@@ -1,7 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
 import Childo from './Childo';
-import {regions, countries, types, sectors} from './data';
+import {regions, countries, types} from './data';
+import {sectors} from './sectors';
 
 function countBy(col){
   return col.reduce(function (acc, curr) {
@@ -15,7 +16,7 @@ export function countIt(reports, prop){
 class MainSelectFilters extends Component {
   constructor(props) {
     super(props);
-    this.state = { liked: false, reports: props.reports, initialReports: props.initialReports  };
+    this.state = { reports: props.reports, initialReports: props.initialReports };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -25,7 +26,9 @@ class MainSelectFilters extends Component {
       return {
         reports: props.reports,
         initialReports: props.initialReports,
-        types: countIt(props.initialReports, 'type')
+        types: countIt(props.initialReports, 'type'),
+        countries: countIt(props.initialReports, 'country')
+
       };
     }
     return null;
@@ -41,12 +44,22 @@ class MainSelectFilters extends Component {
       const c = this.state.types[picked.value] ? this.state.types[picked.value] : 0;
       picked.label+=` (${c})`;
       return picked;
-    })
-    
-//    console.log('data-types', types);
-    
-//    console.log('tt-types', tt);
-  }
+    });
+
+    }
+    let cc = [];
+
+    if (this.state.countries){
+      cc = countries.map(o => {
+      const {...picked} = o;
+//      console.log(picked.value, picked.label, picked);
+      const c = this.state.countries[picked.value] ? this.state.countries[picked.value] : 0;
+      picked.label+=` (${c})`;
+      return picked;
+    });
+
+    }
+
     return <div className="col-xs-12 col-md-12">
             <div className="row">
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
@@ -54,7 +67,7 @@ class MainSelectFilters extends Component {
                 isMulti={true} isClearable={true}/>
               </div>
               <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
-                <Childo options={countries} placeholder="Country" onChange={this.props.onChange} value={this.props.countries}
+                <Childo options={cc} placeholder="Country" onChange={this.props.onChange} value={this.props.countries}
                 isMulti={true} isClearable={true}/>
               </div>
               <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >

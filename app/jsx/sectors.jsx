@@ -1,4 +1,4 @@
-[
+export const sectors = [
     {
         "label": "Animal and vegetable oils, fats and waxes",
         "value": "54db828e-c35c-41e0-a186-732b3eac4526",
@@ -1165,8 +1165,7 @@
         "level": 2
     },
     {
-        "label": "RECREATIONAL, CULTURAL AND SPORTING SERVICES
-(other than audiovisual services)",
+        "label": "RECREATIONAL, CULTURAL AND SPORTING SERVICES(other than audiovisual services)",
         "value": "9fa4fea8-6c8f-40e8-9ece-57aea5e1e71a",
         "level": 0
     },
@@ -1485,4 +1484,4 @@
         "value": "b072b364-fc4d-4b20-b1dd-a790cf759c9b",
         "level": 2
     }
-]
+];
