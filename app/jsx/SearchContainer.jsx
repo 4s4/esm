@@ -181,12 +181,6 @@ class SearchContainer extends Component {
                     <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
                     <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
                   </div>
-                  <div className="row filters" style={{ marginTop: '0px' }}>
-                    <div className="text-center search-controls-wrapper">
-                      <button className="btn btn-primary btn-filter" id="apply_filters" onClick={this.search}>Apply filters</button>
-                      <a id="clear_filters" className="btn-clear-filters" title="Clear filters"><i className="fa fa-times-circle"></i></a>
-                    </div>
-                  </div>
                 </div>
               </div>
                {/* <Charts /> */}
