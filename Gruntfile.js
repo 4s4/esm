@@ -78,7 +78,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'app/jsx/', // Custom folder
-          src: ['*.jsx'],
+          src: ['{,*/}*.jsx'],
           dest: 'app/js/r/', // Custom folder
           ext: '.js'
         }]

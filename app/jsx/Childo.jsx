@@ -34,7 +34,14 @@ class Childo extends Component {
     //    const color = data.color ? '#ff69b4' : "#EFEFEF";
         if(data.level === 1){
           //console.log(data);
-          return { ...styles, backgroundColor:'pink', marginLeft: '20px'};
+          return { ...styles, marginLeft: '10px'};
+        }else if(data.level === 2){
+          //console.log(data);
+          return { ...styles, marginLeft: '20px'};
+        }else if(data.level === 3){
+          //console.log(data);
+          return { ...styles, marginLeft: '30px'};
+
         }else{
           return styles;
         }

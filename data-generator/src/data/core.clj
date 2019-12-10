@@ -6,7 +6,7 @@
             [clojure.pprint :refer (pprint)]
             [data.cols :as cols]))
 
-(defn extract-rec [data]
+(defn extract-rec [data & [level]]
   (let [fun (fn [f* cont collection level]
               (reduce (fn [c {:keys [value label options] :as it}]
                         (let [c (conj c (-> it
@@ -15,7 +15,7 @@
                           (if (and (some? options) (not-empty options))
                             (f* f* c options (inc level))
                             c))) cont collection))]
-    (fun fun [] data 0)))
+    (fun fun [] data (or level 0))))
 
 
 (defn read-resource [resource-url]
@@ -55,6 +55,26 @@
                      (reduce #(apply conj % (:regions %2)) [])
                      (map #(set/rename-keys % {:name :label :id :value})))]
        (.write wrtr  (generate-string (extract-rec all)))))
+
+    (let [regions (read-resource "regions.json")
+          [geo eco] (->> regions
+                         (map #(assoc % :value nil))
+                         
+                         (map #(update % :regions (fn [rr] (reduce (fn [c i] (conj c (-> i
+                                                                                         (dissoc :countries)
+                                                                                         (assoc :value (:id i))
+                                                                                         (assoc :label (:name i))))) [] rr))))
+                         
+                         (map #(set/rename-keys % {:regions :options}))
+                         )]
+      (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/data-generator/resources/regions3.json")]
+        (.write wrtr  (generate-string [{:label (:label geo)
+                                          :level 0
+                                         :options (extract-rec (:options geo) 1)}
+                                        {:label (:label eco)
+                                         :level 0
+                                         :options (extract-rec (:options eco) 1)}]
+                                       ))))
     
     )
 

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import { countries } from './data';
+import { countries } from './data/countries';
 
 //import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';

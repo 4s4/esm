@@ -58,6 +58,7 @@ class SearchContainer extends Component {
   onSelectChange (selectType, vals) {
     if(selectType === "Region"){
       this.setState({ regions: vals });
+      this.selectSelect.bind(this)(vals, 'region');
     } else if(selectType === "Country") {
       this.setState( { countries: vals } );
       this.selectSelect.bind(this)(vals, 'country');
