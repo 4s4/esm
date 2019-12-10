@@ -40,3 +40,7 @@ export const types = [
       "level": 1
   }
 ];
+
+export function findType(uuid){
+    return types.find( o => o.value === uuid);
+}

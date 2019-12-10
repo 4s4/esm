@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { countries } from './data/countries';
+import {findRegion} from './data/regions';
+import {findSector} from './data/sectors';
+import {findCountry} from './data/countries';
+import {findType} from './data/types';
+
 
 //import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,11 +17,24 @@ import { countries } from './data/countries';
 class Results extends Component {
   constructor(props) {
     super(props);
+    this.state = { reports: []};
   }
+
+  static getDerivedStateFromProps(props, state) {
+    if (
+      props.reports !== null && props.reports !== state.reports 
+    ) {
+      return {
+        reports: props.reports,
+      };
+    }
+    return state;
+  }
+
 
   render() {
     const country= (countryValue, cc) => {
-      const c = countries.filter(o => o.value === countryValue)[0].label;
+      const c = findCountry(countryValue).label;
       if (c.length<7) {
         return (<div  style={{marginTop:"8px"}} className="left-first-colum-first-row">
                   <span className="left-table-row-title">Country:</span>
@@ -43,6 +61,7 @@ class Results extends Component {
               </div>
               </div>);
     };
+
     const wrap_show_less = (css, value) => {
       return (<div className="text-container"> 
                 <div className={`text-content ${css}`}> {value} </div> 
@@ -54,21 +73,23 @@ class Results extends Component {
               </div> );
     };
     const leftFormatter = (c, o) => { 
-      return (<div>
+      const r = findRegion(o.region);
+      return (<div key={`left-${o.id}`}>
                 <div className="left-first-colum-first-row" > 
                   <span className="left-table-row-title">Region:</span>
-                <div className="span-region table-value boldi" >{o.region}</div>
+                <div className="span-region table-value boldi" >{r.label}</div>
                 </div>
                 {country(o.country, o.countryCode)}
                 <div style={{ marginTop:"18px", padding:"10px", border:"1px solid rgb(187, 187, 187)", textAlign: "center" }} > 
-                  <img className="world" src={`./img/maps/${o.region}.png`} />
+                  {/* <img className="world" src={`./img/maps/${r.label}.png`} /> */}
                 </div>
               </div>);
     };
     const rightFormatter = (c, o) => {
+      const t = findType(o.type);
       return (<div>
                 <div className="first-colum-first-row first-colum-first-row-bis" >
-                <span className="table-row-title " >Type: </span><span style={{float:"right"}} className="table-value " >{o.type}</span>
+                <span className="table-row-title " >Type: </span><span style={{float:"right"}} className="table-value " >{t.label}</span>
                 <hr className="hr-table-column" />
                 </div> 
                 <div   className="left-first-colum-first-row">
@@ -98,7 +119,7 @@ class Results extends Component {
       const extractRowData = (value, idx) => {  
             return (<div className={css_class} key={`one-${idx}`} >
                       <div className={`label label-default label-table ${css_class}`} key={`two-${idx}`} >
-                        <div className="" key={`three-${idx}`} >{value}</div>
+                        <div className="" key={`three-${idx}`} >{findSector(value).label}</div>
                       </div>
                     </div>);
       };
@@ -116,24 +137,32 @@ class Results extends Component {
       </div>);
     };
 
+    const leftHeaderFormatter = (c, idx, cs) => {
+      return null;
+    };
               
     const columns = [{
       formatter:leftFormatter,
-      sort: false
+      sort: false,
+      dataField: 'region',
+      text: ""
     }, {
       formatter:middleFormatter,
-      sort: false
+      sort: false, 
+      dataField: 'title',
+      text: ""
+
     }, {
       formatter:rightFormatter,
-      sort: false
+      sort: false,
+      dataField: 'type',
+      text: ""
     }];
     
     const defaultSorted = [{
       dataField: 'title',
       order: 'desc'
     }];
-    const results = this.props.reports || [];
-
     return (<div id="card-table" className="card" style={{display:"inherit"}}>
     <div className="card-content">
     {/*
@@ -189,9 +218,9 @@ class Results extends Component {
     </div>
     */}
     <BootstrapTable
-        bootstrap4
-        keyField="sectors"
-        data={ results }
+      //  bootstrap4
+        keyField="id"
+        data={ this.state.reports }
         columns={ columns }
         classes="table-no-hover table-disable-hover search-table"
         defaultSorted={ defaultSorted } 

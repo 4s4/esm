@@ -91,29 +91,39 @@ class MainSelectFilters extends Component {
 
 
 
-    return <div className="col-xs-12 col-md-12">
-            <div className="row">
-              <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
-                <Childo options={rr} placeholder="Region" onChange={this.props.onChange} value={this.props.regions}
-                isMulti={true} isClearable={true}/>
+    return <div className="col-xs-12">
+            <div className="search-controls-wrapper">
+              <div className="search-controls">
+                <div className="row" role="form">
+                  <div id="main_select_filter">
+                    <div className="col-xs-12 col-md-12">
+                      <div className="row">
+                        <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
+                          <Childo options={rr} placeholder="Region" onChange={this.props.onChange} value={this.props.regions}
+                          isMulti={true} isClearable={true}/>
+                        </div>
+                        <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
+                          <Childo options={cc} placeholder="Country" onChange={this.props.onChange} value={this.props.countries}
+                          isMulti={true} isClearable={true}/>
+                        </div>
+                        <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >
+                          <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
+                          isMulti={true} isClearable={true}/>
+                        </div>
+                        <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
+                        <Childo 
+                        options={tt} 
+                        placeholder="Type" onChange={this.props.onChange} value={this.props.types}
+                        defaultMenuIsOpen={false}
+                        isMulti={true} isClearable={false}/>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
-                <Childo options={cc} placeholder="Country" onChange={this.props.onChange} value={this.props.countries}
-                isMulti={true} isClearable={true}/>
-              </div>
-              <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >
-                <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
-                isMulti={true} isClearable={true}/>
-              </div>
-              <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
-              <Childo 
-              options={tt} 
-              placeholder="Type" onChange={this.props.onChange} value={this.props.types}
-              defaultMenuIsOpen={false}
-              isMulti={true} isClearable={false}/>
-              </div>
-            </div>
-          </div>;
+            </div>;
   }
 }
 export default MainSelectFilters;

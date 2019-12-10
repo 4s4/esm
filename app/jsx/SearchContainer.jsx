@@ -26,11 +26,12 @@ class SearchContainer extends Component {
 
   saveReports(r){
     console.log('save reports!');
-
-    this.setState( { reports: r, initialReports: r});
+    const rr = r.map( (o, idx) => { o.id = idx;  return o; })
+    this.setState( { reports: rr, initialReports: rr});
   }
-  componentWillMount() {
-    console.log('componentWillMount');
+
+  componentDidMount() {
+    console.log('componentDidMount');
     fetch('./js/data.json')
     .then(function(response) {
       if (response.status >= 400) {
@@ -152,40 +153,33 @@ class SearchContainer extends Component {
   render() {    
     return <div>
           {/* <Map reports={this.state.initialReports} /> */}
-    <div className="container">
-    <section className="search-controls ">
-            <div className="overlay"></div>
-              <div className="card">
-                <div className="card-content">
-                  <div className="row" style={{ marginBottom: '18px' }}>
-                    <div className="col-xs-12">
-                      <div className="search-controls-wrapper">
-                        <div className="search-controls">
-                          <div className="row" role="form">
-                            <div id="main_select_filter">
-                            <MainSelectFilter onChange={this.onSelectChange} 
+            <div className="container">
+                <section className="search-controls ">
+                  <div className="overlay"></div>
+                    <div className="card">
+                      <div className="card-content">
+                        <div className="row" style={{ marginBottom: '18px' }}>
+                          <MainSelectFilter 
+                            onChange={this.onSelectChange} 
                             reports={this.state.reports}
                             initialReports={this.state.initialReports}
                             regions={this.state.regions} 
                             types={this.state.types}
                             countries={this.state.countries}
                             sectors={this.state.sectors}
-                            />
-                            </div>
-                          </div>
+                          />
+                        </div>
+                        <div className="row ">
+                          <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
+                          <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
                         </div>
                       </div>
-                    </div>
                   </div>
-                  <div className="row ">
-                    <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
-                    <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
-                  </div>
-                </div>
+                  {/* <Charts /> */}
+                  <Results reports={this.state.reports} />
+                </section>
               </div>
-               {/* <Charts /> */}
-               <Results reports={this.state.reports} />
-            </section></div></div>;
+            </div>;
   }
 }
 

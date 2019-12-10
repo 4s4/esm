@@ -97,11 +97,13 @@
 
 (def r (take 100 (cycle [true false false true])))
 
+(def checks [:environment :export_strategy :gender :poverty_reduction
+             :quality :regional :regional_integration :trade_facilitation
+             :trade_finance :trade_focus :trade_information :trade_promotion :tvet :youth])
+
 (defn more-checks []
-  (reduce  (fn [c a] (assoc c (keyword a) (rand-nth r)))  {}
-           ["environment" "gender" "poverty_reduction" "export_strategy" "trade_focus"
-	    "youth" "trade_facilitation" "trade_finance" "trade_information" "trade_promotion" "quality"
-	    "tvet" "regional" "regional_integration"]))
+  (reduce  (fn [c a] (assoc c a (rand-nth r)))  {}
+           checks))
 
 (more-checks)
 
@@ -113,16 +115,11 @@
 
 
 (def keys* (apply conj
-                  [:region
-                   :country
-                   :countryCode
-                   :title
-                   :description
-                   :sectors
-                   :year
-                   :implementationPeriod
-                   :lastUpdate]
-                  [:environment :gender :poverty_reduction :export_strategy :trade_focus :youth :trade_facilitation :trade_finance :trade_information :trade_promotion :quality :tvet :regional :regional_integration]))
+                  [:country :countryCode
+                   :description :implementationPeriod
+                   :lastUpdate :region
+                   :sectors :title :year]
+                  checks))
 
 (defn report []
   (let [i-p (one cols/implementation-periods)]
