@@ -4,7 +4,6 @@ import Childo from './Childo';
 import {types} from './data/types';
 import {sectors} from './data/sectors';
 import {regions} from './data/regions';
-import {countries} from './data/countries';
 
 
 function countBy(col){
@@ -56,9 +55,13 @@ class MainSelectFilters extends Component {
     });
 
     }
-    let cc = this.state.countryFilters;
-   /* if (this.state.countries){
-      cc = countries.map(o => {
+
+    let cc = [];
+    if (this.state.countries){
+      console.log(this.state.countries);
+      console.log(this.state.countryFilters);
+      
+      cc = this.state.countryFilters.map(o => {
       const {...picked} = o;
 //      console.log(picked.value, picked.label, picked);
       const c = this.state.countries[picked.value] ? this.state.countries[picked.value] : 0;
@@ -67,7 +70,7 @@ class MainSelectFilters extends Component {
     });
 
     }
-*/
+
     let rr = [];
     if (this.state.regions){
       const geo = regions[0];

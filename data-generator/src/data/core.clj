@@ -26,8 +26,56 @@
     (extract-rec data)))
 
 
+(comment
+  (let [dict (->> (:thematicFocus (read-resource "filters.json"))
+                  (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))
+        one (-> (first (read-resource "all-records.json"))
+                (set/rename-keys {:sectorIds :sectors
+                                  :regionId :region
+                                  :typeId :type
+                                  :countryId :country}))
+        ]  
+    
+    
+
+
+    (reduce (fn [rep id]
+              (assoc rep (keyword (:kw (first (filter #(= id(:id %)) dict)))) true)
+              ) one (:thematicFocus one))
+
+    )
+
+
+(let [dict (->> (:thematicFocus (read-resource "filters.json"))
+                  (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))
+      res (->> (read-resource "all-records.json")
+               (map #(set/rename-keys % {:sectorIds :sectors
+                                         :regionId :region
+                                         :typeId :type
+                                         :countryId :country}))
+
+               (map #(reduce (fn [rep id]
+                               (assoc rep (keyword (:kw (first (filter (fn [x] (= id(:id x))) dict)))) true)
+                               ) % (:thematicFocus %)))
+               (map #(dissoc %  :thematicFocus))
+               )    
+        ]  
+    
+    
+
+
+
+  (take 1 res)
+    )
+
+({:description "The paper serves as support of the African Development Bank for the implementation of the Government’s Fourth National Development Plan (NDP4) for the period 2012/13-2016/17, which emphasizing high and sustainable growth, employment creation, and reducing income inequality. The report is concentrated on infrastructure with a focus on transport, energy and water; and private sector development through skills development and improving the regulatory environment.", :focus_on_trade true, :trade_information true, :sectors [], :trade_promotion true, :lastUpdate "10 Feb 2016", :type "27c77bd7-69f5-42c2-9413-f3cc3b9ade78", :trade_facilitation true, :title "COUNTRY STRATEGY PAPER 2014-2018 SARC", :region "d380856d-ddca-4995-9cc5-51179abc00f6", :year "2014", :tvet true, :poverty_reduction true, :id "ac79e8f2-4f15-4cc4-b645-0034af8fa90e", :youth true, :implementationPeriod "2014-2018", :quality true, :environment true, :gender true, :trade_finance true, :country "6ddfbd90-5c29-4828-a83e-03f74b92ae0d", :regional_integration true})
+  
+  )
 
 (comment
+  (->> (:thematicFocus (read-resource "filters.json"))
+       (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))
+  
   (let [geographical (first (filter #(= "Geographical" (:label %)) (:regionGroups (read-resource "filters.json"))))
         countries (reduce (fn [c reg]
                             (apply conj c (map (fn [c] (-> c

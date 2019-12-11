@@ -25,21 +25,17 @@ class SearchContainer extends Component {
     this.onSelectYear = this.onSelectYear.bind(this);
   }
 
-  saveFilters(cc){
-    const ups= cljs.countries(cc);
-    this.setState( { countryFilters: ups });
-
-  }
 
   saveReports(r){
     console.log('save reports!');
-    const rr = r.map( (o, idx) => { o.id = idx;  return o; })
+    const rr = cljs.reports(this.state.thematicsFocus, r);
+    console.log('first report', rr[0]);
     this.setState( { reports: rr, initialReports: rr});
   }
 
-  componentDidMount() {
-    console.log('componentDidMount');
-    fetch('./js/data.json')
+  saveFilters(cc){
+    this.setState( { countryFilters: cljs.countries(cc),  thematicsFocus: cljs.thematicFocus(cc) });   
+    fetch('./js/all-records.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
@@ -47,6 +43,12 @@ class SearchContainer extends Component {
       return response.json();
     })
     .then(this.saveReports);
+
+
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
 
     fetch('./js/filters.json')
     .then(function(response) {
@@ -56,6 +58,7 @@ class SearchContainer extends Component {
       return response.json();
     })
     .then(this.saveFilters);
+   
 
 
 
@@ -123,7 +126,7 @@ class SearchContainer extends Component {
 
 
 
-  
+
   searchReports(qqs){
     const queries = Object.values(qqs); 
     let reports;
@@ -191,13 +194,14 @@ class SearchContainer extends Component {
                           />
                         </div>
                         <div className="row ">
-                          <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
+                          {/*  <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/> */}
                           <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
                         </div>
                       </div>
                   </div>
+
                   {/* <Charts /> */}
-                  <Results reports={this.state.reports} />
+                  {/* <Results reports={this.state.reports} /> */}
                 </section>
               </div>
             </div>;
