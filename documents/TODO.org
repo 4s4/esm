@@ -70,3 +70,10 @@ versiones more or less updated
 
 
 ** TODO research proper org-mode todo flow
+
+
+* cljs
+https://github.com/minimal-xyz/minimal-shadow-cljs-nodejs
+ https://stackoverflow.com/questions/58060822/how-to-connect-a-clojurescript-node-repl-to-my-node-library-shadow-cljs-project
+
+https://lwhorton.github.io/2018/10/20/clojurescript-interop-with-javascript.html#translation

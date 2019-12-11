@@ -28,6 +28,22 @@
 
 
 (comment
+  (let [geographical (first (filter #(= "Geographical" (:label %)) (:regionGroups (read-resource "filters.json"))))
+        countries (reduce (fn [c reg]
+                            (apply conj c (map (fn [c] (-> c
+                                                           (dissoc :name)
+                                                           (assoc :label (:name c))
+                                                           (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
+              ) [] (:regions geographical))
+        ]
+    (map :label (sort-by :label (take 10 countries)))
+    )
+  
+
+
+  )
+
+(comment
   (let [{:keys [regionGroups sectors types ]} (parse-string (slurp (io/resource "all-selects.json")) keyword)]
 
     (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/data-generator/resources/regions.json")]
@@ -116,21 +132,22 @@
 
 (def keys* (apply conj
                   [:country :countryCode
-                   :description :implementationPeriod
+                   :recordDocumentDescription :impStartDate
+                   :impEndDate
                    :lastUpdate :region
-                   :sectors :title :year]
+                   :sectorName :recordName :year]
                   checks))
 
 (defn report []
   (let [i-p (one cols/implementation-periods)]
     (-> (more-checks)
         (assoc :region (one cols/regions))
-        (assoc :type (one cols/types))
+        (assoc :documentType (one cols/types))
         (assoc :country (one cols/countries))
         (assoc :countryCode (one cols/country-codes))
         (assoc :title (one cols/titles))
-        (assoc :description (one cols/descriptions))
-        (assoc :sectors (few cols/sectors))
+        (assoc :recordDocumentDescription (one cols/descriptions))
+        (assoc :sectorName (few cols/sectors))
         (assoc :year (- (Integer/parseInt (first (str/split i-p #"-"))) (rand-int 3)))
         (assoc :implementationPeriod i-p)
         (assoc :lastUpdate (one cols/last-updates)))))

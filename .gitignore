@@ -2,3 +2,6 @@ node_modules
 package-lock.json
 app/js/*.json
 app/js/r/*.js
+/app/js/cljs.js
+/data-generator/resources/GetAllRecords.json
+/data-generator/resources/filters.json

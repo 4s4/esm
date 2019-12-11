@@ -19,23 +19,28 @@ export function countIt(reports, prop){
 class MainSelectFilters extends Component {
   constructor(props) {
     super(props);
-    this.state = { reports: props.reports, initialReports: props.initialReports };
+    this.state = { reports: props.reports, initialReports: props.initialReports, countryFilters: props.countryFilters };
   }
 
   static getDerivedStateFromProps(props, state) {
+    const newState = {};
     if (
       props.reports !== state.reports 
     ) {
-      return {
-        reports: props.reports,
-        initialReports: props.initialReports,
-        types: countIt(props.initialReports, 'type'),
-        countries: countIt(props.initialReports, 'country'),
-        regions: countIt(props.initialReports, 'region')
+      newState.reports = props.reports;
+      newState.initialReports =  props.initialReports;
+      newState.types = countIt(props.initialReports, 'type');
+      newState.countries =  countIt(props.initialReports, 'country');
+      newState.regions = countIt(props.initialReports, 'region');
+    };
 
-      };
+    if (
+      props.countryFilters !== state.countryFilters 
+    ) {
+      newState.countryFilters = props.countryFilters;
     }
-    return null;
+
+    return newState;
   }
 
   render() { 
@@ -51,8 +56,8 @@ class MainSelectFilters extends Component {
     });
 
     }
-    let cc = [];
-    if (this.state.countries){
+    let cc = this.state.countryFilters;
+   /* if (this.state.countries){
       cc = countries.map(o => {
       const {...picked} = o;
 //      console.log(picked.value, picked.label, picked);
@@ -62,7 +67,7 @@ class MainSelectFilters extends Component {
     });
 
     }
-
+*/
     let rr = [];
     if (this.state.regions){
       const geo = regions[0];

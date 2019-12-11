@@ -7,21 +7,28 @@ import Charts from './Charts';
 import Map from './Map';
 import Results from './Results';
 
-
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
+const cljs = require('../../js/cljs.js');
 
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { qq:{}, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
+    this.state = { qq:{}, countryFilters: null, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
+    this.saveFilters = this.saveFilters.bind(this);
     this.searchReports = this.searchReports.bind(this);
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
     this.onSelectYear = this.onSelectYear.bind(this);
+  }
+
+  saveFilters(cc){
+    const ups= cljs.countries(cc);
+    this.setState( { countryFilters: ups });
+
   }
 
   saveReports(r){
@@ -40,7 +47,18 @@ class SearchContainer extends Component {
       return response.json();
     })
     .then(this.saveReports);
-    
+
+    fetch('./js/filters.json')
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(this.saveFilters);
+
+
+
   }
   
   selectSelect(vals, kw){
@@ -105,6 +123,7 @@ class SearchContainer extends Component {
 
 
 
+  
   searchReports(qqs){
     const queries = Object.values(qqs); 
     let reports;
@@ -151,6 +170,7 @@ class SearchContainer extends Component {
   }
 
   render() {    
+//    console.log(cljs.hello(this.state.initialReports));
     return <div>
           {/* <Map reports={this.state.initialReports} /> */}
             <div className="container">
@@ -165,6 +185,7 @@ class SearchContainer extends Component {
                             initialReports={this.state.initialReports}
                             regions={this.state.regions} 
                             types={this.state.types}
+                            countryFilters={this.state.countryFilters}
                             countries={this.state.countries}
                             sectors={this.state.sectors}
                           />

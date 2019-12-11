@@ -1,0 +1,9 @@
+
+{:source-paths ["src"]
+ :dependencies []
+ :builds {:app {:target :node-library
+                :output-to "../app/js/cljs.js"
+                :exports-fn server.main/generate-exports
+                :devtools {:after-load server.main/reload!}
+                :main server.main/main!}
+}}
