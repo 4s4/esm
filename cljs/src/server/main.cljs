@@ -53,8 +53,65 @@
 
     (clj->js (sort-by :label countries))))
 
+(defn extract-rec [data & [level]]
+  (let [fun (fn [f* cont collection level]
+              (reduce (fn [c {:keys [value label options] :as it}]
+                        (let [c (conj c (-> it
+                                            (select-keys [:label :value])
+                                            (assoc :level level)))]
+                          (if (and (some? options) (not-empty options))
+                            (f* f* c options (inc level))
+                            c))) cont collection))]
+    (fun fun [] data (or level 0))))
+
+
+(defn types [data]
+  (let [filters (:types (js->clj data :keywordize-keys true))]
+
+    (clj->js (extract-rec filters))))
+
+(defn sectors [data]
+  (let [sectors (:sectors (js->clj data :keywordize-keys true))]
+
+    (clj->js (extract-rec sectors))))
+
+(defn rename-ks [ks] (fn [x] (set/rename-keys x ks)))
+(defn regions [data]
+  (clj->js
+   (extract-rec
+    (->> (:regionGroups (js->clj data :keywordize-keys true))
+         (map #(set/rename-keys % {:name :label :id :value :regions :options}))
+         (map #(update % :options
+                       (fn [ops]
+                         (map (fn [x] (-> x
+                                          ((rename-ks {:name :label :id :value :countries :options}))
+                                          (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
+                                          )) ops))))))))
+
+;; (if (and (not (string? value)) (not (number? value))) (js->clj value :keywordize-keys true) value)
+
+
+(defn assoc-in-state [state path-value-col]
+  (let [
+        state (js->clj state :keywordize-keys true)
+        path-value-col (js->clj path-value-col :keywordize-keys true)
+        res (reduce (fn [c [path value]]
+                      (assoc-in c (map keyword path) value)) state path-value-col)]
+    (clj->js res)))
+
+(comment (println #js ["a" "b"])
+         (println  (assoc-in-state #js {:a 1 :b {:c 5}} #js [[["a"] 3] [["b" "c"] 8]]))
+         
+         (println "ja"))
 (defn generate-exports []
   #js {:hello hello
        :reports reports
+       :assocIn assoc-in-state
        :thematicFocus thematic-focus
+       :types types
+       :sectors sectors
+       :regions regions
        :countries countries})
+
+(comment "test types"
+         (types #js {:types [{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]}))

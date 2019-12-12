@@ -15,7 +15,7 @@ const cljs = require('../../js/cljs.js');
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { qq:{}, countryFilters: null, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
+    this.state = { qq:{}, filters: {countries:null, regions:null, types: null}, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
@@ -29,12 +29,23 @@ class SearchContainer extends Component {
   saveReports(r){
     console.log('save reports!');
     const rr = cljs.reports(this.state.thematicsFocus, r);
+    console.log(rr.map(o => o.type));
     console.log('first report', rr[0]);
     this.setState( { reports: rr, initialReports: rr});
   }
 
   saveFilters(cc){
-    this.setState( { countryFilters: cljs.countries(cc),  thematicsFocus: cljs.thematicFocus(cc) });   
+    console.log('regions', cljs.regions(cc));
+    const state = cljs.assocIn(this.state, 
+      [
+        [["filters", "countries"], cljs.countries(cc)],
+        [["filters", "types"], cljs.types(cc)],
+        [["filters", "regions"], cljs.regions(cc)],
+        [["filters", "sectors"], cljs.sectors(cc)],
+        [["thematicsFocus"], cljs.thematicFocus(cc)]
+      ]); 
+    console.log(state);
+    this.setState( state);   
     fetch('./js/all-records.json')
     .then(function(response) {
       if (response.status >= 400) {
@@ -182,13 +193,16 @@ class SearchContainer extends Component {
                     <div className="card">
                       <div className="card-content">
                         <div className="row" style={{ marginBottom: '18px' }}>
-                          <MainSelectFilter 
+                          <MainSelectFilter
                             onChange={this.onSelectChange} 
                             reports={this.state.reports}
                             initialReports={this.state.initialReports}
                             regions={this.state.regions} 
                             types={this.state.types}
-                            countryFilters={this.state.countryFilters}
+                            countryFilters={this.state.filters.countries}
+                            regionFilters={this.state.filters.regions}
+                            typeFilters={this.state.filters.types}
+                            sectorFilters={this.state.filters.sectors}
                             countries={this.state.countries}
                             sectors={this.state.sectors}
                           />

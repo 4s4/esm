@@ -25,8 +25,38 @@
   (let [data (read-resource resource-json-file)]
     (extract-rec data)))
 
-
+(defn rename-ks [ks]
+  (fn [x] (set/rename-keys x ks)))
+(->> (:regionGroups (read-resource "filters.json"))
+     (map #(set/rename-keys % {:name :label :id :value :regions :options}))
+     (map #(update % :options
+                   (fn [ops]
+                     (map (fn [x] (-> x
+                                      ((rename-ks {:name :label :id :value :countries :options}))
+                                      (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
+                                      )) ops))))
+     extract-rec
+     )
 (comment
+
+
+
+  (->> (:regionGroups (read-resource "filters.json"))
+      (map #(set/rename-keys % {:name :label :id :value :regions :options}))
+      (map #(update % :options  (fn [ops]
+                                  (map (fn [x] (-> x
+                                                   (set/rename-keys {:name :label :id :value :countries :options})
+                                                   (update :options (fn [cops]
+                                                                      (map                                                   (fn [cop] (set/rename-keys cop {:name :label :id :value})) cops)
+                                                                      ))
+                                                   )) ops))))
+      extract-rec
+      ))
+{:id "6ddfbd90-5c29-4828-a83e-03f74b92ae0d", :name "Namibia", :code "NAM"}
+(:id :name :countries)
+
+
+(comment "thematicFocus"
   (let [dict (->> (:thematicFocus (read-resource "filters.json"))
                   (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))
         one (-> (first (read-resource "all-records.json"))
@@ -70,6 +100,11 @@
 
 ({:description "The paper serves as support of the African Development Bank for the implementation of the Government’s Fourth National Development Plan (NDP4) for the period 2012/13-2016/17, which emphasizing high and sustainable growth, employment creation, and reducing income inequality. The report is concentrated on infrastructure with a focus on transport, energy and water; and private sector development through skills development and improving the regulatory environment.", :focus_on_trade true, :trade_information true, :sectors [], :trade_promotion true, :lastUpdate "10 Feb 2016", :type "27c77bd7-69f5-42c2-9413-f3cc3b9ade78", :trade_facilitation true, :title "COUNTRY STRATEGY PAPER 2014-2018 SARC", :region "d380856d-ddca-4995-9cc5-51179abc00f6", :year "2014", :tvet true, :poverty_reduction true, :id "ac79e8f2-4f15-4cc4-b645-0034af8fa90e", :youth true, :implementationPeriod "2014-2018", :quality true, :environment true, :gender true, :trade_finance true, :country "6ddfbd90-5c29-4828-a83e-03f74b92ae0d", :regional_integration true})
   
+)
+(comment 
+  (count (into #{}  (map :typeId  (read-resource "all-records.json"))))
+  (count (distinct (mapcat :sectorIds  (read-resource "all-records.json"))))
+  (count (distinct (map :value (extract-rec (:sectors (read-resource "filters.json"))))))
   )
 
 (comment
@@ -84,7 +119,7 @@
                                                            (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
               ) [] (:regions geographical))
         ]
-    (map :label (sort-by :label (take 10 countries)))
+    (count countries)
     )
   
 
@@ -109,7 +144,7 @@
     (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/data-generator/resources/sectors2.json")]
       (.write wrtr (generate-string (extract "sectors.json")))
       )
-
+(extract-rec (:types (read-resource "filters.json")))
     (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/data-generator/resources/types2.json")]
       (.write wrtr (generate-string (extract "types.json")))
       )
@@ -213,3 +248,5 @@
 
 
 
+
+[{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]

@@ -1,10 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
 import Childo from './Childo';
-import {types} from './data/types';
-import {sectors} from './data/sectors';
-import {regions} from './data/regions';
-
 
 function countBy(col){
   return col.reduce(function (acc, curr) {
@@ -18,7 +14,10 @@ export function countIt(reports, prop){
 class MainSelectFilters extends Component {
   constructor(props) {
     super(props);
-    this.state = { reports: props.reports, initialReports: props.initialReports, countryFilters: props.countryFilters };
+    this.state = { reports: props.reports, initialReports: props.initialReports, countryFilters: props.countryFilters,
+      typeFilters: props.typeFilters, sectorFilters: props.sectorFilters
+
+     };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -38,6 +37,21 @@ class MainSelectFilters extends Component {
     ) {
       newState.countryFilters = props.countryFilters;
     }
+    if (
+      props.typeFilters !== state.typeFilters 
+    ) {
+      newState.typeFilters = props.typeFilters;
+    }
+    if (
+      props.sectorFilters !== state.sectorFilters 
+    ) {
+      newState.sectorFilters = props.sectorFilters;
+    }
+    if (
+      props.regionFilters !== state.regionFilters 
+    ) {
+      newState.regionFilters = props.regionFilters;
+    }
 
     return newState;
   }
@@ -46,7 +60,7 @@ class MainSelectFilters extends Component {
 //    console.log('types', this.state.types);
     let tt = [];
     if (this.state.types){
-      tt = types.map(o => {
+      tt = this.state.typeFilters.map(o => {
       const {...picked} = o;
 //      console.log(picked.value, picked.label, picked);
       const c = this.state.types[picked.value] ? this.state.types[picked.value] : 0;
@@ -72,32 +86,16 @@ class MainSelectFilters extends Component {
     }
 
     let rr = [];
-    if (this.state.regions){
-      const geo = regions[0];
-      let geoOptions= [];
-      geo.options.map(o => {
+    if (this.state.regions){      
+      rr = this.state.regionFilters.map(o => {
       const {...picked} = o;
-      const c = this.state.regions[picked.value] ? this.state.regions[picked.value] : 0;
-      picked.label+=` (${c})`;
-      geoOptions.push(picked);
-    });
-    geo.options = geoOptions;
-
-      const eco = regions[1];
-      let ecoOptions = eco.options;
-      ecoOptions = ecoOptions.map(o => {
-      const {...picked} = o;
+//      console.log(picked.value, picked.label, picked);
       const c = this.state.regions[picked.value] ? this.state.regions[picked.value] : 0;
       picked.label+=` (${c})`;
       return picked;
     });
-    eco.options = ecoOptions;
-    rr.push(geo);
-    rr.push(eco);
 
     }
-
-
 
     return <div className="col-xs-12">
             <div className="search-controls-wrapper">
@@ -115,7 +113,7 @@ class MainSelectFilters extends Component {
                           isMulti={true} isClearable={true}/>
                         </div>
                         <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >
-                          <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
+                          <Childo options={this.props.sectorFilters} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
                           isMulti={true} isClearable={true}/>
                         </div>
                         <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
