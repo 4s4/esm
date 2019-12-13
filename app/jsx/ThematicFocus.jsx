@@ -1,13 +1,13 @@
 'use strict';
 import React, { Component } from 'react';
-import {countProp, thematicFocusKeys} from './utils';
+const cljs = require('../../js/cljs.js');
 
 
 function CheckBox(props){
   return <div className="checkbox" data-toggle="tooltip" title={props.title}>
     <label>
       <input type="checkbox" id={props.id} onChange={props.onChange(props.id)}/>
-      {props.name} ({props.count[props.id] ? props.count[props.id] : 0})
+      {props.name} ({props.count.counter[props.id] ? props.count.counter[props.id] : 0})
     </label>
   </div>;
 }
@@ -15,18 +15,17 @@ function CheckBox(props){
 class ThematicFocus extends Component {
   constructor(props) {
     super(props);
-    this.state = { reports:[] };
+    this.state = { reports:[], counter: {} };
     this.check = this.check.bind(this);
   }
   static getDerivedStateFromProps(props, state) {
     if (
       props.reports !== state.reports 
     ) {
-      return thematicFocusKeys.reduce( (c, o) => {
-	    c[o]=countProp(props.reports, o);
-	    return c} , {reports: props.reports});
+      return {reports: props.reports, 
+              counter: cljs.countThematicFocus(props.reports, props.thematicsFocus)};
     }
-    return null;
+    return state;
   }
 
   check(kw){

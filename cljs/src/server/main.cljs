@@ -103,6 +103,20 @@
          (println  (assoc-in-state #js {:a 1 :b {:c 5}} #js [[["a"] 3] [["b" "c"] 8]]))
          
          (println "ja"))
+
+(defn count-thematic-focus [reports thematic-focus-col]
+  (let [reports (js->clj reports :keywordize-keys true)
+        thematic-focus-col (js->clj thematic-focus-col :keywordize-keys true)
+        counters  (reduce #(assoc % (keyword (:kw %2)) 0) {} thematic-focus-col)]
+    (clj->js (reduce (fn [cs r]
+                       (reduce (fn [c1 c2]
+                                 (if (c2 r)
+                                   (update c1 c2 inc)
+                                   c1
+                                   )
+                                 ) cs (keys cs))
+                       ) counters reports))))
+
 (defn generate-exports []
   #js {:hello hello
        :reports reports
@@ -111,7 +125,8 @@
        :types types
        :sectors sectors
        :regions regions
-       :countries countries})
+       :countries countries
+       :countThematicFocus count-thematic-focus})
 
 (comment "test types"
          (types #js {:types [{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]}))
