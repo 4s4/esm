@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import MainSelectFilter from './MainSelectFilters';
 import ThematicFocus from './ThematicFocus';
 import DocumentField from './DocumentField';
-import Charts from './Charts';
 import Map from './Map';
 import Results from './Results';
 
@@ -29,13 +28,13 @@ class SearchContainer extends Component {
   saveReports(r){
     console.log('save reports!');
     const rr = cljs.reports(this.state.thematicsFocus, r);
-    console.log(rr.map(o => o.type));
-    console.log('first report', rr[0]);
+//    console.log(rr.map(o => o.type));
+//    console.log('first report', rr[0]);
     this.setState( { reports: rr, initialReports: rr});
   }
 
   saveFilters(cc){
-    console.log('regions', cljs.regions(cc));
+//    console.log('regions', cljs.regions(cc));
     const state = cljs.assocIn(this.state, 
       [
         [["filters", "countries"], cljs.countries(cc)],
@@ -44,9 +43,9 @@ class SearchContainer extends Component {
         [["filters", "sectors"], cljs.sectors(cc)],
         [["thematicsFocus"], cljs.thematicFocus(cc)]
       ]); 
-    console.log(state);
+//    console.log(state);
     this.setState( state);   
-    fetch('./js/all-records.json')
+    fetch('./js/oll.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
@@ -54,13 +53,10 @@ class SearchContainer extends Component {
       return response.json();
     })
     .then(this.saveReports);
-
-
   }
 
   componentDidMount() {
     console.log('componentDidMount');
-
     fetch('./js/filters.json')
     .then(function(response) {
       if (response.status >= 400) {
@@ -69,10 +65,6 @@ class SearchContainer extends Component {
       return response.json();
     })
     .then(this.saveFilters);
-   
-
-
-
   }
   
   selectSelect(vals, kw){
@@ -84,8 +76,6 @@ class SearchContainer extends Component {
       delete picked[kw];
     }
     this.searchReports(picked);
-
-
   }
 
   onSelectChange (selectType, vals) {
@@ -102,7 +92,6 @@ class SearchContainer extends Component {
       this.setState( { sectors: vals } );
     }
     console.log(selectType, `Option selected:`, vals)
-
   };
 
   onSelectYear (selectType, val) {
@@ -199,17 +188,16 @@ class SearchContainer extends Component {
                             initialReports={this.state.initialReports}
                             regions={this.state.regions} 
                             types={this.state.types}
-                            countryFilters={this.state.filters.countries}
-                            regionFilters={this.state.filters.regions}
-                            typeFilters={this.state.filters.types}
-                            sectorFilters={this.state.filters.sectors}
+                            filters={this.state.filters}
                             countries={this.state.countries}
                             sectors={this.state.sectors}
                           />
                         </div>
                         <div className="row ">
                           {/*  <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/> */}
-                          <ThematicFocus reports={this.state.reports} onCheck={this.onCheckBoxChange}/>
+                          <ThematicFocus reports={this.state.reports} 
+                          thematicsFocus={this.state.thematicsFocus}                          
+                          onCheck={this.onCheckBoxChange}/>
                         </div>
                       </div>
                   </div>

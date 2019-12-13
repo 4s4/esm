@@ -47,6 +47,8 @@
         countries (reduce (fn [c reg]
                             (apply conj c (map (fn [c] (-> c
                                                            (dissoc :name)
+                                                           (dissoc :id)
+                                                           (assoc :value (:id c))
                                                            (assoc :label (:name c))
                                                            (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
                             ) [] (:regions geographical))]
@@ -72,7 +74,6 @@
 
 (defn sectors [data]
   (let [sectors (:sectors (js->clj data :keywordize-keys true))]
-
     (clj->js (extract-rec sectors))))
 
 (defn rename-ks [ks] (fn [x] (set/rename-keys x ks)))
@@ -84,7 +85,8 @@
          (map #(update % :options
                        (fn [ops]
                          (map (fn [x] (-> x
-                                          ((rename-ks {:name :label :id :value :countries :options}))
+                                          (dissoc :countries)
+                                          ((rename-ks {:name :label :id :value}))
                                           (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
                                           )) ops))))))))
 

@@ -14,7 +14,8 @@ export const thematicFocus = {
   'regional': 'Regional Scope',
   'regional_integration': 'Regional Integration'};
 
-
+  const newsTM = ["environment", "focus_on_trade", "gender", "poverty_reduction", "quality", "regional_integration", "trade_facilitation",
+   "trade_finance", "trade_information", "trade_promotion", "tvet", "youth"];
 export const thematicFocusKeys = Object.keys(thematicFocus);
 
 

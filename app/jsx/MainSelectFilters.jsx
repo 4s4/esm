@@ -1,23 +1,27 @@
 'use strict';
 import React, { Component } from 'react';
 import Childo from './Childo';
+const cljs = require('../../js/cljs.js');
 
-function countBy(col){
-  return col.reduce(function (acc, curr) {
-    acc[curr] ? acc[curr]++ : acc[curr] = 1;
-    return acc
-  }, {});
-}
-export function countIt(reports, prop){
-      return countBy(reports.map(r => r[prop]));
+function yup(filters, freqs, always_show){
+  if (filters && freqs){
+    return filters.reduce((c, o) => {
+    const {...picked} = o;
+    if(freqs[picked.value] || picked.level === 0 || always_show ){
+      const cont = freqs[picked.value] ? freqs[picked.value] : 0;
+      picked.label+=` (${cont})`;
+      c.push(picked);
     }
+    return c;
+  }, []);
+  }
+}
+
 class MainSelectFilters extends Component {
   constructor(props) {
     super(props);
-    this.state = { reports: props.reports, initialReports: props.initialReports, countryFilters: props.countryFilters,
-      typeFilters: props.typeFilters, sectorFilters: props.sectorFilters
-
-     };
+    this.state = { reports: props.reports, initialReports: props.initialReports, 
+      filters: props.filters, frequencies: {}, options:{} };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -27,75 +31,22 @@ class MainSelectFilters extends Component {
     ) {
       newState.reports = props.reports;
       newState.initialReports =  props.initialReports;
-      newState.types = countIt(props.initialReports, 'type');
-      newState.countries =  countIt(props.initialReports, 'country');
-      newState.regions = countIt(props.initialReports, 'region');
+      newState.frequencies = cljs.countSelects(props.reports);
     };
 
     if (
-      props.countryFilters !== state.countryFilters 
+      props.filters !== state.filters 
     ) {
-      newState.countryFilters = props.countryFilters;
+      newState.filters = props.filters;
     }
-    if (
-      props.typeFilters !== state.typeFilters 
-    ) {
-      newState.typeFilters = props.typeFilters;
-    }
-    if (
-      props.sectorFilters !== state.sectorFilters 
-    ) {
-      newState.sectorFilters = props.sectorFilters;
-    }
-    if (
-      props.regionFilters !== state.regionFilters 
-    ) {
-      newState.regionFilters = props.regionFilters;
-    }
-
     return newState;
   }
 
   render() { 
-//    console.log('types', this.state.types);
-    let tt = [];
-    if (this.state.types){
-      tt = this.state.typeFilters.map(o => {
-      const {...picked} = o;
-//      console.log(picked.value, picked.label, picked);
-      const c = this.state.types[picked.value] ? this.state.types[picked.value] : 0;
-      picked.label+=` (${c})`;
-      return picked;
-    });
-
-    }
-
-    let cc = [];
-    if (this.state.countries){
-      console.log(this.state.countries);
-      console.log(this.state.countryFilters);
-      
-      cc = this.state.countryFilters.map(o => {
-      const {...picked} = o;
-//      console.log(picked.value, picked.label, picked);
-      const c = this.state.countries[picked.value] ? this.state.countries[picked.value] : 0;
-      picked.label+=` (${c})`;
-      return picked;
-    });
-
-    }
-
-    let rr = [];
-    if (this.state.regions){      
-      rr = this.state.regionFilters.map(o => {
-      const {...picked} = o;
-//      console.log(picked.value, picked.label, picked);
-      const c = this.state.regions[picked.value] ? this.state.regions[picked.value] : 0;
-      picked.label+=` (${c})`;
-      return picked;
-    });
-
-    }
+    const types = yup(this.state.filters.types, this.state.frequencies.types, true);
+    const countries = yup(this.state.filters.countries,this.state.frequencies.countries, false);
+    const regions = yup(this.state.filters.regions, this.state.frequencies.regions, false);
+    const sectors = yup(this.state.filters.sectors, this.state.frequencies.sectors, false)
 
     return <div className="col-xs-12">
             <div className="search-controls-wrapper">
@@ -105,20 +56,20 @@ class MainSelectFilters extends Component {
                     <div className="col-xs-12 col-md-12">
                       <div className="row">
                         <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Geographic region where the country belongs.">
-                          <Childo options={rr} placeholder="Region" onChange={this.props.onChange} value={this.props.regions}
+                          <Childo options={regions} placeholder="Region" onChange={this.props.onChange} value={this.props.regions}
                           isMulti={true} isClearable={true}/>
                         </div>
                         <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Official country name.">
-                          <Childo options={cc} placeholder="Country" onChange={this.props.onChange} value={this.props.countries}
+                          <Childo options={countries} placeholder="Country" onChange={this.props.onChange} value={this.props.countries}
                           isMulti={true} isClearable={true}/>
                         </div>
                         <div className="col-xs-12 col-sm-3"  data-toggle="tooltip" title="Sector " >
-                          <Childo options={this.props.sectorFilters} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
+                          <Childo options={sectors} placeholder="Sector" onChange={this.props.onChange} value={this.props.sectors}
                           isMulti={true} isClearable={true}/>
                         </div>
                         <div className="col-xs-12 col-sm-3" data-toggle="tooltip" title="Type of Document" >
                         <Childo 
-                        options={tt} 
+                        options={types} 
                         placeholder="Type" onChange={this.props.onChange} value={this.props.types}
                         defaultMenuIsOpen={false}
                         isMulti={true} isClearable={false}/>
