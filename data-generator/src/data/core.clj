@@ -41,17 +41,11 @@
 
 
 
-  (->> (:regionGroups (read-resource "filters.json"))
-      (map #(set/rename-keys % {:name :label :id :value :regions :options}))
-      (map #(update % :options  (fn [ops]
-                                  (map (fn [x] (-> x
-                                                   (set/rename-keys {:name :label :id :value :countries :options})
-                                                   (update :options (fn [cops]
-                                                                      (map                                                   (fn [cop] (set/rename-keys cop {:name :label :id :value})) cops)
-                                                                      ))
-                                                   )) ops))))
-      extract-rec
-      ))
+  
+
+  
+
+  )
 {:id "6ddfbd90-5c29-4828-a83e-03f74b92ae0d", :name "Namibia", :code "NAM"}
 (:id :name :countries)
 
@@ -76,32 +70,7 @@
     )
 
 
-  (let [res (->> (read-resource "oll.json")
-                 (map #(set/rename-keys % {:sectorIds :sectors
-                                           :regionId :region
-                                           :typeId :type
-                                           :countryId :country})))
-        ret (reduce (fn [c r]
-              (-> c
-                  (update :countries conj (:country r))
-                  (update :types conj (:type r))
-                  (update :regions conj (:region r))
-                  (update :sectors #(apply conj % (:sectors r)))
-                  )) {:countries [] :types [] :regions [] :sectors []} res)
-        ]
-
-
-
-     
-    (-> ret
-        (update :countries frequencies)
-        (update :types frequencies)
-        (update :regions frequencies)
-        (update :sectors frequencies))
-    ;; (get (frequencies (map :type res)) nil)
-    ;; (get (frequencies (map :region res)) nil)
-    ;; (get (frequencies (mapcat :sectors res)) nil)
-    )
+  
 
   
 
@@ -152,25 +121,85 @@
   156
   (count (distinct (mapcat :sectorIds  (read-resource "oll.json"))))
   91
-  (count (distinct (map :value (extract-rec (:sectors (read-resource "filters.json"))))))
+
   )
 
 (comment
   (->> (:thematicFocus (read-resource "filters.json"))
        (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))
   
+
+  
+
+
+  )
+
+(defn freqs []
+  (let [res (->> (read-resource "oll.json")
+                 (map #(set/rename-keys % {:sectorIds :sectors
+                                           :regionId :region
+                                           :typeId :type
+                                           :countryId :country})))
+        ret (reduce (fn [c r]
+                      (-> c
+                          (update :countries conj (:country r))
+                          (update :types conj (:type r))
+                          (update :regions conj (:region r))
+                          (update :sectors #(apply conj % (:sectors r)))
+                          )) {:countries [] :types [] :regions [] :sectors []} res)
+        ]
+    (-> ret
+        (update :countries frequencies)
+        (update :types frequencies)
+        (update :regions frequencies)
+        (update :sectors frequencies))
+    ))
+(defn types []
+  (extract-rec (:types (read-resource "filters.json"))))
+
+(defn regions []
+  (->> (:regionGroups (read-resource "filters.json"))
+      (map #(set/rename-keys % {:name :label :id :value :regions :options}))
+      (map #(update % :options  (fn [ops]
+                                  (map (fn [x] (-> x
+                                                   (dissoc :countries)
+                                                   (set/rename-keys {:name :label :id :value})
+                                                   (update :options (fn [cops]
+                                                                      (map                                                   (fn [cop] (set/rename-keys cop {:name :label :id :value})) cops)
+                                                                      ))
+                                                   )) ops))))
+      extract-rec
+      ))
+
+(defn countries []
   (let [geographical (first (filter #(= "Geographical" (:label %)) (:regionGroups (read-resource "filters.json"))))
         countries (reduce (fn [c reg]
                             (apply conj c (map (fn [c] (-> c
                                                            (dissoc :name)
+                                                           (dissoc :id)
+                                                           (assoc :value (:id c))
                                                            (assoc :label (:name c))
                                                            (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
-              ) [] (:regions geographical))
+                            ) [] (:regions geographical))
         ]
-    (count countries)
-    )
-  
+    countries
+    ))
 
+(defn sectors []
+  (extract-rec (:sectors (read-resource "filters.json"))))
+
+(comment "intersections"
+
+  (set/intersection (set (filter some? (map :value (sectors))))
+                          (set (filter some? (keys (:sectors (freqs))))))         
+  (set/intersection (set (filter some? (map :value (regions))))
+                    (set (filter some? (keys (:regions (freqs))))))
+
+  (set/intersection (set (filter some? (map :value (types))))
+                    (set (filter some? (keys (:types (freqs))))))
+
+  (set/intersection (set (map :value (countries)))
+                    (set (filter some? (keys (:countries (freqs))))))
 
   )
 
