@@ -76,9 +76,39 @@
     )
 
 
+  (let [res (->> (read-resource "oll.json")
+                 (map #(set/rename-keys % {:sectorIds :sectors
+                                           :regionId :region
+                                           :typeId :type
+                                           :countryId :country})))
+        ret (reduce (fn [c r]
+              (-> c
+                  (update :countries conj (:country r))
+                  (update :types conj (:type r))
+                  (update :regions conj (:region r))
+                  (update :sectors #(apply conj % (:sectors r)))
+                  )) {:countries [] :types [] :regions [] :sectors []} res)
+        ]
+
+
+
+     
+    (-> ret
+        (update :countries frequencies)
+        (update :types frequencies)
+        (update :regions frequencies)
+        (update :sectors frequencies))
+    ;; (get (frequencies (map :type res)) nil)
+    ;; (get (frequencies (map :region res)) nil)
+    ;; (get (frequencies (mapcat :sectors res)) nil)
+    )
+
+  
+
+  
 (let [dict (->> (:thematicFocus (read-resource "filters.json"))
                   (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))
-      res (->> (read-resource "all-records.json")
+      res (->> (read-resource "oll.json")
                (map #(set/rename-keys % {:sectorIds :sectors
                                          :regionId :region
                                          :typeId :type
@@ -88,22 +118,40 @@
                                (assoc rep (keyword (:kw (first (filter (fn [x] (= id(:id x))) dict)))) true)
                                ) % (:thematicFocus %)))
                (map #(dissoc %  :thematicFocus))
-               )    
+               )
+      counters  (reduce #(assoc % (keyword (:kw %2)) 0) {} dict)
         ]  
     
     
 
-
-
-  (take 1 res)
+  
+  (reduce (fn [cs r]
+            (reduce (fn [c1 c2]
+                      (if (c2 r)
+                        (update c1 c2 inc)
+                        c1
+                        )
+                      ) cs (keys cs))
+            ) counters res)
+  
     )
 
-({:description "The paper serves as support of the African Development Bank for the implementation of the Government’s Fourth National Development Plan (NDP4) for the period 2012/13-2016/17, which emphasizing high and sustainable growth, employment creation, and reducing income inequality. The report is concentrated on infrastructure with a focus on transport, energy and water; and private sector development through skills development and improving the regulatory environment.", :focus_on_trade true, :trade_information true, :sectors [], :trade_promotion true, :lastUpdate "10 Feb 2016", :type "27c77bd7-69f5-42c2-9413-f3cc3b9ade78", :trade_facilitation true, :title "COUNTRY STRATEGY PAPER 2014-2018 SARC", :region "d380856d-ddca-4995-9cc5-51179abc00f6", :year "2014", :tvet true, :poverty_reduction true, :id "ac79e8f2-4f15-4cc4-b645-0034af8fa90e", :youth true, :implementationPeriod "2014-2018", :quality true, :environment true, :gender true, :trade_finance true, :country "6ddfbd90-5c29-4828-a83e-03f74b92ae0d", :regional_integration true})
+(keys {:focus_on_trade 0, :trade_information 0, :trade_promotion 0, :trade_facilitation 0, :tvet 0, :poverty_reduction 0, :youth 0, :quality 0, :environment 0, :gender 0, :trade_finance 0, :regional_integration 0})
+
+(sort ["poverty_reduction" "gender" "youth" "environment" "regional_integration" "trade_finance" "trade_information" "tvet" "quality" "trade_facilitation" "trade_promotion" "focus_on_trade"])
+
+
   
 )
-(comment 
-  (count (into #{}  (map :typeId  (read-resource "all-records.json"))))
-  (count (distinct (mapcat :sectorIds  (read-resource "all-records.json"))))
+(comment
+
+  (:description :sectorIds :regionId :lastUpdate :typeId :title :year :id :countryId :implementationPeriod :thematicFocus)
+  (count (map :typeId  (read-resource "oll.json")))
+  2
+  (count (distinct  (map :countryId  (read-resource "oll.json"))))
+  156
+  (count (distinct (mapcat :sectorIds  (read-resource "oll.json"))))
+  91
   (count (distinct (map :value (extract-rec (:sectors (read-resource "filters.json"))))))
   )
 
@@ -242,11 +290,3 @@
     (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/app/js/data.json")]
       (.write wrtr (generate-string @data))
       )))
-
-
-
-
-
-
-
-[{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]
