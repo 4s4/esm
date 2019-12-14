@@ -29,19 +29,16 @@ class Results extends Component {
 
 
   render() {
-    const findRegion = (regions, v) => {return {label: "HOla region"+v}};
-    const findCountry = (countries, v) => {return {label: "HOla region"+v}};
-    const findType = (types, v) => {return {label: "HOla region"+v}};
-    const findSector = (sectors, v) => {return {label: "HOla region"+v}};
+    const country= (countries, countryValue) => {
+      const co = countries.find( x => x.value === countryValue );
+      const c = co.label;
 
-    const country= (countries, countryValue, cc) => {
-      const c = findCountry(countries, countryValue).label;
       if (c.length<7) {
         return (<div  style={{marginTop:"8px"}} className="left-first-colum-first-row">
                   <span className="left-table-row-title">Country:</span>
                   <div className="div-country"> 
                     <span className="table-value boldi">{c}</span> 
-                    <span style={{color:"black"}} className="table-value boldi">( {cc})</span> 
+                    <span style={{color:"black"}} className="table-value boldi">( {co.code})</span> 
                   </div>
                 </div>);
       }
@@ -57,7 +54,7 @@ class Results extends Component {
                 <span className="left-table-row-title">&nbsp;</span>
                 <div className="div-country"> 
                 <span  className="table-value boldi">{c}</span> 
-                <span style={{color:"black"}} className="table-value boldi">( {cc})</span> 
+                <span style={{color:"black"}} className="table-value boldi">( {co.code})</span> 
                 </div>
               </div>
               </div>);
@@ -74,20 +71,20 @@ class Results extends Component {
               </div> );
     };
     const leftFormatter = (countries, regions) => (c, o) => { 
-      const r = findRegion(regions, o.region);
+      const r = regions.find( r => r.value === o.region );
       return (<div key={`left-${o.id}`}>
                 <div className="left-first-colum-first-row" > 
                   <span className="left-table-row-title">Region:</span>
                 <div className="span-region table-value boldi" >{r.label}</div>
                 </div>
-                {country(countries, o.country, o.countryCode)}
+                {country(countries, o.country)}
                 <div style={{ marginTop:"18px", padding:"10px", border:"1px solid rgb(187, 187, 187)", textAlign: "center" }} > 
                   {/* <img className="world" src={`./img/maps/${r.label}.png`} /> */}
                 </div>
               </div>);
     };
     const rightFormatter = (types) => (c, o) => {
-      const t = findType(types, o.type);
+      const t =  types.find( x => x.value === o.type ) || {label: o.type};
       return (<div>
                 <div className="first-colum-first-row first-colum-first-row-bis" >
                 <span className="table-row-title " >Type: </span><span style={{float:"right"}} className="table-value " >{t.label}</span>
@@ -118,11 +115,12 @@ class Results extends Component {
       }
       const row = (row_data, idx) => (<div key={idx} className="row" style={{marginLeft: "-38px", marginBottom: "10px"}}>{row_data}</div>);
       const extractRowData = (value, idx) => {  
-            return (<div className={css_class} key={`one-${idx}`} >
-                      <div className={`label label-default label-table ${css_class}`} key={`two-${idx}`} >
-                        <div className="" key={`three-${idx}`} >{findSector(sectors, value).label}</div>
-                      </div>
-                    </div>);
+        const s = sectors.find( x => x.value === value );
+        return (<div className={css_class} key={`one-${idx}`} >
+                  <div className={`label label-default label-table ${css_class}`} key={`two-${idx}`} >
+                    <div className="" key={`three-${idx}`} >{s.label}</div>
+                  </div>
+                </div>);
       };
       
       const r = (i, idx) => row(<ul id="grid" key={idx}>{extractRowData(i, idx)}</ul>, idx);
@@ -144,7 +142,7 @@ class Results extends Component {
               
     const columns = (filters) => {
       return [{
-        formatter:leftFormatter(filters.countries, filters.reginos),
+        formatter:leftFormatter(filters.countries, filters.regions),
         sort: false,
         dataField: 'region',
         text: ""
