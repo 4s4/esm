@@ -173,7 +173,6 @@ class SearchContainer extends Component {
   }
 
   render() {    
-//    console.log(cljs.hello(this.state.initialReports));
     return <div>
           {/* <Map reports={this.state.initialReports} /> */}
             <div className="container">

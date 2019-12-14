@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 import Childo from './Childo';
 const cljs = require('../../js/cljs.js');
 
-const range = (start, stop, step = 1) =>
-Array(Math.ceil((stop - start) / step)).fill(start).map((x, y) => x + y * step);
-
-
 class DocumentField extends Component {
   constructor(props) {
     super(props);
@@ -19,29 +15,12 @@ class DocumentField extends Component {
     ) {
       let approvals = cljs.approvalYears(props.reports);
       const approval_year = approvals.filter( o => o.value === props.approval_year ); 
-
-
-      let actives = []
-      /*props.reports.map( r => r['implementationPeriod'].split("-")).reduce( (c, o) => {
-        range(parseInt(o[0], 10 ), parseInt(o[1], 10)).map(x => {
-          c.add(x);
-        });
-        return c;}, new Set());
-      actives = Array.from(actives).sort().reduce( (c, x) => { c[x] = 0; return c;} , {});
-
-      props.reports.map( (r) => { 
-        const dates = r['implementationPeriod'].split("-");
-        range(parseInt(dates[0], 10 ), parseInt(dates[1], 10)).map(x => {
-          actives[x]++;});
-      });
-      actives = Object.keys(actives).map((o) => {return { value: o, label: `${o} (${actives[o]})`, level: 0 }});
-      */
+      let actives = cljs.activeYears(props.reports);
       const active_year = actives.filter( o => o.value === props.active_year ); 
       return {reports: props.reports, approvals, actives, active_year, approval_year};
     }
     return null;
   }
-
 
   render() {
     return <div className="well search-tab">

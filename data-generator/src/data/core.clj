@@ -184,7 +184,9 @@
   (extract-rec (:sectors (all-filters))))
 
 (defn parse-int [s]
-  (Integer. (re-find  #"\d+" s )))
+  (try
+    (Integer. (re-find  #"\d+" s ))
+    (catch Exception e nil)))
 
 (defn approval-years []
  (->> (all-reports)
@@ -195,6 +197,22 @@
                 (assoc c k (count vs))) (sorted-map))
       (reduce (fn [c [k v]] (conj c {:value (str k) :label (format "%s (%s)" k v)} )) [])))
 
+
+(defn current-year []
+  2019)
+
+(defn implementation-periods []
+ (->> (all-reports)
+      (map (fn [r]
+             (let [[init end] (str/split (:implementationPeriod r) #"-")]
+               (assoc r :implementationInit (parse-int init) :implementationEnd (or (parse-int end) (current-year))))))
+      (filter #(and (some? (:implementationInit %)) (< (:implementationInit %) (:implementationEnd %))))
+      (mapcat #(range (:implementationInit %) (inc (:implementationEnd %))))
+      frequencies
+      sort
+      )
+
+  )
 
 (comment "intersections"
 

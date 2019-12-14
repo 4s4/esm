@@ -13,10 +13,8 @@
 (defn main! []
   (println "App loaded!"))
 
-(defn hello [o]
-  (let [data (js->clj o :keywordize-keys true)]
-    (println data)
-    (str "hello"  data)))
+(defn to-clj [o]
+  (js->clj o :keywordize-keys true))
 
 (defn reports [dict data]
   (let [dict (js->clj dict :keywordize-keys true) 
@@ -64,7 +62,6 @@
                             (f* f* c options (inc level))
                             c))) cont collection))]
     (fun fun [] data (or level 0))))
-
 
 (defn types [data]
   (let [filters (:types (js->clj data :keywordize-keys true))]
@@ -117,8 +114,6 @@
                                    )
                                  ) cs (keys cs))
                        ) counters reports))))
-(defn to-clj [o]
-  (js->clj o :keywordize-keys true))
 
 (defn count-selects [reports]
   (let [reports (to-clj reports)
@@ -129,12 +124,7 @@
                           (update :regions conj (:region r))
                           (update :sectors #(apply conj % (:sectors r)))
                           )) {:countries [] :types [] :regions [] :sectors []}
-                    reports)
-        ]
-
-
-
-    
+                    reports)]
     (clj->js
      (-> ret
          (update :countries frequencies)
@@ -144,8 +134,7 @@
     ;; (get (frequencies (map :type res)) nil)
     ;; (get (frequencies (map :region res)) nil)
     ;; (get (frequencies (mapcat :sectors res)) nil)
-    )
-  )
+    ))
 
 (defn parse-int [s]
   (when (and (some? s))
@@ -162,9 +151,25 @@
       (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k " (" v ")")} )) [])
       (clj->js)))
 
+(defn current-year []
+  (.getFullYear (js/Date.)))
+
+(defn active-years [reports]
+  (->> (to-clj reports)
+       (map (fn [r]
+              (let [[init end] (str/split (:implementationPeriod r) #"-")]
+                (assoc r :implementationInit (parse-int init) :implementationEnd (or (parse-int end) (current-year))))))
+       (filter #(and (some? (:implementationInit %)) (< (:implementationInit %) (:implementationEnd %))))
+       (mapcat #(range (:implementationInit %) (inc (:implementationEnd %))))
+       frequencies
+       sort
+       (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k " (" v ")")} )) [])
+       (clj->js)))
+
+
+
 (defn generate-exports []
-  #js {:hello hello
-       :reports reports
+  #js {:reports reports
        :assocIn assoc-in-state
        :thematicFocus thematic-focus
        :types types
@@ -173,7 +178,8 @@
        :countries countries
        :countThematicFocus count-thematic-focus
        :countSelects count-selects
-       :approvalYears approval-years})
+       :approvalYears approval-years
+       :activeYears active-years})
 
 (comment "test types"
          (types #js {:types [{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]}))
