@@ -53,15 +53,31 @@
     (clj->js (sort-by :label countries))))
 
 (defn extract-rec [data & [level]]
-  (let [fun (fn [f* cont collection level]
+  (let [fun (fn [f* cont collection level parent-value]
               (reduce (fn [c {:keys [value label options] :as it}]
                         (let [c (conj c (-> it
                                             (select-keys [:label :value])
-                                            (assoc :level level)))]
+                                            (assoc :level level)
+                                            (cond-> parent-value (assoc :parent-value parent-value))))]
                           (if (and (some? options) (not-empty options))
-                            (f* f* c options (inc level))
+                            (f* f* c options (inc level) value)
                             c))) cont collection))]
-    (fun fun [] data (or level 0))))
+    (fun fun [] data (or level 0) nil)))
+
+
+(defn find-children-rec [col* v]
+  (let [col* (to-clj col*)
+        fun (fn [f* res childs]
+              (reduce
+               (fn [c {:keys [value]}]
+                 (let [cont (conj c value)]
+                   (if-let [more (seq (filter #(= value (:parent-value %)) col*))]
+                     (apply conj cont (f* f* c more))
+                     cont)))
+               res
+               childs))
+        children (fun fun [v] (filter #(= v (:parent-value %)) col*))]
+    (clj->js children)))
 
 (defn types [data]
   (let [filters (:types (js->clj data :keywordize-keys true))]
@@ -179,7 +195,11 @@
        :countThematicFocus count-thematic-focus
        :countSelects count-selects
        :approvalYears approval-years
-       :activeYears active-years})
+       :activeYears active-years
+       :findChildrenRec find-children-rec})
 
 (comment "test types"
-         (types #js {:types [{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]}))
+         (types #js {:types [{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]})
+         
+
+         )

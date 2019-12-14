@@ -7,15 +7,16 @@
             [data.cols :as cols]))
 
 (defn extract-rec [data & [level]]
-  (let [fun (fn [f* cont collection level]
+  (let [fun (fn [f* cont collection level parent-value]
               (reduce (fn [c {:keys [value label options] :as it}]
                         (let [c (conj c (-> it
                                             (select-keys [:label :value])
-                                            (assoc :level level)))]
+                                            (assoc :level level)
+                                            (cond-> parent-value (assoc :parent-value parent-value))))]
                           (if (and (some? options) (not-empty options))
-                            (f* f* c options (inc level))
+                            (f* f* c options (inc level) value)
                             c))) cont collection))]
-    (fun fun [] data (or level 0))))
+    (fun fun [] data (or level 0) nil)))
 
 (defn read-resource [resource-url]
   (parse-string (slurp (io/resource resource-url)) keyword))
@@ -182,6 +183,38 @@
 
 (defn sectors []
   (extract-rec (:sectors (all-filters))))
+
+
+
+(defn find-parent-rec [col* v]
+  (loop [res [v]
+         selected (first (filter #(= v (:value %)) col*))]
+    (if-let [parent (:parent-value selected)]
+      (recur (conj res parent) (first (filter #(= parent (:value %)) col*)))
+      res)))
+
+
+(defn find-children-rec [col* v]
+  (let [fun (fn [f* res childs]
+              (reduce
+               (fn [c {:keys [value]}]
+                 (let [cont (conj c value)]
+                   (if-let [more (seq (filter #(= value (:parent-value %)) col*))]
+                     (apply conj cont (f* f* c more))
+                     cont)))
+               res
+               childs))]
+    (fun fun [v] (filter #(= v (:parent-value %)) col*))))
+
+
+
+(comment
+  (find-parent-rec (sectors) "d2bb2c05-faf3-45dd-b735-97ef1a4e7b44")
+  (find-children-rec (sectors) "83ba4a90-18ee-4a63-bed4-5cea6afc7bd6"))
+
+
+
+
 
 (comment "sectors consistency"
  (let [reps (take 10 (set (mapcat :sectorIds (all-reports))))

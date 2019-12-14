@@ -76,10 +76,18 @@ class SearchContainer extends Component {
     .then(this.saveFilters);
   }
   
-  selectSelect(vals, kw, isMultiple){
+  selectSelect(col, vals, kw, isRecursive, isMultiple){
     const { ...picked } = this.state.qq;
     if (vals !== undefined && vals !== null ){
-      const dict= new Set(vals.map(o => o.value));
+      const selectedValues = vals.map(o => o.value);
+      let dict = new Set(selectedValues);
+//      console.log('initial values', selectedValues);
+
+      if (isRecursive){
+        dict = new Set();
+        selectedValues.map( x => cljs.findChildrenRec(col, x).map( y => dict.add(y)));
+//        console.log('recursive', dict);
+      }
       if(isMultiple){
         picked[kw] = o => intersection(dict, new Set(o[kw])).size > 0;      
       } else{
@@ -94,16 +102,16 @@ class SearchContainer extends Component {
   onSelectChange (selectType, vals) {
     if(selectType === "Region"){
       this.setState({ regions: vals });
-      this.selectSelect.bind(this)(vals, 'region');
+      this.selectSelect.bind(this)(this.state.filters.regions, vals, 'region', false);
     } else if(selectType === "Country") {
       this.setState( { countries: vals } );
-      this.selectSelect.bind(this)(vals, 'country');
+      this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', false);
     } else if(selectType === "Type") {
       this.setState( { types: vals } );
-      this.selectSelect.bind(this)(vals, 'type');
+      this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', true, false);
     } else if(selectType === "Sector") {
       this.setState( { sectors: vals } );
-      this.selectSelect.bind(this)(vals, 'sectors', true);
+      this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', true, true);
     }
     console.log(selectType, `Option selected:`, vals)
   };
@@ -186,9 +194,10 @@ class SearchContainer extends Component {
     alert(JSON.stringify(search));
   }
 
+
   render() {    
     return <div>
-    <Map reports={this.state.initialReports} /> 
+  {/* <Map reports={this.state.initialReports} /> */}
             <div className="container">
                 <section className="search-controls ">
                   <div className="overlay"></div>
