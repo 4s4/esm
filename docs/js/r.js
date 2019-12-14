@@ -1,183 +1,335 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-"use strict";
+(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define([], factory);
+  } else if (typeof module === "object" && module.exports) {
+    module.exports = factory();
+  } else {
+    root.returnExports = factory();
+  }
+})(this, function() {
+  var shadow$umd$export = null;
+
+  var f;
+function w(a){var b=typeof a;if("object"==b)if(a){if(a instanceof Array)return"array";if(a instanceof Object)return b;var c=Object.prototype.toString.call(a);if("[object Window]"==c)return"object";if("[object Array]"==c||"number"==typeof a.length&&"undefined"!=typeof a.splice&&"undefined"!=typeof a.propertyIsEnumerable&&!a.propertyIsEnumerable("splice"))return"array";if("[object Function]"==c||"undefined"!=typeof a.call&&"undefined"!=typeof a.propertyIsEnumerable&&!a.propertyIsEnumerable("call"))return"function"}else return"null";else if("function"==
+b&&"undefined"==typeof a.call)return"object";return b}var aa="closure_uid_"+(1E9*Math.random()>>>0),ba=0;function ea(a){var b=a.length;if(0<b){for(var c=Array(b),d=0;d<b;d++)c[d]=a[d];return c}return[]}function Hf(a,b){a.sort(b||Jf)}function Kf(a,b){for(var c=Array(a.length),d=0;d<a.length;d++)c[d]={index:d,value:a[d]};var e=b||Jf;Hf(c,function(g,h){return e(g.value,h.value)||g.index-h.index});for(d=0;d<a.length;d++)a[d]=c[d].value}function Jf(a,b){return a>b?1:a<b?-1:0};function fa(a){var b=[],c=0,d;for(d in a)b[c++]=d;return b};function ha(a,b){null!=a&&this.append.apply(this,arguments)}f=ha.prototype;f.Ka="";f.set=function(a){this.Ka=""+a};f.append=function(a,b,c){this.Ka+=String(a);if(null!=b)for(var d=1;d<arguments.length;d++)this.Ka+=arguments[d];return this};f.clear=function(){this.Ka=""};f.toString=function(){return this.Ka};var ja={},ka={},ma;if("undefined"===typeof ja||"undefined"===typeof ka||"undefined"===typeof B)var B={};if("undefined"===typeof ja||"undefined"===typeof ka||"undefined"===typeof na)var na=null;if("undefined"===typeof ja||"undefined"===typeof ka||"undefined"===typeof oa)var oa=null;var ra=null;if("undefined"===typeof ja||"undefined"===typeof ka||"undefined"===typeof sa)var sa=null;function of(){return new va(null,5,[wa,!0,xa,!0,ya,!1,za,!1,Ba,null],null)}
+function Ca(){na=function(){return console.log.apply(console,ea(arguments))};oa=function(){return console.error.apply(console,ea(arguments))}}function D(a){return null!=a&&!1!==a}function Lf(a){return Array.isArray(a)}function Mf(a){return null==a?!0:!1===a?!0:!1}function E(a,b){return a[w(null==b?null:b)]?!0:a._?!0:!1}function Nf(a){return null==a?null:a.constructor}
+function Da(a,b){var c=Nf(b);c=D(D(c)?c.pb:c)?c.eb:w(b);return Error(["No protocol method ",a," defined for type ",c,": ",b].join(""))}function Ea(a){var b=a.eb;return D(b)?b:G.a(a)}var Ga="undefined"!==typeof Symbol&&"function"===w(Symbol)?Symbol.iterator:"@@iterator";function Ha(a){for(var b=a.length,c=Array(b),d=0;;)if(d<b)c[d]=a[d],d+=1;else break;return c}function pa(a){function b(d,e){d.push(e);return d}var c=[];return Jc?Jc(b,c,a):Kc.call(null,b,c,a)}function Ia(){}
+var Ja=function Ja(a){if(null!=a&&null!=a.R)return a.R(a);var c=Ja[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=Ja._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("ICounted.-count",a);};function Ka(){}var La=function La(a){if(null!=a&&null!=a.S)return a.S(a);var c=La[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=La._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IEmptyableCollection.-empty",a);};function ta(){}
+var Ma=function Ma(a,b){if(null!=a&&null!=a.P)return a.P(a,b);var d=Ma[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=Ma._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("ICollection.-conj",a);};function Na(){}var Oa=function Oa(a){switch(arguments.length){case 2:return Oa.b(arguments[0],arguments[1]);case 3:return Oa.g(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}};
+Oa.b=function(a,b){if(null!=a&&null!=a.G)return a.G(a,b);var c=Oa[w(null==a?null:a)];if(null!=c)return c.b?c.b(a,b):c.call(null,a,b);c=Oa._;if(null!=c)return c.b?c.b(a,b):c.call(null,a,b);throw Da("IIndexed.-nth",a);};Oa.g=function(a,b,c){if(null!=a&&null!=a.W)return a.W(a,b,c);var d=Oa[w(null==a?null:a)];if(null!=d)return d.g?d.g(a,b,c):d.call(null,a,b,c);d=Oa._;if(null!=d)return d.g?d.g(a,b,c):d.call(null,a,b,c);throw Da("IIndexed.-nth",a);};Oa.V=3;function Le(){}
+var J=function J(a){if(null!=a&&null!=a.ca)return a.ca(a);var c=J[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=J._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("ISeq.-first",a);},Qa=function Qa(a){if(null!=a&&null!=a.da)return a.da(a);var c=Qa[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=Qa._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("ISeq.-rest",a);};function Ra(){}function Sa(){}
+var Ta=function Ta(a){switch(arguments.length){case 2:return Ta.b(arguments[0],arguments[1]);case 3:return Ta.g(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}};Ta.b=function(a,b){if(null!=a&&null!=a.H)return a.H(a,b);var c=Ta[w(null==a?null:a)];if(null!=c)return c.b?c.b(a,b):c.call(null,a,b);c=Ta._;if(null!=c)return c.b?c.b(a,b):c.call(null,a,b);throw Da("ILookup.-lookup",a);};
+Ta.g=function(a,b,c){if(null!=a&&null!=a.u)return a.u(a,b,c);var d=Ta[w(null==a?null:a)];if(null!=d)return d.g?d.g(a,b,c):d.call(null,a,b,c);d=Ta._;if(null!=d)return d.g?d.g(a,b,c):d.call(null,a,b,c);throw Da("ILookup.-lookup",a);};Ta.V=3;var Ua=function Ua(a,b,c){if(null!=a&&null!=a.Ha)return a.Ha(a,b,c);var e=Ua[w(null==a?null:a)];if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);e=Ua._;if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);throw Da("IAssociative.-assoc",a);};function Va(){}
+var rf=function rf(a,b){if(null!=a&&null!=a.Xb)return a.Xb(a,b);var d=rf[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=rf._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("IMap.-dissoc",a);},Wa=function Wa(a){if(null!=a&&null!=a.wb)return a.key;var c=Wa[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=Wa._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IMapEntry.-key",a);},Xa=function Xa(a){if(null!=a&&null!=a.xb)return a.B;var c=Xa[w(null==
+a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=Xa._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IMapEntry.-val",a);},Fg=function Fg(a){if(null!=a&&null!=a.ic)return a.ic(a);var c=Fg[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=Fg._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IStack.-peek",a);},nf=function nf(a){if(null!=a&&null!=a.oc)return a.oc(a);var c=nf[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=nf._;if(null!=c)return c.a?
+c.a(a):c.call(null,a);throw Da("IStack.-pop",a);};function Ya(){}var Za=function Za(a){if(null!=a&&null!=a.sb)return a.B;var c=Za[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=Za._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IDeref.-deref",a);};function $a(){}
+var ab=function ab(a){if(null!=a&&null!=a.K)return a.K(a);var c=ab[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=ab._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IMeta.-meta",a);},bb=function bb(a,b){if(null!=a&&null!=a.N)return a.N(a,b);var d=bb[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=bb._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("IWithMeta.-with-meta",a);};function cb(){}
+var db=function db(a){switch(arguments.length){case 2:return db.b(arguments[0],arguments[1]);case 3:return db.g(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}};db.b=function(a,b){if(null!=a&&null!=a.Y)return a.Y(a,b);var c=db[w(null==a?null:a)];if(null!=c)return c.b?c.b(a,b):c.call(null,a,b);c=db._;if(null!=c)return c.b?c.b(a,b):c.call(null,a,b);throw Da("IReduce.-reduce",a);};
+db.g=function(a,b,c){if(null!=a&&null!=a.Z)return a.Z(a,b,c);var d=db[w(null==a?null:a)];if(null!=d)return d.g?d.g(a,b,c):d.call(null,a,b,c);d=db._;if(null!=d)return d.g?d.g(a,b,c):d.call(null,a,b,c);throw Da("IReduce.-reduce",a);};db.V=3;function eb(){}
+var fb=function fb(a,b,c){if(null!=a&&null!=a.ab)return a.ab(a,b,c);var e=fb[w(null==a?null:a)];if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);e=fb._;if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);throw Da("IKVReduce.-kv-reduce",a);},gb=function gb(a,b){if(null!=a&&null!=a.F)return a.F(a,b);var d=gb[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=gb._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("IEquiv.-equiv",a);},hb=function hb(a){if(null!=a&&null!=a.J)return a.J(a);
+var c=hb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=hb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IHash.-hash",a);};function ib(){}var jb=function jb(a){if(null!=a&&null!=a.D)return a.D(a);var c=jb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=jb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("ISeqable.-seq",a);};function kb(){}function lb(){}function mb(){}function Yf(){}
+var Zf=function Zf(a){if(null!=a&&null!=a.cc)return a.cc(a);var c=Zf[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=Zf._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IReversible.-rseq",a);},nb=function nb(a,b){if(null!=a&&null!=a.ob)return a.ob(a,b);var d=nb[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=nb._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("IWriter.-write",a);};function ob(){}
+var pb=function pb(a,b,c){if(null!=a&&null!=a.M)return a.M(a,b,c);var e=pb[w(null==a?null:a)];if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);e=pb._;if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);throw Da("IPrintWithWriter.-pr-writer",a);},rb=function rb(a){if(null!=a&&null!=a.Ra)return a.Ra(a);var c=rb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=rb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IEditableCollection.-as-transient",a);},sb=function sb(a,b){if(null!=
+a&&null!=a.Ta)return a.Ta(a,b);var d=sb[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=sb._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("ITransientCollection.-conj!",a);},tb=function tb(a){if(null!=a&&null!=a.cb)return a.cb(a);var c=tb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=tb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("ITransientCollection.-persistent!",a);},ub=function ub(a,b,c){if(null!=a&&null!=a.Pa)return a.Pa(a,b,c);var e=
+ub[w(null==a?null:a)];if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);e=ub._;if(null!=e)return e.g?e.g(a,b,c):e.call(null,a,b,c);throw Da("ITransientAssociative.-assoc!",a);};function Of(){}
+var Pf=function Pf(a,b){if(null!=a&&null!=a.$b)return a.$b(a,b);var d=Pf[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=Pf._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("IComparable.-compare",a);},vb=function vb(a){if(null!=a&&null!=a.kb)return a.kb(a);var c=vb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=vb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IChunk.-drop-first",a);},wb=function wb(a){if(null!=a&&null!=a.hb)return a.hb(a);
+var c=wb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=wb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IChunkedSeq.-chunked-first",a);},xb=function xb(a){if(null!=a&&null!=a.Za)return a.Za(a);var c=xb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=xb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IChunkedSeq.-chunked-rest",a);};function yb(){}
+var zb=function zb(a){if(null!=a&&null!=a.oa)return a.oa(a);var c=zb[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=zb._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IIterable.-iterator",a);};function Ab(a){this.Eb=a;this.h=1073741824;this.s=0}Ab.prototype.ob=function(a,b){return this.Eb.append(b)};function Bb(a){var b=new ha;a.M(null,new Ab(b),of());return G.a(b)}
+var Cb="undefined"!==typeof Math&&"undefined"!==typeof Math.imul&&0!==Math.imul(4294967295,5)?function(a,b){return Math.imul(a,b)}:function(a,b){var c=a&65535,d=b&65535;return c*d+((a>>>16&65535)*d+c*(b>>>16&65535)<<16>>>0)|0};function Db(a){a=Cb(a|0,-862048943);return Cb(a<<15|a>>>-15,461845907)}function Eb(a,b){a=(a|0)^(b|0);return Cb(a<<13|a>>>-13,5)+-430675100|0}function Fb(a,b){a=(a|0)^b;a=Cb(a^a>>>16,-2048144789);a=Cb(a^a>>>13,-1028477387);return a^a>>>16}
+function Gb(a){a:{var b=1;for(var c=0;;)if(b<a.length)c=Eb(c,Db(a.charCodeAt(b-1)|a.charCodeAt(b)<<16)),b+=2;else{b=c;break a}}return Fb(1===(a.length&1)?b^Db(a.charCodeAt(a.length-1)):b,Cb(2,a.length))}var Hb={},Ib=0;function Jb(a){255<Ib&&(Hb={},Ib=0);if(null==a)return 0;var b=Hb[a];if("number"===typeof b)a=b;else{a:if(null!=a)if(b=a.length,0<b)for(var c=0,d=0;;)if(c<b)d=Cb(31,d)+a.charCodeAt(c),c+=1;else{b=d;break a}else b=0;else b=0;Hb[a]=b;Ib+=1;a=b}return a}
+function Kb(a){if(null!=a&&(a.h&4194304||B===a.Jb))return a.J(null)^0;if("number"===typeof a){if(D(isFinite(a)))return Math.floor(a)%2147483647;switch(a){case Infinity:return 2146435072;case -Infinity:return-1048576;default:return 2146959360}}else return!0===a?a=1231:!1===a?a=1237:"string"===typeof a?(a=Jb(a),a=0===a?a:Fb(Eb(0,Db(a)),4)):a=a instanceof Date?a.valueOf()^0:null==a?0:hb(a)^0,a}function Lb(a,b){return a^b+2654435769+(a<<6)+(a>>2)}
+function Qf(a,b){if(a.Ja===b.Ja)return 0;if(D(Mf(a.Ya)?b.Ya:!1))return-1;if(D(a.Ya)){if(Mf(b.Ya))return 1;var c=Jf(a.Ya,b.Ya);return 0===c?Jf(a.name,b.name):c}return Jf(a.name,b.name)}function Mb(a,b,c,d,e){this.Ya=a;this.name=b;this.Ja=c;this.Oa=d;this.na=e;this.h=2154168321;this.s=4096}f=Mb.prototype;f.toString=function(){return this.Ja};f.F=function(a,b){return b instanceof Mb?this.Ja===b.Ja:!1};
+f.call=function(){function a(d,e,g){return Nb.g?Nb.g(e,this,g):Nb.call(null,e,this,g)}function b(d,e){return Nb.b?Nb.b(e,this):Nb.call(null,e,this)}var c=null;c=function(d,e,g){switch(arguments.length){case 2:return b.call(this,d,e);case 3:return a.call(this,d,e,g)}throw Error("Invalid arity: "+(arguments.length-1));};c.b=b;c.g=a;return c}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return Nb.b?Nb.b(a,this):Nb.call(null,a,this)};
+f.b=function(a,b){return Nb.g?Nb.g(a,this,b):Nb.call(null,a,this,b)};f.K=function(){return this.na};f.N=function(a,b){return new Mb(this.Ya,this.name,this.Ja,this.Oa,b)};f.J=function(){var a=this.Oa;return null!=a?a:this.Oa=a=Lb(Gb(this.name),Jb(this.Ya))};f.M=function(a,b){return nb(b,this.Ja)};var Ob=function Ob(a){switch(arguments.length){case 1:return Ob.a(arguments[0]);case 2:return Ob.b(arguments[0],arguments[1]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}};
+Ob.a=function(a){for(;;){if(a instanceof Mb)return a;if("string"===typeof a){var b=a.indexOf("/");return 1>b?Ob.b(null,a):Ob.b(a.substring(0,b),a.substring(b+1,a.length))}if(a instanceof Pb)a=a.Fa;else throw Error("no conversion to symbol");}};Ob.b=function(a,b){var c=null!=a?[G.a(a),"/",G.a(b)].join(""):b;return new Mb(a,b,c,null,null)};Ob.V=2;function Qb(a){return null!=a?a.s&131072||B===a.Kb?!0:a.s?!1:E(yb,a):E(yb,a)}
+function O(a){if(null==a)return null;if(null!=a&&(a.h&8388608||B===a.Bb))return a.D(null);if(Lf(a)||"string"===typeof a)return 0===a.length?null:new Rb(a,0,null);if(E(ib,a))return jb(a);throw Error([G.a(a)," is not ISeqable"].join(""));}function Q(a){if(null==a)return null;if(null!=a&&(a.h&64||B===a.bb))return a.ca(null);a=O(a);return null==a?null:J(a)}function Sb(a){return null!=a?null!=a&&(a.h&64||B===a.bb)?a.da(null):(a=O(a))?a.da(null):Tb:Tb}
+function T(a){return null==a?null:null!=a&&(a.h&128||B===a.Sa)?a.X():O(Sb(a))}var Ub=function Ub(a){switch(arguments.length){case 1:return Ub.a(arguments[0]);case 2:return Ub.b(arguments[0],arguments[1]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return Ub.C(arguments[0],arguments[1],new Rb(c.slice(2),0,null))}};Ub.a=function(){return!0};Ub.b=function(a,b){return null==a?null==b:a===b||gb(a,b)};
+Ub.C=function(a,b,c){for(;;)if(Ub.b(a,b))if(T(c))a=b,b=Q(c),c=T(c);else return Ub.b(b,Q(c));else return!1};Ub.U=function(a){var b=Q(a),c=T(a);a=Q(c);c=T(c);return this.C(b,a,c)};Ub.V=2;function Vb(a){this.v=a}Vb.prototype.next=function(){if(null!=this.v){var a=Q(this.v);this.v=T(this.v);return{value:a,done:!1}}return{value:null,done:!0}};function Wb(a){return new Vb(O(a))}function Xb(a){var b=0,c=1;for(a=O(a);;)if(null!=a)b+=1,c=Cb(31,c)+Kb(Q(a))|0,a=T(a);else return Fb(Eb(0,Db(c)),b)}
+var Yb=Fb(Eb(0,Db(1)),0);function Zb(a){var b=0,c=0;for(a=O(a);;)if(null!=a)b+=1,c=c+Kb(Q(a))|0,a=T(a);else return Fb(Eb(0,Db(c)),b)}var $b=Fb(Eb(0,Db(0)),0);Ia["null"]=!0;Ja["null"]=function(){return 0};Date.prototype.F=function(a,b){return b instanceof Date&&this.valueOf()===b.valueOf()};Date.prototype.ac=B;Date.prototype.$b=function(a,b){if(b instanceof Date)return Jf(this.valueOf(),b.valueOf());throw Error(["Cannot compare ",G.a(this)," to ",G.a(b)].join(""));};
+gb.number=function(a,b){return a===b};$a["function"]=!0;ab["function"]=function(){return null};hb._=function(a){return a[aa]||(a[aa]=++ba)};function Bg(a){return a+1}function ac(){this.B=!1;this.h=32768;this.s=0}ac.prototype.sb=function(){return this.B};function bc(a){return a instanceof ac}function Gg(a){return bc(a)?cc.a?cc.a(a):cc.call(null,a):a}function cc(a){return Za(a)}
+function Hg(a,b){var c=a.R(null);if(0===c)return b.A?b.A():b.call(null);for(var d=a.G(null,0),e=1;;)if(e<c){var g=a.G(null,e);d=b.b?b.b(d,g):b.call(null,d,g);if(bc(d))return Za(d);e+=1}else return d}function Ig(a,b,c){var d=a.R(null),e=c;for(c=0;;)if(c<d){var g=a.G(null,c);e=b.b?b.b(e,g):b.call(null,e,g);if(bc(e))return Za(e);c+=1}else return e}
+function dc(a,b){var c=a.length;if(0===a.length)return b.A?b.A():b.call(null);for(var d=a[0],e=1;;)if(e<c){var g=a[e];d=b.b?b.b(d,g):b.call(null,d,g);if(bc(d))return Za(d);e+=1}else return d}function ec(a,b,c){var d=a.length,e=c;for(c=0;;)if(c<d){var g=a[c];e=b.b?b.b(e,g):b.call(null,e,g);if(bc(e))return Za(e);c+=1}else return e}function fc(a,b,c,d){for(var e=a.length;;)if(d<e){var g=a[d];c=b.b?b.b(c,g):b.call(null,c,g);if(bc(c))return Za(c);d+=1}else return c}
+function gc(a){return null!=a?a.h&2||B===a.rb?!0:a.h?!1:E(Ia,a):E(Ia,a)}function hc(a){return null!=a?a.h&16||B===a.mb?!0:a.h?!1:E(Na,a):E(Na,a)}function U(a,b,c){var d=V.a?V.a(a):V.call(null,a);if(c>=d)return-1;!(0<c)&&0>c&&(c+=d,c=0>c?0:c);for(;;)if(c<d){if(Ub.b(ic?ic(a,c):jc.call(null,a,c),b))return c;c+=1}else return-1}
+function Y(a,b,c){var d=V.a?V.a(a):V.call(null,a);if(0===d)return-1;0<c?(--d,c=d<c?d:c):c=0>c?d+c:c;for(;;)if(0<=c){if(Ub.b(ic?ic(a,c):jc.call(null,a,c),b))return c;--c}else return-1}function kc(a,b){this.c=a;this.j=b}kc.prototype.ea=function(){return this.j<this.c.length};kc.prototype.next=function(){var a=this.c[this.j];this.j+=1;return a};function Rb(a,b,c){this.c=a;this.j=b;this.l=c;this.h=166592766;this.s=139264}f=Rb.prototype;f.toString=function(){return Bb(this)};
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V.a?V.a(this):V.call(null,this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.G=function(a,b){a=b+this.j;if(0<=a&&a<this.c.length)return this.c[a];throw Error("Index out of bounds");};f.W=function(a,b,c){a=b+this.j;return 0<=a&&a<this.c.length?this.c[a]:c};
+f.oa=function(){return new kc(this.c,this.j)};f.K=function(){return this.l};f.X=function(){return this.j+1<this.c.length?new Rb(this.c,this.j+1,null):null};f.R=function(){var a=this.c.length-this.j;return 0>a?0:a};f.cc=function(){var a=this.R(null);return 0<a?new $f(this,a-1,null):null};f.J=function(){return Xb(this)};f.F=function(a,b){return lc.b?lc.b(this,b):lc.call(null,this,b)};f.S=function(){return Tb};f.Y=function(a,b){return fc(this.c,b,this.c[this.j],this.j+1)};
+f.Z=function(a,b,c){return fc(this.c,b,c,this.j)};f.ca=function(){return this.c[this.j]};f.da=function(){return this.j+1<this.c.length?new Rb(this.c,this.j+1,null):Tb};f.D=function(){return this.j<this.c.length?this:null};f.N=function(a,b){return b===this.l?this:new Rb(this.c,this.j,b)};f.P=function(a,b){return mc.b?mc.b(b,this):mc.call(null,b,this)};Rb.prototype[Ga]=function(){return Wb(this)};function nc(a){return 0<a.length?new Rb(a,0,null):null}
+function $f(a,b,c){this.bc=a;this.j=b;this.l=c;this.h=32374990;this.s=8192}f=$f.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V.a?V.a(this):V.call(null,this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){return 0<this.j?new $f(this.bc,this.j-1,null):null};f.R=function(){return this.j+1};f.J=function(){return Xb(this)};
+f.F=function(a,b){return lc.b?lc.b(this,b):lc.call(null,this,b)};f.S=function(){return Tb};f.Y=function(a,b){return Ic?Ic(b,this):ag.call(null,b,this)};f.Z=function(a,b,c){return Lc?Lc(b,c,this):ag.call(null,b,c,this)};f.ca=function(){return Oa.b(this.bc,this.j)};f.da=function(){return 0<this.j?new $f(this.bc,this.j-1,null):Tb};f.D=function(){return this};f.N=function(a,b){return b===this.l?this:new $f(this.bc,this.j,b)};f.P=function(a,b){return mc.b?mc.b(b,this):mc.call(null,b,this)};
+$f.prototype[Ga]=function(){return Wb(this)};gb._=function(a,b){return a===b};var oc=function oc(a){switch(arguments.length){case 0:return oc.A();case 1:return oc.a(arguments[0]);case 2:return oc.b(arguments[0],arguments[1]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return oc.C(arguments[0],arguments[1],new Rb(c.slice(2),0,null))}};oc.A=function(){return pc};oc.a=function(a){return a};oc.b=function(a,b){return null!=a?Ma(a,b):new qc(null,b,null,1,null)};
+oc.C=function(a,b,c){for(;;)if(D(c))a=oc.b(a,b),b=Q(c),c=T(c);else return oc.b(a,b)};oc.U=function(a){var b=Q(a),c=T(a);a=Q(c);c=T(c);return this.C(b,a,c)};oc.V=2;function Ue(a){return null==a?null:null!=a&&(a.h&4||B===a.tb)?a.S(null):(null!=a?a.h&4||B===a.tb||(a.h?0:E(Ka,a)):E(Ka,a))?La(a):null}
+function V(a){if(null!=a)if(null!=a&&(a.h&2||B===a.rb))a=a.R(null);else if(Lf(a))a=a.length;else if("string"===typeof a)a=a.length;else if(null!=a&&(a.h&8388608||B===a.Bb))a:{a=O(a);for(var b=0;;){if(gc(a)){a=b+Ja(a);break a}a=T(a);b+=1}}else a=Ja(a);else a=0;return a}function rc(a,b,c){for(;;){if(null==a)return c;if(0===b)return O(a)?Q(a):c;if(hc(a))return Oa.g(a,b,c);if(O(a))a=T(a),--b;else return c}}
+function jc(a){switch(arguments.length){case 2:return ic(arguments[0],arguments[1]);case 3:return sc(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}}
+function ic(a,b){if("number"!==typeof b)throw Error("Index argument to nth must be a number");if(null==a)return a;if(null!=a&&(a.h&16||B===a.mb))return a.G(null,b);if(Lf(a)){if(-1<b&&b<a.length)return a[b|0];throw Error("Index out of bounds");}if("string"===typeof a){if(-1<b&&b<a.length)return a.charAt(b|0);throw Error("Index out of bounds");}if(null!=a&&(a.h&64||B===a.bb)||null!=a&&(a.h&16777216||B===a.nb)){if(0>b)throw Error("Index out of bounds");a:for(;;){if(null==a)throw Error("Index out of bounds");
+if(0===b){if(O(a)){a=Q(a);break a}throw Error("Index out of bounds");}if(hc(a)){a=Oa.b(a,b);break a}if(O(a))a=T(a),--b;else throw Error("Index out of bounds");}return a}if(E(Na,a))return Oa.b(a,b);throw Error(["nth not supported on this type ",G.a(Ea(Nf(a)))].join(""));}
+function sc(a,b,c){if("number"!==typeof b)throw Error("Index argument to nth must be a number.");if(null==a)return c;if(null!=a&&(a.h&16||B===a.mb))return a.W(null,b,c);if(Lf(a))return-1<b&&b<a.length?a[b|0]:c;if("string"===typeof a)return-1<b&&b<a.length?a.charAt(b|0):c;if(null!=a&&(a.h&64||B===a.bb)||null!=a&&(a.h&16777216||B===a.nb))return 0>b?c:rc(a,b,c);if(E(Na,a))return Oa.g(a,b,c);throw Error(["nth not supported on this type ",G.a(Ea(Nf(a)))].join(""));}
+var Nb=function Nb(a){switch(arguments.length){case 2:return Nb.b(arguments[0],arguments[1]);case 3:return Nb.g(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}};Nb.b=function(a,b){return null==a?null:null!=a&&(a.h&256||B===a.vb)?a.H(null,b):Lf(a)?null!=b&&b<a.length?a[b|0]:null:"string"===typeof a?null!=b&&b<a.length?a.charAt(b|0):null:E(Sa,a)?Ta.b(a,b):null};
+Nb.g=function(a,b,c){return null!=a?null!=a&&(a.h&256||B===a.vb)?a.u(null,b,c):Lf(a)?null!=b&&-1<b&&b<a.length?a[b|0]:c:"string"===typeof a?null!=b&&-1<b&&b<a.length?a.charAt(b|0):c:E(Sa,a)?Ta.g(a,b,c):c:c};Nb.V=3;var tc=function tc(a){switch(arguments.length){case 3:return tc.g(arguments[0],arguments[1],arguments[2]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return tc.C(arguments[0],arguments[1],arguments[2],new Rb(c.slice(3),0,null))}};
+tc.g=function(a,b,c){return null!=a&&(a.h&512||B===a.Gb)?a.Ha(null,b,c):null!=a?Ua(a,b,c):af([b,c])};tc.C=function(a,b,c,d){for(;;)if(a=tc.g(a,b,c),D(d))b=Q(d),c=Q(T(d)),d=T(T(d));else return a};tc.U=function(a){var b=Q(a),c=T(a);a=Q(c);var d=T(c);c=Q(d);d=T(d);return this.C(b,a,c,d)};tc.V=3;
+var sf=function sf(a){switch(arguments.length){case 1:return sf.a(arguments[0]);case 2:return sf.b(arguments[0],arguments[1]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return sf.C(arguments[0],arguments[1],new Rb(c.slice(2),0,null))}};sf.a=function(a){return a};sf.b=function(a,b){return null==a?null:rf(a,b)};sf.C=function(a,b,c){for(;;){if(null==a)return null;a=sf.b(a,b);if(D(c))b=Q(c),c=T(c);else return a}};
+sf.U=function(a){var b=Q(a),c=T(a);a=Q(c);c=T(c);return this.C(b,a,c)};sf.V=2;function vc(a,b){this.f=a;this.l=b;this.h=393217;this.s=0}f=vc.prototype;f.K=function(){return this.l};f.N=function(a,b){return new vc(this.f,b)};
+f.call=function(){function a(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb,Gc){m=this;return wc.$a?wc.$a(m.f,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb,Gc):wc.call(null,m.f,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb,Gc)}function b(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb){m=this;return m.f.Aa?m.f.Aa(t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb)}function c(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa){m=this;return m.f.za?
+m.f.za(t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa)}function d(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa){m=this;return m.f.ya?m.f.ya(t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa)}function e(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua){m=this;return m.f.xa?m.f.xa(t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua)}function g(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la){m=
+this;return m.f.wa?m.f.wa(t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la)}function h(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca){m=this;return m.f.va?m.f.va(t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca)}function k(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z){m=this;return m.f.ua?m.f.ua(t,u,x,y,z,A,F,H,K,N,P,S,W,Z):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S,W,Z)}function l(m,t,u,x,y,z,A,F,H,K,N,P,S,W){m=this;return m.f.ta?m.f.ta(t,u,x,y,z,A,F,H,K,N,P,S,W):m.f.call(null,
+t,u,x,y,z,A,F,H,K,N,P,S,W)}function n(m,t,u,x,y,z,A,F,H,K,N,P,S){m=this;return m.f.sa?m.f.sa(t,u,x,y,z,A,F,H,K,N,P,S):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P,S)}function p(m,t,u,x,y,z,A,F,H,K,N,P){m=this;return m.f.ra?m.f.ra(t,u,x,y,z,A,F,H,K,N,P):m.f.call(null,t,u,x,y,z,A,F,H,K,N,P)}function q(m,t,u,x,y,z,A,F,H,K,N){m=this;return m.f.qa?m.f.qa(t,u,x,y,z,A,F,H,K,N):m.f.call(null,t,u,x,y,z,A,F,H,K,N)}function r(m,t,u,x,y,z,A,F,H,K){m=this;return m.f.Ea?m.f.Ea(t,u,x,y,z,A,F,H,K):m.f.call(null,t,u,x,y,z,
+A,F,H,K)}function v(m,t,u,x,y,z,A,F,H){m=this;return m.f.Da?m.f.Da(t,u,x,y,z,A,F,H):m.f.call(null,t,u,x,y,z,A,F,H)}function C(m,t,u,x,y,z,A,F){m=this;return m.f.Ca?m.f.Ca(t,u,x,y,z,A,F):m.f.call(null,t,u,x,y,z,A,F)}function I(m,t,u,x,y,z,A){m=this;return m.f.Ba?m.f.Ba(t,u,x,y,z,A):m.f.call(null,t,u,x,y,z,A)}function M(m,t,u,x,y,z){m=this;return m.f.ha?m.f.ha(t,u,x,y,z):m.f.call(null,t,u,x,y,z)}function R(m,t,u,x,y){m=this;return m.f.T?m.f.T(t,u,x,y):m.f.call(null,t,u,x,y)}function X(m,t,u,x){m=this;
+return m.f.g?m.f.g(t,u,x):m.f.call(null,t,u,x)}function da(m,t,u){m=this;return m.f.b?m.f.b(t,u):m.f.call(null,t,u)}function qa(m,t){m=this;return m.f.a?m.f.a(t):m.f.call(null,t)}function Fa(m){m=this;return m.f.A?m.f.A():m.f.call(null)}var ia=null;ia=function(m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb,Gc){switch(arguments.length){case 1:return Fa.call(this,m);case 2:return qa.call(this,m,t);case 3:return da.call(this,m,t,u);case 4:return X.call(this,m,t,u,x);case 5:return R.call(this,m,t,u,
+x,y);case 6:return M.call(this,m,t,u,x,y,z);case 7:return I.call(this,m,t,u,x,y,z,A);case 8:return C.call(this,m,t,u,x,y,z,A,F);case 9:return v.call(this,m,t,u,x,y,z,A,F,H);case 10:return r.call(this,m,t,u,x,y,z,A,F,H,K);case 11:return q.call(this,m,t,u,x,y,z,A,F,H,K,N);case 12:return p.call(this,m,t,u,x,y,z,A,F,H,K,N,P);case 13:return n.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S);case 14:return l.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W);case 15:return k.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z);case 16:return h.call(this,
+m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca);case 17:return g.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la);case 18:return e.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua);case 19:return d.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa);case 20:return c.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa);case 21:return b.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb);case 22:return a.call(this,m,t,u,x,y,z,A,F,H,K,N,P,S,W,Z,ca,la,ua,Aa,Pa,qb,Gc)}throw Error("Invalid arity: "+(arguments.length-
+1));};ia.a=Fa;ia.b=qa;ia.g=da;ia.T=X;ia.ha=R;ia.Ba=M;ia.Ca=I;ia.Da=C;ia.Ea=v;ia.qa=r;ia.ra=q;ia.sa=p;ia.ta=n;ia.ua=l;ia.va=k;ia.wa=h;ia.xa=g;ia.ya=e;ia.za=d;ia.Aa=c;ia.ub=b;ia.$a=a;return ia}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.A=function(){return this.f.A?this.f.A():this.f.call(null)};f.a=function(a){return this.f.a?this.f.a(a):this.f.call(null,a)};f.b=function(a,b){return this.f.b?this.f.b(a,b):this.f.call(null,a,b)};
+f.g=function(a,b,c){return this.f.g?this.f.g(a,b,c):this.f.call(null,a,b,c)};f.T=function(a,b,c,d){return this.f.T?this.f.T(a,b,c,d):this.f.call(null,a,b,c,d)};f.ha=function(a,b,c,d,e){return this.f.ha?this.f.ha(a,b,c,d,e):this.f.call(null,a,b,c,d,e)};f.Ba=function(a,b,c,d,e,g){return this.f.Ba?this.f.Ba(a,b,c,d,e,g):this.f.call(null,a,b,c,d,e,g)};f.Ca=function(a,b,c,d,e,g,h){return this.f.Ca?this.f.Ca(a,b,c,d,e,g,h):this.f.call(null,a,b,c,d,e,g,h)};
+f.Da=function(a,b,c,d,e,g,h,k){return this.f.Da?this.f.Da(a,b,c,d,e,g,h,k):this.f.call(null,a,b,c,d,e,g,h,k)};f.Ea=function(a,b,c,d,e,g,h,k,l){return this.f.Ea?this.f.Ea(a,b,c,d,e,g,h,k,l):this.f.call(null,a,b,c,d,e,g,h,k,l)};f.qa=function(a,b,c,d,e,g,h,k,l,n){return this.f.qa?this.f.qa(a,b,c,d,e,g,h,k,l,n):this.f.call(null,a,b,c,d,e,g,h,k,l,n)};f.ra=function(a,b,c,d,e,g,h,k,l,n,p){return this.f.ra?this.f.ra(a,b,c,d,e,g,h,k,l,n,p):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p)};
+f.sa=function(a,b,c,d,e,g,h,k,l,n,p,q){return this.f.sa?this.f.sa(a,b,c,d,e,g,h,k,l,n,p,q):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q)};f.ta=function(a,b,c,d,e,g,h,k,l,n,p,q,r){return this.f.ta?this.f.ta(a,b,c,d,e,g,h,k,l,n,p,q,r):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r)};f.ua=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v){return this.f.ua?this.f.ua(a,b,c,d,e,g,h,k,l,n,p,q,r,v):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r,v)};
+f.va=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C){return this.f.va?this.f.va(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C)};f.wa=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I){return this.f.wa?this.f.wa(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I)};f.xa=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M){return this.f.xa?this.f.xa(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M)};
+f.ya=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R){return this.f.ya?this.f.ya(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R)};f.za=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X){return this.f.za?this.f.za(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X)};
+f.Aa=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da){return this.f.Aa?this.f.Aa(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da):this.f.call(null,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da)};f.ub=function(a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da,qa){return wc.$a?wc.$a(this.f,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da,qa):wc.call(null,this.f,a,b,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da,qa)};function xc(a,b){return"function"==w(a)?new vc(a,b):null==a?null:bb(a,b)}
+function yc(a){return null!=a&&(null!=a?a.h&131072||B===a.yb||(a.h?0:E($a,a)):E($a,a))?ab(a):null}function bf(a){return null==a?!1:null!=a?a.h&8||B===a.Tb?!0:a.h?!1:E(ta,a):E(ta,a)}function zc(a){return null!=a?a.h&16777216||B===a.nb?!0:a.h?!1:E(kb,a):E(kb,a)}function Ac(a){return null==a?!1:null!=a?a.h&1024||B===a.Nb?!0:a.h?!1:E(Va,a):E(Va,a)}function Bc(a){return null!=a?a.h&67108864||B===a.Pb?!0:a.h?!1:E(mb,a):E(mb,a)}
+function Cc(a){return null!=a?a.h&16384||B===a.Qb?!0:a.h?!1:E(Ya,a):E(Ya,a)}function Dc(a){return null!=a?a.s&512||B===a.Hb?!0:!1:!1}function Ec(a,b,c,d,e){for(;0!==e;)c[d]=a[b],d+=1,--e,b+=1}var Fc={};function cf(a){return null==a?!1:null!=a?a.h&64||B===a.bb?!0:a.h?!1:E(Le,a):E(Le,a)}function Hc(a){return null==a?!1:!1===a?!1:!0}function Jg(a,b){return Nb.g(a,b,Fc)===Fc?!1:!0}
+function Rf(a,b){if(a===b)return 0;if(null==a)return-1;if(null==b)return 1;if("number"===typeof a){if("number"===typeof b)return Jf(a,b);throw Error(["Cannot compare ",G.a(a)," to ",G.a(b)].join(""));}if(null!=a?a.s&2048||B===a.ac||(a.s?0:E(Of,a)):E(Of,a))return Pf(a,b);if("string"!==typeof a&&!Lf(a)&&!0!==a&&!1!==a||Nf(a)!==Nf(b))throw Error(["Cannot compare ",G.a(a)," to ",G.a(b)].join(""));return Jf(a,b)}
+function Sf(a,b){var c=V(a),d=V(b);if(c<d)a=-1;else if(c>d)a=1;else if(0===c)a=0;else a:for(d=0;;){var e=Rf(ic(a,d),ic(b,d));if(0===e&&d+1<c)d+=1;else{a=e;break a}}return a}function Tf(a){return Ub.b(a,Rf)?Rf:function(b,c){var d=a.b?a.b(b,c):a.call(null,b,c);return"number"===typeof d?d:D(d)?-1:D(a.b?a.b(c,b):a.call(null,c,b))?1:0}}function Uf(a,b){return O(b)?(b=Vf.a?Vf.a(b):Vf.call(null,b),a=Tf(a),Kf(b,a),O(b)):Tb}
+function Wf(a){var b=Df;return Uf(function(c,d){c=b.a?b.a(c):b.call(null,c);d=b.a?b.a(d):b.call(null,d);var e=Tf(Rf);return e.b?e.b(c,d):e.call(null,c,d)},a)}function ag(a){switch(arguments.length){case 2:return Ic(arguments[0],arguments[1]);case 3:return Lc(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}}function Ic(a,b){var c=O(b);return c?(b=Q(c),c=T(c),Jc?Jc(a,b,c):Kc.call(null,a,b,c)):a.A?a.A():a.call(null)}
+function Lc(a,b,c){for(c=O(c);;)if(c){var d=Q(c);b=a.b?a.b(b,d):a.call(null,b,d);if(bc(b))return Za(b);c=T(c)}else return b}function Mc(a,b){a=zb(a);if(D(a.ea()))for(var c=a.next();;)if(a.ea()){var d=a.next();c=b.b?b.b(c,d):b.call(null,c,d);if(bc(c))return Za(c)}else return c;else return b.A?b.A():b.call(null)}function Nc(a,b,c){for(a=zb(a);;)if(a.ea()){var d=a.next();c=b.b?b.b(c,d):b.call(null,c,d);if(bc(c))return Za(c)}else return c}
+function Kc(a){switch(arguments.length){case 2:var b=arguments[0],c=arguments[1];return null!=c&&(c.h&524288||B===c.Ab)?c.Y(null,b):Lf(c)?dc(c,b):"string"===typeof c?dc(c,b):E(cb,c)?db.b(c,b):Qb(c)?Mc(c,b):Ic(b,c);case 3:return Jc(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}}
+function Jc(a,b,c){return null!=c&&(c.h&524288||B===c.Ab)?c.Z(null,a,b):Lf(c)?ec(c,a,b):"string"===typeof c?ec(c,a,b):E(cb,c)?db.g(c,a,b):Qb(c)?Nc(c,a,b):Lc(a,b,c)}function Oc(a,b){return null!=b?fb(b,a,!0):!0}function Pc(a){return a}function df(a,b,c,d){a=a.a?a.a(b):a.call(null,b);c=Jc(a,c,d);return a.a?a.a(c):a.call(null,c)}function Qc(a){a=(a-a%2)/2;return 0<=a?Math.floor(a):Math.ceil(a)}
+function Rc(a){a-=a>>1&1431655765;a=(a&858993459)+(a>>2&858993459);return 16843009*(a+(a>>4)&252645135)>>24}var G=function G(a){switch(arguments.length){case 0:return G.A();case 1:return G.a(arguments[0]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return G.C(arguments[0],new Rb(c.slice(1),0,null))}};G.A=function(){return""};G.a=function(a){return null==a?"":[a].join("")};G.C=function(a,b){for(a=new ha(G.a(a));;)if(D(b))a=a.append(G.a(Q(b))),b=T(b);else return a.toString()};
+G.U=function(a){var b=Q(a);a=T(a);return this.C(b,a)};G.V=1;function lc(a,b){if(zc(b))if(gc(a)&&gc(b)&&V(a)!==V(b))a=!1;else a:for(a=O(a),b=O(b);;){if(null==a){a=null==b;break a}if(null!=b&&Ub.b(Q(a),Q(b)))a=T(a),b=T(b);else{a=!1;break a}}else a=null;return Hc(a)}function qc(a,b,c,d,e){this.l=a;this.first=b;this.Ga=c;this.count=d;this.m=e;this.h=65937646;this.s=8192}f=qc.prototype;f.toString=function(){return Bb(this)};
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,this.count)}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){return 1===this.count?null:this.Ga};f.R=function(){return this.count};f.ic=function(){return this.first};f.oc=function(){return this.da(null)};
+f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return bb(Tb,this.l)};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return this.first};f.da=function(){return 1===this.count?Tb:this.Ga};f.D=function(){return this};f.N=function(a,b){return b===this.l?this:new qc(b,this.first,this.Ga,this.count,this.m)};f.P=function(a,b){return new qc(this.l,b,this,this.count+1,null)};
+qc.prototype[Ga]=function(){return Wb(this)};function Sc(a){this.l=a;this.h=65937614;this.s=8192}f=Sc.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){return null};f.R=function(){return 0};f.ic=function(){return null};f.oc=function(){throw Error("Can't pop empty list");};f.J=function(){return Yb};
+f.F=function(a,b){return(null!=b?b.h&33554432||B===b.Mb||(b.h?0:E(lb,b)):E(lb,b))||zc(b)?null==O(b):!1};f.S=function(){return this};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return null};f.da=function(){return Tb};f.D=function(){return null};f.N=function(a,b){return b===this.l?this:new Sc(b)};f.P=function(a,b){return new qc(this.l,b,null,1,null)};var Tb=new Sc(null);Sc.prototype[Ga]=function(){return Wb(this)};
+function bg(a){return(null!=a?a.h&134217728||B===a.dc||(a.h?0:E(Yf,a)):E(Yf,a))?(a=Zf(a))?a:Tb:Jc(oc,Tb,a)}function Tc(a,b,c,d){this.l=a;this.first=b;this.Ga=c;this.m=d;this.h=65929452;this.s=8192}f=Tc.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){return null==this.Ga?null:O(this.Ga)};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};
+f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return this.first};f.da=function(){return null==this.Ga?Tb:this.Ga};f.D=function(){return this};f.N=function(a,b){return b===this.l?this:new Tc(b,this.first,this.Ga,this.m)};f.P=function(a,b){return new Tc(null,b,this,null)};Tc.prototype[Ga]=function(){return Wb(this)};function mc(a,b){return null==b?new qc(null,a,null,1,null):null!=b&&(b.h&64||B===b.bb)?new Tc(null,a,b,null):new Tc(null,a,O(b),null)}
+function Xf(a,b){if(a.Fa===b.Fa)return 0;if(D(Mf(a.Ya)?b.Ya:!1))return-1;if(D(a.Ya)){if(Mf(b.Ya))return 1;var c=Jf(a.Ya,b.Ya);return 0===c?Jf(a.name,b.name):c}return Jf(a.name,b.name)}function Pb(a,b,c,d){this.Ya=a;this.name=b;this.Fa=c;this.Oa=d;this.h=2153775105;this.s=4096}f=Pb.prototype;f.toString=function(){return[":",G.a(this.Fa)].join("")};f.F=function(a,b){return b instanceof Pb?this.Fa===b.Fa:!1};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return Nb.b(c,this);case 3:return Nb.g(c,this,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return Nb.b(c,this)};a.g=function(b,c,d){return Nb.g(c,this,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return Nb.b(a,this)};f.b=function(a,b){return Nb.g(a,this,b)};
+f.J=function(){var a=this.Oa;return null!=a?a:this.Oa=a=Lb(Gb(this.name),Jb(this.Ya))+2654435769|0};f.M=function(a,b){return nb(b,[":",G.a(this.Fa)].join(""))};function Uc(a){if(null!=a&&(a.s&4096||B===a.zb))return a.Ya;throw Error(["Doesn't support namespace: ",G.a(a)].join(""));}var Vc=function Vc(a){switch(arguments.length){case 1:return Vc.a(arguments[0]);case 2:return Vc.b(arguments[0],arguments[1]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}};
+Vc.a=function(a){if(a instanceof Pb)return a;if(a instanceof Mb)return new Pb(Uc(a),Wc.a?Wc.a(a):Wc.call(null,a),a.Ja,null);if("string"===typeof a){var b=a.split("/");return 2===b.length?new Pb(b[0],b[1],a,null):new Pb(null,b[0],a,null)}return null};
+Vc.b=function(a,b){a=a instanceof Pb?Wc.a?Wc.a(a):Wc.call(null,a):a instanceof Mb?Wc.a?Wc.a(a):Wc.call(null,a):a;b=b instanceof Pb?Wc.a?Wc.a(b):Wc.call(null,b):b instanceof Mb?Wc.a?Wc.a(b):Wc.call(null,b):b;return new Pb(a,b,[D(a)?[G.a(a),"/"].join(""):null,G.a(b)].join(""),null)};Vc.V=2;function Xc(a,b,c){this.l=a;this.Ua=b;this.v=null;this.m=c;this.h=32374988;this.s=1}f=Xc.prototype;f.toString=function(){return Bb(this)};
+function Yc(a){null!=a.Ua&&(a.v=a.Ua.A?a.Ua.A():a.Ua.call(null),a.Ua=null);return a.v}f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){this.D(null);return null==this.v?null:T(this.v)};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return bb(Tb,this.l)};
+f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){this.D(null);return null==this.v?null:Q(this.v)};f.da=function(){this.D(null);return null!=this.v?Sb(this.v):Tb};f.D=function(){Yc(this);if(null==this.v)return null;for(var a=this.v;;)if(a instanceof Xc)a=Yc(a);else return this.v=a,O(this.v)};f.N=function(a,b){var c=this;return b===this.l?c:new Xc(b,function(){return c.D(null)},this.m)};f.P=function(a,b){return mc(b,this)};Xc.prototype[Ga]=function(){return Wb(this)};
+function Zc(a){this.gb=a;this.end=0;this.h=2;this.s=0}Zc.prototype.add=function(a){this.gb[this.end]=a;return this.end+=1};Zc.prototype.pa=function(){var a=new $c(this.gb,0,this.end);this.gb=null;return a};Zc.prototype.R=function(){return this.end};function $c(a,b,c){this.c=a;this.O=b;this.end=c;this.h=524306;this.s=0}f=$c.prototype;f.R=function(){return this.end-this.O};f.G=function(a,b){return this.c[this.O+b]};f.W=function(a,b,c){return 0<=b&&b<this.end-this.O?this.c[this.O+b]:c};
+f.kb=function(){if(this.O===this.end)throw Error("-drop-first of empty chunk");return new $c(this.c,this.O+1,this.end)};f.Y=function(a,b){return fc(this.c,b,this.c[this.O],this.O+1)};f.Z=function(a,b,c){return fc(this.c,b,c,this.O)};function ad(a,b,c,d){this.pa=a;this.ka=b;this.l=c;this.m=d;this.h=31850732;this.s=1536}f=ad.prototype;f.toString=function(){return Bb(this)};
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){return 1<Ja(this.pa)?new ad(vb(this.pa),this.ka,null,null):null==this.ka?null:jb(this.ka)};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};
+f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};f.ca=function(){return Oa.b(this.pa,0)};f.da=function(){return 1<Ja(this.pa)?new ad(vb(this.pa),this.ka,null,null):null==this.ka?Tb:this.ka};f.D=function(){return this};f.hb=function(){return this.pa};f.Za=function(){return null==this.ka?Tb:this.ka};f.N=function(a,b){return b===this.l?this:new ad(this.pa,this.ka,b,this.m)};f.P=function(a,b){return mc(b,this)};f.lb=function(){return null==this.ka?null:this.ka};ad.prototype[Ga]=function(){return Wb(this)};
+function bd(a,b){return 0===Ja(a)?b:new ad(a,b,null,null)}function cd(a,b){a.add(b)}function Vf(a){var b=[];for(a=O(a);;)if(null!=a)b.push(Q(a)),a=T(a);else return b}function dd(a,b){if(gc(b))return V(b);var c=0;for(b=O(b);;)if(null!=b&&c<a)c+=1,b=T(b);else return c}
+var ed=function ed(a){if(null==a)return null;var c=T(a);return null==c?O(Q(a)):mc(Q(a),ed.a?ed.a(c):ed.call(null,c))},pf=function pf(a){switch(arguments.length){case 0:return pf.A();case 1:return pf.a(arguments[0]);case 2:return pf.b(arguments[0],arguments[1]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return pf.C(arguments[0],arguments[1],new Rb(c.slice(2),0,null))}};pf.A=function(){return new Xc(null,function(){return null},null)};
+pf.a=function(a){return new Xc(null,function(){return a},null)};pf.b=function(a,b){return new Xc(null,function(){var c=O(a);return c?Dc(c)?bd(wb(c),pf.b(xb(c),b)):mc(Q(c),pf.b(Sb(c),b)):b},null)};pf.C=function(a,b,c){return function h(e,g){return new Xc(null,function(){var k=O(e);return k?Dc(k)?bd(wb(k),h(xb(k),g)):mc(Q(k),h(Sb(k),g)):D(g)?h(Q(g),T(g)):null},null)}(pf.b(a,b),c)};pf.U=function(a){var b=Q(a),c=T(a);a=Q(c);c=T(c);return this.C(b,a,c)};pf.V=2;
+var fd=function fd(a){switch(arguments.length){case 0:return fd.A();case 1:return fd.a(arguments[0]);case 2:return fd.b(arguments[0],arguments[1]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return fd.C(arguments[0],arguments[1],new Rb(c.slice(2),0,null))}};fd.A=function(){return rb(pc)};fd.a=function(a){return a};fd.b=function(a,b){return sb(a,b)};fd.C=function(a,b,c){for(;;)if(a=sb(a,b),D(c))b=Q(c),c=T(c);else return a};
+fd.U=function(a){var b=Q(a),c=T(a);a=Q(c);c=T(c);return this.C(b,a,c)};fd.V=2;function Cg(a,b,c){return ub(a,b,c)}
+function gd(a,b,c){var d=O(c);if(0===b)return a.A?a.A():a.call(null);c=J(d);var e=Qa(d);if(1===b)return a.a?a.a(c):a.call(null,c);d=J(e);var g=Qa(e);if(2===b)return a.b?a.b(c,d):a.call(null,c,d);e=J(g);var h=Qa(g);if(3===b)return a.g?a.g(c,d,e):a.call(null,c,d,e);g=J(h);var k=Qa(h);if(4===b)return a.T?a.T(c,d,e,g):a.call(null,c,d,e,g);h=J(k);var l=Qa(k);if(5===b)return a.ha?a.ha(c,d,e,g,h):a.call(null,c,d,e,g,h);k=J(l);var n=Qa(l);if(6===b)return a.Ba?a.Ba(c,d,e,g,h,k):a.call(null,c,d,e,g,h,k);l=
+J(n);var p=Qa(n);if(7===b)return a.Ca?a.Ca(c,d,e,g,h,k,l):a.call(null,c,d,e,g,h,k,l);n=J(p);var q=Qa(p);if(8===b)return a.Da?a.Da(c,d,e,g,h,k,l,n):a.call(null,c,d,e,g,h,k,l,n);p=J(q);var r=Qa(q);if(9===b)return a.Ea?a.Ea(c,d,e,g,h,k,l,n,p):a.call(null,c,d,e,g,h,k,l,n,p);q=J(r);var v=Qa(r);if(10===b)return a.qa?a.qa(c,d,e,g,h,k,l,n,p,q):a.call(null,c,d,e,g,h,k,l,n,p,q);r=J(v);var C=Qa(v);if(11===b)return a.ra?a.ra(c,d,e,g,h,k,l,n,p,q,r):a.call(null,c,d,e,g,h,k,l,n,p,q,r);v=J(C);var I=Qa(C);if(12===
+b)return a.sa?a.sa(c,d,e,g,h,k,l,n,p,q,r,v):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v);C=J(I);var M=Qa(I);if(13===b)return a.ta?a.ta(c,d,e,g,h,k,l,n,p,q,r,v,C):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C);I=J(M);var R=Qa(M);if(14===b)return a.ua?a.ua(c,d,e,g,h,k,l,n,p,q,r,v,C,I):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C,I);M=J(R);var X=Qa(R);if(15===b)return a.va?a.va(c,d,e,g,h,k,l,n,p,q,r,v,C,I,M):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M);R=J(X);var da=Qa(X);if(16===b)return a.wa?a.wa(c,d,e,g,h,k,l,n,p,q,r,v,C,
+I,M,R):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R);X=J(da);var qa=Qa(da);if(17===b)return a.xa?a.xa(c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X);da=J(qa);var Fa=Qa(qa);if(18===b)return a.ya?a.ya(c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da);qa=J(Fa);Fa=Qa(Fa);if(19===b)return a.za?a.za(c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da,qa):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da,qa);var ia=J(Fa);Qa(Fa);if(20===b)return a.Aa?
+a.Aa(c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da,qa,ia):a.call(null,c,d,e,g,h,k,l,n,p,q,r,v,C,I,M,R,X,da,qa,ia);throw Error("Only up to 20 arguments supported on functions");}function hd(a){return null!=a&&(a.h&128||B===a.Sa)?a.X():O(Sb(a))}function id(a,b,c){return null==c?a.a?a.a(b):a.call(a,b):jd(a,b,J(c),hd(c))}function jd(a,b,c,d){return null==d?a.b?a.b(b,c):a.call(a,b,c):kd(a,b,c,J(d),hd(d))}function kd(a,b,c,d,e){return null==e?a.g?a.g(b,c,d):a.call(a,b,c,d):ld(a,b,c,d,J(e),hd(e))}
+function ld(a,b,c,d,e,g){if(null==g)return a.T?a.T(b,c,d,e):a.call(a,b,c,d,e);var h=J(g),k=T(g);if(null==k)return a.ha?a.ha(b,c,d,e,h):a.call(a,b,c,d,e,h);g=J(k);var l=T(k);if(null==l)return a.Ba?a.Ba(b,c,d,e,h,g):a.call(a,b,c,d,e,h,g);k=J(l);var n=T(l);if(null==n)return a.Ca?a.Ca(b,c,d,e,h,g,k):a.call(a,b,c,d,e,h,g,k);l=J(n);var p=T(n);if(null==p)return a.Da?a.Da(b,c,d,e,h,g,k,l):a.call(a,b,c,d,e,h,g,k,l);n=J(p);var q=T(p);if(null==q)return a.Ea?a.Ea(b,c,d,e,h,g,k,l,n):a.call(a,b,c,d,e,h,g,k,l,n);
+p=J(q);var r=T(q);if(null==r)return a.qa?a.qa(b,c,d,e,h,g,k,l,n,p):a.call(a,b,c,d,e,h,g,k,l,n,p);q=J(r);var v=T(r);if(null==v)return a.ra?a.ra(b,c,d,e,h,g,k,l,n,p,q):a.call(a,b,c,d,e,h,g,k,l,n,p,q);r=J(v);var C=T(v);if(null==C)return a.sa?a.sa(b,c,d,e,h,g,k,l,n,p,q,r):a.call(a,b,c,d,e,h,g,k,l,n,p,q,r);v=J(C);var I=T(C);if(null==I)return a.ta?a.ta(b,c,d,e,h,g,k,l,n,p,q,r,v):a.call(a,b,c,d,e,h,g,k,l,n,p,q,r,v);C=J(I);var M=T(I);if(null==M)return a.ua?a.ua(b,c,d,e,h,g,k,l,n,p,q,r,v,C):a.call(a,b,c,d,
+e,h,g,k,l,n,p,q,r,v,C);I=J(M);var R=T(M);if(null==R)return a.va?a.va(b,c,d,e,h,g,k,l,n,p,q,r,v,C,I):a.call(a,b,c,d,e,h,g,k,l,n,p,q,r,v,C,I);M=J(R);var X=T(R);if(null==X)return a.wa?a.wa(b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M):a.call(a,b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M);R=J(X);var da=T(X);if(null==da)return a.xa?a.xa(b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R):a.call(a,b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R);X=J(da);var qa=T(da);if(null==qa)return a.ya?a.ya(b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R,X):a.call(a,b,c,d,e,h,g,k,l,n,
+p,q,r,v,C,I,M,R,X);da=J(qa);var Fa=T(qa);if(null==Fa)return a.za?a.za(b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R,X,da):a.call(a,b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R,X,da);qa=J(Fa);Fa=T(Fa);if(null==Fa)return a.Aa?a.Aa(b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R,X,da,qa):a.call(a,b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R,X,da,qa);b=[b,c,d,e,h,g,k,l,n,p,q,r,v,C,I,M,R,X,da,qa];for(c=Fa;;)if(c)b.push(J(c)),c=T(c);else break;return a.apply(a,b)}
+function wc(a){switch(arguments.length){case 2:return md(arguments[0],arguments[1]);case 3:return nd(arguments[0],arguments[1],arguments[2]);case 4:var b=arguments[0];var c=arguments[1],d=arguments[2],e=arguments[3];b.U?(c=mc(c,mc(d,e)),d=b.V,e=2+dd(d-1,e),b=e<=d?gd(b,e,c):b.U(c)):b=jd(b,c,d,O(e));return b;case 5:return cg(arguments[0],arguments[1],arguments[2],arguments[3],arguments[4]);default:e=[];b=arguments.length;for(c=0;;)if(c<b)e.push(arguments[c]),c+=1;else break;b=arguments[0];c=arguments[1];
+d=arguments[2];var g=arguments[3],h=arguments[4];e=new Rb(e.slice(5),0,null);b.U?(e=ed(e),c=mc(c,mc(d,mc(g,mc(h,e)))),d=b.V,e=4+dd(d-3,e),b=e<=d?gd(b,e,c):b.U(c)):b=ld(b,c,d,g,h,ed(e));return b}}function md(a,b){if(a.U){var c=a.V,d=dd(c+1,b);return d<=c?gd(a,d,b):a.U(b)}b=O(b);return null==b?a.A?a.A():a.call(a):id(a,J(b),hd(b))}function nd(a,b,c){if(a.U){b=mc(b,c);var d=a.V;c=dd(d,c)+1;return c<=d?gd(a,c,b):a.U(b)}return id(a,b,O(c))}
+function cg(a,b,c,d,e){return a.U?(b=mc(b,mc(c,mc(d,e))),c=a.V,e=3+dd(c-2,e),e<=c?gd(a,e,b):a.U(b)):kd(a,b,c,d,O(e))}
+function od(){if("undefined"===typeof ja||"undefined"===typeof ka||"undefined"===typeof ma)ma=function(a){this.Db=a;this.h=393216;this.s=0},ma.prototype.N=function(a,b){return new ma(b)},ma.prototype.K=function(){return this.Db},ma.prototype.ea=function(){return!1},ma.prototype.next=function(){return Error("No such element")},ma.prototype.remove=function(){return Error("Unsupported operation")},ma.Rb=function(){return new pd(null,1,5,qd,[rd],null)},ma.pb=!0,ma.eb="cljs.core/t_cljs$core6281",ma.Cb=
+function(a){return nb(a,"cljs.core/t_cljs$core6281")};return new ma(sd)}function td(a,b){for(;;){if(null==O(b))return!0;var c=Q(b);c=a.a?a.a(c):a.call(null,c);if(D(c))b=T(b);else return!1}}
+var dg=function dg(a){switch(arguments.length){case 0:return dg.A();case 1:return dg.a(arguments[0]);case 2:return dg.b(arguments[0],arguments[1]);case 3:return dg.g(arguments[0],arguments[1],arguments[2]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return dg.C(arguments[0],arguments[1],arguments[2],new Rb(c.slice(3),0,null))}};dg.A=function(){return Pc};dg.a=function(a){return a};
+dg.b=function(a,b){return function(){function c(l,n,p){l=b.g?b.g(l,n,p):b.call(null,l,n,p);return a.a?a.a(l):a.call(null,l)}function d(l,n){l=b.b?b.b(l,n):b.call(null,l,n);return a.a?a.a(l):a.call(null,l)}function e(l){l=b.a?b.a(l):b.call(null,l);return a.a?a.a(l):a.call(null,l)}function g(){var l=b.A?b.A():b.call(null);return a.a?a.a(l):a.call(null,l)}var h=null,k=function(){function l(p,q,r,v){var C=null;if(3<arguments.length){C=0;for(var I=Array(arguments.length-3);C<I.length;)I[C]=arguments[C+
+3],++C;C=new Rb(I,0,null)}return n.call(this,p,q,r,C)}function n(p,q,r,v){p=cg(b,p,q,r,v);return a.a?a.a(p):a.call(null,p)}l.V=3;l.U=function(p){var q=Q(p);p=T(p);var r=Q(p);p=T(p);var v=Q(p);p=Sb(p);return n(q,r,v,p)};l.C=n;return l}();h=function(l,n,p,q){switch(arguments.length){case 0:return g.call(this);case 1:return e.call(this,l);case 2:return d.call(this,l,n);case 3:return c.call(this,l,n,p);default:var r=null;if(3<arguments.length){r=0;for(var v=Array(arguments.length-3);r<v.length;)v[r]=
+arguments[r+3],++r;r=new Rb(v,0,null)}return k.C(l,n,p,r)}throw Error("Invalid arity: "+arguments.length);};h.V=3;h.U=k.U;h.A=g;h.a=e;h.b=d;h.g=c;h.C=k.C;return h}()};
+dg.g=function(a,b,c){return function(){function d(n,p,q){n=c.g?c.g(n,p,q):c.call(null,n,p,q);n=b.a?b.a(n):b.call(null,n);return a.a?a.a(n):a.call(null,n)}function e(n,p){n=c.b?c.b(n,p):c.call(null,n,p);n=b.a?b.a(n):b.call(null,n);return a.a?a.a(n):a.call(null,n)}function g(n){n=c.a?c.a(n):c.call(null,n);n=b.a?b.a(n):b.call(null,n);return a.a?a.a(n):a.call(null,n)}function h(){var n=c.A?c.A():c.call(null);n=b.a?b.a(n):b.call(null,n);return a.a?a.a(n):a.call(null,n)}var k=null,l=function(){function n(q,
+r,v,C){var I=null;if(3<arguments.length){I=0;for(var M=Array(arguments.length-3);I<M.length;)M[I]=arguments[I+3],++I;I=new Rb(M,0,null)}return p.call(this,q,r,v,I)}function p(q,r,v,C){q=cg(c,q,r,v,C);q=b.a?b.a(q):b.call(null,q);return a.a?a.a(q):a.call(null,q)}n.V=3;n.U=function(q){var r=Q(q);q=T(q);var v=Q(q);q=T(q);var C=Q(q);q=Sb(q);return p(r,v,C,q)};n.C=p;return n}();k=function(n,p,q,r){switch(arguments.length){case 0:return h.call(this);case 1:return g.call(this,n);case 2:return e.call(this,
+n,p);case 3:return d.call(this,n,p,q);default:var v=null;if(3<arguments.length){v=0;for(var C=Array(arguments.length-3);v<C.length;)C[v]=arguments[v+3],++v;v=new Rb(C,0,null)}return l.C(n,p,q,v)}throw Error("Invalid arity: "+arguments.length);};k.V=3;k.U=l.U;k.A=h;k.a=g;k.b=e;k.g=d;k.C=l.C;return k}()};
+dg.C=function(a,b,c,d){var e=bg(mc(a,mc(b,mc(c,d))));return function(){function g(k){var l=null;if(0<arguments.length){l=0;for(var n=Array(arguments.length-0);l<n.length;)n[l]=arguments[l+0],++l;l=new Rb(n,0,null)}return h.call(this,l)}function h(k){k=md(Q(e),k);for(var l=T(e);;)if(l){var n=Q(l);k=n.a?n.a(k):n.call(null,k);l=T(l)}else return k}g.V=0;g.U=function(k){k=O(k);return h(k)};g.C=h;return g}()};dg.U=function(a){var b=Q(a),c=T(a);a=Q(c);var d=T(c);c=Q(d);d=T(d);return this.C(b,a,c,d)};
+dg.V=3;var ud=function ud(a){switch(arguments.length){case 1:return ud.a(arguments[0]);case 2:return ud.b(arguments[0],arguments[1]);case 3:return ud.g(arguments[0],arguments[1],arguments[2]);case 4:return ud.T(arguments[0],arguments[1],arguments[2],arguments[3]);default:for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return ud.C(arguments[0],arguments[1],arguments[2],arguments[3],new Rb(c.slice(4),0,null))}};
+ud.a=function(a){return function(b){return function(){function c(k,l){l=a.a?a.a(l):a.call(null,l);return b.b?b.b(k,l):b.call(null,k,l)}function d(k){return b.a?b.a(k):b.call(null,k)}function e(){return b.A?b.A():b.call(null)}var g=null,h=function(){function k(n,p,q){var r=null;if(2<arguments.length){r=0;for(var v=Array(arguments.length-2);r<v.length;)v[r]=arguments[r+2],++r;r=new Rb(v,0,null)}return l.call(this,n,p,r)}function l(n,p,q){p=nd(a,p,q);return b.b?b.b(n,p):b.call(null,n,p)}k.V=2;k.U=function(n){var p=
+Q(n);n=T(n);var q=Q(n);n=Sb(n);return l(p,q,n)};k.C=l;return k}();g=function(k,l,n){switch(arguments.length){case 0:return e.call(this);case 1:return d.call(this,k);case 2:return c.call(this,k,l);default:var p=null;if(2<arguments.length){p=0;for(var q=Array(arguments.length-2);p<q.length;)q[p]=arguments[p+2],++p;p=new Rb(q,0,null)}return h.C(k,l,p)}throw Error("Invalid arity: "+arguments.length);};g.V=2;g.U=h.U;g.A=e;g.a=d;g.b=c;g.C=h.C;return g}()}};
+ud.b=function(a,b){return new Xc(null,function(){var c=O(b);if(c){if(Dc(c)){for(var d=wb(c),e=V(d),g=new Zc(Array(e)),h=0;;)if(h<e)cd(g,function(){var k=Oa.b(d,h);return a.a?a.a(k):a.call(null,k)}()),h+=1;else break;return bd(g.pa(),ud.b(a,xb(c)))}return mc(function(){var k=Q(c);return a.a?a.a(k):a.call(null,k)}(),ud.b(a,Sb(c)))}return null},null)};
+ud.g=function(a,b,c){return new Xc(null,function(){var d=O(b),e=O(c);if(d&&e){var g=Q(d);var h=Q(e);g=a.b?a.b(g,h):a.call(null,g,h);d=mc(g,ud.g(a,Sb(d),Sb(e)))}else d=null;return d},null)};ud.T=function(a,b,c,d){return new Xc(null,function(){var e=O(b),g=O(c),h=O(d);if(e&&g&&h){var k=Q(e);var l=Q(g),n=Q(h);k=a.g?a.g(k,l,n):a.call(null,k,l,n);e=mc(k,ud.T(a,Sb(e),Sb(g),Sb(h)))}else e=null;return e},null)};
+ud.C=function(a,b,c,d,e){return ud.b(function(g){return md(a,g)},function k(h){return new Xc(null,function(){var l=ud.b(O,h);return td(Pc,l)?mc(ud.b(Q,l),k(ud.b(Sb,l))):null},null)}(oc.C(e,d,nc([c,b]))))};ud.U=function(a){var b=Q(a),c=T(a);a=Q(c);var d=T(c);c=Q(d);var e=T(d);d=Q(e);e=T(e);return this.C(b,a,c,d,e)};ud.V=4;function vf(a,b){return md(pf,nd(ud,a,b))}
+function tf(a,b){return new Xc(null,function(){var c=O(b);if(c){if(Dc(c)){for(var d=wb(c),e=V(d),g=new Zc(Array(e)),h=0;;)if(h<e){var k=Oa.b(d,h);k=a.a?a.a(k):a.call(null,k);D(k)&&(k=Oa.b(d,h),g.add(k));h+=1}else break;return bd(g.pa(),tf(a,xb(c)))}d=Q(c);c=Sb(c);return D(a.a?a.a(d):a.call(null,d))?mc(d,tf(a,c)):tf(a,c)}return null},null)}
+var ef=function ef(a){switch(arguments.length){case 0:return ef.A();case 1:return ef.a(arguments[0]);case 2:return ef.b(arguments[0],arguments[1]);case 3:return ef.g(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}};ef.A=function(){return pc};ef.a=function(a){return a};ef.b=function(a,b){return null!=a?null!=a&&(a.s&4||B===a.Ib)?bb(tb(Jc(sb,rb(a),b)),yc(a)):Jc(Ma,a,b):Jc(oc,a,b)};
+ef.g=function(a,b,c){return null!=a&&(a.s&4||B===a.Ib)?bb(tb(df(b,fd,rb(a),c)),yc(a)):df(b,oc,a,c)};ef.V=3;var ig=function ig(a,b,c){b=O(b);var e=Q(b),g=T(b);return g?tc.g(a,e,function(){var h=Nb.b(a,e);return ig.g?ig.g(h,g,c):ig.call(null,h,g,c)}()):tc.g(a,e,c)};function rg(a,b,c){return tc.g(a,b,function(){var d=Nb.b(a,b);return c.a?c.a(d):c.call(null,d)}())}function Dg(a,b,c,d){return tc.g(a,b,function(){var e=Nb.b(a,b);return c.b?c.b(e,d):c.call(null,e,d)}())}
+function vd(a,b){this.w=a;this.c=b}function wd(a){return new vd(a,[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null])}function eh(a){return new vd(a.w,Ha(a.c))}function xd(a){a=a.i;return 32>a?0:a-1>>>5<<5}function yd(a,b,c){for(;;){if(0===b)return c;var d=wd(a);d.c[0]=c;c=d;b-=5}}
+var zd=function zd(a,b,c,d){var g=eh(c),h=a.i-1>>>b&31;5===b?g.c[h]=d:(c=c.c[h],null!=c?(b-=5,a=zd.T?zd.T(a,b,c,d):zd.call(null,a,b,c,d)):a=yd(null,b-5,d),g.c[h]=a);return g};function Ad(a,b){if(b>=xd(a))return a.aa;var c=a.root;for(a=a.shift;;)if(0<a){var d=a-5;c=c.c[b>>>a&31];a=d}else return c.c}function Bd(a,b){if(0<=b&&b<a.i)b=Ad(a,b);else throw a=a.i,Error(["No item ",G.a(b)," in vector of length ",G.a(a)].join(""));return b}
+var Cd=function Cd(a,b,c,d,e){var h=eh(c);if(0===b)h.c[d&31]=e;else{var k=d>>>b&31;b-=5;c=c.c[k];a=Cd.ha?Cd.ha(a,b,c,d,e):Cd.call(null,a,b,c,d,e);h.c[k]=a}return h},fh=function fh(a,b,c){var e=a.i-2>>>b&31;if(5<b){b-=5;var g=c.c[e];a=fh.g?fh.g(a,b,g):fh.call(null,a,b,g);if(null==a&&0===e)return null;c=eh(c);c.c[e]=a;return c}if(0===e)return null;c=eh(c);c.c[e]=null;return c};function Dd(a,b,c){this.fb=this.j=0;this.c=a;this.Fb=b;this.start=0;this.end=c}Dd.prototype.ea=function(){return this.j<this.end};
+Dd.prototype.next=function(){32===this.j-this.fb&&(this.c=Ad(this.Fb,this.j),this.fb+=32);var a=this.c[this.j&31];this.j+=1;return a};function Ed(a,b,c,d){return c<d?Fd(a,b,ic(a,c),c+1,d):b.A?b.A():b.call(null)}function Fd(a,b,c,d,e){var g=c;c=d;for(d=Ad(a,d);;)if(c<e){var h=c&31;d=0===h?Ad(a,c):d;h=d[h];g=b.b?b.b(g,h):b.call(null,g,h);if(bc(g))return Za(g);c+=1}else return g}function pd(a,b,c,d,e,g){this.l=a;this.i=b;this.shift=c;this.root=d;this.aa=e;this.m=g;this.h=167666463;this.s=139268}f=pd.prototype;
+f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.H=function(a,b){return this.u(null,b,null)};f.u=function(a,b,c){return"number"===typeof b?this.W(null,b,c):c};
+f.ab=function(a,b,c){a=0;for(var d=c;;)if(a<this.i){var e=Ad(this,a);c=e.length;a:for(var g=0;;)if(g<c){var h=g+a,k=e[g];d=b.g?b.g(d,h,k):b.call(null,d,h,k);if(bc(d)){e=d;break a}g+=1}else{e=d;break a}if(bc(e))return Za(e);a+=c;d=e}else return d};f.G=function(a,b){return Bd(this,b)[b&31]};f.W=function(a,b,c){return 0<=b&&b<this.i?Ad(this,b)[b&31]:c};
+f.ib=function(a,b){if(0<=a&&a<this.i){if(xd(this)<=a){var c=Ha(this.aa);c[a&31]=b;return new pd(this.l,this.i,this.shift,this.root,c,null)}return new pd(this.l,this.i,this.shift,Cd(this,this.shift,this.root,a,b),this.aa,null)}if(a===this.i)return this.P(null,b);throw Error(["Index ",G.a(a)," out of bounds  [0,",G.a(this.i),"]"].join(""));};f.oa=function(){var a=this.i;return new Dd(0<V(this)?Ad(this,0):null,this,a)};f.K=function(){return this.l};f.R=function(){return this.i};
+f.ic=function(){return 0<this.i?this.G(null,this.i-1):null};f.oc=function(){if(0===this.i)throw Error("Can't pop empty vector");if(1===this.i)return bb(pc,this.l);if(1<this.i-xd(this))return new pd(this.l,this.i-1,this.shift,this.root,this.aa.slice(0,-1),null);var a=Ad(this,this.i-2),b=fh(this,this.shift,this.root);b=null==b?qd:b;var c=this.i-1;return 5<this.shift&&null==b.c[1]?new pd(this.l,c,this.shift-5,b.c[0],a,null):new pd(this.l,c,this.shift,b,a,null)};
+f.cc=function(){return 0<this.i?new $f(this,this.i-1,null):null};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){if(b instanceof pd)if(this.i===V(b))for(a=this.oa(null),b=b.oa(null);;)if(a.ea()){var c=a.next(),d=b.next();if(!Ub.b(c,d))return!1}else return!0;else return!1;else return lc(this,b)};f.Ra=function(){return new Gd(this.i,this.shift,Hd.a?Hd.a(this.root):Hd.call(null,this.root),Id.a?Id.a(this.aa):Id.call(null,this.aa))};f.S=function(){return bb(pc,this.l)};
+f.Y=function(a,b){return Ed(this,b,0,this.i)};f.Z=function(a,b,c){a=0;for(var d=c;;)if(a<this.i){var e=Ad(this,a);c=e.length;a:for(var g=0;;)if(g<c){var h=e[g];d=b.b?b.b(d,h):b.call(null,d,h);if(bc(d)){e=d;break a}g+=1}else{e=d;break a}if(bc(e))return Za(e);a+=c;d=e}else return d};f.Ha=function(a,b,c){if("number"===typeof b)return this.ib(b,c);throw Error("Vector's key for assoc must be a number.");};
+f.D=function(){if(0===this.i)return null;if(32>=this.i)return new Rb(this.aa,0,null);a:{var a=this.root;for(var b=this.shift;;)if(0<b)b-=5,a=a.c[0];else{a=a.c;break a}}return Jd?Jd(this,a,0,0):Kd.call(null,this,a,0,0)};f.N=function(a,b){return b===this.l?this:new pd(b,this.i,this.shift,this.root,this.aa,this.m)};
+f.P=function(a,b){if(32>this.i-xd(this)){a=this.aa.length;for(var c=Array(a+1),d=0;;)if(d<a)c[d]=this.aa[d],d+=1;else break;c[a]=b;return new pd(this.l,this.i+1,this.shift,this.root,c,null)}a=(c=this.i>>>5>1<<this.shift)?this.shift+5:this.shift;c?(c=wd(null),c.c[0]=this.root,d=yd(null,this.shift,new vd(null,this.aa)),c.c[1]=d):c=zd(this,this.shift,this.root,new vd(null,this.aa));return new pd(this.l,this.i+1,a,c,[b],null)};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.G(null,c);case 3:return this.W(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.G(null,c)};a.g=function(b,c,d){return this.W(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.G(null,a)};f.b=function(a,b){return this.W(null,a,b)};
+var qd=new vd(null,[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]),pc=new pd(null,0,5,qd,[],Yb);pd.prototype[Ga]=function(){return Wb(this)};
+function Kg(a){if(D(Vd.a?Vd.a(a):Vd.call(null,a)))a=new pd(null,2,5,qd,[ce.a?ce.a(a):ce.call(null,a),de.a?de.a(a):de.call(null,a)],null);else if(Cc(a))a=xc(a,null);else if(Lf(a))a:{var b=a.length;if(32>b)a=new pd(null,b,5,qd,a,null);else for(var c=32,d=(new pd(null,32,5,qd,a.slice(0,32),null)).Ra(null);;)if(c<b){var e=c+1;d=fd.b(d,a[c]);c=e}else{a=tb(d);break a}}else a=tb(Jc(sb,rb(pc),a));return a}
+function Ld(a,b,c,d,e){this.ga=a;this.node=b;this.j=c;this.O=d;this.l=e;this.m=null;this.h=32375020;this.s=1536}f=Ld.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){if(this.O+1<this.node.length){var a=this.ga;var b=this.node,c=this.j,d=this.O+1;a=Jd?Jd(a,b,c,d):Kd.call(null,a,b,c,d);return null==a?null:a}return this.lb()};
+f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};f.Y=function(a,b){return Ed(this.ga,b,this.j+this.O,V(this.ga))};f.Z=function(a,b,c){return Fd(this.ga,b,c,this.j+this.O,V(this.ga))};f.ca=function(){return this.node[this.O]};f.da=function(){if(this.O+1<this.node.length){var a=this.ga;var b=this.node,c=this.j,d=this.O+1;a=Jd?Jd(a,b,c,d):Kd.call(null,a,b,c,d);return null==a?Tb:a}return this.Za(null)};f.D=function(){return this};
+f.hb=function(){var a=this.node;return new $c(a,this.O,a.length)};f.Za=function(){var a=this.j+this.node.length;if(a<Ja(this.ga)){var b=this.ga,c=Ad(this.ga,a);return Jd?Jd(b,c,a,0):Kd.call(null,b,c,a,0)}return Tb};f.N=function(a,b){return b===this.l?this:Md?Md(this.ga,this.node,this.j,this.O,b):Kd.call(null,this.ga,this.node,this.j,this.O,b)};f.P=function(a,b){return mc(b,this)};
+f.lb=function(){var a=this.j+this.node.length;if(a<Ja(this.ga)){var b=this.ga,c=Ad(this.ga,a);return Jd?Jd(b,c,a,0):Kd.call(null,b,c,a,0)}return null};Ld.prototype[Ga]=function(){return Wb(this)};
+function Kd(a){switch(arguments.length){case 3:var b=arguments[0],c=arguments[1],d=arguments[2];return new Ld(b,Bd(b,c),c,d,null);case 4:return Jd(arguments[0],arguments[1],arguments[2],arguments[3]);case 5:return Md(arguments[0],arguments[1],arguments[2],arguments[3],arguments[4]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}}function Jd(a,b,c,d){return new Ld(a,b,c,d,null)}function Md(a,b,c,d,e){return new Ld(a,b,c,d,e)}
+function Nd(a,b){return a===b.w?b:new vd(a,Ha(b.c))}function Hd(a){return new vd({},Ha(a.c))}function Id(a){var b=[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];Ec(a,0,b,0,a.length);return b}var Od=function Od(a,b,c,d){c=Nd(a.root.w,c);var g=a.i-1>>>b&31;if(5===b)a=d;else{var h=c.c[g];null!=h?(b-=5,a=Od.T?Od.T(a,b,h,d):Od.call(null,a,b,h,d)):a=yd(a.root.w,b-5,d)}c.c[g]=a;return c};
+function Gd(a,b,c,d){this.i=a;this.shift=b;this.root=c;this.aa=d;this.s=88;this.h=275}f=Gd.prototype;
+f.Ta=function(a,b){if(this.root.w){if(32>this.i-xd(this))this.aa[this.i&31]=b;else{a=new vd(this.root.w,this.aa);var c=[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];c[0]=b;this.aa=c;this.i>>>5>1<<this.shift?(b=[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],c=this.shift+
+5,b[0]=this.root,b[1]=yd(this.root.w,this.shift,a),this.root=new vd(this.root.w,b),this.shift=c):this.root=Od(this,this.shift,this.root,a)}this.i+=1;return this}throw Error("conj! after persistent!");};f.cb=function(){if(this.root.w){this.root.w=null;var a=this.i-xd(this),b=Array(a);Ec(this.aa,0,b,0,a);return new pd(null,this.i,this.shift,this.root,b,null)}throw Error("persistent! called twice");};
+f.Pa=function(a,b,c){if("number"===typeof b)return Pd(this,b,c);throw Error("TransientVector's key for assoc! must be a number.");};
+function Pd(a,b,c){if(a.root.w){if(0<=b&&b<a.i){if(xd(a)<=b)a.aa[b&31]=c;else{var d=function(){return function k(g,h){h=Nd(a.root.w,h);if(0===g)h.c[b&31]=c;else{var l=b>>>g&31;g=k(g-5,h.c[l]);h.c[l]=g}return h}(a.shift,a.root)}();a.root=d}return a}if(b===a.i)return a.Ta(null,c);throw Error(["Index ",G.a(b)," out of bounds for TransientVector of length",G.a(a.i)].join(""));}throw Error("assoc! after persistent!");}f.R=function(){if(this.root.w)return this.i;throw Error("count after persistent!");};
+f.G=function(a,b){if(this.root.w)return Bd(this,b)[b&31];throw Error("nth after persistent!");};f.W=function(a,b,c){return 0<=b&&b<this.i?this.G(null,b):c};f.H=function(a,b){return this.u(null,b,null)};f.u=function(a,b,c){if(this.root.w)return"number"===typeof b?this.W(null,b,c):c;throw Error("lookup after persistent!");};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.H(null,c);case 3:return this.u(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.H(null,c)};a.g=function(b,c,d){return this.u(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.H(null,a)};f.b=function(a,b){return this.u(null,a,b)};function Qd(){this.h=2097152;this.s=0}Qd.prototype.F=function(){return!1};
+var Rd=new Qd;function Sd(a,b){return Hc(Ac(b)&&!Bc(b)?V(a)===V(b)?(null!=a?a.h&1048576||B===a.Lb||(a.h?0:E(eb,a)):E(eb,a))?Oc(function(c,d,e){return Ub.b(Nb.g(b,d,Rd),e)?!0:new ac},a):td(function(c){return Ub.b(Nb.g(b,Q(c),Rd),Q(T(c)))},a):null:null)}function Td(a){this.v=a}Td.prototype.next=function(){if(null!=this.v){var a=Q(this.v),b=sc(a,0,null);a=sc(a,1,null);this.v=T(this.v);return{value:[b,a],done:!1}}return{value:null,done:!0}};
+function uc(a,b){if(b instanceof Pb)a:{var c=a.length;b=b.Fa;for(var d=0;;){if(c<=d){a=-1;break a}if(a[d]instanceof Pb&&b===a[d].Fa){a=d;break a}d+=2}}else if("string"==typeof b||"number"===typeof b)a:for(c=a.length,d=0;;){if(c<=d){a=-1;break a}if(b===a[d]){a=d;break a}d+=2}else if(b instanceof Mb)a:for(c=a.length,b=b.Ja,d=0;;){if(c<=d){a=-1;break a}if(a[d]instanceof Mb&&b===a[d].Ja){a=d;break a}d+=2}else if(null==b)a:for(b=a.length,c=0;;){if(b<=c){a=-1;break a}if(null==a[c]){a=c;break a}c+=2}else a:for(c=
+a.length,d=0;;){if(c<=d){a=-1;break a}if(Ub.b(b,a[d])){a=d;break a}d+=2}return a}function Ud(a,b){this.key=a;this.B=b;this.m=null;this.h=166619935;this.s=0}f=Ud.prototype;f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.H=function(a,b){return this.W(null,b,null)};f.u=function(a,b,c){return this.W(null,b,c)};f.G=function(a,b){if(0===b)return this.key;if(1===b)return this.B;throw Error("Index out of bounds");};
+f.W=function(a,b,c){return 0===b?this.key:1===b?this.B:c};f.ib=function(a,b){return(new pd(null,2,5,qd,[this.key,this.B],null)).ib(a,b)};f.K=function(){return null};f.R=function(){return 2};f.wb=function(){return this.key};f.xb=function(){return this.B};f.ic=function(){return this.B};f.oc=function(){return new pd(null,1,5,qd,[this.key],null)};f.cc=function(){return new Rb([this.B,this.key],0,null)};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};
+f.S=function(){return null};f.Y=function(a,b){return Hg(this,b)};f.Z=function(a,b,c){return Ig(this,b,c)};f.Ha=function(a,b,c){return tc.g(new pd(null,2,5,qd,[this.key,this.B],null),b,c)};f.D=function(){return new Rb([this.key,this.B],0,null)};f.N=function(a,b){return xc(new pd(null,2,5,qd,[this.key,this.B],null),b)};f.P=function(a,b){return new pd(null,3,5,qd,[this.key,this.B,b],null)};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.G(null,c);case 3:return this.W(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.G(null,c)};a.g=function(b,c,d){return this.W(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.G(null,a)};f.b=function(a,b){return this.W(null,a,b)};function Vd(a){return null!=a?a.h&2048||B===a.Ob?!0:!1:!1}
+function Wd(a,b,c){this.c=a;this.j=b;this.na=c;this.h=32374990;this.s=0}f=Wd.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.na};f.X=function(){return this.j<this.c.length-2?new Wd(this.c,this.j+2,null):null};f.R=function(){return(this.c.length-this.j)/2};f.J=function(){return Xb(this)};f.F=function(a,b){return lc(this,b)};
+f.S=function(){return Tb};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return new Ud(this.c[this.j],this.c[this.j+1])};f.da=function(){return this.j<this.c.length-2?new Wd(this.c,this.j+2,null):Tb};f.D=function(){return this};f.N=function(a,b){return b===this.na?this:new Wd(this.c,this.j,b)};f.P=function(a,b){return mc(b,this)};Wd.prototype[Ga]=function(){return Wb(this)};function Xd(a,b){this.c=a;this.j=0;this.i=b}
+Xd.prototype.ea=function(){return this.j<this.i};Xd.prototype.next=function(){var a=new Ud(this.c[this.j],this.c[this.j+1]);this.j+=2;return a};function va(a,b,c,d){this.l=a;this.i=b;this.c=c;this.m=d;this.h=16647951;this.s=139268}f=va.prototype;f.toString=function(){return Bb(this)};f.keys=function(){return Wb(Yd.a?Yd.a(this):Yd.call(null,this))};f.entries=function(){return new Td(O(O(this)))};f.values=function(){return Wb(Zd.a?Zd.a(this):Zd.call(null,this))};f.has=function(a){return Jg(this,a)};
+f.get=function(a,b){return this.u(null,a,b)};f.forEach=function(a){for(var b=O(this),c=null,d=0,e=0;;)if(e<d){var g=c.G(null,e),h=sc(g,0,null);g=sc(g,1,null);a.b?a.b(g,h):a.call(null,g,h);e+=1}else if(b=O(b))Dc(b)?(c=wb(b),b=xb(b),h=c,d=V(c),c=h):(c=Q(b),h=sc(c,0,null),g=sc(c,1,null),a.b?a.b(g,h):a.call(null,g,h),b=T(b),c=null,d=0),e=0;else return null};f.H=function(a,b){return this.u(null,b,null)};f.u=function(a,b,c){a=uc(this.c,b);return-1===a?c:this.c[a+1]};
+f.ab=function(a,b,c){a=this.c.length;for(var d=0;;)if(d<a){var e=this.c[d],g=this.c[d+1];c=b.g?b.g(c,e,g):b.call(null,c,e,g);if(bc(c))return Za(c);d+=2}else return c};f.oa=function(){return new Xd(this.c,2*this.i)};f.K=function(){return this.l};f.R=function(){return this.i};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Zb(this)};
+f.F=function(a,b){if(Ac(b)&&!Bc(b))if(a=this.c.length,this.i===b.R(null))for(var c=0;;)if(c<a){var d=b.u(null,this.c[c],Fc);if(d!==Fc)if(Ub.b(this.c[c+1],d))c+=2;else return!1;else return!1}else return!0;else return!1;else return!1};f.Ra=function(){return new $d(this.c.length,Ha(this.c))};f.S=function(){return bb(sd,this.l)};f.Y=function(a,b){return Mc(this,b)};f.Z=function(a,b,c){return Nc(this,b,c)};
+f.Xb=function(a,b){if(0<=uc(this.c,b)){a=this.c.length;var c=a-2;if(0===c)return this.S(null);c=Array(c);for(var d=0,e=0;;){if(d>=a)return new va(this.l,this.i-1,c,null);Ub.b(b,this.c[d])?d+=2:(c[e]=this.c[d],c[e+1]=this.c[d+1],e+=2,d+=2)}}else return this};
+f.Ha=function(a,b,c){a=uc(this.c,b);if(-1===a){if(this.i<ae){a=this.c;for(var d=a.length,e=Array(d+2),g=0;;)if(g<d)e[g]=a[g],g+=1;else break;e[d]=b;e[d+1]=c;return new va(this.l,this.i+1,e,null)}return bb(Ua(ef.b(be,this),b,c),this.l)}if(c===this.c[a+1])return this;b=Ha(this.c);b[a+1]=c;return new va(this.l,this.i,b,null)};f.D=function(){var a=this.c;return 0<=a.length-2?new Wd(a,0,null):null};f.N=function(a,b){return b===this.l?this:new va(b,this.i,this.c,this.m)};
+f.P=function(a,b){if(Cc(b))return this.Ha(null,Oa.b(b,0),Oa.b(b,1));a=this;for(b=O(b);;){if(null==b)return a;var c=Q(b);if(Cc(c))a=Ua(a,Oa.b(c,0),Oa.b(c,1)),b=T(b);else throw Error("conj on a map takes map entries or seqables of map entries");}};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.H(null,c);case 3:return this.u(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.H(null,c)};a.g=function(b,c,d){return this.u(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.H(null,a)};f.b=function(a,b){return this.u(null,a,b)};var sd=new va(null,0,[],$b),ae=8;
+function af(a){for(var b=[],c=0;;)if(c<a.length){var d=a[c],e=a[c+1],g=uc(b,d);-1===g?(g=b,g.push(d),g.push(e)):b[g+1]=e;c+=2}else break;return new va(null,b.length/2,b,null)}va.prototype[Ga]=function(){return Wb(this)};function $d(a,b){this.Qa={};this.Na=a;this.c=b;this.h=259;this.s=56}f=$d.prototype;f.R=function(){if(this.Qa)return Qc(this.Na);throw Error("count after persistent!");};f.H=function(a,b){return this.u(null,b,null)};
+f.u=function(a,b,c){if(this.Qa)return a=uc(this.c,b),-1===a?c:this.c[a+1];throw Error("lookup after persistent!");};f.Ta=function(a,b){if(this.Qa){if(Vd(b))return this.Pa(null,ce.a?ce.a(b):ce.call(null,b),de.a?de.a(b):de.call(null,b));if(Cc(b))return this.Pa(null,b.a?b.a(0):b.call(null,0),b.a?b.a(1):b.call(null,1));a=O(b);for(b=this;;){var c=Q(a);if(D(c))a=T(a),b=ub(b,ce.a?ce.a(c):ce.call(null,c),de.a?de.a(c):de.call(null,c));else return b}}else throw Error("conj! after persistent!");};
+f.cb=function(){if(this.Qa)return this.Qa=!1,new va(null,Qc(this.Na),this.c,null);throw Error("persistent! called twice");};f.Pa=function(a,b,c){if(this.Qa){a=uc(this.c,b);if(-1===a)return this.Na+2<=2*ae?(this.Na+=2,this.c.push(b),this.c.push(c),this):Cg(ee.b?ee.b(this.Na,this.c):ee.call(null,this.Na,this.c),b,c);c!==this.c[a+1]&&(this.c[a+1]=c);return this}throw Error("assoc! after persistent!");};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.u(null,c,null);case 3:return this.u(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.u(null,c,null)};a.g=function(b,c,d){return this.u(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.u(null,a,null)};f.b=function(a,b){return this.u(null,a,b)};
+function ee(a,b){for(var c=rb(be),d=0;;)if(d<a)c=ub(c,b[d],b[d+1]),d+=2;else return c}function fe(){this.B=!1}function ge(a,b){return a===b?!0:a===b||a instanceof Pb&&b instanceof Pb&&a.Fa===b.Fa?!0:Ub.b(a,b)}function he(a,b,c){a=Ha(a);a[b]=c;return a}function uf(a,b){var c=Array(a.length-2);Ec(a,0,c,0,2*b);Ec(a,2*(b+1),c,2*b,c.length-2*b);return c}function ie(a,b,c,d){a=a.La(b);a.c[c]=d;return a}
+function je(a,b,c){for(var d=a.length,e=0,g=c;;)if(e<d){c=a[e];if(null!=c){var h=a[e+1];c=b.g?b.g(g,c,h):b.call(null,g,c,h)}else c=a[e+1],c=null!=c?c.Wa(b,g):g;if(bc(c))return c;e+=2;g=c}else return g}function ke(a){this.c=a;this.j=0;this.la=this.Xa=null}ke.prototype.advance=function(){for(var a=this.c.length;;)if(this.j<a){var b=this.c[this.j],c=this.c[this.j+1];null!=b?b=this.Xa=new Ud(b,c):null!=c?(b=zb(c),b=b.ea()?this.la=b:!1):b=!1;this.j+=2;if(b)return!0}else return!1};
+ke.prototype.ea=function(){var a=null!=this.Xa;return a?a:(a=null!=this.la)?a:this.advance()};ke.prototype.next=function(){if(null!=this.Xa){var a=this.Xa;this.Xa=null;return a}if(null!=this.la)return a=this.la.next(),this.la.ea()||(this.la=null),a;if(this.advance())return this.next();throw Error("No such element");};ke.prototype.remove=function(){return Error("Unsupported operation")};function le(a,b,c){this.w=a;this.I=b;this.c=c;this.s=131072;this.h=0}f=le.prototype;
+f.La=function(a){if(a===this.w)return this;var b=Rc(this.I),c=Array(0>b?4:2*(b+1));Ec(this.c,0,c,0,2*b);return new le(a,this.I,c)};f.Va=function(){return me?me(this.c):ne.call(null,this.c)};f.Wa=function(a,b){return je(this.c,a,b)};f.Ma=function(a,b,c,d){var e=1<<(b>>>a&31);if(0===(this.I&e))return d;var g=Rc(this.I&e-1);e=this.c[2*g];g=this.c[2*g+1];return null==e?g.Ma(a+5,b,c,d):ge(c,e)?g:d};
+f.ja=function(a,b,c,d,e,g){var h=1<<(c>>>b&31),k=Rc(this.I&h-1);if(0===(this.I&h)){var l=Rc(this.I);if(2*l<this.c.length){a=this.La(a);b=a.c;g.B=!0;c=2*(l-k);g=2*k+(c-1);for(l=2*(k+1)+(c-1);0!==c;)b[l]=b[g],--l,--c,--g;b[2*k]=d;b[2*k+1]=e;a.I|=h;return a}if(16<=l){k=[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];k[c>>>b&31]=oe.ja(a,b+5,c,d,e,g);for(e=d=0;;)if(32>d)0===(this.I>>>d&1)?
+d+=1:(k[d]=null!=this.c[e]?oe.ja(a,b+5,Kb(this.c[e]),this.c[e],this.c[e+1],g):this.c[e+1],e+=2,d+=1);else break;return new pe(a,l+1,k)}b=Array(2*(l+4));Ec(this.c,0,b,0,2*k);b[2*k]=d;b[2*k+1]=e;Ec(this.c,2*k,b,2*(k+1),2*(l-k));g.B=!0;a=this.La(a);a.c=b;a.I|=h;return a}l=this.c[2*k];h=this.c[2*k+1];if(null==l)return l=h.ja(a,b+5,c,d,e,g),l===h?this:ie(this,a,2*k+1,l);if(ge(d,l))return e===h?this:ie(this,a,2*k+1,e);g.B=!0;g=b+5;d=qe?qe(a,g,l,h,c,d,e):re.call(null,a,g,l,h,c,d,e);e=2*k;k=2*k+1;a=this.La(a);
+a.c[e]=null;a.c[k]=d;return a};
+f.ia=function(a,b,c,d,e){var g=1<<(b>>>a&31),h=Rc(this.I&g-1);if(0===(this.I&g)){var k=Rc(this.I);if(16<=k){h=[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];h[b>>>a&31]=oe.ia(a+5,b,c,d,e);for(d=c=0;;)if(32>c)0===(this.I>>>c&1)?c+=1:(h[c]=null!=this.c[d]?oe.ia(a+5,Kb(this.c[d]),this.c[d],this.c[d+1],e):this.c[d+1],d+=2,c+=1);else break;return new pe(null,k+1,h)}a=Array(2*(k+1));Ec(this.c,
+0,a,0,2*h);a[2*h]=c;a[2*h+1]=d;Ec(this.c,2*h,a,2*(h+1),2*(k-h));e.B=!0;return new le(null,this.I|g,a)}var l=this.c[2*h];g=this.c[2*h+1];if(null==l)return k=g.ia(a+5,b,c,d,e),k===g?this:new le(null,this.I,he(this.c,2*h+1,k));if(ge(c,l))return d===g?this:new le(null,this.I,he(this.c,2*h+1,d));e.B=!0;e=this.I;k=this.c;a+=5;a=se?se(a,l,g,b,c,d):re.call(null,a,l,g,b,c,d);c=2*h;h=2*h+1;d=Ha(k);d[c]=null;d[h]=a;return new le(null,e,d)};
+f.Wb=function(a,b,c){var d=1<<(b>>>a&31);if(0===(this.I&d))return this;var e=Rc(this.I&d-1),g=this.c[2*e],h=this.c[2*e+1];return null==g?(a=h.Wb(a+5,b,c),a===h?this:null!=a?new le(null,this.I,he(this.c,2*e+1,a)):this.I===d?null:new le(null,this.I^d,uf(this.c,e))):ge(c,g)?new le(null,this.I^d,uf(this.c,e)):this};f.oa=function(){return new ke(this.c)};var oe=new le(null,0,[]);function te(a){this.c=a;this.j=0;this.la=null}
+te.prototype.ea=function(){for(var a=this.c.length;;){if(null!=this.la&&this.la.ea())return!0;if(this.j<a){var b=this.c[this.j];this.j+=1;null!=b&&(this.la=zb(b))}else return!1}};te.prototype.next=function(){if(this.ea())return this.la.next();throw Error("No such element");};te.prototype.remove=function(){return Error("Unsupported operation")};function pe(a,b,c){this.w=a;this.i=b;this.c=c;this.s=131072;this.h=0}f=pe.prototype;f.La=function(a){return a===this.w?this:new pe(a,this.i,Ha(this.c))};
+f.Va=function(){return ue?ue(this.c):ve.call(null,this.c)};f.Wa=function(a,b){for(var c=this.c.length,d=0;;)if(d<c){var e=this.c[d];if(null!=e){b=e.Wa(a,b);if(bc(b))return b;d+=1}else d+=1}else return b};f.Ma=function(a,b,c,d){var e=this.c[b>>>a&31];return null!=e?e.Ma(a+5,b,c,d):d};f.ja=function(a,b,c,d,e,g){var h=c>>>b&31,k=this.c[h];if(null==k)return a=ie(this,a,h,oe.ja(a,b+5,c,d,e,g)),a.i+=1,a;b=k.ja(a,b+5,c,d,e,g);return b===k?this:ie(this,a,h,b)};
+f.ia=function(a,b,c,d,e){var g=b>>>a&31,h=this.c[g];if(null==h)return new pe(null,this.i+1,he(this.c,g,oe.ia(a+5,b,c,d,e)));a=h.ia(a+5,b,c,d,e);return a===h?this:new pe(null,this.i,he(this.c,g,a))};
+f.Wb=function(a,b,c){var d=b>>>a&31,e=this.c[d];if(null!=e){a=e.Wb(a+5,b,c);if(a===e)d=this;else if(null==a)if(8>=this.i)a:{e=this.c;a=e.length;b=Array(2*(this.i-1));c=0;for(var g=1,h=0;;)if(c<a)c!==d&&null!=e[c]?(b[g]=e[c],g+=2,h|=1<<c,c+=1):c+=1;else{d=new le(null,h,b);break a}}else d=new pe(null,this.i-1,he(this.c,d,a));else d=new pe(null,this.i,he(this.c,d,a));return d}return this};f.oa=function(){return new te(this.c)};
+function we(a,b,c){b*=2;for(var d=0;;)if(d<b){if(ge(c,a[d]))return d;d+=2}else return-1}function xe(a,b,c,d){this.w=a;this.Ia=b;this.i=c;this.c=d;this.s=131072;this.h=0}f=xe.prototype;f.La=function(a){if(a===this.w)return this;var b=Array(2*(this.i+1));Ec(this.c,0,b,0,2*this.i);return new xe(a,this.Ia,this.i,b)};f.Va=function(){return me?me(this.c):ne.call(null,this.c)};f.Wa=function(a,b){return je(this.c,a,b)};
+f.Ma=function(a,b,c,d){a=we(this.c,this.i,c);return 0>a?d:ge(c,this.c[a])?this.c[a+1]:d};
+f.ja=function(a,b,c,d,e,g){if(c===this.Ia){b=we(this.c,this.i,d);if(-1===b){if(this.c.length>2*this.i)return b=2*this.i,c=2*this.i+1,a=this.La(a),a.c[b]=d,a.c[c]=e,g.B=!0,a.i+=1,a;c=this.c.length;b=Array(c+2);Ec(this.c,0,b,0,c);b[c]=d;b[c+1]=e;g.B=!0;d=this.i+1;a===this.w?(this.c=b,this.i=d,a=this):a=new xe(this.w,this.Ia,d,b);return a}return this.c[b+1]===e?this:ie(this,a,b+1,e)}return(new le(a,1<<(this.Ia>>>b&31),[null,this,null,null])).ja(a,b,c,d,e,g)};
+f.ia=function(a,b,c,d,e){return b===this.Ia?(a=we(this.c,this.i,c),-1===a?(a=2*this.i,b=Array(a+2),Ec(this.c,0,b,0,a),b[a]=c,b[a+1]=d,e.B=!0,new xe(null,this.Ia,this.i+1,b)):Ub.b(this.c[a+1],d)?this:new xe(null,this.Ia,this.i,he(this.c,a+1,d))):(new le(null,1<<(this.Ia>>>a&31),[null,this])).ia(a,b,c,d,e)};f.Wb=function(a,b,c){a=we(this.c,this.i,c);return-1===a?this:1===this.i?null:new xe(null,this.Ia,this.i-1,uf(this.c,Qc(a)))};f.oa=function(){return new ke(this.c)};
+function re(a){switch(arguments.length){case 6:return se(arguments[0],arguments[1],arguments[2],arguments[3],arguments[4],arguments[5]);case 7:return qe(arguments[0],arguments[1],arguments[2],arguments[3],arguments[4],arguments[5],arguments[6]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}}function se(a,b,c,d,e,g){var h=Kb(b);if(h===d)return new xe(null,h,2,[b,c,e,g]);var k=new fe;return oe.ia(a,h,b,c,k).ia(a,d,e,g,k)}
+function qe(a,b,c,d,e,g,h){var k=Kb(c);if(k===e)return new xe(null,k,2,[c,d,g,h]);var l=new fe;return oe.ja(a,b,k,c,d,l).ja(a,b,e,g,h,l)}function ye(a,b,c,d,e){this.l=a;this.ma=b;this.j=c;this.v=d;this.m=e;this.h=32374988;this.s=0}f=ye.prototype;f.toString=function(){return Bb(this)};
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){if(null==this.v){var a=this.ma,b=this.j+2;return ze?ze(a,b,null):ne.call(null,a,b,null)}a=this.ma;b=this.j;var c=T(this.v);return ze?ze(a,b,c):ne.call(null,a,b,c)};
+f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return null==this.v?new Ud(this.ma[this.j],this.ma[this.j+1]):Q(this.v)};
+f.da=function(){var a=this,b=null==a.v?function(){var c=a.ma,d=a.j+2;return ze?ze(c,d,null):ne.call(null,c,d,null)}():function(){var c=a.ma,d=a.j,e=T(a.v);return ze?ze(c,d,e):ne.call(null,c,d,e)}();return null!=b?b:Tb};f.D=function(){return this};f.N=function(a,b){return b===this.l?this:new ye(b,this.ma,this.j,this.v,this.m)};f.P=function(a,b){return mc(b,this)};ye.prototype[Ga]=function(){return Wb(this)};
+function ne(a){switch(arguments.length){case 1:return me(arguments[0]);case 3:return ze(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}}function me(a){return ze(a,0,null)}function ze(a,b,c){if(null==c)for(c=a.length;;)if(b<c){if(null!=a[b])return new ye(null,a,b,null,null);var d=a[b+1];if(D(d)&&(d=d.Va(),D(d)))return new ye(null,a,b+2,d,null);b+=2}else return null;else return new ye(null,a,b,c,null)}
+function Ae(a,b,c,d,e){this.l=a;this.ma=b;this.j=c;this.v=d;this.m=e;this.h=32374988;this.s=0}f=Ae.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){var a=this.ma,b=this.j,c=T(this.v);return Be?Be(a,b,c):ve.call(null,a,b,c)};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};
+f.S=function(){return Tb};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return Q(this.v)};f.da=function(){var a=this.ma;var b=this.j,c=T(this.v);a=Be?Be(a,b,c):ve.call(null,a,b,c);return null!=a?a:Tb};f.D=function(){return this};f.N=function(a,b){return b===this.l?this:new Ae(b,this.ma,this.j,this.v,this.m)};f.P=function(a,b){return mc(b,this)};Ae.prototype[Ga]=function(){return Wb(this)};
+function ve(a){switch(arguments.length){case 1:return ue(arguments[0]);case 3:return Be(arguments[0],arguments[1],arguments[2]);default:throw Error(["Invalid arity: ",G.a(arguments.length)].join(""));}}function ue(a){return Be(a,0,null)}function Be(a,b,c){if(null==c)for(c=a.length;;)if(b<c){var d=a[b];if(D(d)&&(d=d.Va(),D(d)))return new Ae(null,a,b+1,d,null);b+=1}else return null;else return new Ae(null,a,b,c,null)}function Ce(a,b){this.$=a;this.qb=b;this.jb=!1}
+Ce.prototype.ea=function(){return!this.jb||this.qb.ea()};Ce.prototype.next=function(){if(this.jb)return this.qb.next();this.jb=!0;return new Ud(null,this.$)};Ce.prototype.remove=function(){return Error("Unsupported operation")};function De(a,b,c,d,e,g){this.l=a;this.i=b;this.root=c;this.fa=d;this.$=e;this.m=g;this.h=16123663;this.s=139268}f=De.prototype;f.toString=function(){return Bb(this)};f.keys=function(){return Wb(Yd.a?Yd.a(this):Yd.call(null,this))};f.entries=function(){return new Td(O(O(this)))};
+f.values=function(){return Wb(Zd.a?Zd.a(this):Zd.call(null,this))};f.has=function(a){return Jg(this,a)};f.get=function(a,b){return this.u(null,a,b)};f.forEach=function(a){for(var b=O(this),c=null,d=0,e=0;;)if(e<d){var g=c.G(null,e),h=sc(g,0,null);g=sc(g,1,null);a.b?a.b(g,h):a.call(null,g,h);e+=1}else if(b=O(b))Dc(b)?(c=wb(b),b=xb(b),h=c,d=V(c),c=h):(c=Q(b),h=sc(c,0,null),g=sc(c,1,null),a.b?a.b(g,h):a.call(null,g,h),b=T(b),c=null,d=0),e=0;else return null};f.H=function(a,b){return this.u(null,b,null)};
+f.u=function(a,b,c){return null==b?this.fa?this.$:c:null==this.root?c:this.root.Ma(0,Kb(b),b,c)};f.ab=function(a,b,c){a=this.fa?b.g?b.g(c,null,this.$):b.call(null,c,null,this.$):c;return bc(a)?Za(a):null!=this.root?Gg(this.root.Wa(b,a)):a};f.oa=function(){var a=this.root?zb(this.root):od();return this.fa?new Ce(this.$,a):a};f.K=function(){return this.l};f.R=function(){return this.i};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Zb(this)};f.F=function(a,b){return Sd(this,b)};
+f.Ra=function(){return new Ee(this.root,this.i,this.fa,this.$)};f.S=function(){return bb(be,this.l)};f.Xb=function(a,b){if(null==b)return this.fa?new De(this.l,this.i-1,this.root,!1,null,null):this;if(null==this.root)return this;a=this.root.Wb(0,Kb(b),b);return a===this.root?this:new De(this.l,this.i-1,a,this.fa,this.$,null)};
+f.Ha=function(a,b,c){if(null==b)return this.fa&&c===this.$?this:new De(this.l,this.fa?this.i:this.i+1,this.root,!0,c,null);a=new fe;b=(null==this.root?oe:this.root).ia(0,Kb(b),b,c,a);return b===this.root?this:new De(this.l,a.B?this.i+1:this.i,b,this.fa,this.$,null)};f.D=function(){if(0<this.i){var a=null!=this.root?this.root.Va():null;return this.fa?mc(new Ud(null,this.$),a):a}return null};f.N=function(a,b){return b===this.l?this:new De(b,this.i,this.root,this.fa,this.$,this.m)};
+f.P=function(a,b){if(Cc(b))return this.Ha(null,Oa.b(b,0),Oa.b(b,1));a=this;for(b=O(b);;){if(null==b)return a;var c=Q(b);if(Cc(c))a=Ua(a,Oa.b(c,0),Oa.b(c,1)),b=T(b);else throw Error("conj on a map takes map entries or seqables of map entries");}};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.H(null,c);case 3:return this.u(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.H(null,c)};a.g=function(b,c,d){return this.u(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.H(null,a)};f.b=function(a,b){return this.u(null,a,b)};var be=new De(null,0,null,!1,null,$b);De.prototype[Ga]=function(){return Wb(this)};
+function Ee(a,b,c,d){this.w={};this.root=a;this.count=b;this.fa=c;this.$=d;this.h=259;this.s=56}function Fe(a,b,c){if(a.w){if(null==b)a.$!==c&&(a.$=c),a.fa||(a.count+=1,a.fa=!0);else{var d=new fe;b=(null==a.root?oe:a.root).ja(a.w,0,Kb(b),b,c,d);b!==a.root&&(a.root=b);d.B&&(a.count+=1)}return a}throw Error("assoc! after persistent!");}f=Ee.prototype;f.R=function(){if(this.w)return this.count;throw Error("count after persistent!");};
+f.H=function(a,b){return null==b?this.fa?this.$:null:null==this.root?null:this.root.Ma(0,Kb(b),b)};f.u=function(a,b,c){return null==b?this.fa?this.$:c:null==this.root?c:this.root.Ma(0,Kb(b),b,c)};
+f.Ta=function(a,b){a:if(this.w)if(Vd(b))a=Fe(this,ce.a?ce.a(b):ce.call(null,b),de.a?de.a(b):de.call(null,b));else if(Cc(b))a=Fe(this,b.a?b.a(0):b.call(null,0),b.a?b.a(1):b.call(null,1));else for(a=O(b),b=this;;){var c=Q(a);if(D(c))a=T(a),b=Fe(b,ce.a?ce.a(c):ce.call(null,c),de.a?de.a(c):de.call(null,c));else{a=b;break a}}else throw Error("conj! after persistent");return a};
+f.cb=function(){if(this.w){this.w=null;var a=new De(null,this.count,this.root,this.fa,this.$,null)}else throw Error("persistent! called twice");return a};f.Pa=function(a,b,c){return Fe(this,b,c)};f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.H(null,c);case 3:return this.u(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.H(null,c)};a.g=function(b,c,d){return this.u(null,c,d)};return a}();
+f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.H(null,a)};f.b=function(a,b){return this.u(null,a,b)};function Lg(a,b,c){for(var d=b;;)if(null!=a)b=c?a.left:a.right,d=oc.b(d,a),a=b;else return d}function Mg(a,b,c,d,e){this.l=a;this.stack=b;this.hc=c;this.i=d;this.m=e;this.h=32374990;this.s=0}f=Mg.prototype;f.toString=function(){return Bb(this)};
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.l};f.X=function(){var a=Q(this.stack);a=Lg(this.hc?a.right:a.left,T(this.stack),this.hc);return null==a?null:new Mg(null,a,this.hc,this.i-1,null)};f.R=function(){return 0>this.i?V(T(this))+1:this.i};
+f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){var a=this.stack;return null==a?null:Fg(a)};f.da=function(){var a=Q(this.stack);a=Lg(this.hc?a.right:a.left,T(this.stack),this.hc);return null!=a?new Mg(null,a,this.hc,this.i-1,null):Tb};f.D=function(){return this};
+f.N=function(a,b){return b===this.l?this:new Mg(b,this.stack,this.hc,this.i,this.m)};f.P=function(a,b){return mc(b,this)};Mg.prototype[Ga]=function(){return Wb(this)};function Ng(a,b,c){return new Mg(null,Lg(a,null,b),b,c,null)}function Og(a,b,c,d){return c instanceof Pg?c.left instanceof Pg?new Pg(c.key,c.B,c.left.fc(),new Qg(a,b,c.right,d)):c.right instanceof Pg?new Pg(c.right.key,c.right.B,new Qg(c.key,c.B,c.left,c.right.left),new Qg(a,b,c.right.right,d)):new Qg(a,b,c,d):new Qg(a,b,c,d)}
+function Rg(a,b,c,d){return d instanceof Pg?d.right instanceof Pg?new Pg(d.key,d.B,new Qg(a,b,c,d.left),d.right.fc()):d.left instanceof Pg?new Pg(d.left.key,d.left.B,new Qg(a,b,c,d.left.left),new Qg(d.key,d.B,d.left.right,d.right)):new Qg(a,b,c,d):new Qg(a,b,c,d)}
+function Sg(a,b,c,d){if(c instanceof Pg)return new Pg(a,b,c.fc(),d);if(d instanceof Qg)return Rg(a,b,c,d.jc());if(d instanceof Pg&&d.left instanceof Qg)return new Pg(d.left.key,d.left.B,new Qg(a,b,c,d.left.left),Rg(d.key,d.B,d.left.right,d.right.jc()));throw Error("red-black tree invariant violation");}
+function Tg(a,b,c,d){if(d instanceof Pg)return new Pg(a,b,c,d.fc());if(c instanceof Qg)return Og(a,b,c.jc(),d);if(c instanceof Pg&&c.right instanceof Qg)return new Pg(c.right.key,c.right.B,Og(c.key,c.B,c.left.jc(),c.right.left),new Qg(a,b,c.right.right,d));throw Error("red-black tree invariant violation");}
+var Ug=function Ug(a,b,c){var e=null!=a.left?function(){var k=a.left;return Ug.g?Ug.g(k,b,c):Ug.call(null,k,b,c)}():c;if(bc(e))return e;var g=function(){var k=a.key,l=a.B;return b.g?b.g(e,k,l):b.call(null,e,k,l)}();if(bc(g))return g;if(null!=a.right){var h=a.right;return Ug.g?Ug.g(h,b,g):Ug.call(null,h,b,g)}return g};function Qg(a,b,c,d){this.key=a;this.B=b;this.left=c;this.right=d;this.m=null;this.h=166619935;this.s=0}f=Qg.prototype;
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();f.lc=function(a){return a.nc(this)};f.jc=function(){return new Pg(this.key,this.B,this.left,this.right)};f.fc=function(){return this};f.kc=function(a){return a.mc(this)};f.replace=function(a,b,c,d){return new Qg(a,b,c,d)};
+f.mc=function(a){return new Qg(a.key,a.B,this,a.right)};f.nc=function(a){return new Qg(a.key,a.B,a.left,this)};f.Wa=function(a,b){return Ug(this,a,b)};f.H=function(a,b){return this.W(null,b,null)};f.u=function(a,b,c){return this.W(null,b,c)};f.G=function(a,b){if(0===b)return this.key;if(1===b)return this.B;throw Error("Index out of bounds");};f.W=function(a,b,c){return 0===b?this.key:1===b?this.B:c};f.ib=function(a,b){return(new pd(null,2,5,qd,[this.key,this.B],null)).ib(a,b)};f.K=function(){return null};
+f.R=function(){return 2};f.wb=function(){return this.key};f.xb=function(){return this.B};f.ic=function(){return this.B};f.oc=function(){return new pd(null,1,5,qd,[this.key],null)};f.cc=function(){return new Rb([this.B,this.key],0,null)};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return null};f.Y=function(a,b){return Hg(this,b)};f.Z=function(a,b,c){return Ig(this,b,c)};
+f.Ha=function(a,b,c){return tc.g(new pd(null,2,5,qd,[this.key,this.B],null),b,c)};f.D=function(){return new Rb([this.key,this.B],0,null)};f.N=function(a,b){return bb(new pd(null,2,5,qd,[this.key,this.B],null),b)};f.P=function(a,b){return new pd(null,3,5,qd,[this.key,this.B,b],null)};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.G(null,c);case 3:return this.W(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.G(null,c)};a.g=function(b,c,d){return this.W(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.G(null,a)};f.b=function(a,b){return this.W(null,a,b)};Qg.prototype[Ga]=function(){return Wb(this)};
+function Pg(a,b,c,d){this.key=a;this.B=b;this.left=c;this.right=d;this.m=null;this.h=166619935;this.s=0}f=Pg.prototype;f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();f.lc=function(a){return new Pg(this.key,this.B,this.left,a)};f.jc=function(){throw Error("red-black tree invariant violation");};f.fc=function(){return new Qg(this.key,this.B,this.left,this.right)};
+f.kc=function(a){return new Pg(this.key,this.B,a,this.right)};f.replace=function(a,b,c,d){return new Pg(a,b,c,d)};f.mc=function(a){return this.left instanceof Pg?new Pg(this.key,this.B,this.left.fc(),new Qg(a.key,a.B,this.right,a.right)):this.right instanceof Pg?new Pg(this.right.key,this.right.B,new Qg(this.key,this.B,this.left,this.right.left),new Qg(a.key,a.B,this.right.right,a.right)):new Qg(a.key,a.B,this,a.right)};
+f.nc=function(a){return this.right instanceof Pg?new Pg(this.key,this.B,new Qg(a.key,a.B,a.left,this.left),this.right.fc()):this.left instanceof Pg?new Pg(this.left.key,this.left.B,new Qg(a.key,a.B,a.left,this.left.left),new Qg(this.key,this.B,this.left.right,this.right)):new Qg(a.key,a.B,a.left,this)};f.Wa=function(a,b){return Ug(this,a,b)};f.H=function(a,b){return this.W(null,b,null)};f.u=function(a,b,c){return this.W(null,b,c)};
+f.G=function(a,b){if(0===b)return this.key;if(1===b)return this.B;throw Error("Index out of bounds");};f.W=function(a,b,c){return 0===b?this.key:1===b?this.B:c};f.ib=function(a,b){return(new pd(null,2,5,qd,[this.key,this.B],null)).ib(a,b)};f.K=function(){return null};f.R=function(){return 2};f.wb=function(){return this.key};f.xb=function(){return this.B};f.ic=function(){return this.B};f.oc=function(){return new pd(null,1,5,qd,[this.key],null)};f.cc=function(){return new Rb([this.B,this.key],0,null)};
+f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return null};f.Y=function(a,b){return Hg(this,b)};f.Z=function(a,b,c){return Ig(this,b,c)};f.Ha=function(a,b,c){return tc.g(new pd(null,2,5,qd,[this.key,this.B],null),b,c)};f.D=function(){return new Rb([this.key,this.B],0,null)};f.N=function(a,b){return bb(new pd(null,2,5,qd,[this.key,this.B],null),b)};f.P=function(a,b){return new pd(null,3,5,qd,[this.key,this.B,b],null)};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.G(null,c);case 3:return this.W(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.G(null,c)};a.g=function(b,c,d){return this.W(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.G(null,a)};f.b=function(a,b){return this.W(null,a,b)};Pg.prototype[Ga]=function(){return Wb(this)};
+var Vg=function Vg(a,b,c,d,e){if(null==b)return new Pg(c,d,null,null);var h=function(){var k=b.key;return a.b?a.b(c,k):a.call(null,c,k)}();if(0===h)return e[0]=b,null;if(0>h)return h=function(){var k=b.left;return Vg.ha?Vg.ha(a,k,c,d,e):Vg.call(null,a,k,c,d,e)}(),null!=h?b.kc(h):null;h=function(){var k=b.right;return Vg.ha?Vg.ha(a,k,c,d,e):Vg.call(null,a,k,c,d,e)}();return null!=h?b.lc(h):null},Wg=function Wg(a,b){if(null==a)return b;if(null==b)return a;if(a instanceof Pg){if(b instanceof Pg){var d=
+function(){var e=a.right,g=b.left;return Wg.b?Wg.b(e,g):Wg.call(null,e,g)}();return d instanceof Pg?new Pg(d.key,d.B,new Pg(a.key,a.B,a.left,d.left),new Pg(b.key,b.B,d.right,b.right)):new Pg(a.key,a.B,a.left,new Pg(b.key,b.B,d,b.right))}return new Pg(a.key,a.B,a.left,function(){var e=a.right;return Wg.b?Wg.b(e,b):Wg.call(null,e,b)}())}if(b instanceof Pg)return new Pg(b.key,b.B,function(){var e=b.left;return Wg.b?Wg.b(a,e):Wg.call(null,a,e)}(),b.right);d=function(){var e=a.right,g=b.left;return Wg.b?
+Wg.b(e,g):Wg.call(null,e,g)}();return d instanceof Pg?new Pg(d.key,d.B,new Qg(a.key,a.B,a.left,d.left),new Qg(b.key,b.B,d.right,b.right)):Sg(a.key,a.B,a.left,new Qg(b.key,b.B,d,b.right))},Xg=function Xg(a,b,c,d){if(null!=b){var g=function(){var h=b.key;return a.b?a.b(c,h):a.call(null,c,h)}();if(0===g)return d[0]=b,Wg(b.left,b.right);if(0>g)return g=function(){var h=b.left;return Xg.T?Xg.T(a,h,c,d):Xg.call(null,a,h,c,d)}(),null!=g||null!=d[0]?b.left instanceof Qg?Sg(b.key,b.B,g,b.right):new Pg(b.key,
+b.B,g,b.right):null;g=function(){var h=b.right;return Xg.T?Xg.T(a,h,c,d):Xg.call(null,a,h,c,d)}();return null!=g||null!=d[0]?b.right instanceof Qg?Tg(b.key,b.B,b.left,g):new Pg(b.key,b.B,b.left,g):null}return null},Yg=function Yg(a,b,c,d){var g=b.key,h=a.b?a.b(c,g):a.call(null,c,g);return 0===h?b.replace(g,d,b.left,b.right):0>h?b.replace(g,b.B,function(){var k=b.left;return Yg.T?Yg.T(a,k,c,d):Yg.call(null,a,k,c,d)}(),b.right):b.replace(g,b.B,b.left,function(){var k=b.right;return Yg.T?Yg.T(a,k,c,
+d):Yg.call(null,a,k,c,d)}())};function Zg(a,b,c,d,e){this.ec=a;this.gc=b;this.i=c;this.l=d;this.m=e;this.h=418776847;this.s=8192}f=Zg.prototype;f.forEach=function(a){for(var b=O(this),c=null,d=0,e=0;;)if(e<d){var g=c.G(null,e),h=sc(g,0,null);g=sc(g,1,null);a.b?a.b(g,h):a.call(null,g,h);e+=1}else if(b=O(b))Dc(b)?(c=wb(b),b=xb(b),h=c,d=V(c),c=h):(c=Q(b),h=sc(c,0,null),g=sc(c,1,null),a.b?a.b(g,h):a.call(null,g,h),b=T(b),c=null,d=0),e=0;else return null};f.get=function(a,b){return this.u(null,a,b)};
+f.entries=function(){return new Td(O(O(this)))};f.toString=function(){return Bb(this)};f.keys=function(){return Wb(Yd.a?Yd.a(this):Yd.call(null,this))};f.values=function(){return Wb(Zd.a?Zd.a(this):Zd.call(null,this))};f.has=function(a){return Jg(this,a)};f.H=function(a,b){return this.u(null,b,null)};f.u=function(a,b,c){a:for(a=this.gc;;)if(null!=a){var d=a.key;d=this.ec.b?this.ec.b(b,d):this.ec.call(null,b,d);if(0===d){b=a;break a}a=0>d?a.left:a.right}else{b=null;break a}return null!=b?b.B:c};
+f.ab=function(a,b,c){return null!=this.gc?Gg(Ug(this.gc,b,c)):c};f.K=function(){return this.l};f.R=function(){return this.i};f.cc=function(){return 0<this.i?Ng(this.gc,!1,this.i):null};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Zb(this)};f.F=function(a,b){return Sd(this,b)};f.S=function(){return new Zg(this.ec,null,0,this.l,0)};
+f.Xb=function(a,b){a=[null];b=Xg(this.ec,this.gc,b,a);return null==b?null==ic(a,0)?this:new Zg(this.ec,null,0,this.l,null):new Zg(this.ec,b.fc(),this.i-1,this.l,null)};f.Ha=function(a,b,c){a=[null];var d=Vg(this.ec,this.gc,b,c,a);return null==d?(a=ic(a,0),Ub.b(c,a.B)?this:new Zg(this.ec,Yg(this.ec,this.gc,b,c),this.i,this.l,null)):new Zg(this.ec,d.fc(),this.i+1,this.l,null)};f.D=function(){return 0<this.i?Ng(this.gc,!0,this.i):null};
+f.N=function(a,b){return b===this.l?this:new Zg(this.ec,this.gc,this.i,b,this.m)};f.P=function(a,b){if(Cc(b))return this.Ha(null,Oa.b(b,0),Oa.b(b,1));a=this;for(b=O(b);;){if(null==b)return a;var c=Q(b);if(Cc(c))a=Ua(a,Oa.b(c,0),Oa.b(c,1)),b=T(b);else throw Error("conj on a map takes map entries or seqables of map entries");}};
+f.call=function(){var a=null;a=function(b,c,d){switch(arguments.length){case 2:return this.H(null,c);case 3:return this.u(null,c,d)}throw Error("Invalid arity: "+(arguments.length-1));};a.b=function(b,c){return this.H(null,c)};a.g=function(b,c,d){return this.u(null,c,d)};return a}();f.apply=function(a,b){return this.call.apply(this,[this].concat(Ha(b)))};f.a=function(a){return this.H(null,a)};f.b=function(a,b){return this.u(null,a,b)};var $g=new Zg(Rf,null,0,null,$b);Zg.prototype[Ga]=function(){return Wb(this)};
+var ff=function ff(a){for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return ff.C(0<c.length?new Rb(c.slice(0),0,null):null)};ff.C=function(a){a=O(a);for(var b=rb(be);;)if(a){var c=T(T(a));b=Cg(b,Q(a),Q(T(a)));a=c}else return tb(b)};ff.V=0;ff.U=function(a){return this.C(O(a))};var gf=function gf(a){for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return gf.C(0<c.length?new Rb(c.slice(0),0,null):null)};
+gf.C=function(a){a=a instanceof Rb&&0===a.j?a.c:pa(a);return af(a)};gf.V=0;gf.U=function(a){return this.C(O(a))};function ah(a){for(var b=[],c=arguments.length,d=0;;)if(d<c)b.push(arguments[d]),d+=1;else break;a:for(b=O(0<b.length?new Rb(b.slice(0),0,null):null),d=$g;;)if(b)c=T(T(b)),d=tc.g(d,Q(b),Q(T(b))),b=c;else break a;return d}function Ge(a,b){this.o=a;this.na=b;this.h=32374988;this.s=0}f=Ge.prototype;f.toString=function(){return Bb(this)};
+f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.na};f.X=function(){var a=(null!=this.o?this.o.h&128||B===this.o.Sa||(this.o.h?0:E(Ra,this.o)):E(Ra,this.o))?this.o.X():T(this.o);return null==a?null:new Ge(a,null)};f.J=function(){return Xb(this)};
+f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return this.o.ca(null).key};f.da=function(){var a=(null!=this.o?this.o.h&128||B===this.o.Sa||(this.o.h?0:E(Ra,this.o)):E(Ra,this.o))?this.o.X():T(this.o);return null!=a?new Ge(a,null):Tb};f.D=function(){return this};f.N=function(a,b){return b===this.na?this:new Ge(this.o,b)};f.P=function(a,b){return mc(b,this)};Ge.prototype[Ga]=function(){return Wb(this)};
+function Yd(a){return(a=O(a))?new Ge(a,null):null}function ce(a){return Wa(a)}function He(a,b){this.o=a;this.na=b;this.h=32374988;this.s=0}f=He.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();f.K=function(){return this.na};f.X=function(){var a=(null!=this.o?this.o.h&128||B===this.o.Sa||(this.o.h?0:E(Ra,this.o)):E(Ra,this.o))?this.o.X():T(this.o);return null==a?null:new He(a,null)};f.J=function(){return Xb(this)};
+f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};f.Y=function(a,b){return Ic(b,this)};f.Z=function(a,b,c){return Lc(b,c,this)};f.ca=function(){return this.o.ca(null).B};f.da=function(){var a=(null!=this.o?this.o.h&128||B===this.o.Sa||(this.o.h?0:E(Ra,this.o)):E(Ra,this.o))?this.o.X():T(this.o);return null!=a?new He(a,null):Tb};f.D=function(){return this};f.N=function(a,b){return b===this.na?this:new He(this.o,b)};f.P=function(a,b){return mc(b,this)};He.prototype[Ga]=function(){return Wb(this)};
+function Zd(a){return(a=O(a))?new He(a,null):null}function de(a){return Xa(a)}function sg(a){for(var b=sd,c=O(new pd(null,2,5,qd,[Df,tg],null));;)if(c){var d=Q(c),e=Nb.g(a,d,ug);b=Ub.b(e,ug)?b:tc.g(b,d,e);c=T(c)}else return bb(b,yc(a))}function Wc(a){if(null!=a&&(a.s&4096||B===a.zb))return a.name;if("string"===typeof a)return a;throw Error(["Doesn't support name: ",G.a(a)].join(""));}function gh(a,b,c){this.start=a;this.step=b;this.count=c;this.h=82;this.s=0}f=gh.prototype;f.R=function(){return this.count};
+f.ca=function(){return this.start};f.G=function(a,b){return this.start+b*this.step};f.W=function(a,b,c){return 0<=b&&b<this.count?this.start+b*this.step:c};f.kb=function(){if(1>=this.count)throw Error("-drop-first of empty chunk");return new gh(this.start+this.step,this.step,this.count-1)};function hh(a,b,c){this.j=a;this.end=b;this.step=c}hh.prototype.ea=function(){return 0<this.step?this.j<this.end:this.j>this.end};hh.prototype.next=function(){var a=this.j;this.j+=this.step;return a};
+function ih(a,b,c,d,e,g,h){this.l=a;this.start=b;this.end=c;this.step=d;this.pa=e;this.pc=g;this.m=h;this.h=32375006;this.s=140800}f=ih.prototype;f.toString=function(){return Bb(this)};f.indexOf=function(){var a=null;a=function(b,c){switch(arguments.length){case 1:return U(this,b,0);case 2:return U(this,b,c)}throw Error("Invalid arity: "+arguments.length);};a.a=function(b){return U(this,b,0)};a.b=function(b,c){return U(this,b,c)};return a}();
+f.lastIndexOf=function(){function a(c){return Y(this,c,V(this))}var b=null;b=function(c,d){switch(arguments.length){case 1:return a.call(this,c);case 2:return Y(this,c,d)}throw Error("Invalid arity: "+arguments.length);};b.a=a;b.b=function(c,d){return Y(this,c,d)};return b}();function jh(a){if(null==a.pa){var b=a.R(null);32<b?(a.pc=new ih(null,a.start+32*a.step,a.end,a.step,null,null,null),a.pa=new gh(a.start,a.step,32)):a.pa=new gh(a.start,a.step,b)}}
+f.G=function(a,b){if(0<=b&&b<this.R(null))return this.start+b*this.step;if(0<=b&&this.start>this.end&&0===this.step)return this.start;throw Error("Index out of bounds");};f.W=function(a,b,c){return 0<=b&&b<this.R(null)?this.start+b*this.step:0<=b&&this.start>this.end&&0===this.step?this.start:c};f.oa=function(){return new hh(this.start,this.end,this.step)};f.K=function(){return this.l};
+f.X=function(){return 0<this.step?this.start+this.step<this.end?new ih(null,this.start+this.step,this.end,this.step,null,null,null):null:this.start+this.step>this.end?new ih(null,this.start+this.step,this.end,this.step,null,null,null):null};f.R=function(){return Math.ceil((this.end-this.start)/this.step)};f.J=function(){var a=this.m;return null!=a?a:this.m=a=Xb(this)};f.F=function(a,b){return lc(this,b)};f.S=function(){return Tb};f.Y=function(a,b){return Hg(this,b)};
+f.Z=function(a,b,c){for(a=this.start;;)if(0<this.step?a<this.end:a>this.end){c=b.b?b.b(c,a):b.call(null,c,a);if(bc(c))return Za(c);a+=this.step}else return c};f.ca=function(){return this.start};f.da=function(){var a=this.X();return null==a?Tb:a};f.D=function(){return this};f.hb=function(){jh(this);return this.pa};f.Za=function(){jh(this);return null==this.pc?Tb:this.pc};f.N=function(a,b){return b===this.l?this:new ih(b,this.start,this.end,this.step,this.pa,this.pc,this.m)};
+f.P=function(a,b){return mc(b,this)};f.lb=function(){return O(this.Za(null))};ih.prototype[Ga]=function(){return Wb(this)};function Eg(a){return tb(Jc(function(b,c){return Cg(b,c,Nb.g(b,c,0)+1)},rb(sd),a))}function hf(a){a:for(var b=a;;)if(b=O(b))b=T(b);else break a;return a}
+function Ie(a,b,c,d,e,g,h){var k=ra;ra=null==ra?null:ra-1;try{if(null!=ra&&0>ra)return nb(a,"#");nb(a,c);if(0===Ba.a(g))O(h)&&nb(a,function(){var v=Je.a(g);return D(v)?v:"..."}());else{if(O(h)){var l=Q(h);b.g?b.g(l,a,g):b.call(null,l,a,g)}for(var n=T(h),p=Ba.a(g)-1;;)if(!n||null!=p&&0===p){O(n)&&0===p&&(nb(a,d),nb(a,function(){var v=Je.a(g);return D(v)?v:"..."}()));break}else{nb(a,d);var q=Q(n);c=a;h=g;b.g?b.g(q,c,h):b.call(null,q,c,h);var r=T(n);c=p-1;n=r;p=c}}return nb(a,e)}finally{ra=k}}
+function Ke(a,b){b=O(b);for(var c=null,d=0,e=0;;)if(e<d){var g=c.G(null,e);nb(a,g);e+=1}else if(b=O(b))c=b,Dc(c)?(b=wb(c),d=xb(c),c=b,g=V(b),b=d,d=g):(g=Q(c),nb(a,g),b=T(c),c=null,d=0),e=0;else return null}var Me={'"':'\\"',"\\":"\\\\","\b":"\\b","\f":"\\f","\n":"\\n","\r":"\\r","\t":"\\t"};function Ne(a){return['"',G.a(a.replace(/[\\"\b\f\n\r\t]/g,function(b){return Me[b]})),'"'].join("")}function Oe(a,b){return Hc(Nb.b(a,ya))?null!=b&&(b.h&131072||B===b.yb)?null!=yc(b):!1:!1}
+function Pe(a,b,c){if(null==a)return nb(b,"nil");if(Oe(c,a)){nb(b,"^");var d=yc(a);Qe.g?Qe.g(d,b,c):Qe.call(null,d,b,c);nb(b," ")}if(a.pb)return a.Cb(b);if(null!=a?a.h&2147483648||B===a.ba||(a.h?0:E(ob,a)):E(ob,a))return pb(a,b,c);if(!0===a||!1===a)return nb(b,G.a(a));if("number"===typeof a)return nb(b,isNaN(a)?"##NaN":a===Number.POSITIVE_INFINITY?"##Inf":a===Number.NEGATIVE_INFINITY?"##-Inf":G.a(a));if(null!=a&&a.constructor===Object)return nb(b,"#js "),d=ud.b(function(g){var h=/[A-Za-z_\*\+\?!\-'][\w\*\+\?!\-']*/;
+if("string"===typeof g)h=h.exec(g),h=Ub.b(Q(h),g)?1===V(h)?Q(h):Kg(h):null;else throw new TypeError("re-matches must match against a string.");return new Ud(null!=h?Vc.a(g):g,a[g])},fa(a)),Re.T?Re.T(d,Qe,b,c):Re.call(null,d,Qe,b,c);if(Lf(a))return Ie(b,Qe,"#js ["," ","]",c,a);if("string"==typeof a)return D(xa.a(c))?nb(b,Ne(a)):nb(b,a);if("function"==w(a)){var e=a.name;c=D(function(){var g=null==e;return g?g:/^[\s\xa0]*$/.test(e)}())?"Function":e;return Ke(b,nc(["#object[",c,D(!1)?[' "',G.a(a),'"'].join(""):
+"","]"]))}if(a instanceof Date)return c=function(g,h){for(g=G.a(g);;)if(g.length<h)g=["0",g].join("");else return g},Ke(b,nc(['#inst "',G.a(a.getUTCFullYear()),"-",c(a.getUTCMonth()+1,2),"-",c(a.getUTCDate(),2),"T",c(a.getUTCHours(),2),":",c(a.getUTCMinutes(),2),":",c(a.getUTCSeconds(),2),".",c(a.getUTCMilliseconds(),3),"-",'00:00"']));if(a instanceof RegExp)return Ke(b,nc(['#"',a.source,'"']));if(D(function(){var g=null==a?null:a.constructor;return null==g?null:g.eb}()))return Ke(b,nc(["#object[",
+a.constructor.eb.replace(/\//g,"."),"]"]));e=function(){var g=null==a?null:a.constructor;return null==g?null:g.name}();c=D(function(){var g=null==e;return g?g:/^[\s\xa0]*$/.test(e)}())?"Object":e;return null==a.constructor?Ke(b,nc(["#object[",c,"]"])):Ke(b,nc(["#object[",c," ",G.a(a),"]"]))}function Qe(a,b,c){var d=Se.a(c);return D(d)?(c=tc.g(c,Te,Pe),d.g?d.g(a,b,c):d.call(null,a,b,c)):Pe(a,b,c)}
+function qf(a,b){var c=new ha;a:{var d=new Ab(c);Qe(Q(a),d,b);a=O(T(a));for(var e=null,g=0,h=0;;)if(h<g){var k=e.G(null,h);nb(d," ");Qe(k,d,b);h+=1}else if(a=O(a))e=a,Dc(e)?(a=wb(e),g=xb(e),e=a,k=V(a),a=g,g=k):(k=Q(e),nb(d," "),Qe(k,d,b),a=T(e),e=null,g=0),h=0;else break a}return c}function Ve(a){return a instanceof Mb?Ob.b(null,Wc(a)):Vc.b(null,Wc(a))}
+function We(a){if(D(!1)){var b=O(a),c=O(b),d=Q(c);T(c);sc(d,0,null);sc(d,1,null);c=Ue(a);for(a=null;;){d=a;b=O(b);a=Q(b);var e=T(b),g=a;a=sc(g,0,null);b=sc(g,1,null);if(D(g))if(a instanceof Pb||a instanceof Mb)if(D(d))if(Ub.b(d,Uc(a)))c=tc.g(c,Ve(a),b),a=d,b=e;else return null;else if(d=Uc(a),D(d))c=tc.g(c,Ve(a),b),a=d,b=e;else return null;else return null;else return new pd(null,2,5,qd,[d,c],null)}}else return null}
+function Xe(a,b,c,d,e){return Ie(d,function(g,h,k){var l=Wa(g);c.g?c.g(l,h,k):c.call(null,l,h,k);nb(h," ");g=Xa(g);return c.g?c.g(g,h,k):c.call(null,g,h,k)},[G.a(a),"{"].join(""),", ","}",e,O(b))}function Re(a,b,c,d){var e=Ac(a)?We(a):null,g=sc(e,0,null);e=sc(e,1,null);return D(g)?Xe(["#:",G.a(g)].join(""),e,b,c,d):Xe(null,a,b,c,d)}Rb.prototype.ba=B;Rb.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Xc.prototype.ba=B;Xc.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};
+Ud.prototype.ba=B;Ud.prototype.M=function(a,b,c){return Ie(b,Qe,"["," ","]",c,this)};Mg.prototype.ba=B;Mg.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};ye.prototype.ba=B;ye.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Qg.prototype.ba=B;Qg.prototype.M=function(a,b,c){return Ie(b,Qe,"["," ","]",c,this)};Wd.prototype.ba=B;Wd.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Ld.prototype.ba=B;
+Ld.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Tc.prototype.ba=B;Tc.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};$f.prototype.ba=B;$f.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};De.prototype.ba=B;De.prototype.M=function(a,b,c){return Re(this,Qe,b,c)};Ae.prototype.ba=B;Ae.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Zg.prototype.ba=B;Zg.prototype.M=function(a,b,c){return Re(this,Qe,b,c)};ad.prototype.ba=B;
+ad.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};He.prototype.ba=B;He.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Pg.prototype.ba=B;Pg.prototype.M=function(a,b,c){return Ie(b,Qe,"["," ","]",c,this)};pd.prototype.ba=B;pd.prototype.M=function(a,b,c){return Ie(b,Qe,"["," ","]",c,this)};Sc.prototype.ba=B;Sc.prototype.M=function(a,b){return nb(b,"()")};va.prototype.ba=B;va.prototype.M=function(a,b,c){return Re(this,Qe,b,c)};ih.prototype.ba=B;
+ih.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Ge.prototype.ba=B;Ge.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};qc.prototype.ba=B;qc.prototype.M=function(a,b,c){return Ie(b,Qe,"("," ",")",c,this)};Mb.prototype.ac=B;Mb.prototype.$b=function(a,b){if(b instanceof Mb)return Qf(this,b);throw Error(["Cannot compare ",G.a(this)," to ",G.a(b)].join(""));};Pb.prototype.ac=B;
+Pb.prototype.$b=function(a,b){if(b instanceof Pb)return Xf(this,b);throw Error(["Cannot compare ",G.a(this)," to ",G.a(b)].join(""));};pd.prototype.ac=B;pd.prototype.$b=function(a,b){if(Cc(b))return Sf(this,b);throw Error(["Cannot compare ",G.a(this)," to ",G.a(b)].join(""));};Ud.prototype.ac=B;Ud.prototype.$b=function(a,b){if(Cc(b))return Sf(this,b);throw Error(["Cannot compare ",G.a(this)," to ",G.a(b)].join(""));};Qg.prototype.ac=B;
+Qg.prototype.$b=function(a,b){if(Cc(b))return Sf(this,b);throw Error(["Cannot compare ",G.a(this)," to ",G.a(b)].join(""));};Pg.prototype.ac=B;Pg.prototype.$b=function(a,b){if(Cc(b))return Sf(this,b);throw Error(["Cannot compare ",G.a(this)," to ",G.a(b)].join(""));};function wf(){}
+var xf=function xf(a){if(null!=a&&null!=a.Zb)return a.Zb(a);var c=xf[w(null==a?null:a)];if(null!=c)return c.a?c.a(a):c.call(null,a);c=xf._;if(null!=c)return c.a?c.a(a):c.call(null,a);throw Da("IEncodeJS.-clj-\x3ejs",a);};function yf(a,b){(null!=a?B===a.Yb||(a.Vb?0:E(wf,a)):E(wf,a))?a=xf(a):"string"===typeof a||"number"===typeof a||a instanceof Pb||a instanceof Mb?a=b.a?b.a(a):b.call(null,a):(a=nc([a]),b=of(),a=null==a||Mf(O(a))?"":G.a(qf(a,b)));return a}
+var zf=function zf(a){for(var c=[],d=arguments.length,e=0;;)if(e<d)c.push(arguments[e]),e+=1;else break;return zf.C(arguments[0],1<c.length?new Rb(c.slice(1),0,null):null)};
+zf.C=function(a,b){b=null!=b&&(b.h&64||B===b.bb)?md(ff,b):b;var c=Nb.g(b,Af,Wc),d=function h(g){if(null==g)return null;if(null!=g?B===g.Yb||(g.Vb?0:E(wf,g)):E(wf,g))return xf(g);if(g instanceof Pb)return c.a?c.a(g):c.call(null,g);if(g instanceof Mb)return G.a(g);if(Ac(g)){var k={};g=O(g);for(var l=null,n=0,p=0;;)if(p<n){var q=l.G(null,p),r=sc(q,0,null),v=sc(q,1,null);q=k;r=yf(r,d);v=h(v);q[r]=v;p+=1}else if(g=O(g))Dc(g)?(n=wb(g),g=xb(g),l=n,n=V(n)):(l=Q(g),n=sc(l,0,null),p=sc(l,1,null),l=k,n=yf(n,
+d),p=h(p),l[n]=p,g=T(g),l=null,n=0),p=0;else break;return k}if(bf(g)){k=[];g=O(ud.b(h,g));l=null;for(p=n=0;;)if(p<n)q=l.G(null,p),k.push(q),p+=1;else if(g=O(g))l=g,Dc(l)?(g=wb(l),p=xb(l),l=g,n=V(g),g=p):(g=Q(l),k.push(g),g=T(l),l=null,n=0),p=0;else break;return k}return g};return d(a)};zf.V=1;zf.U=function(a){var b=Q(a);a=T(a);return this.C(b,a)};function jf(){}
+var kf=function kf(a,b){if(null!=a&&null!=a.Sb)return a.Sb(a,b);var d=kf[w(null==a?null:a)];if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);d=kf._;if(null!=d)return d.b?d.b(a,b):d.call(null,a,b);throw Da("IEncodeClojure.-js-\x3eclj",a);};
+function lf(a){var b=nc([mf,!0]),c=null!=b&&(b.h&64||B===b.bb)?md(ff,b):b;c=Nb.b(c,mf);var d=D(c)?Vc:G;return function h(g){return(null!=g?B===g.Ub||(g.Vb?0:E(jf,g)):E(jf,g))?kf(g,md(gf,b)):cf(g)?hf(ud.b(h,g)):Vd(g)?new Ud(h(Wa(g)),h(Xa(g))):bf(g)?ef.g(Ue(g),ud.a(h),g):Lf(g)?tb(Jc(function(k,l){return fd.b(k,h(l))},rb(pc),g)):Nf(g)===Object?tb(Jc(function(k,l){var n=d.a?d.a(l):d.call(null,l);return Cg(k,n,h(null!==g&&l in g?g[l]:void 0))},rb(sd),fa(g))):g}(a)}
+function bh(a,b){return tb(Jc(function(c,d){var e=a.a?a.a(d):a.call(null,d);return Cg(c,e,oc.b(Nb.g(c,e,pc),d))},rb(sd),b))}if("undefined"===typeof ja||"undefined"===typeof ka||"undefined"===typeof Ye)var Ye=null;"undefined"!==typeof console&&Ca();if("undefined"===typeof ja||"undefined"===typeof ka||"undefined"===typeof Ze)var Ze=function(){throw Error("cljs.core/*eval* not bound");};Ub.b("nodejs","nodejs");Ca();var Ba=new Pb(null,"print-length","print-length",1931866356),wa=new Pb(null,"flush-on-newline","flush-on-newline",-151457939),vg=new Pb(null,"level","level",1290497552),Bf=new Pb(null,"countries","countries",863192750),ya=new Pb(null,"meta","meta",1499536964),jg=new Pb(null,"typeId","typeId",-1935714579),mf=new Pb(null,"keywordize-keys","keywordize-keys",1310784252),kg=new Pb(null,"countryId","countryId",863919925),lg=new Pb(null,"country","country",312965309),If=new Pb(null,"regionGroups","regionGroups",
+1744886740),eg=new Pb(null,"thematicFocus","thematicFocus",-1978345347),fg=new Pb(null,"kw","kw",1158308175),wg=new Pb(null,"types","types",590030639),Cf=new Pb(null,"regions","regions",-1023815958),Df=new Pb(null,"label","label",1718410804),tg=new Pb(null,"value","value",305978217),Te=new Pb(null,"fallback-impl","fallback-impl",-1501286995),xa=new Pb(null,"readably","readably",1129599760),kh=new Pb(null,"implementationInit","implementationInit",931604657),rd=new Mb(null,"meta6282","meta6282",1850575520,
+null),Af=new Pb(null,"keyword-fn","keyword-fn",-64566675),mg=new Pb(null,"sectorIds","sectorIds",1230598816),Ef=new Pb(null,"name","name",1843675177),lh=new Pb(null,"implementationPeriod","implementationPeriod",1822117398),Ff=new Pb(null,"id","id",-1388402092),ng=new Pb(null,"regionId","regionId",1435518084),Se=new Pb(null,"alt-impl","alt-impl",670969595),mh=new Pb(null,"implementationEnd","implementationEnd",-1719040732),xg=new Pb(null,"options","options",99638489),ug=new Pb("cljs.core","not-found",
+"cljs.core/not-found",-1572889185),ch=new Pb(null,"year","year",335913393),og=new Pb(null,"type","type",1174270348),pg=new Pb(null,"sectors","sectors",-1244148731),za=new Pb(null,"dup","dup",556298533),Je=new Pb(null,"more-marker","more-marker",-14717935),Gf=new Pb(null,"region","region",270415120);function qg(a,b){return Jc(function(c,d){var e=sc(d,0,null);d=sc(d,1,null);return Jg(a,e)?tc.g(c,d,Nb.b(a,e)):c},nd(sf,a,Yd(b)),b)};function gg(a){return a.toLowerCase()}function nh(a){var b=/-/;a="/(?:)/"===G.a(b)?oc.b(Kg(mc("",ud.b(G,O(a)))),""):Kg(G.a(a).split(b));if(1<V(a))a:for(;;)if(""===(null==a?null:Fg(a)))a=null==a?null:nf(a);else break a;return a}function hg(a){return a.replace(/[\s\xa0]+$/,"")};if("undefined"===typeof $e)var $e=4;function yg(a){for(var b=[],c=arguments.length,d=0;;)if(d<c)b.push(arguments[d]),d+=1;else break;return zg(arguments[0],1<b.length?new Rb(b.slice(1),0,null):null)}function zg(a,b){function c(d,e,g,h){return Jc(function(k,l){var n=null!=l&&(l.h&64||B===l.bb)?md(ff,l):l;Nb.b(n,tg);Nb.b(n,Df);l=Nb.b(n,xg);k=oc.b(k,tc.g(sg(n),vg,h));n=null!=l?O(l)?l:null:!1;return D(n)?(n=h+1,d.T?d.T(d,k,l,n):d.call(null,d,k,l,n)):k},e,g)}b=sc(b,0,null);return c(c,pc,a,D(b)?b:0)}
+function Ag(){var a=new va(null,2,[Ef,Df,Ff,tg],null);return function(b){return qg(b,a)}}function dh(a){if(null!=a){var b=parseInt;var c=/\d+/;if("string"===typeof a)a=c.exec(a),a=null==a?null:1===V(a)?Q(a):Kg(a);else throw new TypeError("re-find must match against a string.");b=b(a);return"number"!==typeof b||isNaN(b)||Infinity===b||parseFloat(b)!==parseInt(b,10)?null:b}return null};shadow$umd$export={countSelects:function(a){a=lf(a);a=Jc(function(b,c){return rg(Dg(Dg(Dg(b,Bf,oc,lg.a(c)),wg,oc,og.a(c)),Cf,oc,Gf.a(c)),pg,function(d){return nd(oc,d,pg.a(c))})},new va(null,4,[Bf,pc,wg,pc,Cf,pc,pg,pc],null),a);return zf(rg(rg(rg(rg(a,Bf,Eg),wg,Eg),Cf,Eg),pg,Eg))},activeYears:function(a){return zf(Jc(function(b,c){var d=sc(c,0,null);c=sc(c,1,null);return oc.b(b,new va(null,2,[tg,G.a(d),Df,[G.a(d)," (",G.a(c),")"].join("")],null))},pc,Uf(Rf,Eg(vf(function(b){var c=kh.a(b);b=mh.a(b)+
+1;return b<=c?Tb:new ih(null,c,b,1,null,null,null)},nc([tf(function(b){return null!=kh.a(b)&&kh.a(b)<mh.a(b)},ud.b(function(b){var c=nh(lh.a(b)),d=sc(c,0,null),e=sc(c,1,null);return tc.C(b,kh,dh(d),nc([mh,function(){var g=dh(e);return D(g)?g:(new Date).getFullYear()}()]))},lf(a)))]))))))},countThematicFocus:function(a,b){a=lf(a);b=lf(b);b=Jc(function(c,d){return tc.g(c,Vc.a(fg.a(d)),0)},sd,b);return zf(Jc(function(c,d){return Jc(function(e,g){return D(g.a?g.a(d):g.call(null,d))?rg(e,g,Bg):e},c,Yd(c))},
+b,a))},sectors:function(a){a=pg.a(lf(a));return zf(yg(a))},regions:function(a){return zf(yg(ud.b(function(b){return rg(b,xg,function(c){return ud.b(function(d){return rg(function(){var e=sf.b(d,Bf),g=Ag();return g.a?g.a(e):g.call(null,e)}(),xg,function(e){return ud.b(Ag(),e)})},c)})},ud.b(function(b){return qg(b,new va(null,3,[Ef,Df,Ff,tg,Cf,xg],null))},If.a(lf(a))))))},countries:function(a){a=If.a(lf(a));a=Q(tf(function(b){return Ub.b("Geographical",Df.a(b))},a));a=Jc(function(b,c){return nd(oc,
+b,ud.b(function(d){return tc.g(tc.g(tc.g(sf.b(sf.b(d,Ef),Ff),tg,Ff.a(d)),Df,Ef.a(d)),Gf,new va(null,2,[Ff,Ff.a(c),Df,Ef.a(c)],null))},Bf.a(c)))},pc,Cf.a(a));return zf(Wf(a))},types:function(a){a=wg.a(lf(a));return zf(yg(a))},approvalYears:function(a){return zf(Jc(function(b,c){var d=sc(c,0,null);c=sc(c,1,null);return oc.b(b,new va(null,2,[tg,G.a(d),Df,[G.a(d)," (",G.a(c),")"].join("")],null))},pc,Jc(function(b,c){var d=sc(c,0,null);c=sc(c,1,null);return tc.g(b,d,V(c))},ah(),bh(ch,ud.b(function(b){return rg(b,
+ch,dh)},tf(function(b){return dh(ch.a(b))},lf(a)))))))},assocIn:function(a,b){a=lf(a);b=lf(b);b=Jc(function(c,d){var e=sc(d,0,null);d=sc(d,1,null);return ig(c,ud.b(Vc,e),d)},a,b);return zf(b)},reports:function(a,b){var c=lf(a);a=ud.b(function(d){return sf.b(d,eg)},ud.b(function(d){return Jc(function(e,g){return tc.g(e,Vc.a(fg.a(Q(tf(function(h){return Ub.b(g,Ff.a(h))},c)))),!0)},d,eg.a(d))},ud.b(function(d){return qg(d,new va(null,4,[mg,pg,ng,Gf,jg,og,kg,lg],null))},lf(b))));return zf(a)},thematicFocus:function(a){return zf(ud.b(function(b){return tc.g(b,
+fg,function(){var c=dg.C(function(d){a:{d=d.replace(new RegExp(" ".replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g,"\\$1").replace(/\x08/g,"\\x08"),"g"),"_");break a;throw["Invalid match arg: ",G.a(" ")].join("");}return d},gg,hg,nc([Ef]));return c.a?c.a(b):c.call(null,b)}())},eg.a(lf(a))))}};
+
+  return shadow$umd$export;
+});
 
 },{}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var Charts =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Charts, _Component);
-
-  function Charts(props) {
-    _classCallCheck(this, Charts);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Charts).call(this, props));
-  }
-
-  _createClass(Charts, [{
-    key: "render",
-    value: function render() {
-      return _react["default"].createElement("div", {
-        className: "row "
-      }, _react["default"].createElement("div", {
-        className: "col-xs-12"
-      }, _react["default"].createElement("div", {
-        className: "charts"
-      }, _react["default"].createElement("div", {
-        className: "card"
-      }, _react["default"].createElement("span", {
-        className: "card-title"
-      }, "Charts"), _react["default"].createElement("div", {
-        className: "card-content "
-      }, _react["default"].createElement("div", {
-        id: "charts-carousel",
-        className: "charts-carousel carousel slide",
-        "data-ride": "carousel",
-        "data-interval": "0"
-      }, _react["default"].createElement("div", {
-        className: "carousel-inner",
-        role: "listbox"
-      }, _react["default"].createElement("div", {
-        className: "item active"
-      }, _react["default"].createElement("div", {
-        className: "row"
-      }, _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })))), _react["default"].createElement("div", {
-        className: "item"
-      }, _react["default"].createElement("div", {
-        className: "row"
-      }, _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })))), _react["default"].createElement("div", {
-        className: "item"
-      }, _react["default"].createElement("div", {
-        className: "row"
-      }, _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-4"
-      }, _react["default"].createElement("img", {
-        src: "placeholders/2014-09-15_08432.png",
-        className: "img-responsive",
-        alt: ""
-      }))))), _react["default"].createElement("a", {
-        className: "left carousel-control",
-        href: "#charts-carousel",
-        role: "button",
-        "data-slide": "prev"
-      }, _react["default"].createElement("span", {
-        className: "fa fa-chevron-left",
-        "aria-hidden": "true"
-      }), _react["default"].createElement("span", {
-        className: "sr-only"
-      }, "Previous")), _react["default"].createElement("a", {
-        className: "right carousel-control",
-        href: "#charts-carousel",
-        role: "button",
-        "data-slide": "next"
-      }, _react["default"].createElement("span", {
-        className: "fa fa-chevron-right",
-        "aria-hidden": "true"
-      }), _react["default"].createElement("span", {
-        className: "sr-only"
-      }, "Next")), _react["default"].createElement("ol", {
-        className: "carousel-indicators"
-      }, _react["default"].createElement("li", {
-        "data-target": "#charts-carousel",
-        "data-slide-to": "0",
-        className: "active"
-      }), _react["default"].createElement("li", {
-        "data-target": "#charts-carousel",
-        "data-slide-to": "1"
-      }), _react["default"].createElement("li", {
-        "data-target": "#charts-carousel",
-        "data-slide-to": "2"
-      }))))))));
-    }
-  }]);
-
-  return Charts;
-}(_react.Component);
-
-var _default = Charts;
-exports["default"] = _default;
-
-},{"react":224}],3:[function(require,module,exports){
-arguments[4][2][0].apply(exports,arguments)
-},{"dup":2,"react":224}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -278,8 +430,17 @@ function (_Component) {
           if (data.level === 1) {
             //console.log(data);
             return _objectSpread({}, styles, {
-              backgroundColor: 'pink',
+              marginLeft: '10px'
+            });
+          } else if (data.level === 2) {
+            //console.log(data);
+            return _objectSpread({}, styles, {
               marginLeft: '20px'
+            });
+          } else if (data.level === 3) {
+            //console.log(data);
+            return _objectSpread({}, styles, {
+              marginLeft: '30px'
             });
           } else {
             return styles;
@@ -341,1324 +502,7 @@ function (_Component) {
 var _default = Childo;
 exports["default"] = _default;
 
-},{"react":224,"react-select":213}],5:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.allCountries = exports.afganJson = void 0;
-var afganCoord = [[[61.210817, 35.650072], [62.230651, 35.270664], [62.984662, 35.404041], [63.193538, 35.857166], [63.982896, 36.007957], [64.546479, 36.312073], [64.746105, 37.111818], [65.588948, 37.305217], [65.745631, 37.661164], [66.217385, 37.39379], [66.518607, 37.362784], [67.075782, 37.356144], [67.83, 37.144994], [68.135562, 37.023115], [68.859446, 37.344336], [69.196273, 37.151144], [69.518785, 37.608997], [70.116578, 37.588223], [70.270574, 37.735165], [70.376304, 38.138396], [70.806821, 38.486282], [71.348131, 38.258905], [71.239404, 37.953265], [71.541918, 37.905774], [71.448693, 37.065645], [71.844638, 36.738171], [72.193041, 36.948288], [72.63689, 37.047558], [73.260056, 37.495257], [73.948696, 37.421566], [74.980002, 37.41999], [75.158028, 37.133031], [74.575893, 37.020841], [74.067552, 36.836176], [72.920025, 36.720007], [71.846292, 36.509942], [71.262348, 36.074388], [71.498768, 35.650563], [71.613076, 35.153203], [71.115019, 34.733126], [71.156773, 34.348911], [70.881803, 33.988856], [69.930543, 34.02012], [70.323594, 33.358533], [69.687147, 33.105499], [69.262522, 32.501944], [69.317764, 31.901412], [68.926677, 31.620189], [68.556932, 31.71331], [67.792689, 31.58293], [67.683394, 31.303154], [66.938891, 31.304911], [66.381458, 30.738899], [66.346473, 29.887943], [65.046862, 29.472181], [64.350419, 29.560031], [64.148002, 29.340819], [63.550261, 29.468331], [62.549857, 29.318572], [60.874248, 29.829239], [61.781222, 30.73585], [61.699314, 31.379506], [60.941945, 31.548075], [60.863655, 32.18292], [60.536078, 32.981269], [60.9637, 33.528832], [60.52843, 33.676446], [60.803193, 34.404102], [61.210817, 35.650072]]];
-var geoJson = {
-  "type": "FeatureCollection",
-  "features": [{
-    "type": "Feature",
-    "id": "AFG",
-    "properties": {
-      "name": "Afghanistan"
-    },
-    "geometry": {
-      "type": "Polygon",
-      "coordinates": afganCoord
-    }
-  }]
-};
-var afganJson = [{
-  "CountryID": "010d6483-d82d-48de-88c4-030fc5e7f81e",
-  "CountryName": "Afghanistan",
-  "CountryCode": "AFG",
-  "GeoJSON": geoJson,
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}];
-exports.afganJson = afganJson;
-var allCountries = [{
-  "CountryID": "010d6483-d82d-48de-88c4-030fc5e7f81e",
-  "CountryName": "Afghanistan",
-  "CountryCode": "AFG",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"AFG\",\"properties\":{\"name\":\"Afghanistan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[61.210817,35.650072],[62.230651,35.270664],[62.984662,35.404041],[63.193538,35.857166],[63.982896,36.007957],[64.546479,36.312073],[64.746105,37.111818],[65.588948,37.305217],[65.745631,37.661164],[66.217385,37.39379],[66.518607,37.362784],[67.075782,37.356144],[67.83,37.144994],[68.135562,37.023115],[68.859446,37.344336],[69.196273,37.151144],[69.518785,37.608997],[70.116578,37.588223],[70.270574,37.735165],[70.376304,38.138396],[70.806821,38.486282],[71.348131,38.258905],[71.239404,37.953265],[71.541918,37.905774],[71.448693,37.065645],[71.844638,36.738171],[72.193041,36.948288],[72.63689,37.047558],[73.260056,37.495257],[73.948696,37.421566],[74.980002,37.41999],[75.158028,37.133031],[74.575893,37.020841],[74.067552,36.836176],[72.920025,36.720007],[71.846292,36.509942],[71.262348,36.074388],[71.498768,35.650563],[71.613076,35.153203],[71.115019,34.733126],[71.156773,34.348911],[70.881803,33.988856],[69.930543,34.02012],[70.323594,33.358533],[69.687147,33.105499],[69.262522,32.501944],[69.317764,31.901412],[68.926677,31.620189],[68.556932,31.71331],[67.792689,31.58293],[67.683394,31.303154],[66.938891,31.304911],[66.381458,30.738899],[66.346473,29.887943],[65.046862,29.472181],[64.350419,29.560031],[64.148002,29.340819],[63.550261,29.468331],[62.549857,29.318572],[60.874248,29.829239],[61.781222,30.73585],[61.699314,31.379506],[60.941945,31.548075],[60.863655,32.18292],[60.536078,32.981269],[60.9637,33.528832],[60.52843,33.676446],[60.803193,34.404102],[61.210817,35.650072]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "e2a7c98c-1141-4d24-9ac0-b8d238ba852d",
-  "CountryName": "Albania",
-  "CountryCode": "ALB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ALB\",\"properties\":{\"name\":\"Albania\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[20.590247,41.855404],[20.463175,41.515089],[20.605182,41.086226],[21.02004,40.842727],[20.99999,40.580004],[20.674997,40.435],[20.615,40.110007],[20.150016,39.624998],[19.98,39.694993],[19.960002,39.915006],[19.406082,40.250773],[19.319059,40.72723],[19.40355,41.409566],[19.540027,41.719986],[19.371769,41.877548],[19.304486,42.195745],[19.738051,42.688247],[19.801613,42.500093],[20.0707,42.58863],[20.283755,42.32026],[20.52295,42.21787],[20.590247,41.855404]]]}}]}",
-  "RecordCount": 12,
-  "FillOpacity": 0.39,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "38837eef-de83-4d76-9bea-5adadc54ddb6",
-  "CountryName": "Algeria",
-  "CountryCode": "DZA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"DZA\",\"properties\":{\"name\":\"Algeria\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[11.999506,23.471668],[8.572893,21.565661],[5.677566,19.601207],[4.267419,19.155265],[3.158133,19.057364],[3.146661,19.693579],[2.683588,19.85623],[2.060991,20.142233],[1.823228,20.610809],[-1.550055,22.792666],[-4.923337,24.974574],[-8.6844,27.395744],[-8.665124,27.589479],[-8.66559,27.656426],[-8.674116,28.841289],[-7.059228,29.579228],[-6.060632,29.7317],[-5.242129,30.000443],[-4.859646,30.501188],[-3.690441,30.896952],[-3.647498,31.637294],[-3.06898,31.724498],[-2.616605,32.094346],[-1.307899,32.262889],[-1.124551,32.651522],[-1.388049,32.864015],[-1.733455,33.919713],[-1.792986,34.527919],[-2.169914,35.168396],[-1.208603,35.714849],[-0.127454,35.888662],[0.503877,36.301273],[1.466919,36.605647],[3.161699,36.783905],[4.815758,36.865037],[5.32012,36.716519],[6.26182,37.110655],[7.330385,37.118381],[7.737078,36.885708],[8.420964,36.946427],[8.217824,36.433177],[8.376368,35.479876],[8.140981,34.655146],[7.524482,34.097376],[7.612642,33.344115],[8.430473,32.748337],[8.439103,32.506285],[9.055603,32.102692],[9.48214,30.307556],[9.805634,29.424638],[9.859998,28.95999],[9.683885,28.144174],[9.756128,27.688259],[9.629056,27.140953],[9.716286,26.512206],[9.319411,26.094325],[9.910693,25.365455],[9.948261,24.936954],[10.303847,24.379313],[10.771364,24.562532],[11.560669,24.097909],[11.999506,23.471668]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "c709fae3-f171-4185-8990-1ecc3b076f83",
-  "CountryName": "Angola",
-  "CountryCode": "AGO",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"AGO\",\"properties\":{\"name\":\"Angola\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[16.326528,-5.87747],[16.57318,-6.622645],[16.860191,-7.222298],[17.089996,-7.545689],[17.47297,-8.068551],[18.134222,-7.987678],[18.464176,-7.847014],[19.016752,-7.988246],[19.166613,-7.738184],[19.417502,-7.155429],[20.037723,-7.116361],[20.091622,-6.94309],[20.601823,-6.939318],[20.514748,-7.299606],[21.728111,-7.290872],[21.746456,-7.920085],[21.949131,-8.305901],[21.801801,-8.908707],[21.875182,-9.523708],[22.208753,-9.894796],[22.155268,-11.084801],[22.402798,-10.993075],[22.837345,-11.017622],[23.456791,-10.867863],[23.912215,-10.926826],[24.017894,-11.237298],[23.904154,-11.722282],[24.079905,-12.191297],[23.930922,-12.565848],[24.016137,-12.911046],[21.933886,-12.898437],[21.887843,-16.08031],[22.562478,-16.898451],[23.215048,-17.523116],[21.377176,-17.930636],[18.956187,-17.789095],[18.263309,-17.309951],[14.209707,-17.353101],[14.058501,-17.423381],[13.462362,-16.971212],[12.814081,-16.941343],[12.215461,-17.111668],[11.734199,-17.301889],[11.640096,-16.673142],[11.778537,-15.793816],[12.123581,-14.878316],[12.175619,-14.449144],[12.500095,-13.5477],[12.738479,-13.137906],[13.312914,-12.48363],[13.633721,-12.038645],[13.738728,-11.297863],[13.686379,-10.731076],[13.387328,-10.373578],[13.120988,-9.766897],[12.87537,-9.166934],[12.929061,-8.959091],[13.236433,-8.562629],[12.93304,-7.596539],[12.728298,-6.927122],[12.227347,-6.294448],[12.322432,-6.100092],[12.735171,-5.965682],[13.024869,-5.984389],[13.375597,-5.864241],[16.326528,-5.87747]]],[[[12.436688,-5.684304],[12.182337,-5.789931],[11.914963,-5.037987],[12.318608,-4.60623],[12.62076,-4.438023],[12.995517,-4.781103],[12.631612,-4.991271],[12.468004,-5.248362],[12.436688,-5.684304]]]]}}]}",
-  "RecordCount": 20,
-  "FillOpacity": 0.53,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "80e915ae-17b3-465a-8e73-adfcc5ac3407",
-  "CountryName": "Anguilla",
-  "CountryCode": "AIA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"scalerank\":1,\"featurecla\":\"Admin-0 country\",\"labelrank\":6,\"sovereignt\":\"United Kingdom\",\"sov_a3\":\"GB1\",\"adm0_dif\":1,\"level\":2,\"type\":\"Dependency\",\"admin\":\"Anguilla\",\"adm0_a3\":\"AIA\",\"geou_dif\":0,\"geounit\":\"Anguilla\",\"gu_a3\":\"AIA\",\"su_dif\":0,\"subunit\":\"Anguilla\",\"su_a3\":\"AIA\",\"brk_diff\":0,\"name\":\"Anguilla\",\"name_long\":\"Anguilla\",\"brk_a3\":\"AIA\",\"brk_name\":\"Anguilla\",\"brk_group\":null,\"abbrev\":\"Ang.\",\"postal\":\"AI\",\"formal_en\":null,\"formal_fr\":null,\"note_adm0\":\"U.K.\",\"note_brk\":null,\"name_sort\":\"Anguilla\",\"name_alt\":null,\"mapcolor7\":6,\"mapcolor8\":6,\"mapcolor9\":6,\"mapcolor13\":3,\"pop_est\":14436,\"gdp_md_est\":108.9,\"pop_year\":-99,\"lastcensus\":-99,\"gdp_year\":-99,\"economy\":\"6. Developing region\",\"income_grp\":\"3. Upper middle income\",\"wikipedia\":-99,\"fips_10\":null,\"iso_a2\":\"AI\",\"iso_a3\":\"AIA\",\"iso_n3\":\"660\",\"un_a3\":\"660\",\"wb_a2\":\"-99\",\"wb_a3\":\"-99\",\"woe_id\":-99,\"adm0_a3_is\":\"AIA\",\"adm0_a3_us\":\"AIA\",\"adm0_a3_un\":-99,\"adm0_a3_wb\":-99,\"continent\":\"North America\",\"region_un\":\"Americas\",\"subregion\":\"Caribbean\",\"region_wb\":\"Latin America & Caribbean\",\"name_len\":8,\"long_len\":8,\"abbrev_len\":4,\"tiny\":-99,\"homepart\":-99},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-63.001220703125,18.22177734374999],[-63.16000976562499,18.17138671875],[-63.1533203125,18.20029296874999],[-63.026025390624994,18.269726562499997],[-62.97958984374999,18.264794921874994],[-63.001220703125,18.22177734374999]]]},\"id\":\"AIA\"}]}",
-  "RecordCount": 6,
-  "FillOpacity": 0.29,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "34a881a1-3438-46e8-8ef3-3b7f5e80bec2",
-  "CountryName": "Antigua and Barbuda",
-  "CountryCode": "ATG",
-  "GeoJSON": "[{\"type\":\"Feature\",\"properties\":{\"scalerank\":3,\"featurecla\":\"Admin-0 country\",\"LABELRANK\":6,\"SOVEREIGNT\":\"Antigua and Barbuda\",\"SOV_A3\":\"ATG\",\"ADM0_DIF\":0,\"LEVEL\":2,\"TYPE\":\"Sovereign country\",\"ADMIN\":\"Antigua and Barbuda\",\"ADM0_A3\":\"ATG\",\"GEOU_DIF\":0,\"GEOUNIT\":\"Antigua and Barbuda\",\"GU_A3\":\"ATG\",\"SU_DIF\":0,\"SUBUNIT\":\"Antigua and Barbuda\",\"SU_A3\":\"ATG\",\"BRK_DIFF\":0,\"NAME\":\"Antigua and Barb.\",\"NAME_LONG\":\"Antigua and Barbuda\",\"BRK_A3\":\"ATG\",\"BRK_NAME\":\"Antigua and Barb.\",\"BRK_GROUP\":null,\"ABBREV\":\"Ant.B.\",\"POSTAL\":\"AG\",\"FORMAL_EN\":\"Antigua and Barbuda\",\"FORMAL_FR\":null,\"NOTE_ADM0\":null,\"NOTE_BRK\":null,\"NAME_SORT\":\"Antigua and Barbuda\",\"NAME_ALT\":null,\"MAPCOLOR7\":2,\"MAPCOLOR8\":2,\"MAPCOLOR9\":5,\"MAPCOLOR13\":5,\"POP_EST\":85632,\"GDP_MD_EST\":1657,\"POP_YEAR\":-99,\"LASTCENSUS\":2011,\"GDP_YEAR\":-99,\"ECONOMY\":\"6. Developing region\",\"INCOME_GRP\":\"3. Upper middle income\",\"WIKIPEDIA\":-99,\"FIPS_10_\":\"AC\",\"ISO_A2\":\"AG\",\"ISO_A3\":\"ATG\",\"ISO_N3\":\"028\",\"UN_A3\":\"028\",\"WB_A2\":\"AG\",\"WB_A3\":\"ATG\",\"WOE_ID\":23424737,\"WOE_ID_EH\":23424737,\"WOE_NOTE\":\"Exact WOE match as country\",\"ADM0_A3_IS\":\"ATG\",\"ADM0_A3_US\":\"ATG\",\"ADM0_A3_UN\":-99,\"ADM0_A3_WB\":-99,\"CONTINENT\":\"North America\",\"REGION_UN\":\"Americas\",\"SUBREGION\":\"Caribbean\",\"REGION_WB\":\"Latin America & Caribbean\",\"NAME_LEN\":17,\"LONG_LEN\":19,\"ABBREV_LEN\":6,\"TINY\":4,\"HOMEPART\":1},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-61.77301998599992,17.126532294000143],[-61.756418423999975,17.114162502000013],[-61.755441860999895,17.123032945000162],[-61.752756313999924,17.128892320000105],[-61.743316209999904,17.1415062520001],[-61.73761959499993,17.13296133000007],[-61.72984778599994,17.127997137000122],[-61.72008216099988,17.1263695330001],[-61.70860755099994,17.127834377000156],[-61.71349036399991,17.12254466400016],[-61.716297980999855,17.118801174000126],[-61.720529751999976,17.11611562700007],[-61.729644334999875,17.114162502000013],[-61.72508704299992,17.09983958500014],[-61.714833136999914,17.09308502800009],[-61.70164954299986,17.093451239000032],[-61.68809973899988,17.100531317000062],[-61.68065344999991,17.100531317000062],[-61.67552649599989,17.095607815],[-61.67210852799988,17.090643622000144],[-61.66759192599994,17.079413153000147],[-61.674387173999946,17.079901434000064],[-61.68814042899987,17.078924872000172],[-61.694935675999915,17.079413153000147],[-61.685658331999946,17.068264065000122],[-61.67707271999984,17.062933661000088],[-61.67218990799995,17.05756256700012],[-61.67442786399994,17.04588450700011],[-61.68569902299993,17.028550523000135],[-61.69701087099992,17.027818101000022],[-61.70995032499994,17.03416575700014],[-61.72622636599996,17.03847890800013],[-61.73399817599997,17.03485748900006],[-61.734364386999886,17.025783596000068],[-61.729644334999875,17.001166083000058],[-61.737131313999924,16.98924388200011],[-61.75352942599994,16.99681224200016],[-61.76976477799988,17.01097239800019],[-61.776844855999855,17.018540757000054],[-61.78359941299988,17.016913153000033],[-61.80406653599994,17.007310289000046],[-61.817860480999855,17.004950262000094],[-61.838693813999924,17.00482819200012],[-61.85171464799993,17.00763580900015],[-61.883656378999916,17.026271877000156],[-61.89037024599989,17.035386460000055],[-61.883615688999924,17.049017645],[-61.87922115799995,17.06045156500015],[-61.882801886999914,17.070217190000093],[-61.882435675999915,17.078802802],[-61.86620032499988,17.08685944200012],[-61.87336178299992,17.089544989000117],[-61.894154425999915,17.100531317000062],[-61.88312740799995,17.110500393000066],[-61.865386522999955,17.117824611000074],[-61.84235592399989,17.12441640800013],[-61.850453253999916,17.13764069200009],[-61.848784959999904,17.149481512000037],[-61.83967037699992,17.159857489000146],[-61.82526607999995,17.168768622000172],[-61.79336503799993,17.16494375200007],[-61.78066972599987,17.147162177000084],[-61.77301998599992,17.126532294000143]]],[[[-61.8314509759999,17.69635651200018],[-61.81822669199997,17.691839911000116],[-61.79727128799993,17.69879791900003],[-61.78429114499991,17.69635651200018],[-61.76817786399994,17.684637762000094],[-61.75426184799997,17.668768622000172],[-61.74327551999991,17.651353257],[-61.73591061099992,17.634914455000015],[-61.72874915299988,17.60496653900013],[-61.727772589999915,17.588446356000148],[-61.729644334999875,17.572821356000176],[-61.7363988919999,17.554022528000033],[-61.74327551999991,17.55060455900012],[-61.753570115999935,17.551499742000104],[-61.770659959999875,17.545558986000074],[-61.776966925999915,17.563421942000147],[-61.79474850199992,17.576117255000113],[-61.83893795499998,17.59332916900003],[-61.85179602799991,17.586574611000103],[-61.85728919199994,17.600978908000158],[-61.85936438699986,17.641791083000115],[-61.8639216789999,17.660142320000162],[-61.86974036399994,17.675482489000117],[-61.873850063999896,17.691148179],[-61.873036261999886,17.71063873900009],[-61.86937415299994,17.70734284100014],[-61.8678279289999,17.704087632],[-61.86620032499988,17.69635651200018],[-61.860096808999884,17.684230861000103],[-61.84422766799986,17.665961005000113],[-61.83893795499998,17.65542226800015],[-61.83922278599991,17.641424872000087],[-61.8431697259999,17.62958405200014],[-61.8431697259999,17.620184637000122],[-61.8314509759999,17.613836981000176],[-61.82648678299995,17.63247304900007],[-61.825021938999896,17.65794505400008],[-61.831206834999875,17.680487372000144],[-61.849191860999895,17.690130927000112],[-61.85643469999994,17.701076565000093],[-61.85167395699992,17.720282294000143],[-61.83779863199993,17.727687893000123],[-61.817860480999855,17.70319245000009],[-61.82457434799991,17.6993675800001],[-61.8314509759999,17.69635651200018]]]]}}]",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "989ffd50-ddad-4377-9f38-594851db4007",
-  "CountryName": "Argentina",
-  "CountryCode": "ARG",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ARG\",\"properties\":{\"name\":\"Argentina\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-65.5,-55.2],[-66.45,-55.25],[-66.95992,-54.89681],[-67.56244,-54.87001],[-68.63335,-54.8695],[-68.63401,-52.63637],[-68.25,-53.1],[-67.75,-53.85],[-66.45,-54.45],[-65.05,-54.7],[-65.5,-55.2]]],[[[-64.964892,-22.075862],[-64.377021,-22.798091],[-63.986838,-21.993644],[-62.846468,-22.034985],[-62.685057,-22.249029],[-60.846565,-23.880713],[-60.028966,-24.032796],[-58.807128,-24.771459],[-57.777217,-25.16234],[-57.63366,-25.603657],[-58.618174,-27.123719],[-57.60976,-27.395899],[-56.486702,-27.548499],[-55.695846,-27.387837],[-54.788795,-26.621786],[-54.625291,-25.739255],[-54.13005,-25.547639],[-53.628349,-26.124865],[-53.648735,-26.923473],[-54.490725,-27.474757],[-55.162286,-27.881915],[-56.2909,-28.852761],[-57.625133,-30.216295],[-57.874937,-31.016556],[-58.14244,-32.044504],[-58.132648,-33.040567],[-58.349611,-33.263189],[-58.427074,-33.909454],[-58.495442,-34.43149],[-57.22583,-35.288027],[-57.362359,-35.97739],[-56.737487,-36.413126],[-56.788285,-36.901572],[-57.749157,-38.183871],[-59.231857,-38.72022],[-61.237445,-38.928425],[-62.335957,-38.827707],[-62.125763,-39.424105],[-62.330531,-40.172586],[-62.145994,-40.676897],[-62.745803,-41.028761],[-63.770495,-41.166789],[-64.73209,-40.802677],[-65.118035,-41.064315],[-64.978561,-42.058001],[-64.303408,-42.359016],[-63.755948,-42.043687],[-63.458059,-42.563138],[-64.378804,-42.873558],[-65.181804,-43.495381],[-65.328823,-44.501366],[-65.565269,-45.036786],[-66.509966,-45.039628],[-67.293794,-45.551896],[-67.580546,-46.301773],[-66.597066,-47.033925],[-65.641027,-47.236135],[-65.985088,-48.133289],[-67.166179,-48.697337],[-67.816088,-49.869669],[-68.728745,-50.264218],[-69.138539,-50.73251],[-68.815561,-51.771104],[-68.149995,-52.349983],[-68.571545,-52.299444],[-69.498362,-52.142761],[-71.914804,-52.009022],[-72.329404,-51.425956],[-72.309974,-50.67701],[-72.975747,-50.74145],[-73.328051,-50.378785],[-73.415436,-49.318436],[-72.648247,-48.878618],[-72.331161,-48.244238],[-72.447355,-47.738533],[-71.917258,-46.884838],[-71.552009,-45.560733],[-71.659316,-44.973689],[-71.222779,-44.784243],[-71.329801,-44.407522],[-71.793623,-44.207172],[-71.464056,-43.787611],[-71.915424,-43.408565],[-72.148898,-42.254888],[-71.746804,-42.051386],[-71.915734,-40.832339],[-71.680761,-39.808164],[-71.413517,-38.916022],[-70.814664,-38.552995],[-71.118625,-37.576827],[-71.121881,-36.658124],[-70.364769,-36.005089],[-70.388049,-35.169688],[-69.817309,-34.193571],[-69.814777,-33.273886],[-70.074399,-33.09121],[-70.535069,-31.36501],[-69.919008,-30.336339],[-70.01355,-29.367923],[-69.65613,-28.459141],[-69.001235,-27.521214],[-68.295542,-26.89934],[-68.5948,-26.506909],[-68.386001,-26.185016],[-68.417653,-24.518555],[-67.328443,-24.025303],[-66.985234,-22.986349],[-67.106674,-22.735925],[-66.273339,-21.83231],[-64.964892,-22.075862]]]]}}]}",
-  "RecordCount": 13,
-  "FillOpacity": 0.41,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "3dab6c55-3eb2-4e13-930c-3c0dd45aec74",
-  "CountryName": "Armenia",
-  "CountryCode": "ARM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ARM\",\"properties\":{\"name\":\"Armenia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[43.582746,41.092143],[44.97248,41.248129],[45.179496,40.985354],[45.560351,40.81229],[45.359175,40.561504],[45.891907,40.218476],[45.610012,39.899994],[46.034534,39.628021],[46.483499,39.464155],[46.50572,38.770605],[46.143623,38.741201],[45.735379,39.319719],[45.739978,39.473999],[45.298145,39.471751],[45.001987,39.740004],[44.79399,39.713003],[44.400009,40.005],[43.656436,40.253564],[43.752658,40.740201],[43.582746,41.092143]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "e70cf935-885e-4e6b-a2d2-7ea991072302",
-  "CountryName": "Azerbaijan",
-  "CountryCode": "AZE",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"AZE\",\"properties\":{\"name\":\"Azerbaijan\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[45.001987,39.740004],[45.298145,39.471751],[45.739978,39.473999],[45.735379,39.319719],[46.143623,38.741201],[45.457722,38.874139],[44.952688,39.335765],[44.79399,39.713003],[45.001987,39.740004]]],[[[47.373315,41.219732],[47.815666,41.151416],[47.987283,41.405819],[48.584353,41.80887],[49.110264,41.282287],[49.618915,40.572924],[50.08483,40.526157],[50.392821,40.256561],[49.569202,40.176101],[49.395259,39.399482],[49.223228,39.049219],[48.856532,38.815486],[48.883249,38.320245],[48.634375,38.270378],[48.010744,38.794015],[48.355529,39.288765],[48.060095,39.582235],[47.685079,39.508364],[46.50572,38.770605],[46.483499,39.464155],[46.034534,39.628021],[45.610012,39.899994],[45.891907,40.218476],[45.359175,40.561504],[45.560351,40.81229],[45.179496,40.985354],[44.97248,41.248129],[45.217426,41.411452],[45.962601,41.123873],[46.501637,41.064445],[46.637908,41.181673],[46.145432,41.722802],[46.404951,41.860675],[46.686071,41.827137],[47.373315,41.219732]]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "270ff05f-587a-4247-b4b5-f8094fc641fc",
-  "CountryName": "Bahamas",
-  "CountryCode": "BHS",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BHS\",\"properties\":{\"name\":\"The Bahamas\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-77.53466,23.75975],[-77.78,23.71],[-78.03405,24.28615],[-78.40848,24.57564],[-78.19087,25.2103],[-77.89,25.17],[-77.54,24.34],[-77.53466,23.75975]]],[[[-77.82,26.58],[-78.91,26.42],[-78.98,26.79],[-78.51,26.87],[-77.85,26.84],[-77.82,26.58]]],[[[-77,26.59],[-77.17255,25.87918],[-77.35641,26.00735],[-77.34,26.53],[-77.78802,26.92516],[-77.79,27.04],[-77,26.59]]]]}}]}",
-  "RecordCount": 7,
-  "FillOpacity": 0.31,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "15481bcb-877e-452e-9717-8a0df63162fa",
-  "CountryName": "Bangladesh",
-  "CountryCode": "BGD",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BGD\",\"properties\":{\"name\":\"Bangladesh\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[92.672721,22.041239],[92.652257,21.324048],[92.303234,21.475485],[92.368554,20.670883],[92.082886,21.192195],[92.025215,21.70157],[91.834891,22.182936],[91.417087,22.765019],[90.496006,22.805017],[90.586957,22.392794],[90.272971,21.836368],[89.847467,22.039146],[89.70205,21.857116],[89.418863,21.966179],[89.031961,22.055708],[88.876312,22.879146],[88.52977,23.631142],[88.69994,24.233715],[88.084422,24.501657],[88.306373,24.866079],[88.931554,25.238692],[88.209789,25.768066],[88.563049,26.446526],[89.355094,26.014407],[89.832481,25.965082],[89.920693,25.26975],[90.872211,25.132601],[91.799596,25.147432],[92.376202,24.976693],[91.915093,24.130414],[91.46773,24.072639],[91.158963,23.503527],[91.706475,22.985264],[91.869928,23.624346],[92.146035,23.627499],[92.672721,22.041239]]]}}]}",
-  "RecordCount": 19,
-  "FillOpacity": 0.52,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "535cc6a3-2e10-4a05-91e9-5d207d72f922",
-  "CountryName": "Barbados",
-  "CountryCode": "BRB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"cca2\":\"bb\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-59.533058,13.050554],[-59.543335,13.067499],[-59.547501,13.070555],[-59.571114,13.075832],[-59.60334,13.08],[-59.60778,13.082499],[-59.611389,13.085833],[-59.625557,13.099722],[-59.628616,13.103333],[-59.642227,13.14361],[-59.643333,13.149166],[-59.659447,13.287777],[-59.65834,13.299166],[-59.653061,13.315554],[-59.650841,13.320276],[-59.64473,13.328054],[-59.641113,13.331388],[-59.631111,13.334999],[-59.619728,13.337221],[-59.612503,13.336943],[-59.59584,13.331944],[-59.591118,13.329721],[-59.573616,13.299166],[-59.56945,13.290277],[-59.566116,13.279722],[-59.565285,13.274166],[-59.559448,13.259443],[-59.554451,13.25111],[-59.551674,13.246944],[-59.545006,13.239721],[-59.521118,13.214443],[-59.513062,13.208611],[-59.479446,13.185833],[-59.470001,13.18111],[-59.463615,13.180277],[-59.442223,13.173054],[-59.4375,13.170832],[-59.429169,13.164999],[-59.426949,13.153889],[-59.427223,13.146944],[-59.430283,13.135277],[-59.439445,13.116665],[-59.444725,13.108055],[-59.450279,13.099443],[-59.456673,13.092222],[-59.464447,13.085554],[-59.5,13.059444],[-59.510284,13.054998],[-59.533058,13.050554]]]}}]}",
-  "RecordCount": 13,
-  "FillOpacity": 0.41,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "0028122d-4ca4-41c3-a52b-544d0e0201b0",
-  "CountryName": "Belarus",
-  "CountryCode": "BLR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BLR\",\"properties\":{\"name\":\"Belarus\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[23.484128,53.912498],[24.450684,53.905702],[25.536354,54.282423],[25.768433,54.846963],[26.588279,55.167176],[26.494331,55.615107],[27.10246,55.783314],[28.176709,56.16913],[29.229513,55.918344],[29.371572,55.670091],[29.896294,55.789463],[30.873909,55.550976],[30.971836,55.081548],[30.757534,54.811771],[31.384472,54.157056],[31.791424,53.974639],[31.731273,53.794029],[32.405599,53.618045],[32.693643,53.351421],[32.304519,53.132726],[31.497644,53.167427],[31.305201,53.073996],[31.540018,52.742052],[31.785998,52.101678],[30.927549,52.042353],[30.619454,51.822806],[30.555117,51.319503],[30.157364,51.416138],[29.254938,51.368234],[28.992835,51.602044],[28.617613,51.427714],[28.241615,51.572227],[27.454066,51.592303],[26.337959,51.832289],[25.327788,51.910656],[24.553106,51.888461],[24.005078,51.617444],[23.527071,51.578454],[23.508002,52.023647],[23.199494,52.486977],[23.799199,52.691099],[23.804935,53.089731],[23.527536,53.470122],[23.484128,53.912498]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "87fb4b19-1526-495c-b581-f6979038b217",
-  "CountryName": "Belize",
-  "CountryCode": "BLZ",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BLZ\",\"properties\":{\"name\":\"Belize\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-89.14308,17.808319],[-89.150909,17.955468],[-89.029857,18.001511],[-88.848344,17.883198],[-88.490123,18.486831],[-88.300031,18.499982],[-88.296336,18.353273],[-88.106813,18.348674],[-88.123479,18.076675],[-88.285355,17.644143],[-88.197867,17.489475],[-88.302641,17.131694],[-88.239518,17.036066],[-88.355428,16.530774],[-88.551825,16.265467],[-88.732434,16.233635],[-88.930613,15.887273],[-89.229122,15.886938],[-89.150806,17.015577],[-89.14308,17.808319]]]}}]}",
-  "RecordCount": 19,
-  "FillOpacity": 0.52,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "f92d9ea2-2b11-4e20-82c2-09e6edff0401",
-  "CountryName": "Benin",
-  "CountryCode": "BEN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BEN\",\"properties\":{\"name\":\"Benin\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[2.691702,6.258817],[1.865241,6.142158],[1.618951,6.832038],[1.664478,9.12859],[1.463043,9.334624],[1.425061,9.825395],[1.077795,10.175607],[0.772336,10.470808],[0.899563,10.997339],[1.24347,11.110511],[1.447178,11.547719],[1.935986,11.64115],[2.154474,11.94015],[2.490164,12.233052],[2.848643,12.235636],[3.61118,11.660167],[3.572216,11.327939],[3.797112,10.734746],[3.60007,10.332186],[3.705438,10.06321],[3.220352,9.444153],[2.912308,9.137608],[2.723793,8.506845],[2.749063,7.870734],[2.691702,6.258817]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "d74ba23c-50ae-4029-9110-0502368cb5f1",
-  "CountryName": "Bhutan",
-  "CountryCode": "BTN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BTN\",\"properties\":{\"name\":\"Bhutan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[91.696657,27.771742],[92.103712,27.452614],[92.033484,26.83831],[91.217513,26.808648],[90.373275,26.875724],[89.744528,26.719403],[88.835643,27.098966],[88.814248,27.299316],[89.47581,28.042759],[90.015829,28.296439],[90.730514,28.064954],[91.258854,28.040614],[91.696657,27.771742]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "a5c611b4-2651-4860-949e-8b2cea6c2607",
-  "CountryName": "Bolivia (Plurinational State of)",
-  "CountryCode": "BOL",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BOL\",\"properties\":{\"name\":\"Bolivia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-62.846468,-22.034985],[-63.986838,-21.993644],[-64.377021,-22.798091],[-64.964892,-22.075862],[-66.273339,-21.83231],[-67.106674,-22.735925],[-67.82818,-22.872919],[-68.219913,-21.494347],[-68.757167,-20.372658],[-68.442225,-19.405068],[-68.966818,-18.981683],[-69.100247,-18.260125],[-69.590424,-17.580012],[-68.959635,-16.500698],[-69.389764,-15.660129],[-69.160347,-15.323974],[-69.339535,-14.953195],[-68.948887,-14.453639],[-68.929224,-13.602684],[-68.88008,-12.899729],[-68.66508,-12.5613],[-69.529678,-10.951734],[-68.786158,-11.03638],[-68.271254,-11.014521],[-68.048192,-10.712059],[-67.173801,-10.306812],[-66.646908,-9.931331],[-65.338435,-9.761988],[-65.444837,-10.511451],[-65.321899,-10.895872],[-65.402281,-11.56627],[-64.316353,-12.461978],[-63.196499,-12.627033],[-62.80306,-13.000653],[-62.127081,-13.198781],[-61.713204,-13.489202],[-61.084121,-13.479384],[-60.503304,-13.775955],[-60.459198,-14.354007],[-60.264326,-14.645979],[-60.251149,-15.077219],[-60.542966,-15.09391],[-60.15839,-16.258284],[-58.24122,-16.299573],[-58.388058,-16.877109],[-58.280804,-17.27171],[-57.734558,-17.552468],[-57.498371,-18.174188],[-57.676009,-18.96184],[-57.949997,-19.400004],[-57.853802,-19.969995],[-58.166392,-20.176701],[-58.183471,-19.868399],[-59.115042,-19.356906],[-60.043565,-19.342747],[-61.786326,-19.633737],[-62.265961,-20.513735],[-62.291179,-21.051635],[-62.685057,-22.249029],[-62.846468,-22.034985]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "4c508907-e87d-48d1-8e2d-e7f52f5dd4db",
-  "CountryName": "Bosnia and Herzegovina",
-  "CountryCode": "BIH",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BIH\",\"properties\":{\"name\":\"Bosnia and Herzegovina\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[19.005486,44.860234],[19.36803,44.863],[19.11761,44.42307],[19.59976,44.03847],[19.454,43.5681],[19.21852,43.52384],[19.03165,43.43253],[18.70648,43.20011],[18.56,42.65],[17.674922,43.028563],[17.297373,43.446341],[16.916156,43.667722],[16.456443,44.04124],[16.23966,44.351143],[15.750026,44.818712],[15.959367,45.233777],[16.318157,45.004127],[16.534939,45.211608],[17.002146,45.233777],[17.861783,45.06774],[18.553214,45.08159],[19.005486,44.860234]]]}}]}",
-  "RecordCount": 13,
-  "FillOpacity": 0.41,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "9d40483c-63a7-4fe5-a134-0f5a9dc7d1b1",
-  "CountryName": "Botswana",
-  "CountryCode": "BWA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BWA\",\"properties\":{\"name\":\"Botswana\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[25.649163,-18.536026],[25.850391,-18.714413],[26.164791,-19.293086],[27.296505,-20.39152],[27.724747,-20.499059],[27.727228,-20.851802],[28.02137,-21.485975],[28.794656,-21.639454],[29.432188,-22.091313],[28.017236,-22.827754],[27.11941,-23.574323],[26.786407,-24.240691],[26.485753,-24.616327],[25.941652,-24.696373],[25.765849,-25.174845],[25.664666,-25.486816],[25.025171,-25.71967],[24.211267,-25.670216],[23.73357,-25.390129],[23.312097,-25.26869],[22.824271,-25.500459],[22.579532,-25.979448],[22.105969,-26.280256],[21.605896,-26.726534],[20.889609,-26.828543],[20.66647,-26.477453],[20.758609,-25.868136],[20.165726,-24.917962],[19.895768,-24.76779],[19.895458,-21.849157],[20.881134,-21.814327],[20.910641,-18.252219],[21.65504,-18.219146],[23.196858,-17.869038],[23.579006,-18.281261],[24.217365,-17.889347],[24.520705,-17.887125],[25.084443,-17.661816],[25.264226,-17.73654],[25.649163,-18.536026]]]}}]}",
-  "RecordCount": 19,
-  "FillOpacity": 0.52,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "d8e1bce0-2e94-4847-b4de-77ebd8ae6efc",
-  "CountryName": "Brazil",
-  "CountryCode": "BRA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BRA\",\"properties\":{\"name\":\"Brazil\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-57.625133,-30.216295],[-56.2909,-28.852761],[-55.162286,-27.881915],[-54.490725,-27.474757],[-53.648735,-26.923473],[-53.628349,-26.124865],[-54.13005,-25.547639],[-54.625291,-25.739255],[-54.428946,-25.162185],[-54.293476,-24.5708],[-54.29296,-24.021014],[-54.652834,-23.839578],[-55.027902,-24.001274],[-55.400747,-23.956935],[-55.517639,-23.571998],[-55.610683,-22.655619],[-55.797958,-22.35693],[-56.473317,-22.0863],[-56.88151,-22.282154],[-57.937156,-22.090176],[-57.870674,-20.732688],[-58.166392,-20.176701],[-57.853802,-19.969995],[-57.949997,-19.400004],[-57.676009,-18.96184],[-57.498371,-18.174188],[-57.734558,-17.552468],[-58.280804,-17.27171],[-58.388058,-16.877109],[-58.24122,-16.299573],[-60.15839,-16.258284],[-60.542966,-15.09391],[-60.251149,-15.077219],[-60.264326,-14.645979],[-60.459198,-14.354007],[-60.503304,-13.775955],[-61.084121,-13.479384],[-61.713204,-13.489202],[-62.127081,-13.198781],[-62.80306,-13.000653],[-63.196499,-12.627033],[-64.316353,-12.461978],[-65.402281,-11.56627],[-65.321899,-10.895872],[-65.444837,-10.511451],[-65.338435,-9.761988],[-66.646908,-9.931331],[-67.173801,-10.306812],[-68.048192,-10.712059],[-68.271254,-11.014521],[-68.786158,-11.03638],[-69.529678,-10.951734],[-70.093752,-11.123972],[-70.548686,-11.009147],[-70.481894,-9.490118],[-71.302412,-10.079436],[-72.184891,-10.053598],[-72.563033,-9.520194],[-73.226713,-9.462213],[-73.015383,-9.032833],[-73.571059,-8.424447],[-73.987235,-7.52383],[-73.723401,-7.340999],[-73.724487,-6.918595],[-73.120027,-6.629931],[-73.219711,-6.089189],[-72.964507,-5.741251],[-72.891928,-5.274561],[-71.748406,-4.593983],[-70.928843,-4.401591],[-70.794769,-4.251265],[-69.893635,-4.298187],[-69.444102,-1.556287],[-69.420486,-1.122619],[-69.577065,-0.549992],[-70.020656,-0.185156],[-70.015566,0.541414],[-69.452396,0.706159],[-69.252434,0.602651],[-69.218638,0.985677],[-69.804597,1.089081],[-69.816973,1.714805],[-67.868565,1.692455],[-67.53781,2.037163],[-67.259998,1.719999],[-67.065048,1.130112],[-66.876326,1.253361],[-66.325765,0.724452],[-65.548267,0.789254],[-65.354713,1.095282],[-64.611012,1.328731],[-64.199306,1.492855],[-64.083085,1.916369],[-63.368788,2.2009],[-63.422867,2.411068],[-64.269999,2.497006],[-64.408828,3.126786],[-64.368494,3.79721],[-64.816064,4.056445],[-64.628659,4.148481],[-63.888343,4.02053],[-63.093198,3.770571],[-62.804533,4.006965],[-62.08543,4.162124],[-60.966893,4.536468],[-60.601179,4.918098],[-60.733574,5.200277],[-60.213683,5.244486],[-59.980959,5.014061],[-60.111002,4.574967],[-59.767406,4.423503],[-59.53804,3.958803],[-59.815413,3.606499],[-59.974525,2.755233],[-59.718546,2.24963],[-59.646044,1.786894],[-59.030862,1.317698],[-58.540013,1.268088],[-58.429477,1.463942],[-58.11345,1.507195],[-57.660971,1.682585],[-57.335823,1.948538],[-56.782704,1.863711],[-56.539386,1.899523],[-55.995698,1.817667],[-55.9056,2.021996],[-56.073342,2.220795],[-55.973322,2.510364],[-55.569755,2.421506],[-55.097587,2.523748],[-54.524754,2.311849],[-54.088063,2.105557],[-53.778521,2.376703],[-53.554839,2.334897],[-53.418465,2.053389],[-52.939657,2.124858],[-52.556425,2.504705],[-52.249338,3.241094],[-51.657797,4.156232],[-51.317146,4.203491],[-51.069771,3.650398],[-50.508875,1.901564],[-49.974076,1.736483],[-49.947101,1.04619],[-50.699251,0.222984],[-50.388211,-0.078445],[-48.620567,-0.235489],[-48.584497,-1.237805],[-47.824956,-0.581618],[-46.566584,-0.941028],[-44.905703,-1.55174],[-44.417619,-2.13775],[-44.581589,-2.691308],[-43.418791,-2.38311],[-41.472657,-2.912018],[-39.978665,-2.873054],[-38.500383,-3.700652],[-37.223252,-4.820946],[-36.452937,-5.109404],[-35.597796,-5.149504],[-35.235389,-5.464937],[-34.89603,-6.738193],[-34.729993,-7.343221],[-35.128212,-8.996401],[-35.636967,-9.649282],[-37.046519,-11.040721],[-37.683612,-12.171195],[-38.423877,-13.038119],[-38.673887,-13.057652],[-38.953276,-13.79337],[-38.882298,-15.667054],[-39.161092,-17.208407],[-39.267339,-17.867746],[-39.583521,-18.262296],[-39.760823,-19.599113],[-40.774741,-20.904512],[-40.944756,-21.937317],[-41.754164,-22.370676],[-41.988284,-22.97007],[-43.074704,-22.967693],[-44.647812,-23.351959],[-45.352136,-23.796842],[-46.472093,-24.088969],[-47.648972,-24.885199],[-48.495458,-25.877025],[-48.641005,-26.623698],[-48.474736,-27.175912],[-48.66152,-28.186135],[-48.888457,-28.674115],[-49.587329,-29.224469],[-50.696874,-30.984465],[-51.576226,-31.777698],[-52.256081,-32.24537],[-52.7121,-33.196578],[-53.373662,-33.768378],[-53.650544,-33.202004],[-53.209589,-32.727666],[-53.787952,-32.047243],[-54.572452,-31.494511],[-55.60151,-30.853879],[-55.973245,-30.883076],[-56.976026,-30.109686],[-57.625133,-30.216295]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "1b7ab99c-9ea6-4d46-8b3c-37568d5b6928",
-  "CountryName": "Bulgaria",
-  "CountryCode": "BGR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BGR\",\"properties\":{\"name\":\"Bulgaria\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[22.65715,44.234923],[22.944832,43.823785],[23.332302,43.897011],[24.100679,43.741051],[25.569272,43.688445],[26.065159,43.943494],[27.2424,44.175986],[27.970107,43.812468],[28.558081,43.707462],[28.039095,43.293172],[27.673898,42.577892],[27.99672,42.007359],[27.135739,42.141485],[26.117042,41.826905],[26.106138,41.328899],[25.197201,41.234486],[24.492645,41.583896],[23.692074,41.309081],[22.952377,41.337994],[22.881374,41.999297],[22.380526,42.32026],[22.545012,42.461362],[22.436595,42.580321],[22.604801,42.898519],[22.986019,43.211161],[22.500157,43.642814],[22.410446,44.008063],[22.65715,44.234923]]]}}]}",
-  "RecordCount": 3,
-  "FillOpacity": 0.24,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "1c8a1885-ddfd-4851-a20b-5dca41e0cacb",
-  "CountryName": "Burkina Faso",
-  "CountryCode": "BFA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BFA\",\"properties\":{\"name\":\"Burkina Faso\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-2.827496,9.642461],[-3.511899,9.900326],[-3.980449,9.862344],[-4.330247,9.610835],[-4.779884,9.821985],[-4.954653,10.152714],[-5.404342,10.370737],[-5.470565,10.95127],[-5.197843,11.375146],[-5.220942,11.713859],[-4.427166,12.542646],[-4.280405,13.228444],[-4.006391,13.472485],[-3.522803,13.337662],[-3.103707,13.541267],[-2.967694,13.79815],[-2.191825,14.246418],[-2.001035,14.559008],[-1.066363,14.973815],[-0.515854,15.116158],[-0.266257,14.924309],[0.374892,14.928908],[0.295646,14.444235],[0.429928,13.988733],[0.993046,13.33575],[1.024103,12.851826],[2.177108,12.625018],[2.154474,11.94015],[1.935986,11.64115],[1.447178,11.547719],[1.24347,11.110511],[0.899563,10.997339],[0.023803,11.018682],[-0.438702,11.098341],[-0.761576,10.93693],[-1.203358,11.009819],[-2.940409,10.96269],[-2.963896,10.395335],[-2.827496,9.642461]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "1a511184-6309-45fb-9b02-9757c17e2721",
-  "CountryName": "Burundi",
-  "CountryCode": "BDI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"BDI\",\"properties\":{\"name\":\"Burundi\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[29.339998,-4.499983],[29.276384,-3.293907],[29.024926,-2.839258],[29.632176,-2.917858],[29.938359,-2.348487],[30.469696,-2.413858],[30.527677,-2.807632],[30.743013,-3.034285],[30.752263,-3.35933],[30.50556,-3.568567],[30.116333,-4.090138],[29.753512,-4.452389],[29.339998,-4.499983]]]}}]}",
-  "RecordCount": 23,
-  "FillOpacity": 0.58,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "45aae5e2-9845-47db-9322-9a643b88b623",
-  "CountryName": "Cambodia",
-  "CountryCode": "KHM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"KHM\",\"properties\":{\"name\":\"Cambodia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[103.49728,10.632555],[103.09069,11.153661],[102.584932,12.186595],[102.348099,13.394247],[102.988422,14.225721],[104.281418,14.416743],[105.218777,14.273212],[106.043946,13.881091],[106.496373,14.570584],[107.382727,14.202441],[107.614548,13.535531],[107.491403,12.337206],[105.810524,11.567615],[106.24967,10.961812],[105.199915,10.88931],[104.334335,10.486544],[103.49728,10.632555]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "dc9049fb-ca15-41ae-aec6-1a4d77824527",
-  "CountryName": "Cameroon",
-  "CountryCode": "CMR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CMR\",\"properties\":{\"name\":\"Cameroon\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[13.075822,2.267097],[12.951334,2.321616],[12.35938,2.192812],[11.751665,2.326758],[11.276449,2.261051],[9.649158,2.283866],[9.795196,3.073404],[9.404367,3.734527],[8.948116,3.904129],[8.744924,4.352215],[8.488816,4.495617],[8.500288,4.771983],[8.757533,5.479666],[9.233163,6.444491],[9.522706,6.453482],[10.118277,7.03877],[10.497375,7.055358],[11.058788,6.644427],[11.745774,6.981383],[11.839309,7.397042],[12.063946,7.799808],[12.218872,8.305824],[12.753672,8.717763],[12.955468,9.417772],[13.1676,9.640626],[13.308676,10.160362],[13.57295,10.798566],[14.415379,11.572369],[14.468192,11.904752],[14.577178,12.085361],[14.181336,12.483657],[14.213531,12.802035],[14.495787,12.859396],[14.893386,12.219048],[14.960152,11.555574],[14.923565,10.891325],[15.467873,9.982337],[14.909354,9.992129],[14.627201,9.920919],[14.171466,10.021378],[13.954218,9.549495],[14.544467,8.965861],[14.979996,8.796104],[15.120866,8.38215],[15.436092,7.692812],[15.27946,7.421925],[14.776545,6.408498],[14.53656,6.226959],[14.459407,5.451761],[14.558936,5.030598],[14.478372,4.732605],[14.950953,4.210389],[15.03622,3.851367],[15.405396,3.335301],[15.862732,3.013537],[15.907381,2.557389],[16.012852,2.26764],[15.940919,1.727673],[15.146342,1.964015],[14.337813,2.227875],[13.075822,2.267097]]]}}]}",
-  "RecordCount": 22,
-  "FillOpacity": 0.57,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "3529d1f2-0da7-4d02-8924-41a02d62e8cd",
-  "CountryName": "Canada",
-  "CountryCode": "CAN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CAN\",\"properties\":{\"name\":\"Canada\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-63.6645,46.55001],[-62.9393,46.41587],[-62.01208,46.44314],[-62.50391,46.03339],[-62.87433,45.96818],[-64.1428,46.39265],[-64.39261,46.72747],[-64.01486,47.03601],[-63.6645,46.55001]]],[[[-61.806305,49.10506],[-62.29318,49.08717],[-63.58926,49.40069],[-64.51912,49.87304],[-64.17322,49.95718],[-62.85829,49.70641],[-61.835585,49.28855],[-61.806305,49.10506]]],[[[-123.510002,48.510011],[-124.012891,48.370846],[-125.655013,48.825005],[-125.954994,49.179996],[-126.850004,49.53],[-127.029993,49.814996],[-128.059336,49.994959],[-128.444584,50.539138],[-128.358414,50.770648],[-127.308581,50.552574],[-126.695001,50.400903],[-125.755007,50.295018],[-125.415002,49.950001],[-124.920768,49.475275],[-123.922509,49.062484],[-123.510002,48.510011]]],[[[-56.134036,50.68701],[-56.795882,49.812309],[-56.143105,50.150117],[-55.471492,49.935815],[-55.822401,49.587129],[-54.935143,49.313011],[-54.473775,49.556691],[-53.476549,49.249139],[-53.786014,48.516781],[-53.086134,48.687804],[-52.958648,48.157164],[-52.648099,47.535548],[-53.069158,46.655499],[-53.521456,46.618292],[-54.178936,46.807066],[-53.961869,47.625207],[-54.240482,47.752279],[-55.400773,46.884994],[-55.997481,46.91972],[-55.291219,47.389562],[-56.250799,47.632545],[-57.325229,47.572807],[-59.266015,47.603348],[-59.419494,47.899454],[-58.796586,48.251525],[-59.231625,48.523188],[-58.391805,49.125581],[-57.35869,50.718274],[-56.73865,51.287438],[-55.870977,51.632094],[-55.406974,51.588273],[-55.600218,51.317075],[-56.134036,50.68701]]],[[[-132.710008,54.040009],[-131.74999,54.120004],[-132.04948,52.984621],[-131.179043,52.180433],[-131.57783,52.182371],[-132.180428,52.639707],[-132.549992,53.100015],[-133.054611,53.411469],[-133.239664,53.85108],[-133.180004,54.169975],[-132.710008,54.040009]]],[[[-79.26582,62.158675],[-79.65752,61.63308],[-80.09956,61.7181],[-80.36215,62.01649],[-80.315395,62.085565],[-79.92939,62.3856],[-79.52002,62.36371],[-79.26582,62.158675]]],[[[-81.89825,62.7108],[-83.06857,62.15922],[-83.77462,62.18231],[-83.99367,62.4528],[-83.25048,62.91409],[-81.87699,62.90458],[-81.89825,62.7108]]],[[[-85.161308,65.657285],[-84.975764,65.217518],[-84.464012,65.371772],[-83.882626,65.109618],[-82.787577,64.766693],[-81.642014,64.455136],[-81.55344,63.979609],[-80.817361,64.057486],[-80.103451,63.725981],[-80.99102,63.411246],[-82.547178,63.651722],[-83.108798,64.101876],[-84.100417,63.569712],[-85.523405,63.052379],[-85.866769,63.637253],[-87.221983,63.541238],[-86.35276,64.035833],[-86.224886,64.822917],[-85.883848,65.738778],[-85.161308,65.657285]]],[[[-75.86588,67.14886],[-76.98687,67.09873],[-77.2364,67.58809],[-76.81166,68.14856],[-75.89521,68.28721],[-75.1145,68.01036],[-75.10333,67.58202],[-75.21597,67.44425],[-75.86588,67.14886]]],[[[-95.647681,69.10769],[-96.269521,68.75704],[-97.617401,69.06003],[-98.431801,68.9507],[-99.797401,69.40003],[-98.917401,69.71003],[-98.218261,70.14354],[-97.157401,69.86003],[-96.557401,69.68003],[-96.257401,69.49003],[-95.647681,69.10769]]],[[[-90.5471,69.49766],[-90.55151,68.47499],[-89.21515,69.25873],[-88.01966,68.61508],[-88.31749,67.87338],[-87.35017,67.19872],[-86.30607,67.92146],[-85.57664,68.78456],[-85.52197,69.88211],[-84.10081,69.80539],[-82.62258,69.65826],[-81.28043,69.16202],[-81.2202,68.66567],[-81.96436,68.13253],[-81.25928,67.59716],[-81.38653,67.11078],[-83.34456,66.41154],[-84.73542,66.2573],[-85.76943,66.55833],[-86.0676,66.05625],[-87.03143,65.21297],[-87.32324,64.77563],[-88.48296,64.09897],[-89.91444,64.03273],[-90.70398,63.61017],[-90.77004,62.96021],[-91.93342,62.83508],[-93.15698,62.02469],[-94.24153,60.89865],[-94.62931,60.11021],[-94.6846,58.94882],[-93.21502,58.78212],[-92.76462,57.84571],[-92.29703,57.08709],[-90.89769,57.28468],[-89.03953,56.85172],[-88.03978,56.47162],[-87.32421,55.99914],[-86.07121,55.72383],[-85.01181,55.3026],[-83.36055,55.24489],[-82.27285,55.14832],[-82.4362,54.28227],[-82.12502,53.27703],[-81.40075,52.15788],[-79.91289,51.20842],[-79.14301,51.53393],[-78.60191,52.56208],[-79.12421,54.14145],[-79.82958,54.66772],[-78.22874,55.13645],[-77.0956,55.83741],[-76.54137,56.53423],[-76.62319,57.20263],[-77.30226,58.05209],[-78.51688,58.80458],[-77.33676,59.85261],[-77.77272,60.75788],[-78.10687,62.31964],[-77.41067,62.55053],[-75.69621,62.2784],[-74.6682,62.18111],[-73.83988,62.4438],[-72.90853,62.10507],[-71.67708,61.52535],[-71.37369,61.13717],[-69.59042,61.06141],[-69.62033,60.22125],[-69.2879,58.95736],[-68.37455,58.80106],[-67.64976,58.21206],[-66.20178,58.76731],[-65.24517,59.87071],[-64.58352,60.33558],[-63.80475,59.4426],[-62.50236,58.16708],[-61.39655,56.96745],[-61.79866,56.33945],[-60.46853,55.77548],[-59.56962,55.20407],[-57.97508,54.94549],[-57.3332,54.6265],[-56.93689,53.78032],[-56.15811,53.64749],[-55.75632,53.27036],[-55.68338,52.14664],[-56.40916,51.7707],[-57.12691,51.41972],[-58.77482,51.0643],[-60.03309,50.24277],[-61.72366,50.08046],[-63.86251,50.29099],[-65.36331,50.2982],[-66.39905,50.22897],[-67.23631,49.51156],[-68.51114,49.06836],[-69.95362,47.74488],[-71.10458,46.82171],[-70.25522,46.98606],[-68.65,48.3],[-66.55243,49.1331],[-65.05626,49.23278],[-64.17099,48.74248],[-65.11545,48.07085],[-64.79854,46.99297],[-64.47219,46.23849],[-63.17329,45.73902],[-61.52072,45.88377],[-60.51815,47.00793],[-60.4486,46.28264],[-59.80287,45.9204],[-61.03988,45.26525],[-63.25471,44.67014],[-64.24656,44.26553],[-65.36406,43.54523],[-66.1234,43.61867],[-66.16173,44.46512],[-64.42549,45.29204],[-66.02605,45.25931],[-67.13741,45.13753],[-67.79134,45.70281],[-67.79046,47.06636],[-68.23444,47.35486],[-68.905,47.185],[-69.237216,47.447781],[-69.99997,46.69307],[-70.305,45.915],[-70.66,45.46],[-71.08482,45.30524],[-71.405,45.255],[-71.50506,45.0082],[-73.34783,45.00738],[-74.867,45.00048],[-75.31821,44.81645],[-76.375,44.09631],[-76.5,44.018459],[-76.820034,43.628784],[-77.737885,43.629056],[-78.72028,43.625089],[-79.171674,43.466339],[-79.01,43.27],[-78.92,42.965],[-78.939362,42.863611],[-80.247448,42.3662],[-81.277747,42.209026],[-82.439278,41.675105],[-82.690089,41.675105],[-83.02981,41.832796],[-83.142,41.975681],[-83.12,42.08],[-82.9,42.43],[-82.43,42.98],[-82.137642,43.571088],[-82.337763,44.44],[-82.550925,45.347517],[-83.592851,45.816894],[-83.469551,45.994686],[-83.616131,46.116927],[-83.890765,46.116927],[-84.091851,46.275419],[-84.14212,46.512226],[-84.3367,46.40877],[-84.6049,46.4396],[-84.543749,46.538684],[-84.779238,46.637102],[-84.87608,46.900083],[-85.652363,47.220219],[-86.461991,47.553338],[-87.439793,47.94],[-88.378114,48.302918],[-89.272917,48.019808],[-89.6,48.01],[-90.83,48.27],[-91.64,48.14],[-92.61,48.45],[-93.63087,48.60926],[-94.32914,48.67074],[-94.64,48.84],[-94.81758,49.38905],[-95.15609,49.38425],[-95.15907,49],[-97.22872,49.0007],[-100.65,49],[-104.04826,48.99986],[-107.05,49],[-110.05,49],[-113,49],[-116.04818,49],[-117.03121,49],[-120,49],[-122.84,49],[-122.97421,49.002538],[-124.91024,49.98456],[-125.62461,50.41656],[-127.43561,50.83061],[-127.99276,51.71583],[-127.85032,52.32961],[-129.12979,52.75538],[-129.30523,53.56159],[-130.51497,54.28757],[-130.53611,54.80278],[-129.98,55.285],[-130.00778,55.91583],[-131.70781,56.55212],[-132.73042,57.69289],[-133.35556,58.41028],[-134.27111,58.86111],[-134.945,59.27056],[-135.47583,59.78778],[-136.47972,59.46389],[-137.4525,58.905],[-138.34089,59.56211],[-139.039,60],[-140.013,60.27682],[-140.99778,60.30639],[-140.9925,66.00003],[-140.986,69.712],[-139.12052,69.47102],[-137.54636,68.99002],[-136.50358,68.89804],[-135.62576,69.31512],[-134.41464,69.62743],[-132.92925,69.50534],[-131.43136,69.94451],[-129.79471,70.19369],[-129.10773,69.77927],[-128.36156,70.01286],[-128.13817,70.48384],[-127.44712,70.37721],[-125.75632,69.48058],[-124.42483,70.1584],[-124.28968,69.39969],[-123.06108,69.56372],[-122.6835,69.85553],[-121.47226,69.79778],[-119.94288,69.37786],[-117.60268,69.01128],[-116.22643,68.84151],[-115.2469,68.90591],[-113.89794,68.3989],[-115.30489,67.90261],[-113.49727,67.68815],[-110.798,67.80612],[-109.94619,67.98104],[-108.8802,67.38144],[-107.79239,67.88736],[-108.81299,68.31164],[-108.16721,68.65392],[-106.95,68.7],[-106.15,68.8],[-105.34282,68.56122],[-104.33791,68.018],[-103.22115,68.09775],[-101.45433,67.64689],[-99.90195,67.80566],[-98.4432,67.78165],[-98.5586,68.40394],[-97.66948,68.57864],[-96.11991,68.23939],[-96.12588,67.29338],[-95.48943,68.0907],[-94.685,68.06383],[-94.23282,69.06903],[-95.30408,69.68571],[-96.47131,70.08976],[-96.39115,71.19482],[-95.2088,71.92053],[-93.88997,71.76015],[-92.87818,71.31869],[-91.51964,70.19129],[-92.40692,69.69997],[-90.5471,69.49766]]],[[[-114.16717,73.12145],[-114.66634,72.65277],[-112.44102,72.9554],[-111.05039,72.4504],[-109.92035,72.96113],[-109.00654,72.63335],[-108.18835,71.65089],[-107.68599,72.06548],[-108.39639,73.08953],[-107.51645,73.23598],[-106.52259,73.07601],[-105.40246,72.67259],[-104.77484,71.6984],[-104.46476,70.99297],[-102.78537,70.49776],[-100.98078,70.02432],[-101.08929,69.58447],[-102.73116,69.50402],[-102.09329,69.11962],[-102.43024,68.75282],[-104.24,68.91],[-105.96,69.18],[-107.12254,69.11922],[-109,68.78],[-111.534149,68.630059],[-113.3132,68.53554],[-113.85496,69.00744],[-115.22,69.28],[-116.10794,69.16821],[-117.34,69.96],[-116.67473,70.06655],[-115.13112,70.2373],[-113.72141,70.19237],[-112.4161,70.36638],[-114.35,70.6],[-116.48684,70.52045],[-117.9048,70.54056],[-118.43238,70.9092],[-116.11311,71.30918],[-117.65568,71.2952],[-119.40199,71.55859],[-118.56267,72.30785],[-117.86642,72.70594],[-115.18909,73.31459],[-114.16717,73.12145]]],[[[-104.5,73.42],[-105.38,72.76],[-106.94,73.46],[-106.6,73.6],[-105.26,73.64],[-104.5,73.42]]],[[[-76.34,73.102685],[-76.251404,72.826385],[-77.314438,72.855545],[-78.39167,72.876656],[-79.486252,72.742203],[-79.775833,72.802902],[-80.876099,73.333183],[-80.833885,73.693184],[-80.353058,73.75972],[-78.064438,73.651932],[-76.34,73.102685]]],[[[-86.562179,73.157447],[-85.774371,72.534126],[-84.850112,73.340278],[-82.31559,73.750951],[-80.600088,72.716544],[-80.748942,72.061907],[-78.770639,72.352173],[-77.824624,72.749617],[-75.605845,72.243678],[-74.228616,71.767144],[-74.099141,71.33084],[-72.242226,71.556925],[-71.200015,70.920013],[-68.786054,70.525024],[-67.91497,70.121948],[-66.969033,69.186087],[-68.805123,68.720198],[-66.449866,68.067163],[-64.862314,67.847539],[-63.424934,66.928473],[-61.851981,66.862121],[-62.163177,66.160251],[-63.918444,64.998669],[-65.14886,65.426033],[-66.721219,66.388041],[-68.015016,66.262726],[-68.141287,65.689789],[-67.089646,65.108455],[-65.73208,64.648406],[-65.320168,64.382737],[-64.669406,63.392927],[-65.013804,62.674185],[-66.275045,62.945099],[-68.783186,63.74567],[-67.369681,62.883966],[-66.328297,62.280075],[-66.165568,61.930897],[-68.877367,62.330149],[-71.023437,62.910708],[-72.235379,63.397836],[-71.886278,63.679989],[-73.378306,64.193963],[-74.834419,64.679076],[-74.818503,64.389093],[-77.70998,64.229542],[-78.555949,64.572906],[-77.897281,65.309192],[-76.018274,65.326969],[-73.959795,65.454765],[-74.293883,65.811771],[-73.944912,66.310578],[-72.651167,67.284576],[-72.92606,67.726926],[-73.311618,68.069437],[-74.843307,68.554627],[-76.869101,68.894736],[-76.228649,69.147769],[-77.28737,69.76954],[-78.168634,69.826488],[-78.957242,70.16688],[-79.492455,69.871808],[-81.305471,69.743185],[-84.944706,69.966634],[-87.060003,70.260001],[-88.681713,70.410741],[-89.51342,70.762038],[-88.467721,71.218186],[-89.888151,71.222552],[-90.20516,72.235074],[-89.436577,73.129464],[-88.408242,73.537889],[-85.826151,73.803816],[-86.562179,73.157447]]],[[[-100.35642,73.84389],[-99.16387,73.63339],[-97.38,73.76],[-97.12,73.47],[-98.05359,72.99052],[-96.54,72.56],[-96.72,71.66],[-98.35966,71.27285],[-99.32286,71.35639],[-100.01482,71.73827],[-102.5,72.51],[-102.48,72.83],[-100.43836,72.70588],[-101.54,73.36],[-100.35642,73.84389]]],[[[-93.196296,72.771992],[-94.269047,72.024596],[-95.409856,72.061881],[-96.033745,72.940277],[-96.018268,73.43743],[-95.495793,73.862417],[-94.503658,74.134907],[-92.420012,74.100025],[-90.509793,73.856732],[-92.003965,72.966244],[-93.196296,72.771992]]],[[[-120.46,71.383602],[-123.09219,70.90164],[-123.62,71.34],[-125.928949,71.868688],[-125.5,72.292261],[-124.80729,73.02256],[-123.94,73.68],[-124.91775,74.29275],[-121.53788,74.44893],[-120.10978,74.24135],[-117.55564,74.18577],[-116.58442,73.89607],[-115.51081,73.47519],[-116.76794,73.22292],[-119.22,72.52],[-120.46,71.82],[-120.46,71.383602]]],[[[-93.612756,74.979997],[-94.156909,74.592347],[-95.608681,74.666864],[-96.820932,74.927623],[-96.288587,75.377828],[-94.85082,75.647218],[-93.977747,75.29649],[-93.612756,74.979997]]],[[[-98.5,76.72],[-97.735585,76.25656],[-97.704415,75.74344],[-98.16,75],[-99.80874,74.89744],[-100.88366,75.05736],[-100.86292,75.64075],[-102.50209,75.5638],[-102.56552,76.3366],[-101.48973,76.30537],[-99.98349,76.64634],[-98.57699,76.58859],[-98.5,76.72]]],[[[-108.21141,76.20168],[-107.81943,75.84552],[-106.92893,76.01282],[-105.881,75.9694],[-105.70498,75.47951],[-106.31347,75.00527],[-109.7,74.85],[-112.22307,74.41696],[-113.74381,74.39427],[-113.87135,74.72029],[-111.79421,75.1625],[-116.31221,75.04343],[-117.7104,75.2222],[-116.34602,76.19903],[-115.40487,76.47887],[-112.59056,76.14134],[-110.81422,75.54919],[-109.0671,75.47321],[-110.49726,76.42982],[-109.5811,76.79417],[-108.54859,76.67832],[-108.21141,76.20168]]],[[[-94.684086,77.097878],[-93.573921,76.776296],[-91.605023,76.778518],[-90.741846,76.449597],[-90.969661,76.074013],[-89.822238,75.847774],[-89.187083,75.610166],[-87.838276,75.566189],[-86.379192,75.482421],[-84.789625,75.699204],[-82.753445,75.784315],[-81.128531,75.713983],[-80.057511,75.336849],[-79.833933,74.923127],[-80.457771,74.657304],[-81.948843,74.442459],[-83.228894,74.564028],[-86.097452,74.410032],[-88.15035,74.392307],[-89.764722,74.515555],[-92.422441,74.837758],[-92.768285,75.38682],[-92.889906,75.882655],[-93.893824,76.319244],[-95.962457,76.441381],[-97.121379,76.751078],[-96.745123,77.161389],[-94.684086,77.097878]]],[[[-116.198587,77.645287],[-116.335813,76.876962],[-117.106051,76.530032],[-118.040412,76.481172],[-119.899318,76.053213],[-121.499995,75.900019],[-122.854924,76.116543],[-122.854925,76.116543],[-121.157535,76.864508],[-119.103939,77.51222],[-117.570131,77.498319],[-116.198587,77.645287]]],[[[-93.840003,77.519997],[-94.295608,77.491343],[-96.169654,77.555111],[-96.436304,77.834629],[-94.422577,77.820005],[-93.720656,77.634331],[-93.840003,77.519997]]],[[[-110.186938,77.697015],[-112.051191,77.409229],[-113.534279,77.732207],[-112.724587,78.05105],[-111.264443,78.152956],[-109.854452,77.996325],[-110.186938,77.697015]]],[[[-109.663146,78.601973],[-110.881314,78.40692],[-112.542091,78.407902],[-112.525891,78.550555],[-111.50001,78.849994],[-110.963661,78.804441],[-109.663146,78.601973]]],[[[-95.830295,78.056941],[-97.309843,77.850597],[-98.124289,78.082857],[-98.552868,78.458105],[-98.631984,78.87193],[-97.337231,78.831984],[-96.754399,78.765813],[-95.559278,78.418315],[-95.830295,78.056941]]],[[[-100.060192,78.324754],[-99.670939,77.907545],[-101.30394,78.018985],[-102.949809,78.343229],[-105.176133,78.380332],[-104.210429,78.67742],[-105.41958,78.918336],[-105.492289,79.301594],[-103.529282,79.165349],[-100.825158,78.800462],[-100.060192,78.324754]]],[[[-87.02,79.66],[-85.81435,79.3369],[-87.18756,79.0393],[-89.03535,78.28723],[-90.80436,78.21533],[-92.87669,78.34333],[-93.95116,78.75099],[-93.93574,79.11373],[-93.14524,79.3801],[-94.974,79.37248],[-96.07614,79.70502],[-96.70972,80.15777],[-96.01644,80.60233],[-95.32345,80.90729],[-94.29843,80.97727],[-94.73542,81.20646],[-92.40984,81.25739],[-91.13289,80.72345],[-89.45,80.509322],[-87.81,80.32],[-87.02,79.66]]],[[[-68.5,83.106322],[-65.82735,83.02801],[-63.68,82.9],[-61.85,82.6286],[-61.89388,82.36165],[-64.334,81.92775],[-66.75342,81.72527],[-67.65755,81.50141],[-65.48031,81.50657],[-67.84,80.9],[-69.4697,80.61683],[-71.18,79.8],[-73.2428,79.63415],[-73.88,79.430162],[-76.90773,79.32309],[-75.52924,79.19766],[-76.22046,79.01907],[-75.39345,78.52581],[-76.34354,78.18296],[-77.88851,77.89991],[-78.36269,77.50859],[-79.75951,77.20968],[-79.61965,76.98336],[-77.91089,77.022045],[-77.88911,76.777955],[-80.56125,76.17812],[-83.17439,76.45403],[-86.11184,76.29901],[-87.6,76.42],[-89.49068,76.47239],[-89.6161,76.95213],[-87.76739,77.17833],[-88.26,77.9],[-87.65,77.970222],[-84.97634,77.53873],[-86.34,78.18],[-87.96192,78.37181],[-87.15198,78.75867],[-85.37868,78.9969],[-85.09495,79.34543],[-86.50734,79.73624],[-86.93179,80.25145],[-84.19844,80.20836],[-83.408696,80.1],[-81.84823,80.46442],[-84.1,80.58],[-87.59895,80.51627],[-89.36663,80.85569],[-90.2,81.26],[-91.36786,81.5531],[-91.58702,81.89429],[-90.1,82.085],[-88.93227,82.11751],[-86.97024,82.27961],[-85.5,82.652273],[-84.260005,82.6],[-83.18,82.32],[-82.42,82.86],[-81.1,83.02],[-79.30664,83.13056],[-76.25,83.172059],[-75.71878,83.06404],[-72.83153,83.23324],[-70.665765,83.169781],[-68.5,83.106322]]]]}}]}",
-  "RecordCount": 3,
-  "FillOpacity": 0.24,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "d37b1038-b22c-43e3-ab77-1276fd9ecadd",
-  "CountryName": "Central African Republic",
-  "CountryCode": "CAF",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CAF\",\"properties\":{\"name\":\"Central African Republic\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[15.27946,7.421925],[16.106232,7.497088],[16.290562,7.754307],[16.456185,7.734774],[16.705988,7.508328],[17.96493,7.890914],[18.389555,8.281304],[18.911022,8.630895],[18.81201,8.982915],[19.094008,9.074847],[20.059685,9.012706],[21.000868,9.475985],[21.723822,10.567056],[22.231129,10.971889],[22.864165,11.142395],[22.977544,10.714463],[23.554304,10.089255],[23.55725,9.681218],[23.394779,9.265068],[23.459013,8.954286],[23.805813,8.666319],[24.567369,8.229188],[25.114932,7.825104],[25.124131,7.500085],[25.796648,6.979316],[26.213418,6.546603],[26.465909,5.946717],[27.213409,5.550953],[27.374226,5.233944],[27.044065,5.127853],[26.402761,5.150875],[25.650455,5.256088],[25.278798,5.170408],[25.128833,4.927245],[24.805029,4.897247],[24.410531,5.108784],[23.297214,4.609693],[22.84148,4.710126],[22.704124,4.633051],[22.405124,4.02916],[21.659123,4.224342],[20.927591,4.322786],[20.290679,4.691678],[19.467784,5.031528],[18.932312,4.709506],[18.542982,4.201785],[18.453065,3.504386],[17.8099,3.560196],[17.133042,3.728197],[16.537058,3.198255],[16.012852,2.26764],[15.907381,2.557389],[15.862732,3.013537],[15.405396,3.335301],[15.03622,3.851367],[14.950953,4.210389],[14.478372,4.732605],[14.558936,5.030598],[14.459407,5.451761],[14.53656,6.226959],[14.776545,6.408498],[15.27946,7.421925]]]}}]}",
-  "RecordCount": 13,
-  "FillOpacity": 0.41,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "2bcfe6d3-4977-4f02-8ff4-ad4cc426e98f",
-  "CountryName": "Chad",
-  "CountryCode": "TCD",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TCD\",\"properties\":{\"name\":\"Chad\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[14.495787,12.859396],[14.595781,13.330427],[13.954477,13.353449],[13.956699,13.996691],[13.540394,14.367134],[13.97217,15.68437],[15.247731,16.627306],[15.300441,17.92795],[15.685741,19.95718],[15.903247,20.387619],[15.487148,20.730415],[15.47106,21.04845],[15.096888,21.308519],[14.8513,22.86295],[15.86085,23.40972],[19.84926,21.49509],[23.83766,19.58047],[23.88689,15.61084],[23.02459,15.68072],[22.56795,14.94429],[22.30351,14.32682],[22.51202,14.09318],[22.18329,13.78648],[22.29658,13.37232],[22.03759,12.95546],[21.93681,12.58818],[22.28801,12.64605],[22.49762,12.26024],[22.50869,11.67936],[22.87622,11.38461],[22.864165,11.142395],[22.231129,10.971889],[21.723822,10.567056],[21.000868,9.475985],[20.059685,9.012706],[19.094008,9.074847],[18.81201,8.982915],[18.911022,8.630895],[18.389555,8.281304],[17.96493,7.890914],[16.705988,7.508328],[16.456185,7.734774],[16.290562,7.754307],[16.106232,7.497088],[15.27946,7.421925],[15.436092,7.692812],[15.120866,8.38215],[14.979996,8.796104],[14.544467,8.965861],[13.954218,9.549495],[14.171466,10.021378],[14.627201,9.920919],[14.909354,9.992129],[15.467873,9.982337],[14.923565,10.891325],[14.960152,11.555574],[14.89336,12.21905],[14.495787,12.859396]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "70b8afb5-2201-4b3e-8f24-8214ee594660",
-  "CountryName": "Chile",
-  "CountryCode": "CHL",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CHL\",\"properties\":{\"name\":\"Chile\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-68.63401,-52.63637],[-68.63335,-54.8695],[-67.56244,-54.87001],[-66.95992,-54.89681],[-67.29103,-55.30124],[-68.14863,-55.61183],[-68.639991,-55.580018],[-69.2321,-55.49906],[-69.95809,-55.19843],[-71.00568,-55.05383],[-72.2639,-54.49514],[-73.2852,-53.95752],[-74.66253,-52.83749],[-73.8381,-53.04743],[-72.43418,-53.7154],[-71.10773,-54.07433],[-70.59178,-53.61583],[-70.26748,-52.93123],[-69.34565,-52.5183],[-68.63401,-52.63637]]],[[[-68.219913,-21.494347],[-67.82818,-22.872919],[-67.106674,-22.735925],[-66.985234,-22.986349],[-67.328443,-24.025303],[-68.417653,-24.518555],[-68.386001,-26.185016],[-68.5948,-26.506909],[-68.295542,-26.89934],[-69.001235,-27.521214],[-69.65613,-28.459141],[-70.01355,-29.367923],[-69.919008,-30.336339],[-70.535069,-31.36501],[-70.074399,-33.09121],[-69.814777,-33.273886],[-69.817309,-34.193571],[-70.388049,-35.169688],[-70.364769,-36.005089],[-71.121881,-36.658124],[-71.118625,-37.576827],[-70.814664,-38.552995],[-71.413517,-38.916022],[-71.680761,-39.808164],[-71.915734,-40.832339],[-71.746804,-42.051386],[-72.148898,-42.254888],[-71.915424,-43.408565],[-71.464056,-43.787611],[-71.793623,-44.207172],[-71.329801,-44.407522],[-71.222779,-44.784243],[-71.659316,-44.973689],[-71.552009,-45.560733],[-71.917258,-46.884838],[-72.447355,-47.738533],[-72.331161,-48.244238],[-72.648247,-48.878618],[-73.415436,-49.318436],[-73.328051,-50.378785],[-72.975747,-50.74145],[-72.309974,-50.67701],[-72.329404,-51.425956],[-71.914804,-52.009022],[-69.498362,-52.142761],[-68.571545,-52.299444],[-69.461284,-52.291951],[-69.94278,-52.537931],[-70.845102,-52.899201],[-71.006332,-53.833252],[-71.429795,-53.856455],[-72.557943,-53.53141],[-73.702757,-52.835069],[-73.702757,-52.83507],[-74.946763,-52.262754],[-75.260026,-51.629355],[-74.976632,-51.043396],[-75.479754,-50.378372],[-75.608015,-48.673773],[-75.18277,-47.711919],[-74.126581,-46.939253],[-75.644395,-46.647643],[-74.692154,-45.763976],[-74.351709,-44.103044],[-73.240356,-44.454961],[-72.717804,-42.383356],[-73.3889,-42.117532],[-73.701336,-43.365776],[-74.331943,-43.224958],[-74.017957,-41.794813],[-73.677099,-39.942213],[-73.217593,-39.258689],[-73.505559,-38.282883],[-73.588061,-37.156285],[-73.166717,-37.12378],[-72.553137,-35.50884],[-71.861732,-33.909093],[-71.43845,-32.418899],[-71.668721,-30.920645],[-71.370083,-30.095682],[-71.489894,-28.861442],[-70.905124,-27.64038],[-70.724954,-25.705924],[-70.403966,-23.628997],[-70.091246,-21.393319],[-70.16442,-19.756468],[-70.372572,-18.347975],[-69.858444,-18.092694],[-69.590424,-17.580012],[-69.100247,-18.260125],[-68.966818,-18.981683],[-68.442225,-19.405068],[-68.757167,-20.372658],[-68.219913,-21.494347]]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "0dd83c77-6d72-4705-9d3d-41c3dd29e805",
-  "CountryName": "China",
-  "CountryCode": "CHN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CHN\",\"properties\":{\"name\":\"China\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[110.339188,18.678395],[109.47521,18.197701],[108.655208,18.507682],[108.626217,19.367888],[109.119056,19.821039],[110.211599,20.101254],[110.786551,20.077534],[111.010051,19.69593],[110.570647,19.255879],[110.339188,18.678395]]],[[[127.657407,49.76027],[129.397818,49.4406],[130.582293,48.729687],[130.987282,47.790132],[132.506672,47.78897],[133.373596,48.183442],[135.026311,48.47823],[134.500814,47.57844],[134.112362,47.212467],[133.769644,46.116927],[133.097127,45.144066],[131.883454,45.321162],[131.025212,44.967953],[131.288555,44.11152],[131.144688,42.92999],[130.633866,42.903015],[130.640016,42.395009],[129.994267,42.985387],[129.596669,42.424982],[128.052215,41.994285],[128.208433,41.466772],[127.343783,41.503152],[126.869083,41.816569],[126.182045,41.107336],[125.079942,40.569824],[124.265625,39.928493],[122.86757,39.637788],[122.131388,39.170452],[121.054554,38.897471],[121.585995,39.360854],[121.376757,39.750261],[122.168595,40.422443],[121.640359,40.94639],[120.768629,40.593388],[119.639602,39.898056],[119.023464,39.252333],[118.042749,39.204274],[117.532702,38.737636],[118.059699,38.061476],[118.87815,37.897325],[118.911636,37.448464],[119.702802,37.156389],[120.823457,37.870428],[121.711259,37.481123],[122.357937,37.454484],[122.519995,36.930614],[121.104164,36.651329],[120.637009,36.11144],[119.664562,35.609791],[119.151208,34.909859],[120.227525,34.360332],[120.620369,33.376723],[121.229014,32.460319],[121.908146,31.692174],[121.891919,30.949352],[121.264257,30.676267],[121.503519,30.142915],[122.092114,29.83252],[121.938428,29.018022],[121.684439,28.225513],[121.125661,28.135673],[120.395473,27.053207],[119.585497,25.740781],[118.656871,24.547391],[117.281606,23.624501],[115.890735,22.782873],[114.763827,22.668074],[114.152547,22.22376],[113.80678,22.54834],[113.241078,22.051367],[111.843592,21.550494],[110.785466,21.397144],[110.444039,20.341033],[109.889861,20.282457],[109.627655,21.008227],[109.864488,21.395051],[108.522813,21.715212],[108.05018,21.55238],[107.04342,21.811899],[106.567273,22.218205],[106.725403,22.794268],[105.811247,22.976892],[105.329209,23.352063],[104.476858,22.81915],[103.504515,22.703757],[102.706992,22.708795],[102.170436,22.464753],[101.652018,22.318199],[101.80312,21.174367],[101.270026,21.201652],[101.180005,21.436573],[101.150033,21.849984],[100.416538,21.558839],[99.983489,21.742937],[99.240899,22.118314],[99.531992,22.949039],[98.898749,23.142722],[98.660262,24.063286],[97.60472,23.897405],[97.724609,25.083637],[98.671838,25.918703],[98.712094,26.743536],[98.68269,27.508812],[98.246231,27.747221],[97.911988,28.335945],[97.327114,28.261583],[96.248833,28.411031],[96.586591,28.83098],[96.117679,29.452802],[95.404802,29.031717],[94.56599,29.277438],[93.413348,28.640629],[92.503119,27.896876],[91.696657,27.771742],[91.258854,28.040614],[90.730514,28.064954],[90.015829,28.296439],[89.47581,28.042759],[88.814248,27.299316],[88.730326,28.086865],[88.120441,27.876542],[86.954517,27.974262],[85.82332,28.203576],[85.011638,28.642774],[84.23458,28.839894],[83.898993,29.320226],[83.337115,29.463732],[82.327513,30.115268],[81.525804,30.422717],[81.111256,30.183481],[79.721367,30.882715],[78.738894,31.515906],[78.458446,32.618164],[79.176129,32.48378],[79.208892,32.994395],[78.811086,33.506198],[78.912269,34.321936],[77.837451,35.49401],[76.192848,35.898403],[75.896897,36.666806],[75.158028,37.133031],[74.980002,37.41999],[74.829986,37.990007],[74.864816,38.378846],[74.257514,38.606507],[73.928852,38.505815],[73.675379,39.431237],[73.960013,39.660008],[73.822244,39.893973],[74.776862,40.366425],[75.467828,40.562072],[76.526368,40.427946],[76.904484,41.066486],[78.187197,41.185316],[78.543661,41.582243],[80.11943,42.123941],[80.25999,42.349999],[80.18015,42.920068],[80.866206,43.180362],[79.966106,44.917517],[81.947071,45.317027],[82.458926,45.53965],[83.180484,47.330031],[85.16429,47.000956],[85.720484,47.452969],[85.768233,48.455751],[86.598776,48.549182],[87.35997,49.214981],[87.751264,49.297198],[88.013832,48.599463],[88.854298,48.069082],[90.280826,47.693549],[90.970809,46.888146],[90.585768,45.719716],[90.94554,45.286073],[92.133891,45.115076],[93.480734,44.975472],[94.688929,44.352332],[95.306875,44.241331],[95.762455,43.319449],[96.349396,42.725635],[97.451757,42.74889],[99.515817,42.524691],[100.845866,42.663804],[101.83304,42.514873],[103.312278,41.907468],[104.522282,41.908347],[104.964994,41.59741],[106.129316,42.134328],[107.744773,42.481516],[109.243596,42.519446],[110.412103,42.871234],[111.129682,43.406834],[111.829588,43.743118],[111.667737,44.073176],[111.348377,44.457442],[111.873306,45.102079],[112.436062,45.011646],[113.463907,44.808893],[114.460332,45.339817],[115.985096,45.727235],[116.717868,46.388202],[117.421701,46.672733],[118.874326,46.805412],[119.66327,46.69268],[119.772824,47.048059],[118.866574,47.74706],[118.064143,48.06673],[117.295507,47.697709],[116.308953,47.85341],[115.742837,47.726545],[115.485282,48.135383],[116.191802,49.134598],[116.678801,49.888531],[117.879244,49.510983],[119.288461,50.142883],[119.279366,50.582908],[120.18205,51.643566],[120.738191,51.964115],[120.725789,52.516226],[120.177089,52.753886],[121.003085,53.251401],[122.245748,53.431726],[123.571507,53.458804],[125.068211,53.161045],[125.946349,52.792799],[126.564399,51.784255],[126.939157,51.353894],[127.287456,50.739797],[127.657407,49.76027]]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "82bb5f6c-151c-4c03-9c67-8edbb1928306",
-  "CountryName": "Colombia",
-  "CountryCode": "COL",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"COL\",\"properties\":{\"name\":\"Colombia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-75.373223,-0.152032],[-75.801466,0.084801],[-76.292314,0.416047],[-76.57638,0.256936],[-77.424984,0.395687],[-77.668613,0.825893],[-77.855061,0.809925],[-78.855259,1.380924],[-78.990935,1.69137],[-78.617831,1.766404],[-78.662118,2.267355],[-78.42761,2.629556],[-77.931543,2.696606],[-77.510431,3.325017],[-77.12769,3.849636],[-77.496272,4.087606],[-77.307601,4.667984],[-77.533221,5.582812],[-77.318815,5.845354],[-77.476661,6.691116],[-77.881571,7.223771],[-77.753414,7.70984],[-77.431108,7.638061],[-77.242566,7.935278],[-77.474723,8.524286],[-77.353361,8.670505],[-76.836674,8.638749],[-76.086384,9.336821],[-75.6746,9.443248],[-75.664704,9.774003],[-75.480426,10.61899],[-74.906895,11.083045],[-74.276753,11.102036],[-74.197223,11.310473],[-73.414764,11.227015],[-72.627835,11.731972],[-72.238195,11.95555],[-71.75409,12.437303],[-71.399822,12.376041],[-71.137461,12.112982],[-71.331584,11.776284],[-71.973922,11.608672],[-72.227575,11.108702],[-72.614658,10.821975],[-72.905286,10.450344],[-73.027604,9.73677],[-73.304952,9.152],[-72.78873,9.085027],[-72.660495,8.625288],[-72.439862,8.405275],[-72.360901,8.002638],[-72.479679,7.632506],[-72.444487,7.423785],[-72.198352,7.340431],[-71.960176,6.991615],[-70.674234,7.087785],[-70.093313,6.960376],[-69.38948,6.099861],[-68.985319,6.206805],[-68.265052,6.153268],[-67.695087,6.267318],[-67.34144,6.095468],[-67.521532,5.55687],[-67.744697,5.221129],[-67.823012,4.503937],[-67.621836,3.839482],[-67.337564,3.542342],[-67.303173,3.318454],[-67.809938,2.820655],[-67.447092,2.600281],[-67.181294,2.250638],[-66.876326,1.253361],[-67.065048,1.130112],[-67.259998,1.719999],[-67.53781,2.037163],[-67.868565,1.692455],[-69.816973,1.714805],[-69.804597,1.089081],[-69.218638,0.985677],[-69.252434,0.602651],[-69.452396,0.706159],[-70.015566,0.541414],[-70.020656,-0.185156],[-69.577065,-0.549992],[-69.420486,-1.122619],[-69.444102,-1.556287],[-69.893635,-4.298187],[-70.394044,-3.766591],[-70.692682,-3.742872],[-70.047709,-2.725156],[-70.813476,-2.256865],[-71.413646,-2.342802],[-71.774761,-2.16979],[-72.325787,-2.434218],[-73.070392,-2.308954],[-73.659504,-1.260491],[-74.122395,-1.002833],[-74.441601,-0.53082],[-75.106625,-0.057205],[-75.373223,-0.152032]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "290f75f9-afb4-4add-95fd-8fc9132ac56f",
-  "CountryName": "Congo",
-  "CountryCode": "COG",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"COG\",\"properties\":{\"name\":\"Republic of the Congo\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[12.995517,-4.781103],[12.62076,-4.438023],[12.318608,-4.60623],[11.914963,-5.037987],[11.093773,-3.978827],[11.855122,-3.426871],[11.478039,-2.765619],[11.820964,-2.514161],[12.495703,-2.391688],[12.575284,-1.948511],[13.109619,-2.42874],[13.992407,-2.470805],[14.29921,-1.998276],[14.425456,-1.333407],[14.316418,-0.552627],[13.843321,0.038758],[14.276266,1.19693],[14.026669,1.395677],[13.282631,1.314184],[13.003114,1.830896],[13.075822,2.267097],[14.337813,2.227875],[15.146342,1.964015],[15.940919,1.727673],[16.012852,2.26764],[16.537058,3.198255],[17.133042,3.728197],[17.8099,3.560196],[18.453065,3.504386],[18.393792,2.900443],[18.094276,2.365722],[17.898835,1.741832],[17.774192,0.855659],[17.82654,0.288923],[17.663553,-0.058084],[17.638645,-0.424832],[17.523716,-0.74383],[16.865307,-1.225816],[16.407092,-1.740927],[15.972803,-2.712392],[16.00629,-3.535133],[15.75354,-3.855165],[15.170992,-4.343507],[14.582604,-4.970239],[14.209035,-4.793092],[14.144956,-4.510009],[13.600235,-4.500138],[13.25824,-4.882957],[12.995517,-4.781103]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "52767289-1dae-40ef-944d-381e074498b4",
-  "CountryName": "Costa Rica",
-  "CountryCode": "CRI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CRI\",\"properties\":{\"name\":\"Costa Rica\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-82.965783,8.225028],[-83.508437,8.446927],[-83.711474,8.656836],[-83.596313,8.830443],[-83.632642,9.051386],[-83.909886,9.290803],[-84.303402,9.487354],[-84.647644,9.615537],[-84.713351,9.908052],[-84.97566,10.086723],[-84.911375,9.795992],[-85.110923,9.55704],[-85.339488,9.834542],[-85.660787,9.933347],[-85.797445,10.134886],[-85.791709,10.439337],[-85.659314,10.754331],[-85.941725,10.895278],[-85.71254,11.088445],[-85.561852,11.217119],[-84.903003,10.952303],[-84.673069,11.082657],[-84.355931,10.999226],[-84.190179,10.79345],[-83.895054,10.726839],[-83.655612,10.938764],[-83.40232,10.395438],[-83.015677,9.992982],[-82.546196,9.566135],[-82.932891,9.476812],[-82.927155,9.07433],[-82.719183,8.925709],[-82.868657,8.807266],[-82.829771,8.626295],[-82.913176,8.423517],[-82.965783,8.225028]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "4da70af7-c5c2-4320-80f1-a165aed3be7e",
-  "CountryName": "Côte d'Ivoire",
-  "CountryCode": "CIV",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CIV\",\"properties\":{\"name\":\"Ivory Coast\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-2.856125,4.994476],[-3.311084,4.984296],[-4.00882,5.179813],[-4.649917,5.168264],[-5.834496,4.993701],[-6.528769,4.705088],[-7.518941,4.338288],[-7.712159,4.364566],[-7.635368,5.188159],[-7.539715,5.313345],[-7.570153,5.707352],[-7.993693,6.12619],[-8.311348,6.193033],[-8.60288,6.467564],[-8.385452,6.911801],[-8.485446,7.395208],[-8.439298,7.686043],[-8.280703,7.68718],[-8.221792,8.123329],[-8.299049,8.316444],[-8.203499,8.455453],[-7.8321,8.575704],[-8.079114,9.376224],[-8.309616,9.789532],[-8.229337,10.12902],[-8.029944,10.206535],[-7.89959,10.297382],[-7.622759,10.147236],[-6.850507,10.138994],[-6.666461,10.430811],[-6.493965,10.411303],[-6.205223,10.524061],[-6.050452,10.096361],[-5.816926,10.222555],[-5.404342,10.370737],[-4.954653,10.152714],[-4.779884,9.821985],[-4.330247,9.610835],[-3.980449,9.862344],[-3.511899,9.900326],[-2.827496,9.642461],[-2.56219,8.219628],[-2.983585,7.379705],[-3.24437,6.250472],[-2.810701,5.389051],[-2.856125,4.994476]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "cde54e79-568e-490a-980a-0963b48a76c2",
-  "CountryName": "Croatia",
-  "CountryCode": "HRV",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"HRV\",\"properties\":{\"name\":\"Croatia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[18.829838,45.908878],[19.072769,45.521511],[19.390476,45.236516],[19.005486,44.860234],[18.553214,45.08159],[17.861783,45.06774],[17.002146,45.233777],[16.534939,45.211608],[16.318157,45.004127],[15.959367,45.233777],[15.750026,44.818712],[16.23966,44.351143],[16.456443,44.04124],[16.916156,43.667722],[17.297373,43.446341],[17.674922,43.028563],[18.56,42.65],[18.450016,42.479991],[17.50997,42.849995],[16.930006,43.209998],[16.015385,43.507215],[15.174454,44.243191],[15.37625,44.317915],[14.920309,44.738484],[14.901602,45.07606],[14.258748,45.233777],[13.952255,44.802124],[13.656976,45.136935],[13.679403,45.484149],[13.71506,45.500324],[14.411968,45.466166],[14.595109,45.634941],[14.935244,45.471695],[15.327675,45.452316],[15.323954,45.731783],[15.67153,45.834154],[15.768733,46.238108],[16.564808,46.503751],[16.882515,46.380632],[17.630066,45.951769],[18.456062,45.759481],[18.829838,45.908878]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "076ec937-2db2-4b7c-b7f8-962f225e683b",
-  "CountryName": "Cuba",
-  "CountryCode": "CUB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"CUB\",\"properties\":{\"name\":\"Cuba\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-82.268151,23.188611],[-81.404457,23.117271],[-80.618769,23.10598],[-79.679524,22.765303],[-79.281486,22.399202],[-78.347434,22.512166],[-77.993296,22.277194],[-77.146422,21.657851],[-76.523825,21.20682],[-76.19462,21.220565],[-75.598222,21.016624],[-75.67106,20.735091],[-74.933896,20.693905],[-74.178025,20.284628],[-74.296648,20.050379],[-74.961595,19.923435],[-75.63468,19.873774],[-76.323656,19.952891],[-77.755481,19.855481],[-77.085108,20.413354],[-77.492655,20.673105],[-78.137292,20.739949],[-78.482827,21.028613],[-78.719867,21.598114],[-79.285,21.559175],[-80.217475,21.827324],[-80.517535,22.037079],[-81.820943,22.192057],[-82.169992,22.387109],[-81.795002,22.636965],[-82.775898,22.68815],[-83.494459,22.168518],[-83.9088,22.154565],[-84.052151,21.910575],[-84.54703,21.801228],[-84.974911,21.896028],[-84.447062,22.20495],[-84.230357,22.565755],[-83.77824,22.788118],[-83.267548,22.983042],[-82.510436,23.078747],[-82.268151,23.188611]]]}}]}",
-  "RecordCount": 6,
-  "FillOpacity": 0.29,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "dfd49913-4a82-4186-9ace-f370d73a1acf",
-  "CountryName": "Democratic People's Republic of Korea (the)",
-  "CountryCode": "PRK",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PRK\",\"properties\":{\"name\":\"North Korea\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[130.640016,42.395009],[130.780007,42.220007],[130.400031,42.280004],[129.965949,41.941368],[129.667362,41.601104],[129.705189,40.882828],[129.188115,40.661808],[129.0104,40.485436],[128.633368,40.189847],[127.967414,40.025413],[127.533436,39.75685],[127.50212,39.323931],[127.385434,39.213472],[127.783343,39.050898],[128.349716,38.612243],[128.205746,38.370397],[127.780035,38.304536],[127.073309,38.256115],[126.68372,37.804773],[126.237339,37.840378],[126.174759,37.749686],[125.689104,37.94001],[125.568439,37.752089],[125.27533,37.669071],[125.240087,37.857224],[124.981033,37.948821],[124.712161,38.108346],[124.985994,38.548474],[125.221949,38.665857],[125.132859,38.848559],[125.38659,39.387958],[125.321116,39.551385],[124.737482,39.660344],[124.265625,39.928493],[125.079942,40.569824],[126.182045,41.107336],[126.869083,41.816569],[127.343783,41.503152],[128.208433,41.466772],[128.052215,41.994285],[129.596669,42.424982],[129.994267,42.985387],[130.640016,42.395009]]]}}]}",
-  "RecordCount": 2,
-  "FillOpacity": 0.22,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "dab64a9e-1ca8-4b81-b077-dfa1ce9cdb1d",
-  "CountryName": "Democratic Republic of the Congo (the)",
-  "CountryCode": "COD",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"COD\",\"properties\":{\"name\":\"Democratic Republic of the Congo\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[30.83386,3.509166],[30.773347,2.339883],[31.174149,2.204465],[30.85267,1.849396],[30.468508,1.583805],[30.086154,1.062313],[29.875779,0.59738],[29.819503,-0.20531],[29.587838,-0.587406],[29.579466,-1.341313],[29.291887,-1.620056],[29.254835,-2.21511],[29.117479,-2.292211],[29.024926,-2.839258],[29.276384,-3.293907],[29.339998,-4.499983],[29.519987,-5.419979],[29.419993,-5.939999],[29.620032,-6.520015],[30.199997,-7.079981],[30.740015,-8.340007],[30.346086,-8.238257],[29.002912,-8.407032],[28.734867,-8.526559],[28.449871,-9.164918],[28.673682,-9.605925],[28.49607,-10.789884],[28.372253,-11.793647],[28.642417,-11.971569],[29.341548,-12.360744],[29.616001,-12.178895],[29.699614,-13.257227],[28.934286,-13.248958],[28.523562,-12.698604],[28.155109,-12.272481],[27.388799,-12.132747],[27.16442,-11.608748],[26.553088,-11.92444],[25.75231,-11.784965],[25.418118,-11.330936],[24.78317,-11.238694],[24.314516,-11.262826],[24.257155,-10.951993],[23.912215,-10.926826],[23.456791,-10.867863],[22.837345,-11.017622],[22.402798,-10.993075],[22.155268,-11.084801],[22.208753,-9.894796],[21.875182,-9.523708],[21.801801,-8.908707],[21.949131,-8.305901],[21.746456,-7.920085],[21.728111,-7.290872],[20.514748,-7.299606],[20.601823,-6.939318],[20.091622,-6.94309],[20.037723,-7.116361],[19.417502,-7.155429],[19.166613,-7.738184],[19.016752,-7.988246],[18.464176,-7.847014],[18.134222,-7.987678],[17.47297,-8.068551],[17.089996,-7.545689],[16.860191,-7.222298],[16.57318,-6.622645],[16.326528,-5.87747],[13.375597,-5.864241],[13.024869,-5.984389],[12.735171,-5.965682],[12.322432,-6.100092],[12.182337,-5.789931],[12.436688,-5.684304],[12.468004,-5.248362],[12.631612,-4.991271],[12.995517,-4.781103],[13.25824,-4.882957],[13.600235,-4.500138],[14.144956,-4.510009],[14.209035,-4.793092],[14.582604,-4.970239],[15.170992,-4.343507],[15.75354,-3.855165],[16.00629,-3.535133],[15.972803,-2.712392],[16.407092,-1.740927],[16.865307,-1.225816],[17.523716,-0.74383],[17.638645,-0.424832],[17.663553,-0.058084],[17.82654,0.288923],[17.774192,0.855659],[17.898835,1.741832],[18.094276,2.365722],[18.393792,2.900443],[18.453065,3.504386],[18.542982,4.201785],[18.932312,4.709506],[19.467784,5.031528],[20.290679,4.691678],[20.927591,4.322786],[21.659123,4.224342],[22.405124,4.02916],[22.704124,4.633051],[22.84148,4.710126],[23.297214,4.609693],[24.410531,5.108784],[24.805029,4.897247],[25.128833,4.927245],[25.278798,5.170408],[25.650455,5.256088],[26.402761,5.150875],[27.044065,5.127853],[27.374226,5.233944],[27.979977,4.408413],[28.428994,4.287155],[28.696678,4.455077],[29.159078,4.389267],[29.715995,4.600805],[29.9535,4.173699],[30.83386,3.509166]]]}}]}",
-  "RecordCount": 19,
-  "FillOpacity": 0.52,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "e4a987d8-b5f1-45e3-bef6-ccb1563c5ffe",
-  "CountryName": "Djibouti",
-  "CountryCode": "DJI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"DJI\",\"properties\":{\"name\":\"Djibouti\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[43.081226,12.699639],[43.317852,12.390148],[43.286381,11.974928],[42.715874,11.735641],[43.145305,11.46204],[42.776852,10.926879],[42.55493,11.10511],[42.31414,11.0342],[41.75557,11.05091],[41.73959,11.35511],[41.66176,11.6312],[42,12.1],[42.35156,12.54223],[42.779642,12.455416],[43.081226,12.699639]]]}}]}",
-  "RecordCount": 20,
-  "FillOpacity": 0.53,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "49fce62a-aad5-4675-8871-2b271e63b551",
-  "CountryName": "Dominican Republic",
-  "CountryCode": "DOM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"DOM\",\"properties\":{\"name\":\"Dominican Republic\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-71.712361,19.714456],[-71.587304,19.884911],[-70.806706,19.880286],[-70.214365,19.622885],[-69.950815,19.648],[-69.76925,19.293267],[-69.222126,19.313214],[-69.254346,19.015196],[-68.809412,18.979074],[-68.317943,18.612198],[-68.689316,18.205142],[-69.164946,18.422648],[-69.623988,18.380713],[-69.952934,18.428307],[-70.133233,18.245915],[-70.517137,18.184291],[-70.669298,18.426886],[-70.99995,18.283329],[-71.40021,17.598564],[-71.657662,17.757573],[-71.708305,18.044997],[-71.687738,18.31666],[-71.945112,18.6169],[-71.701303,18.785417],[-71.624873,19.169838],[-71.712361,19.714456]]]}}]}",
-  "RecordCount": 12,
-  "FillOpacity": 0.39,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "9fdb1f3f-8eaa-4f7f-aa14-560203da088f",
-  "CountryName": "Ecuador",
-  "CountryCode": "ECU",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ECU\",\"properties\":{\"name\":\"Ecuador\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-80.302561,-3.404856],[-79.770293,-2.657512],[-79.986559,-2.220794],[-80.368784,-2.685159],[-80.967765,-2.246943],[-80.764806,-1.965048],[-80.933659,-1.057455],[-80.58337,-0.906663],[-80.399325,-0.283703],[-80.020898,0.36034],[-80.09061,0.768429],[-79.542762,0.982938],[-78.855259,1.380924],[-77.855061,0.809925],[-77.668613,0.825893],[-77.424984,0.395687],[-76.57638,0.256936],[-76.292314,0.416047],[-75.801466,0.084801],[-75.373223,-0.152032],[-75.233723,-0.911417],[-75.544996,-1.56161],[-76.635394,-2.608678],[-77.837905,-3.003021],[-78.450684,-3.873097],[-78.639897,-4.547784],[-79.205289,-4.959129],[-79.624979,-4.454198],[-80.028908,-4.346091],[-80.442242,-4.425724],[-80.469295,-4.059287],[-80.184015,-3.821162],[-80.302561,-3.404856]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "afeb4e93-5a90-493e-9e05-3365130b64b9",
-  "CountryName": "Egypt",
-  "CountryCode": "EGY",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"EGY\",\"properties\":{\"name\":\"Egypt\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[34.9226,29.50133],[34.64174,29.09942],[34.42655,28.34399],[34.15451,27.8233],[33.92136,27.6487],[33.58811,27.97136],[33.13676,28.41765],[32.42323,29.85108],[32.32046,29.76043],[32.73482,28.70523],[33.34876,27.69989],[34.10455,26.14227],[34.47387,25.59856],[34.79507,25.03375],[35.69241,23.92671],[35.49372,23.75237],[35.52598,23.10244],[36.69069,22.20485],[36.86623,22],[32.9,22],[29.02,22],[25,22],[25,25.6825],[25,29.238655],[24.70007,30.04419],[24.95762,30.6616],[24.80287,31.08929],[25.16482,31.56915],[26.49533,31.58568],[27.45762,31.32126],[28.45048,31.02577],[28.91353,30.87005],[29.68342,31.18686],[30.09503,31.4734],[30.97693,31.55586],[31.68796,31.4296],[31.96041,30.9336],[32.19247,31.26034],[32.99392,31.02407],[33.7734,30.96746],[34.26544,31.21936],[34.9226,29.50133]]]}}]}",
-  "RecordCount": 27,
-  "FillOpacity": 0.66,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "138e8bd3-aa7a-4a9b-9de9-987fcf60c3ed",
-  "CountryName": "El Salvador",
-  "CountryCode": "SLV",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SLV\",\"properties\":{\"name\":\"El Salvador\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-87.793111,13.38448],[-87.904112,13.149017],[-88.483302,13.163951],[-88.843228,13.259734],[-89.256743,13.458533],[-89.812394,13.520622],[-90.095555,13.735338],[-90.064678,13.88197],[-89.721934,14.134228],[-89.534219,14.244816],[-89.587343,14.362586],[-89.353326,14.424133],[-89.058512,14.340029],[-88.843073,14.140507],[-88.541231,13.980155],[-88.503998,13.845486],[-88.065343,13.964626],[-87.859515,13.893312],[-87.723503,13.78505],[-87.793111,13.38448]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "157bd994-6b49-4764-a036-128778685850",
-  "CountryName": "Equatorial Guinea",
-  "CountryCode": "GNQ",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GNQ\",\"properties\":{\"name\":\"Equatorial Guinea\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[9.492889,1.01012],[9.305613,1.160911],[9.649158,2.283866],[11.276449,2.261051],[11.285079,1.057662],[9.830284,1.067894],[9.492889,1.01012]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ad397874-13b3-4064-b824-79decda97e71",
-  "CountryName": "Eritrea",
-  "CountryCode": "ERI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ERI\",\"properties\":{\"name\":\"Eritrea\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[42.35156,12.54223],[42.00975,12.86582],[41.59856,13.45209],[41.155194,13.77332],[40.8966,14.11864],[40.026219,14.519579],[39.34061,14.53155],[39.0994,14.74064],[38.51295,14.50547],[37.90607,14.95943],[37.59377,14.2131],[36.42951,14.42211],[36.323189,14.822481],[36.75386,16.291874],[36.85253,16.95655],[37.16747,17.26314],[37.904,17.42754],[38.41009,17.998307],[38.990623,16.840626],[39.26611,15.922723],[39.814294,15.435647],[41.179275,14.49108],[41.734952,13.921037],[42.276831,13.343992],[42.589576,13.000421],[43.081226,12.699639],[42.779642,12.455416],[42.35156,12.54223]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "cdb2bc43-4d6c-4921-a992-6e321ebf88f7",
-  "CountryName": "Ethiopia",
-  "CountryCode": "ETH",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ETH\",\"properties\":{\"name\":\"Ethiopia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[37.90607,14.95943],[38.51295,14.50547],[39.0994,14.74064],[39.34061,14.53155],[40.02625,14.51959],[40.8966,14.11864],[41.1552,13.77333],[41.59856,13.45209],[42.00975,12.86582],[42.35156,12.54223],[42,12.1],[41.66176,11.6312],[41.73959,11.35511],[41.75557,11.05091],[42.31414,11.0342],[42.55493,11.10511],[42.776852,10.926879],[42.55876,10.57258],[42.92812,10.02194],[43.29699,9.54048],[43.67875,9.18358],[46.94834,7.99688],[47.78942,8.003],[44.9636,5.00162],[43.66087,4.95755],[42.76967,4.25259],[42.12861,4.23413],[41.855083,3.918912],[41.1718,3.91909],[40.76848,4.25702],[39.85494,3.83879],[39.559384,3.42206],[38.89251,3.50074],[38.67114,3.61607],[38.43697,3.58851],[38.120915,3.598605],[36.855093,4.447864],[36.159079,4.447864],[35.817448,4.776966],[35.817448,5.338232],[35.298007,5.506],[34.70702,6.59422],[34.25032,6.82607],[34.0751,7.22595],[33.56829,7.71334],[32.95418,7.78497],[33.2948,8.35458],[33.8255,8.37916],[33.97498,8.68456],[33.96162,9.58358],[34.25745,10.63009],[34.73115,10.91017],[34.83163,11.31896],[35.26049,12.08286],[35.86363,12.57828],[36.27022,13.56333],[36.42951,14.42211],[37.59377,14.2131],[37.90607,14.95943]]]}}]}",
-  "RecordCount": 32,
-  "FillOpacity": 0.74,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "743388e7-1bf1-4ff2-bb7e-0c02495dd299",
-  "CountryName": "Fiji",
-  "CountryCode": "FJI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"FJI\",\"properties\":{\"name\":\"Fiji\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[178.3736,-17.33992],[178.71806,-17.62846],[178.55271,-18.15059],[177.93266,-18.28799],[177.38146,-18.16432],[177.28504,-17.72465],[177.67087,-17.38114],[178.12557,-17.50481],[178.3736,-17.33992]]],[[[179.364143,-16.801354],[178.725059,-17.012042],[178.596839,-16.63915],[179.096609,-16.433984],[179.413509,-16.379054],[180,-16.067133],[180,-16.555217],[179.364143,-16.801354]]],[[[-179.917369,-16.501783],[-180,-16.555217],[-180,-16.067133],[-179.79332,-16.020882],[-179.917369,-16.501783]]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "1501a87f-8548-4446-b5f5-c79c812ed91a",
-  "CountryName": "Gabon",
-  "CountryCode": "GAB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GAB\",\"properties\":{\"name\":\"Gabon\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[11.093773,-3.978827],[10.066135,-2.969483],[9.405245,-2.144313],[8.797996,-1.111301],[8.830087,-0.779074],[9.04842,-0.459351],[9.291351,0.268666],[9.492889,1.01012],[9.830284,1.067894],[11.285079,1.057662],[11.276449,2.261051],[11.751665,2.326758],[12.35938,2.192812],[12.951334,2.321616],[13.075822,2.267097],[13.003114,1.830896],[13.282631,1.314184],[14.026669,1.395677],[14.276266,1.19693],[13.843321,0.038758],[14.316418,-0.552627],[14.425456,-1.333407],[14.29921,-1.998276],[13.992407,-2.470805],[13.109619,-2.42874],[12.575284,-1.948511],[12.495703,-2.391688],[11.820964,-2.514161],[11.478039,-2.765619],[11.855122,-3.426871],[11.093773,-3.978827]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "c0a82bd6-0570-4dcf-b988-ee1a13d3c7e0",
-  "CountryName": "Gambia",
-  "CountryCode": "GMB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GMB\",\"properties\":{\"name\":\"Gambia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-16.841525,13.151394],[-16.713729,13.594959],[-15.624596,13.623587],[-15.39877,13.860369],[-15.081735,13.876492],[-14.687031,13.630357],[-14.376714,13.62568],[-14.046992,13.794068],[-13.844963,13.505042],[-14.277702,13.280585],[-14.712197,13.298207],[-15.141163,13.509512],[-15.511813,13.27857],[-15.691001,13.270353],[-15.931296,13.130284],[-16.841525,13.151394]]]}}]}",
-  "RecordCount": 21,
-  "FillOpacity": 0.55,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "d5befb70-f97e-4345-a59e-bc0db305d272",
-  "CountryName": "Georgia",
-  "CountryCode": "GEO",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GEO\",\"properties\":{\"name\":\"Georgia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[41.554084,41.535656],[41.703171,41.962943],[41.45347,42.645123],[40.875469,43.013628],[40.321394,43.128634],[39.955009,43.434998],[40.076965,43.553104],[40.922185,43.382159],[42.394395,43.220308],[43.756017,42.740828],[43.9312,42.554974],[44.537623,42.711993],[45.470279,42.502781],[45.77641,42.092444],[46.404951,41.860675],[46.145432,41.722802],[46.637908,41.181673],[46.501637,41.064445],[45.962601,41.123873],[45.217426,41.411452],[44.97248,41.248129],[43.582746,41.092143],[42.619549,41.583173],[41.554084,41.535656]]]}}]}",
-  "RecordCount": 13,
-  "FillOpacity": 0.41,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "2af5bae7-3361-4bfb-9469-fa1c013a612c",
-  "CountryName": "Ghana",
-  "CountryCode": "GHA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GHA\",\"properties\":{\"name\":\"Ghana\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[1.060122,5.928837],[-0.507638,5.343473],[-1.063625,5.000548],[-1.964707,4.710462],[-2.856125,4.994476],[-2.810701,5.389051],[-3.24437,6.250472],[-2.983585,7.379705],[-2.56219,8.219628],[-2.827496,9.642461],[-2.963896,10.395335],[-2.940409,10.96269],[-1.203358,11.009819],[-0.761576,10.93693],[-0.438702,11.098341],[0.023803,11.018682],[-0.049785,10.706918],[0.36758,10.191213],[0.365901,9.465004],[0.461192,8.677223],[0.712029,8.312465],[0.490957,7.411744],[0.570384,6.914359],[0.836931,6.279979],[1.060122,5.928837]]]}}]}",
-  "RecordCount": 28,
-  "FillOpacity": 0.67,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "58ad83dc-6db0-40c9-af95-6e686a22cf56",
-  "CountryName": "Grenada",
-  "CountryCode": "GRD",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"cca2\":\"gd\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-61.74695,11.997499],[-61.7525,11.996387],[-61.78015,12],[-61.78361,12.001389],[-61.78722,12.004721],[-61.78973,12.009165],[-61.72472,12.17222],[-61.7075,12.19694],[-61.686668,12.218054],[-61.675835,12.227777],[-61.65861,12.236666],[-61.653061,12.237778],[-61.64751,12.237499],[-61.6175,12.232777],[-61.61195,12.23111],[-61.610001,12.227777],[-61.606392,12.224165],[-61.60473,12.220554],[-61.59972,12.186666],[-61.59639,12.125555],[-61.61111,12.079443],[-61.628616,12.048054],[-61.63167,12.044167],[-61.6425,12.034166],[-61.65139,12.02916],[-61.683334,12.016109],[-61.717506,12.003887],[-61.74695,11.997499]]],[[[-61.58,12.29555],[-61.585556,12.29444],[-61.589172,12.29805],[-61.58889,12.30361],[-61.585556,12.314444],[-61.58334,12.319166],[-61.5789,12.323055],[-61.573891,12.320833],[-61.572227,12.315832],[-61.5725,12.308887],[-61.57417,12.30361],[-61.58,12.29555]]],[[[-61.42834,12.453609],[-61.491669,12.434999],[-61.49556,12.438055],[-61.49695,12.443609],[-61.49556,12.469444],[-61.493896,12.475],[-61.490837,12.47889],[-61.43445,12.529165],[-61.427505,12.52889],[-61.42556,12.526943],[-61.42056,12.51278],[-61.41945,12.5075],[-61.41862,12.494999],[-61.425285,12.457499],[-61.42834,12.453609]]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ef46993b-797a-4c85-8f5b-83325fa0cf93",
-  "CountryName": "Guatemala",
-  "CountryCode": "GTM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GTM\",\"properties\":{\"name\":\"Guatemala\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-90.095555,13.735338],[-90.608624,13.909771],[-91.23241,13.927832],[-91.689747,14.126218],[-92.22775,14.538829],[-92.20323,14.830103],[-92.087216,15.064585],[-92.229249,15.251447],[-91.74796,16.066565],[-90.464473,16.069562],[-90.438867,16.41011],[-90.600847,16.470778],[-90.711822,16.687483],[-91.08167,16.918477],[-91.453921,17.252177],[-91.002269,17.254658],[-91.00152,17.817595],[-90.067934,17.819326],[-89.14308,17.808319],[-89.150806,17.015577],[-89.229122,15.886938],[-88.930613,15.887273],[-88.604586,15.70638],[-88.518364,15.855389],[-88.225023,15.727722],[-88.68068,15.346247],[-89.154811,15.066419],[-89.22522,14.874286],[-89.145535,14.678019],[-89.353326,14.424133],[-89.587343,14.362586],[-89.534219,14.244816],[-89.721934,14.134228],[-90.064678,13.88197],[-90.095555,13.735338]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "5ff47e2b-8af5-45a2-9097-79079be32014",
-  "CountryName": "Guinea",
-  "CountryCode": "GIN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GIN\",\"properties\":{\"name\":\"Guinea\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-8.439298,7.686043],[-8.722124,7.711674],[-8.926065,7.309037],[-9.208786,7.313921],[-9.403348,7.526905],[-9.33728,7.928534],[-9.755342,8.541055],[-10.016567,8.428504],[-10.230094,8.406206],[-10.505477,8.348896],[-10.494315,8.715541],[-10.65477,8.977178],[-10.622395,9.26791],[-10.839152,9.688246],[-11.117481,10.045873],[-11.917277,10.046984],[-12.150338,9.858572],[-12.425929,9.835834],[-12.596719,9.620188],[-12.711958,9.342712],[-13.24655,8.903049],[-13.685154,9.494744],[-14.074045,9.886167],[-14.330076,10.01572],[-14.579699,10.214467],[-14.693232,10.656301],[-14.839554,10.876572],[-15.130311,11.040412],[-14.685687,11.527824],[-14.382192,11.509272],[-14.121406,11.677117],[-13.9008,11.678719],[-13.743161,11.811269],[-13.828272,12.142644],[-13.718744,12.247186],[-13.700476,12.586183],[-13.217818,12.575874],[-12.499051,12.33209],[-12.278599,12.35444],[-12.203565,12.465648],[-11.658301,12.386583],[-11.513943,12.442988],[-11.456169,12.076834],[-11.297574,12.077971],[-11.036556,12.211245],[-10.87083,12.177887],[-10.593224,11.923975],[-10.165214,11.844084],[-9.890993,12.060479],[-9.567912,12.194243],[-9.327616,12.334286],[-9.127474,12.30806],[-8.905265,12.088358],[-8.786099,11.812561],[-8.376305,11.393646],[-8.581305,11.136246],[-8.620321,10.810891],[-8.407311,10.909257],[-8.282357,10.792597],[-8.335377,10.494812],[-8.029944,10.206535],[-8.229337,10.12902],[-8.309616,9.789532],[-8.079114,9.376224],[-7.8321,8.575704],[-8.203499,8.455453],[-8.299049,8.316444],[-8.221792,8.123329],[-8.280703,7.68718],[-8.439298,7.686043]]]}}]}",
-  "RecordCount": 12,
-  "FillOpacity": 0.39,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "9a104d81-56b6-45cb-9be0-bbaf079c1ad8",
-  "CountryName": "Guinea-Bissau",
-  "CountryCode": "GNB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GNB\",\"properties\":{\"name\":\"Guinea Bissau\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-15.130311,11.040412],[-15.66418,11.458474],[-16.085214,11.524594],[-16.314787,11.806515],[-16.308947,11.958702],[-16.613838,12.170911],[-16.677452,12.384852],[-16.147717,12.547762],[-15.816574,12.515567],[-15.548477,12.62817],[-13.700476,12.586183],[-13.718744,12.247186],[-13.828272,12.142644],[-13.743161,11.811269],[-13.9008,11.678719],[-14.121406,11.677117],[-14.382192,11.509272],[-14.685687,11.527824],[-15.130311,11.040412]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "3f3f1cc9-0028-4c98-be15-28293168f64b",
-  "CountryName": "Guyana",
-  "CountryCode": "GUY",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"GUY\",\"properties\":{\"name\":\"Guyana\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-59.758285,8.367035],[-59.101684,7.999202],[-58.482962,7.347691],[-58.454876,6.832787],[-58.078103,6.809094],[-57.542219,6.321268],[-57.147436,5.97315],[-57.307246,5.073567],[-57.914289,4.812626],[-57.86021,4.576801],[-58.044694,4.060864],[-57.601569,3.334655],[-57.281433,3.333492],[-57.150098,2.768927],[-56.539386,1.899523],[-56.782704,1.863711],[-57.335823,1.948538],[-57.660971,1.682585],[-58.11345,1.507195],[-58.429477,1.463942],[-58.540013,1.268088],[-59.030862,1.317698],[-59.646044,1.786894],[-59.718546,2.24963],[-59.974525,2.755233],[-59.815413,3.606499],[-59.53804,3.958803],[-59.767406,4.423503],[-60.111002,4.574967],[-59.980959,5.014061],[-60.213683,5.244486],[-60.733574,5.200277],[-61.410303,5.959068],[-61.139415,6.234297],[-61.159336,6.696077],[-60.543999,6.856584],[-60.295668,7.043911],[-60.637973,7.415],[-60.550588,7.779603],[-59.758285,8.367035]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "e4866671-282a-4821-b834-feb6c45c6dd7",
-  "CountryName": "Haiti",
-  "CountryCode": "HTI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"HTI\",\"properties\":{\"name\":\"Haiti\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-73.189791,19.915684],[-72.579673,19.871501],[-71.712361,19.714456],[-71.624873,19.169838],[-71.701303,18.785417],[-71.945112,18.6169],[-71.687738,18.31666],[-71.708305,18.044997],[-72.372476,18.214961],[-72.844411,18.145611],[-73.454555,18.217906],[-73.922433,18.030993],[-74.458034,18.34255],[-74.369925,18.664908],[-73.449542,18.526053],[-72.694937,18.445799],[-72.334882,18.668422],[-72.79165,19.101625],[-72.784105,19.483591],[-73.415022,19.639551],[-73.189791,19.915684]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "6e8d1eba-0cc8-498d-b8ca-84f89b2adaae",
-  "CountryName": "Honduras",
-  "CountryCode": "HND",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"HND\",\"properties\":{\"name\":\"Honduras\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-87.316654,12.984686],[-87.489409,13.297535],[-87.793111,13.38448],[-87.723503,13.78505],[-87.859515,13.893312],[-88.065343,13.964626],[-88.503998,13.845486],[-88.541231,13.980155],[-88.843073,14.140507],[-89.058512,14.340029],[-89.353326,14.424133],[-89.145535,14.678019],[-89.22522,14.874286],[-89.154811,15.066419],[-88.68068,15.346247],[-88.225023,15.727722],[-88.121153,15.688655],[-87.901813,15.864458],[-87.61568,15.878799],[-87.522921,15.797279],[-87.367762,15.84694],[-86.903191,15.756713],[-86.440946,15.782835],[-86.119234,15.893449],[-86.001954,16.005406],[-85.683317,15.953652],[-85.444004,15.885749],[-85.182444,15.909158],[-84.983722,15.995923],[-84.52698,15.857224],[-84.368256,15.835158],[-84.063055,15.648244],[-83.773977,15.424072],[-83.410381,15.270903],[-83.147219,14.995829],[-83.489989,15.016267],[-83.628585,14.880074],[-83.975721,14.749436],[-84.228342,14.748764],[-84.449336,14.621614],[-84.649582,14.666805],[-84.820037,14.819587],[-84.924501,14.790493],[-85.052787,14.551541],[-85.148751,14.560197],[-85.165365,14.35437],[-85.514413,14.079012],[-85.698665,13.960078],[-85.801295,13.836055],[-86.096264,14.038187],[-86.312142,13.771356],[-86.520708,13.778487],[-86.755087,13.754845],[-86.733822,13.263093],[-86.880557,13.254204],[-87.005769,13.025794],[-87.316654,12.984686]]]}}]}",
-  "RecordCount": 14,
-  "FillOpacity": 0.43,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "fc19d4aa-a098-464f-88ff-fdab4b64f166",
-  "CountryName": "India",
-  "CountryCode": "IND",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"IND\",\"properties\":{\"name\":\"India\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[77.837451,35.49401],[78.912269,34.321936],[78.811086,33.506198],[79.208892,32.994395],[79.176129,32.48378],[78.458446,32.618164],[78.738894,31.515906],[79.721367,30.882715],[81.111256,30.183481],[80.476721,29.729865],[80.088425,28.79447],[81.057203,28.416095],[81.999987,27.925479],[83.304249,27.364506],[84.675018,27.234901],[85.251779,26.726198],[86.024393,26.630985],[87.227472,26.397898],[88.060238,26.414615],[88.174804,26.810405],[88.043133,27.445819],[88.120441,27.876542],[88.730326,28.086865],[88.814248,27.299316],[88.835643,27.098966],[89.744528,26.719403],[90.373275,26.875724],[91.217513,26.808648],[92.033484,26.83831],[92.103712,27.452614],[91.696657,27.771742],[92.503119,27.896876],[93.413348,28.640629],[94.56599,29.277438],[95.404802,29.031717],[96.117679,29.452802],[96.586591,28.83098],[96.248833,28.411031],[97.327114,28.261583],[97.402561,27.882536],[97.051989,27.699059],[97.133999,27.083774],[96.419366,27.264589],[95.124768,26.573572],[95.155153,26.001307],[94.603249,25.162495],[94.552658,24.675238],[94.106742,23.850741],[93.325188,24.078556],[93.286327,23.043658],[93.060294,22.703111],[93.166128,22.27846],[92.672721,22.041239],[92.146035,23.627499],[91.869928,23.624346],[91.706475,22.985264],[91.158963,23.503527],[91.46773,24.072639],[91.915093,24.130414],[92.376202,24.976693],[91.799596,25.147432],[90.872211,25.132601],[89.920693,25.26975],[89.832481,25.965082],[89.355094,26.014407],[88.563049,26.446526],[88.209789,25.768066],[88.931554,25.238692],[88.306373,24.866079],[88.084422,24.501657],[88.69994,24.233715],[88.52977,23.631142],[88.876312,22.879146],[89.031961,22.055708],[88.888766,21.690588],[88.208497,21.703172],[86.975704,21.495562],[87.033169,20.743308],[86.499351,20.151638],[85.060266,19.478579],[83.941006,18.30201],[83.189217,17.671221],[82.192792,17.016636],[82.191242,16.556664],[81.692719,16.310219],[80.791999,15.951972],[80.324896,15.899185],[80.025069,15.136415],[80.233274,13.835771],[80.286294,13.006261],[79.862547,12.056215],[79.857999,10.357275],[79.340512,10.308854],[78.885345,9.546136],[79.18972,9.216544],[78.277941,8.933047],[77.941165,8.252959],[77.539898,7.965535],[76.592979,8.899276],[76.130061,10.29963],[75.746467,11.308251],[75.396101,11.781245],[74.864816,12.741936],[74.616717,13.992583],[74.443859,14.617222],[73.534199,15.990652],[73.119909,17.92857],[72.820909,19.208234],[72.824475,20.419503],[72.630533,21.356009],[71.175273,20.757441],[70.470459,20.877331],[69.16413,22.089298],[69.644928,22.450775],[69.349597,22.84318],[68.176645,23.691965],[68.842599,24.359134],[71.04324,24.356524],[70.844699,25.215102],[70.282873,25.722229],[70.168927,26.491872],[69.514393,26.940966],[70.616496,27.989196],[71.777666,27.91318],[72.823752,28.961592],[73.450638,29.976413],[74.42138,30.979815],[74.405929,31.692639],[75.258642,32.271105],[74.451559,32.7649],[74.104294,33.441473],[73.749948,34.317699],[74.240203,34.748887],[75.757061,34.504923],[76.871722,34.653544],[77.837451,35.49401]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "abf04d10-a52f-41e7-8346-bbe198b9e92d",
-  "CountryName": "Indonesia",
-  "CountryCode": "IDN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"IDN\",\"properties\":{\"name\":\"Indonesia\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[120.715609,-10.239581],[120.295014,-10.25865],[118.967808,-9.557969],[119.90031,-9.36134],[120.425756,-9.665921],[120.775502,-9.969675],[120.715609,-10.239581]]],[[[124.43595,-10.140001],[123.579982,-10.359987],[123.459989,-10.239995],[123.550009,-9.900016],[123.980009,-9.290027],[124.968682,-8.89279],[125.07002,-9.089987],[125.08852,-9.393173],[124.43595,-10.140001]]],[[[117.900018,-8.095681],[118.260616,-8.362383],[118.87846,-8.280683],[119.126507,-8.705825],[117.970402,-8.906639],[117.277731,-9.040895],[116.740141,-9.032937],[117.083737,-8.457158],[117.632024,-8.449303],[117.900018,-8.095681]]],[[[122.903537,-8.094234],[122.756983,-8.649808],[121.254491,-8.933666],[119.924391,-8.810418],[119.920929,-8.444859],[120.715092,-8.236965],[121.341669,-8.53674],[122.007365,-8.46062],[122.903537,-8.094234]]],[[[108.623479,-6.777674],[110.539227,-6.877358],[110.759576,-6.465186],[112.614811,-6.946036],[112.978768,-7.594213],[114.478935,-7.776528],[115.705527,-8.370807],[114.564511,-8.751817],[113.464734,-8.348947],[112.559672,-8.376181],[111.522061,-8.302129],[110.58615,-8.122605],[109.427667,-7.740664],[108.693655,-7.6416],[108.277763,-7.766657],[106.454102,-7.3549],[106.280624,-6.9249],[105.365486,-6.851416],[106.051646,-5.895919],[107.265009,-5.954985],[108.072091,-6.345762],[108.486846,-6.421985],[108.623479,-6.777674]]],[[[134.724624,-6.214401],[134.210134,-6.895238],[134.112776,-6.142467],[134.290336,-5.783058],[134.499625,-5.445042],[134.727002,-5.737582],[134.724624,-6.214401]]],[[[127.249215,-3.459065],[126.874923,-3.790983],[126.183802,-3.607376],[125.989034,-3.177273],[127.000651,-3.129318],[127.249215,-3.459065]]],[[[130.471344,-3.093764],[130.834836,-3.858472],[129.990547,-3.446301],[129.155249,-3.362637],[128.590684,-3.428679],[127.898891,-3.393436],[128.135879,-2.84365],[129.370998,-2.802154],[130.471344,-3.093764]]],[[[134.143368,-1.151867],[134.422627,-2.769185],[135.457603,-3.367753],[136.293314,-2.307042],[137.440738,-1.703513],[138.329727,-1.702686],[139.184921,-2.051296],[139.926684,-2.409052],[141.00021,-2.600151],[141.017057,-5.859022],[141.033852,-9.117893],[140.143415,-8.297168],[139.127767,-8.096043],[138.881477,-8.380935],[137.614474,-8.411683],[138.039099,-7.597882],[138.668621,-7.320225],[138.407914,-6.232849],[137.92784,-5.393366],[135.98925,-4.546544],[135.164598,-4.462931],[133.66288,-3.538853],[133.367705,-4.024819],[132.983956,-4.112979],[132.756941,-3.746283],[132.753789,-3.311787],[131.989804,-2.820551],[133.066845,-2.460418],[133.780031,-2.479848],[133.696212,-2.214542],[132.232373,-2.212526],[131.836222,-1.617162],[130.94284,-1.432522],[130.519558,-0.93772],[131.867538,-0.695461],[132.380116,-0.369538],[133.985548,-0.78021],[134.143368,-1.151867]]],[[[125.240501,1.419836],[124.437035,0.427881],[123.685505,0.235593],[122.723083,0.431137],[121.056725,0.381217],[120.183083,0.237247],[120.04087,-0.519658],[120.935905,-1.408906],[121.475821,-0.955962],[123.340565,-0.615673],[123.258399,-1.076213],[122.822715,-0.930951],[122.38853,-1.516858],[121.508274,-1.904483],[122.454572,-3.186058],[122.271896,-3.5295],[123.170963,-4.683693],[123.162333,-5.340604],[122.628515,-5.634591],[122.236394,-5.282933],[122.719569,-4.464172],[121.738234,-4.851331],[121.489463,-4.574553],[121.619171,-4.188478],[120.898182,-3.602105],[120.972389,-2.627643],[120.305453,-2.931604],[120.390047,-4.097579],[120.430717,-5.528241],[119.796543,-5.6734],[119.366906,-5.379878],[119.653606,-4.459417],[119.498835,-3.494412],[119.078344,-3.487022],[118.767769,-2.801999],[119.180974,-2.147104],[119.323394,-1.353147],[119.825999,0.154254],[120.035702,0.566477],[120.885779,1.309223],[121.666817,1.013944],[122.927567,0.875192],[124.077522,0.917102],[125.065989,1.643259],[125.240501,1.419836]]],[[[128.688249,1.132386],[128.635952,0.258486],[128.12017,0.356413],[127.968034,-0.252077],[128.379999,-0.780004],[128.100016,-0.899996],[127.696475,-0.266598],[127.39949,1.011722],[127.600512,1.810691],[127.932378,2.174596],[128.004156,1.628531],[128.594559,1.540811],[128.688249,1.132386]]],[[[117.875627,1.827641],[118.996747,0.902219],[117.811858,0.784242],[117.478339,0.102475],[117.521644,-0.803723],[116.560048,-1.487661],[116.533797,-2.483517],[116.148084,-4.012726],[116.000858,-3.657037],[114.864803,-4.106984],[114.468652,-3.495704],[113.755672,-3.43917],[113.256994,-3.118776],[112.068126,-3.478392],[111.703291,-2.994442],[111.04824,-3.049426],[110.223846,-2.934032],[110.070936,-1.592874],[109.571948,-1.314907],[109.091874,-0.459507],[108.952658,0.415375],[109.069136,1.341934],[109.66326,2.006467],[109.830227,1.338136],[110.514061,0.773131],[111.159138,0.976478],[111.797548,0.904441],[112.380252,1.410121],[112.859809,1.49779],[113.80585,1.217549],[114.621355,1.430688],[115.134037,2.821482],[115.519078,3.169238],[115.865517,4.306559],[117.015214,4.306094],[117.882035,4.137551],[117.313232,3.234428],[118.04833,2.28769],[117.875627,1.827641]]],[[[105.817655,-5.852356],[104.710384,-5.873285],[103.868213,-5.037315],[102.584261,-4.220259],[102.156173,-3.614146],[101.399113,-2.799777],[100.902503,-2.050262],[100.141981,-0.650348],[99.26374,0.183142],[98.970011,1.042882],[98.601351,1.823507],[97.699598,2.453184],[97.176942,3.308791],[96.424017,3.86886],[95.380876,4.970782],[95.293026,5.479821],[95.936863,5.439513],[97.484882,5.246321],[98.369169,4.26837],[99.142559,3.59035],[99.693998,3.174329],[100.641434,2.099381],[101.658012,2.083697],[102.498271,1.3987],[103.07684,0.561361],[103.838396,0.104542],[103.437645,-0.711946],[104.010789,-1.059212],[104.369991,-1.084843],[104.53949,-1.782372],[104.887893,-2.340425],[105.622111,-2.428844],[106.108593,-3.061777],[105.857446,-4.305525],[105.817655,-5.852356]]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "64b32e34-dfd6-4a8a-bc20-c2fa38c41390",
-  "CountryName": "Iran (Islamic Republic of)",
-  "CountryCode": "IRN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"IRN\",\"properties\":{\"name\":\"Iran\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[53.921598,37.198918],[54.800304,37.392421],[55.511578,37.964117],[56.180375,37.935127],[56.619366,38.121394],[57.330434,38.029229],[58.436154,37.522309],[59.234762,37.412988],[60.377638,36.527383],[61.123071,36.491597],[61.210817,35.650072],[60.803193,34.404102],[60.52843,33.676446],[60.9637,33.528832],[60.536078,32.981269],[60.863655,32.18292],[60.941945,31.548075],[61.699314,31.379506],[61.781222,30.73585],[60.874248,29.829239],[61.369309,29.303276],[61.771868,28.699334],[62.72783,28.259645],[62.755426,27.378923],[63.233898,27.217047],[63.316632,26.756532],[61.874187,26.239975],[61.497363,25.078237],[59.616134,25.380157],[58.525761,25.609962],[57.397251,25.739902],[56.970766,26.966106],[56.492139,27.143305],[55.72371,26.964633],[54.71509,26.480658],[53.493097,26.812369],[52.483598,27.580849],[51.520763,27.86569],[50.852948,28.814521],[50.115009,30.147773],[49.57685,29.985715],[48.941333,30.31709],[48.567971,29.926778],[48.014568,30.452457],[48.004698,30.985137],[47.685286,30.984853],[47.849204,31.709176],[47.334661,32.469155],[46.109362,33.017287],[45.416691,33.967798],[45.64846,34.748138],[46.151788,35.093259],[46.07634,35.677383],[45.420618,35.977546],[44.77267,37.17045],[44.225756,37.971584],[44.421403,38.281281],[44.109225,39.428136],[44.79399,39.713003],[44.952688,39.335765],[45.457722,38.874139],[46.143623,38.741201],[46.50572,38.770605],[47.685079,39.508364],[48.060095,39.582235],[48.355529,39.288765],[48.010744,38.794015],[48.634375,38.270378],[48.883249,38.320245],[49.199612,37.582874],[50.147771,37.374567],[50.842354,36.872814],[52.264025,36.700422],[53.82579,36.965031],[53.921598,37.198918]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "85228aa1-da3a-4beb-8867-13a5131f17c6",
-  "CountryName": "Iraq",
-  "CountryCode": "IRQ",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"IRQ\",\"properties\":{\"name\":\"Iraq\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[45.420618,35.977546],[46.07634,35.677383],[46.151788,35.093259],[45.64846,34.748138],[45.416691,33.967798],[46.109362,33.017287],[47.334661,32.469155],[47.849204,31.709176],[47.685286,30.984853],[48.004698,30.985137],[48.014568,30.452457],[48.567971,29.926778],[47.974519,29.975819],[47.302622,30.05907],[46.568713,29.099025],[44.709499,29.178891],[41.889981,31.190009],[40.399994,31.889992],[39.195468,32.161009],[38.792341,33.378686],[41.006159,34.419372],[41.383965,35.628317],[41.289707,36.358815],[41.837064,36.605854],[42.349591,37.229873],[42.779126,37.385264],[43.942259,37.256228],[44.293452,37.001514],[44.772699,37.170445],[45.420618,35.977546]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "dac21ff0-6415-403f-a6f1-4ac7a7741da1",
-  "CountryName": "Jamaica",
-  "CountryCode": "JAM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"JAM\",\"properties\":{\"name\":\"Jamaica\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-77.569601,18.490525],[-76.896619,18.400867],[-76.365359,18.160701],[-76.199659,17.886867],[-76.902561,17.868238],[-77.206341,17.701116],[-77.766023,17.861597],[-78.337719,18.225968],[-78.217727,18.454533],[-77.797365,18.524218],[-77.569601,18.490525]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "4d20bded-1b02-47c0-b8bd-02d14d081cfd",
-  "CountryName": "Jordan",
-  "CountryCode": "JOR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"JOR\",\"properties\":{\"name\":\"Jordan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[35.545665,32.393992],[35.719918,32.709192],[36.834062,32.312938],[38.792341,33.378686],[39.195468,32.161009],[39.004886,32.010217],[37.002166,31.508413],[37.998849,30.5085],[37.66812,30.338665],[37.503582,30.003776],[36.740528,29.865283],[36.501214,29.505254],[36.068941,29.197495],[34.956037,29.356555],[34.922603,29.501326],[35.420918,31.100066],[35.397561,31.489086],[35.545252,31.782505],[35.545665,32.393992]]]}}]}",
-  "RecordCount": 6,
-  "FillOpacity": 0.29,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "13f77e4d-1a41-45a4-938a-178ef3623ef2",
-  "CountryName": "Kazakhstan",
-  "CountryCode": "KAZ",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"KAZ\",\"properties\":{\"name\":\"Kazakhstan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[70.962315,42.266154],[70.388965,42.081308],[69.070027,41.384244],[68.632483,40.668681],[68.259896,40.662325],[67.985856,41.135991],[66.714047,41.168444],[66.510649,41.987644],[66.023392,41.994646],[66.098012,42.99766],[64.900824,43.728081],[63.185787,43.650075],[62.0133,43.504477],[61.05832,44.405817],[60.239972,44.784037],[58.689989,45.500014],[58.503127,45.586804],[55.928917,44.995858],[55.968191,41.308642],[55.455251,41.259859],[54.755345,42.043971],[54.079418,42.324109],[52.944293,42.116034],[52.50246,41.783316],[52.446339,42.027151],[52.692112,42.443895],[52.501426,42.792298],[51.342427,43.132975],[50.891292,44.031034],[50.339129,44.284016],[50.305643,44.609836],[51.278503,44.514854],[51.316899,45.245998],[52.16739,45.408391],[53.040876,45.259047],[53.220866,46.234646],[53.042737,46.853006],[52.042023,46.804637],[51.191945,47.048705],[50.034083,46.60899],[49.10116,46.39933],[48.593241,46.561034],[48.694734,47.075628],[48.057253,47.743753],[47.315231,47.715847],[46.466446,48.394152],[47.043672,49.152039],[46.751596,49.356006],[47.54948,50.454698],[48.577841,49.87476],[48.702382,50.605128],[50.766648,51.692762],[52.328724,51.718652],[54.532878,51.02624],[55.716941,50.621717],[56.777961,51.043551],[58.363291,51.063653],[59.642282,50.545442],[59.932807,50.842194],[61.337424,50.79907],[61.588003,51.272659],[59.967534,51.96042],[60.927269,52.447548],[60.739993,52.719986],[61.699986,52.979996],[60.978066,53.664993],[61.436591,54.006265],[65.178534,54.354228],[65.666876,54.601267],[68.1691,54.970392],[69.068167,55.38525],[70.865267,55.169734],[71.180131,54.133285],[72.22415,54.376655],[73.508516,54.035617],[73.425679,53.48981],[74.384845,53.546861],[76.8911,54.490524],[76.525179,54.177003],[77.800916,53.404415],[80.03556,50.864751],[80.568447,51.388336],[81.945986,50.812196],[83.383004,51.069183],[83.935115,50.889246],[84.416377,50.3114],[85.11556,50.117303],[85.54127,49.692859],[86.829357,49.826675],[87.35997,49.214981],[86.598776,48.549182],[85.768233,48.455751],[85.720484,47.452969],[85.16429,47.000956],[83.180484,47.330031],[82.458926,45.53965],[81.947071,45.317027],[79.966106,44.917517],[80.866206,43.180362],[80.18015,42.920068],[80.25999,42.349999],[79.643645,42.496683],[79.142177,42.856092],[77.658392,42.960686],[76.000354,42.988022],[75.636965,42.8779],[74.212866,43.298339],[73.645304,43.091272],[73.489758,42.500894],[71.844638,42.845395],[71.186281,42.704293],[70.962315,42.266154]]]}}]}",
-  "RecordCount": 7,
-  "FillOpacity": 0.31,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "b64cfacb-1236-448d-8608-814cfa62e683",
-  "CountryName": "Kenya",
-  "CountryCode": "KEN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"KEN\",\"properties\":{\"name\":\"Kenya\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[40.993,-0.85829],[41.58513,-1.68325],[40.88477,-2.08255],[40.63785,-2.49979],[40.26304,-2.57309],[40.12119,-3.27768],[39.80006,-3.68116],[39.60489,-4.34653],[39.20222,-4.67677],[37.7669,-3.67712],[37.69869,-3.09699],[34.07262,-1.05982],[33.903711,-0.95],[33.893569,0.109814],[34.18,0.515],[34.6721,1.17694],[35.03599,1.90584],[34.59607,3.05374],[34.47913,3.5556],[34.005,4.249885],[34.620196,4.847123],[35.298007,5.506],[35.817448,5.338232],[35.817448,4.776966],[36.159079,4.447864],[36.855093,4.447864],[38.120915,3.598605],[38.43697,3.58851],[38.67114,3.61607],[38.89251,3.50074],[39.559384,3.42206],[39.85494,3.83879],[40.76848,4.25702],[41.1718,3.91909],[41.855083,3.918912],[40.98105,2.78452],[40.993,-0.85829]]]}}]}",
-  "RecordCount": 32,
-  "FillOpacity": 0.74,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "099d7c58-3c64-4116-bc66-3369bfe18a0e",
-  "CountryName": "Kuwait",
-  "CountryCode": "KWT",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"KWT\",\"properties\":{\"name\":\"Kuwait\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[47.974519,29.975819],[48.183189,29.534477],[48.093943,29.306299],[48.416094,28.552004],[47.708851,28.526063],[47.459822,29.002519],[46.568713,29.099025],[47.302622,30.05907],[47.974519,29.975819]]]}}]}",
-  "RecordCount": 3,
-  "FillOpacity": 0.24,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "10301396-7ece-41a1-8d12-43d631fdc2ad",
-  "CountryName": "Kyrgyzstan",
-  "CountryCode": "KGZ",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"KGZ\",\"properties\":{\"name\":\"Kyrgyzstan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[70.962315,42.266154],[71.186281,42.704293],[71.844638,42.845395],[73.489758,42.500894],[73.645304,43.091272],[74.212866,43.298339],[75.636965,42.8779],[76.000354,42.988022],[77.658392,42.960686],[79.142177,42.856092],[79.643645,42.496683],[80.25999,42.349999],[80.11943,42.123941],[78.543661,41.582243],[78.187197,41.185316],[76.904484,41.066486],[76.526368,40.427946],[75.467828,40.562072],[74.776862,40.366425],[73.822244,39.893973],[73.960013,39.660008],[73.675379,39.431237],[71.784694,39.279463],[70.549162,39.604198],[69.464887,39.526683],[69.55961,40.103211],[70.648019,39.935754],[71.014198,40.244366],[71.774875,40.145844],[73.055417,40.866033],[71.870115,41.3929],[71.157859,41.143587],[70.420022,41.519998],[71.259248,42.167711],[70.962315,42.266154]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "9b682d13-e182-491d-9f21-62c028b9e0a3",
-  "CountryName": "Lao People's Democratic Republic",
-  "CountryCode": "LAO",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"LAO\",\"properties\":{\"name\":\"Laos\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[105.218777,14.273212],[105.544338,14.723934],[105.589039,15.570316],[104.779321,16.441865],[104.716947,17.428859],[103.956477,18.240954],[103.200192,18.309632],[102.998706,17.961695],[102.413005,17.932782],[102.113592,18.109102],[101.059548,17.512497],[101.035931,18.408928],[101.282015,19.462585],[100.606294,19.508344],[100.548881,20.109238],[100.115988,20.41785],[100.329101,20.786122],[101.180005,21.436573],[101.270026,21.201652],[101.80312,21.174367],[101.652018,22.318199],[102.170436,22.464753],[102.754896,21.675137],[103.203861,20.766562],[104.435,20.758733],[104.822574,19.886642],[104.183388,19.624668],[103.896532,19.265181],[105.094598,18.666975],[105.925762,17.485315],[106.556008,16.604284],[107.312706,15.908538],[107.564525,15.202173],[107.382727,14.202441],[106.496373,14.570584],[106.043946,13.881091],[105.218777,14.273212]]]}}]}",
-  "RecordCount": 22,
-  "FillOpacity": 0.57,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "69e0ac35-eca3-46b4-9e94-b5582d55a838",
-  "CountryName": "Lebanon",
-  "CountryCode": "LBN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"LBN\",\"properties\":{\"name\":\"Lebanon\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[35.821101,33.277426],[35.552797,33.264275],[35.460709,33.08904],[35.126053,33.0909],[35.482207,33.90545],[35.979592,34.610058],[35.998403,34.644914],[36.448194,34.593935],[36.61175,34.201789],[36.06646,33.824912],[35.821101,33.277426]]]}}]}",
-  "RecordCount": 8,
-  "FillOpacity": 0.32,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "b9b32958-3621-44e1-a63b-e3fbcb1f6e38",
-  "CountryName": "Lesotho",
-  "CountryCode": "LSO",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"LSO\",\"properties\":{\"name\":\"Lesotho\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[28.978263,-28.955597],[29.325166,-29.257387],[29.018415,-29.743766],[28.8484,-30.070051],[28.291069,-30.226217],[28.107205,-30.545732],[27.749397,-30.645106],[26.999262,-29.875954],[27.532511,-29.242711],[28.074338,-28.851469],[28.5417,-28.647502],[28.978263,-28.955597]]]}}]}",
-  "RecordCount": 20,
-  "FillOpacity": 0.53,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "2fb89646-b646-4173-b08f-d496f74a10a4",
-  "CountryName": "Liberia",
-  "CountryCode": "LBR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"LBR\",\"properties\":{\"name\":\"Liberia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-7.712159,4.364566],[-7.974107,4.355755],[-9.004794,4.832419],[-9.91342,5.593561],[-10.765384,6.140711],[-11.438779,6.785917],[-11.199802,7.105846],[-11.146704,7.396706],[-10.695595,7.939464],[-10.230094,8.406206],[-10.016567,8.428504],[-9.755342,8.541055],[-9.33728,7.928534],[-9.403348,7.526905],[-9.208786,7.313921],[-8.926065,7.309037],[-8.722124,7.711674],[-8.439298,7.686043],[-8.485446,7.395208],[-8.385452,6.911801],[-8.60288,6.467564],[-8.311348,6.193033],[-7.993693,6.12619],[-7.570153,5.707352],[-7.539715,5.313345],[-7.635368,5.188159],[-7.712159,4.364566]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "0e843b73-cefc-4ed7-a28a-1a6cdaacd780",
-  "CountryName": "Libya",
-  "CountryCode": "LBY",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"LBY\",\"properties\":{\"name\":\"Libya\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[14.8513,22.86295],[14.143871,22.491289],[13.581425,23.040506],[11.999506,23.471668],[11.560669,24.097909],[10.771364,24.562532],[10.303847,24.379313],[9.948261,24.936954],[9.910693,25.365455],[9.319411,26.094325],[9.716286,26.512206],[9.629056,27.140953],[9.756128,27.688259],[9.683885,28.144174],[9.859998,28.95999],[9.805634,29.424638],[9.48214,30.307556],[9.970017,30.539325],[10.056575,30.961831],[9.950225,31.37607],[10.636901,31.761421],[10.94479,32.081815],[11.432253,32.368903],[11.488787,33.136996],[12.66331,32.79278],[13.08326,32.87882],[13.91868,32.71196],[15.24563,32.26508],[15.71394,31.37626],[16.61162,31.18218],[18.02109,30.76357],[19.08641,30.26639],[19.57404,30.52582],[20.05335,30.98576],[19.82033,31.75179],[20.13397,32.2382],[20.85452,32.7068],[21.54298,32.8432],[22.89576,32.63858],[23.2368,32.19149],[23.60913,32.18726],[23.9275,32.01667],[24.92114,31.89936],[25.16482,31.56915],[24.80287,31.08929],[24.95762,30.6616],[24.70007,30.04419],[25,29.238655],[25,25.6825],[25,22],[25,20.00304],[23.85,20],[23.83766,19.58047],[19.84926,21.49509],[15.86085,23.40972],[14.8513,22.86295]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "8751f797-f5c3-4178-b3f1-bb371044c3b7",
-  "CountryName": "Madagascar",
-  "CountryCode": "MDG",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MDG\",\"properties\":{\"name\":\"Madagascar\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[49.543519,-12.469833],[49.808981,-12.895285],[50.056511,-13.555761],[50.217431,-14.758789],[50.476537,-15.226512],[50.377111,-15.706069],[50.200275,-16.000263],[49.860606,-15.414253],[49.672607,-15.710204],[49.863344,-16.451037],[49.774564,-16.875042],[49.498612,-17.106036],[49.435619,-17.953064],[49.041792,-19.118781],[48.548541,-20.496888],[47.930749,-22.391501],[47.547723,-23.781959],[47.095761,-24.94163],[46.282478,-25.178463],[45.409508,-25.601434],[44.833574,-25.346101],[44.03972,-24.988345],[43.763768,-24.460677],[43.697778,-23.574116],[43.345654,-22.776904],[43.254187,-22.057413],[43.433298,-21.336475],[43.893683,-21.163307],[43.89637,-20.830459],[44.374325,-20.072366],[44.464397,-19.435454],[44.232422,-18.961995],[44.042976,-18.331387],[43.963084,-17.409945],[44.312469,-16.850496],[44.446517,-16.216219],[44.944937,-16.179374],[45.502732,-15.974373],[45.872994,-15.793454],[46.312243,-15.780018],[46.882183,-15.210182],[47.70513,-14.594303],[48.005215,-14.091233],[47.869047,-13.663869],[48.293828,-13.784068],[48.84506,-13.089175],[48.863509,-12.487868],[49.194651,-12.040557],[49.543519,-12.469833]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "34d13650-6e21-4407-b574-0e2bfa072c33",
-  "CountryName": "Malawi",
-  "CountryCode": "MWI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MWI\",\"properties\":{\"name\":\"Malawi\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[34.559989,-11.52002],[34.280006,-12.280025],[34.559989,-13.579998],[34.907151,-13.565425],[35.267956,-13.887834],[35.686845,-14.611046],[35.771905,-15.896859],[35.339063,-16.10744],[35.03381,-16.8013],[34.381292,-16.18356],[34.307291,-15.478641],[34.517666,-15.013709],[34.459633,-14.61301],[34.064825,-14.35995],[33.7897,-14.451831],[33.214025,-13.97186],[32.688165,-13.712858],[32.991764,-12.783871],[33.306422,-12.435778],[33.114289,-11.607198],[33.31531,-10.79655],[33.485688,-10.525559],[33.231388,-9.676722],[32.759375,-9.230599],[33.739729,-9.417151],[33.940838,-9.693674],[34.280006,-10.16],[34.559989,-11.52002]]]}}]}",
-  "RecordCount": 23,
-  "FillOpacity": 0.58,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "bad404ac-a1c9-49bc-900e-ff709ed45481",
-  "CountryName": "Malaysia",
-  "CountryCode": "MYS",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MYS\",\"properties\":{\"name\":\"Malaysia\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[101.075516,6.204867],[101.154219,5.691384],[101.814282,5.810808],[102.141187,6.221636],[102.371147,6.128205],[102.961705,5.524495],[103.381215,4.855001],[103.438575,4.181606],[103.332122,3.726698],[103.429429,3.382869],[103.502448,2.791019],[103.854674,2.515454],[104.247932,1.631141],[104.228811,1.293048],[103.519707,1.226334],[102.573615,1.967115],[101.390638,2.760814],[101.27354,3.270292],[100.695435,3.93914],[100.557408,4.76728],[100.196706,5.312493],[100.30626,6.040562],[100.085757,6.464489],[100.259596,6.642825],[101.075516,6.204867]]],[[[118.618321,4.478202],[117.882035,4.137551],[117.015214,4.306094],[115.865517,4.306559],[115.519078,3.169238],[115.134037,2.821482],[114.621355,1.430688],[113.80585,1.217549],[112.859809,1.49779],[112.380252,1.410121],[111.797548,0.904441],[111.159138,0.976478],[110.514061,0.773131],[109.830227,1.338136],[109.66326,2.006467],[110.396135,1.663775],[111.168853,1.850637],[111.370081,2.697303],[111.796928,2.885897],[112.995615,3.102395],[113.712935,3.893509],[114.204017,4.525874],[114.659596,4.007637],[114.869557,4.348314],[115.347461,4.316636],[115.4057,4.955228],[115.45071,5.44773],[116.220741,6.143191],[116.725103,6.924771],[117.129626,6.928053],[117.643393,6.422166],[117.689075,5.98749],[118.347691,5.708696],[119.181904,5.407836],[119.110694,5.016128],[118.439727,4.966519],[118.618321,4.478202]]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "6e2c37c0-9e1c-4d06-9745-d84289ece978",
-  "CountryName": "Mali",
-  "CountryCode": "MLI",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MLI\",\"properties\":{\"name\":\"Mali\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-12.17075,14.616834],[-11.834208,14.799097],[-11.666078,15.388208],[-11.349095,15.411256],[-10.650791,15.132746],[-10.086846,15.330486],[-9.700255,15.264107],[-9.550238,15.486497],[-5.537744,15.50169],[-5.315277,16.201854],[-5.488523,16.325102],[-5.971129,20.640833],[-6.453787,24.956591],[-4.923337,24.974574],[-1.550055,22.792666],[1.823228,20.610809],[2.060991,20.142233],[2.683588,19.85623],[3.146661,19.693579],[3.158133,19.057364],[4.267419,19.155265],[4.27021,16.852227],[3.723422,16.184284],[3.638259,15.56812],[2.749993,15.409525],[1.385528,15.323561],[1.015783,14.968182],[0.374892,14.928908],[-0.266257,14.924309],[-0.515854,15.116158],[-1.066363,14.973815],[-2.001035,14.559008],[-2.191825,14.246418],[-2.967694,13.79815],[-3.103707,13.541267],[-3.522803,13.337662],[-4.006391,13.472485],[-4.280405,13.228444],[-4.427166,12.542646],[-5.220942,11.713859],[-5.197843,11.375146],[-5.470565,10.95127],[-5.404342,10.370737],[-5.816926,10.222555],[-6.050452,10.096361],[-6.205223,10.524061],[-6.493965,10.411303],[-6.666461,10.430811],[-6.850507,10.138994],[-7.622759,10.147236],[-7.89959,10.297382],[-8.029944,10.206535],[-8.335377,10.494812],[-8.282357,10.792597],[-8.407311,10.909257],[-8.620321,10.810891],[-8.581305,11.136246],[-8.376305,11.393646],[-8.786099,11.812561],[-8.905265,12.088358],[-9.127474,12.30806],[-9.327616,12.334286],[-9.567912,12.194243],[-9.890993,12.060479],[-10.165214,11.844084],[-10.593224,11.923975],[-10.87083,12.177887],[-11.036556,12.211245],[-11.297574,12.077971],[-11.456169,12.076834],[-11.513943,12.442988],[-11.467899,12.754519],[-11.553398,13.141214],[-11.927716,13.422075],[-12.124887,13.994727],[-12.17075,14.616834]]]}}]}",
-  "RecordCount": 23,
-  "FillOpacity": 0.58,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "14446d2f-1cf2-4624-8047-b22a4867870a",
-  "CountryName": "Mauritania",
-  "CountryCode": "MRT",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MRT\",\"properties\":{\"name\":\"Mauritania\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-12.17075,14.616834],[-12.830658,15.303692],[-13.435738,16.039383],[-14.099521,16.304302],[-14.577348,16.598264],[-15.135737,16.587282],[-15.623666,16.369337],[-16.12069,16.455663],[-16.463098,16.135036],[-16.549708,16.673892],[-16.270552,17.166963],[-16.146347,18.108482],[-16.256883,19.096716],[-16.377651,19.593817],[-16.277838,20.092521],[-16.536324,20.567866],[-17.063423,20.999752],[-16.845194,21.333323],[-12.929102,21.327071],[-13.118754,22.77122],[-12.874222,23.284832],[-11.937224,23.374594],[-11.969419,25.933353],[-8.687294,25.881056],[-8.6844,27.395744],[-4.923337,24.974574],[-6.453787,24.956591],[-5.971129,20.640833],[-5.488523,16.325102],[-5.315277,16.201854],[-5.537744,15.50169],[-9.550238,15.486497],[-9.700255,15.264107],[-10.086846,15.330486],[-10.650791,15.132746],[-11.349095,15.411256],[-11.666078,15.388208],[-11.834208,14.799097],[-12.17075,14.616834]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ed581306-e57f-4d1b-82c8-9a005c3f90d3",
-  "CountryName": "Mexico",
-  "CountryCode": "MEX",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MEX\",\"properties\":{\"name\":\"Mexico\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-97.140008,25.869997],[-97.528072,24.992144],[-97.702946,24.272343],[-97.776042,22.93258],[-97.872367,22.444212],[-97.699044,21.898689],[-97.38896,21.411019],[-97.189333,20.635433],[-96.525576,19.890931],[-96.292127,19.320371],[-95.900885,18.828024],[-94.839063,18.562717],[-94.42573,18.144371],[-93.548651,18.423837],[-92.786114,18.524839],[-92.037348,18.704569],[-91.407903,18.876083],[-90.77187,19.28412],[-90.53359,19.867418],[-90.451476,20.707522],[-90.278618,20.999855],[-89.601321,21.261726],[-88.543866,21.493675],[-87.658417,21.458846],[-87.05189,21.543543],[-86.811982,21.331515],[-86.845908,20.849865],[-87.383291,20.255405],[-87.621054,19.646553],[-87.43675,19.472403],[-87.58656,19.04013],[-87.837191,18.259816],[-88.090664,18.516648],[-88.300031,18.499982],[-88.490123,18.486831],[-88.848344,17.883198],[-89.029857,18.001511],[-89.150909,17.955468],[-89.14308,17.808319],[-90.067934,17.819326],[-91.00152,17.817595],[-91.002269,17.254658],[-91.453921,17.252177],[-91.08167,16.918477],[-90.711822,16.687483],[-90.600847,16.470778],[-90.438867,16.41011],[-90.464473,16.069562],[-91.74796,16.066565],[-92.229249,15.251447],[-92.087216,15.064585],[-92.20323,14.830103],[-92.22775,14.538829],[-93.359464,15.61543],[-93.875169,15.940164],[-94.691656,16.200975],[-95.250227,16.128318],[-96.053382,15.752088],[-96.557434,15.653515],[-97.263592,15.917065],[-98.01303,16.107312],[-98.947676,16.566043],[-99.697397,16.706164],[-100.829499,17.171071],[-101.666089,17.649026],[-101.918528,17.91609],[-102.478132,17.975751],[-103.50099,18.292295],[-103.917527,18.748572],[-104.99201,19.316134],[-105.493038,19.946767],[-105.731396,20.434102],[-105.397773,20.531719],[-105.500661,20.816895],[-105.270752,21.076285],[-105.265817,21.422104],[-105.603161,21.871146],[-105.693414,22.26908],[-106.028716,22.773752],[-106.90998,23.767774],[-107.915449,24.548915],[-108.401905,25.172314],[-109.260199,25.580609],[-109.444089,25.824884],[-109.291644,26.442934],[-109.801458,26.676176],[-110.391732,27.162115],[-110.641019,27.859876],[-111.178919,27.941241],[-111.759607,28.467953],[-112.228235,28.954409],[-112.271824,29.266844],[-112.809594,30.021114],[-113.163811,30.786881],[-113.148669,31.170966],[-113.871881,31.567608],[-114.205737,31.524045],[-114.776451,31.799532],[-114.9367,31.393485],[-114.771232,30.913617],[-114.673899,30.162681],[-114.330974,29.750432],[-113.588875,29.061611],[-113.424053,28.826174],[-113.271969,28.754783],[-113.140039,28.411289],[-112.962298,28.42519],[-112.761587,27.780217],[-112.457911,27.525814],[-112.244952,27.171727],[-111.616489,26.662817],[-111.284675,25.73259],[-110.987819,25.294606],[-110.710007,24.826004],[-110.655049,24.298595],[-110.172856,24.265548],[-109.771847,23.811183],[-109.409104,23.364672],[-109.433392,23.185588],[-109.854219,22.818272],[-110.031392,22.823078],[-110.295071,23.430973],[-110.949501,24.000964],[-111.670568,24.484423],[-112.182036,24.738413],[-112.148989,25.470125],[-112.300711,26.012004],[-112.777297,26.32196],[-113.464671,26.768186],[-113.59673,26.63946],[-113.848937,26.900064],[-114.465747,27.14209],[-115.055142,27.722727],[-114.982253,27.7982],[-114.570366,27.741485],[-114.199329,28.115003],[-114.162018,28.566112],[-114.931842,29.279479],[-115.518654,29.556362],[-115.887365,30.180794],[-116.25835,30.836464],[-116.721526,31.635744],[-117.12776,32.53534],[-115.99135,32.61239],[-114.72139,32.72083],[-114.815,32.52528],[-113.30498,32.03914],[-111.02361,31.33472],[-109.035,31.34194],[-108.24194,31.34222],[-108.24,31.754854],[-106.50759,31.75452],[-106.1429,31.39995],[-105.63159,31.08383],[-105.03737,30.64402],[-104.70575,30.12173],[-104.45697,29.57196],[-103.94,29.27],[-103.11,28.97],[-102.48,29.76],[-101.6624,29.7793],[-100.9576,29.38071],[-100.45584,28.69612],[-100.11,28.11],[-99.52,27.54],[-99.3,26.84],[-99.02,26.37],[-98.24,26.06],[-97.53,25.84],[-97.140008,25.869997]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "25ceba91-7a7d-4b53-a390-cebd8f5b306b",
-  "CountryName": "Mongolia",
-  "CountryCode": "MNG",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MNG\",\"properties\":{\"name\":\"Mongolia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[87.751264,49.297198],[88.805567,49.470521],[90.713667,50.331812],[92.234712,50.802171],[93.104219,50.49529],[94.147566,50.480537],[94.815949,50.013433],[95.814028,49.977467],[97.259728,49.726061],[98.231762,50.422401],[97.82574,51.010995],[98.861491,52.047366],[99.981732,51.634006],[100.88948,51.516856],[102.065223,51.259921],[102.255909,50.510561],[103.676545,50.089966],[104.621552,50.275329],[105.886591,50.406019],[106.888804,50.274296],[107.868176,49.793705],[108.475167,49.282548],[109.402449,49.292961],[110.662011,49.130128],[111.581231,49.377968],[112.89774,49.543565],[114.362456,50.248303],[114.96211,50.140247],[115.485695,49.805177],[116.678801,49.888531],[116.191802,49.134598],[115.485282,48.135383],[115.742837,47.726545],[116.308953,47.85341],[117.295507,47.697709],[118.064143,48.06673],[118.866574,47.74706],[119.772824,47.048059],[119.66327,46.69268],[118.874326,46.805412],[117.421701,46.672733],[116.717868,46.388202],[115.985096,45.727235],[114.460332,45.339817],[113.463907,44.808893],[112.436062,45.011646],[111.873306,45.102079],[111.348377,44.457442],[111.667737,44.073176],[111.829588,43.743118],[111.129682,43.406834],[110.412103,42.871234],[109.243596,42.519446],[107.744773,42.481516],[106.129316,42.134328],[104.964994,41.59741],[104.522282,41.908347],[103.312278,41.907468],[101.83304,42.514873],[100.845866,42.663804],[99.515817,42.524691],[97.451757,42.74889],[96.349396,42.725635],[95.762455,43.319449],[95.306875,44.241331],[94.688929,44.352332],[93.480734,44.975472],[92.133891,45.115076],[90.94554,45.286073],[90.585768,45.719716],[90.970809,46.888146],[90.280826,47.693549],[88.854298,48.069082],[88.013832,48.599463],[87.751264,49.297198]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "debdc097-257c-45f8-890a-4ac0cfa40345",
-  "CountryName": "Montenegro",
-  "CountryCode": "MNE",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MNE\",\"properties\":{\"name\":\"Montenegro\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[19.801613,42.500093],[19.738051,42.688247],[19.30449,42.19574],[19.37177,41.87755],[19.16246,41.95502],[18.88214,42.28151],[18.45,42.48],[18.56,42.65],[18.70648,43.20011],[19.03165,43.43253],[19.21852,43.52384],[19.48389,43.35229],[19.63,43.21378],[19.95857,43.10604],[20.3398,42.89852],[20.25758,42.81275],[20.0707,42.58863],[19.801613,42.500093]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "e0fcb722-bc4d-46da-b93c-877151b8f7e6",
-  "CountryName": "Morocco",
-  "CountryCode": "MAR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MAR\",\"properties\":{\"name\":\"Morocco\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-5.193863,35.755182],[-4.591006,35.330712],[-3.640057,35.399855],[-2.604306,35.179093],[-2.169914,35.168396],[-1.792986,34.527919],[-1.733455,33.919713],[-1.388049,32.864015],[-1.124551,32.651522],[-1.307899,32.262889],[-2.616605,32.094346],[-3.06898,31.724498],[-3.647498,31.637294],[-3.690441,30.896952],[-4.859646,30.501188],[-5.242129,30.000443],[-6.060632,29.7317],[-7.059228,29.579228],[-8.674116,28.841289],[-8.66559,27.656426],[-8.817809,27.656426],[-8.817828,27.656426],[-8.794884,27.120696],[-9.413037,27.088476],[-9.735343,26.860945],[-10.189424,26.860945],[-10.551263,26.990808],[-11.392555,26.883424],[-11.71822,26.104092],[-12.030759,26.030866],[-12.500963,24.770116],[-13.89111,23.691009],[-14.221168,22.310163],[-14.630833,21.86094],[-14.750955,21.5006],[-17.002962,21.420734],[-17.020428,21.42231],[-16.973248,21.885745],[-16.589137,22.158234],[-16.261922,22.67934],[-16.326414,23.017768],[-15.982611,23.723358],[-15.426004,24.359134],[-15.089332,24.520261],[-14.824645,25.103533],[-14.800926,25.636265],[-14.43994,26.254418],[-13.773805,26.618892],[-13.139942,27.640148],[-13.121613,27.654148],[-12.618837,28.038186],[-11.688919,28.148644],[-10.900957,28.832142],[-10.399592,29.098586],[-9.564811,29.933574],[-9.814718,31.177736],[-9.434793,32.038096],[-9.300693,32.564679],[-8.657476,33.240245],[-7.654178,33.697065],[-6.912544,34.110476],[-6.244342,35.145865],[-5.929994,35.759988],[-5.193863,35.755182]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "691c1148-603a-40fa-b6c3-40b88452ad53",
-  "CountryName": "Mozambique",
-  "CountryCode": "MOZ",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MOZ\",\"properties\":{\"name\":\"Mozambique\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[34.559989,-11.52002],[35.312398,-11.439146],[36.514082,-11.720938],[36.775151,-11.594537],[37.471284,-11.568751],[37.827645,-11.268769],[38.427557,-11.285202],[39.52103,-10.896854],[40.316589,-10.317096],[40.478387,-10.765441],[40.437253,-11.761711],[40.560811,-12.639177],[40.59962,-14.201975],[40.775475,-14.691764],[40.477251,-15.406294],[40.089264,-16.100774],[39.452559,-16.720891],[38.538351,-17.101023],[37.411133,-17.586368],[36.281279,-18.659688],[35.896497,-18.84226],[35.1984,-19.552811],[34.786383,-19.784012],[34.701893,-20.497043],[35.176127,-21.254361],[35.373428,-21.840837],[35.385848,-22.14],[35.562546,-22.09],[35.533935,-23.070788],[35.371774,-23.535359],[35.60747,-23.706563],[35.458746,-24.12261],[35.040735,-24.478351],[34.215824,-24.816314],[33.01321,-25.357573],[32.574632,-25.727318],[32.660363,-26.148584],[32.915955,-26.215867],[32.83012,-26.742192],[32.071665,-26.73382],[31.985779,-26.29178],[31.837778,-25.843332],[31.752408,-25.484284],[31.930589,-24.369417],[31.670398,-23.658969],[31.191409,-22.25151],[32.244988,-21.116489],[32.508693,-20.395292],[32.659743,-20.30429],[32.772708,-19.715592],[32.611994,-19.419383],[32.654886,-18.67209],[32.849861,-17.979057],[32.847639,-16.713398],[32.328239,-16.392074],[31.852041,-16.319417],[31.636498,-16.07199],[31.173064,-15.860944],[30.338955,-15.880839],[30.274256,-15.507787],[30.179481,-14.796099],[33.214025,-13.97186],[33.7897,-14.451831],[34.064825,-14.35995],[34.459633,-14.61301],[34.517666,-15.013709],[34.307291,-15.478641],[34.381292,-16.18356],[35.03381,-16.8013],[35.339063,-16.10744],[35.771905,-15.896859],[35.686845,-14.611046],[35.267956,-13.887834],[34.907151,-13.565425],[34.559989,-13.579998],[34.280006,-12.280025],[34.559989,-11.52002]]]}}]}",
-  "RecordCount": 26,
-  "FillOpacity": 0.64,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "938c2c41-1779-47b3-8213-dc57f6508a1d",
-  "CountryName": "Myanmar",
-  "CountryCode": "MMR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MMR\",\"properties\":{\"name\":\"Myanmar\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[99.543309,20.186598],[98.959676,19.752981],[98.253724,19.708203],[97.797783,18.62708],[97.375896,18.445438],[97.859123,17.567946],[98.493761,16.837836],[98.903348,16.177824],[98.537376,15.308497],[98.192074,15.123703],[98.430819,14.622028],[99.097755,13.827503],[99.212012,13.269294],[99.196354,12.804748],[99.587286,11.892763],[99.038121,10.960546],[98.553551,9.93296],[98.457174,10.675266],[98.764546,11.441292],[98.428339,12.032987],[98.509574,13.122378],[98.103604,13.64046],[97.777732,14.837286],[97.597072,16.100568],[97.16454,16.928734],[96.505769,16.427241],[95.369352,15.71439],[94.808405,15.803454],[94.188804,16.037936],[94.533486,17.27724],[94.324817,18.213514],[93.540988,19.366493],[93.663255,19.726962],[93.078278,19.855145],[92.368554,20.670883],[92.303234,21.475485],[92.652257,21.324048],[92.672721,22.041239],[93.166128,22.27846],[93.060294,22.703111],[93.286327,23.043658],[93.325188,24.078556],[94.106742,23.850741],[94.552658,24.675238],[94.603249,25.162495],[95.155153,26.001307],[95.124768,26.573572],[96.419366,27.264589],[97.133999,27.083774],[97.051989,27.699059],[97.402561,27.882536],[97.327114,28.261583],[97.911988,28.335945],[98.246231,27.747221],[98.68269,27.508812],[98.712094,26.743536],[98.671838,25.918703],[97.724609,25.083637],[97.60472,23.897405],[98.660262,24.063286],[98.898749,23.142722],[99.531992,22.949039],[99.240899,22.118314],[99.983489,21.742937],[100.416538,21.558839],[101.150033,21.849984],[101.180005,21.436573],[100.329101,20.786122],[100.115988,20.41785],[99.543309,20.186598]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "6ddfbd90-5c29-4828-a83e-03f74b92ae0d",
-  "CountryName": "Namibia",
-  "CountryCode": "NAM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"NAM\",\"properties\":{\"name\":\"Namibia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[16.344977,-28.576705],[15.601818,-27.821247],[15.210472,-27.090956],[14.989711,-26.117372],[14.743214,-25.39292],[14.408144,-23.853014],[14.385717,-22.656653],[14.257714,-22.111208],[13.868642,-21.699037],[13.352498,-20.872834],[12.826845,-19.673166],[12.608564,-19.045349],[11.794919,-18.069129],[11.734199,-17.301889],[12.215461,-17.111668],[12.814081,-16.941343],[13.462362,-16.971212],[14.058501,-17.423381],[14.209707,-17.353101],[18.263309,-17.309951],[18.956187,-17.789095],[21.377176,-17.930636],[23.215048,-17.523116],[24.033862,-17.295843],[24.682349,-17.353411],[25.07695,-17.578823],[25.084443,-17.661816],[24.520705,-17.887125],[24.217365,-17.889347],[23.579006,-18.281261],[23.196858,-17.869038],[21.65504,-18.219146],[20.910641,-18.252219],[20.881134,-21.814327],[19.895458,-21.849157],[19.895768,-24.76779],[19.894734,-28.461105],[19.002127,-28.972443],[18.464899,-29.045462],[17.836152,-28.856378],[17.387497,-28.783514],[17.218929,-28.355943],[16.824017,-28.082162],[16.344977,-28.576705]]]}}]}",
-  "RecordCount": 20,
-  "FillOpacity": 0.53,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "98195e76-9702-4436-87c3-50065ab87399",
-  "CountryName": "Nepal",
-  "CountryCode": "NPL",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"NPL\",\"properties\":{\"name\":\"Nepal\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[88.120441,27.876542],[88.043133,27.445819],[88.174804,26.810405],[88.060238,26.414615],[87.227472,26.397898],[86.024393,26.630985],[85.251779,26.726198],[84.675018,27.234901],[83.304249,27.364506],[81.999987,27.925479],[81.057203,28.416095],[80.088425,28.79447],[80.476721,29.729865],[81.111256,30.183481],[81.525804,30.422717],[82.327513,30.115268],[83.337115,29.463732],[83.898993,29.320226],[84.23458,28.839894],[85.011638,28.642774],[85.82332,28.203576],[86.954517,27.974262],[88.120441,27.876542]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "57cc80d2-ec8c-479b-893a-a88c1161c586",
-  "CountryName": "Nicaragua",
-  "CountryCode": "NIC",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"NIC\",\"properties\":{\"name\":\"Nicaragua\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-85.71254,11.088445],[-86.058488,11.403439],[-86.52585,11.806877],[-86.745992,12.143962],[-87.167516,12.458258],[-87.668493,12.90991],[-87.557467,13.064552],[-87.392386,12.914018],[-87.316654,12.984686],[-87.005769,13.025794],[-86.880557,13.254204],[-86.733822,13.263093],[-86.755087,13.754845],[-86.520708,13.778487],[-86.312142,13.771356],[-86.096264,14.038187],[-85.801295,13.836055],[-85.698665,13.960078],[-85.514413,14.079012],[-85.165365,14.35437],[-85.148751,14.560197],[-85.052787,14.551541],[-84.924501,14.790493],[-84.820037,14.819587],[-84.649582,14.666805],[-84.449336,14.621614],[-84.228342,14.748764],[-83.975721,14.749436],[-83.628585,14.880074],[-83.489989,15.016267],[-83.147219,14.995829],[-83.233234,14.899866],[-83.284162,14.676624],[-83.182126,14.310703],[-83.4125,13.970078],[-83.519832,13.567699],[-83.552207,13.127054],[-83.498515,12.869292],[-83.473323,12.419087],[-83.626104,12.32085],[-83.719613,11.893124],[-83.650858,11.629032],[-83.85547,11.373311],[-83.808936,11.103044],[-83.655612,10.938764],[-83.895054,10.726839],[-84.190179,10.79345],[-84.355931,10.999226],[-84.673069,11.082657],[-84.903003,10.952303],[-85.561852,11.217119],[-85.71254,11.088445]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "a334f112-6b0f-4731-b453-5a477b370b16",
-  "CountryName": "Niger",
-  "CountryCode": "NER",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"NER\",\"properties\":{\"name\":\"Niger\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[2.154474,11.94015],[2.177108,12.625018],[1.024103,12.851826],[0.993046,13.33575],[0.429928,13.988733],[0.295646,14.444235],[0.374892,14.928908],[1.015783,14.968182],[1.385528,15.323561],[2.749993,15.409525],[3.638259,15.56812],[3.723422,16.184284],[4.27021,16.852227],[4.267419,19.155265],[5.677566,19.601207],[8.572893,21.565661],[11.999506,23.471668],[13.581425,23.040506],[14.143871,22.491289],[14.8513,22.86295],[15.096888,21.308519],[15.471077,21.048457],[15.487148,20.730415],[15.903247,20.387619],[15.685741,19.95718],[15.300441,17.92795],[15.247731,16.627306],[13.972202,15.684366],[13.540394,14.367134],[13.956699,13.996691],[13.954477,13.353449],[14.595781,13.330427],[14.495787,12.859396],[14.213531,12.802035],[14.181336,12.483657],[13.995353,12.461565],[13.318702,13.556356],[13.083987,13.596147],[12.302071,13.037189],[11.527803,13.32898],[10.989593,13.387323],[10.701032,13.246918],[10.114814,13.277252],[9.524928,12.851102],[9.014933,12.826659],[7.804671,13.343527],[7.330747,13.098038],[6.820442,13.115091],[6.445426,13.492768],[5.443058,13.865924],[4.368344,13.747482],[4.107946,13.531216],[3.967283,12.956109],[3.680634,12.552903],[3.61118,11.660167],[2.848643,12.235636],[2.490164,12.233052],[2.154474,11.94015]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "89a42705-425d-4b55-9db7-4d0aa6760709",
-  "CountryName": "Nigeria",
-  "CountryCode": "NGA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"NGA\",\"properties\":{\"name\":\"Nigeria\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[8.500288,4.771983],[7.462108,4.412108],[7.082596,4.464689],[6.698072,4.240594],[5.898173,4.262453],[5.362805,4.887971],[5.033574,5.611802],[4.325607,6.270651],[3.57418,6.2583],[2.691702,6.258817],[2.749063,7.870734],[2.723793,8.506845],[2.912308,9.137608],[3.220352,9.444153],[3.705438,10.06321],[3.60007,10.332186],[3.797112,10.734746],[3.572216,11.327939],[3.61118,11.660167],[3.680634,12.552903],[3.967283,12.956109],[4.107946,13.531216],[4.368344,13.747482],[5.443058,13.865924],[6.445426,13.492768],[6.820442,13.115091],[7.330747,13.098038],[7.804671,13.343527],[9.014933,12.826659],[9.524928,12.851102],[10.114814,13.277252],[10.701032,13.246918],[10.989593,13.387323],[11.527803,13.32898],[12.302071,13.037189],[13.083987,13.596147],[13.318702,13.556356],[13.995353,12.461565],[14.181336,12.483657],[14.577178,12.085361],[14.468192,11.904752],[14.415379,11.572369],[13.57295,10.798566],[13.308676,10.160362],[13.1676,9.640626],[12.955468,9.417772],[12.753672,8.717763],[12.218872,8.305824],[12.063946,7.799808],[11.839309,7.397042],[11.745774,6.981383],[11.058788,6.644427],[10.497375,7.055358],[10.118277,7.03877],[9.522706,6.453482],[9.233163,6.444491],[8.757533,5.479666],[8.500288,4.771983]]]}}]}",
-  "RecordCount": 14,
-  "FillOpacity": 0.43,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "66a41722-6e5e-4b39-8f62-705118a3630d",
-  "CountryName": "Oman",
-  "CountryCode": "OMN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"OMN\",\"properties\":{\"name\":\"Oman\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[58.861141,21.114035],[58.487986,20.428986],[58.034318,20.481437],[57.826373,20.243002],[57.665762,19.736005],[57.7887,19.06757],[57.694391,18.94471],[57.234264,18.947991],[56.609651,18.574267],[56.512189,18.087113],[56.283521,17.876067],[55.661492,17.884128],[55.269939,17.632309],[55.2749,17.228354],[54.791002,16.950697],[54.239253,17.044981],[53.570508,16.707663],[53.108573,16.651051],[52.782184,17.349742],[52.00001,19.000003],[54.999982,19.999994],[55.666659,22.000001],[55.208341,22.70833],[55.234489,23.110993],[55.525841,23.524869],[55.528632,23.933604],[55.981214,24.130543],[55.804119,24.269604],[55.886233,24.920831],[56.396847,24.924732],[56.84514,24.241673],[57.403453,23.878594],[58.136948,23.747931],[58.729211,23.565668],[59.180502,22.992395],[59.450098,22.660271],[59.80806,22.533612],[59.806148,22.310525],[59.442191,21.714541],[59.282408,21.433886],[58.861141,21.114035]]],[[[56.391421,25.895991],[56.261042,25.714606],[56.070821,26.055464],[56.362017,26.395934],[56.485679,26.309118],[56.391421,25.895991]]]]}}]}",
-  "RecordCount": 5,
-  "FillOpacity": 0.27,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "8641f4ae-f4cb-4b4b-85b4-9a9633ad63a7",
-  "CountryName": "Pakistan",
-  "CountryCode": "PAK",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PAK\",\"properties\":{\"name\":\"Pakistan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[75.158028,37.133031],[75.896897,36.666806],[76.192848,35.898403],[77.837451,35.49401],[76.871722,34.653544],[75.757061,34.504923],[74.240203,34.748887],[73.749948,34.317699],[74.104294,33.441473],[74.451559,32.7649],[75.258642,32.271105],[74.405929,31.692639],[74.42138,30.979815],[73.450638,29.976413],[72.823752,28.961592],[71.777666,27.91318],[70.616496,27.989196],[69.514393,26.940966],[70.168927,26.491872],[70.282873,25.722229],[70.844699,25.215102],[71.04324,24.356524],[68.842599,24.359134],[68.176645,23.691965],[67.443667,23.944844],[67.145442,24.663611],[66.372828,25.425141],[64.530408,25.237039],[62.905701,25.218409],[61.497363,25.078237],[61.874187,26.239975],[63.316632,26.756532],[63.233898,27.217047],[62.755426,27.378923],[62.72783,28.259645],[61.771868,28.699334],[61.369309,29.303276],[60.874248,29.829239],[62.549857,29.318572],[63.550261,29.468331],[64.148002,29.340819],[64.350419,29.560031],[65.046862,29.472181],[66.346473,29.887943],[66.381458,30.738899],[66.938891,31.304911],[67.683394,31.303154],[67.792689,31.58293],[68.556932,31.71331],[68.926677,31.620189],[69.317764,31.901412],[69.262522,32.501944],[69.687147,33.105499],[70.323594,33.358533],[69.930543,34.02012],[70.881803,33.988856],[71.156773,34.348911],[71.115019,34.733126],[71.613076,35.153203],[71.498768,35.650563],[71.262348,36.074388],[71.846292,36.509942],[72.920025,36.720007],[74.067552,36.836176],[74.575893,37.020841],[75.158028,37.133031]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "eb3e22d3-5b2d-46ee-8952-e2d446779567",
-  "CountryName": "Panama",
-  "CountryCode": "PAN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PAN\",\"properties\":{\"name\":\"Panama\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-77.881571,7.223771],[-78.214936,7.512255],[-78.429161,8.052041],[-78.182096,8.319182],[-78.435465,8.387705],[-78.622121,8.718124],[-79.120307,8.996092],[-79.557877,8.932375],[-79.760578,8.584515],[-80.164481,8.333316],[-80.382659,8.298409],[-80.480689,8.090308],[-80.00369,7.547524],[-80.276671,7.419754],[-80.421158,7.271572],[-80.886401,7.220541],[-81.059543,7.817921],[-81.189716,7.647906],[-81.519515,7.70661],[-81.721311,8.108963],[-82.131441,8.175393],[-82.390934,8.292362],[-82.820081,8.290864],[-82.850958,8.073823],[-82.965783,8.225028],[-82.913176,8.423517],[-82.829771,8.626295],[-82.868657,8.807266],[-82.719183,8.925709],[-82.927155,9.07433],[-82.932891,9.476812],[-82.546196,9.566135],[-82.187123,9.207449],[-82.207586,8.995575],[-81.808567,8.950617],[-81.714154,9.031955],[-81.439287,8.786234],[-80.947302,8.858504],[-80.521901,9.111072],[-79.9146,9.312765],[-79.573303,9.61161],[-79.021192,9.552931],[-79.05845,9.454565],[-78.500888,9.420459],[-78.055928,9.24773],[-77.729514,8.946844],[-77.353361,8.670505],[-77.474723,8.524286],[-77.242566,7.935278],[-77.431108,7.638061],[-77.753414,7.70984],[-77.881571,7.223771]]]}}]}",
-  "RecordCount": 7,
-  "FillOpacity": 0.31,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "f67d64ee-f05f-454e-9b6e-7a0e908f294f",
-  "CountryName": "Papua New Guinea",
-  "CountryCode": "PNG",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PNG\",\"properties\":{\"name\":\"Papua New Guinea\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[155.880026,-6.819997],[155.599991,-6.919991],[155.166994,-6.535931],[154.729192,-5.900828],[154.514114,-5.139118],[154.652504,-5.042431],[154.759991,-5.339984],[155.062918,-5.566792],[155.547746,-6.200655],[156.019965,-6.540014],[155.880026,-6.819997]]],[[[151.982796,-5.478063],[151.459107,-5.56028],[151.30139,-5.840728],[150.754447,-6.083763],[150.241197,-6.317754],[149.709963,-6.316513],[148.890065,-6.02604],[148.318937,-5.747142],[148.401826,-5.437756],[149.298412,-5.583742],[149.845562,-5.505503],[149.99625,-5.026101],[150.139756,-5.001348],[150.236908,-5.53222],[150.807467,-5.455842],[151.089672,-5.113693],[151.647881,-4.757074],[151.537862,-4.167807],[152.136792,-4.14879],[152.338743,-4.312966],[152.318693,-4.867661],[151.982796,-5.478063]]],[[[147.191874,-7.388024],[148.084636,-8.044108],[148.734105,-9.104664],[149.306835,-9.071436],[149.266631,-9.514406],[150.038728,-9.684318],[149.738798,-9.872937],[150.801628,-10.293687],[150.690575,-10.582713],[150.028393,-10.652476],[149.78231,-10.393267],[148.923138,-10.280923],[147.913018,-10.130441],[147.135443,-9.492444],[146.567881,-8.942555],[146.048481,-8.067414],[144.744168,-7.630128],[143.897088,-7.91533],[143.286376,-8.245491],[143.413913,-8.983069],[142.628431,-9.326821],[142.068259,-9.159596],[141.033852,-9.117893],[141.017057,-5.859022],[141.00021,-2.600151],[142.735247,-3.289153],[144.583971,-3.861418],[145.27318,-4.373738],[145.829786,-4.876498],[145.981922,-5.465609],[147.648073,-6.083659],[147.891108,-6.614015],[146.970905,-6.721657],[147.191874,-7.388024]]],[[[153.140038,-4.499983],[152.827292,-4.766427],[152.638673,-4.176127],[152.406026,-3.789743],[151.953237,-3.462062],[151.384279,-3.035422],[150.66205,-2.741486],[150.939965,-2.500002],[151.479984,-2.779985],[151.820015,-2.999972],[152.239989,-3.240009],[152.640017,-3.659983],[153.019994,-3.980015],[153.140038,-4.499983]]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "01ee5242-03e3-4842-8696-88688319e784",
-  "CountryName": "Paraguay",
-  "CountryCode": "PRY",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PRY\",\"properties\":{\"name\":\"Paraguay\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-62.685057,-22.249029],[-62.291179,-21.051635],[-62.265961,-20.513735],[-61.786326,-19.633737],[-60.043565,-19.342747],[-59.115042,-19.356906],[-58.183471,-19.868399],[-58.166392,-20.176701],[-57.870674,-20.732688],[-57.937156,-22.090176],[-56.88151,-22.282154],[-56.473317,-22.0863],[-55.797958,-22.35693],[-55.610683,-22.655619],[-55.517639,-23.571998],[-55.400747,-23.956935],[-55.027902,-24.001274],[-54.652834,-23.839578],[-54.29296,-24.021014],[-54.293476,-24.5708],[-54.428946,-25.162185],[-54.625291,-25.739255],[-54.788795,-26.621786],[-55.695846,-27.387837],[-56.486702,-27.548499],[-57.60976,-27.395899],[-58.618174,-27.123719],[-57.63366,-25.603657],[-57.777217,-25.16234],[-58.807128,-24.771459],[-60.028966,-24.032796],[-60.846565,-23.880713],[-62.685057,-22.249029]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "69ad7c10-405f-4b45-a3ee-fa1a1b21e473",
-  "CountryName": "Peru",
-  "CountryCode": "PER",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PER\",\"properties\":{\"name\":\"Peru\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-69.590424,-17.580012],[-69.858444,-18.092694],[-70.372572,-18.347975],[-71.37525,-17.773799],[-71.462041,-17.363488],[-73.44453,-16.359363],[-75.237883,-15.265683],[-76.009205,-14.649286],[-76.423469,-13.823187],[-76.259242,-13.535039],[-77.106192,-12.222716],[-78.092153,-10.377712],[-79.036953,-8.386568],[-79.44592,-7.930833],[-79.760578,-7.194341],[-80.537482,-6.541668],[-81.249996,-6.136834],[-80.926347,-5.690557],[-81.410943,-4.736765],[-81.09967,-4.036394],[-80.302561,-3.404856],[-80.184015,-3.821162],[-80.469295,-4.059287],[-80.442242,-4.425724],[-80.028908,-4.346091],[-79.624979,-4.454198],[-79.205289,-4.959129],[-78.639897,-4.547784],[-78.450684,-3.873097],[-77.837905,-3.003021],[-76.635394,-2.608678],[-75.544996,-1.56161],[-75.233723,-0.911417],[-75.373223,-0.152032],[-75.106625,-0.057205],[-74.441601,-0.53082],[-74.122395,-1.002833],[-73.659504,-1.260491],[-73.070392,-2.308954],[-72.325787,-2.434218],[-71.774761,-2.16979],[-71.413646,-2.342802],[-70.813476,-2.256865],[-70.047709,-2.725156],[-70.692682,-3.742872],[-70.394044,-3.766591],[-69.893635,-4.298187],[-70.794769,-4.251265],[-70.928843,-4.401591],[-71.748406,-4.593983],[-72.891928,-5.274561],[-72.964507,-5.741251],[-73.219711,-6.089189],[-73.120027,-6.629931],[-73.724487,-6.918595],[-73.723401,-7.340999],[-73.987235,-7.52383],[-73.571059,-8.424447],[-73.015383,-9.032833],[-73.226713,-9.462213],[-72.563033,-9.520194],[-72.184891,-10.053598],[-71.302412,-10.079436],[-70.481894,-9.490118],[-70.548686,-11.009147],[-70.093752,-11.123972],[-69.529678,-10.951734],[-68.66508,-12.5613],[-68.88008,-12.899729],[-68.929224,-13.602684],[-68.948887,-14.453639],[-69.339535,-14.953195],[-69.160347,-15.323974],[-69.389764,-15.660129],[-68.959635,-16.500698],[-69.590424,-17.580012]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "d178fed0-e946-4f12-8603-9222014bd730",
-  "CountryName": "Philippines",
-  "CountryCode": "PHL",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PHL\",\"properties\":{\"name\":\"Philippines\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[126.376814,8.414706],[126.478513,7.750354],[126.537424,7.189381],[126.196773,6.274294],[125.831421,7.293715],[125.363852,6.786485],[125.683161,6.049657],[125.396512,5.581003],[124.219788,6.161355],[123.93872,6.885136],[124.243662,7.36061],[123.610212,7.833527],[123.296071,7.418876],[122.825506,7.457375],[122.085499,6.899424],[121.919928,7.192119],[122.312359,8.034962],[122.942398,8.316237],[123.487688,8.69301],[123.841154,8.240324],[124.60147,8.514158],[124.764612,8.960409],[125.471391,8.986997],[125.412118,9.760335],[126.222714,9.286074],[126.306637,8.782487],[126.376814,8.414706]]],[[[123.982438,10.278779],[123.623183,9.950091],[123.309921,9.318269],[122.995883,9.022189],[122.380055,9.713361],[122.586089,9.981045],[122.837081,10.261157],[122.947411,10.881868],[123.49885,10.940624],[123.337774,10.267384],[124.077936,11.232726],[123.982438,10.278779]]],[[[118.504581,9.316383],[117.174275,8.3675],[117.664477,9.066889],[118.386914,9.6845],[118.987342,10.376292],[119.511496,11.369668],[119.689677,10.554291],[119.029458,10.003653],[118.504581,9.316383]]],[[[121.883548,11.891755],[122.483821,11.582187],[123.120217,11.58366],[123.100838,11.165934],[122.637714,10.741308],[122.00261,10.441017],[121.967367,10.905691],[122.03837,11.415841],[121.883548,11.891755]]],[[[125.502552,12.162695],[125.783465,11.046122],[125.011884,11.311455],[125.032761,10.975816],[125.277449,10.358722],[124.801819,10.134679],[124.760168,10.837995],[124.459101,10.88993],[124.302522,11.495371],[124.891013,11.415583],[124.87799,11.79419],[124.266762,12.557761],[125.227116,12.535721],[125.502552,12.162695]]],[[[121.527394,13.06959],[121.26219,12.20556],[120.833896,12.704496],[120.323436,13.466413],[121.180128,13.429697],[121.527394,13.06959]]],[[[121.321308,18.504065],[121.937601,18.218552],[122.246006,18.47895],[122.336957,18.224883],[122.174279,17.810283],[122.515654,17.093505],[122.252311,16.262444],[121.662786,15.931018],[121.50507,15.124814],[121.728829,14.328376],[122.258925,14.218202],[122.701276,14.336541],[123.950295,13.782131],[123.855107,13.237771],[124.181289,12.997527],[124.077419,12.536677],[123.298035,13.027526],[122.928652,13.55292],[122.671355,13.185836],[122.03465,13.784482],[121.126385,13.636687],[120.628637,13.857656],[120.679384,14.271016],[120.991819,14.525393],[120.693336,14.756671],[120.564145,14.396279],[120.070429,14.970869],[119.920929,15.406347],[119.883773,16.363704],[120.286488,16.034629],[120.390047,17.599081],[120.715867,18.505227],[121.321308,18.504065]]]]}}]}",
-  "RecordCount": 7,
-  "FillOpacity": 0.31,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "fc265c4e-463d-4560-9a01-5c95b0c4eb08",
-  "CountryName": "Poland",
-  "CountryCode": "POL",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"POL\",\"properties\":{\"name\":\"Poland\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[15.016996,51.106674],[14.607098,51.745188],[14.685026,52.089947],[14.4376,52.62485],[14.074521,52.981263],[14.353315,53.248171],[14.119686,53.757029],[14.8029,54.050706],[16.363477,54.513159],[17.622832,54.851536],[18.620859,54.682606],[18.696255,54.438719],[19.66064,54.426084],[20.892245,54.312525],[22.731099,54.327537],[23.243987,54.220567],[23.484128,53.912498],[23.527536,53.470122],[23.804935,53.089731],[23.799199,52.691099],[23.199494,52.486977],[23.508002,52.023647],[23.527071,51.578454],[24.029986,50.705407],[23.922757,50.424881],[23.426508,50.308506],[22.51845,49.476774],[22.776419,49.027395],[22.558138,49.085738],[21.607808,49.470107],[20.887955,49.328772],[20.415839,49.431453],[19.825023,49.217125],[19.320713,49.571574],[18.909575,49.435846],[18.853144,49.49623],[18.392914,49.988629],[17.649445,50.049038],[17.554567,50.362146],[16.868769,50.473974],[16.719476,50.215747],[16.176253,50.422607],[16.238627,50.697733],[15.490972,50.78473],[15.016996,51.106674]]]}}]}",
-  "RecordCount": 2,
-  "FillOpacity": 0.22,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "b2a91181-7344-46db-9c21-e7fc04b15c7c",
-  "CountryName": "Qatar",
-  "CountryCode": "QAT",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"QAT\",\"properties\":{\"name\":\"Qatar\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[50.810108,24.754743],[50.743911,25.482424],[51.013352,26.006992],[51.286462,26.114582],[51.589079,25.801113],[51.6067,25.21567],[51.389608,24.627386],[51.112415,24.556331],[50.810108,24.754743]]]}}]}",
-  "RecordCount": 7,
-  "FillOpacity": 0.31,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "41f299c9-ab17-4f89-b009-b9ca5a613b6f",
-  "CountryName": "Republic of Korea (the) ",
-  "CountryCode": "KOR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"KOR\",\"properties\":{\"name\":\"South Korea\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[128.349716,38.612243],[129.21292,37.432392],[129.46045,36.784189],[129.468304,35.632141],[129.091377,35.082484],[128.18585,34.890377],[127.386519,34.475674],[126.485748,34.390046],[126.37392,34.93456],[126.559231,35.684541],[126.117398,36.725485],[126.860143,36.893924],[126.174759,37.749686],[126.237339,37.840378],[126.68372,37.804773],[127.073309,38.256115],[127.780035,38.304536],[128.205746,38.370397],[128.349716,38.612243]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "1fc027e8-ee4c-4034-b07a-c5559e446c1d",
-  "CountryName": "Republic of Moldova (the)",
-  "CountryCode": "MDA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MDA\",\"properties\":{\"name\":\"Moldova\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[26.619337,48.220726],[26.857824,48.368211],[27.522537,48.467119],[28.259547,48.155562],[28.670891,48.118149],[29.122698,47.849095],[29.050868,47.510227],[29.415135,47.346645],[29.559674,46.928583],[29.908852,46.674361],[29.83821,46.525326],[30.024659,46.423937],[29.759972,46.349988],[29.170654,46.379262],[29.072107,46.517678],[28.862972,46.437889],[28.933717,46.25883],[28.659987,45.939987],[28.485269,45.596907],[28.233554,45.488283],[28.054443,45.944586],[28.160018,46.371563],[28.12803,46.810476],[27.551166,47.405117],[27.233873,47.826771],[26.924176,48.123264],[26.619337,48.220726]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "93453d3b-2539-460e-8829-dfec0c214696",
-  "CountryName": "Romania",
-  "CountryCode": "ROU",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ROU\",\"properties\":{\"name\":\"Romania\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[22.710531,47.882194],[23.142236,48.096341],[23.760958,47.985598],[24.402056,47.981878],[24.866317,47.737526],[25.207743,47.891056],[25.945941,47.987149],[26.19745,48.220881],[26.619337,48.220726],[26.924176,48.123264],[27.233873,47.826771],[27.551166,47.405117],[28.12803,46.810476],[28.160018,46.371563],[28.054443,45.944586],[28.233554,45.488283],[28.679779,45.304031],[29.149725,45.464925],[29.603289,45.293308],[29.626543,45.035391],[29.141612,44.82021],[28.837858,44.913874],[28.558081,43.707462],[27.970107,43.812468],[27.2424,44.175986],[26.065159,43.943494],[25.569272,43.688445],[24.100679,43.741051],[23.332302,43.897011],[22.944832,43.823785],[22.65715,44.234923],[22.474008,44.409228],[22.705726,44.578003],[22.459022,44.702517],[22.145088,44.478422],[21.562023,44.768947],[21.483526,45.18117],[20.874313,45.416375],[20.762175,45.734573],[20.220192,46.127469],[21.021952,46.316088],[21.626515,46.994238],[22.099768,47.672439],[22.710531,47.882194]]]}}]}",
-  "RecordCount": 8,
-  "FillOpacity": 0.32,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "142f344d-6425-4764-bd7a-cc8a2b18554f",
-  "CountryName": "Russia",
-  "CountryCode": "RUS",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"RUS\",\"properties\":{\"name\":\"Russia\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[143.648007,50.7476],[144.654148,48.976391],[143.173928,49.306551],[142.558668,47.861575],[143.533492,46.836728],[143.505277,46.137908],[142.747701,46.740765],[142.09203,45.966755],[141.906925,46.805929],[142.018443,47.780133],[141.904445,48.859189],[142.1358,49.615163],[142.179983,50.952342],[141.594076,51.935435],[141.682546,53.301966],[142.606934,53.762145],[142.209749,54.225476],[142.654786,54.365881],[142.914616,53.704578],[143.260848,52.74076],[143.235268,51.75666],[143.648007,50.7476]]],[[[22.731099,54.327537],[20.892245,54.312525],[19.66064,54.426084],[19.888481,54.86616],[21.268449,55.190482],[22.315724,55.015299],[22.757764,54.856574],[22.651052,54.582741],[22.731099,54.327537]]],[[[-175.01425,66.58435],[-174.33983,66.33556],[-174.57182,67.06219],[-171.85731,66.91308],[-169.89958,65.97724],[-170.89107,65.54139],[-172.53025,65.43791],[-172.555,64.46079],[-172.95533,64.25269],[-173.89184,64.2826],[-174.65392,64.63125],[-175.98353,64.92288],[-176.20716,65.35667],[-177.22266,65.52024],[-178.35993,65.39052],[-178.90332,65.74044],[-178.68611,66.11211],[-179.88377,65.87456],[-179.43268,65.40411],[-180,64.979709],[-180,68.963636],[-177.55,68.2],[-174.92825,67.20589],[-175.01425,66.58435]]],[[[180,70.832199],[178.903425,70.78114],[178.7253,71.0988],[180,71.515714],[180,70.832199]]],[[[-178.69378,70.89302],[-180,70.832199],[-180,71.515714],[-179.871875,71.55762],[-179.02433,71.55553],[-177.577945,71.26948],[-177.663575,71.13277],[-178.69378,70.89302]]],[[[143.60385,73.21244],[142.08763,73.20544],[140.038155,73.31692],[139.86312,73.36983],[140.81171,73.76506],[142.06207,73.85758],[143.48283,73.47525],[143.60385,73.21244]]],[[[150.73167,75.08406],[149.575925,74.68892],[147.977465,74.778355],[146.11919,75.17298],[146.358485,75.49682],[148.22223,75.345845],[150.73167,75.08406]]],[[[145.086285,75.562625],[144.3,74.82],[140.61381,74.84768],[138.95544,74.61148],[136.97439,75.26167],[137.51176,75.94917],[138.831075,76.13676],[141.471615,76.09289],[145.086285,75.562625]]],[[[57.535693,70.720464],[56.944979,70.632743],[53.677375,70.762658],[53.412017,71.206662],[51.601895,71.474759],[51.455754,72.014881],[52.478275,72.229442],[52.444169,72.774731],[54.427614,73.627548],[53.50829,73.749814],[55.902459,74.627486],[55.631933,75.081412],[57.868644,75.60939],[61.170044,76.251883],[64.498368,76.439055],[66.210977,76.809782],[68.15706,76.939697],[68.852211,76.544811],[68.180573,76.233642],[64.637326,75.737755],[61.583508,75.260885],[58.477082,74.309056],[56.986786,73.333044],[55.419336,72.371268],[55.622838,71.540595],[57.535693,70.720464]]],[[[106.97013,76.97419],[107.24,76.48],[108.1538,76.72335],[111.07726,76.71],[113.33151,76.22224],[114.13417,75.84764],[113.88539,75.32779],[112.77918,75.03186],[110.15125,74.47673],[109.4,74.18],[110.64,74.04],[112.11919,73.78774],[113.01954,73.97693],[113.52958,73.33505],[113.96881,73.59488],[115.56782,73.75285],[118.77633,73.58772],[119.02,73.12],[123.20066,72.97122],[123.25777,73.73503],[125.38,73.56],[126.97644,73.56549],[128.59126,73.03871],[129.05157,72.39872],[128.46,71.98],[129.71599,71.19304],[131.28858,70.78699],[132.2535,71.8363],[133.85766,71.38642],[135.56193,71.65525],[137.49755,71.34763],[138.23409,71.62803],[139.86983,71.48783],[139.14791,72.41619],[140.46817,72.84941],[149.5,72.2],[150.35118,71.60643],[152.9689,70.84222],[157.00688,71.03141],[158.99779,70.86672],[159.83031,70.45324],[159.70866,69.72198],[160.94053,69.43728],[162.27907,69.64204],[164.05248,69.66823],[165.94037,69.47199],[167.83567,69.58269],[169.57763,68.6938],[170.81688,69.01363],[170.0082,69.65276],[170.45345,70.09703],[173.64391,69.81743],[175.72403,69.87725],[178.6,69.4],[180,68.963636],[180,64.979709],[179.99281,64.97433],[178.7072,64.53493],[177.41128,64.60821],[178.313,64.07593],[178.90825,63.25197],[179.37034,62.98262],[179.48636,62.56894],[179.22825,62.3041],[177.3643,62.5219],[174.56929,61.76915],[173.68013,61.65261],[172.15,60.95],[170.6985,60.33618],[170.33085,59.88177],[168.90046,60.57355],[166.29498,59.78855],[165.84,60.16],[164.87674,59.7316],[163.53929,59.86871],[163.21711,59.21101],[162.01733,58.24328],[162.05297,57.83912],[163.19191,57.61503],[163.05794,56.15924],[162.12958,56.12219],[161.70146,55.28568],[162.11749,54.85514],[160.36877,54.34433],[160.02173,53.20257],[158.53094,52.95868],[158.23118,51.94269],[156.78979,51.01105],[156.42,51.7],[155.99182,53.15895],[155.43366,55.38103],[155.91442,56.76792],[156.75815,57.3647],[156.81035,57.83204],[158.36433,58.05575],[160.15064,59.31477],[161.87204,60.343],[163.66969,61.1409],[164.47355,62.55061],[163.25842,62.46627],[162.65791,61.6425],[160.12148,60.54423],[159.30232,61.77396],[156.72068,61.43442],[154.21806,59.75818],[155.04375,59.14495],[152.81185,58.88385],[151.26573,58.78089],[151.33815,59.50396],[149.78371,59.65573],[148.54481,59.16448],[145.48722,59.33637],[142.19782,59.03998],[138.95848,57.08805],[135.12619,54.72959],[136.70171,54.60355],[137.19342,53.97732],[138.1647,53.75501],[138.80463,54.25455],[139.90151,54.18968],[141.34531,53.08957],[141.37923,52.23877],[140.59742,51.23967],[140.51308,50.04553],[140.06193,48.44671],[138.55472,46.99965],[138.21971,46.30795],[136.86232,45.1435],[135.51535,43.989],[134.86939,43.39821],[133.53687,42.81147],[132.90627,42.79849],[132.27807,43.28456],[130.93587,42.55274],[130.78,42.22],[130.64,42.395],[130.633866,42.903015],[131.144688,42.92999],[131.288555,44.11152],[131.02519,44.96796],[131.883454,45.321162],[133.09712,45.14409],[133.769644,46.116927],[134.11235,47.21248],[134.50081,47.57845],[135.026311,48.47823],[133.373596,48.183442],[132.50669,47.78896],[130.98726,47.79013],[130.582293,48.729687],[129.397818,49.4406],[127.6574,49.76027],[127.287456,50.739797],[126.939157,51.353894],[126.564399,51.784255],[125.946349,52.792799],[125.068211,53.161045],[123.57147,53.4588],[122.245748,53.431726],[121.003085,53.251401],[120.177089,52.753886],[120.725789,52.516226],[120.7382,51.96411],[120.18208,51.64355],[119.27939,50.58292],[119.288461,50.142883],[117.879244,49.510983],[116.678801,49.888531],[115.485695,49.805177],[114.96211,50.140247],[114.362456,50.248303],[112.89774,49.543565],[111.581231,49.377968],[110.662011,49.130128],[109.402449,49.292961],[108.475167,49.282548],[107.868176,49.793705],[106.888804,50.274296],[105.886591,50.406019],[104.62158,50.27532],[103.676545,50.089966],[102.25589,50.51056],[102.06521,51.25991],[100.88948,51.516856],[99.981732,51.634006],[98.861491,52.047366],[97.82574,51.010995],[98.231762,50.422401],[97.25976,49.72605],[95.81402,49.97746],[94.815949,50.013433],[94.147566,50.480537],[93.10421,50.49529],[92.234712,50.802171],[90.713667,50.331812],[88.805567,49.470521],[87.751264,49.297198],[87.35997,49.214981],[86.829357,49.826675],[85.54127,49.692859],[85.11556,50.117303],[84.416377,50.3114],[83.935115,50.889246],[83.383004,51.069183],[81.945986,50.812196],[80.568447,51.388336],[80.03556,50.864751],[77.800916,53.404415],[76.525179,54.177003],[76.8911,54.490524],[74.38482,53.54685],[73.425679,53.48981],[73.508516,54.035617],[72.22415,54.376655],[71.180131,54.133285],[70.865267,55.169734],[69.068167,55.38525],[68.1691,54.970392],[65.66687,54.60125],[65.178534,54.354228],[61.4366,54.00625],[60.978066,53.664993],[61.699986,52.979996],[60.739993,52.719986],[60.927269,52.447548],[59.967534,51.96042],[61.588003,51.272659],[61.337424,50.79907],[59.932807,50.842194],[59.642282,50.545442],[58.36332,51.06364],[56.77798,51.04355],[55.71694,50.62171],[54.532878,51.02624],[52.328724,51.718652],[50.766648,51.692762],[48.702382,50.605128],[48.577841,49.87476],[47.54948,50.454698],[46.751596,49.356006],[47.043672,49.152039],[46.466446,48.394152],[47.31524,47.71585],[48.05725,47.74377],[48.694734,47.075628],[48.59325,46.56104],[49.10116,46.39933],[48.64541,45.80629],[47.67591,45.64149],[46.68201,44.6092],[47.59094,43.66016],[47.49252,42.98658],[48.58437,41.80888],[47.987283,41.405819],[47.815666,41.151416],[47.373315,41.219732],[46.686071,41.827137],[46.404951,41.860675],[45.7764,42.09244],[45.470279,42.502781],[44.537623,42.711993],[43.93121,42.55496],[43.75599,42.74083],[42.3944,43.2203],[40.92219,43.38215],[40.076965,43.553104],[39.955009,43.434998],[38.68,44.28],[37.53912,44.65721],[36.67546,45.24469],[37.40317,45.40451],[38.23295,46.24087],[37.67372,46.63657],[39.14767,47.04475],[39.1212,47.26336],[38.223538,47.10219],[38.255112,47.5464],[38.77057,47.82562],[39.738278,47.898937],[39.89562,48.23241],[39.67465,48.78382],[40.080789,49.30743],[40.06904,49.60105],[38.594988,49.926462],[38.010631,49.915662],[37.39346,50.383953],[36.626168,50.225591],[35.356116,50.577197],[35.37791,50.77394],[35.022183,51.207572],[34.224816,51.255993],[34.141978,51.566413],[34.391731,51.768882],[33.7527,52.335075],[32.715761,52.238465],[32.412058,52.288695],[32.15944,52.06125],[31.78597,52.10168],[31.540018,52.742052],[31.305201,53.073996],[31.49764,53.16743],[32.304519,53.132726],[32.693643,53.351421],[32.405599,53.618045],[31.731273,53.794029],[31.791424,53.974639],[31.384472,54.157056],[30.757534,54.811771],[30.971836,55.081548],[30.873909,55.550976],[29.896294,55.789463],[29.371572,55.670091],[29.229513,55.918344],[28.176709,56.16913],[27.855282,56.759326],[27.770016,57.244258],[27.288185,57.474528],[27.716686,57.791899],[27.42015,58.72457],[28.131699,59.300825],[27.98112,59.47537],[29.1177,60.02805],[28.07,60.50352],[30.211107,61.780028],[31.139991,62.357693],[31.516092,62.867687],[30.035872,63.552814],[30.444685,64.204453],[29.54443,64.948672],[30.21765,65.80598],[29.054589,66.944286],[29.977426,67.698297],[28.445944,68.364613],[28.59193,69.064777],[29.39955,69.15692],[31.10108,69.55811],[32.13272,69.90595],[33.77547,69.30142],[36.51396,69.06342],[40.29234,67.9324],[41.05987,67.45713],[41.12595,66.79158],[40.01583,66.26618],[38.38295,65.99953],[33.91871,66.75961],[33.18444,66.63253],[34.81477,65.90015],[34.878574,65.436213],[34.94391,64.41437],[36.23129,64.10945],[37.01273,63.84983],[37.14197,64.33471],[36.539579,64.76446],[37.17604,65.14322],[39.59345,64.52079],[40.4356,64.76446],[39.7626,65.49682],[42.09309,66.47623],[43.01604,66.41858],[43.94975,66.06908],[44.53226,66.75634],[43.69839,67.35245],[44.18795,67.95051],[43.45282,68.57079],[46.25,68.25],[46.82134,67.68997],[45.55517,67.56652],[45.56202,67.01005],[46.34915,66.66767],[47.89416,66.88455],[48.13876,67.52238],[50.22766,67.99867],[53.71743,68.85738],[54.47171,68.80815],[53.48582,68.20131],[54.72628,68.09702],[55.44268,68.43866],[57.31702,68.46628],[58.802,68.88082],[59.94142,68.27844],[61.07784,68.94069],[60.03,69.52],[60.55,69.85],[63.504,69.54739],[64.888115,69.234835],[68.51216,68.09233],[69.18068,68.61563],[68.16444,69.14436],[68.13522,69.35649],[66.93008,69.45461],[67.25976,69.92873],[66.72492,70.70889],[66.69466,71.02897],[68.54006,71.9345],[69.19636,72.84336],[69.94,73.04],[72.58754,72.77629],[72.79603,72.22006],[71.84811,71.40898],[72.47011,71.09019],[72.79188,70.39114],[72.5647,69.02085],[73.66787,68.4079],[73.2387,67.7404],[71.28,66.32],[72.42301,66.17267],[72.82077,66.53267],[73.92099,66.78946],[74.18651,67.28429],[75.052,67.76047],[74.46926,68.32899],[74.93584,68.98918],[73.84236,69.07146],[73.60187,69.62763],[74.3998,70.63175],[73.1011,71.44717],[74.89082,72.12119],[74.65926,72.83227],[75.15801,72.85497],[75.68351,72.30056],[75.28898,71.33556],[76.35911,71.15287],[75.90313,71.87401],[77.57665,72.26717],[79.65202,72.32011],[81.5,71.75],[80.61071,72.58285],[80.51109,73.6482],[82.25,73.85],[84.65526,73.80591],[86.8223,73.93688],[86.00956,74.45967],[87.16682,75.11643],[88.31571,75.14393],[90.26,75.64],[92.90058,75.77333],[93.23421,76.0472],[95.86,76.14],[96.67821,75.91548],[98.92254,76.44689],[100.75967,76.43028],[101.03532,76.86189],[101.99084,77.28754],[104.3516,77.69792],[106.06664,77.37389],[104.705,77.1274],[106.97013,76.97419]]],[[[105.07547,78.30689],[99.43814,77.921],[101.2649,79.23399],[102.08635,79.34641],[102.837815,79.28129],[105.37243,78.71334],[105.07547,78.30689]]],[[[51.136187,80.54728],[49.793685,80.415428],[48.894411,80.339567],[48.754937,80.175468],[47.586119,80.010181],[46.502826,80.247247],[47.072455,80.559424],[44.846958,80.58981],[46.799139,80.771918],[48.318477,80.78401],[48.522806,80.514569],[49.09719,80.753986],[50.039768,80.918885],[51.522933,80.699726],[51.136187,80.54728]]],[[[99.93976,78.88094],[97.75794,78.7562],[94.97259,79.044745],[93.31288,79.4265],[92.5454,80.14379],[91.18107,80.34146],[93.77766,81.0246],[95.940895,81.2504],[97.88385,80.746975],[100.186655,79.780135],[99.93976,78.88094]]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "3a04839a-890e-4d7b-bad4-40f29b2b9d3c",
-  "CountryName": "Rwanda",
-  "CountryCode": "RWA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"RWA\",\"properties\":{\"name\":\"Rwanda\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[30.419105,-1.134659],[30.816135,-1.698914],[30.758309,-2.28725],[30.469696,-2.413858],[29.938359,-2.348487],[29.632176,-2.917858],[29.024926,-2.839258],[29.117479,-2.292211],[29.254835,-2.21511],[29.291887,-1.620056],[29.579466,-1.341313],[29.821519,-1.443322],[30.419105,-1.134659]]]}}]}",
-  "RecordCount": 41,
-  "FillOpacity": 0.9,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "8d1d79fe-cddf-4bd4-8469-6c1a8eb36cf2",
-  "CountryName": "Saint Lucia",
-  "CountryCode": "LCA",
-  "GeoJSON": "[{\"type\":\"Feature\",\"properties\":{\"scalerank\":3,\"featurecla\":\"Admin-0 country\",\"LABELRANK\":6,\"SOVEREIGNT\":\"Saint Lucia\",\"SOV_A3\":\"LCA\",\"ADM0_DIF\":0,\"LEVEL\":2,\"TYPE\":\"Sovereign country\",\"ADMIN\":\"Saint Lucia\",\"ADM0_A3\":\"LCA\",\"GEOU_DIF\":0,\"GEOUNIT\":\"Saint Lucia\",\"GU_A3\":\"LCA\",\"SU_DIF\":0,\"SUBUNIT\":\"Saint Lucia\",\"SU_A3\":\"LCA\",\"BRK_DIFF\":0,\"NAME\":\"Saint Lucia\",\"NAME_LONG\":\"Saint Lucia\",\"BRK_A3\":\"LCA\",\"BRK_NAME\":\"Saint Lucia\",\"BRK_GROUP\":null,\"ABBREV\":\"S.L.\",\"POSTAL\":\"LC\",\"FORMAL_EN\":\"Saint Lucia\",\"FORMAL_FR\":null,\"NOTE_ADM0\":null,\"NOTE_BRK\":null,\"NAME_SORT\":\"St. Lucia\",\"NAME_ALT\":null,\"MAPCOLOR7\":3,\"MAPCOLOR8\":4,\"MAPCOLOR9\":3,\"MAPCOLOR13\":4,\"POP_EST\":160267,\"GDP_MD_EST\":1778,\"POP_YEAR\":-99,\"LASTCENSUS\":2010,\"GDP_YEAR\":-99,\"ECONOMY\":\"6. Developing region\",\"INCOME_GRP\":\"3. Upper middle income\",\"WIKIPEDIA\":-99,\"FIPS_10_\":\"ST\",\"ISO_A2\":\"LC\",\"ISO_A3\":\"LCA\",\"ISO_N3\":\"662\",\"UN_A3\":\"662\",\"WB_A2\":\"LC\",\"WB_A3\":\"LCA\",\"WOE_ID\":23424951,\"WOE_ID_EH\":23424951,\"WOE_NOTE\":\"Exact WOE match as country\",\"ADM0_A3_IS\":\"LCA\",\"ADM0_A3_US\":\"LCA\",\"ADM0_A3_UN\":-99,\"ADM0_A3_WB\":-99,\"CONTINENT\":\"North America\",\"REGION_UN\":\"Americas\",\"SUBREGION\":\"Caribbean\",\"REGION_WB\":\"Latin America & Caribbean\",\"NAME_LEN\":11,\"LONG_LEN\":11,\"ABBREV_LEN\":4,\"TINY\":4,\"HOMEPART\":1},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-60.886789516999926,14.010077216000113],[-60.88296464799993,13.980617580000043],[-60.88304602799991,13.954413153000104],[-60.89509029899992,13.87734609600004],[-60.89220130099997,13.833197333000058],[-60.90461178299992,13.78424713700008],[-60.90729732999998,13.77732982000009],[-60.9103083979999,13.776109117000075],[-60.92284094999988,13.772691148000064],[-60.92711341099991,13.769924221000096],[-60.93175208199992,13.76032135600012],[-60.94078528599994,13.722113348000065],[-60.94701087099989,13.716294664000102],[-60.95010331899988,13.714667059000092],[-60.95506751199994,13.714667059000092],[-60.973378058999884,13.738999742000061],[-61.0481664699999,13.76732005400001],[-61.06493079299992,13.786932684000064],[-61.06810462099989,13.792181708000058],[-61.07420813699986,13.798732815000037],[-61.07811438699986,13.806301174000083],[-61.07115637899997,13.82196686400006],[-61.07005774599992,13.832098700000103],[-61.07115637899997,13.851792710000055],[-61.07274329299989,13.858221747000073],[-61.07559160099993,13.86326732000009],[-61.07811438699986,13.869614976000037],[-61.07852128799996,13.87978750200007],[-61.07591712099986,13.890366929000038],[-61.06688391799986,13.909002997000115],[-61.06493079299992,13.91730377800009],[-61.059478318999965,13.931219794000071],[-61.035552537999905,13.964911200000074],[-61.02660071499989,13.98737213700008],[-61.00226803299992,14.023138739000103],[-60.99705969999991,14.027167059000064],[-60.98729407499988,14.032538153000118],[-60.98232988199993,14.037339585000026],[-60.97996985599988,14.043524481000077],[-60.97606360599988,14.061183986000088],[-60.9720759759999,14.068101304000095],[-60.94762122299994,14.10228099200009],[-60.93346106699994,14.111883856000063],[-60.9141332669999,14.105698960000097],[-60.91860917899987,14.088446356000091],[-60.91193600199992,14.079494533000059],[-60.90103105399993,14.073391018000066],[-60.892974412999905,14.064683335000083],[-60.89020748599995,14.052232164000074],[-60.886789516999926,14.010077216000113]]]}}]",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "4ca0a9a9-645f-4146-99b9-f4c8704731d0",
-  "CountryName": "Saint Vincent and the Grenadines",
-  "CountryCode": "VCT",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"cca2\":\"vc\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-61.416946,12.590277],[-61.443893,12.584444],[-61.448616,12.586943],[-61.452225,12.590277],[-61.45417,12.593887],[-61.446396,12.607222],[-61.44334,12.611111],[-61.437782,12.612499],[-61.425835,12.612499],[-61.412506,12.60861],[-61.406952,12.606943],[-61.40306,12.603888],[-61.40528,12.599165],[-61.416946,12.590277]]],[[[-61.32806,12.68778],[-61.3325,12.686666],[-61.33639,12.689444],[-61.347778,12.698889],[-61.347778,12.70167],[-61.32973,12.732498],[-61.32667,12.736387],[-61.323616,12.737499],[-61.31056,12.734999],[-61.30584,12.725832],[-61.305,12.720276],[-61.30584,12.71417],[-61.31473,12.702221],[-61.32084,12.694166],[-61.32806,12.68778]]],[[[-61.216667,12.998055],[-61.23945,12.974998],[-61.2475,12.980833],[-61.252228,12.988609],[-61.22806,13.023333],[-61.20612,13.042776],[-61.199722,13.04472],[-61.19723,13.033609],[-61.213615,13.002222],[-61.216667,12.998055]]],[[[-61.17306,13.1325],[-61.18445,13.13028],[-61.243614,13.156111],[-61.263062,13.178333],[-61.27889,13.203609],[-61.28139,13.207777],[-61.278061,13.25028],[-61.265556,13.273054],[-61.20889,13.36778],[-61.20528,13.370832],[-61.182503,13.382221],[-61.177223,13.384165],[-61.14389,13.378332],[-61.141113,13.374166],[-61.12361,13.33111],[-61.12222,13.32555],[-61.120285,13.307499],[-61.123337,13.248888],[-61.124168,13.242777],[-61.13,13.220276],[-61.148056,13.167776],[-61.165,13.138332],[-61.16806,13.13444],[-61.17306,13.1325]]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "e194f59d-eb57-4d22-b07e-8c561365f3d8",
-  "CountryName": "Saudi Arabia",
-  "CountryCode": "SAU",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SAU\",\"properties\":{\"name\":\"Saudi Arabia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[42.779332,16.347891],[42.649573,16.774635],[42.347989,17.075806],[42.270888,17.474722],[41.754382,17.833046],[41.221391,18.6716],[40.939341,19.486485],[40.247652,20.174635],[39.801685,20.338862],[39.139399,21.291905],[39.023696,21.986875],[39.066329,22.579656],[38.492772,23.688451],[38.02386,24.078686],[37.483635,24.285495],[37.154818,24.858483],[37.209491,25.084542],[36.931627,25.602959],[36.639604,25.826228],[36.249137,26.570136],[35.640182,27.37652],[35.130187,28.063352],[34.632336,28.058546],[34.787779,28.607427],[34.83222,28.957483],[34.956037,29.356555],[36.068941,29.197495],[36.501214,29.505254],[36.740528,29.865283],[37.503582,30.003776],[37.66812,30.338665],[37.998849,30.5085],[37.002166,31.508413],[39.004886,32.010217],[39.195468,32.161009],[40.399994,31.889992],[41.889981,31.190009],[44.709499,29.178891],[46.568713,29.099025],[47.459822,29.002519],[47.708851,28.526063],[48.416094,28.552004],[48.807595,27.689628],[49.299554,27.461218],[49.470914,27.109999],[50.152422,26.689663],[50.212935,26.277027],[50.113303,25.943972],[50.239859,25.60805],[50.527387,25.327808],[50.660557,24.999896],[50.810108,24.754743],[51.112415,24.556331],[51.389608,24.627386],[51.579519,24.245497],[51.617708,24.014219],[52.000733,23.001154],[55.006803,22.496948],[55.208341,22.70833],[55.666659,22.000001],[54.999982,19.999994],[52.00001,19.000003],[49.116672,18.616668],[48.183344,18.166669],[47.466695,17.116682],[47.000005,16.949999],[46.749994,17.283338],[46.366659,17.233315],[45.399999,17.333335],[45.216651,17.433329],[44.062613,17.410359],[43.791519,17.319977],[43.380794,17.579987],[43.115798,17.08844],[43.218375,16.66689],[42.779332,16.347891]]]}}]}",
-  "RecordCount": 5,
-  "FillOpacity": 0.27,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "694cac88-2693-45cf-bfc7-92901f1c8680",
-  "CountryName": "Senegal",
-  "CountryCode": "SEN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SEN\",\"properties\":{\"name\":\"Senegal\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-16.713729,13.594959],[-17.126107,14.373516],[-17.625043,14.729541],[-17.185173,14.919477],[-16.700706,15.621527],[-16.463098,16.135036],[-16.12069,16.455663],[-15.623666,16.369337],[-15.135737,16.587282],[-14.577348,16.598264],[-14.099521,16.304302],[-13.435738,16.039383],[-12.830658,15.303692],[-12.17075,14.616834],[-12.124887,13.994727],[-11.927716,13.422075],[-11.553398,13.141214],[-11.467899,12.754519],[-11.513943,12.442988],[-11.658301,12.386583],[-12.203565,12.465648],[-12.278599,12.35444],[-12.499051,12.33209],[-13.217818,12.575874],[-13.700476,12.586183],[-15.548477,12.62817],[-15.816574,12.515567],[-16.147717,12.547762],[-16.677452,12.384852],[-16.841525,13.151394],[-15.931296,13.130284],[-15.691001,13.270353],[-15.511813,13.27857],[-15.141163,13.509512],[-14.712197,13.298207],[-14.277702,13.280585],[-13.844963,13.505042],[-14.046992,13.794068],[-14.376714,13.62568],[-14.687031,13.630357],[-15.081735,13.876492],[-15.39877,13.860369],[-15.624596,13.623587],[-16.713729,13.594959]]]}}]}",
-  "RecordCount": 15,
-  "FillOpacity": 0.45,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "cbfcd0c7-d34b-4470-8df5-6d4941221810",
-  "CountryName": "Serbia",
-  "CountryCode": "SRB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SRB\",\"properties\":{\"name\":\"Republic of Serbia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[20.874313,45.416375],[21.483526,45.18117],[21.562023,44.768947],[22.145088,44.478422],[22.459022,44.702517],[22.705726,44.578003],[22.474008,44.409228],[22.65715,44.234923],[22.410446,44.008063],[22.500157,43.642814],[22.986019,43.211161],[22.604801,42.898519],[22.436595,42.580321],[22.545012,42.461362],[22.380526,42.32026],[21.91708,42.30364],[21.576636,42.245224],[21.54332,42.32025],[21.66292,42.43922],[21.77505,42.6827],[21.63302,42.67717],[21.43866,42.86255],[21.27421,42.90959],[21.143395,43.068685],[20.95651,43.13094],[20.81448,43.27205],[20.63508,43.21671],[20.49679,42.88469],[20.25758,42.81275],[20.3398,42.89852],[19.95857,43.10604],[19.63,43.21378],[19.48389,43.35229],[19.21852,43.52384],[19.454,43.5681],[19.59976,44.03847],[19.11761,44.42307],[19.36803,44.863],[19.00548,44.86023],[19.390476,45.236516],[19.072769,45.521511],[18.82982,45.90888],[19.596045,46.17173],[20.220192,46.127469],[20.762175,45.734573],[20.874313,45.416375]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "5b6d448f-a386-4587-a399-25aaf6d04a04",
-  "CountryName": "Sierra Leone",
-  "CountryCode": "SLE",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SLE\",\"properties\":{\"name\":\"Sierra Leone\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-11.438779,6.785917],[-11.708195,6.860098],[-12.428099,7.262942],[-12.949049,7.798646],[-13.124025,8.163946],[-13.24655,8.903049],[-12.711958,9.342712],[-12.596719,9.620188],[-12.425929,9.835834],[-12.150338,9.858572],[-11.917277,10.046984],[-11.117481,10.045873],[-10.839152,9.688246],[-10.622395,9.26791],[-10.65477,8.977178],[-10.494315,8.715541],[-10.505477,8.348896],[-10.230094,8.406206],[-10.695595,7.939464],[-11.146704,7.396706],[-11.199802,7.105846],[-11.438779,6.785917]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "c4945a2c-fd3e-48c5-9174-57592a6586fb",
-  "CountryName": "Solomon Islands",
-  "CountryCode": "SLB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SLB\",\"properties\":{\"name\":\"Solomon Islands\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[162.119025,-10.482719],[162.398646,-10.826367],[161.700032,-10.820011],[161.319797,-10.204751],[161.917383,-10.446701],[162.119025,-10.482719]]],[[[160.852229,-9.872937],[160.462588,-9.89521],[159.849447,-9.794027],[159.640003,-9.63998],[159.702945,-9.24295],[160.362956,-9.400304],[160.688518,-9.610162],[160.852229,-9.872937]]],[[[161.679982,-9.599982],[161.529397,-9.784312],[160.788253,-8.917543],[160.579997,-8.320009],[160.920028,-8.320009],[161.280006,-9.120011],[161.679982,-9.599982]]],[[[159.875027,-8.33732],[159.917402,-8.53829],[159.133677,-8.114181],[158.586114,-7.754824],[158.21115,-7.421872],[158.359978,-7.320018],[158.820001,-7.560003],[159.640003,-8.020027],[159.875027,-8.33732]]],[[[157.538426,-7.34782],[157.33942,-7.404767],[156.90203,-7.176874],[156.491358,-6.765943],[156.542828,-6.599338],[157.14,-7.021638],[157.538426,-7.34782]]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "480f6dec-d75c-4bd4-872c-3b419aa70450",
-  "CountryName": "Somalia",
-  "CountryCode": "SOM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SOM\",\"properties\":{\"name\":\"Somalia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[49.72862,11.5789],[50.25878,11.67957],[50.73202,12.0219],[51.1112,12.02464],[51.13387,11.74815],[51.04153,11.16651],[51.04531,10.6409],[50.83418,10.27972],[50.55239,9.19874],[50.07092,8.08173],[49.4527,6.80466],[48.59455,5.33911],[47.74079,4.2194],[46.56476,2.85529],[45.56399,2.04576],[44.06815,1.05283],[43.13597,0.2922],[42.04157,-0.91916],[41.81095,-1.44647],[41.58513,-1.68325],[40.993,-0.85829],[40.98105,2.78452],[41.855083,3.918912],[42.12861,4.23413],[42.76967,4.25259],[43.66087,4.95755],[44.9636,5.00162],[47.78942,8.003],[48.486736,8.837626],[48.93813,9.451749],[48.938233,9.9735],[48.938491,10.982327],[48.942005,11.394266],[48.948205,11.410617],[49.26776,11.43033],[49.72862,11.5789]]]}}]}",
-  "RecordCount": 6,
-  "FillOpacity": 0.29,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ec06d616-e161-49cf-b6d6-211a3ee491f3",
-  "CountryName": "South Africa",
-  "CountryCode": "ZAF",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ZAF\",\"properties\":{\"name\":\"South Africa\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[31.521001,-29.257387],[31.325561,-29.401978],[30.901763,-29.909957],[30.622813,-30.423776],[30.055716,-31.140269],[28.925553,-32.172041],[28.219756,-32.771953],[27.464608,-33.226964],[26.419452,-33.61495],[25.909664,-33.66704],[25.780628,-33.944646],[25.172862,-33.796851],[24.677853,-33.987176],[23.594043,-33.794474],[22.988189,-33.916431],[22.574157,-33.864083],[21.542799,-34.258839],[20.689053,-34.417175],[20.071261,-34.795137],[19.616405,-34.819166],[19.193278,-34.462599],[18.855315,-34.444306],[18.424643,-33.997873],[18.377411,-34.136521],[18.244499,-33.867752],[18.25008,-33.281431],[17.92519,-32.611291],[18.24791,-32.429131],[18.221762,-31.661633],[17.566918,-30.725721],[17.064416,-29.878641],[17.062918,-29.875954],[16.344977,-28.576705],[16.824017,-28.082162],[17.218929,-28.355943],[17.387497,-28.783514],[17.836152,-28.856378],[18.464899,-29.045462],[19.002127,-28.972443],[19.894734,-28.461105],[19.895768,-24.76779],[20.165726,-24.917962],[20.758609,-25.868136],[20.66647,-26.477453],[20.889609,-26.828543],[21.605896,-26.726534],[22.105969,-26.280256],[22.579532,-25.979448],[22.824271,-25.500459],[23.312097,-25.26869],[23.73357,-25.390129],[24.211267,-25.670216],[25.025171,-25.71967],[25.664666,-25.486816],[25.765849,-25.174845],[25.941652,-24.696373],[26.485753,-24.616327],[26.786407,-24.240691],[27.11941,-23.574323],[28.017236,-22.827754],[29.432188,-22.091313],[29.839037,-22.102216],[30.322883,-22.271612],[30.659865,-22.151567],[31.191409,-22.25151],[31.670398,-23.658969],[31.930589,-24.369417],[31.752408,-25.484284],[31.837778,-25.843332],[31.333158,-25.660191],[31.04408,-25.731452],[30.949667,-26.022649],[30.676609,-26.398078],[30.685962,-26.743845],[31.282773,-27.285879],[31.86806,-27.177927],[32.071665,-26.73382],[32.83012,-26.742192],[32.580265,-27.470158],[32.462133,-28.301011],[32.203389,-28.752405],[31.521001,-29.257387]],[[28.978263,-28.955597],[28.5417,-28.647502],[28.074338,-28.851469],[27.532511,-29.242711],[26.999262,-29.875954],[27.749397,-30.645106],[28.107205,-30.545732],[28.291069,-30.226217],[28.8484,-30.070051],[29.018415,-29.743766],[29.325166,-29.257387],[28.978263,-28.955597]]]}}]}",
-  "RecordCount": 20,
-  "FillOpacity": 0.53,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "88a7febf-ed09-4482-96ca-29745759d372",
-  "CountryName": "South Sudan",
-  "CountryCode": "SSD",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SSD\",\"properties\":{\"name\":\"South Sudan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[33.963393,9.464285],[33.97498,8.68456],[33.8255,8.37916],[33.2948,8.35458],[32.95418,7.78497],[33.56829,7.71334],[34.0751,7.22595],[34.25032,6.82607],[34.70702,6.59422],[35.298007,5.506],[34.620196,4.847123],[34.005,4.249885],[33.39,3.79],[32.68642,3.79232],[31.88145,3.55827],[31.24556,3.7819],[30.83385,3.50917],[29.95349,4.1737],[29.715995,4.600805],[29.159078,4.389267],[28.696678,4.455077],[28.428994,4.287155],[27.979977,4.408413],[27.374226,5.233944],[27.213409,5.550953],[26.465909,5.946717],[26.213418,6.546603],[25.796648,6.979316],[25.124131,7.500085],[25.114932,7.825104],[24.567369,8.229188],[23.88698,8.61973],[24.194068,8.728696],[24.537415,8.917538],[24.794926,9.810241],[25.069604,10.27376],[25.790633,10.411099],[25.962307,10.136421],[26.477328,9.55273],[26.752006,9.466893],[27.112521,9.638567],[27.833551,9.604232],[27.97089,9.398224],[28.966597,9.398224],[29.000932,9.604232],[29.515953,9.793074],[29.618957,10.084919],[29.996639,10.290927],[30.837841,9.707237],[31.352862,9.810241],[31.850716,10.531271],[32.400072,11.080626],[32.314235,11.681484],[32.073892,11.97333],[32.67475,12.024832],[32.743419,12.248008],[33.206938,12.179338],[33.086766,11.441141],[33.206938,10.720112],[33.721959,10.325262],[33.842131,9.981915],[33.824963,9.484061],[33.963393,9.464285]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ce3005f1-67fd-4e54-93fb-9502ab9af088",
-  "CountryName": "Sri Lanka",
-  "CountryCode": "LKA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"LKA\",\"properties\":{\"name\":\"Sri Lanka\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[81.787959,7.523055],[81.637322,6.481775],[81.21802,6.197141],[80.348357,5.96837],[79.872469,6.763463],[79.695167,8.200843],[80.147801,9.824078],[80.838818,9.268427],[81.304319,8.564206],[81.787959,7.523055]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "6ea1a9d8-7a95-4b5c-ad78-91b1baed7f3c",
-  "CountryName": "State of Palestine",
-  "CountryCode": "PSE",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"PSE\",\"properties\":{\"name\":\"West Bank\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[35.545665,32.393992],[35.545252,31.782505],[35.397561,31.489086],[34.927408,31.353435],[34.970507,31.616778],[35.225892,31.754341],[34.974641,31.866582],[35.18393,32.532511],[35.545665,32.393992]]]}}]}",
-  "RecordCount": 13,
-  "FillOpacity": 0.41,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "d7e6c682-4fcc-44cd-9efd-ed9e7cd676ea",
-  "CountryName": "Sudan",
-  "CountryCode": "SDN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SDN\",\"properties\":{\"name\":\"Sudan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[33.963393,9.464285],[33.824963,9.484061],[33.842131,9.981915],[33.721959,10.325262],[33.206938,10.720112],[33.086766,11.441141],[33.206938,12.179338],[32.743419,12.248008],[32.67475,12.024832],[32.073892,11.97333],[32.314235,11.681484],[32.400072,11.080626],[31.850716,10.531271],[31.352862,9.810241],[30.837841,9.707237],[29.996639,10.290927],[29.618957,10.084919],[29.515953,9.793074],[29.000932,9.604232],[28.966597,9.398224],[27.97089,9.398224],[27.833551,9.604232],[27.112521,9.638567],[26.752006,9.466893],[26.477328,9.55273],[25.962307,10.136421],[25.790633,10.411099],[25.069604,10.27376],[24.794926,9.810241],[24.537415,8.917538],[24.194068,8.728696],[23.88698,8.61973],[23.805813,8.666319],[23.459013,8.954286],[23.394779,9.265068],[23.55725,9.681218],[23.554304,10.089255],[22.977544,10.714463],[22.864165,11.142395],[22.87622,11.38461],[22.50869,11.67936],[22.49762,12.26024],[22.28801,12.64605],[21.93681,12.58818],[22.03759,12.95546],[22.29658,13.37232],[22.18329,13.78648],[22.51202,14.09318],[22.30351,14.32682],[22.56795,14.94429],[23.02459,15.68072],[23.88689,15.61084],[23.83766,19.58047],[23.85,20],[25,20.00304],[25,22],[29.02,22],[32.9,22],[36.86623,22],[37.18872,21.01885],[36.96941,20.83744],[37.1147,19.80796],[37.48179,18.61409],[37.86276,18.36786],[38.41009,17.998307],[37.904,17.42754],[37.16747,17.26314],[36.85253,16.95655],[36.75389,16.29186],[36.32322,14.82249],[36.42951,14.42211],[36.27022,13.56333],[35.86363,12.57828],[35.26049,12.08286],[34.83163,11.31896],[34.73115,10.91017],[34.25745,10.63009],[33.96162,9.58358],[33.963393,9.464285]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "7448ec6c-e3f9-4355-8062-2273e19d9886",
-  "CountryName": "Suriname",
-  "CountryCode": "SUR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SUR\",\"properties\":{\"name\":\"Suriname\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-57.147436,5.97315],[-55.949318,5.772878],[-55.84178,5.953125],[-55.03325,6.025291],[-53.958045,5.756548],[-54.478633,4.896756],[-54.399542,4.212611],[-54.006931,3.620038],[-54.181726,3.18978],[-54.269705,2.732392],[-54.524754,2.311849],[-55.097587,2.523748],[-55.569755,2.421506],[-55.973322,2.510364],[-56.073342,2.220795],[-55.9056,2.021996],[-55.995698,1.817667],[-56.539386,1.899523],[-57.150098,2.768927],[-57.281433,3.333492],[-57.601569,3.334655],[-58.044694,4.060864],[-57.86021,4.576801],[-57.914289,4.812626],[-57.307246,5.073567],[-57.147436,5.97315]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "947c1d0d-fd49-49ac-8d71-857037f470b9",
-  "CountryName": "Swaziland",
-  "CountryCode": "SWZ",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SWZ\",\"properties\":{\"name\":\"Swaziland\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[32.071665,-26.73382],[31.86806,-27.177927],[31.282773,-27.285879],[30.685962,-26.743845],[30.676609,-26.398078],[30.949667,-26.022649],[31.04408,-25.731452],[31.333158,-25.660191],[31.837778,-25.843332],[31.985779,-26.29178],[32.071665,-26.73382]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "e701856b-3c58-4e33-926f-670f2a32016e",
-  "CountryName": "Syrian Arab Republic",
-  "CountryCode": "SYR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"SYR\",\"properties\":{\"name\":\"Syria\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[38.792341,33.378686],[36.834062,32.312938],[35.719918,32.709192],[35.700798,32.716014],[35.836397,32.868123],[35.821101,33.277426],[36.06646,33.824912],[36.61175,34.201789],[36.448194,34.593935],[35.998403,34.644914],[35.905023,35.410009],[36.149763,35.821535],[36.41755,36.040617],[36.685389,36.259699],[36.739494,36.81752],[37.066761,36.623036],[38.167727,36.90121],[38.699891,36.712927],[39.52258,36.716054],[40.673259,37.091276],[41.212089,37.074352],[42.349591,37.229873],[41.837064,36.605854],[41.289707,36.358815],[41.383965,35.628317],[41.006159,34.419372],[38.792341,33.378686]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ea9bbd2b-bc1a-4b34-b665-9b299dafbb05",
-  "CountryName": "Taipei Chinese",
-  "CountryCode": "TWN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TWN\",\"properties\":{\"name\":\"Taiwan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[121.777818,24.394274],[121.175632,22.790857],[120.74708,21.970571],[120.220083,22.814861],[120.106189,23.556263],[120.69468,24.538451],[121.495044,25.295459],[121.951244,24.997596],[121.777818,24.394274]]]}}]}",
-  "RecordCount": 1,
-  "FillOpacity": 0.2,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "2881f8c1-951f-40c2-ae24-679447eabf9e",
-  "CountryName": "Tajikistan",
-  "CountryCode": "TJK",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TJK\",\"properties\":{\"name\":\"Tajikistan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[71.014198,40.244366],[70.648019,39.935754],[69.55961,40.103211],[69.464887,39.526683],[70.549162,39.604198],[71.784694,39.279463],[73.675379,39.431237],[73.928852,38.505815],[74.257514,38.606507],[74.864816,38.378846],[74.829986,37.990007],[74.980002,37.41999],[73.948696,37.421566],[73.260056,37.495257],[72.63689,37.047558],[72.193041,36.948288],[71.844638,36.738171],[71.448693,37.065645],[71.541918,37.905774],[71.239404,37.953265],[71.348131,38.258905],[70.806821,38.486282],[70.376304,38.138396],[70.270574,37.735165],[70.116578,37.588223],[69.518785,37.608997],[69.196273,37.151144],[68.859446,37.344336],[68.135562,37.023115],[67.83,37.144994],[68.392033,38.157025],[68.176025,38.901553],[67.44222,39.140144],[67.701429,39.580478],[68.536416,39.533453],[69.011633,40.086158],[69.329495,40.727824],[70.666622,40.960213],[70.45816,40.496495],[70.601407,40.218527],[71.014198,40.244366]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "7ec8648e-70d4-4663-8d11-1fd30d1ca571",
-  "CountryName": "Thailand",
-  "CountryCode": "THA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"THA\",\"properties\":{\"name\":\"Thailand\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[102.584932,12.186595],[101.687158,12.64574],[100.83181,12.627085],[100.978467,13.412722],[100.097797,13.406856],[100.018733,12.307001],[99.478921,10.846367],[99.153772,9.963061],[99.222399,9.239255],[99.873832,9.207862],[100.279647,8.295153],[100.459274,7.429573],[101.017328,6.856869],[101.623079,6.740622],[102.141187,6.221636],[101.814282,5.810808],[101.154219,5.691384],[101.075516,6.204867],[100.259596,6.642825],[100.085757,6.464489],[99.690691,6.848213],[99.519642,7.343454],[98.988253,7.907993],[98.503786,8.382305],[98.339662,7.794512],[98.150009,8.350007],[98.25915,8.973923],[98.553551,9.93296],[99.038121,10.960546],[99.587286,11.892763],[99.196354,12.804748],[99.212012,13.269294],[99.097755,13.827503],[98.430819,14.622028],[98.192074,15.123703],[98.537376,15.308497],[98.903348,16.177824],[98.493761,16.837836],[97.859123,17.567946],[97.375896,18.445438],[97.797783,18.62708],[98.253724,19.708203],[98.959676,19.752981],[99.543309,20.186598],[100.115988,20.41785],[100.548881,20.109238],[100.606294,19.508344],[101.282015,19.462585],[101.035931,18.408928],[101.059548,17.512497],[102.113592,18.109102],[102.413005,17.932782],[102.998706,17.961695],[103.200192,18.309632],[103.956477,18.240954],[104.716947,17.428859],[104.779321,16.441865],[105.589039,15.570316],[105.544338,14.723934],[105.218777,14.273212],[104.281418,14.416743],[102.988422,14.225721],[102.348099,13.394247],[102.584932,12.186595]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ddddcb73-014c-42ef-b84f-ce6df6e023a1",
-  "CountryName": "The former Yugoslav Republic of Macedonia",
-  "CountryCode": "MKD",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"MKD\",\"properties\":{\"name\":\"Macedonia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[20.59023,41.85541],[20.71731,41.84711],[20.76216,42.05186],[21.3527,42.2068],[21.576636,42.245224],[21.91708,42.30364],[22.380526,42.32026],[22.881374,41.999297],[22.952377,41.337994],[22.76177,41.3048],[22.597308,41.130487],[22.055378,41.149866],[21.674161,40.931275],[21.02004,40.842727],[20.60518,41.08622],[20.46315,41.51509],[20.59023,41.85541]]]}}]}",
-  "RecordCount": 10,
-  "FillOpacity": 0.36,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "82ecfb01-ec22-4731-ae70-d172eb355b59",
-  "CountryName": "Togo",
-  "CountryCode": "TGO",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TGO\",\"properties\":{\"name\":\"Togo\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[1.865241,6.142158],[1.060122,5.928837],[0.836931,6.279979],[0.570384,6.914359],[0.490957,7.411744],[0.712029,8.312465],[0.461192,8.677223],[0.365901,9.465004],[0.36758,10.191213],[-0.049785,10.706918],[0.023803,11.018682],[0.899563,10.997339],[0.772336,10.470808],[1.077795,10.175607],[1.425061,9.825395],[1.463043,9.334624],[1.664478,9.12859],[1.618951,6.832038],[1.865241,6.142158]]]}}]}",
-  "RecordCount": 18,
-  "FillOpacity": 0.5,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "6ddc37e8-8296-4e3b-851b-901393bba74c",
-  "CountryName": "Trinidad and Tobago",
-  "CountryCode": "TTO",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TTO\",\"properties\":{\"name\":\"Trinidad and Tobago\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-61.68,10.76],[-61.105,10.89],[-60.895,10.855],[-60.935,10.11],[-61.77,10],[-61.95,10.09],[-61.66,10.365],[-61.68,10.76]]]}}]}",
-  "RecordCount": 12,
-  "FillOpacity": 0.39,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ff50afe1-8f88-4d95-8fe5-04eb8d93af02",
-  "CountryName": "Tunisia",
-  "CountryCode": "TUN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TUN\",\"properties\":{\"name\":\"Tunisia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[9.48214,30.307556],[9.055603,32.102692],[8.439103,32.506285],[8.430473,32.748337],[7.612642,33.344115],[7.524482,34.097376],[8.140981,34.655146],[8.376368,35.479876],[8.217824,36.433177],[8.420964,36.946427],[9.509994,37.349994],[10.210002,37.230002],[10.18065,36.724038],[11.028867,37.092103],[11.100026,36.899996],[10.600005,36.41],[10.593287,35.947444],[10.939519,35.698984],[10.807847,34.833507],[10.149593,34.330773],[10.339659,33.785742],[10.856836,33.76874],[11.108501,33.293343],[11.488787,33.136996],[11.432253,32.368903],[10.94479,32.081815],[10.636901,31.761421],[9.950225,31.37607],[10.056575,30.961831],[9.970017,30.539325],[9.48214,30.307556]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "0e4db025-64fe-44f1-a6d1-58053042ce23",
-  "CountryName": "Turkey",
-  "CountryCode": "TUR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TUR\",\"properties\":{\"name\":\"Turkey\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[36.913127,41.335358],[38.347665,40.948586],[39.512607,41.102763],[40.373433,41.013673],[41.554084,41.535656],[42.619549,41.583173],[43.582746,41.092143],[43.752658,40.740201],[43.656436,40.253564],[44.400009,40.005],[44.79399,39.713003],[44.109225,39.428136],[44.421403,38.281281],[44.225756,37.971584],[44.772699,37.170445],[44.293452,37.001514],[43.942259,37.256228],[42.779126,37.385264],[42.349591,37.229873],[41.212089,37.074352],[40.673259,37.091276],[39.52258,36.716054],[38.699891,36.712927],[38.167727,36.90121],[37.066761,36.623036],[36.739494,36.81752],[36.685389,36.259699],[36.41755,36.040617],[36.149763,35.821535],[35.782085,36.274995],[36.160822,36.650606],[35.550936,36.565443],[34.714553,36.795532],[34.026895,36.21996],[32.509158,36.107564],[31.699595,36.644275],[30.621625,36.677865],[30.391096,36.262981],[29.699976,36.144357],[28.732903,36.676831],[27.641187,36.658822],[27.048768,37.653361],[26.318218,38.208133],[26.8047,38.98576],[26.170785,39.463612],[27.28002,40.420014],[28.819978,40.460011],[29.240004,41.219991],[31.145934,41.087622],[32.347979,41.736264],[33.513283,42.01896],[35.167704,42.040225],[36.913127,41.335358]]],[[[27.192377,40.690566],[26.358009,40.151994],[26.043351,40.617754],[26.056942,40.824123],[26.294602,40.936261],[26.604196,41.562115],[26.117042,41.826905],[27.135739,42.141485],[27.99672,42.007359],[28.115525,41.622886],[28.988443,41.299934],[28.806438,41.054962],[27.619017,40.999823],[27.192377,40.690566]]]]}}]}",
-  "RecordCount": 16,
-  "FillOpacity": 0.46,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ab807095-d0a9-403d-9fdc-d638f7fcc87b",
-  "CountryName": "Turkmenistan",
-  "CountryCode": "TKM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TKM\",\"properties\":{\"name\":\"Turkmenistan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[61.210817,35.650072],[61.123071,36.491597],[60.377638,36.527383],[59.234762,37.412988],[58.436154,37.522309],[57.330434,38.029229],[56.619366,38.121394],[56.180375,37.935127],[55.511578,37.964117],[54.800304,37.392421],[53.921598,37.198918],[53.735511,37.906136],[53.880929,38.952093],[53.101028,39.290574],[53.357808,39.975286],[52.693973,40.033629],[52.915251,40.876523],[53.858139,40.631034],[54.736845,40.951015],[54.008311,41.551211],[53.721713,42.123191],[52.91675,41.868117],[52.814689,41.135371],[52.50246,41.783316],[52.944293,42.116034],[54.079418,42.324109],[54.755345,42.043971],[55.455251,41.259859],[55.968191,41.308642],[57.096391,41.32231],[56.932215,41.826026],[57.78653,42.170553],[58.629011,42.751551],[59.976422,42.223082],[60.083341,41.425146],[60.465953,41.220327],[61.547179,41.26637],[61.882714,41.084857],[62.37426,40.053886],[63.518015,39.363257],[64.170223,38.892407],[65.215999,38.402695],[66.54615,37.974685],[66.518607,37.362784],[66.217385,37.39379],[65.745631,37.661164],[65.588948,37.305217],[64.746105,37.111818],[64.546479,36.312073],[63.982896,36.007957],[63.193538,35.857166],[62.984662,35.404041],[62.230651,35.270664],[61.210817,35.650072]]]}}]}",
-  "RecordCount": 3,
-  "FillOpacity": 0.24,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "4e5c40d7-ad08-4e17-9ca3-8962b6748951",
-  "CountryName": "Uganda",
-  "CountryCode": "UGA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"UGA\",\"properties\":{\"name\":\"Uganda\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[31.86617,-1.02736],[30.76986,-1.01455],[30.419105,-1.134659],[29.821519,-1.443322],[29.579466,-1.341313],[29.587838,-0.587406],[29.8195,-0.2053],[29.875779,0.59738],[30.086154,1.062313],[30.468508,1.583805],[30.85267,1.849396],[31.174149,2.204465],[30.77332,2.33989],[30.83385,3.50917],[31.24556,3.7819],[31.88145,3.55827],[32.68642,3.79232],[33.39,3.79],[34.005,4.249885],[34.47913,3.5556],[34.59607,3.05374],[35.03599,1.90584],[34.6721,1.17694],[34.18,0.515],[33.893569,0.109814],[33.903711,-0.95],[31.86617,-1.02736]]]}}]}",
-  "RecordCount": 41,
-  "FillOpacity": 0.9,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "cedb2c8f-a45d-4f4d-aaca-5b0fa5c1902e",
-  "CountryName": "Ukraine",
-  "CountryCode": "UKR",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"UKR\",\"properties\":{\"name\":\"Ukraine\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[31.785998,52.101678],[32.159412,52.061267],[32.412058,52.288695],[32.715761,52.238465],[33.7527,52.335075],[34.391731,51.768882],[34.141978,51.566413],[34.224816,51.255993],[35.022183,51.207572],[35.377924,50.773955],[35.356116,50.577197],[36.626168,50.225591],[37.39346,50.383953],[38.010631,49.915662],[38.594988,49.926462],[40.069058,49.601055],[40.080789,49.30743],[39.674664,48.783818],[39.895632,48.232405],[39.738278,47.898937],[38.770585,47.825608],[38.255112,47.5464],[38.223538,47.10219],[37.425137,47.022221],[36.759855,46.6987],[35.823685,46.645964],[34.962342,46.273197],[35.020788,45.651219],[35.510009,45.409993],[36.529998,45.46999],[36.334713,45.113216],[35.239999,44.939996],[33.882511,44.361479],[33.326421,44.564877],[33.546924,45.034771],[32.454174,45.327466],[32.630804,45.519186],[33.588162,45.851569],[33.298567,46.080598],[31.74414,46.333348],[31.675307,46.706245],[30.748749,46.5831],[30.377609,46.03241],[29.603289,45.293308],[29.149725,45.464925],[28.679779,45.304031],[28.233554,45.488283],[28.485269,45.596907],[28.659987,45.939987],[28.933717,46.25883],[28.862972,46.437889],[29.072107,46.517678],[29.170654,46.379262],[29.759972,46.349988],[30.024659,46.423937],[29.83821,46.525326],[29.908852,46.674361],[29.559674,46.928583],[29.415135,47.346645],[29.050868,47.510227],[29.122698,47.849095],[28.670891,48.118149],[28.259547,48.155562],[27.522537,48.467119],[26.857824,48.368211],[26.619337,48.220726],[26.19745,48.220881],[25.945941,47.987149],[25.207743,47.891056],[24.866317,47.737526],[24.402056,47.981878],[23.760958,47.985598],[23.142236,48.096341],[22.710531,47.882194],[22.64082,48.15024],[22.085608,48.422264],[22.280842,48.825392],[22.558138,49.085738],[22.776419,49.027395],[22.51845,49.476774],[23.426508,50.308506],[23.922757,50.424881],[24.029986,50.705407],[23.527071,51.578454],[24.005078,51.617444],[24.553106,51.888461],[25.327788,51.910656],[26.337959,51.832289],[27.454066,51.592303],[28.241615,51.572227],[28.617613,51.427714],[28.992835,51.602044],[29.254938,51.368234],[30.157364,51.416138],[30.555117,51.319503],[30.619454,51.822806],[30.927549,52.042353],[31.785998,52.101678]]]}}]}",
-  "RecordCount": 8,
-  "FillOpacity": 0.32,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "c343abab-a5be-4f49-9c53-36da7b95e29c",
-  "CountryName": "United Arab Emirates",
-  "CountryCode": "ARE",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ARE\",\"properties\":{\"name\":\"United Arab Emirates\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[51.579519,24.245497],[51.757441,24.294073],[51.794389,24.019826],[52.577081,24.177439],[53.404007,24.151317],[54.008001,24.121758],[54.693024,24.797892],[55.439025,25.439145],[56.070821,26.055464],[56.261042,25.714606],[56.396847,24.924732],[55.886233,24.920831],[55.804119,24.269604],[55.981214,24.130543],[55.528632,23.933604],[55.525841,23.524869],[55.234489,23.110993],[55.208341,22.70833],[55.006803,22.496948],[52.000733,23.001154],[51.617708,24.014219],[51.579519,24.245497]]]}}]}",
-  "RecordCount": 5,
-  "FillOpacity": 0.27,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "1aeb22e3-7d60-4d6a-a5e2-cda11a6a333f",
-  "CountryName": "United Republic of Tanzania (the)",
-  "CountryCode": "TZA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"TZA\",\"properties\":{\"name\":\"United Republic of Tanzania\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[33.903711,-0.95],[34.07262,-1.05982],[37.69869,-3.09699],[37.7669,-3.67712],[39.20222,-4.67677],[38.74054,-5.90895],[38.79977,-6.47566],[39.44,-6.84],[39.47,-7.1],[39.19469,-7.7039],[39.25203,-8.00781],[39.18652,-8.48551],[39.53574,-9.11237],[39.9496,-10.0984],[40.31659,-10.3171],[39.521,-10.89688],[38.427557,-11.285202],[37.82764,-11.26879],[37.47129,-11.56876],[36.775151,-11.594537],[36.514082,-11.720938],[35.312398,-11.439146],[34.559989,-11.52002],[34.28,-10.16],[33.940838,-9.693674],[33.73972,-9.41715],[32.759375,-9.230599],[32.191865,-8.930359],[31.556348,-8.762049],[31.157751,-8.594579],[30.74,-8.34],[30.2,-7.08],[29.62,-6.52],[29.419993,-5.939999],[29.519987,-5.419979],[29.339998,-4.499983],[29.753512,-4.452389],[30.11632,-4.09012],[30.50554,-3.56858],[30.75224,-3.35931],[30.74301,-3.03431],[30.52766,-2.80762],[30.46967,-2.41383],[30.758309,-2.28725],[30.816135,-1.698914],[30.419105,-1.134659],[30.76986,-1.01455],[31.86617,-1.02736],[33.903711,-0.95]]]}}]}",
-  "RecordCount": 34,
-  "FillOpacity": 0.78,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "97597703-0331-4378-a8a3-f1af387310d8",
-  "CountryName": "United States",
-  "CountryCode": "USA",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"USA\",\"properties\":{\"name\":\"United States of America\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[-155.54211,19.08348],[-155.68817,18.91619],[-155.93665,19.05939],[-155.90806,19.33888],[-156.07347,19.70294],[-156.02368,19.81422],[-155.85008,19.97729],[-155.91907,20.17395],[-155.86108,20.26721],[-155.78505,20.2487],[-155.40214,20.07975],[-155.22452,19.99302],[-155.06226,19.8591],[-154.80741,19.50871],[-154.83147,19.45328],[-155.22217,19.23972],[-155.54211,19.08348]]],[[[-156.07926,20.64397],[-156.41445,20.57241],[-156.58673,20.783],[-156.70167,20.8643],[-156.71055,20.92676],[-156.61258,21.01249],[-156.25711,20.91745],[-155.99566,20.76404],[-156.07926,20.64397]]],[[[-156.75824,21.17684],[-156.78933,21.06873],[-157.32521,21.09777],[-157.25027,21.21958],[-156.75824,21.17684]]],[[[-157.65283,21.32217],[-157.70703,21.26442],[-157.7786,21.27729],[-158.12667,21.31244],[-158.2538,21.53919],[-158.29265,21.57912],[-158.0252,21.71696],[-157.94161,21.65272],[-157.65283,21.32217]]],[[[-159.34512,21.982],[-159.46372,21.88299],[-159.80051,22.06533],[-159.74877,22.1382],[-159.5962,22.23618],[-159.36569,22.21494],[-159.34512,21.982]]],[[[-94.81758,49.38905],[-94.64,48.84],[-94.32914,48.67074],[-93.63087,48.60926],[-92.61,48.45],[-91.64,48.14],[-90.83,48.27],[-89.6,48.01],[-89.272917,48.019808],[-88.378114,48.302918],[-87.439793,47.94],[-86.461991,47.553338],[-85.652363,47.220219],[-84.87608,46.900083],[-84.779238,46.637102],[-84.543749,46.538684],[-84.6049,46.4396],[-84.3367,46.40877],[-84.14212,46.512226],[-84.091851,46.275419],[-83.890765,46.116927],[-83.616131,46.116927],[-83.469551,45.994686],[-83.592851,45.816894],[-82.550925,45.347517],[-82.337763,44.44],[-82.137642,43.571088],[-82.43,42.98],[-82.9,42.43],[-83.12,42.08],[-83.142,41.975681],[-83.02981,41.832796],[-82.690089,41.675105],[-82.439278,41.675105],[-81.277747,42.209026],[-80.247448,42.3662],[-78.939362,42.863611],[-78.92,42.965],[-79.01,43.27],[-79.171674,43.466339],[-78.72028,43.625089],[-77.737885,43.629056],[-76.820034,43.628784],[-76.5,44.018459],[-76.375,44.09631],[-75.31821,44.81645],[-74.867,45.00048],[-73.34783,45.00738],[-71.50506,45.0082],[-71.405,45.255],[-71.08482,45.30524],[-70.66,45.46],[-70.305,45.915],[-69.99997,46.69307],[-69.237216,47.447781],[-68.905,47.185],[-68.23444,47.35486],[-67.79046,47.06636],[-67.79134,45.70281],[-67.13741,45.13753],[-66.96466,44.8097],[-68.03252,44.3252],[-69.06,43.98],[-70.11617,43.68405],[-70.645476,43.090238],[-70.81489,42.8653],[-70.825,42.335],[-70.495,41.805],[-70.08,41.78],[-70.185,42.145],[-69.88497,41.92283],[-69.96503,41.63717],[-70.64,41.475],[-71.12039,41.49445],[-71.86,41.32],[-72.295,41.27],[-72.87643,41.22065],[-73.71,40.931102],[-72.24126,41.11948],[-71.945,40.93],[-73.345,40.63],[-73.982,40.628],[-73.952325,40.75075],[-74.25671,40.47351],[-73.96244,40.42763],[-74.17838,39.70926],[-74.90604,38.93954],[-74.98041,39.1964],[-75.20002,39.24845],[-75.52805,39.4985],[-75.32,38.96],[-75.071835,38.782032],[-75.05673,38.40412],[-75.37747,38.01551],[-75.94023,37.21689],[-76.03127,37.2566],[-75.72205,37.93705],[-76.23287,38.319215],[-76.35,39.15],[-76.542725,38.717615],[-76.32933,38.08326],[-76.989998,38.239992],[-76.30162,37.917945],[-76.25874,36.9664],[-75.9718,36.89726],[-75.86804,36.55125],[-75.72749,35.55074],[-76.36318,34.80854],[-77.397635,34.51201],[-78.05496,33.92547],[-78.55435,33.86133],[-79.06067,33.49395],[-79.20357,33.15839],[-80.301325,32.509355],[-80.86498,32.0333],[-81.33629,31.44049],[-81.49042,30.72999],[-81.31371,30.03552],[-80.98,29.18],[-80.535585,28.47213],[-80.53,28.04],[-80.056539,26.88],[-80.088015,26.205765],[-80.13156,25.816775],[-80.38103,25.20616],[-80.68,25.08],[-81.17213,25.20126],[-81.33,25.64],[-81.71,25.87],[-82.24,26.73],[-82.70515,27.49504],[-82.85526,27.88624],[-82.65,28.55],[-82.93,29.1],[-83.70959,29.93656],[-84.1,30.09],[-85.10882,29.63615],[-85.28784,29.68612],[-85.7731,30.15261],[-86.4,30.4],[-87.53036,30.27433],[-88.41782,30.3849],[-89.18049,30.31598],[-89.593831,30.159994],[-89.413735,29.89419],[-89.43,29.48864],[-89.21767,29.29108],[-89.40823,29.15961],[-89.77928,29.30714],[-90.15463,29.11743],[-90.880225,29.148535],[-91.626785,29.677],[-92.49906,29.5523],[-93.22637,29.78375],[-93.84842,29.71363],[-94.69,29.48],[-95.60026,28.73863],[-96.59404,28.30748],[-97.14,27.83],[-97.37,27.38],[-97.38,26.69],[-97.33,26.21],[-97.14,25.87],[-97.53,25.84],[-98.24,26.06],[-99.02,26.37],[-99.3,26.84],[-99.52,27.54],[-100.11,28.11],[-100.45584,28.69612],[-100.9576,29.38071],[-101.6624,29.7793],[-102.48,29.76],[-103.11,28.97],[-103.94,29.27],[-104.45697,29.57196],[-104.70575,30.12173],[-105.03737,30.64402],[-105.63159,31.08383],[-106.1429,31.39995],[-106.50759,31.75452],[-108.24,31.754854],[-108.24194,31.34222],[-109.035,31.34194],[-111.02361,31.33472],[-113.30498,32.03914],[-114.815,32.52528],[-114.72139,32.72083],[-115.99135,32.61239],[-117.12776,32.53534],[-117.295938,33.046225],[-117.944,33.621236],[-118.410602,33.740909],[-118.519895,34.027782],[-119.081,34.078],[-119.438841,34.348477],[-120.36778,34.44711],[-120.62286,34.60855],[-120.74433,35.15686],[-121.71457,36.16153],[-122.54747,37.55176],[-122.51201,37.78339],[-122.95319,38.11371],[-123.7272,38.95166],[-123.86517,39.76699],[-124.39807,40.3132],[-124.17886,41.14202],[-124.2137,41.99964],[-124.53284,42.76599],[-124.14214,43.70838],[-124.020535,44.615895],[-123.89893,45.52341],[-124.079635,46.86475],[-124.39567,47.72017],[-124.68721,48.184433],[-124.566101,48.379715],[-123.12,48.04],[-122.58736,47.096],[-122.34,47.36],[-122.5,48.18],[-122.84,49],[-120,49],[-117.03121,49],[-116.04818,49],[-113,49],[-110.05,49],[-107.05,49],[-104.04826,48.99986],[-100.65,49],[-97.22872,49.0007],[-95.15907,49],[-95.15609,49.38425],[-94.81758,49.38905]]],[[[-153.006314,57.115842],[-154.00509,56.734677],[-154.516403,56.992749],[-154.670993,57.461196],[-153.76278,57.816575],[-153.228729,57.968968],[-152.564791,57.901427],[-152.141147,57.591059],[-153.006314,57.115842]]],[[[-165.579164,59.909987],[-166.19277,59.754441],[-166.848337,59.941406],[-167.455277,60.213069],[-166.467792,60.38417],[-165.67443,60.293607],[-165.579164,59.909987]]],[[[-171.731657,63.782515],[-171.114434,63.592191],[-170.491112,63.694975],[-169.682505,63.431116],[-168.689439,63.297506],[-168.771941,63.188598],[-169.52944,62.976931],[-170.290556,63.194438],[-170.671386,63.375822],[-171.553063,63.317789],[-171.791111,63.405846],[-171.731657,63.782515]]],[[[-155.06779,71.147776],[-154.344165,70.696409],[-153.900006,70.889989],[-152.210006,70.829992],[-152.270002,70.600006],[-150.739992,70.430017],[-149.720003,70.53001],[-147.613362,70.214035],[-145.68999,70.12001],[-144.920011,69.989992],[-143.589446,70.152514],[-142.07251,69.851938],[-140.985988,69.711998],[-140.992499,66.000029],[-140.99777,60.306397],[-140.012998,60.276838],[-139.039,60.000007],[-138.34089,59.56211],[-137.4525,58.905],[-136.47972,59.46389],[-135.47583,59.78778],[-134.945,59.27056],[-134.27111,58.86111],[-133.355549,58.410285],[-132.73042,57.69289],[-131.70781,56.55212],[-130.00778,55.91583],[-129.979994,55.284998],[-130.53611,54.802753],[-131.085818,55.178906],[-131.967211,55.497776],[-132.250011,56.369996],[-133.539181,57.178887],[-134.078063,58.123068],[-135.038211,58.187715],[-136.628062,58.212209],[-137.800006,58.499995],[-139.867787,59.537762],[-140.825274,59.727517],[-142.574444,60.084447],[-143.958881,59.99918],[-145.925557,60.45861],[-147.114374,60.884656],[-148.224306,60.672989],[-148.018066,59.978329],[-148.570823,59.914173],[-149.727858,59.705658],[-150.608243,59.368211],[-151.716393,59.155821],[-151.859433,59.744984],[-151.409719,60.725803],[-150.346941,61.033588],[-150.621111,61.284425],[-151.895839,60.727198],[-152.57833,60.061657],[-154.019172,59.350279],[-153.287511,58.864728],[-154.232492,58.146374],[-155.307491,57.727795],[-156.308335,57.422774],[-156.556097,56.979985],[-158.117217,56.463608],[-158.433321,55.994154],[-159.603327,55.566686],[-160.28972,55.643581],[-161.223048,55.364735],[-162.237766,55.024187],[-163.069447,54.689737],[-164.785569,54.404173],[-164.942226,54.572225],[-163.84834,55.039431],[-162.870001,55.348043],[-161.804175,55.894986],[-160.563605,56.008055],[-160.07056,56.418055],[-158.684443,57.016675],[-158.461097,57.216921],[-157.72277,57.570001],[-157.550274,58.328326],[-157.041675,58.918885],[-158.194731,58.615802],[-158.517218,58.787781],[-159.058606,58.424186],[-159.711667,58.93139],[-159.981289,58.572549],[-160.355271,59.071123],[-161.355003,58.670838],[-161.968894,58.671665],[-162.054987,59.266925],[-161.874171,59.633621],[-162.518059,59.989724],[-163.818341,59.798056],[-164.662218,60.267484],[-165.346388,60.507496],[-165.350832,61.073895],[-166.121379,61.500019],[-165.734452,62.074997],[-164.919179,62.633076],[-164.562508,63.146378],[-163.753332,63.219449],[-163.067224,63.059459],[-162.260555,63.541936],[-161.53445,63.455817],[-160.772507,63.766108],[-160.958335,64.222799],[-161.518068,64.402788],[-160.777778,64.788604],[-161.391926,64.777235],[-162.45305,64.559445],[-162.757786,64.338605],[-163.546394,64.55916],[-164.96083,64.446945],[-166.425288,64.686672],[-166.845004,65.088896],[-168.11056,65.669997],[-166.705271,66.088318],[-164.47471,66.57666],[-163.652512,66.57666],[-163.788602,66.077207],[-161.677774,66.11612],[-162.489715,66.735565],[-163.719717,67.116395],[-164.430991,67.616338],[-165.390287,68.042772],[-166.764441,68.358877],[-166.204707,68.883031],[-164.430811,68.915535],[-163.168614,69.371115],[-162.930566,69.858062],[-161.908897,70.33333],[-160.934797,70.44769],[-159.039176,70.891642],[-158.119723,70.824721],[-156.580825,71.357764],[-155.06779,71.147776]]]]}}]}",
-  "RecordCount": 1,
-  "FillOpacity": 0.2,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "1d661e99-4b84-4a58-811e-ed504e5928c1",
-  "CountryName": "Uruguay",
-  "CountryCode": "URY",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"URY\",\"properties\":{\"name\":\"Uruguay\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-57.625133,-30.216295],[-56.976026,-30.109686],[-55.973245,-30.883076],[-55.60151,-30.853879],[-54.572452,-31.494511],[-53.787952,-32.047243],[-53.209589,-32.727666],[-53.650544,-33.202004],[-53.373662,-33.768378],[-53.806426,-34.396815],[-54.935866,-34.952647],[-55.67409,-34.752659],[-56.215297,-34.859836],[-57.139685,-34.430456],[-57.817861,-34.462547],[-58.427074,-33.909454],[-58.349611,-33.263189],[-58.132648,-33.040567],[-58.14244,-32.044504],[-57.874937,-31.016556],[-57.625133,-30.216295]]]}}]}",
-  "RecordCount": 4,
-  "FillOpacity": 0.25,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "db540278-9df7-466a-acfa-dbecf36e15cd",
-  "CountryName": "Uzbekistan",
-  "CountryCode": "UZB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"UZB\",\"properties\":{\"name\":\"Uzbekistan\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[66.518607,37.362784],[66.54615,37.974685],[65.215999,38.402695],[64.170223,38.892407],[63.518015,39.363257],[62.37426,40.053886],[61.882714,41.084857],[61.547179,41.26637],[60.465953,41.220327],[60.083341,41.425146],[59.976422,42.223082],[58.629011,42.751551],[57.78653,42.170553],[56.932215,41.826026],[57.096391,41.32231],[55.968191,41.308642],[55.928917,44.995858],[58.503127,45.586804],[58.689989,45.500014],[60.239972,44.784037],[61.05832,44.405817],[62.0133,43.504477],[63.185787,43.650075],[64.900824,43.728081],[66.098012,42.99766],[66.023392,41.994646],[66.510649,41.987644],[66.714047,41.168444],[67.985856,41.135991],[68.259896,40.662325],[68.632483,40.668681],[69.070027,41.384244],[70.388965,42.081308],[70.962315,42.266154],[71.259248,42.167711],[70.420022,41.519998],[71.157859,41.143587],[71.870115,41.3929],[73.055417,40.866033],[71.774875,40.145844],[71.014198,40.244366],[70.601407,40.218527],[70.45816,40.496495],[70.666622,40.960213],[69.329495,40.727824],[69.011633,40.086158],[68.536416,39.533453],[67.701429,39.580478],[67.44222,39.140144],[68.176025,38.901553],[68.392033,38.157025],[67.83,37.144994],[67.075782,37.356144],[66.518607,37.362784]]]}}]}",
-  "RecordCount": 7,
-  "FillOpacity": 0.31,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "0c2dc7bf-c9d1-4555-b25b-21e431c6c2a3",
-  "CountryName": "Vanuatu",
-  "CountryCode": "VUT",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"VUT\",\"properties\":{\"name\":\"Vanuatu\"},\"geometry\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[167.844877,-16.466333],[167.515181,-16.59785],[167.180008,-16.159995],[167.216801,-15.891846],[167.844877,-16.466333]]],[[[167.107712,-14.93392],[167.270028,-15.740021],[167.001207,-15.614602],[166.793158,-15.668811],[166.649859,-15.392704],[166.629137,-14.626497],[167.107712,-14.93392]]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "701382ca-40e0-49cc-beb4-e8870c3a81aa",
-  "CountryName": "Venezuela (Bolivarian Republic of)",
-  "CountryCode": "VEN",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"VEN\",\"properties\":{\"name\":\"Venezuela\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-71.331584,11.776284],[-71.360006,11.539994],[-71.94705,11.423282],[-71.620868,10.96946],[-71.633064,10.446494],[-72.074174,9.865651],[-71.695644,9.072263],[-71.264559,9.137195],[-71.039999,9.859993],[-71.350084,10.211935],[-71.400623,10.968969],[-70.155299,11.375482],[-70.293843,11.846822],[-69.943245,12.162307],[-69.5843,11.459611],[-68.882999,11.443385],[-68.233271,10.885744],[-68.194127,10.554653],[-67.296249,10.545868],[-66.227864,10.648627],[-65.655238,10.200799],[-64.890452,10.077215],[-64.329479,10.389599],[-64.318007,10.641418],[-63.079322,10.701724],[-61.880946,10.715625],[-62.730119,10.420269],[-62.388512,9.948204],[-61.588767,9.873067],[-60.830597,9.38134],[-60.671252,8.580174],[-60.150096,8.602757],[-59.758285,8.367035],[-60.550588,7.779603],[-60.637973,7.415],[-60.295668,7.043911],[-60.543999,6.856584],[-61.159336,6.696077],[-61.139415,6.234297],[-61.410303,5.959068],[-60.733574,5.200277],[-60.601179,4.918098],[-60.966893,4.536468],[-62.08543,4.162124],[-62.804533,4.006965],[-63.093198,3.770571],[-63.888343,4.02053],[-64.628659,4.148481],[-64.816064,4.056445],[-64.368494,3.79721],[-64.408828,3.126786],[-64.269999,2.497006],[-63.422867,2.411068],[-63.368788,2.2009],[-64.083085,1.916369],[-64.199306,1.492855],[-64.611012,1.328731],[-65.354713,1.095282],[-65.548267,0.789254],[-66.325765,0.724452],[-66.876326,1.253361],[-67.181294,2.250638],[-67.447092,2.600281],[-67.809938,2.820655],[-67.303173,3.318454],[-67.337564,3.542342],[-67.621836,3.839482],[-67.823012,4.503937],[-67.744697,5.221129],[-67.521532,5.55687],[-67.34144,6.095468],[-67.695087,6.267318],[-68.265052,6.153268],[-68.985319,6.206805],[-69.38948,6.099861],[-70.093313,6.960376],[-70.674234,7.087785],[-71.960176,6.991615],[-72.198352,7.340431],[-72.444487,7.423785],[-72.479679,7.632506],[-72.360901,8.002638],[-72.439862,8.405275],[-72.660495,8.625288],[-72.78873,9.085027],[-73.304952,9.152],[-73.027604,9.73677],[-72.905286,10.450344],[-72.614658,10.821975],[-72.227575,11.108702],[-71.973922,11.608672],[-71.331584,11.776284]]]}}]}",
-  "RecordCount": 3,
-  "FillOpacity": 0.24,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "0ca410b2-24f0-46d5-90b3-0cce65951dbf",
-  "CountryName": "Viet Nam",
-  "CountryCode": "VNM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"VNM\",\"properties\":{\"name\":\"Vietnam\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[108.05018,21.55238],[106.715068,20.696851],[105.881682,19.75205],[105.662006,19.058165],[106.426817,18.004121],[107.361954,16.697457],[108.269495,16.079742],[108.877107,15.276691],[109.33527,13.426028],[109.200136,11.666859],[108.36613,11.008321],[107.220929,10.364484],[106.405113,9.53084],[105.158264,8.59976],[104.795185,9.241038],[105.076202,9.918491],[104.334335,10.486544],[105.199915,10.88931],[106.24967,10.961812],[105.810524,11.567615],[107.491403,12.337206],[107.614548,13.535531],[107.382727,14.202441],[107.564525,15.202173],[107.312706,15.908538],[106.556008,16.604284],[105.925762,17.485315],[105.094598,18.666975],[103.896532,19.265181],[104.183388,19.624668],[104.822574,19.886642],[104.435,20.758733],[103.203861,20.766562],[102.754896,21.675137],[102.170436,22.464753],[102.706992,22.708795],[103.504515,22.703757],[104.476858,22.81915],[105.329209,23.352063],[105.811247,22.976892],[106.725403,22.794268],[106.567273,22.218205],[107.04342,21.811899],[108.05018,21.55238]]]}}]}",
-  "RecordCount": 11,
-  "FillOpacity": 0.38,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "ba1f957b-71e4-4f37-8cb5-4e336c755979",
-  "CountryName": "Western Sahara",
-  "CountryCode": "ESH",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ESH\",\"properties\":{\"name\":\"Western Sahara\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-8.794884,27.120696],[-8.817828,27.656426],[-8.66559,27.656426],[-8.665124,27.589479],[-8.6844,27.395744],[-8.687294,25.881056],[-11.969419,25.933353],[-11.937224,23.374594],[-12.874222,23.284832],[-13.118754,22.77122],[-12.929102,21.327071],[-16.845194,21.333323],[-17.063423,20.999752],[-17.020428,21.42231],[-17.002962,21.420734],[-14.750955,21.5006],[-14.630833,21.86094],[-14.221168,22.310163],[-13.89111,23.691009],[-12.500963,24.770116],[-12.030759,26.030866],[-11.71822,26.104092],[-11.392555,26.883424],[-10.551263,26.990808],[-10.189424,26.860945],[-9.735343,26.860945],[-9.413037,27.088476],[-8.794884,27.120696]]]}}]}",
-  "RecordCount": 1,
-  "FillOpacity": 0.2,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "8ab1c1dd-bf5d-4314-9223-3d1c44f8ea16",
-  "CountryName": "Yemen",
-  "CountryCode": "YEM",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"YEM\",\"properties\":{\"name\":\"Yemen\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[53.108573,16.651051],[52.385206,16.382411],[52.191729,15.938433],[52.168165,15.59742],[51.172515,15.17525],[49.574576,14.708767],[48.679231,14.003202],[48.238947,13.94809],[47.938914,14.007233],[47.354454,13.59222],[46.717076,13.399699],[45.877593,13.347764],[45.62505,13.290946],[45.406459,13.026905],[45.144356,12.953938],[44.989533,12.699587],[44.494576,12.721653],[44.175113,12.58595],[43.482959,12.6368],[43.222871,13.22095],[43.251448,13.767584],[43.087944,14.06263],[42.892245,14.802249],[42.604873,15.213335],[42.805015,15.261963],[42.702438,15.718886],[42.823671,15.911742],[42.779332,16.347891],[43.218375,16.66689],[43.115798,17.08844],[43.380794,17.579987],[43.791519,17.319977],[44.062613,17.410359],[45.216651,17.433329],[45.399999,17.333335],[46.366659,17.233315],[46.749994,17.283338],[47.000005,16.949999],[47.466695,17.116682],[48.183344,18.166669],[49.116672,18.616668],[52.00001,19.000003],[52.782184,17.349742],[53.108573,16.651051]]]}}]}",
-  "RecordCount": 9,
-  "FillOpacity": 0.34,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "940df73e-bc90-40b2-a499-a1f8a7c53470",
-  "CountryName": "Zambia",
-  "CountryCode": "ZMB",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ZMB\",\"properties\":{\"name\":\"Zambia\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[32.759375,-9.230599],[33.231388,-9.676722],[33.485688,-10.525559],[33.31531,-10.79655],[33.114289,-11.607198],[33.306422,-12.435778],[32.991764,-12.783871],[32.688165,-13.712858],[33.214025,-13.97186],[30.179481,-14.796099],[30.274256,-15.507787],[29.516834,-15.644678],[28.947463,-16.043051],[28.825869,-16.389749],[28.467906,-16.4684],[27.598243,-17.290831],[27.044427,-17.938026],[26.706773,-17.961229],[26.381935,-17.846042],[25.264226,-17.73654],[25.084443,-17.661816],[25.07695,-17.578823],[24.682349,-17.353411],[24.033862,-17.295843],[23.215048,-17.523116],[22.562478,-16.898451],[21.887843,-16.08031],[21.933886,-12.898437],[24.016137,-12.911046],[23.930922,-12.565848],[24.079905,-12.191297],[23.904154,-11.722282],[24.017894,-11.237298],[23.912215,-10.926826],[24.257155,-10.951993],[24.314516,-11.262826],[24.78317,-11.238694],[25.418118,-11.330936],[25.75231,-11.784965],[26.553088,-11.92444],[27.16442,-11.608748],[27.388799,-12.132747],[28.155109,-12.272481],[28.523562,-12.698604],[28.934286,-13.248958],[29.699614,-13.257227],[29.616001,-12.178895],[29.341548,-12.360744],[28.642417,-11.971569],[28.372253,-11.793647],[28.49607,-10.789884],[28.673682,-9.605925],[28.449871,-9.164918],[28.734867,-8.526559],[29.002912,-8.407032],[30.346086,-8.238257],[30.740015,-8.340007],[31.157751,-8.594579],[31.556348,-8.762049],[32.191865,-8.930359],[32.759375,-9.230599]]]}}]}",
-  "RecordCount": 22,
-  "FillOpacity": 0.57,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}, {
-  "CountryID": "940d48bf-fea6-4a42-9e24-8e5799a3a5c5",
-  "CountryName": "Zimbabwe",
-  "CountryCode": "ZWE",
-  "GeoJSON": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"id\":\"ZWE\",\"properties\":{\"name\":\"Zimbabwe\"},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[31.191409,-22.25151],[30.659865,-22.151567],[30.322883,-22.271612],[29.839037,-22.102216],[29.432188,-22.091313],[28.794656,-21.639454],[28.02137,-21.485975],[27.727228,-20.851802],[27.724747,-20.499059],[27.296505,-20.39152],[26.164791,-19.293086],[25.850391,-18.714413],[25.649163,-18.536026],[25.264226,-17.73654],[26.381935,-17.846042],[26.706773,-17.961229],[27.044427,-17.938026],[27.598243,-17.290831],[28.467906,-16.4684],[28.825869,-16.389749],[28.947463,-16.043051],[29.516834,-15.644678],[30.274256,-15.507787],[30.338955,-15.880839],[31.173064,-15.860944],[31.636498,-16.07199],[31.852041,-16.319417],[32.328239,-16.392074],[32.847639,-16.713398],[32.849861,-17.979057],[32.654886,-18.67209],[32.611994,-19.419383],[32.772708,-19.715592],[32.659743,-20.30429],[32.508693,-20.395292],[32.244988,-21.116489],[31.191409,-22.25151]]]}}]}",
-  "RecordCount": 17,
-  "FillOpacity": 0.48,
-  "MinRecord": 1,
-  "MaxRecord": 41
-}].map(function (x) {
-  x.GeoJSON = JSON.parse(x.GeoJSON);
-  return x;
-});
-exports.allCountries = allCountries;
-
-},{}],6:[function(require,module,exports){
+},{"react":214,"react-select":203}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1669,8 +513,6 @@ exports["default"] = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _Childo = _interopRequireDefault(require("./Childo"));
-
-var _MainSelectFilters = require("./MainSelectFilters");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -1696,12 +538,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var range = function range(start, stop) {
-  var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  return Array(Math.ceil((stop - start) / step)).fill(start).map(function (x, y) {
-    return x + y * step;
-  });
-};
+var cljs = require('../../js/cljs.js');
 
 var DocumentField =
 /*#__PURE__*/
@@ -1785,46 +622,11 @@ function (_Component) {
     key: "getDerivedStateFromProps",
     value: function getDerivedStateFromProps(props, state) {
       if (props.reports && props.reports !== state.reports) {
-        var approvals = props.reports.reduce(function (c, o) {
-          c.add(o['year']);
-          return c;
-        }, new Set());
-        var approvals_counts = (0, _MainSelectFilters.countIt)(props.reports, 'year');
-        approvals = Array.from(approvals).sort().map(function (o) {
-          return {
-            value: o,
-            label: "".concat(o, " (").concat(approvals_counts[o], ")"),
-            level: 0
-          };
-        });
+        var approvals = cljs.approvalYears(props.reports);
         var approval_year = approvals.filter(function (o) {
           return o.value === props.approval_year;
         });
-        var actives = props.reports.map(function (r) {
-          return r['implementationPeriod'].split("-");
-        }).reduce(function (c, o) {
-          range(parseInt(o[0], 10), parseInt(o[1], 10)).map(function (x) {
-            c.add(x);
-          });
-          return c;
-        }, new Set());
-        actives = Array.from(actives).sort().reduce(function (c, x) {
-          c[x] = 0;
-          return c;
-        }, {});
-        props.reports.map(function (r) {
-          var dates = r['implementationPeriod'].split("-");
-          range(parseInt(dates[0], 10), parseInt(dates[1], 10)).map(function (x) {
-            actives[x]++;
-          });
-        });
-        actives = Object.keys(actives).map(function (o) {
-          return {
-            value: o,
-            label: "".concat(o, " (").concat(actives[o], ")"),
-            level: 0
-          };
-        });
+        var actives = cljs.activeYears(props.reports);
         var active_year = actives.filter(function (o) {
           return o.value === props.active_year;
         });
@@ -1847,7 +649,7 @@ function (_Component) {
 var _default = DocumentField;
 exports["default"] = _default;
 
-},{"./Childo":4,"./MainSelectFilters":8,"react":224}],7:[function(require,module,exports){
+},{"../../js/cljs.js":1,"./Childo":2,"react":214}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1858,8 +660,6 @@ exports["default"] = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _Childo = _interopRequireDefault(require("./Childo"));
-
-var _data = require("./data");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -1877,135 +677,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var MainSelectFilters =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(MainSelectFilters, _Component);
-
-  function MainSelectFilters(props) {
-    var _this;
-
-    _classCallCheck(this, MainSelectFilters);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MainSelectFilters).call(this, props));
-    _this.state = {
-      liked: false,
-      region: ''
-    };
-    _this.wow = _this.wow.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(MainSelectFilters, [{
-    key: "wow",
-    value: function wow(e) {
-      console.log('wow', e, this.state);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react["default"].createElement("div", {
-        className: "col-xs-12 col-md-12"
-      }, _react["default"].createElement("div", {
-        className: "row"
-      }, _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-3",
-        "data-toggle": "tooltip",
-        title: "Geographic region where the country belongs."
-      }, _react["default"].createElement(_Childo["default"], {
-        options: _data.regions,
-        placeholder: "Region"
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-3",
-        "data-toggle": "tooltip",
-        title: "Official country name."
-      }, _react["default"].createElement(_Childo["default"], {
-        options: _data.countries,
-        placeholder: "Country"
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-3",
-        "data-toggle": "tooltip",
-        title: "Sector "
-      }, _react["default"].createElement(_Childo["default"], {
-        options: _data.sectors,
-        placeholder: "Sector"
-      })), _react["default"].createElement("div", {
-        className: "col-xs-12 col-sm-3",
-        "data-toggle": "tooltip",
-        title: "Type of Document"
-      }, _react["default"].createElement(_Childo["default"], {
-        options: _data.types,
-        placeholder: "Type"
-      }))));
-    }
-  }]);
-
-  return MainSelectFilters;
-}(_react.Component);
-
-var _default = MainSelectFilters;
-exports["default"] = _default;
-
-},{"./Childo":4,"./data":18,"react":224}],8:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.countIt = countIt;
-exports["default"] = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Childo = _interopRequireDefault(require("./Childo"));
-
-var _data = require("./data");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var cljs = require('../../js/cljs.js');
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function yup(filters, freqs, always_show) {
+  if (filters && freqs) {
+    return filters.reduce(function (c, o) {
+      var picked = _extends({}, o);
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+      if (freqs[picked.value] || picked.level === 0 || always_show) {
+        var cont = freqs[picked.value] ? freqs[picked.value] : 0;
+        picked.label += " (".concat(cont, ")");
+        c.push(picked);
+      }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function countBy(col) {
-  return col.reduce(function (acc, curr) {
-    acc[curr] ? acc[curr]++ : acc[curr] = 1;
-    return acc;
-  }, {});
-}
-
-function countIt(reports, prop) {
-  return countBy(reports.map(function (r) {
-    return r[prop];
-  }));
+      return c;
+    }, []);
+  }
 }
 
 var MainSelectFilters =
@@ -2020,9 +717,11 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MainSelectFilters).call(this, props));
     _this.state = {
-      liked: false,
       reports: props.reports,
-      initialReports: props.initialReports
+      initialReports: props.initialReports,
+      filters: props.filters,
+      frequencies: {},
+      options: {}
     };
     return _this;
   }
@@ -2030,24 +729,22 @@ function (_Component) {
   _createClass(MainSelectFilters, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      //    console.log('types', this.state.types);
-      var tt = [];
-
-      if (this.state.types) {
-        tt = _data.types.map(function (o) {
-          var picked = _extends({}, o); //      console.log(picked.value, picked.label, picked);
-
-
-          var c = _this2.state.types[picked.value] ? _this2.state.types[picked.value] : 0;
-          picked.label += " (".concat(c, ")");
-          return picked;
-        }); //    console.log('data-types', types);
-        //    console.log('tt-types', tt);
-      }
-
+      var types = yup(this.state.filters.types, this.state.frequencies.types, true);
+      var countries = yup(this.state.filters.countries, this.state.frequencies.countries, false);
+      var regions = yup(this.state.filters.regions, this.state.frequencies.regions, false);
+      var sectors = yup(this.state.filters.sectors, this.state.frequencies.sectors, false);
       return _react["default"].createElement("div", {
+        className: "col-xs-12"
+      }, _react["default"].createElement("div", {
+        className: "search-controls-wrapper"
+      }, _react["default"].createElement("div", {
+        className: "search-controls"
+      }, _react["default"].createElement("div", {
+        className: "row",
+        role: "form"
+      }, _react["default"].createElement("div", {
+        id: "main_select_filter"
+      }, _react["default"].createElement("div", {
         className: "col-xs-12 col-md-12"
       }, _react["default"].createElement("div", {
         className: "row"
@@ -2056,7 +753,7 @@ function (_Component) {
         "data-toggle": "tooltip",
         title: "Geographic region where the country belongs."
       }, _react["default"].createElement(_Childo["default"], {
-        options: _data.regions,
+        options: regions,
         placeholder: "Region",
         onChange: this.props.onChange,
         value: this.props.regions,
@@ -2067,7 +764,7 @@ function (_Component) {
         "data-toggle": "tooltip",
         title: "Official country name."
       }, _react["default"].createElement(_Childo["default"], {
-        options: _data.countries,
+        options: countries,
         placeholder: "Country",
         onChange: this.props.onChange,
         value: this.props.countries,
@@ -2078,7 +775,7 @@ function (_Component) {
         "data-toggle": "tooltip",
         title: "Sector "
       }, _react["default"].createElement(_Childo["default"], {
-        options: _data.sectors,
+        options: sectors,
         placeholder: "Sector",
         onChange: this.props.onChange,
         value: this.props.sectors,
@@ -2089,27 +786,33 @@ function (_Component) {
         "data-toggle": "tooltip",
         title: "Type of Document"
       }, _react["default"].createElement(_Childo["default"], {
-        options: tt,
+        options: types,
         placeholder: "Type",
         onChange: this.props.onChange,
         value: this.props.types,
         defaultMenuIsOpen: false,
         isMulti: true,
         isClearable: false
-      }))));
+      })))))))));
     }
   }], [{
     key: "getDerivedStateFromProps",
     value: function getDerivedStateFromProps(props, state) {
+      var newState = state || {};
+
       if (props.reports !== state.reports) {
-        return {
-          reports: props.reports,
-          initialReports: props.initialReports,
-          types: countIt(props.initialReports, 'type')
-        };
+        newState.reports = props.reports;
+        newState.initialReports = props.initialReports;
+        newState.frequencies = cljs.countSelects(props.reports);
       }
 
-      return null;
+      ;
+
+      if (props.filters !== state.filters) {
+        newState.filters = props.filters;
+      }
+
+      return newState;
     }
   }]);
 
@@ -2119,7 +822,7 @@ function (_Component) {
 var _default = MainSelectFilters;
 exports["default"] = _default;
 
-},{"./Childo":4,"./data":18,"react":224}],9:[function(require,module,exports){
+},{"../../js/cljs.js":1,"./Childo":2,"react":214}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2130,12 +833,6 @@ exports["default"] = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactMapGl = _interopRequireWildcard(require("react-map-gl"));
-
-var _Countries = require("./Countries");
-
-var _cities = require("./cities");
-
-var _utils = require("./utils");
 
 var _cityPin = _interopRequireDefault(require("./city-pin"));
 
@@ -2167,6 +864,38 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+require('es6-promise').polyfill();
+
+require('isomorphic-fetch');
+
+var thematicFocus = {
+  'environment': 'Environment',
+  'gender': 'Gender',
+  'poverty_reduction': 'Poverty Reduction',
+  'export_strategy': 'Export Strategy',
+  'trade_focus': 'Focus on trade',
+  'youth': 'Youth',
+  'trade_facilitation': 'Trade Facilitation',
+  'trade_finance': 'Trade Finance',
+  'trade_information': 'Trade Information',
+  'trade_promotion': 'Trade Promotion',
+  'quality': 'Quality',
+  'tvet': 'TVET',
+  'regional': 'Regional Scope',
+  'regional_integration': 'Regional Integration'
+};
+var thematicFocusKeys = Object.keys(thematicFocus);
+
+function countProp(col, kw) {
+  if (col) {
+    return col.filter(function (o) {
+      return o[kw];
+    }).length;
+  } else {
+    return 0;
+  }
+}
+
 var Map =
 /*#__PURE__*/
 function (_Component) {
@@ -2195,10 +924,34 @@ function (_Component) {
     _this._renderCityMarker = _this._renderCityMarker.bind(_assertThisInitialized(_this));
     _this._renderPopup = _this._renderPopup.bind(_assertThisInitialized(_this));
     _this._onClick = _this._onClick.bind(_assertThisInitialized(_this));
+    _this.saveCountries = _this.saveCountries.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Map, [{
+    key: "saveCountries",
+    value: function saveCountries(cc) {
+      console.log('countries', cc);
+      this.setState({
+        countries: cc.map(function (x) {
+          x.GeoJSON = JSON.parse(x.GeoJSON);
+          return x;
+        })
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log('componentDidMount');
+      fetch('./js/countries.json').then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+
+        return response.json();
+      }).then(this.saveCountries);
+    }
+  }, {
     key: "_renderPopup",
     value: function _renderPopup() {
       var _this2 = this;
@@ -2310,12 +1063,10 @@ function (_Component) {
           var reportsFiltered = this.props.reports.filter(function (o) {
             return o.country === value;
           });
-
-          var search = _utils.thematicFocusKeys.reduce(function (c, o) {
-            c[o] = (0, _utils.countProp)(reportsFiltered, o);
+          var search = thematicFocusKeys.reduce(function (c, o) {
+            c[o] = countProp(reportsFiltered, o);
             return c;
           }, {});
-
           var keysSorted = Object.keys(search).sort(function (a, b) {
             return search[b] - search[a];
           });
@@ -2323,7 +1074,7 @@ function (_Component) {
 
           var dataChart = keysSorted.slice(0, keysSorted.length > 5 ? 5 : keysSorted.length);
           var xAxisCategories = dataChart.map(function (o) {
-            return _utils.thematicFocus[o];
+            return thematicFocus[o];
           });
           var seriesData = dataChart.reduce(function (c, o) {
             c.push(search[o]);
@@ -2351,46 +1102,50 @@ function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      return _react["default"].createElement("div", {
-        className: "container"
-      }, _react["default"].createElement("ol", {
-        className: "breadcrumb pull-right"
-      }, _react["default"].createElement("li", null, _react["default"].createElement("a", {
-        href: "#"
-      }, "Home"))), _react["default"].createElement("h2", null, "Search documents"), _react["default"].createElement("section", {
-        className: "map-container map-container-details"
-      }, _react["default"].createElement("div", {
-        className: "container"
-      }, _react["default"].createElement("div", {
-        id: "map"
-      }, _react["default"].createElement(_reactMapGl["default"], _extends({}, this.state.viewport, {
-        onClick: this._onClick,
-        mapStyle: "mapbox://styles/mapbox/streets-v10",
-        mapboxApiAccessToken: "pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA",
-        onViewportChange: function onViewportChange(viewport) {
-          return _this4.setState({
-            viewport: viewport
-          });
-        }
-      }), _react["default"].createElement("div", {
-        style: {
-          position: 'absolute',
-          left: "10px",
-          top: "10px"
-        }
-      }, _react["default"].createElement(_reactMapGl.NavigationControl, null)), _Countries.allCountries.map(function (o, idx) {
-        var coords = o.GeoJSON.features ? o.GeoJSON.features[0].geometry.coordinates[0][0] : o.GeoJSON[0].geometry.coordinates[0][0];
+      if (this.state.countries) {
+        return _react["default"].createElement("div", {
+          className: "container"
+        }, _react["default"].createElement("ol", {
+          className: "breadcrumb pull-right"
+        }, _react["default"].createElement("li", null, _react["default"].createElement("a", {
+          href: "#"
+        }, "Home"))), _react["default"].createElement("h2", null, "Search documents"), _react["default"].createElement("section", {
+          className: "map-container map-container-details"
+        }, _react["default"].createElement("div", {
+          className: "container"
+        }, _react["default"].createElement("div", {
+          id: "map"
+        }, _react["default"].createElement(_reactMapGl["default"], _extends({}, this.state.viewport, {
+          onClick: this._onClick,
+          mapStyle: "mapbox://styles/mapbox/streets-v10",
+          mapboxApiAccessToken: "pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA",
+          onViewportChange: function onViewportChange(viewport) {
+            return _this4.setState({
+              viewport: viewport
+            });
+          }
+        }), _react["default"].createElement("div", {
+          style: {
+            position: 'absolute',
+            left: "10px",
+            top: "10px"
+          }
+        }, _react["default"].createElement(_reactMapGl.NavigationControl, null)), this.state.countries.map(function (o, idx) {
+          var coords = o.GeoJSON.features ? o.GeoJSON.features[0].geometry.coordinates[0][0] : o.GeoJSON[0].geometry.coordinates[0][0];
 
-        if (o.GeoJSON.features && !Array.isArray(coords[0])) {
-          return _this4._renderCountry({
-            geoJSON: o.GeoJSON,
-            value: o.CountryID,
-            label: o.CountryName,
-            coords: coords
-          }, idx);
-        } else {// console.log("ahhhh", o.CountryName, coords, o.GeoJSON)
-        }
-      }), this._renderPopup())))));
+          if (o.GeoJSON.features && !Array.isArray(coords[0])) {
+            return _this4._renderCountry({
+              geoJSON: o.GeoJSON,
+              value: o.CountryID,
+              label: o.CountryName,
+              coords: coords
+            }, idx);
+          } else {// console.log("ahhhh", o.CountryName, coords, o.GeoJSON)
+          }
+        }), this._renderPopup())))));
+      }
+
+      return _react["default"].createElement("div", null);
     }
   }]);
 
@@ -2400,7 +1155,7 @@ function (_Component) {
 var _default = Map;
 exports["default"] = _default;
 
-},{"./Countries":5,"./cities":16,"./city-pin":17,"./utils":19,"react":224,"react-highcharts":167,"react-map-gl":185}],10:[function(require,module,exports){
+},{"./city-pin":9,"es6-promise":53,"isomorphic-fetch":61,"react":214,"react-highcharts":157,"react-map-gl":175}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2413,8 +1168,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _reactBootstrapTableNext = _interopRequireDefault(require("react-bootstrap-table-next"));
 
 var _reactBootstrapTable2Paginator = _interopRequireDefault(require("react-bootstrap-table2-paginator"));
-
-var _data = require("./data");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -2448,18 +1201,25 @@ function (_Component) {
   _inherits(Results, _Component);
 
   function Results(props) {
+    var _this;
+
     _classCallCheck(this, Results);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Results).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Results).call(this, props));
+    _this.state = {
+      reports: []
+    };
+    return _this;
   }
 
   _createClass(Results, [{
     key: "render",
     value: function render() {
-      var country = function country(countryValue, cc) {
-        var c = _data.countries.filter(function (o) {
-          return o.value === countryValue;
-        })[0].label;
+      var country = function country(countries, countryValue) {
+        var co = countries.find(function (x) {
+          return x.value === countryValue;
+        });
+        var c = co.label;
 
         if (c.length < 7) {
           return _react["default"].createElement("div", {
@@ -2478,7 +1238,7 @@ function (_Component) {
               color: "black"
             },
             className: "table-value boldi"
-          }, "( ", cc, ")")));
+          }, "( ", co.code, ")")));
         }
 
         return _react["default"].createElement("div", null, _react["default"].createElement("div", {
@@ -2518,7 +1278,7 @@ function (_Component) {
             color: "black"
           },
           className: "table-value boldi"
-        }, "( ", cc, ")"))));
+        }, "( ", co.code, ")"))));
       };
 
       var wrap_show_less = function wrap_show_less(css, value) {
@@ -2538,58 +1298,69 @@ function (_Component) {
         }, "show more"))));
       };
 
-      var leftFormatter = function leftFormatter(c, o) {
-        return _react["default"].createElement("div", null, _react["default"].createElement("div", {
-          className: "left-first-colum-first-row"
-        }, _react["default"].createElement("span", {
-          className: "left-table-row-title"
-        }, "Region:"), _react["default"].createElement("div", {
-          className: "span-region table-value boldi"
-        }, o.region)), country(o.country, o.countryCode), _react["default"].createElement("div", {
-          style: {
-            marginTop: "18px",
-            padding: "10px",
-            border: "1px solid rgb(187, 187, 187)",
-            textAlign: "center"
-          }
-        }, _react["default"].createElement("img", {
-          className: "world",
-          src: "./img/maps/".concat(o.region, ".png")
-        })));
+      var leftFormatter = function leftFormatter(countries, regions) {
+        return function (c, o) {
+          var r = regions.find(function (r) {
+            return r.value === o.region;
+          });
+          return _react["default"].createElement("div", {
+            key: "left-".concat(o.id)
+          }, _react["default"].createElement("div", {
+            className: "left-first-colum-first-row"
+          }, _react["default"].createElement("span", {
+            className: "left-table-row-title"
+          }, "Region:"), _react["default"].createElement("div", {
+            className: "span-region table-value boldi"
+          }, r.label)), country(countries, o.country), _react["default"].createElement("div", {
+            style: {
+              marginTop: "18px",
+              padding: "10px",
+              border: "1px solid rgb(187, 187, 187)",
+              textAlign: "center"
+            }
+          }));
+        };
       };
 
-      var rightFormatter = function rightFormatter(c, o) {
-        return _react["default"].createElement("div", null, _react["default"].createElement("div", {
-          className: "first-colum-first-row first-colum-first-row-bis"
-        }, _react["default"].createElement("span", {
-          className: "table-row-title "
-        }, "Type: "), _react["default"].createElement("span", {
-          style: {
-            "float": "right"
-          },
-          className: "table-value "
-        }, o.type), _react["default"].createElement("hr", {
-          className: "hr-table-column"
-        })), _react["default"].createElement("div", {
-          className: "left-first-colum-first-row"
-        }, _react["default"].createElement("span", {
-          className: "left-table-row-title"
-        }, "Year:"), _react["default"].createElement("div", {
-          className: "div-year"
-        }, _react["default"].createElement("span", {
-          className: "table-value boldi"
-        }, o.year))), _react["default"].createElement("div", {
-          className: "left-first-colum-first-row"
-        }, _react["default"].createElement("span", {
-          className: "left-table-row-title"
-        }, "Period:"), _react["default"].createElement("div", {
-          className: "div-ip"
-        }, _react["default"].createElement("span", {
-          className: "table-value boldi"
-        }, o.implementationPeriod))));
+      var rightFormatter = function rightFormatter(types) {
+        return function (c, o) {
+          var t = types.find(function (x) {
+            return x.value === o.type;
+          }) || {
+            label: o.type
+          };
+          return _react["default"].createElement("div", null, _react["default"].createElement("div", {
+            className: "first-colum-first-row first-colum-first-row-bis"
+          }, _react["default"].createElement("span", {
+            className: "table-row-title "
+          }, "Type: "), _react["default"].createElement("span", {
+            style: {
+              "float": "right"
+            },
+            className: "table-value "
+          }, t.label), _react["default"].createElement("hr", {
+            className: "hr-table-column"
+          })), _react["default"].createElement("div", {
+            className: "left-first-colum-first-row"
+          }, _react["default"].createElement("span", {
+            className: "left-table-row-title"
+          }, "Year:"), _react["default"].createElement("div", {
+            className: "div-year"
+          }, _react["default"].createElement("span", {
+            className: "table-value boldi"
+          }, o.year))), _react["default"].createElement("div", {
+            className: "left-first-colum-first-row"
+          }, _react["default"].createElement("span", {
+            className: "left-table-row-title"
+          }, "Period:"), _react["default"].createElement("div", {
+            className: "div-ip"
+          }, _react["default"].createElement("span", {
+            className: "table-value boldi"
+          }, o.implementationPeriod))));
+        };
       };
 
-      var sectorsFormatter = function sectorsFormatter(value) {
+      var sectorsFormatter = function sectorsFormatter(sectors, value) {
         var screen_bigger = $(window).width() > 760; //      let chunk = 3;
 
         var css_class = "col-sm-4";
@@ -2611,6 +1382,9 @@ function (_Component) {
         };
 
         var extractRowData = function extractRowData(value, idx) {
+          var s = sectors.find(function (x) {
+            return x.value === value;
+          });
           return _react["default"].createElement("div", {
             className: css_class,
             key: "one-".concat(idx)
@@ -2620,7 +1394,7 @@ function (_Component) {
           }, _react["default"].createElement("div", {
             className: "",
             key: "three-".concat(idx)
-          }, value)));
+          }, s.label)));
         };
 
         var r = function r(i, idx) {
@@ -2635,33 +1409,47 @@ function (_Component) {
         }, value.map(r));
       };
 
-      var middleFormatter = function middleFormatter(c, o) {
-        return _react["default"].createElement("div", {
-          className: "middle-column"
-        }, _react["default"].createElement("h2", {
-          className: "middle-column-title"
-        }, _react["default"].createElement("a", {
-          href: "search_details.html#"
-        }, o.title)), o.description, _react["default"].createElement("h3", {
-          className: "middle-column-seectors"
-        }, "Sectors:"), sectorsFormatter(o.sectors));
+      var middleFormatter = function middleFormatter(sectors) {
+        return function (c, o) {
+          return _react["default"].createElement("div", {
+            className: "middle-column"
+          }, _react["default"].createElement("h2", {
+            className: "middle-column-title"
+          }, _react["default"].createElement("a", {
+            href: "search_details.html#"
+          }, o.title)), o.description, _react["default"].createElement("h3", {
+            className: "middle-column-seectors"
+          }, "Sectors:"), sectorsFormatter(sectors, o.sectors));
+        };
       };
 
-      var columns = [{
-        formatter: leftFormatter,
-        sort: false
-      }, {
-        formatter: middleFormatter,
-        sort: false
-      }, {
-        formatter: rightFormatter,
-        sort: false
-      }];
+      var leftHeaderFormatter = function leftHeaderFormatter(c, idx, cs) {
+        return null;
+      };
+
+      var columns = function columns(filters) {
+        return [{
+          formatter: leftFormatter(filters.countries, filters.regions),
+          sort: false,
+          dataField: 'region',
+          text: ""
+        }, {
+          formatter: middleFormatter(filters.sectors),
+          sort: false,
+          dataField: 'title',
+          text: ""
+        }, {
+          formatter: rightFormatter(filters.types),
+          sort: false,
+          dataField: 'type',
+          text: ""
+        }];
+      };
+
       var defaultSorted = [{
         dataField: 'title',
         order: 'desc'
       }];
-      var results = this.props.reports || [];
       return _react["default"].createElement("div", {
         id: "card-table",
         className: "card",
@@ -2670,15 +1458,30 @@ function (_Component) {
         }
       }, _react["default"].createElement("div", {
         className: "card-content"
-      }, _react["default"].createElement(_reactBootstrapTableNext["default"], {
-        bootstrap4: true,
-        keyField: "sectors",
-        data: results,
-        columns: columns,
+      }, _react["default"].createElement(_reactBootstrapTableNext["default"] //  bootstrap4
+      , {
+        keyField: "id",
+        data: this.state.reports,
+        columns: columns(this.state.filters),
         classes: "table-no-hover table-disable-hover search-table",
         defaultSorted: defaultSorted,
         pagination: (0, _reactBootstrapTable2Paginator["default"])()
       })));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      var newState = state || {};
+
+      if (props.reports !== null && props.reports !== state.reports) {
+        newState.reports = props.reports;
+      }
+
+      if (props.filters !== state.filters) {
+        newState.filters = props.filters;
+      }
+
+      return state;
     }
   }]);
 
@@ -2688,91 +1491,7 @@ function (_Component) {
 var _default = Results;
 exports["default"] = _default;
 
-},{"./data":18,"react":224,"react-bootstrap-table-next":93,"react-bootstrap-table2-paginator":143}],11:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Childo = _interopRequireDefault(require("./Childo"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var LikeButton =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(LikeButton, _Component);
-
-  function LikeButton(props) {
-    var _this;
-
-    _classCallCheck(this, LikeButton);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(LikeButton).call(this, props));
-    _this.state = {
-      liked: false
-    };
-    return _this;
-  }
-
-  _createClass(LikeButton, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      if (this.state.liked) {
-        return _react["default"].createElement("h1", null, "You liked this.");
-      }
-
-      var yuhu = (0, _react.createElement)('button', {
-        onClick: function onClick() {
-          return _this2.setState({
-            liked: true
-          });
-        }
-      }, 'Like');
-      return _react["default"].createElement("div", null, yuhu, _react["default"].createElement(_Childo["default"], null));
-    }
-  }]);
-
-  return LikeButton;
-}(_react.Component);
-
-var _default = LikeButton;
-exports["default"] = _default;
-global.window.LikeButton = LikeButton;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Childo":4,"react":224}],12:[function(require,module,exports){
-arguments[4][11][0].apply(exports,arguments)
-},{"./Childo":4,"dup":11,"react":224}],13:[function(require,module,exports){
+},{"react":214,"react-bootstrap-table-next":83,"react-bootstrap-table2-paginator":133}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -2783,8 +1502,6 @@ var _MainSelectFilters = _interopRequireDefault(require("./MainSelectFilters"));
 var _ThematicFocus = _interopRequireDefault(require("./ThematicFocus"));
 
 var _DocumentField = _interopRequireDefault(require("./DocumentField"));
-
-var _Charts = _interopRequireDefault(require("./Charts"));
 
 var _Map = _interopRequireDefault(require("./Map"));
 
@@ -2830,6 +1547,41 @@ require('es6-promise').polyfill();
 
 require('isomorphic-fetch');
 
+var cljs = require('../../js/cljs.js');
+
+var intersection = function intersection(setA, setB) {
+  var _intersection = new Set();
+
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = setB[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var elem = _step.value;
+
+      if (setA.has(elem)) {
+        _intersection.add(elem);
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return _intersection;
+};
+
 var SearchContainer =
 /*#__PURE__*/
 function (_Component) {
@@ -2843,6 +1595,11 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchContainer).call(this, props));
     _this.state = {
       qq: {},
+      filters: {
+        countries: null,
+        regions: null,
+        types: null
+      },
       reports: null,
       initialReports: null,
       regions: null,
@@ -2856,6 +1613,7 @@ function (_Component) {
     _this.onSelectChange = _this.onSelectChange.bind(_assertThisInitialized(_this));
     _this.search = _this.search.bind(_assertThisInitialized(_this));
     _this.saveReports = _this.saveReports.bind(_assertThisInitialized(_this));
+    _this.saveFilters = _this.saveFilters.bind(_assertThisInitialized(_this));
     _this.searchReports = _this.searchReports.bind(_assertThisInitialized(_this));
     _this.onCheckBoxChange = _this.onCheckBoxChange.bind(_assertThisInitialized(_this));
     _this.onSelectYear = _this.onSelectYear.bind(_assertThisInitialized(_this));
@@ -2866,16 +1624,22 @@ function (_Component) {
     key: "saveReports",
     value: function saveReports(r) {
       console.log('save reports!');
+      var rr = cljs.reports(this.state.thematicsFocus, r); //    console.log(rr.map(o => o.type));
+      //    console.log('first report', rr[0]);
+
       this.setState({
-        reports: r,
-        initialReports: r
+        reports: rr,
+        initialReports: rr
       });
     }
   }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      console.log('componentWillMount');
-      fetch('./js/data.json').then(function (response) {
+    key: "saveFilters",
+    value: function saveFilters(cc) {
+      //    console.log('regions', cljs.regions(cc));
+      var state = cljs.assocIn(this.state, [[["filters", "countries"], cljs.countries(cc)], [["filters", "types"], cljs.types(cc)], [["filters", "regions"], cljs.regions(cc)], [["filters", "sectors"], cljs.sectors(cc)], [["thematicsFocus"], cljs.thematicFocus(cc)]]); //    console.log(state);
+
+      this.setState(state);
+      fetch('./js/all-reports.json').then(function (response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
         }
@@ -2884,8 +1648,20 @@ function (_Component) {
       }).then(this.saveReports);
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log('componentDidMount');
+      fetch('./js/all-filters.json').then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+
+        return response.json();
+      }).then(this.saveFilters);
+    }
+  }, {
     key: "selectSelect",
-    value: function selectSelect(vals, kw) {
+    value: function selectSelect(vals, kw, isMultiple) {
       var picked = _extends({}, this.state.qq);
 
       if (vals !== undefined && vals !== null) {
@@ -2893,9 +1669,15 @@ function (_Component) {
           return o.value;
         }));
 
-        picked[kw] = function (o) {
-          return dict.has(o[kw]);
-        };
+        if (isMultiple) {
+          picked[kw] = function (o) {
+            return intersection(dict, new Set(o[kw])).size > 0;
+          };
+        } else {
+          picked[kw] = function (o) {
+            return dict.has(o[kw]);
+          };
+        }
       } else {
         delete picked[kw];
       }
@@ -2909,6 +1691,7 @@ function (_Component) {
         this.setState({
           regions: vals
         });
+        this.selectSelect.bind(this)(vals, 'region');
       } else if (selectType === "Country") {
         this.setState({
           countries: vals
@@ -2923,6 +1706,7 @@ function (_Component) {
         this.setState({
           sectors: vals
         });
+        this.selectSelect.bind(this)(vals, 'sectors', true);
       }
 
       console.log(selectType, "Option selected:", vals);
@@ -3050,26 +1834,16 @@ function (_Component) {
         style: {
           marginBottom: '18px'
         }
-      }, _react["default"].createElement("div", {
-        className: "col-xs-12"
-      }, _react["default"].createElement("div", {
-        className: "search-controls-wrapper"
-      }, _react["default"].createElement("div", {
-        className: "search-controls"
-      }, _react["default"].createElement("div", {
-        className: "row",
-        role: "form"
-      }, _react["default"].createElement("div", {
-        id: "main_select_filter"
       }, _react["default"].createElement(_MainSelectFilters["default"], {
         onChange: this.onSelectChange,
         reports: this.state.reports,
         initialReports: this.state.initialReports,
         regions: this.state.regions,
         types: this.state.types,
+        filters: this.state.filters,
         countries: this.state.countries,
         sectors: this.state.sectors
-      }))))))), _react["default"].createElement("div", {
+      })), _react["default"].createElement("div", {
         className: "row "
       }, _react["default"].createElement(_DocumentField["default"], {
         reports: this.state.reports,
@@ -3078,26 +1852,11 @@ function (_Component) {
         approval_year: this.state.approval_year
       }), _react["default"].createElement(_ThematicFocus["default"], {
         reports: this.state.reports,
+        thematicsFocus: this.state.thematicsFocus,
         onCheck: this.onCheckBoxChange
-      })), _react["default"].createElement("div", {
-        className: "row filters",
-        style: {
-          marginTop: '0px'
-        }
-      }, _react["default"].createElement("div", {
-        className: "text-center search-controls-wrapper"
-      }, _react["default"].createElement("button", {
-        className: "btn btn-primary btn-filter",
-        id: "apply_filters",
-        onClick: this.search
-      }, "Apply filters"), _react["default"].createElement("a", {
-        id: "clear_filters",
-        className: "btn-clear-filters",
-        title: "Clear filters"
-      }, _react["default"].createElement("i", {
-        className: "fa fa-times-circle"
-      })))))), _react["default"].createElement(_Results["default"], {
-        reports: this.state.reports
+      })))), _react["default"].createElement(_Results["default"], {
+        reports: this.state.reports,
+        filters: this.state.filters
       }))));
     }
   }]);
@@ -3108,7 +1867,7 @@ function (_Component) {
 global.window.SearchContainer = SearchContainer;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Charts":3,"./DocumentField":6,"./MainSelectFilters":8,"./Map":9,"./Results":10,"./ThematicFocus":15,"es6-promise":63,"isomorphic-fetch":71,"react":224}],14:[function(require,module,exports){
+},{"../../js/cljs.js":1,"./DocumentField":3,"./MainSelectFilters":4,"./Map":5,"./Results":6,"./ThematicFocus":8,"es6-promise":53,"isomorphic-fetch":61,"react":214}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3117,12 +1876,6 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
-
-var _Childo = _interopRequireDefault(require("./Childo"));
-
-var _data = require("./data");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -3146,230 +1899,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var ThematicFocus =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(ThematicFocus, _Component);
+var cljs = require('../../js/cljs.js');
 
-  function ThematicFocus(props) {
-    var _this;
-
-    _classCallCheck(this, ThematicFocus);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ThematicFocus).call(this, props));
-    _this.state = {
-      liked: false,
-      region: ''
-    };
-    _this.wow = _this.wow.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(ThematicFocus, [{
-    key: "wow",
-    value: function wow(e) {
-      console.log('wow', e, this.state);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react["default"].createElement("div", {
-        className: "well search-tab"
-      }, _react["default"].createElement("a", {
-        className: "btn btn-primary",
-        role: "button",
-        "data-toggle": "collapse",
-        href: "#collapseTheme",
-        "aria-expanded": "false",
-        "aria-controls": "collapseTheme"
-      }, _react["default"].createElement("span", {
-        className: "glyphicon glyphicon-plus collap plus-minus",
-        "aria-hidden": "true"
-      })), _react["default"].createElement("a", {
-        className: "",
-        role: "button",
-        "data-toggle": "collapse",
-        href: "#collapseTheme",
-        "aria-expanded": "false",
-        "aria-controls": "collapseTheme"
-      }, _react["default"].createElement("span", {
-        className: "collapse-title"
-      }, "Thematic focus")), _react["default"].createElement("div", {
-        className: "collapse collapseDiv row",
-        id: "collapseTheme"
-      }, _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "form-group",
-        "data-toggle": "tooltip",
-        title: ""
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The strategy focuses on environmental sustainability"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "environment"
-      }), "Environment")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The strategy focuses on gender equality"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "gender"
-      }), "Gender")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The strategy focuses on poverty reduction"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "poverty_reduction"
-      }), "Poverty Reduction")))), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "form-group",
-        "data-toggle": "tooltip",
-        title: ""
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The trade export strategy "
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "export_strategy"
-      }), "Export Strategy")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "Trade focus"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_focus"
-      }), "Focus on trade")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The strategy focuses on youth integration"
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "youth"
-      }), "Youth")))), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The document focuses on trade facilitation."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_facilitation"
-      }), "Trade Facilitation")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The document focuses on trade finance and/or access to credit."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_finance"
-      }), "Trade Finance")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The document focuses on trade information and/or market intelligence."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_information"
-      }), "Trade Information"))), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The document focuses on trade promotion."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "trade_promotion"
-      }), "Trade Promotion")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The document focuses on standards and/or quality management."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "quality"
-      }), "Quality")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The strategy focuses on Technical and Vocational Education and Training (TVET)."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "tvet"
-      }), "TVET"))), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The document has a regional scope. The information included applies to a group of countries."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "regional"
-      }), "Regional Scope")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "The document focuses on regional integration."
-      }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "regional_integration"
-      }), "Regional Integration")), _react["default"].createElement("div", {
-        className: "checkbox",
-        "data-toggle": "tooltip",
-        title: "select all theme options"
-      }, _react["default"].createElement("label", {
-        style: {
-          fontWeight: "bolder",
-          textDecoration: "underline"
-        }
-      }, _react["default"].createElement("input", {
-        type: "checkbox",
-        id: "all_theme"
-      }), "Select all")))));
-    }
-  }]);
-
-  return ThematicFocus;
-}(_react.Component);
-
-var _default = ThematicFocus;
-exports["default"] = _default;
-
-},{"./Childo":4,"./data":18,"react":224}],15:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _utils = require("./utils");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+var newsTM = ["environment", "focus_on_trade", "gender", "poverty_reduction", "quality", "regional_integration", "trade_facilitation", "trade_finance", "trade_information", "trade_promotion", "tvet", "youth"];
 
 function CheckBox(props) {
   return _react["default"].createElement("div", {
@@ -3380,7 +1912,7 @@ function CheckBox(props) {
     type: "checkbox",
     id: props.id,
     onChange: props.onChange(props.id)
-  }), props.name, " (", props.count[props.id] ? props.count[props.id] : 0, ")"));
+  }), props.name, " (", props.count.counter[props.id] ? props.count.counter[props.id] : 0, ")"));
 }
 
 var ThematicFocus =
@@ -3395,7 +1927,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ThematicFocus).call(this, props));
     _this.state = {
-      reports: []
+      reports: [],
+      counter: {}
     };
     _this.check = _this.check.bind(_assertThisInitialized(_this));
     return _this;
@@ -3547,15 +2080,13 @@ function (_Component) {
     key: "getDerivedStateFromProps",
     value: function getDerivedStateFromProps(props, state) {
       if (props.reports !== state.reports) {
-        return _utils.thematicFocusKeys.reduce(function (c, o) {
-          c[o] = (0, _utils.countProp)(props.reports, o);
-          return c;
-        }, {
-          reports: props.reports
-        });
+        return {
+          reports: props.reports,
+          counter: cljs.countThematicFocus(props.reports, props.thematicsFocus)
+        };
       }
 
-      return null;
+      return state;
     }
   }]);
 
@@ -3565,157 +2096,7 @@ function (_Component) {
 var _default = ThematicFocus;
 exports["default"] = _default;
 
-},{"./utils":19,"react":224}],16:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.cities = void 0;
-var cities = [{
-  "city": "New York",
-  "population": "8,175,133",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Gotham.jpg/240px-Above_Gotham.jpg",
-  "state": "New York",
-  "latitude": 40.6643,
-  "longitude": -73.9385
-}, {
-  "city": "Los Angeles",
-  "population": "3,792,621",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/5/57/LA_Skyline_Mountains2.jpg/240px-LA_Skyline_Mountains2.jpg",
-  "state": "California",
-  "latitude": 34.0194,
-  "longitude": -118.4108
-}, {
-  "city": "Chicago",
-  "population": "2,695,598",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/8/85/2008-06-10_3000x1000_chicago_skyline.jpg/240px-2008-06-10_3000x1000_chicago_skyline.jpg",
-  "state": "Illinois",
-  "latitude": 41.8376,
-  "longitude": -87.6818
-}, {
-  "city": "Houston",
-  "population": "2,100,263",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Aerial_views_of_the_Houston%2C_Texas%2C_28005u.jpg/240px-Aerial_views_of_the_Houston%2C_Texas%2C_28005u.jpg",
-  "state": "Texas",
-  "latitude": 29.7805,
-  "longitude": -95.3863
-}, {
-  "city": "Phoenix",
-  "population": "1,445,632",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Downtown_Phoenix_Aerial_Looking_Northeast.jpg/207px-Downtown_Phoenix_Aerial_Looking_Northeast.jpg",
-  "state": "Arizona",
-  "latitude": 33.5722,
-  "longitude": -112.0880
-}, {
-  "city": "Philadelphia",
-  "population": "1,526,006",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Philly_skyline.jpg/240px-Philly_skyline.jpg",
-  "state": "Pennsylvania",
-  "latitude": 40.0094,
-  "longitude": -75.1333
-}, {
-  "city": "San Antonio",
-  "population": "1,327,407",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Downtown_San_Antonio_View.JPG/240px-Downtown_San_Antonio_View.JPG",
-  "state": "Texas",
-  "latitude": 29.4724,
-  "longitude": -98.5251
-}, {
-  "city": "San Diego",
-  "population": "1,307,402",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/5/53/US_Navy_110604-N-NS602-574_Navy_and_Marine_Corps_personnel%2C_along_with_community_leaders_from_the_greater_San_Diego_area_come_together_to_commemora.jpg/240px-US_Navy_110604-N-NS602-574_Navy_and_Marine_Corps_personnel%2C_along_with_community_leaders_from_the_greater_San_Diego_area_come_together_to_commemora.jpg",
-  "state": "California",
-  "latitude": 32.8153,
-  "longitude": -117.1350
-}, {
-  "city": "Dallas",
-  "population": "1,197,816",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Dallas_skyline_daytime.jpg/240px-Dallas_skyline_daytime.jpg",
-  "state": "Texas",
-  "latitude": 32.7757,
-  "longitude": -96.7967
-}, {
-  "city": "San Jose",
-  "population": "945,942",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Downtown_San_Jose_skyline.PNG/240px-Downtown_San_Jose_skyline.PNG",
-  "state": "California",
-  "latitude": 37.2969,
-  "longitude": -121.8193
-}, {
-  "city": "Austin",
-  "population": "790,390",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Austin2012-12-01.JPG/240px-Austin2012-12-01.JPG",
-  "state": "Texas",
-  "latitude": 30.3072,
-  "longitude": -97.7560
-}, {
-  "city": "Jacksonville",
-  "population": "821,784",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Skyline_of_Jacksonville_FL%2C_South_view_20160706_1.jpg/240px-Skyline_of_Jacksonville_FL%2C_South_view_20160706_1.jpg",
-  "state": "Florida",
-  "latitude": 30.3370,
-  "longitude": -81.6613
-}, {
-  "city": "San Francisco",
-  "population": "805,235",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/San_Francisco_skyline_from_Coit_Tower.jpg/240px-San_Francisco_skyline_from_Coit_Tower.jpg",
-  "state": "California",
-  "latitude": 37.7751,
-  "longitude": -122.4193
-}, {
-  "city": "Columbus",
-  "population": "787,033",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Columbus-ohio-skyline-panorama.jpg/240px-Columbus-ohio-skyline-panorama.jpg",
-  "state": "Ohio",
-  "latitude": 39.9848,
-  "longitude": -82.9850
-}, {
-  "city": "Indianapolis",
-  "population": "820,445",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Downtown_indy_from_parking_garage_zoom.JPG/213px-Downtown_indy_from_parking_garage_zoom.JPG",
-  "state": "Indiana",
-  "latitude": 39.7767,
-  "longitude": -86.1459
-}, {
-  "city": "Fort Worth",
-  "population": "741,206",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/d/db/FortWorthTexasSkylineW.jpg/240px-FortWorthTexasSkylineW.jpg",
-  "state": "Texas",
-  "latitude": 32.7795,
-  "longitude": -97.3463
-}, {
-  "city": "Charlotte",
-  "population": "731,424",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Charlotte_skyline45647.jpg/222px-Charlotte_skyline45647.jpg",
-  "state": "North Carolina",
-  "latitude": 35.2087,
-  "longitude": -80.8307
-}, {
-  "city": "Seattle",
-  "population": "608,660",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/3/36/SeattleI5Skyline.jpg/240px-SeattleI5Skyline.jpg",
-  "state": "Washington",
-  "latitude": 47.6205,
-  "longitude": -122.3509
-}, {
-  "city": "Denver",
-  "population": "600,158",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/DenverCP.JPG/240px-DenverCP.JPG",
-  "state": "Colorado",
-  "latitude": 39.7618,
-  "longitude": -104.8806
-}, {
-  "city": "El Paso",
-  "population": "649,121",
-  "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Downtown_El_Paso_at_sunset.jpeg/240px-Downtown_El_Paso_at_sunset.jpeg",
-  "state": "Texas",
-  "latitude": 31.8484,
-  "longitude": -106.4270
-}];
-exports.cities = cities;
-
-},{}],17:[function(require,module,exports){
+},{"../../js/cljs.js":1,"react":214}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3796,1661 +2177,13 @@ function (_PureComponent) {
 
 exports["default"] = CityPin;
 
-},{"react":224}],18:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.d = exports.countries = exports.regions = exports.types = exports.sectors = void 0;
-var sectors = [{
-  label: "Animal and vegetable oils, fats and waxes",
-  options: [{
-    value: "831fe888-5e70-4d2f-8cd1-37d68b6ab8cf",
-    label: "Animal oils and fats"
-  }, {
-    value: "5f13d462-d292-4340-9295-1673e0c2b781",
-    label: "Animal or vegetable fats and oils, processed; waxes of animal or vegetable origin; inedible mixtures or preparations of animal or vegetable fats or oils, n.e.s."
-  }, {
-    value: "a1e0a1e6-013c-43dd-b707-2a4e4d0b852e",
-    label: "Fixed vegetable fats and oils, crude, refined or fractionated"
-  }]
-}, {
-  value: "663ae2bf-fc55-4064-a1e2-db0af580b635",
-  label: "Beverages and tobacco",
-  "class": "first-level",
-  options: [{
-    value: "80e60b8d-b762-4608-8766-cfd54d3cc282",
-    "class": "second-level-last",
-    label: "Beverages"
-  }, {
-    value: "2ee2c112-e8be-44fe-b0d8-13169edcf2f4",
-    "class": "second-level-last",
-    label: "Tobacco and tobacco manufactures"
-  }]
-}, {
-  value: "83ba4a90-18ee-4a63-bed4-5cea6afc7bd6",
-  label: "Chemicals and related products, n.e.s.",
-  "class": "first-level",
-  options: [{
-    value: "9ca4db08-e2d3-4070-b09c-a2eec5ee21d4",
-    "class": "second-level-last",
-    label: "Chemical materials and products, n.e.s."
-  }, {
-    value: "78cfb731-52fc-4f9a-a7b4-ea02043a7a65",
-    "class": "second-level-last",
-    label: "Dyeing, tanning and colouring materials"
-  }, {
-    value: "c8730a2d-ac99-41f3-8ba8-c463c359b098",
-    "class": "second-level-last",
-    label: "Essential oils and resinoids and perfume materials; toilet, polishing and cleansing preparations"
-  }, {
-    value: "e2f8e9bd-7858-49ed-8bfe-116772e235c0",
-    "class": "second-level-last",
-    label: "Fertilizers (other than those of group 272)"
-  }, {
-    value: "451260a2-1f64-426b-af33-edfd0f7b261b",
-    "class": "second-level-last",
-    label: "Inorganic chemicals"
-  }, {
-    value: "d1cc4143-6e19-412b-b705-aab7c3a5ab85",
-    "class": "second-level-last",
-    label: "Medicinal and pharmaceutical products"
-  }, {
-    value: "de67dcb2-e682-4ee0-b01b-f6bb1002b8c2",
-    "class": "second-level-last",
-    label: "Organic chemicals"
-  }, {
-    value: "ad6d34ce-65fb-4ec5-bdc0-268e6e5eba5f",
-    "class": "second-level-last",
-    label: "Plastics in non-primary forms"
-  }, {
-    value: "529445ba-53e6-4faa-9f48-35618cede471",
-    "class": "second-level-last",
-    label: "Plastics in primary forms"
-  }]
-}, {
-  value: "b1f6272e-5672-481d-8d06-c531569da45c",
-  label: "Commodities and transactions not classified elsewhere in the SITC",
-  "class": "first-level",
-  options: [{
-    value: "3f738294-1e05-4ff0-99ba-7983b5b6c328",
-    "class": "second-level-last",
-    label: "Coin (other than gold coin), not being legal tender"
-  }, {
-    value: "dadb2c8c-2d29-4d1c-8270-fa0c946721e7",
-    "class": "second-level-last",
-    label: "Gold, non-monetary (excluding gold ores and concentrates)"
-  }, {
-    value: "d37bef45-5c68-47f9-bfd9-c47b0b1d32c0",
-    "class": "second-level-last",
-    label: "Postal packages not classified according to kind"
-  }, {
-    value: "8f933f83-263a-4ded-93de-647f56bb65b9",
-    "class": "second-level-last",
-    label: "Special transactions and commodities not classified according to kind"
-  }]
-}, {
-  value: "ad0d6e26-d1ff-4ed8-8e76-b5d66c4a5159",
-  label: "Crude materials, inedible, except fuels",
-  "class": "first-level",
-  options: [{
-    value: "2403af10-fa09-4ba6-9d19-4b6bc0dfab33",
-    "class": "second-level-last",
-    label: "Cork and wood"
-  }, {
-    value: "bd88986a-911c-4297-917f-1fc1f1e6fded",
-    "class": "second-level-last",
-    label: "Crude animal and vegetable materials, n.e.s."
-  }, {
-    value: "31cf82a7-149f-476c-92b0-eae5e8ca501f",
-    "class": "second-level-last",
-    label: "Crude fertilizers, other than those of division 56, and crude minerals (excluding coal, petroleum and precious stones)"
-  }, {
-    value: "a2d73f4f-b6e5-471b-9380-cc06a61ad018",
-    "class": "second-level-last",
-    label: "Crude rubber (including synthetic and reclaimed)"
-  }, {
-    value: "c6259cde-f9cd-4bf4-b810-a7fdcbe5da50",
-    "class": "second-level-last",
-    label: "Hides, skins and furskins, raw"
-  }, {
-    value: "bda93d6d-8715-4c5b-ad15-81cab5d87505",
-    "class": "second-level-last",
-    label: "Metalliferous ores and metal scrap"
-  }, {
-    value: "8fbb01a4-66cf-4700-a6bd-5dafb6486ce3",
-    "class": "second-level-last",
-    label: "Oil-seeds and oleaginous fruits"
-  }, {
-    value: "83f48ef5-c5e8-4813-ba8f-ecf10e481357",
-    "class": "second-level-last",
-    label: "Pulp and waste paper"
-  }, {
-    value: "6a339fcc-f819-4056-8f05-9e3473191e06",
-    "class": "second-level-last",
-    label: "Textile fibres (other than wool tops and other combed wool) and their wastes (not manufactured into yarn or fabric)"
-  }]
-}, {
-  value: "cc357bb6-86d8-437b-b8a8-4e239418b8d2",
-  label: "Food and live animals",
-  "class": "first-level",
-  options: [{
-    value: "e4d7cdb0-6692-47a1-8ca6-a6d787e4e12d",
-    "class": "second-level-last",
-    label: "Cereals and cereal preparations"
-  }, {
-    value: "d2694f12-97e2-4fd9-9187-f45a3f59a5c6",
-    "class": "second-level-last",
-    label: "Coffee, tea, cocoa, spices, and manufactures thereof"
-  }, {
-    value: "4e869a4e-ec69-4624-a1ce-11c2b7927067",
-    "class": "second-level-last",
-    label: "Dairy products and birds&#39; eggs"
-  }, {
-    value: "a6ee4d25-8f19-494c-908d-2eba133820ad",
-    "class": "second-level-last",
-    label: "Feeding stuff for animals (not including unmilled cereals)"
-  }, {
-    value: "b2e2073b-280c-418c-b7d3-249b71d76eef",
-    "class": "second-level-last",
-    label: "Fish (not marine mammals), crustaceans, molluscs and aquatic invertebrates, and preparations thereof"
-  }, {
-    value: "93201d7b-686f-452d-9854-441ed3b04444",
-    "class": "second-level-last",
-    label: "Live animals other than animals of division 03"
-  }, {
-    value: "8dd6213c-935a-40f5-9096-a8be77969523",
-    "class": "second-level-last",
-    label: "Meat and meat preparations"
-  }, {
-    value: "4d835010-7513-481a-9739-076016495e4a",
-    "class": "second-level-last",
-    label: "Miscellaneous edible products and preparations"
-  }, {
-    value: "1a4188d3-ca4e-468a-9077-69ab2b7b25de",
-    "class": "second-level-last",
-    label: "Sugars, sugar preparations and honey"
-  }, {
-    value: "703953f5-d1ef-4cfb-a377-42282a87a49c",
-    "class": "second-level-last",
-    label: "Vegetables and fruit"
-  }]
-}, {
-  value: "724fa0de-e1f3-4597-968e-eddd6688a548",
-  label: "Machinery and transport equipment",
-  "class": "first-level",
-  options: [{
-    value: "262a7aa9-8305-4312-91e6-1cb0e62d91f6",
-    "class": "second-level-last",
-    label: "Electrical machinery, apparatus and appliances, n.e.s., and electrical parts thereof (including non-electrical counterparts, n.e.s., of electrical household-type equipment)"
-  }, {
-    value: "1cb1ef1d-2b3f-4e58-b751-9d67b3e828eb",
-    "class": "second-level-last",
-    label: "General industrial machinery and equipment, n.e.s., and machine parts, n.e.s."
-  }, {
-    value: "1b2a04e7-d658-495e-a31f-63bf4b2ddb50",
-    "class": "second-level-last",
-    label: "Machinery specialized for particular industries"
-  }, {
-    value: "a55f1477-2799-4ae2-9271-31b4cfb4cd9e",
-    "class": "second-level-last",
-    label: "Metalworking machinery"
-  }, {
-    value: "43f1fc4d-256e-4e2d-83ae-4c63a2321fd8",
-    "class": "second-level-last",
-    label: "Office machines and automatic data-processing machines"
-  }, {
-    value: "25c2c881-ad52-4822-8868-60f8ccaa9a1a",
-    "class": "second-level-last",
-    label: "Other transport equipment"
-  }, {
-    value: "b4b401b7-7169-4783-b990-1c974284bc69",
-    "class": "second-level-last",
-    label: "Power-generating machinery and equipment"
-  }, {
-    value: "2d6652bf-f440-41b6-a7a2-1020c2c50834",
-    "class": "second-level-last",
-    label: "Road vehicles (including air-cushion vehicles)"
-  }, {
-    value: "4edf0b60-ced4-4ffc-a68b-2c8b7a48982a",
-    "class": "second-level-last",
-    label: "Telecommunications and sound-recording and reproducing apparatus and equipment"
-  }]
-}, {
-  value: "5730fc7f-0387-46fc-9222-595b1ba819c2",
-  label: "Manufactured goods classified chiefly by material",
-  "class": "first-level",
-  options: [{
-    value: "94252a25-4bd1-44ef-af20-79780890b37c",
-    "class": "second-level-last",
-    label: "Cork and wood manufactures (excluding furniture)"
-  }, {
-    value: "20aff6ee-de8c-43ce-913d-23145f3222f4",
-    "class": "second-level-last",
-    label: "Iron and steel"
-  }, {
-    value: "126ae1f3-932d-42ee-9ec4-44df17ef1189",
-    "class": "second-level-last",
-    label: "Leather, leather manufactures, n.e.s., and dressed furskins"
-  }, {
-    value: "513743dd-9ade-46a0-8c06-edc836671c6e",
-    "class": "second-level-last",
-    label: "Manufactures of metals, n.e.s."
-  }, {
-    value: "180a500c-4cdf-4c04-934d-c556704018a7",
-    "class": "second-level-last",
-    label: "Non-ferrous metals"
-  }, {
-    value: "89c604ca-24a7-440b-b93d-5f5bba151e8b",
-    "class": "second-level-last",
-    label: "Non-metallic mineral manufactures, n.e.s."
-  }, {
-    value: "3f2f9fdd-b935-40e1-a947-da1be02ee98d",
-    "class": "second-level-last",
-    label: "Paper, paperboard and articles of paper pulp, of paper or of paperboard"
-  }, {
-    value: "6d013c63-9c5f-4458-b560-be106d20e15f",
-    "class": "second-level-last",
-    label: "Rubber manufactures, n.e.s."
-  }, {
-    value: "a9205727-b4f1-4682-9911-3ca9449c9e09",
-    "class": "second-level-last",
-    label: "Textile yarn, fabrics, made-up articles, n.e.s., and related products"
-  }]
-}, {
-  value: "0657d265-fab1-4e94-94ed-af6d88933f94",
-  label: "Mineral fuels, lubricants and related materials",
-  "class": "first-level",
-  options: [{
-    value: "238929d7-5a32-483a-ad39-7611c3a879eb",
-    "class": "second-level-last",
-    label: "Coal, coke and briquettes"
-  }, {
-    value: "13ab2e82-04d0-481e-b470-651a6742e089",
-    "class": "second-level-last",
-    label: "Electric current"
-  }, {
-    value: "3ad501a8-09b7-4977-83a0-153cbb534326",
-    "class": "second-level-last",
-    label: "Gas, natural and manufactured"
-  }, {
-    value: "4540795e-3705-4f40-9ef8-a136adf50a04",
-    "class": "second-level-last",
-    label: "Petroleum, petroleum products and related materials"
-  }]
-}, {
-  value: "67d0edf0-e9a0-4db1-b372-88e0d8edb0d2",
-  label: "Miscellaneous manufactured articles",
-  "class": "first-level",
-  options: [{
-    value: "b55d80eb-92ac-425d-8957-73f53082cc28",
-    "class": "second-level-last",
-    label: "Articles of apparel and clothing accessories"
-  }, {
-    value: "7d84975a-5d94-44a8-9e4f-9340ee2f76e0",
-    "class": "second-level-last",
-    label: "Footwear"
-  }, {
-    value: "224d3c5a-7c53-48cb-8aab-8677e1f6ae06",
-    "class": "second-level-last",
-    label: "Furniture, and parts thereof; bedding, mattresses, mattress supports, cushions and similar stuffed furnishings"
-  }, {
-    value: "b3984a03-fc9e-4fd3-8266-2e2f858c2726",
-    "class": "second-level-last",
-    label: "Miscellaneous manufactured articles, n.e.s."
-  }, {
-    value: "6f4110d9-cbac-442b-b5de-abeb6809bb2b",
-    "class": "second-level-last",
-    label: "Photographic apparatus, equipment and supplies and optical goods, n.e.s.; watches and clocks"
-  }, {
-    value: "f8a662b2-01de-4a9c-96f4-2bf60da2e218",
-    "class": "second-level-last",
-    label: "Prefabricated buildings; sanitary, plumbing, heating and lighting fixtures and fittings, n.e.s."
-  }, {
-    value: "fb3c0a42-b5a7-498a-9730-0de7651dd0d4",
-    "class": "second-level-last",
-    label: "Professional, scientific and controlling instruments and apparatus, n.e.s."
-  }, {
-    value: "61a0f895-1986-42f1-bb17-d87e5502f224",
-    "class": "second-level-last",
-    label: "Travel goods, handbags and similar containers"
-  }]
-}, {
-  value: "1f0b3afb-248e-42c3-a123-1446f4d3c5ca",
-  label: "N/A",
-  "class": "first-level",
-  options: []
-}, {
-  value: "41c966ec-48a8-4b68-9fb4-a6ca51374c55",
-  label: "BUSINESS&#160;SERVICES",
-  "class": "first-level",
-  options: [{
-    value: "4ffd315b-de21-4072-87d1-60e345cdb689",
-    "class": "second-level",
-    label: "Computer and Related Services",
-    options: [{
-      value: "d2bb2c05-faf3-45dd-b735-97ef1a4e7b44",
-      "class": "third-level",
-      label: "Consultancy services related to the installation of computer hardware       ",
-      options: []
-    }, {
-      value: "08324325-7b43-4dd5-a4a7-aad5cd3714ee",
-      "class": "third-level",
-      label: "Data base services",
-      options: []
-    }, {
-      value: "f35cc60c-5d41-4c70-8751-75955c15ead2",
-      "class": "third-level",
-      label: "Data processing services",
-      options: []
-    }, {
-      value: "df417bb7-705a-4e78-b8af-182cd115e327",
-      "class": "third-level",
-      label: "Ohter",
-      options: []
-    }, {
-      value: "4d008930-e0cf-4960-a336-66a2c12c959f",
-      "class": "third-level",
-      label: "Software implementation services",
-      options: []
-    }]
-  }]
-}, {
-  value: "fa5d876f-b1e7-4894-b9c9-e85dff80981a",
-  "class": "second-level",
-  label: "Other Business Services",
-  options: [{
-    value: "1dba80e6-9093-456f-8ed7-e15df19221fb",
-    "class": "third-level",
-    label: "Advertising services",
-    options: []
-  }, {
-    value: "96c3d6af-db6a-4215-988c-fbcb332e845c",
-    "class": "third-level",
-    label: "Building-cleaning services",
-    options: []
-  }, {
-    value: "19cef3c7-9905-4adb-b4b1-6bef35f173a6",
-    "class": "third-level",
-    label: "Convention services",
-    options: []
-  }, {
-    value: "22eafe52-6909-42a6-9e65-cf57723569be",
-    "class": "third-level",
-    label: "Investigation and security",
-    options: []
-  }, {
-    value: "6d840bf3-5cf2-4d8a-aa64-8f9db43b7306",
-    "class": "third-level",
-    label: "Maintenance and repair of equipment (not including maritime vessels, aircraftor or other transport equipment)             ",
-    options: []
-  }, {
-    value: "f21af7be-cd15-499e-b8d5-d1092cb00081",
-    "class": "third-level",
-    label: "Management consulting service",
-    options: []
-  }, {
-    value: "519a63f7-ae54-4014-b115-5d85b9432fc0",
-    "class": "third-level",
-    label: "Market research and public opinion polling services",
-    options: []
-  }, {
-    value: "bf1c663c-09ed-411c-a4ce-1c39606cb151",
-    "class": "third-level",
-    label: "Others",
-    options: []
-  }, {
-    value: "50d9fb09-a484-4e7b-96d8-6d102197d168",
-    "class": "third-level",
-    label: "Packaging services",
-    options: []
-  }, {
-    value: "533573f7-7bb8-46b5-bd1f-7b2fd3dd50c9",
-    "class": "third-level",
-    label: "Photographic services",
-    options: []
-  }, {
-    value: "445e4401-4f15-48ee-b012-3e596d61f962",
-    "class": "third-level",
-    label: "Placement and supply services of Personnel",
-    options: []
-  }, {
-    value: "9f2c8cf8-b6ba-4275-9e36-4e69f5393741",
-    "class": "third-level",
-    label: "Printing, publishing",
-    options: []
-  }, {
-    value: "0b0dd734-aa25-4ad2-8d7e-afd53279396b",
-    "class": "third-level",
-    label: "Related scientific and technical consulting services",
-    options: []
-  }, {
-    value: "c31d7248-ef6d-4094-a4e5-db209f5ad0bd",
-    "class": "third-level",
-    label: "Services incidental to agriculture, hunting and forestry",
-    options: []
-  }, {
-    value: "8aea549e-4caf-4388-ad6c-f6b4d58fd505",
-    "class": "third-level",
-    label: "Services incidental to energy distribution",
-    options: []
-  }, {
-    value: "fa7f409b-08a3-4e01-8e54-f68e56f3d025",
-    "class": "third-level",
-    label: "Services incidental to fishing",
-    options: []
-  }, {
-    value: "fbc6562c-9576-415d-a0a3-e5fbe6788545",
-    "class": "third-level",
-    label: "Services incidental to manufacturing",
-    options: []
-  }, {
-    value: "fcc613da-b824-4e2e-81de-dd6a292e5c03",
-    "class": "third-level",
-    label: "Services incidental to mining",
-    options: []
-  }, {
-    value: "c2f9f020-ae85-4f8d-8a90-d4b10ad1066c",
-    "class": "third-level",
-    label: "Services related to man. consulting ",
-    options: [{
-      value: "6cba3e6d-01a7-417a-b53f-3f153be8e20c",
-      "class": "third-level",
-      label: "Accounting, auditing and bookeeping services     ",
-      options: []
-    }, {
-      value: "4a3c6fda-b026-4a4b-84a3-a331dcd624e7",
-      "class": "third-level",
-      label: "Architectural services",
-      options: []
-    }, {
-      value: "1051930b-4716-4df4-a7fe-9fdd93ba2d40",
-      "class": "third-level",
-      label: "Engineering services",
-      options: []
-    }, {
-      value: "35eb3c8a-56bc-4923-9194-457b7ce4c36e",
-      "class": "third-level",
-      label: "Integrated engineering services",
-      options: []
-    }, {
-      value: "68d88072-02fc-43db-87c0-5b84cb553858",
-      "class": "third-level",
-      label: "Legal Services",
-      options: []
-    }, {
-      value: "139dcfe0-4cf4-4f28-b627-3ceaae4db948",
-      "class": "third-level",
-      label: "Medical and dental services",
-      options: []
-    }, {
-      value: "88b3456b-23d9-430d-bf88-11f933dc119a",
-      "class": "third-level",
-      label: "Other",
-      options: []
-    }, {
-      value: "ecae4a61-92d1-4c1b-8d72-98acb1fc9d44",
-      "class": "third-level",
-      label: "Services provided by midwives, nurses,physiotherapists and para-medical personnel",
-      options: []
-    }, {
-      value: "989b2bc2-f808-49fa-a327-2a32c3deb7d3",
-      "class": "third-level",
-      label: "Taxation Services   ",
-      options: []
-    }, {
-      value: "085c58cc-9d45-41ab-96c9-46327e54ef4c",
-      "class": "third-level",
-      label: "Urban planning and landscape architectural services       ",
-      options: []
-    }, {
-      value: "d15df049-c0b4-4a76-8960-54e51092597f",
-      "class": "third-level",
-      label: "Veterinary services",
-      options: []
-    }]
-  }]
-}, {
-  value: "a59a3b9f-53ad-4fe5-acd2-53fc6f1c850a",
-  "class": "second-level",
-  label: "Professional Services",
-  options: []
-}, {
-  value: "a45375c4-54cc-4d04-bc96-b7557304862a",
-  "class": "second-level",
-  label: "Real Estate Services",
-  options: [{
-    value: "154aede1-36ea-4e1c-9a16-537f70186cbd",
-    "class": "third-level",
-    label: "Involving own or leased property",
-    options: []
-  }, {
-    value: "9f8c00da-fa76-412e-af8f-f56a53f373f2",
-    "class": "third-level",
-    label: "On a fee or contract basis",
-    options: []
-  }]
-}, {
-  value: "84884ca3-431d-4941-adbf-65cf6567e318",
-  "class": "second-level",
-  label: "Rental/Leasing Services without Operators",
-  options: [{
-    value: "cf0fee53-5d22-4adc-9da7-6023eeb210b2",
-    "class": "third-level",
-    label: "Others",
-    options: []
-  }, {
-    value: "f257ae11-3be6-4d57-bfbd-299ee83d12bd",
-    "class": "third-level",
-    label: "Relating to aircraft",
-    options: []
-  }, {
-    value: "b180cd5d-059c-4f9b-9c53-b1a132d2669a",
-    "class": "third-level",
-    label: "Relating to other machinery and equipment",
-    options: []
-  }, {
-    value: "02606a49-dcac-457d-8a5b-de41eded251c",
-    "class": "third-level",
-    label: "Relating to other transport equipment ",
-    options: []
-  }, {
-    value: "8b3bd2c9-61c9-4c99-a278-b65b41283ae9",
-    "class": "third-level",
-    label: "Relating to ships",
-    options: []
-  }]
-}, {
-  value: "7b13c47a-fe7d-4c1e-8e71-da5cc21f7fcd",
-  "class": "second-level",
-  label: "Research and Development Services",
-  options: [{
-    value: "a6497fa4-2efa-4973-a45d-09526ecb9f25",
-    "class": "third-level",
-    label: "Interdisciplinary R&amp;D services",
-    options: []
-  }, {
-    value: "4ac2d90e-dd35-4c2f-9d3e-245d8cb94976",
-    "class": "third-level",
-    label: "R&amp;D services on social sciences and humanities",
-    options: []
-  }, {
-    value: "df68a78d-7456-47c3-8ec2-4fed6cc6816b",
-    "class": "third-level",
-    label: "SR&amp;D services on natural sciences",
-    options: []
-  }]
-}];
-exports.sectors = sectors;
-var types = [{
-  value: "National",
-  label: "National",
-  level: 0
-}, {
-  value: "International",
-  label: "International",
-  level: 0
-}, {
-  value: "DTIS",
-  label: "DTIS",
-  level: 1
-}, {
-  value: "NES-ITC",
-  label: "NES-ITC",
-  level: 1
-}, {
-  value: "Other",
-  label: "Other",
-  level: 1
-}, {
-  value: "PRSP",
-  label: "PRSP",
-  level: 1
-}, {
-  value: "SES-ITC",
-  label: "SES-ITC",
-  level: 1
-}, {
-  value: "UNDAF",
-  label: "UNDAF",
-  level: 1
-}];
-exports.types = types;
-var regions = [{
-  label: "Geographical",
-  options: [{
-    value: "d380856d-ddca-4995-9cc5-51179abc00f6",
-    label: "Africa"
-  }, {
-    value: "3f5ceef1-92b1-4378-b9d9-8b6486154219",
-    label: "America"
-  }, {
-    value: "1a7644bb-7cab-48d6-be14-a08a987bb394",
-    label: "Asia"
-  }, {
-    value: "a9051429-6a0a-46de-ac0e-f3117cbe5c73",
-    label: "Europe"
-  }, {
-    value: "604fdd0d-ccfb-4c2c-8676-8778e373f3c5",
-    label: "Oceania"
-  }]
-}, {
-  label: "Economical",
-  options: [{
-    value: "b58f9539-de72-486f-91c0-fff9c937508d",
-    label: "A.C.P."
-  }, {
-    value: "c3a3e0a3-91c0-4044-b226-bb451e1551be",
-    label: "ACM"
-  }, {
-    value: "866a404d-9e98-4616-9ab7-358aa541cfbe",
-    label: "Agadir"
-  }, {
-    value: "0d869cb3-5cef-4197-bca7-25e23a861b7d",
-    label: "ALADI"
-  }, {
-    value: "5179b631-a4e5-4270-b588-72ef36bb35a5",
-    label: "AMU"
-  }, {
-    value: "2d8a8037-1522-42fd-af01-a4a36be65617",
-    label: "Andean"
-  }, {
-    value: "2814d5f4-9655-4e12-bc6c-7843320d52db",
-    label: "ASEAN"
-  }, {
-    value: "78727c0d-a8b9-419e-bd17-ce2a05b872d8",
-    label: "AU"
-  }, {
-    value: "8c603fb5-8047-4b00-8bed-7529ab6ca995",
-    label: "BSEC"
-  }, {
-    value: "835f16b9-f155-480c-b833-eaade4438b46",
-    label: "CAN"
-  }, {
-    value: "038d3f4f-1d23-4bd9-8bb8-6f3acecfb50f",
-    label: "CAREC"
-  }, {
-    value: "9f834166-51c1-41d6-9506-e9aa247405d1",
-    label: "CARICOM"
-  }, {
-    value: "9f4913aa-e08f-4b5c-b80f-1d7b4b46d706",
-    label: "CARIFORUM"
-  }, {
-    value: "24735803-e3a4-4e46-a7d1-5be561625f7a",
-    label: "CBI"
-  }, {
-    value: "f08d0b7e-ff15-4d79-ae41-3d2a451d6920",
-    label: "CEI"
-  }, {
-    value: "aedca5f6-77ce-4ad4-8392-d7642e3bf124",
-    label: "CEMAC"
-  }, {
-    value: "48e9e52a-52f0-4976-8722-28dd3369b694",
-    label: "CENSAD"
-  }, {
-    value: "d541999a-e82a-4d1c-903f-d77438d6dff2",
-    label: "Central American Common Market (CACM)"
-  }, {
-    value: "3d76ab7b-e240-455e-a177-f60eb1213326",
-    label: "CIS"
-  }, {
-    value: "346a47da-455a-4998-a2bb-b33fb3749c04",
-    label: "COE"
-  }, {
-    value: "2c2d1ec5-b123-415b-bf1d-67a702e58b2f",
-    label: "COMESA"
-  }, {
-    value: "0c959d5a-7080-459d-bdb3-c9adb53a75ed",
-    label: "COMESA (PTA)"
-  }, {
-    value: "80387468-a73b-47eb-9dd5-b5f3c37755b7",
-    label: "COMSEC"
-  }, {
-    value: "72f7735b-15f3-445c-bff9-9855d70bf294",
-    label: "CSATFF"
-  }, {
-    value: "3e2ad3ea-fee6-4815-a992-721764daf737",
-    label: "Customs and Economic Union of Central Africa (CEUCA)"
-  }, {
-    value: "10d3ee6a-b625-4cd8-8037-19e4ae5cae19",
-    label: "Developed Countries"
-  }, {
-    value: "f281ae6a-a5ab-48ee-be8d-cc16194fc1b6",
-    label: "Developing Countries"
-  }, {
-    value: "a6ecd7e3-95f5-47f5-9dcc-510c4574b5d1",
-    label: "EAC"
-  }, {
-    value: "a41edbb4-29b7-4745-81b0-c6c0bbb64ae3",
-    label: "ECCAS"
-  }, {
-    value: "5b640d13-4368-4be7-a701-68b5a5183681",
-    label: "ECO"
-  }, {
-    value: "dca3cc0b-9ac3-492b-9b52-6d6a609ec488",
-    label: "ECOWAS"
-  }, {
-    value: "d21f0b67-f224-4af9-8d48-4fd778d58945",
-    label: "EFTA"
-  }, {
-    value: "10fe85cf-c8ca-4171-814b-df51b4fe9198",
-    label: "EurAsEc/EAEC "
-  }, {
-    value: "b5ce2d9e-5959-48ea-9cb4-6d8a115856c9",
-    label: "European Union"
-  }, {
-    value: "515c0131-0cc3-4aba-b60c-130d794e577d",
-    label: "GAFTA"
-  }, {
-    value: "446500e2-12f7-417b-8c98-52eb608119e1",
-    label: "GCC"
-  }, {
-    value: "f6c07a7a-59d4-400f-a3a9-4f86947c035f",
-    label: "GUUAM"
-  }, {
-    value: "85d987e9-64d7-431d-95aa-ba823417cb96",
-    label: "IGAD"
-  }, {
-    value: "90b13024-630c-4113-ad6a-a32f8e7eb5a3",
-    label: "Land Locked Developing Countries"
-  }, {
-    value: "19050907-491e-40cc-a686-fc616a3fadf1",
-    label: "Latin American Integration Association (LAIA)"
-  }, {
-    value: "7fe30ab7-4590-4966-a5d3-0756b4e76d39",
-    label: "Least Developed Countries"
-  }, {
-    value: "e20b7dc0-ba1d-438b-adbd-fa405eca69af",
-    label: "Maghreb"
-  }, {
-    value: "9e4568f0-7c18-4a77-b736-8d9a88b59a1f",
-    label: "MERCOSUR"
-  }, {
-    value: "c5c8c4e7-c6fc-4781-b15d-370fc2e0d6eb",
-    label: "NAFTA"
-  }, {
-    value: "d08f5e9c-4eaa-429a-8d1e-e15f4a4032d4",
-    label: "OECD"
-  }, {
-    value: "93fe7c9f-455f-433c-bd8e-547aec5c3395",
-    label: "OECS"
-  }, {
-    value: "eb15334a-a466-4ddc-949d-f3a9e1f9d09a",
-    label: "OIC"
-  }, {
-    value: "41e91a4c-9b6e-45ca-9728-8ed4993e3785",
-    label: "OIF"
-  }, {
-    value: "b939f4a8-76f3-43fa-b3be-0331f630e0ac",
-    label: "OPEC"
-  }, {
-    value: "3965c62c-a46e-4685-aa76-d512f2f4aaec",
-    label: "PIFS"
-  }, {
-    value: "ff21996f-a913-4cc0-b072-681b61bfe2b5",
-    label: "RCC"
-  }, {
-    value: "5d98e469-2f49-49df-82b0-d0a7ee57faa9",
-    label: "SAARC"
-  }, {
-    value: "1c90b34d-ab40-41c9-95e4-44aea4118216",
-    label: "SACU"
-  }, {
-    value: "9f7519e0-b6dd-4ae6-8a6f-bb3d36e4d99f",
-    label: "SADC"
-  }, {
-    value: "9c94cc86-3bfa-4df6-9a6b-4ab21bc73002",
-    label: "SCO"
-  }, {
-    value: "96009f3b-c6fa-46f1-b42e-bb2ab108a81e",
-    label: "SEECP"
-  }, {
-    value: "4b424580-897d-4a05-a5bf-32ca9926eb2c",
-    label: "Small Island Developing States"
-  }, {
-    value: "d19dd8de-25c3-49a7-8d22-6b03139af279",
-    label: "SPECA"
-  }, {
-    value: "1440f7f1-af6f-45ad-84d6-8f41abbc4ec8",
-    label: "Sub-Sahara"
-  }, {
-    value: "7693f8fd-ade6-4ffe-a306-a2c7781f8ef5",
-    label: "Transition countries"
-  }, {
-    value: "11d647a6-6cf8-4a5c-9461-2bb855056980",
-    label: "UEMOA"
-  }, {
-    value: "b83f16a7-94fb-4030-9913-5ba0f49233a5",
-    label: "UfM"
-  }, {
-    value: "2349154c-1218-4e1f-b0d3-173e831748b8",
-    label: "UNASUR"
-  }]
-}];
-exports.regions = regions;
-var countries = [{
-  value: "010d6483-d82d-48de-88c4-030fc5e7f81e",
-  label: "Afghanistan"
-}, {
-  value: "30e154ac-8558-4b33-b4aa-c944bec3eb9b",
-  label: "Aland Islands"
-}, {
-  value: "e2a7c98c-1141-4d24-9ac0-b8d238ba852d",
-  label: "Albania"
-}, {
-  value: "38837eef-de83-4d76-9bea-5adadc54ddb6",
-  label: "Algeria"
-}, {
-  value: "1b2cd850-26dc-4684-b0df-4b78f87eb0ab",
-  label: "American Samoa"
-}, {
-  value: "feef851a-26ab-4fd9-90be-33056585525a",
-  label: "Andorra"
-}, {
-  value: "c709fae3-f171-4185-8990-1ecc3b076f83",
-  label: "Angola"
-}, {
-  value: "80e915ae-17b3-465a-8e73-adfcc5ac3407",
-  label: "Anguilla"
-}, {
-  value: "34a881a1-3438-46e8-8ef3-3b7f5e80bec2",
-  label: "Antigua and Barbuda"
-}, {
-  value: "989ffd50-ddad-4377-9f38-594851db4007",
-  label: "Argentina"
-}, {
-  value: "3dab6c55-3eb2-4e13-930c-3c0dd45aec74",
-  label: "Armenia"
-}, {
-  value: "1e2fba0d-c3a3-48d9-9a09-6e9834a3e91d",
-  label: "Aruba"
-}, {
-  value: "08b28de1-9429-489f-812d-0f8aab1bf1e4",
-  label: "Australia"
-}, {
-  value: "19f57563-c22b-4a1c-abfb-9dcacea4fb7d",
-  label: "Austria"
-}, {
-  value: "e70cf935-885e-4e6b-a2d2-7ea991072302",
-  label: "Azerbaijan"
-}, {
-  value: "270ff05f-587a-4247-b4b5-f8094fc641fc",
-  label: "Bahamas"
-}, {
-  value: "4f9a0932-3f12-448e-a448-c5a5e449297e",
-  label: "Bahrain"
-}, {
-  value: "15481bcb-877e-452e-9717-8a0df63162fa",
-  label: "Bangladesh"
-}, {
-  value: "535cc6a3-2e10-4a05-91e9-5d207d72f922",
-  label: "Barbados"
-}, {
-  value: "0028122d-4ca4-41c3-a52b-544d0e0201b0",
-  label: "Belarus"
-}, {
-  value: "1fa57ba8-99f2-44b4-bca7-57e2681bfc1f",
-  label: "Belgium"
-}, {
-  value: "87fb4b19-1526-495c-b581-f6979038b217",
-  label: "Belize"
-}, {
-  value: "f92d9ea2-2b11-4e20-82c2-09e6edff0401",
-  label: "Benin"
-}, {
-  value: "fab55237-9b0a-42f9-b288-e7fc70e1aad8",
-  label: "Bermuda"
-}, {
-  value: "d74ba23c-50ae-4029-9110-0502368cb5f1",
-  label: "Bhutan"
-}, {
-  value: "a5c611b4-2651-4860-949e-8b2cea6c2607",
-  label: "Bolivia (Plurinational State of)"
-}, {
-  value: "4c508907-e87d-48d1-8e2d-e7f52f5dd4db",
-  label: "Bosnia and Herzegovina"
-}, {
-  value: "9d40483c-63a7-4fe5-a134-0f5a9dc7d1b1",
-  label: "Botswana"
-}, {
-  value: "d8e1bce0-2e94-4847-b4de-77ebd8ae6efc",
-  label: "Brazil"
-}, {
-  value: "787ed301-2abb-4717-9d47-5f3bce00e255",
-  label: "British Indian Ocean Territory"
-}, {
-  value: "0012c666-88a7-4369-9e1b-818c88249daf",
-  label: "Brunei Darussalam"
-}, {
-  value: "1b7ab99c-9ea6-4d46-8b3c-37568d5b6928",
-  label: "Bulgaria"
-}, {
-  value: "1c8a1885-ddfd-4851-a20b-5dca41e0cacb",
-  label: "Burkina Faso"
-}, {
-  value: "1a511184-6309-45fb-9b02-9757c17e2721",
-  label: "Burundi"
-}, {
-  value: "9da0a585-0ddf-4c7c-8c59-7ac29865bce3",
-  label: "Cabo Verde"
-}, {
-  value: "45aae5e2-9845-47db-9322-9a643b88b623",
-  label: "Cambodia"
-}, {
-  value: "dc9049fb-ca15-41ae-aec6-1a4d77824527",
-  label: "Cameroon"
-}, {
-  value: "3529d1f2-0da7-4d02-8924-41a02d62e8cd",
-  label: "Canada"
-}, {
-  value: "bb127239-3cf1-4eda-bb89-4e8757840933",
-  label: "Cayman Islands"
-}, {
-  value: "d37b1038-b22c-43e3-ab77-1276fd9ecadd",
-  label: "Central African Republic"
-}, {
-  value: "2bcfe6d3-4977-4f02-8ff4-ad4cc426e98f",
-  label: "Chad"
-}, {
-  value: "2f0d6482-de6d-48f6-a8bc-681b9a4a33bb",
-  label: "Channel Islands"
-}, {
-  value: "70b8afb5-2201-4b3e-8f24-8214ee594660",
-  label: "Chile"
-}, {
-  value: "0dd83c77-6d72-4705-9d3d-41c3dd29e805",
-  label: "China"
-}, {
-  value: "adec13cb-23a0-4864-a5c0-574f28541e1a",
-  label: "Christmas Island"
-}, {
-  value: "44eccbcf-f4d0-4c2f-afd7-8d5166478c73",
-  label: "Cocos (Keeling) Islands"
-}, {
-  value: "82bb5f6c-151c-4c03-9c67-8edbb1928306",
-  label: "Colombia"
-}, {
-  value: "e2e1e8e6-1c7a-401d-ae7f-9116521b01f7",
-  label: "Comoros"
-}, {
-  value: "290f75f9-afb4-4add-95fd-8fc9132ac56f",
-  label: "Congo"
-}, {
-  value: "2858fa16-2237-4978-962d-fd75c12c2d3f",
-  label: "Cook Islands"
-}, {
-  value: "52767289-1dae-40ef-944d-381e074498b4",
-  label: "Costa Rica"
-}, {
-  value: "4da70af7-c5c2-4320-80f1-a165aed3be7e",
-  label: "C&#244;te d&#39;Ivoire"
-}, {
-  value: "cde54e79-568e-490a-980a-0963b48a76c2",
-  label: "Croatia"
-}, {
-  value: "076ec937-2db2-4b7c-b7f8-962f225e683b",
-  label: "Cuba"
-}, {
-  value: "4638437a-b2ed-4cd9-99c5-55e77f2ca637",
-  label: "Cyprus"
-}, {
-  value: "bfe5adc6-570a-4ec9-9bc6-5efc35d91d3c",
-  label: "Czech Republic"
-}, {
-  value: "dfd49913-4a82-4186-9ace-f370d73a1acf",
-  label: "Democratic People&#39;s Republic of Korea (the)"
-}, {
-  value: "dab64a9e-1ca8-4b81-b077-dfa1ce9cdb1d",
-  label: "Democratic Republic of the Congo (the)"
-}, {
-  value: "75c26550-b301-48ce-a680-96411ad8f6c6",
-  label: "Denmark"
-}, {
-  value: "e4a987d8-b5f1-45e3-bef6-ccb1563c5ffe",
-  label: "Djibouti"
-}, {
-  value: "1d7c3ea9-3d70-48e8-a7c9-9388bf268eb0",
-  label: "Dominica"
-}, {
-  value: "49fce62a-aad5-4675-8871-2b271e63b551",
-  label: "Dominican Republic"
-}, {
-  value: "9fdb1f3f-8eaa-4f7f-aa14-560203da088f",
-  label: "Ecuador"
-}, {
-  value: "afeb4e93-5a90-493e-9e05-3365130b64b9",
-  label: "Egypt"
-}, {
-  value: "138e8bd3-aa7a-4a9b-9de9-987fcf60c3ed",
-  label: "El Salvador"
-}, {
-  value: "157bd994-6b49-4764-a036-128778685850",
-  label: "Equatorial Guinea"
-}, {
-  value: "ad397874-13b3-4064-b824-79decda97e71",
-  label: "Eritrea"
-}, {
-  value: "08a37395-14e7-4fc2-9fac-795cdd828c49",
-  label: "Estonia"
-}, {
-  value: "cdb2bc43-4d6c-4921-a992-6e321ebf88f7",
-  label: "Ethiopia"
-}, {
-  value: "89792f25-6436-4b54-9b1e-558c6f092869",
-  label: "Faeroe Islands"
-}, {
-  value: "f6feebde-2f2a-4d76-a692-d9544a905737",
-  label: "Falkland Islands (Malvinas)"
-}, {
-  value: "743388e7-1bf1-4ff2-bb7e-0c02495dd299",
-  label: "Fiji"
-}, {
-  value: "a68a9fef-3d11-4592-8287-5168ea927559",
-  label: "Finland"
-}, {
-  value: "84dc6b38-fc2e-4e49-a8c5-2356510c128d",
-  label: "France"
-}, {
-  value: "c9ee959d-0910-4dd7-9e7e-0563f6265f5d",
-  label: "French Guiana"
-}, {
-  value: "583d391f-57b4-4f06-aa98-1639d7aa192e",
-  label: "French Polynesia"
-}, {
-  value: "478d3d4c-750b-470f-ae39-f06e615bff9e",
-  label: "French Southern and Antarctic Territories"
-}, {
-  value: "1501a87f-8548-4446-b5f5-c79c812ed91a",
-  label: "Gabon"
-}, {
-  value: "c0a82bd6-0570-4dcf-b988-ee1a13d3c7e0",
-  label: "Gambia"
-}, {
-  value: "d5befb70-f97e-4345-a59e-bc0db305d272",
-  label: "Georgia"
-}, {
-  value: "7bfda050-9cbd-4136-af74-2f3f034b625b",
-  label: "Germany"
-}, {
-  value: "2af5bae7-3361-4bfb-9469-fa1c013a612c",
-  label: "Ghana"
-}, {
-  value: "6d6a234f-2837-4afb-bf31-598bb72bd658",
-  label: "Gibraltar"
-}, {
-  value: "32f80247-34c8-473a-9b12-49f76863cdc6",
-  label: "Greece"
-}, {
-  value: "629dc3b7-4bff-4225-b30c-a3341e93988d",
-  label: "Greenland"
-}, {
-  value: "58ad83dc-6db0-40c9-af95-6e686a22cf56",
-  label: "Grenada"
-}, {
-  value: "6e037946-7379-4713-b920-9e938dd40ffe",
-  label: "Guadeloupe"
-}, {
-  value: "493b21b3-fc45-4be5-975a-0a4f48712097",
-  label: "Guam"
-}, {
-  value: "ef46993b-797a-4c85-8f5b-83325fa0cf93",
-  label: "Guatemala"
-}, {
-  value: "4fe1f1a4-8845-4b81-a832-104a9c5789e5",
-  label: "Guernsey"
-}, {
-  value: "5ff47e2b-8af5-45a2-9097-79079be32014",
-  label: "Guinea"
-}, {
-  value: "9a104d81-56b6-45cb-9be0-bbaf079c1ad8",
-  label: "Guinea-Bissau"
-}, {
-  value: "3f3f1cc9-0028-4c98-be15-28293168f64b",
-  label: "Guyana"
-}, {
-  value: "e4866671-282a-4821-b834-feb6c45c6dd7",
-  label: "Haiti"
-}, {
-  value: "204f795e-1860-4bcd-8522-1ef6facf5c06",
-  label: "Holy See"
-}, {
-  value: "6e8d1eba-0cc8-498d-b8ca-84f89b2adaae",
-  label: "Honduras"
-}, {
-  value: "99ce0cac-5271-4fa9-b2e1-5b2cb2e21db2",
-  label: "Hong Kong , SAR China"
-}, {
-  value: "37d16a2c-28a2-4791-902f-b136f4508df3",
-  label: "Hungary"
-}, {
-  value: "ca65ac5b-79af-4ed5-88ac-c1304e4d2f25",
-  label: "Iceland"
-}, {
-  value: "fc19d4aa-a098-464f-88ff-fdab4b64f166",
-  label: "India"
-}, {
-  value: "abf04d10-a52f-41e7-8346-bbe198b9e92d",
-  label: "Indonesia"
-}, {
-  value: "64b32e34-dfd6-4a8a-bc20-c2fa38c41390",
-  label: "Iran (Islamic Republic of)"
-}, {
-  value: "85228aa1-da3a-4beb-8867-13a5131f17c6",
-  label: "Iraq"
-}, {
-  value: "80da441f-7020-451b-9a56-343ff99a43f1",
-  label: "Ireland"
-}, {
-  value: "5140dfb6-c626-4fd2-aecb-de52412085b0",
-  label: "Israel"
-}, {
-  value: "0da58c13-a1f0-4e28-bae5-e55a009d4c85",
-  label: "Italy"
-}, {
-  value: "dac21ff0-6415-403f-a6f1-4ac7a7741da1",
-  label: "Jamaica"
-}, {
-  value: "9bfd8829-392f-43c1-823d-681593a88a0c",
-  label: "Japan"
-}, {
-  value: "329f3974-be50-4b08-9c5f-66d249447b22",
-  label: "Jersey"
-}, {
-  value: "4d20bded-1b02-47c0-b8bd-02d14d081cfd",
-  label: "Jordan"
-}, {
-  value: "13f77e4d-1a41-45a4-938a-178ef3623ef2",
-  label: "Kazakhstan"
-}, {
-  value: "b64cfacb-1236-448d-8608-814cfa62e683",
-  label: "Kenya"
-}, {
-  value: "16944b59-481e-4c81-aaf4-6e0d41319535",
-  label: "Kiribati"
-}, {
-  value: "099d7c58-3c64-4116-bc66-3369bfe18a0e",
-  label: "Kuwait"
-}, {
-  value: "10301396-7ece-41a1-8d12-43d631fdc2ad",
-  label: "Kyrgyzstan"
-}, {
-  value: "9b682d13-e182-491d-9f21-62c028b9e0a3",
-  label: "Lao People&#39;s Democratic Republic"
-}, {
-  value: "a3671b41-1b9d-4a6d-808e-63eb07b3d87d",
-  label: "Latvia"
-}, {
-  value: "69e0ac35-eca3-46b4-9e94-b5582d55a838",
-  label: "Lebanon"
-}, {
-  value: "b9b32958-3621-44e1-a63b-e3fbcb1f6e38",
-  label: "Lesotho"
-}, {
-  value: "2fb89646-b646-4173-b08f-d496f74a10a4",
-  label: "Liberia"
-}, {
-  value: "0e843b73-cefc-4ed7-a28a-1a6cdaacd780",
-  label: "Libya"
-}, {
-  value: "464e1df9-ea0e-4c66-9b13-5a97adcca80a",
-  label: "Liechtenstein"
-}, {
-  value: "5cb9d909-e11e-410c-90df-e5b4cf5d11d1",
-  label: "Lithuania"
-}, {
-  value: "cd0d702b-a924-4324-8c79-24489a0f1352",
-  label: "Luxembourg"
-}, {
-  value: "44c45147-7de5-47c6-a97a-21587f88104d",
-  label: "Macao, SAR China"
-}, {
-  value: "8751f797-f5c3-4178-b3f1-bb371044c3b7",
-  label: "Madagascar"
-}, {
-  value: "34d13650-6e21-4407-b574-0e2bfa072c33",
-  label: "Malawi"
-}, {
-  value: "bad404ac-a1c9-49bc-900e-ff709ed45481",
-  label: "Malaysia"
-}, {
-  value: "246a69e6-dcb8-4984-9c3e-17e50d65aa28",
-  label: "Maldives"
-}, {
-  value: "6e2c37c0-9e1c-4d06-9745-d84289ece978",
-  label: "Mali"
-}, {
-  value: "772b066c-a3e1-4cff-bf77-28a29281a3b1",
-  label: "Malta"
-}, {
-  value: "da7b7c2e-6315-4fc6-b5c3-89b3bf5e706c",
-  label: "Man, Isle of"
-}, {
-  value: "bb95b65e-b958-474a-aff7-00fa5b87171b",
-  label: "Marshall Islands"
-}, {
-  value: "ae939148-e157-4a53-be86-62a58b371a45",
-  label: "Martinique"
-}, {
-  value: "14446d2f-1cf2-4624-8047-b22a4867870a",
-  label: "Mauritania"
-}, {
-  value: "30e8fad8-edd8-4585-a114-cb3e5cf6ec90",
-  label: "Mauritius"
-}, {
-  value: "58b9fc14-7b3a-4165-937c-c0a5dd064a8e",
-  label: "Mayotte"
-}, {
-  value: "ed581306-e57f-4d1b-82c8-9a005c3f90d3",
-  label: "Mexico"
-}, {
-  value: "c1ea7669-687c-4570-86dc-9ce91814da60",
-  label: "Micronesia (Federated States of)"
-}, {
-  value: "cff70a65-51ba-48fe-96b9-4c74dd5e77a7",
-  label: "Monaco"
-}, {
-  value: "25ceba91-7a7d-4b53-a390-cebd8f5b306b",
-  label: "Mongolia"
-}, {
-  value: "debdc097-257c-45f8-890a-4ac0cfa40345",
-  label: "Montenegro"
-}, {
-  value: "19f41718-551a-4659-b0d3-3e3f9351aa85",
-  label: "Montserrat"
-}, {
-  value: "e0fcb722-bc4d-46da-b93c-877151b8f7e6",
-  label: "Morocco"
-}, {
-  value: "691c1148-603a-40fa-b6c3-40b88452ad53",
-  label: "Mozambique"
-}, {
-  value: "938c2c41-1779-47b3-8213-dc57f6508a1d",
-  label: "Myanmar"
-}, {
-  value: "6ddfbd90-5c29-4828-a83e-03f74b92ae0d",
-  label: "Namibia"
-}, {
-  value: "eaffdd5c-324b-4338-bb09-2a098c101b86",
-  label: "Nauru"
-}, {
-  value: "98195e76-9702-4436-87c3-50065ab87399",
-  label: "Nepal"
-}, {
-  value: "d977ddad-0d9c-4bb2-8b49-2516c72b733a",
-  label: "Netherlands"
-}, {
-  value: "69004c9c-ff19-4731-ac95-441e97d3100a",
-  label: "Netherlands Antilles"
-}, {
-  value: "08ce1a4c-d4d7-4d3a-88c7-515cd451a72d",
-  label: "Neutral Zone"
-}, {
-  value: "15f204bd-6b8f-4483-a3ec-e2093af9ee9e",
-  label: "New Caledonia"
-}, {
-  value: "069aada7-0182-46ac-93bb-1940a4ef6342",
-  label: "New Zealand"
-}, {
-  value: "57cc80d2-ec8c-479b-893a-a88c1161c586",
-  label: "Nicaragua"
-}, {
-  value: "a334f112-6b0f-4731-b453-5a477b370b16",
-  label: "Niger"
-}, {
-  value: "89a42705-425d-4b55-9db7-4d0aa6760709",
-  label: "Nigeria"
-}, {
-  value: "6d62bc6a-4d1c-4968-bbe1-5ac64c587c35",
-  label: "Niue"
-}, {
-  value: "14ec2796-3808-47c7-b617-78f1d3945886",
-  label: "Norfolk Island"
-}, {
-  value: "89c81d8f-a650-4481-a497-294b58228731",
-  label: "Northern Mariana Islands"
-}, {
-  value: "f6828673-4871-4794-87cd-ef54b37de6be",
-  label: "Norway"
-}, {
-  value: "66a41722-6e5e-4b39-8f62-705118a3630d",
-  label: "Oman"
-}, {
-  value: "9bfe9ff6-2150-4ce6-8020-017ea32e1fee",
-  label: "Pacific Islands (Trust Territory)"
-}, {
-  value: "8641f4ae-f4cb-4b4b-85b4-9a9633ad63a7",
-  label: "Pakistan"
-}, {
-  value: "812e2782-2bca-4dd2-aea6-bd56374ca6ee",
-  label: "Palau"
-}, {
-  value: "eb3e22d3-5b2d-46ee-8952-e2d446779567",
-  label: "Panama"
-}, {
-  value: "f67d64ee-f05f-454e-9b6e-7a0e908f294f",
-  label: "Papua New Guinea"
-}, {
-  value: "01ee5242-03e3-4842-8696-88688319e784",
-  label: "Paraguay"
-}, {
-  value: "69ad7c10-405f-4b45-a3ee-fa1a1b21e473",
-  label: "Peru"
-}, {
-  value: "d178fed0-e946-4f12-8603-9222014bd730",
-  label: "Philippines"
-}, {
-  value: "995b0a79-c61a-4726-a56a-7f770c5a8bd6",
-  label: "Pitcairn"
-}, {
-  value: "fc265c4e-463d-4560-9a01-5c95b0c4eb08",
-  label: "Poland"
-}, {
-  value: "3f110d79-c056-4880-b244-ba5234396a0a",
-  label: "Portugal"
-}, {
-  value: "29ef316c-d53e-4926-922d-10b60c42a5b1",
-  label: "Puerto Rico"
-}, {
-  value: "b2a91181-7344-46db-9c21-e7fc04b15c7c",
-  label: "Qatar"
-}, {
-  value: "41f299c9-ab17-4f89-b009-b9ca5a613b6f",
-  label: "Republic of Korea (the) "
-}, {
-  value: "1fc027e8-ee4c-4034-b07a-c5559e446c1d",
-  label: "Republic of Moldova (the)"
-}, {
-  value: "05579606-087f-499c-8d05-18ed42595aba",
-  label: "Reunion"
-}, {
-  value: "93453d3b-2539-460e-8829-dfec0c214696",
-  label: "Romania"
-}, {
-  value: "142f344d-6425-4764-bd7a-cc8a2b18554f",
-  label: "Russia"
-}, {
-  value: "3a04839a-890e-4d7b-bad4-40f29b2b9d3c",
-  label: "Rwanda"
-}, {
-  value: "226d8290-82ae-4bd0-9e79-7744c56f1776",
-  label: "Saint Helena"
-}, {
-  value: "58b6b547-5a53-488c-b941-59a70d2cbb75",
-  label: "Saint Kitts and Nevis"
-}, {
-  value: "8d1d79fe-cddf-4bd4-8469-6c1a8eb36cf2",
-  label: "Saint Lucia"
-}, {
-  value: "4ca0a9a9-645f-4146-99b9-f4c8704731d0",
-  label: "Saint Vincent and the Grenadines"
-}, {
-  value: "7b9afe1b-b47c-4d40-910a-e0181dd7e8bb",
-  label: "Samoa"
-}, {
-  value: "4e14f3aa-f102-4909-8664-70686ebc985d",
-  label: "San Marino"
-}, {
-  value: "c856a955-1551-491e-8b56-22954fa08ebf",
-  label: "Sao Tome and Principe"
-}, {
-  value: "e194f59d-eb57-4d22-b07e-8c561365f3d8",
-  label: "Saudi Arabia"
-}, {
-  value: "694cac88-2693-45cf-bfc7-92901f1c8680",
-  label: "Senegal"
-}, {
-  value: "cbfcd0c7-d34b-4470-8df5-6d4941221810",
-  label: "Serbia"
-}, {
-  value: "5d0a88c7-03d8-431a-b66e-0b518eac8bb0",
-  label: "Seychelles"
-}, {
-  value: "5b6d448f-a386-4587-a399-25aaf6d04a04",
-  label: "Sierra Leone"
-}, {
-  value: "2565fcd9-8110-450f-b49c-969c9882d048",
-  label: "Singapore"
-}, {
-  value: "c33d14cd-f1b8-4a40-a2b4-72b43f72ec00",
-  label: "Slovakia"
-}, {
-  value: "f6c160fc-7e26-45d5-9067-c97f59e64c99",
-  label: "Slovenia"
-}, {
-  value: "c4945a2c-fd3e-48c5-9174-57592a6586fb",
-  label: "Solomon Islands"
-}, {
-  value: "480f6dec-d75c-4bd4-872c-3b419aa70450",
-  label: "Somalia"
-}, {
-  value: "ec06d616-e161-49cf-b6d6-211a3ee491f3",
-  label: "South Africa"
-}, {
-  value: "88a7febf-ed09-4482-96ca-29745759d372",
-  label: "South Sudan"
-}, {
-  value: "0446cda4-6ef0-499a-8c8e-6c2783cc4b64",
-  label: "Spain"
-}, {
-  value: "ce3005f1-67fd-4e54-93fb-9502ab9af088",
-  label: "Sri Lanka"
-}, {
-  value: "500e1717-30d7-4ea0-ab0f-65ce14746238",
-  label: "St. Pierre and Miquelon"
-}, {
-  value: "6ea1a9d8-7a95-4b5c-ad78-91b1baed7f3c",
-  label: "State of Palestine"
-}, {
-  value: "d7e6c682-4fcc-44cd-9efd-ed9e7cd676ea",
-  label: "Sudan"
-}, {
-  value: "7448ec6c-e3f9-4355-8062-2273e19d9886",
-  label: "Suriname"
-}, {
-  value: "cd1358a2-d9c8-4135-b809-069e5945e719",
-  label: "Svalbard and Jan Mayen Islands"
-}, {
-  value: "947c1d0d-fd49-49ac-8d71-857037f470b9",
-  label: "Swaziland"
-}, {
-  value: "fa5a3a2c-fbea-4ad6-8868-f92e34555828",
-  label: "Sweden"
-}, {
-  value: "2922f526-8dd0-473c-b7ff-4c45e16b13bb",
-  label: "Switzerland"
-}, {
-  value: "e701856b-3c58-4e33-926f-670f2a32016e",
-  label: "Syrian Arab Republic"
-}, {
-  value: "ea9bbd2b-bc1a-4b34-b665-9b299dafbb05",
-  label: "Taipei Chinese"
-}, {
-  value: "2881f8c1-951f-40c2-ae24-679447eabf9e",
-  label: "Tajikistan"
-}, {
-  value: "7ec8648e-70d4-4663-8d11-1fd30d1ca571",
-  label: "Thailand"
-}, {
-  value: "ddddcb73-014c-42ef-b84f-ce6df6e023a1",
-  label: "The former Yugoslav Republic of Macedonia"
-}, {
-  value: "29df9f9f-fb79-4da0-8f09-f270143e1e96",
-  label: "Timor-Leste"
-}, {
-  value: "82ecfb01-ec22-4731-ae70-d172eb355b59",
-  label: "Togo"
-}, {
-  value: "0c0ff40b-ff0b-4fd0-b1c3-5840782e8cb9",
-  label: "Tokelau"
-}, {
-  value: "5baf6434-e35d-4677-a40d-12913be2f9d1",
-  label: "Tonga"
-}, {
-  value: "6ddc37e8-8296-4e3b-851b-901393bba74c",
-  label: "Trinidad and Tobago"
-}, {
-  value: "ff50afe1-8f88-4d95-8fe5-04eb8d93af02",
-  label: "Tunisia"
-}, {
-  value: "0e4db025-64fe-44f1-a6d1-58053042ce23",
-  label: "Turkey"
-}, {
-  value: "ab807095-d0a9-403d-9fdc-d638f7fcc87b",
-  label: "Turkmenistan"
-}, {
-  value: "bec5aeb7-a144-4b83-b7d2-0fd6525f42c8",
-  label: "Turks and Caicos Islands"
-}, {
-  value: "3035ca62-2c2b-4b71-8df0-fe335f5750b9",
-  label: "Tuvalu"
-}, {
-  value: "4e5c40d7-ad08-4e17-9ca3-8962b6748951",
-  label: "Uganda"
-}, {
-  value: "cedb2c8f-a45d-4f4d-aaca-5b0fa5c1902e",
-  label: "Ukraine"
-}, {
-  value: "c343abab-a5be-4f49-9c53-36da7b95e29c",
-  label: "United Arab Emirates"
-}, {
-  value: "80f8195a-fb66-4ef5-8048-ce8f26684b11",
-  label: "United Kingdom of Great Britain and Northern Ireland (the)"
-}, {
-  value: "1aeb22e3-7d60-4d6a-a5e2-cda11a6a333f",
-  label: "United Republic of Tanzania (the)"
-}, {
-  value: "97597703-0331-4378-a8a3-f1af387310d8",
-  label: "United States"
-}, {
-  value: "1d661e99-4b84-4a58-811e-ed504e5928c1",
-  label: "Uruguay"
-}, {
-  value: "db540278-9df7-466a-acfa-dbecf36e15cd",
-  label: "Uzbekistan"
-}, {
-  value: "0c2dc7bf-c9d1-4555-b25b-21e431c6c2a3",
-  label: "Vanuatu"
-}, {
-  value: "701382ca-40e0-49cc-beb4-e8870c3a81aa",
-  label: "Venezuela (Bolivarian Republic of)"
-}, {
-  value: "0ca410b2-24f0-46d5-90b3-0cce65951dbf",
-  label: "Viet Nam"
-}, {
-  value: "ef8b9957-efdb-4010-8219-266916031d46",
-  label: "Virgin Islands (British)"
-}, {
-  value: "6b72b1cb-6e95-4f4c-a37e-4032bde723b5",
-  label: "Virgin Islands (U.S.)"
-}, {
-  value: "6b97b1e9-9a2c-463c-9c23-a0d1cd988d20",
-  label: "Wallis and Futuna Islands"
-}, {
-  value: "ba1f957b-71e4-4f37-8cb5-4e336c755979",
-  label: "Western Sahara"
-}, {
-  value: "8ab1c1dd-bf5d-4314-9223-3d1c44f8ea16",
-  label: "Yemen"
-}, {
-  value: "940df73e-bc90-40b2-a499-a1f8a7c53470",
-  label: "Zambia"
-}, {
-  value: "940d48bf-fea6-4a42-9e24-8e5799a3a5c5",
-  label: "Zimbabwe"
-}];
-exports.countries = countries;
-var d = [{
-  value: 'ocean',
-  label: 'Ocean',
-  color: '#00B8D9',
-  isFixed: true
-}, {
-  value: 'blue',
-  label: 'Blue',
-  color: '#0052CC',
-  isDisabled: true
-}, {
-  value: 'purple',
-  label: 'Purple',
-  color: '#5243AA'
-}, {
-  value: 'red',
-  label: 'Red',
-  color: '#FF5630',
-  isFixed: true
-}, {
-  value: 'orange',
-  label: 'Orange',
-  color: '#FF8B00'
-}, {
-  value: 'yellow',
-  label: 'Yellow',
-  color: '#FFC400'
-}, {
-  value: 'green',
-  label: 'Green',
-  color: '#36B37E'
-}, {
-  value: 'forest',
-  label: 'Forest',
-  color: '#00875A'
-}, {
-  value: 'slate',
-  label: 'Slate',
-  color: '#253858'
-}, {
-  value: 'silver',
-  label: 'Silver',
-  color: '#666666'
-}];
-exports.d = d;
-
-},{}],19:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.countProp = countProp;
-exports.thematicFocusKeys = exports.thematicFocus = void 0;
-var thematicFocus = {
-  'environment': 'Environment',
-  'gender': 'Gender',
-  'poverty_reduction': 'Poverty Reduction',
-  'export_strategy': 'Export Strategy',
-  'trade_focus': 'Focus on trade',
-  'youth': 'Youth',
-  'trade_facilitation': 'Trade Facilitation',
-  'trade_finance': 'Trade Finance',
-  'trade_information': 'Trade Information',
-  'trade_promotion': 'Trade Promotion',
-  'quality': 'Quality',
-  'tvet': 'TVET',
-  'regional': 'Regional Scope',
-  'regional_integration': 'Regional Integration'
-};
-exports.thematicFocus = thematicFocus;
-var thematicFocusKeys = Object.keys(thematicFocus);
-exports.thematicFocusKeys = thematicFocusKeys;
-
-function countProp(col, kw) {
-  if (col) {
-    return col.filter(function (o) {
-      return o[kw];
-    }).length;
-  } else {
-    return 0;
-  }
-}
-
-},{}],20:[function(require,module,exports){
+},{"react":214}],10:[function(require,module,exports){
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
 
 module.exports = _arrayWithHoles;
-},{}],21:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) {
     for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
@@ -5462,7 +2195,7 @@ function _arrayWithoutHoles(arr) {
 }
 
 module.exports = _arrayWithoutHoles;
-},{}],22:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -5472,7 +2205,7 @@ function _assertThisInitialized(self) {
 }
 
 module.exports = _assertThisInitialized;
-},{}],23:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -5480,7 +2213,7 @@ function _classCallCheck(instance, Constructor) {
 }
 
 module.exports = _classCallCheck;
-},{}],24:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -5498,7 +2231,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 module.exports = _createClass;
-},{}],25:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -5515,7 +2248,7 @@ function _defineProperty(obj, key, value) {
 }
 
 module.exports = _defineProperty;
-},{}],26:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 function _extends() {
   module.exports = _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -5535,7 +2268,7 @@ function _extends() {
 }
 
 module.exports = _extends;
-},{}],27:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var superPropBase = require("./superPropBase");
 
 function _get(target, property, receiver) {
@@ -5559,7 +2292,7 @@ function _get(target, property, receiver) {
 }
 
 module.exports = _get;
-},{"./superPropBase":43}],28:[function(require,module,exports){
+},{"./superPropBase":33}],18:[function(require,module,exports){
 function _getPrototypeOf(o) {
   module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
@@ -5568,7 +2301,7 @@ function _getPrototypeOf(o) {
 }
 
 module.exports = _getPrototypeOf;
-},{}],29:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var setPrototypeOf = require("./setPrototypeOf");
 
 function _inherits(subClass, superClass) {
@@ -5587,7 +2320,7 @@ function _inherits(subClass, superClass) {
 }
 
 module.exports = _inherits;
-},{"./setPrototypeOf":41}],30:[function(require,module,exports){
+},{"./setPrototypeOf":31}],20:[function(require,module,exports){
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
@@ -5595,7 +2328,7 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 module.exports = _inheritsLoose;
-},{}],31:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     "default": obj
@@ -5603,7 +2336,7 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = _interopRequireDefault;
-},{}],32:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var _typeof = require("../helpers/typeof");
 
 function _getRequireWildcardCache() {
@@ -5659,13 +2392,13 @@ function _interopRequireWildcard(obj) {
 }
 
 module.exports = _interopRequireWildcard;
-},{"../helpers/typeof":46}],33:[function(require,module,exports){
+},{"../helpers/typeof":36}],23:[function(require,module,exports){
 function _iterableToArray(iter) {
   if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
 }
 
 module.exports = _iterableToArray;
-},{}],34:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 function _iterableToArrayLimit(arr, i) {
   if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
     return;
@@ -5697,19 +2430,19 @@ function _iterableToArrayLimit(arr, i) {
 }
 
 module.exports = _iterableToArrayLimit;
-},{}],35:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance");
 }
 
 module.exports = _nonIterableRest;
-},{}],36:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
 module.exports = _nonIterableSpread;
-},{}],37:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 var defineProperty = require("./defineProperty");
 
 function _objectSpread(target) {
@@ -5732,7 +2465,7 @@ function _objectSpread(target) {
 }
 
 module.exports = _objectSpread;
-},{"./defineProperty":25}],38:[function(require,module,exports){
+},{"./defineProperty":15}],28:[function(require,module,exports){
 var objectWithoutPropertiesLoose = require("./objectWithoutPropertiesLoose");
 
 function _objectWithoutProperties(source, excluded) {
@@ -5755,7 +2488,7 @@ function _objectWithoutProperties(source, excluded) {
 }
 
 module.exports = _objectWithoutProperties;
-},{"./objectWithoutPropertiesLoose":39}],39:[function(require,module,exports){
+},{"./objectWithoutPropertiesLoose":29}],29:[function(require,module,exports){
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
@@ -5772,7 +2505,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 module.exports = _objectWithoutPropertiesLoose;
-},{}],40:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 var _typeof = require("../helpers/typeof");
 
 var assertThisInitialized = require("./assertThisInitialized");
@@ -5786,7 +2519,7 @@ function _possibleConstructorReturn(self, call) {
 }
 
 module.exports = _possibleConstructorReturn;
-},{"../helpers/typeof":46,"./assertThisInitialized":22}],41:[function(require,module,exports){
+},{"../helpers/typeof":36,"./assertThisInitialized":12}],31:[function(require,module,exports){
 function _setPrototypeOf(o, p) {
   module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
@@ -5797,7 +2530,7 @@ function _setPrototypeOf(o, p) {
 }
 
 module.exports = _setPrototypeOf;
-},{}],42:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 var arrayWithHoles = require("./arrayWithHoles");
 
 var iterableToArrayLimit = require("./iterableToArrayLimit");
@@ -5809,7 +2542,7 @@ function _slicedToArray(arr, i) {
 }
 
 module.exports = _slicedToArray;
-},{"./arrayWithHoles":20,"./iterableToArrayLimit":34,"./nonIterableRest":35}],43:[function(require,module,exports){
+},{"./arrayWithHoles":10,"./iterableToArrayLimit":24,"./nonIterableRest":25}],33:[function(require,module,exports){
 var getPrototypeOf = require("./getPrototypeOf");
 
 function _superPropBase(object, property) {
@@ -5822,7 +2555,7 @@ function _superPropBase(object, property) {
 }
 
 module.exports = _superPropBase;
-},{"./getPrototypeOf":28}],44:[function(require,module,exports){
+},{"./getPrototypeOf":18}],34:[function(require,module,exports){
 function _taggedTemplateLiteral(strings, raw) {
   if (!raw) {
     raw = strings.slice(0);
@@ -5836,7 +2569,7 @@ function _taggedTemplateLiteral(strings, raw) {
 }
 
 module.exports = _taggedTemplateLiteral;
-},{}],45:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 var arrayWithoutHoles = require("./arrayWithoutHoles");
 
 var iterableToArray = require("./iterableToArray");
@@ -5848,7 +2581,7 @@ function _toConsumableArray(arr) {
 }
 
 module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":21,"./iterableToArray":33,"./nonIterableSpread":36}],46:[function(require,module,exports){
+},{"./arrayWithoutHoles":11,"./iterableToArray":23,"./nonIterableSpread":26}],36:[function(require,module,exports){
 function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
 
 function _typeof(obj) {
@@ -5866,7 +2599,7 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
-},{}],47:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6086,7 +2819,7 @@ var createCache = function createCache(options) {
 exports.default = createCache;
 
 }).call(this,require('_process'))
-},{"@emotion/sheet":53,"@emotion/stylis":54,"@emotion/weak-memoize":57,"_process":87}],48:[function(require,module,exports){
+},{"@emotion/sheet":43,"@emotion/stylis":44,"@emotion/weak-memoize":47,"_process":77}],38:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6478,7 +3211,7 @@ exports.jsx = jsx;
 exports.keyframes = keyframes;
 
 }).call(this,require('_process'))
-},{"@babel/runtime/helpers/inheritsLoose":30,"@emotion/cache":47,"@emotion/css":49,"@emotion/serialize":52,"@emotion/sheet":53,"@emotion/utils":56,"_process":87,"react":224}],49:[function(require,module,exports){
+},{"@babel/runtime/helpers/inheritsLoose":20,"@emotion/cache":37,"@emotion/css":39,"@emotion/serialize":42,"@emotion/sheet":43,"@emotion/utils":46,"_process":77,"react":214}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -6495,7 +3228,7 @@ function css() {
 
 exports.default = css;
 
-},{"@emotion/serialize":52}],50:[function(require,module,exports){
+},{"@emotion/serialize":42}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -6538,7 +3271,7 @@ function murmurhash2_32_gc(str) {
 
 exports.default = murmurhash2_32_gc;
 
-},{}],51:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -6553,7 +3286,7 @@ function memoize(fn) {
 
 exports.default = memoize;
 
-},{}],52:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -6885,7 +3618,7 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
 exports.serializeStyles = serializeStyles;
 
 }).call(this,require('_process'))
-},{"@emotion/hash":50,"@emotion/memoize":51,"@emotion/unitless":55,"_process":87}],53:[function(require,module,exports){
+},{"@emotion/hash":40,"@emotion/memoize":41,"@emotion/unitless":45,"_process":77}],43:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -7028,7 +3761,7 @@ function () {
 exports.StyleSheet = StyleSheet;
 
 }).call(this,require('_process'))
-},{"_process":87}],54:[function(require,module,exports){
+},{"_process":77}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -7649,7 +4382,7 @@ function stylis_min (W) {
 
 exports.default = stylis_min;
 
-},{}],55:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -7705,7 +4438,7 @@ var unitlessKeys = {
 
 exports.default = unitlessKeys;
 
-},{}],56:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -7752,7 +4485,7 @@ var insertStyles = function insertStyles(cache, serialized, isStringTag) {
 exports.getRegisteredStyles = getRegisteredStyles;
 exports.insertStyles = insertStyles;
 
-},{}],57:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -7774,7 +4507,7 @@ var weakMemoize = function weakMemoize(func) {
 
 exports.default = weakMemoize;
 
-},{}],58:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -8299,7 +5032,7 @@ function functionBindPolyfill(context) {
   };
 }
 
-},{}],59:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 /*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -8349,7 +5082,7 @@ function functionBindPolyfill(context) {
 	}
 }());
 
-},{}],60:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8364,7 +5097,7 @@ function addClass(element, className) {
 }
 
 module.exports = exports["default"];
-},{"./hasClass":61,"@babel/runtime/helpers/interopRequireDefault":31}],61:[function(require,module,exports){
+},{"./hasClass":51,"@babel/runtime/helpers/interopRequireDefault":21}],51:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -8375,7 +5108,7 @@ function hasClass(element, className) {
 }
 
 module.exports = exports["default"];
-},{}],62:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 'use strict';
 
 function replaceClassName(origClass, classToRemove) {
@@ -8385,7 +5118,7 @@ function replaceClassName(origClass, classToRemove) {
 module.exports = function removeClass(element, className) {
   if (element.classList) element.classList.remove(className);else if (typeof element.className === 'string') element.className = replaceClassName(element.className, className);else element.setAttribute('class', replaceClassName(element.className && element.className.baseVal || '', className));
 };
-},{}],63:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -9563,7 +6296,7 @@ return Promise$1;
 
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":87}],64:[function(require,module,exports){
+},{"_process":77}],54:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9631,7 +6364,7 @@ if (!Math.hypot) Math.hypot = function () {
 
   return Math.sqrt(y);
 };
-},{}],65:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11548,7 +8281,7 @@ var mul = multiply;
 exports.mul = mul;
 var sub = subtract;
 exports.sub = sub;
-},{"./common.js":64}],66:[function(require,module,exports){
+},{"./common.js":54}],56:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12283,7 +9016,7 @@ var forEach = function () {
 }();
 
 exports.forEach = forEach;
-},{"./common.js":64}],67:[function(require,module,exports){
+},{"./common.js":54}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13172,7 +9905,7 @@ var forEach = function () {
 }();
 
 exports.forEach = forEach;
-},{"./common.js":64}],68:[function(require,module,exports){
+},{"./common.js":54}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13922,7 +10655,7 @@ var forEach = function () {
 }();
 
 exports.forEach = forEach;
-},{"./common.js":64}],69:[function(require,module,exports){
+},{"./common.js":54}],59:[function(require,module,exports){
 /*! Hammer.JS - v2.0.7 - 2016-04-22
  * http://hammerjs.github.io/
  *
@@ -16567,7 +13300,7 @@ if (typeof define === 'function' && define.amd) {
 
 })(window, document, 'Hammer');
 
-},{}],70:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 /*
  Highcharts JS v6.2.0 (2018-10-17)
 
@@ -16991,7 +13724,7 @@ this.currentResponsive=void 0)};C.prototype.matchResponsiveRule=function(a,f){va
 (h[d][k]={},t(a[k],c[d][k],h[d][k],p+1));else f(a)?(h[d]=n(a)?[]:{},t(a,c[d]||{},h[d],p+1)):h[d]=c[d]||null})}var w={};t(e,this.options,w,0);return w}})(K);return K});
 
 
-},{}],71:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
@@ -16999,7 +13732,7 @@ this.currentResponsive=void 0)};C.prototype.matchResponsiveRule=function(a,f){va
 require('whatwg-fetch');
 module.exports = self.fetch.bind(self);
 
-},{"whatwg-fetch":240}],72:[function(require,module,exports){
+},{"whatwg-fetch":230}],62:[function(require,module,exports){
 /* Mapbox GL JS is licensed under the 3-Clause BSD License. Full text of license: https://github.com/mapbox/mapbox-gl-js/blob/v1.5.1/LICENSE.txt */
 (function (global, factory) {
 typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -17041,7 +13774,7 @@ return mapboxgl;
 }));
 
 
-},{}],73:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 'use strict';
 
 function areInputsEqual(newInputs, lastInputs) {
@@ -17081,7 +13814,7 @@ function memoizeOne(resultFn, isEqual) {
 
 module.exports = memoizeOne;
 
-},{}],74:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17190,7 +13923,7 @@ var GESTURE_EVENT_ALIASES = {
 };
 exports.GESTURE_EVENT_ALIASES = GESTURE_EVENT_ALIASES;
 
-},{"./utils/hammer":85,"@babel/runtime/helpers/interopRequireDefault":31}],75:[function(require,module,exports){
+},{"./utils/hammer":75,"@babel/runtime/helpers/interopRequireDefault":21}],65:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17510,7 +14243,7 @@ var EventManager = function () {
 
 exports["default"] = EventManager;
 
-},{"./constants":74,"./inputs/contextmenu-input":77,"./inputs/key-input":78,"./inputs/move-input":79,"./inputs/wheel-input":80,"./utils/event-registrar":81,"./utils/hammer":85,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/slicedToArray":42}],76:[function(require,module,exports){
+},{"./constants":64,"./inputs/contextmenu-input":67,"./inputs/key-input":68,"./inputs/move-input":69,"./inputs/wheel-input":70,"./utils/event-registrar":71,"./utils/hammer":75,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/slicedToArray":32}],66:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17527,7 +14260,7 @@ Object.defineProperty(exports, "EventManager", {
 
 var _eventManager = _interopRequireDefault(require("./event-manager"));
 
-},{"./event-manager":75,"@babel/runtime/helpers/interopRequireDefault":31}],77:[function(require,module,exports){
+},{"./event-manager":65,"@babel/runtime/helpers/interopRequireDefault":21}],67:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17592,7 +14325,7 @@ var ContextmenuInput = function () {
 
 exports["default"] = ContextmenuInput;
 
-},{"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/interopRequireDefault":31}],78:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/interopRequireDefault":21}],68:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17687,7 +14420,7 @@ var KeyInput = function () {
 
 exports["default"] = KeyInput;
 
-},{"../constants":74,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/interopRequireDefault":31}],79:[function(require,module,exports){
+},{"../constants":64,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/interopRequireDefault":21}],69:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17852,7 +14585,7 @@ var MoveInput = function () {
 
 exports["default"] = MoveInput;
 
-},{"../constants":74,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/interopRequireDefault":31}],80:[function(require,module,exports){
+},{"../constants":64,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/interopRequireDefault":21}],70:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -17965,7 +14698,7 @@ var WheelInput = function () {
 
 exports["default"] = WheelInput;
 
-},{"../constants":74,"../utils/globals":83,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/interopRequireDefault":31}],81:[function(require,module,exports){
+},{"../constants":64,"../utils/globals":73,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/interopRequireDefault":21}],71:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -18121,7 +14854,7 @@ var EventRegistrar = function () {
 
 exports["default"] = EventRegistrar;
 
-},{"./event-utils":82,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/interopRequireDefault":31}],82:[function(require,module,exports){
+},{"./event-utils":72,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/interopRequireDefault":21}],72:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18210,7 +14943,7 @@ function getOffsetPosition(event, rootElement) {
   };
 }
 
-},{}],83:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -18242,7 +14975,7 @@ try {
 } catch (err) {}
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],84:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18316,7 +15049,7 @@ function enhanceMouseInput(MouseInput) {
   };
 }
 
-},{}],85:[function(require,module,exports){
+},{}],75:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -18337,7 +15070,7 @@ exports.Manager = Manager;
 var _default = _hammerjs["default"];
 exports["default"] = _default;
 
-},{"./hammer-overrides":84,"@babel/runtime/helpers/interopRequireDefault":31,"hammerjs":69}],86:[function(require,module,exports){
+},{"./hammer-overrides":74,"@babel/runtime/helpers/interopRequireDefault":21,"hammerjs":59}],76:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -18429,7 +15162,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],87:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -18615,7 +15348,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],88:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -18721,7 +15454,7 @@ checkPropTypes.resetWarningCache = function() {
 module.exports = checkPropTypes;
 
 }).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":92,"_process":87}],89:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":82,"_process":77}],79:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -18787,7 +15520,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":92}],90:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":82}],80:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -19382,7 +16115,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 };
 
 }).call(this,require('_process'))
-},{"./checkPropTypes":88,"./lib/ReactPropTypesSecret":92,"_process":87,"object-assign":86,"react-is":171}],91:[function(require,module,exports){
+},{"./checkPropTypes":78,"./lib/ReactPropTypesSecret":82,"_process":77,"object-assign":76,"react-is":161}],81:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -19405,7 +16138,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./factoryWithThrowingShims":89,"./factoryWithTypeCheckers":90,"_process":87,"react-is":171}],92:[function(require,module,exports){
+},{"./factoryWithThrowingShims":79,"./factoryWithTypeCheckers":80,"_process":77,"react-is":161}],82:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -19419,7 +16152,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],93:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19437,7 +16170,7 @@ var _contexts2 = _interopRequireDefault(_contexts);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _contexts2.default)(_bootstrapTable2.default);
-},{"./src/bootstrap-table":95,"./src/contexts":103}],94:[function(require,module,exports){
+},{"./src/bootstrap-table":85,"./src/contexts":93}],84:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19617,7 +16350,7 @@ Body.propTypes = {
 };
 
 exports.default = Body;
-},{"./const":99,"./row-expand/row-consumer":120,"./row-selection/row-consumer":121,"./row/aggregate-row":125,"./row/row-section":128,"./row/simple-row":131,"./utils":141,"prop-types":91,"react":224}],95:[function(require,module,exports){
+},{"./const":89,"./row-expand/row-consumer":110,"./row-selection/row-consumer":111,"./row/aggregate-row":115,"./row/row-section":118,"./row/simple-row":121,"./utils":131,"prop-types":81,"react":214}],85:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19944,7 +16677,7 @@ BootstrapTable.defaultProps = {
 };
 
 exports.default = BootstrapTable;
-},{"./body":94,"./caption":96,"./const":99,"./filters":108,"./footer":110,"./header":112,"./props-resolver":114,"./utils":141,"classnames":59,"prop-types":91,"react":224}],96:[function(require,module,exports){
+},{"./body":84,"./caption":86,"./const":89,"./filters":98,"./footer":100,"./header":102,"./props-resolver":104,"./utils":131,"classnames":49,"prop-types":81,"react":214}],86:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19976,7 +16709,7 @@ Caption.propTypes = {
 };
 
 exports.default = Caption;
-},{"prop-types":91,"react":224}],97:[function(require,module,exports){
+},{"prop-types":81,"react":214}],87:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20048,7 +16781,7 @@ exports.default = function (ExtendBase) {
     return CellEventDelegater;
   }(ExtendBase);
 };
-},{"./utils":141}],98:[function(require,module,exports){
+},{"./utils":131}],88:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20183,7 +16916,7 @@ Cell.propTypes = {
 };
 
 exports.default = Cell;
-},{"./cell-event-delegater":97,"./utils":141,"prop-types":91,"react":224}],99:[function(require,module,exports){
+},{"./cell-event-delegater":87,"./utils":131,"prop-types":81,"react":214}],89:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20208,7 +16941,7 @@ exports.default = {
   FILTERS_POSITION_TOP: 'top',
   FILTERS_POSITION_BOTTOM: 'bottom'
 };
-},{}],100:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20225,7 +16958,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var BootstrapContext = exports.BootstrapContext = _react2.default.createContext({
   bootstrap4: false
 });
-},{"react":224}],101:[function(require,module,exports){
+},{"react":214}],91:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20306,7 +17039,7 @@ exports.default = function () {
     Consumer: ColumnManagementContext.Consumer
   };
 };
-},{"prop-types":91,"react":224}],102:[function(require,module,exports){
+},{"prop-types":81,"react":214}],92:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20391,7 +17124,7 @@ exports.default = function () {
     Consumer: DataContext.Consumer
   };
 };
-},{"prop-types":91,"react":224}],103:[function(require,module,exports){
+},{"prop-types":81,"react":214}],93:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20816,7 +17549,7 @@ var withContext = function withContext(Base) {
 };
 
 exports.default = withContext;
-},{"../props-resolver/remote-resolver":115,"../store/operators":136,"../utils":141,"./bootstrap":100,"./column-context":101,"./data-context":102,"./row-expand-context":104,"./selection-context":105,"./sort-context":106,"events":58,"react":224}],104:[function(require,module,exports){
+},{"../props-resolver/remote-resolver":105,"../store/operators":126,"../utils":131,"./bootstrap":90,"./column-context":91,"./data-context":92,"./row-expand-context":94,"./selection-context":95,"./sort-context":96,"events":48,"react":214}],94:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21007,7 +17740,7 @@ exports.default = {
   Provider: RowExpandProvider,
   Consumer: RowExpandContext.Consumer
 };
-},{"../store/operators":136,"../utils":141,"prop-types":91,"react":224}],105:[function(require,module,exports){
+},{"../store/operators":126,"../utils":131,"prop-types":81,"react":214}],95:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21190,7 +17923,7 @@ exports.default = {
   Provider: SelectionProvider,
   Consumer: SelectionContext.Consumer
 };
-},{"../const":99,"../store/operators":136,"../store/selection":138,"../utils":141,"prop-types":91,"react":224}],106:[function(require,module,exports){
+},{"../const":89,"../store/operators":126,"../store/selection":128,"../utils":131,"prop-types":81,"react":214}],96:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21337,7 +18070,7 @@ exports.default = function (dataOperator, isRemoteSort, handleSortChange) {
     Consumer: SortContext.Consumer
   };
 };
-},{"../const":99,"prop-types":91,"react":224}],107:[function(require,module,exports){
+},{"../const":89,"prop-types":81,"react":214}],97:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21403,7 +18136,7 @@ FiltersCell.defaultProps = {
 };
 
 exports.default = FiltersCell;
-},{"./utils":141,"prop-types":91,"react":224}],108:[function(require,module,exports){
+},{"./utils":131,"prop-types":81,"react":214}],98:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21500,7 +18233,7 @@ Filters.defaultProps = {
 };
 
 exports.default = Filters;
-},{"./const":99,"./filters-cell":107,"./row/row-template":129,"prop-types":91,"react":224}],109:[function(require,module,exports){
+},{"./const":89,"./filters-cell":97,"./row/row-template":119,"prop-types":81,"react":214}],99:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21611,7 +18344,7 @@ FooterCell.propTypes = {
 };
 
 exports.default = FooterCell;
-},{"./cell-event-delegater":97,"./utils":141,"classnames":59,"prop-types":91,"react":224}],110:[function(require,module,exports){
+},{"./cell-event-delegater":87,"./utils":131,"classnames":49,"prop-types":81,"react":214}],100:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21688,7 +18421,7 @@ Footer.propTypes = {
 };
 
 exports.default = Footer;
-},{"./footer-cell":109,"./row/row-template":129,"./utils":141,"prop-types":91,"react":224}],111:[function(require,module,exports){
+},{"./footer-cell":99,"./row/row-template":119,"./utils":131,"prop-types":81,"react":214}],101:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21905,7 +18638,7 @@ HeaderCell.propTypes = {
 };
 
 exports.default = HeaderCell;
-},{"./cell-event-delegater":97,"./const":99,"./sort/caret":132,"./sort/symbol":133,"./utils":141,"classnames":59,"prop-types":91,"react":224}],112:[function(require,module,exports){
+},{"./cell-event-delegater":87,"./const":89,"./sort/caret":122,"./sort/symbol":123,"./utils":131,"classnames":49,"prop-types":81,"react":214}],102:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22042,7 +18775,7 @@ Header.propTypes = {
 };
 
 exports.default = Header;
-},{"./const":99,"./header-cell":111,"./row-expand/expand-header-cell":118,"./row-expand/expand-header-cell-consumer":117,"./row-selection/selection-header-cell":124,"./row-selection/selection-header-cell-consumer":123,"prop-types":91,"react":224}],113:[function(require,module,exports){
+},{"./const":89,"./header-cell":101,"./row-expand/expand-header-cell":108,"./row-expand/expand-header-cell-consumer":107,"./row-selection/selection-header-cell":114,"./row-selection/selection-header-cell-consumer":113,"prop-types":81,"react":214}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22097,7 +18830,7 @@ exports.default = function (ExtendBase) {
     return ColumnResolver;
   }(ExtendBase);
 };
-},{}],114:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22168,7 +18901,7 @@ exports.default = function (ExtendBase) {
     return TableResolver;
   }((0, _columnResolver2.default)(ExtendBase));
 };
-},{"../utils":141,"./column-resolver":113}],115:[function(require,module,exports){
+},{"../utils":131,"./column-resolver":103}],105:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22309,7 +19042,7 @@ exports.default = function (ExtendBase) {
     return RemoteResolver;
   }(ExtendBase);
 };
-},{"../utils":141,"events":58}],116:[function(require,module,exports){
+},{"../utils":131,"events":48}],106:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22410,7 +19143,7 @@ ExpandCell.propTypes = {
   tabIndex: _propTypes2.default.number
 };
 exports.default = ExpandCell;
-},{"prop-types":91,"react":224}],117:[function(require,module,exports){
+},{"prop-types":81,"react":214}],107:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22438,7 +19171,7 @@ exports.default = function (Component) {
     );
   };
 };
-},{"../contexts/row-expand-context":104,"react":224}],118:[function(require,module,exports){
+},{"../contexts/row-expand-context":94,"react":214}],108:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22517,7 +19250,7 @@ ExpansionHeaderCell.propTypes = {
   expandHeaderColumnRenderer: _propTypes2.default.func
 };
 exports.default = ExpansionHeaderCell;
-},{"prop-types":91,"react":224}],119:[function(require,module,exports){
+},{"prop-types":81,"react":214}],109:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22595,7 +19328,7 @@ ExpandRow.defaultProps = {
 };
 
 exports.default = ExpandRow;
-},{"classnames":59,"prop-types":91,"react":224,"react-transition-group":218}],120:[function(require,module,exports){
+},{"classnames":49,"prop-types":81,"react":214,"react-transition-group":208}],110:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22672,7 +19405,7 @@ exports.default = function (Component) {
     );
   };
 };
-},{"../contexts/row-expand-context":104,"../utils":141,"./expand-row":119,"classnames":59,"react":224}],121:[function(require,module,exports){
+},{"../contexts/row-expand-context":94,"../utils":131,"./expand-row":109,"classnames":49,"react":214}],111:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22756,7 +19489,7 @@ exports.default = function (Component) {
   withConsumer.displayName = 'WithSelectionRowConsumer';
   return withConsumer;
 };
-},{"../contexts/selection-context":105,"../utils":141,"classnames":59,"react":224}],122:[function(require,module,exports){
+},{"../contexts/selection-context":95,"../utils":131,"classnames":49,"react":214}],112:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22902,7 +19635,7 @@ SelectionCell.propTypes = {
   selectColumnStyle: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.func])
 };
 exports.default = SelectionCell;
-},{"../const":99,"../contexts/bootstrap":100,"../utils":141,"prop-types":91,"react":224}],123:[function(require,module,exports){
+},{"../const":89,"../contexts/bootstrap":90,"../utils":131,"prop-types":81,"react":214}],113:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22930,7 +19663,7 @@ exports.default = function (Component) {
     );
   };
 };
-},{"../contexts/selection-context":105,"react":224}],124:[function(require,module,exports){
+},{"../contexts/selection-context":95,"react":214}],114:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23105,7 +19838,7 @@ SelectionHeaderCell.propTypes = {
   headerColumnStyle: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.func])
 };
 exports.default = SelectionHeaderCell;
-},{"../const":99,"../contexts/bootstrap":100,"../utils":141,"prop-types":91,"react":224}],125:[function(require,module,exports){
+},{"../const":89,"../contexts/bootstrap":90,"../utils":131,"prop-types":81,"react":214}],115:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23298,7 +20031,7 @@ RowAggregator.defaultProps = {
   style: {}
 };
 exports.default = RowAggregator;
-},{"../const":99,"../row-expand/expand-cell":116,"../row-selection/selection-cell":122,"../utils":141,"./event-delegater":126,"./row-pure-content":127,"./should-updater":130,"prop-types":91,"react":224}],126:[function(require,module,exports){
+},{"../const":89,"../row-expand/expand-cell":106,"../row-selection/selection-cell":112,"../utils":131,"./event-delegater":116,"./row-pure-content":117,"./should-updater":120,"prop-types":81,"react":214}],116:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23421,7 +20154,7 @@ exports.default = function (ExtendBase) {
     return RowEventDelegater;
   }(ExtendBase);
 };
-},{"../const":99,"../utils":141}],127:[function(require,module,exports){
+},{"../const":89,"../utils":131}],117:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23573,7 +20306,7 @@ var RowPureContent = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = RowPureContent;
-},{"../cell":98,"../utils":141,"react":224}],128:[function(require,module,exports){
+},{"../cell":88,"../utils":131,"react":214}],118:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23619,7 +20352,7 @@ RowSection.defaultProps = {
 };
 
 exports.default = RowSection;
-},{"prop-types":91,"react":224}],129:[function(require,module,exports){
+},{"prop-types":81,"react":214}],119:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23688,7 +20421,7 @@ RowTemplate.propTypes = {
 };
 
 exports.default = RowTemplate;
-},{"../const":99,"prop-types":91,"react":224}],130:[function(require,module,exports){
+},{"../const":89,"prop-types":81,"react":214}],120:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23769,7 +20502,7 @@ exports.default = function (ExtendBase) {
     return RowShouldUpdater;
   }(ExtendBase);
 };
-},{"../utils":141}],131:[function(require,module,exports){
+},{"../utils":131}],121:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23878,7 +20611,7 @@ SimpleRow.defaultProps = {
 };
 
 exports.default = SimpleRow;
-},{"./event-delegater":126,"./row-pure-content":127,"./should-updater":130,"prop-types":91,"react":224}],132:[function(require,module,exports){
+},{"./event-delegater":116,"./row-pure-content":117,"./should-updater":120,"prop-types":81,"react":214}],122:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23931,7 +20664,7 @@ SortCaret.propTypes = {
 };
 
 exports.default = SortCaret;
-},{"../const":99,"../contexts/bootstrap":100,"classnames":59,"prop-types":91,"react":224}],133:[function(require,module,exports){
+},{"../const":89,"../contexts/bootstrap":90,"classnames":49,"prop-types":81,"react":214}],123:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23971,7 +20704,7 @@ var SortSymbol = function SortSymbol() {
 };
 
 exports.default = SortSymbol;
-},{"../contexts/bootstrap":100,"react":224}],134:[function(require,module,exports){
+},{"../contexts/bootstrap":90,"react":214}],124:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24031,7 +20764,7 @@ var getExpandedRows = exports.getExpandedRows = function getExpandedRows(data, k
     return (0, _rows.getRowByRowId)(data, keyField, k);
   });
 };
-},{"../utils":141,"./rows":137}],135:[function(require,module,exports){
+},{"../utils":131,"./rows":127}],125:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24051,7 +20784,7 @@ var editCell = exports.editCell = function editCell(data, keyField, rowId, dataF
   var row = (0, _rows.getRowByRowId)(data, keyField, rowId);
   if (row) _utils2.default.set(row, dataField, newValue);
 };
-},{"../utils":141,"./rows":137}],136:[function(require,module,exports){
+},{"../utils":131,"./rows":127}],126:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24087,7 +20820,7 @@ var type = _interopRequireWildcard(_type);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 exports.default = _extends({}, rows, selection, expand, mutate, sort, type);
-},{"./expand":134,"./mutate":135,"./rows":137,"./selection":138,"./sort":139,"./type":140}],137:[function(require,module,exports){
+},{"./expand":124,"./mutate":125,"./rows":127,"./selection":128,"./sort":129,"./type":130}],127:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24110,7 +20843,7 @@ var matchRow = exports.matchRow = function matchRow(keyField, id) {
 var getRowByRowId = exports.getRowByRowId = function getRowByRowId(data, keyField, id) {
   return data.find(matchRow(keyField, id));
 };
-},{"../utils":141}],138:[function(require,module,exports){
+},{"../utils":131}],128:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24196,7 +20929,7 @@ var getSelectedRows = exports.getSelectedRows = function getSelectedRows() {
     return !!x;
   });
 };
-},{"../utils":141,"./rows":137}],139:[function(require,module,exports){
+},{"../utils":131,"./rows":127}],129:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24269,7 +21002,7 @@ var nextOrder = exports.nextOrder = function nextOrder(currentSortColumn, _ref2)
   if (!sortColumn || currentSortColumn.dataField !== sortColumn.dataField) return defaultOrder;
   return sortOrder === _const2.default.SORT_DESC ? _const2.default.SORT_ASC : _const2.default.SORT_DESC;
 };
-},{"../const":99,"../utils":141}],140:[function(require,module,exports){
+},{"../const":89,"../utils":131}],130:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24298,7 +21031,7 @@ var typeConvert = exports.typeConvert = function typeConvert(type, value) {
   }
   return value;
 };
-},{"../const":99}],141:[function(require,module,exports){
+},{"../const":89}],131:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24400,7 +21133,7 @@ function debounce(func, wait, immediate) {
 }
 
 exports.default = Object.assign(_underscore2.default, { get: get, set: set, isDefined: isDefined, isEmptyObject: isEmptyObject, sleep: sleep, debounce: debounce });
-},{"underscore":142}],142:[function(require,module,exports){
+},{"underscore":132}],132:[function(require,module,exports){
 (function (global){
 //     Underscore.js 1.9.1
 //     http://underscorejs.org
@@ -26096,7 +22829,7 @@ exports.default = Object.assign(_underscore2.default, { get: get, set: set, isDe
 }());
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],143:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26168,7 +22901,7 @@ var PaginationProvider = exports.PaginationProvider = CustomizableProvider;
 exports.PaginationListStandalone = _paginationListStandalone2.default;
 exports.SizePerPageDropdownStandalone = _sizePerPageDropdownStandalone2.default;
 exports.PaginationTotalStandalone = _paginationTotalStandalone2.default;
-},{"./src/data-context":146,"./src/pagination-list-standalone":152,"./src/pagination-total-standalone":155,"./src/size-per-page-dropdown-standalone":159,"./src/state-context":163,"prop-types":91,"react":224}],144:[function(require,module,exports){
+},{"./src/data-context":136,"./src/pagination-list-standalone":142,"./src/pagination-total-standalone":145,"./src/size-per-page-dropdown-standalone":149,"./src/state-context":153,"prop-types":81,"react":214}],134:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26186,7 +22919,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var BootstrapContext = exports.BootstrapContext = _react2.default.createContext({
   bootstrap4: false
 });
-},{"react":224}],145:[function(require,module,exports){
+},{"react":214}],135:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26211,7 +22944,7 @@ exports.default = {
   HIDE_SIZE_PER_PAGE: false,
   HIDE_PAGE_LIST_ONLY_ONE_PAGE: false
 };
-},{}],146:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26371,7 +23104,7 @@ exports.default = function () {
     Consumer: PaginationDataContext.Consumer
   };
 };
-},{"./bootstrap":144,"./const":145,"./page":149,"./pagination":157,"./state-context":163,"prop-types":91,"react":224}],147:[function(require,module,exports){
+},{"./bootstrap":134,"./const":135,"./page":139,"./pagination":147,"./state-context":153,"prop-types":81,"react":214}],137:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26461,7 +23194,7 @@ PageButton.propTypes = {
 };
 
 exports.default = PageButton;
-},{"classnames":59,"prop-types":91,"react":224}],148:[function(require,module,exports){
+},{"classnames":49,"prop-types":81,"react":214}],138:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26670,7 +23403,7 @@ exports.default = function (ExtendBase) {
     return PageResolver;
   }(ExtendBase);
 };
-},{"./const":145}],149:[function(require,module,exports){
+},{"./const":135}],139:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26725,7 +23458,7 @@ var getByCurrPage = exports.getByCurrPage = function getByCurrPage(data, page, s
   }
   return result;
 };
-},{"./const":145}],150:[function(require,module,exports){
+},{"./const":135}],140:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26843,7 +23576,7 @@ exports.default = function (WrappedComponent) {
     return PaginationHandler;
   }((0, _pageResolver3.default)(_react.Component));
 };
-},{"./page-resolver":148,"react":224}],151:[function(require,module,exports){
+},{"./page-resolver":138,"react":214}],141:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26908,7 +23641,7 @@ var paginationListAdapter = function paginationListAdapter(WrappedComponent) {
 
 var PaginationListWithAdapter = exports.PaginationListWithAdapter = paginationListAdapter(_paginationList2.default);
 exports.default = paginationListAdapter;
-},{"./page-resolver":148,"./pagination-list":153,"react":224}],152:[function(require,module,exports){
+},{"./page-resolver":138,"./pagination-list":143,"react":214}],142:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26942,7 +23675,7 @@ var PaginationListStandalone = function PaginationListStandalone(props) {
 };
 
 exports.default = (0, _standaloneAdapter2.default)((0, _paginationHandler2.default)((0, _paginationListAdapter2.default)(PaginationListStandalone)));
-},{"./pagination-handler":150,"./pagination-list":153,"./pagination-list-adapter":151,"./standalone-adapter":162,"react":224}],153:[function(require,module,exports){
+},{"./pagination-handler":140,"./pagination-list":143,"./pagination-list-adapter":141,"./standalone-adapter":152,"react":214}],143:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27000,7 +23733,7 @@ PaginatonList.defaultProps = {
 };
 
 exports.default = PaginatonList;
-},{"./page-button":147,"prop-types":91,"react":224}],154:[function(require,module,exports){
+},{"./page-button":137,"prop-types":81,"react":214}],144:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27066,7 +23799,7 @@ var paginationTotalAdapter = function paginationTotalAdapter(WrappedComponent) {
 
 var PaginationTotalWithAdapter = exports.PaginationTotalWithAdapter = paginationTotalAdapter(_paginationTotal2.default);
 exports.default = paginationTotalAdapter;
-},{"./page-resolver":148,"./pagination-total":156,"react":224}],155:[function(require,module,exports){
+},{"./page-resolver":138,"./pagination-total":146,"react":214}],145:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27096,7 +23829,7 @@ var PaginationTotalStandalone = function PaginationTotalStandalone(props) {
 };
 
 exports.default = (0, _standaloneAdapter2.default)((0, _paginationTotalAdapter2.default)(PaginationTotalStandalone));
-},{"./pagination-total":156,"./pagination-total-adapter":154,"./standalone-adapter":162,"react":224}],156:[function(require,module,exports){
+},{"./pagination-total":146,"./pagination-total-adapter":144,"./standalone-adapter":152,"react":214}],146:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27141,7 +23874,7 @@ PaginationTotal.defaultProps = {
 };
 
 exports.default = PaginationTotal;
-},{"prop-types":91,"react":224}],157:[function(require,module,exports){
+},{"prop-types":81,"react":214}],147:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27329,7 +24062,7 @@ Pagination.defaultProps = {
 };
 
 exports.default = (0, _paginationHandler2.default)(Pagination);
-},{"./const":145,"./page-resolver":148,"./pagination-handler":150,"./pagination-list-adapter":151,"./pagination-total-adapter":154,"./size-per-page-dropdown-adapter":158,"classnames":59,"prop-types":91,"react":224}],158:[function(require,module,exports){
+},{"./const":135,"./page-resolver":138,"./pagination-handler":140,"./pagination-list-adapter":141,"./pagination-total-adapter":144,"./size-per-page-dropdown-adapter":148,"classnames":49,"prop-types":81,"react":214}],148:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27439,7 +24172,7 @@ var sizePerPageDropdownAdapter = function sizePerPageDropdownAdapter(WrappedComp
 
 var SizePerPageDropdownWithAdapter = exports.SizePerPageDropdownWithAdapter = sizePerPageDropdownAdapter(_sizePerPageDropdown2.default);
 exports.default = sizePerPageDropdownAdapter;
-},{"./page-resolver":148,"./size-per-page-dropdown":160,"react":224}],159:[function(require,module,exports){
+},{"./page-resolver":138,"./size-per-page-dropdown":150,"react":214}],149:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27473,7 +24206,7 @@ var SizePerPageDropdownStandalone = function SizePerPageDropdownStandalone(props
 };
 
 exports.default = (0, _standaloneAdapter2.default)((0, _paginationHandler2.default)((0, _sizePerPageDropdownAdapter2.default)(SizePerPageDropdownStandalone)));
-},{"./pagination-handler":150,"./size-per-page-dropdown":160,"./size-per-page-dropdown-adapter":158,"./standalone-adapter":162,"react":224}],160:[function(require,module,exports){
+},{"./pagination-handler":140,"./size-per-page-dropdown":150,"./size-per-page-dropdown-adapter":148,"./standalone-adapter":152,"react":214}],150:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27599,7 +24332,7 @@ SizePerPageDropDown.defaultProps = {
 };
 
 exports.default = SizePerPageDropDown;
-},{"./bootstrap":144,"./size-per-page-option":161,"classnames":59,"prop-types":91,"react":224}],161:[function(require,module,exports){
+},{"./bootstrap":134,"./size-per-page-option":151,"classnames":49,"prop-types":81,"react":214}],151:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27672,7 +24405,7 @@ SizePerPageOption.defaultProps = {
 };
 
 exports.default = SizePerPageOption;
-},{"prop-types":91,"react":224}],162:[function(require,module,exports){
+},{"prop-types":81,"react":214}],152:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27702,7 +24435,7 @@ exports.default = function (WrappedComponent) {
     }));
   };
 };
-},{"react":224}],163:[function(require,module,exports){
+},{"react":214}],153:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27952,7 +24685,7 @@ exports.default = function () {
     Consumer: StateContext.Consumer
   };
 };
-},{"./const":145,"./page":149,"events":58,"react":224}],164:[function(require,module,exports){
+},{"./const":135,"./page":139,"events":48,"react":214}],154:[function(require,module,exports){
 (function (process){
 /** @license React v16.11.0
  * react-dom.development.js
@@ -55683,7 +52416,7 @@ module.exports = reactDom;
 }
 
 }).call(this,require('_process'))
-},{"_process":87,"object-assign":86,"prop-types/checkPropTypes":88,"react":224,"scheduler":229,"scheduler/tracing":230}],165:[function(require,module,exports){
+},{"_process":77,"object-assign":76,"prop-types/checkPropTypes":78,"react":214,"scheduler":219,"scheduler/tracing":220}],155:[function(require,module,exports){
 /** @license React v16.11.0
  * react-dom.production.min.js
  *
@@ -55975,7 +52708,7 @@ xe,ye,Ca.injectEventPluginsByName,fa,Sc,function(a){ya(a,Rc)},cb,db,Pd,Ba,Sj,{cu
 (function(a){var b=a.findFiberByHostInstance;return ok(n({},a,{overrideHookState:null,overrideProps:null,setSuspenseHandler:null,scheduleUpdate:null,currentDispatcherRef:Ea.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=ic(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null},findHostInstancesForRefresh:null,scheduleRefresh:null,scheduleRoot:null,setRefreshHandler:null,getCurrentFiber:null}))})({findFiberByHostInstance:Fc,bundleType:0,version:"16.11.0",
 rendererPackageName:"react-dom"});var Dk={default:Ck},Ek=Dk&&Ck||Dk;module.exports=Ek.default||Ek;
 
-},{"object-assign":86,"react":224,"scheduler":229}],166:[function(require,module,exports){
+},{"object-assign":76,"react":214,"scheduler":219}],156:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -56017,9 +52750,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":164,"./cjs/react-dom.production.min.js":165,"_process":87}],167:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":154,"./cjs/react-dom.production.min.js":155,"_process":77}],157:[function(require,module,exports){
 !function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e(require("react"),require("highcharts")):"function"==typeof define&&define.amd?define(["react","highcharts"],e):"object"==typeof exports?exports.ReactHighcharts=e(require("react"),require("highcharts")):t.ReactHighcharts=e(t.React,t.Highcharts)}("undefined"!=typeof self?self:this,function(t,e){return function(t){var e={};function r(n){if(e[n])return e[n].exports;var o=e[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}return r.m=t,r.c=e,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:n})},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=4)}([function(e,r){e.exports=t},function(t,e,r){"use strict";(function(n){Object.defineProperty(e,"__esModule",{value:!0});var o,i=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var r=arguments[e];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(t[n]=r[n])}return t},a=function(){function t(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n)}}return function(e,r,n){return r&&t(e.prototype,r),n&&t(e,n),e}}(),c=r(0),u=(o=c)&&o.__esModule?o:{default:o};var s=void 0===n?window:n;e.default=function(e,r){var n=function(t){function n(){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,n);var t=function(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}(this,(n.__proto__||Object.getPrototypeOf(n)).call(this));return t.chartType=e,t.Highcharts=r,t.displayName="Highcharts"+e,t}return function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}(n,c.Component),a(n,[{key:"setChartRef",value:function(t){this.chartRef=t}},{key:"renderChart",value:function(t){var e=this;if(!t)throw new Error("Config must be specified for the "+this.displayName+" component");var r=t.chart;this.chart&&this.chart.destroy(),this.chart=new this.Highcharts[this.chartType](i({},t,{chart:i({},r,{renderTo:this.chartRef})}),this.props.callback),this.props.neverReflow||s&&s.requestAnimationFrame&&requestAnimationFrame(function(){e.chart&&e.chart.options&&e.chart.reflow()})}},{key:"shouldComponentUpdate",value:function(t){return!!(t.neverReflow||t.isPureConfig&&this.props.config===t.config)||(this.renderChart(t.config),!1)}},{key:"getChart",value:function(){if(!this.chart)throw new Error("getChart() should not be called before the component is mounted");return this.chart}},{key:"componentDidMount",value:function(){this.renderChart(this.props.config)}},{key:"componentWillUnmount",value:function(){this.chart.destroy()}},{key:"render",value:function(){return u.default.createElement("div",i({ref:this.setChartRef.bind(this)},this.props.domProps))}}]),n}();n.defaultProps={callback:function(){},domProps:{}};var o=n;return o.Highcharts=r,o.withHighcharts=function(r){return t.exports(e,r)},o},t.exports=e.default}).call(e,r(2))},function(t,e){var r;r=function(){return this}();try{r=r||Function("return this")()||(0,eval)("this")}catch(t){"object"==typeof window&&(r=window)}t.exports=r},,function(t,e,r){t.exports=r(5)},function(t,e,r){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var n=i(r(1)),o=i(r(6));function i(t){return t&&t.__esModule?t:{default:t}}e.default=(0,n.default)("Chart",o.default),t.exports=e.default},function(t,r){t.exports=e}])});
-},{"highcharts":70,"react":224}],168:[function(require,module,exports){
+},{"highcharts":60,"react":214}],158:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -56288,7 +53021,7 @@ AutosizeInput.defaultProps = {
 };
 
 exports.default = AutosizeInput;
-},{"prop-types":91,"react":224}],169:[function(require,module,exports){
+},{"prop-types":81,"react":214}],159:[function(require,module,exports){
 (function (process){
 /** @license React v16.11.0
  * react-is.development.js
@@ -56528,7 +53261,7 @@ exports.isSuspense = isSuspense;
 }
 
 }).call(this,require('_process'))
-},{"_process":87}],170:[function(require,module,exports){
+},{"_process":77}],160:[function(require,module,exports){
 /** @license React v16.11.0
  * react-is.production.min.js
  *
@@ -56545,7 +53278,7 @@ exports.typeOf=y;exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextCon
 exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===v||a.$$typeof===w||a.$$typeof===x)};exports.isAsyncMode=function(a){return z(a)||y(a)===l};exports.isConcurrentMode=z;exports.isContextConsumer=function(a){return y(a)===k};exports.isContextProvider=function(a){return y(a)===h};
 exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return y(a)===n};exports.isFragment=function(a){return y(a)===e};exports.isLazy=function(a){return y(a)===t};exports.isMemo=function(a){return y(a)===r};exports.isPortal=function(a){return y(a)===d};exports.isProfiler=function(a){return y(a)===g};exports.isStrictMode=function(a){return y(a)===f};exports.isSuspense=function(a){return y(a)===p};
 
-},{}],171:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -56556,7 +53289,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-is.development.js":169,"./cjs/react-is.production.min.js":170,"_process":87}],172:[function(require,module,exports){
+},{"./cjs/react-is.development.js":159,"./cjs/react-is.production.min.js":160,"_process":77}],162:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -56720,7 +53453,7 @@ function polyfill(Component) {
 
 exports.polyfill = polyfill;
 
-},{}],173:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -56860,7 +53593,7 @@ exports["default"] = BaseControl;
 (0, _defineProperty2["default"])(BaseControl, "propTypes", propTypes);
 (0, _defineProperty2["default"])(BaseControl, "defaultProps", defaultProps);
 
-},{"./map-context":179,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],174:[function(require,module,exports){
+},{"./map-context":169,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],164:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -57095,7 +53828,7 @@ exports["default"] = DraggableControl;
 (0, _defineProperty2["default"])(DraggableControl, "propTypes", propTypes);
 (0, _defineProperty2["default"])(DraggableControl, "defaultProps", defaultProps);
 
-},{"./base-control":173,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/get":27,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"@babel/runtime/helpers/slicedToArray":42,"prop-types":91}],175:[function(require,module,exports){
+},{"./base-control":163,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/get":17,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"@babel/runtime/helpers/slicedToArray":32,"prop-types":81}],165:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -57224,7 +53957,7 @@ exports["default"] = FullscreenControl;
 (0, _defineProperty2["default"])(FullscreenControl, "propTypes", propTypes);
 (0, _defineProperty2["default"])(FullscreenControl, "defaultProps", defaultProps);
 
-},{"../utils/globals":196,"../utils/mapboxgl":200,"./base-control":173,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],176:[function(require,module,exports){
+},{"../utils/globals":186,"../utils/mapboxgl":190,"./base-control":163,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],166:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -57467,7 +54200,7 @@ exports["default"] = GeolocateControl;
 (0, _defineProperty2["default"])(GeolocateControl, "propTypes", propTypes);
 (0, _defineProperty2["default"])(GeolocateControl, "defaultProps", defaultProps);
 
-},{"../utils/geolocate-utils":195,"../utils/map-state":199,"../utils/mapboxgl":200,"../utils/transition-manager":203,"./base-control":173,"./marker":180,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224,"viewport-mercator-project":234}],177:[function(require,module,exports){
+},{"../utils/geolocate-utils":185,"../utils/map-state":189,"../utils/mapboxgl":190,"../utils/transition-manager":193,"./base-control":163,"./marker":170,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214,"viewport-mercator-project":224}],167:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -57949,7 +54682,7 @@ exports["default"] = InteractiveMap;
 (0, _defineProperty2["default"])(InteractiveMap, "propTypes", propTypes);
 (0, _defineProperty2["default"])(InteractiveMap, "defaultProps", defaultProps);
 
-},{"../utils/deprecate-warn":193,"../utils/map-controller":198,"../utils/map-state":199,"../utils/transition-manager":203,"./map-context":179,"./static-map":184,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/extends":26,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/possibleConstructorReturn":40,"mjolnir.js":76,"prop-types":91,"react":224,"viewport-mercator-project":234}],178:[function(require,module,exports){
+},{"../utils/deprecate-warn":183,"../utils/map-controller":188,"../utils/map-state":189,"../utils/transition-manager":193,"./map-context":169,"./static-map":174,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/possibleConstructorReturn":30,"mjolnir.js":66,"prop-types":81,"react":214,"viewport-mercator-project":224}],168:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -58151,7 +54884,7 @@ var Layer = function (_PureComponent) {
 exports["default"] = Layer;
 (0, _defineProperty2["default"])(Layer, "propTypes", propTypes);
 
-},{"../utils/assert":190,"../utils/deep-equal":192,"./map-context":179,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/objectWithoutProperties":38,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],179:[function(require,module,exports){
+},{"../utils/assert":180,"../utils/deep-equal":182,"./map-context":169,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/objectWithoutProperties":28,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],169:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58173,7 +54906,7 @@ var _default = (0, _react.createContext)({
 
 exports["default"] = _default;
 
-},{"react":224}],180:[function(require,module,exports){
+},{"react":214}],170:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -58278,7 +55011,7 @@ exports["default"] = Marker;
 (0, _defineProperty2["default"])(Marker, "propTypes", propTypes);
 (0, _defineProperty2["default"])(Marker, "defaultProps", defaultProps);
 
-},{"./draggable-control":174,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"@babel/runtime/helpers/slicedToArray":42,"prop-types":91,"react":224}],181:[function(require,module,exports){
+},{"./draggable-control":164,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"@babel/runtime/helpers/slicedToArray":32,"prop-types":81,"react":214}],171:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -58412,7 +55145,7 @@ exports["default"] = NavigationControl;
 (0, _defineProperty2["default"])(NavigationControl, "propTypes", propTypes);
 (0, _defineProperty2["default"])(NavigationControl, "defaultProps", defaultProps);
 
-},{"../utils/deprecate-warn":193,"../utils/map-controller":198,"../utils/map-state":199,"./base-control":173,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],182:[function(require,module,exports){
+},{"../utils/deprecate-warn":183,"../utils/map-controller":188,"../utils/map-state":189,"./base-control":163,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],172:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -58640,7 +55373,7 @@ exports["default"] = Popup;
 (0, _defineProperty2["default"])(Popup, "propTypes", propTypes);
 (0, _defineProperty2["default"])(Popup, "defaultProps", defaultProps);
 
-},{"../utils/dynamic-position":194,"./base-control":173,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/get":27,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/possibleConstructorReturn":40,"@babel/runtime/helpers/slicedToArray":42,"prop-types":91,"react":224}],183:[function(require,module,exports){
+},{"../utils/dynamic-position":184,"./base-control":163,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/get":17,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/possibleConstructorReturn":30,"@babel/runtime/helpers/slicedToArray":32,"prop-types":81,"react":214}],173:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -58812,7 +55545,7 @@ var Source = function (_PureComponent) {
 exports["default"] = Source;
 (0, _defineProperty2["default"])(Source, "propTypes", propTypes);
 
-},{"../utils/assert":190,"./map-context":179,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],184:[function(require,module,exports){
+},{"../utils/assert":180,"./map-context":169,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],174:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -59118,7 +55851,7 @@ exports["default"] = StaticMap;
 (0, _defineProperty2["default"])(StaticMap, "propTypes", propTypes);
 (0, _defineProperty2["default"])(StaticMap, "defaultProps", defaultProps);
 
-},{"../mapbox/mapbox":186,"../utils/map-constraints":197,"../utils/map-state":199,"../utils/mapboxgl":200,"../utils/style-utils":202,"./map-context":179,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224,"react-virtualized-auto-sizer":221,"viewport-mercator-project":234}],185:[function(require,module,exports){
+},{"../mapbox/mapbox":176,"../utils/map-constraints":187,"../utils/map-state":189,"../utils/mapboxgl":190,"../utils/style-utils":192,"./map-context":169,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214,"react-virtualized-auto-sizer":211,"viewport-mercator-project":224}],175:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -59281,7 +56014,7 @@ var _mapController = _interopRequireDefault(require("./utils/map-controller"));
 
 var _mapContext = _interopRequireDefault(require("./components/map-context"));
 
-},{"./components/base-control":173,"./components/fullscreen-control":175,"./components/geolocate-control":176,"./components/interactive-map":177,"./components/layer":178,"./components/map-context":179,"./components/marker":180,"./components/navigation-control":181,"./components/popup":182,"./components/source":183,"./components/static-map":184,"./overlays/canvas-overlay":187,"./overlays/html-overlay":188,"./overlays/svg-overlay":189,"./utils/map-controller":198,"./utils/transition":204,"./utils/transition-manager":203,"@babel/runtime/helpers/interopRequireDefault":31}],186:[function(require,module,exports){
+},{"./components/base-control":163,"./components/fullscreen-control":165,"./components/geolocate-control":166,"./components/interactive-map":167,"./components/layer":168,"./components/map-context":169,"./components/marker":170,"./components/navigation-control":171,"./components/popup":172,"./components/source":173,"./components/static-map":174,"./overlays/canvas-overlay":177,"./overlays/html-overlay":178,"./overlays/svg-overlay":179,"./utils/map-controller":188,"./utils/transition":194,"./utils/transition-manager":193,"@babel/runtime/helpers/interopRequireDefault":21}],176:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -59719,7 +56452,7 @@ exports["default"] = Mapbox;
 (0, _defineProperty2["default"])(Mapbox, "savedMap", null);
 
 }).call(this,require('_process'))
-},{"../utils/globals":196,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/interopRequireDefault":31,"_process":87,"prop-types":91}],187:[function(require,module,exports){
+},{"../utils/globals":186,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/interopRequireDefault":21,"_process":77,"prop-types":81}],177:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -59849,7 +56582,7 @@ exports["default"] = CanvasOverlay;
 (0, _defineProperty2["default"])(CanvasOverlay, "propTypes", propTypes);
 (0, _defineProperty2["default"])(CanvasOverlay, "defaultProps", defaultProps);
 
-},{"../components/base-control":173,"../utils/globals":196,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],188:[function(require,module,exports){
+},{"../components/base-control":163,"../utils/globals":186,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],178:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -59928,7 +56661,7 @@ exports["default"] = HTMLOverlay;
 (0, _defineProperty2["default"])(HTMLOverlay, "propTypes", propTypes);
 (0, _defineProperty2["default"])(HTMLOverlay, "defaultProps", defaultProps);
 
-},{"../components/base-control":173,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],189:[function(require,module,exports){
+},{"../components/base-control":163,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],179:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -60007,7 +56740,7 @@ exports["default"] = SVGOverlay;
 (0, _defineProperty2["default"])(SVGOverlay, "propTypes", propTypes);
 (0, _defineProperty2["default"])(SVGOverlay, "defaultProps", defaultProps);
 
-},{"../components/base-control":173,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"prop-types":91,"react":224}],190:[function(require,module,exports){
+},{"../components/base-control":163,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"prop-types":81,"react":214}],180:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60021,7 +56754,7 @@ function assert(condition, message) {
   }
 }
 
-},{}],191:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60053,7 +56786,7 @@ function debounce(func, delay) {
   };
 }
 
-},{}],192:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -60116,7 +56849,7 @@ function deepEqual(a, b) {
   return false;
 }
 
-},{"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/typeof":46}],193:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/typeof":36}],183:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60166,7 +56899,7 @@ function checkDeprecatedProps() {
   });
 }
 
-},{}],194:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60267,7 +57000,7 @@ function getDynamicPosition(_ref) {
   }) || anchor;
 }
 
-},{}],195:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60294,7 +57027,7 @@ function isGeolocationSupported() {
   return Promise.resolve(supported);
 }
 
-},{}],196:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -60310,7 +57043,7 @@ var document_ = typeof document !== 'undefined' ? document : {};
 exports.document = document_;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],197:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60343,7 +57076,7 @@ function checkVisibilityConstraints(props) {
   return true;
 }
 
-},{"./map-state":199}],198:[function(require,module,exports){
+},{"./map-state":189}],188:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -60888,7 +57621,7 @@ var MapController = function () {
 
 exports["default"] = MapController;
 
-},{"./debounce":191,"./map-state":199,"./transition":204,"./transition-manager":203,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/slicedToArray":42}],199:[function(require,module,exports){
+},{"./debounce":181,"./map-state":189,"./transition":194,"./transition-manager":193,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/slicedToArray":32}],189:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -61226,7 +57959,7 @@ var MapState = function () {
 
 exports["default"] = MapState;
 
-},{"./assert":190,"./math-utils":201,"./transition":204,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/slicedToArray":42,"viewport-mercator-project":234}],200:[function(require,module,exports){
+},{"./assert":180,"./math-utils":191,"./transition":194,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/slicedToArray":32,"viewport-mercator-project":224}],190:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -61243,7 +57976,7 @@ Object.defineProperty(exports, "default", {
 
 var _mapboxGl = _interopRequireDefault(require("mapbox-gl"));
 
-},{"@babel/runtime/helpers/interopRequireDefault":31,"mapbox-gl":72}],201:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":21,"mapbox-gl":62}],191:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -61294,7 +58027,7 @@ function lerp(a, b, t) {
   return t * b + (1 - t) * a;
 }
 
-},{}],202:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -61397,7 +58130,7 @@ function normalizeStyle(style) {
   });
 }
 
-},{"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/interopRequireDefault":31}],203:[function(require,module,exports){
+},{"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/interopRequireDefault":21}],193:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -61650,7 +58383,7 @@ var TransitionManager = function () {
 exports["default"] = TransitionManager;
 (0, _defineProperty2["default"])(TransitionManager, "defaultProps", DEFAULT_PROPS);
 
-},{"./assert":190,"./map-state":199,"./transition":204,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/interopRequireDefault":31}],204:[function(require,module,exports){
+},{"./assert":180,"./map-state":189,"./transition":194,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/interopRequireDefault":21}],194:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -61683,7 +58416,7 @@ var _viewportFlyToInterpolator = _interopRequireDefault(require("./viewport-fly-
 
 var _linearInterpolator = _interopRequireDefault(require("./linear-interpolator"));
 
-},{"./linear-interpolator":205,"./transition-interpolator":206,"./viewport-fly-to-interpolator":208,"@babel/runtime/helpers/interopRequireDefault":31}],205:[function(require,module,exports){
+},{"./linear-interpolator":195,"./transition-interpolator":196,"./viewport-fly-to-interpolator":198,"@babel/runtime/helpers/interopRequireDefault":21}],195:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -61844,7 +58577,7 @@ var LinearInterpolator = function (_TransitionInterpolat) {
 
 exports["default"] = LinearInterpolator;
 
-},{"../assert":190,"../math-utils":201,"./transition-interpolator":206,"./transition-utils":207,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"@babel/runtime/helpers/slicedToArray":42,"viewport-mercator-project":234}],206:[function(require,module,exports){
+},{"../assert":180,"../math-utils":191,"./transition-interpolator":196,"./transition-utils":197,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"@babel/runtime/helpers/slicedToArray":32,"viewport-mercator-project":224}],196:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -61926,7 +58659,7 @@ var TransitionInterpolator = function () {
 
 exports["default"] = TransitionInterpolator;
 
-},{"../assert":190,"../math-utils":201,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/interopRequireDefault":31}],207:[function(require,module,exports){
+},{"../assert":180,"../math-utils":191,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/interopRequireDefault":21}],197:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -61961,7 +58694,7 @@ function getEndValueByShortestPath(propName, startValue, endValue) {
   return endValue;
 }
 
-},{}],208:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -62134,7 +58867,7 @@ var ViewportFlyToInterpolator = function (_TransitionInterpolat) {
 
 exports["default"] = ViewportFlyToInterpolator;
 
-},{"../assert":190,"../math-utils":201,"./transition-interpolator":206,"./transition-utils":207,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/possibleConstructorReturn":40,"viewport-mercator-project":234}],209:[function(require,module,exports){
+},{"../assert":180,"../math-utils":191,"./transition-interpolator":196,"./transition-utils":197,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/possibleConstructorReturn":30,"viewport-mercator-project":224}],199:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -65011,7 +61744,7 @@ exports.defaultTheme = defaultTheme;
 exports.mergeStyles = mergeStyles;
 
 }).call(this,require('_process'))
-},{"../../chunk-efbed3c1.browser.cjs.js":211,"../../chunk-f83207f0.browser.cjs.js":212,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/extends":26,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/objectSpread":37,"@babel/runtime/helpers/objectWithoutProperties":38,"@babel/runtime/helpers/possibleConstructorReturn":40,"@babel/runtime/helpers/toConsumableArray":45,"@emotion/core":48,"@emotion/css":49,"_process":87,"memoize-one":73,"react":224,"react-dom":166}],210:[function(require,module,exports){
+},{"../../chunk-efbed3c1.browser.cjs.js":201,"../../chunk-f83207f0.browser.cjs.js":202,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/objectSpread":27,"@babel/runtime/helpers/objectWithoutProperties":28,"@babel/runtime/helpers/possibleConstructorReturn":30,"@babel/runtime/helpers/toConsumableArray":35,"@emotion/core":38,"@emotion/css":39,"_process":77,"memoize-one":63,"react":214,"react-dom":156}],200:[function(require,module,exports){
 'use strict';
 
 function _interopDefault(ex) {
@@ -65174,7 +61907,7 @@ var manageState = function manageState(SelectComponent) {
 
 exports.manageState = manageState;
 
-},{"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/extends":26,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/objectWithoutProperties":38,"@babel/runtime/helpers/possibleConstructorReturn":40,"react":224}],211:[function(require,module,exports){
+},{"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/objectWithoutProperties":28,"@babel/runtime/helpers/possibleConstructorReturn":30,"react":214}],201:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -66609,7 +63342,7 @@ exports.placeholderCSS = placeholderCSS;
 exports.valueContainerCSS = valueContainerCSS;
 
 }).call(this,require('_process'))
-},{"./chunk-f83207f0.browser.cjs.js":212,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/extends":26,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/objectSpread":37,"@babel/runtime/helpers/objectWithoutProperties":38,"@babel/runtime/helpers/possibleConstructorReturn":40,"@babel/runtime/helpers/taggedTemplateLiteral":44,"@babel/runtime/helpers/typeof":46,"@emotion/core":48,"@emotion/css":49,"_process":87,"prop-types":91,"react":224,"react-dom":166,"react-input-autosize":168}],212:[function(require,module,exports){
+},{"./chunk-f83207f0.browser.cjs.js":202,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/objectSpread":27,"@babel/runtime/helpers/objectWithoutProperties":28,"@babel/runtime/helpers/possibleConstructorReturn":30,"@babel/runtime/helpers/taggedTemplateLiteral":34,"@babel/runtime/helpers/typeof":36,"@emotion/core":38,"@emotion/css":39,"_process":77,"prop-types":81,"react":214,"react-dom":156,"react-input-autosize":158}],202:[function(require,module,exports){
 'use strict';
 
 function _interopDefault(ex) {
@@ -66838,7 +63571,7 @@ exports.noop = noop;
 exports.scrollIntoView = scrollIntoView;
 exports.scrollTo = scrollTo;
 
-},{"@babel/runtime/helpers/typeof":46}],213:[function(require,module,exports){
+},{"@babel/runtime/helpers/typeof":36}],203:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -66945,7 +63678,7 @@ exports.mergeStyles = reactSelect.mergeStyles;
 exports.NonceProvider = NonceProvider;
 exports.default = index;
 
-},{"./base/dist/react-select-306fdb60.browser.cjs.js":209,"./chunk-185dfbdc.browser.cjs.js":210,"./chunk-efbed3c1.browser.cjs.js":211,"./chunk-f83207f0.browser.cjs.js":212,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/defineProperty":25,"@babel/runtime/helpers/extends":26,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/objectSpread":37,"@babel/runtime/helpers/objectWithoutProperties":38,"@babel/runtime/helpers/possibleConstructorReturn":40,"@babel/runtime/helpers/taggedTemplateLiteral":44,"@babel/runtime/helpers/toConsumableArray":45,"@babel/runtime/helpers/typeof":46,"@emotion/cache":47,"@emotion/core":48,"@emotion/css":49,"memoize-one":73,"prop-types":91,"react":224,"react-dom":166,"react-input-autosize":168}],214:[function(require,module,exports){
+},{"./base/dist/react-select-306fdb60.browser.cjs.js":199,"./chunk-185dfbdc.browser.cjs.js":200,"./chunk-efbed3c1.browser.cjs.js":201,"./chunk-f83207f0.browser.cjs.js":202,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/defineProperty":15,"@babel/runtime/helpers/extends":16,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/objectSpread":27,"@babel/runtime/helpers/objectWithoutProperties":28,"@babel/runtime/helpers/possibleConstructorReturn":30,"@babel/runtime/helpers/taggedTemplateLiteral":34,"@babel/runtime/helpers/toConsumableArray":35,"@babel/runtime/helpers/typeof":36,"@emotion/cache":37,"@emotion/core":38,"@emotion/css":39,"memoize-one":63,"prop-types":81,"react":214,"react-dom":156,"react-input-autosize":158}],204:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -67244,7 +63977,7 @@ var _default = CSSTransition;
 exports.default = _default;
 module.exports = exports["default"];
 }).call(this,require('_process'))
-},{"./Transition":216,"./utils/PropTypes":220,"_process":87,"dom-helpers/class/addClass":60,"dom-helpers/class/removeClass":62,"prop-types":91,"react":224}],215:[function(require,module,exports){
+},{"./Transition":206,"./utils/PropTypes":210,"_process":77,"dom-helpers/class/addClass":50,"dom-helpers/class/removeClass":52,"prop-types":81,"react":214}],205:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -67397,7 +64130,7 @@ var _default = ReplaceTransition;
 exports.default = _default;
 module.exports = exports["default"];
 }).call(this,require('_process'))
-},{"./TransitionGroup":217,"_process":87,"prop-types":91,"react":224,"react-dom":166}],216:[function(require,module,exports){
+},{"./TransitionGroup":207,"_process":77,"prop-types":81,"react":214,"react-dom":156}],206:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -68002,7 +64735,7 @@ var _default = (0, _reactLifecyclesCompat.polyfill)(Transition);
 
 exports.default = _default;
 }).call(this,require('_process'))
-},{"./utils/PropTypes":220,"_process":87,"prop-types":91,"react":224,"react-dom":166,"react-lifecycles-compat":172}],217:[function(require,module,exports){
+},{"./utils/PropTypes":210,"_process":77,"prop-types":81,"react":214,"react-dom":156,"react-lifecycles-compat":162}],207:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -68206,7 +64939,7 @@ var _default = (0, _reactLifecyclesCompat.polyfill)(TransitionGroup);
 exports.default = _default;
 module.exports = exports["default"];
 }).call(this,require('_process'))
-},{"./utils/ChildMapping":219,"_process":87,"prop-types":91,"react":224,"react-lifecycles-compat":172}],218:[function(require,module,exports){
+},{"./utils/ChildMapping":209,"_process":77,"prop-types":81,"react":214,"react-lifecycles-compat":162}],208:[function(require,module,exports){
 "use strict";
 
 var _CSSTransition = _interopRequireDefault(require("./CSSTransition"));
@@ -68225,7 +64958,7 @@ module.exports = {
   ReplaceTransition: _ReplaceTransition.default,
   CSSTransition: _CSSTransition.default
 };
-},{"./CSSTransition":214,"./ReplaceTransition":215,"./Transition":216,"./TransitionGroup":217}],219:[function(require,module,exports){
+},{"./CSSTransition":204,"./ReplaceTransition":205,"./Transition":206,"./TransitionGroup":207}],209:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -68376,7 +65109,7 @@ function getNextChildMapping(nextProps, prevChildMapping, onExited) {
   });
   return children;
 }
-},{"react":224}],220:[function(require,module,exports){
+},{"react":214}],210:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -68406,7 +65139,7 @@ var classNamesShape = process.env.NODE_ENV !== 'production' ? _propTypes.default
 })]) : null;
 exports.classNamesShape = classNamesShape;
 }).call(this,require('_process'))
-},{"_process":87,"prop-types":91}],221:[function(require,module,exports){
+},{"_process":77,"prop-types":81}],211:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -68813,7 +65546,7 @@ AutoSizer.defaultProps = {
 module.exports = AutoSizer;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"react":224}],222:[function(require,module,exports){
+},{"react":214}],212:[function(require,module,exports){
 (function (process){
 /** @license React v16.11.0
  * react.development.js
@@ -71135,7 +67868,7 @@ module.exports = react;
 }
 
 }).call(this,require('_process'))
-},{"_process":87,"object-assign":86,"prop-types/checkPropTypes":88}],223:[function(require,module,exports){
+},{"_process":77,"object-assign":76,"prop-types/checkPropTypes":78}],213:[function(require,module,exports){
 /** @license React v16.11.0
  * react.production.min.js
  *
@@ -71162,7 +67895,7 @@ b,c){return W().useImperativeHandle(a,b,c)},useDebugValue:function(){},useLayout
 if(null!=b){void 0!==b.ref&&(g=b.ref,l=J.current);void 0!==b.key&&(d=""+b.key);if(a.type&&a.type.defaultProps)var f=a.type.defaultProps;for(k in b)K.call(b,k)&&!L.hasOwnProperty(k)&&(e[k]=void 0===b[k]&&void 0!==f?f[k]:b[k])}var k=arguments.length-2;if(1===k)e.children=c;else if(1<k){f=Array(k);for(var m=0;m<k;m++)f[m]=arguments[m+2];e.children=f}return{$$typeof:p,type:a.type,key:d,ref:g,props:e,_owner:l}},createFactory:function(a){var b=M.bind(null,a);b.type=a;return b},isValidElement:N,version:"16.11.0",
 __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentDispatcher:I,ReactCurrentBatchConfig:{suspense:null},ReactCurrentOwner:J,IsSomeRendererActing:{current:!1},assign:h}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default||Z;
 
-},{"object-assign":86}],224:[function(require,module,exports){
+},{"object-assign":76}],214:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -71173,7 +67906,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react.development.js":222,"./cjs/react.production.min.js":223,"_process":87}],225:[function(require,module,exports){
+},{"./cjs/react.development.js":212,"./cjs/react.production.min.js":213,"_process":77}],215:[function(require,module,exports){
 (function (process){
 /** @license React v0.17.0
  * scheduler-tracing.development.js
@@ -71598,7 +68331,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 }
 
 }).call(this,require('_process'))
-},{"_process":87}],226:[function(require,module,exports){
+},{"_process":77}],216:[function(require,module,exports){
 /** @license React v0.17.0
  * scheduler-tracing.production.min.js
  *
@@ -71610,7 +68343,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 
 'use strict';Object.defineProperty(exports,"__esModule",{value:!0});var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_wrap=function(a){return a};exports.unstable_subscribe=function(){};exports.unstable_unsubscribe=function(){};
 
-},{}],227:[function(require,module,exports){
+},{}],217:[function(require,module,exports){
 (function (process){
 /** @license React v0.17.0
  * scheduler.development.js
@@ -72639,7 +69372,7 @@ exports.unstable_Profiling = unstable_Profiling;
 }
 
 }).call(this,require('_process'))
-},{"_process":87}],228:[function(require,module,exports){
+},{"_process":77}],218:[function(require,module,exports){
 /** @license React v0.17.0
  * scheduler.production.min.js
  *
@@ -72663,7 +69396,7 @@ exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();i
 exports.unstable_wrapCallback=function(a){var b=S;return function(){var c=S;S=b;try{return a.apply(this,arguments)}finally{S=c}}};exports.unstable_getCurrentPriorityLevel=function(){return S};exports.unstable_shouldYield=function(){var a=exports.unstable_now();W(a);var b=M(O);return b!==R&&null!==R&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<R.expirationTime||k()};exports.unstable_requestPaint=aa;exports.unstable_continueExecution=function(){U||T||(U=!0,f(Y))};
 exports.unstable_pauseExecution=function(){};exports.unstable_getFirstCallbackNode=function(){return M(O)};exports.unstable_Profiling=null;
 
-},{}],229:[function(require,module,exports){
+},{}],219:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -72674,7 +69407,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":227,"./cjs/scheduler.production.min.js":228,"_process":87}],230:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":217,"./cjs/scheduler.production.min.js":218,"_process":77}],220:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -72685,7 +69418,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":225,"./cjs/scheduler-tracing.production.min.js":226,"_process":87}],231:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":215,"./cjs/scheduler-tracing.production.min.js":216,"_process":77}],221:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -72699,7 +69432,7 @@ function assert(condition, message) {
   }
 }
 
-},{}],232:[function(require,module,exports){
+},{}],222:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -72774,7 +69507,7 @@ function fitBounds(_ref) {
   };
 }
 
-},{"./assert":231,"./web-mercator-viewport":239,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/slicedToArray":42}],233:[function(require,module,exports){
+},{"./assert":221,"./web-mercator-viewport":229,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/slicedToArray":32}],223:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -72898,7 +69631,7 @@ function getFlyToTransitionParams(startProps, endProps, opts) {
   };
 }
 
-},{"./math-utils":235,"./web-mercator-utils":238,"@babel/runtime/helpers/interopRequireWildcard":32,"gl-matrix/vec2":66}],234:[function(require,module,exports){
+},{"./math-utils":225,"./web-mercator-utils":228,"@babel/runtime/helpers/interopRequireWildcard":22,"gl-matrix/vec2":56}],224:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -73039,7 +69772,7 @@ var _flyToViewport = _interopRequireWildcard(require("./fly-to-viewport"));
 
 var _webMercatorUtils = require("./web-mercator-utils");
 
-},{"./fit-bounds":232,"./fly-to-viewport":233,"./normalize-viewport-props":236,"./web-mercator-utils":238,"./web-mercator-viewport":239,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32}],235:[function(require,module,exports){
+},{"./fit-bounds":222,"./fly-to-viewport":223,"./normalize-viewport-props":226,"./web-mercator-utils":228,"./web-mercator-viewport":229,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22}],225:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -73073,7 +69806,7 @@ function lerp(start, end, step) {
   return step * end + (1 - step) * start;
 }
 
-},{"@babel/runtime/helpers/interopRequireWildcard":32,"gl-matrix/vec4":68}],236:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireWildcard":22,"gl-matrix/vec4":58}],226:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -73154,7 +69887,7 @@ function normalizeViewportProps(_ref) {
   };
 }
 
-},{"./math-utils":235,"./web-mercator-viewport":239,"@babel/runtime/helpers/interopRequireDefault":31}],237:[function(require,module,exports){
+},{"./math-utils":225,"./web-mercator-viewport":229,"@babel/runtime/helpers/interopRequireDefault":21}],227:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -73317,7 +70050,7 @@ var Viewport = function () {
 
 exports.default = Viewport;
 
-},{"./math-utils":235,"./web-mercator-utils":238,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/slicedToArray":42,"gl-matrix/mat4":65}],238:[function(require,module,exports){
+},{"./math-utils":225,"./web-mercator-utils":228,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/slicedToArray":32,"gl-matrix/mat4":55}],228:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -73572,7 +70305,7 @@ function pixelsToWorld(xyz, pixelUnprojectionMatrix) {
   return vec2.lerp([], coord0, coord1, t);
 }
 
-},{"./assert":231,"./math-utils":235,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/slicedToArray":42,"gl-matrix/mat4":65,"gl-matrix/vec2":66,"gl-matrix/vec3":67}],239:[function(require,module,exports){
+},{"./assert":221,"./math-utils":225,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/slicedToArray":32,"gl-matrix/mat4":55,"gl-matrix/vec2":56,"gl-matrix/vec3":57}],229:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -73734,7 +70467,7 @@ var WebMercatorViewport = function (_Viewport) {
 
 exports.default = WebMercatorViewport;
 
-},{"./fit-bounds":232,"./viewport":237,"./web-mercator-utils":238,"@babel/runtime/helpers/assertThisInitialized":22,"@babel/runtime/helpers/classCallCheck":23,"@babel/runtime/helpers/createClass":24,"@babel/runtime/helpers/getPrototypeOf":28,"@babel/runtime/helpers/inherits":29,"@babel/runtime/helpers/interopRequireDefault":31,"@babel/runtime/helpers/interopRequireWildcard":32,"@babel/runtime/helpers/possibleConstructorReturn":40,"gl-matrix/vec2":66}],240:[function(require,module,exports){
+},{"./fit-bounds":222,"./viewport":227,"./web-mercator-utils":228,"@babel/runtime/helpers/assertThisInitialized":12,"@babel/runtime/helpers/classCallCheck":13,"@babel/runtime/helpers/createClass":14,"@babel/runtime/helpers/getPrototypeOf":18,"@babel/runtime/helpers/inherits":19,"@babel/runtime/helpers/interopRequireDefault":21,"@babel/runtime/helpers/interopRequireWildcard":22,"@babel/runtime/helpers/possibleConstructorReturn":30,"gl-matrix/vec2":56}],230:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -74267,4 +71000,4 @@ exports.default = WebMercatorViewport;
 
 })));
 
-},{}]},{},[1,2,3,4,16,17,5,18,6,7,8,9,10,11,12,13,14,15,19]);
+},{}]},{},[2,9,3,4,5,6,7,8]);

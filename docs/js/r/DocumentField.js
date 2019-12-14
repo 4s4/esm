@@ -9,8 +9,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Childo = _interopRequireDefault(require("./Childo"));
 
-var _MainSelectFilters = require("./MainSelectFilters");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -35,12 +33,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var range = function range(start, stop) {
-  var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  return Array(Math.ceil((stop - start) / step)).fill(start).map(function (x, y) {
-    return x + y * step;
-  });
-};
+var cljs = require('../../js/cljs.js');
 
 var DocumentField =
 /*#__PURE__*/
@@ -124,46 +117,11 @@ function (_Component) {
     key: "getDerivedStateFromProps",
     value: function getDerivedStateFromProps(props, state) {
       if (props.reports && props.reports !== state.reports) {
-        var approvals = props.reports.reduce(function (c, o) {
-          c.add(o['year']);
-          return c;
-        }, new Set());
-        var approvals_counts = (0, _MainSelectFilters.countIt)(props.reports, 'year');
-        approvals = Array.from(approvals).sort().map(function (o) {
-          return {
-            value: o,
-            label: "".concat(o, " (").concat(approvals_counts[o], ")"),
-            level: 0
-          };
-        });
+        var approvals = cljs.approvalYears(props.reports);
         var approval_year = approvals.filter(function (o) {
           return o.value === props.approval_year;
         });
-        var actives = props.reports.map(function (r) {
-          return r['implementationPeriod'].split("-");
-        }).reduce(function (c, o) {
-          range(parseInt(o[0], 10), parseInt(o[1], 10)).map(function (x) {
-            c.add(x);
-          });
-          return c;
-        }, new Set());
-        actives = Array.from(actives).sort().reduce(function (c, x) {
-          c[x] = 0;
-          return c;
-        }, {});
-        props.reports.map(function (r) {
-          var dates = r['implementationPeriod'].split("-");
-          range(parseInt(dates[0], 10), parseInt(dates[1], 10)).map(function (x) {
-            actives[x]++;
-          });
-        });
-        actives = Object.keys(actives).map(function (o) {
-          return {
-            value: o,
-            label: "".concat(o, " (").concat(actives[o], ")"),
-            level: 0
-          };
-        });
+        var actives = cljs.activeYears(props.reports);
         var active_year = actives.filter(function (o) {
           return o.value === props.active_year;
         });

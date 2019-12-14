@@ -1,10 +1,11 @@
 'use strict';
 import React, { Component } from 'react';
 import ReactMapGL, {Layer, Marker, Popup, NavigationControl} from 'react-map-gl';
-import {afganJson, allCountries} from './Countries';
-
 import CityPin from './city-pin';
 import ReactHighcharts from 'react-highcharts';
+
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const thematicFocus = {
   'environment': 'Environment',
@@ -32,7 +33,6 @@ function countProp(col, kw) {
   }
 }
 
-
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -54,6 +54,23 @@ class Map extends Component {
     this._renderCityMarker = this._renderCityMarker.bind(this);
     this._renderPopup = this._renderPopup.bind(this);
     this._onClick = this._onClick.bind(this);
+    this.saveCountries = this.saveCountries.bind(this);
+  }
+  saveCountries(cc){
+        console.log('countries', cc);
+        this.setState( {countries: cc.map(x => {x.GeoJSON = JSON.parse(x.GeoJSON); return x})});   
+  }
+    
+  componentDidMount() {
+    console.log('componentDidMount');
+    fetch('./js/countries.json')
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(this.saveCountries);
   }
 
   _renderPopup() {
@@ -164,6 +181,7 @@ class Map extends Component {
   };
   
   render() {
+    if (this.state.countries){
 
     return (
       <div className="container">
@@ -187,7 +205,7 @@ class Map extends Component {
         <div style={{position: 'absolute', left: "10px", top: "10px"}}>
           <NavigationControl />
         </div>
-        {allCountries.map( (o, idx) => {
+        {this.state.countries.map( (o, idx) => {
           const coords = o.GeoJSON.features ? o.GeoJSON.features[0].geometry.coordinates[0][0] : o.GeoJSON[0].geometry.coordinates[0][0]; 
           if(o.GeoJSON.features && !Array.isArray(coords[0])){
             return this._renderCountry({geoJSON: o.GeoJSON,
@@ -206,9 +224,13 @@ class Map extends Component {
       </ReactMapGL>
       </div>
 </div>
+
 </section>
 </div>
      );
             }
+            return (<div></div>);
+          }
+
 }
 export default Map;

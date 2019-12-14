@@ -63,7 +63,7 @@ function get_slider_value(id){
     return $("#"+id).slider().slider('getValue');
 }
 var all_checks=[].concat(document_tab.checks).concat(theme_tab.checks).concat(process_tab.checks);
-console.log(all_checks.map(function(o){return o.value}));
+//console.log(all_checks.map(function(o){return o.value}));
 
 
 $('#clear_filters').on("click", function(){

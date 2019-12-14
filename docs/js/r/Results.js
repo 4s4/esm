@@ -11,8 +11,6 @@ var _reactBootstrapTableNext = _interopRequireDefault(require("react-bootstrap-t
 
 var _reactBootstrapTable2Paginator = _interopRequireDefault(require("react-bootstrap-table2-paginator"));
 
-var _data = require("./data");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -45,18 +43,25 @@ function (_Component) {
   _inherits(Results, _Component);
 
   function Results(props) {
+    var _this;
+
     _classCallCheck(this, Results);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Results).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Results).call(this, props));
+    _this.state = {
+      reports: []
+    };
+    return _this;
   }
 
   _createClass(Results, [{
     key: "render",
     value: function render() {
-      var country = function country(countryValue, cc) {
-        var c = _data.countries.filter(function (o) {
-          return o.value === countryValue;
-        })[0].label;
+      var country = function country(countries, countryValue) {
+        var co = countries.find(function (x) {
+          return x.value === countryValue;
+        });
+        var c = co.label;
 
         if (c.length < 7) {
           return _react["default"].createElement("div", {
@@ -75,7 +80,7 @@ function (_Component) {
               color: "black"
             },
             className: "table-value boldi"
-          }, "( ", cc, ")")));
+          }, "( ", co.code, ")")));
         }
 
         return _react["default"].createElement("div", null, _react["default"].createElement("div", {
@@ -115,7 +120,7 @@ function (_Component) {
             color: "black"
           },
           className: "table-value boldi"
-        }, "( ", cc, ")"))));
+        }, "( ", co.code, ")"))));
       };
 
       var wrap_show_less = function wrap_show_less(css, value) {
@@ -135,58 +140,69 @@ function (_Component) {
         }, "show more"))));
       };
 
-      var leftFormatter = function leftFormatter(c, o) {
-        return _react["default"].createElement("div", null, _react["default"].createElement("div", {
-          className: "left-first-colum-first-row"
-        }, _react["default"].createElement("span", {
-          className: "left-table-row-title"
-        }, "Region:"), _react["default"].createElement("div", {
-          className: "span-region table-value boldi"
-        }, o.region)), country(o.country, o.countryCode), _react["default"].createElement("div", {
-          style: {
-            marginTop: "18px",
-            padding: "10px",
-            border: "1px solid rgb(187, 187, 187)",
-            textAlign: "center"
-          }
-        }, _react["default"].createElement("img", {
-          className: "world",
-          src: "./img/maps/".concat(o.region, ".png")
-        })));
+      var leftFormatter = function leftFormatter(countries, regions) {
+        return function (c, o) {
+          var r = regions.find(function (r) {
+            return r.value === o.region;
+          });
+          return _react["default"].createElement("div", {
+            key: "left-".concat(o.id)
+          }, _react["default"].createElement("div", {
+            className: "left-first-colum-first-row"
+          }, _react["default"].createElement("span", {
+            className: "left-table-row-title"
+          }, "Region:"), _react["default"].createElement("div", {
+            className: "span-region table-value boldi"
+          }, r.label)), country(countries, o.country), _react["default"].createElement("div", {
+            style: {
+              marginTop: "18px",
+              padding: "10px",
+              border: "1px solid rgb(187, 187, 187)",
+              textAlign: "center"
+            }
+          }));
+        };
       };
 
-      var rightFormatter = function rightFormatter(c, o) {
-        return _react["default"].createElement("div", null, _react["default"].createElement("div", {
-          className: "first-colum-first-row first-colum-first-row-bis"
-        }, _react["default"].createElement("span", {
-          className: "table-row-title "
-        }, "Type: "), _react["default"].createElement("span", {
-          style: {
-            "float": "right"
-          },
-          className: "table-value "
-        }, o.type), _react["default"].createElement("hr", {
-          className: "hr-table-column"
-        })), _react["default"].createElement("div", {
-          className: "left-first-colum-first-row"
-        }, _react["default"].createElement("span", {
-          className: "left-table-row-title"
-        }, "Year:"), _react["default"].createElement("div", {
-          className: "div-year"
-        }, _react["default"].createElement("span", {
-          className: "table-value boldi"
-        }, o.year))), _react["default"].createElement("div", {
-          className: "left-first-colum-first-row"
-        }, _react["default"].createElement("span", {
-          className: "left-table-row-title"
-        }, "Period:"), _react["default"].createElement("div", {
-          className: "div-ip"
-        }, _react["default"].createElement("span", {
-          className: "table-value boldi"
-        }, o.implementationPeriod))));
+      var rightFormatter = function rightFormatter(types) {
+        return function (c, o) {
+          var t = types.find(function (x) {
+            return x.value === o.type;
+          }) || {
+            label: o.type
+          };
+          return _react["default"].createElement("div", null, _react["default"].createElement("div", {
+            className: "first-colum-first-row first-colum-first-row-bis"
+          }, _react["default"].createElement("span", {
+            className: "table-row-title "
+          }, "Type: "), _react["default"].createElement("span", {
+            style: {
+              "float": "right"
+            },
+            className: "table-value "
+          }, t.label), _react["default"].createElement("hr", {
+            className: "hr-table-column"
+          })), _react["default"].createElement("div", {
+            className: "left-first-colum-first-row"
+          }, _react["default"].createElement("span", {
+            className: "left-table-row-title"
+          }, "Year:"), _react["default"].createElement("div", {
+            className: "div-year"
+          }, _react["default"].createElement("span", {
+            className: "table-value boldi"
+          }, o.year))), _react["default"].createElement("div", {
+            className: "left-first-colum-first-row"
+          }, _react["default"].createElement("span", {
+            className: "left-table-row-title"
+          }, "Period:"), _react["default"].createElement("div", {
+            className: "div-ip"
+          }, _react["default"].createElement("span", {
+            className: "table-value boldi"
+          }, o.implementationPeriod))));
+        };
       };
 
-      var sectorsFormatter = function sectorsFormatter(value) {
+      var sectorsFormatter = function sectorsFormatter(sectors, value) {
         var screen_bigger = $(window).width() > 760; //      let chunk = 3;
 
         var css_class = "col-sm-4";
@@ -208,6 +224,9 @@ function (_Component) {
         };
 
         var extractRowData = function extractRowData(value, idx) {
+          var s = sectors.find(function (x) {
+            return x.value === value;
+          });
           return _react["default"].createElement("div", {
             className: css_class,
             key: "one-".concat(idx)
@@ -217,7 +236,7 @@ function (_Component) {
           }, _react["default"].createElement("div", {
             className: "",
             key: "three-".concat(idx)
-          }, value)));
+          }, s.label)));
         };
 
         var r = function r(i, idx) {
@@ -232,33 +251,47 @@ function (_Component) {
         }, value.map(r));
       };
 
-      var middleFormatter = function middleFormatter(c, o) {
-        return _react["default"].createElement("div", {
-          className: "middle-column"
-        }, _react["default"].createElement("h2", {
-          className: "middle-column-title"
-        }, _react["default"].createElement("a", {
-          href: "search_details.html#"
-        }, o.title)), o.description, _react["default"].createElement("h3", {
-          className: "middle-column-seectors"
-        }, "Sectors:"), sectorsFormatter(o.sectors));
+      var middleFormatter = function middleFormatter(sectors) {
+        return function (c, o) {
+          return _react["default"].createElement("div", {
+            className: "middle-column"
+          }, _react["default"].createElement("h2", {
+            className: "middle-column-title"
+          }, _react["default"].createElement("a", {
+            href: "search_details.html#"
+          }, o.title)), o.description, _react["default"].createElement("h3", {
+            className: "middle-column-seectors"
+          }, "Sectors:"), sectorsFormatter(sectors, o.sectors));
+        };
       };
 
-      var columns = [{
-        formatter: leftFormatter,
-        sort: false
-      }, {
-        formatter: middleFormatter,
-        sort: false
-      }, {
-        formatter: rightFormatter,
-        sort: false
-      }];
+      var leftHeaderFormatter = function leftHeaderFormatter(c, idx, cs) {
+        return null;
+      };
+
+      var columns = function columns(filters) {
+        return [{
+          formatter: leftFormatter(filters.countries, filters.regions),
+          sort: false,
+          dataField: 'region',
+          text: ""
+        }, {
+          formatter: middleFormatter(filters.sectors),
+          sort: false,
+          dataField: 'title',
+          text: ""
+        }, {
+          formatter: rightFormatter(filters.types),
+          sort: false,
+          dataField: 'type',
+          text: ""
+        }];
+      };
+
       var defaultSorted = [{
         dataField: 'title',
         order: 'desc'
       }];
-      var results = this.props.reports || [];
       return _react["default"].createElement("div", {
         id: "card-table",
         className: "card",
@@ -267,15 +300,30 @@ function (_Component) {
         }
       }, _react["default"].createElement("div", {
         className: "card-content"
-      }, _react["default"].createElement(_reactBootstrapTableNext["default"], {
-        bootstrap4: true,
-        keyField: "sectors",
-        data: results,
-        columns: columns,
+      }, _react["default"].createElement(_reactBootstrapTableNext["default"] //  bootstrap4
+      , {
+        keyField: "id",
+        data: this.state.reports,
+        columns: columns(this.state.filters),
         classes: "table-no-hover table-disable-hover search-table",
         defaultSorted: defaultSorted,
         pagination: (0, _reactBootstrapTable2Paginator["default"])()
       })));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      var newState = state || {};
+
+      if (props.reports !== null && props.reports !== state.reports) {
+        newState.reports = props.reports;
+      }
+
+      if (props.filters !== state.filters) {
+        newState.filters = props.filters;
+      }
+
+      return state;
     }
   }]);
 

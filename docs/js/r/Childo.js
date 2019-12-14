@@ -98,8 +98,17 @@ function (_Component) {
           if (data.level === 1) {
             //console.log(data);
             return _objectSpread({}, styles, {
-              backgroundColor: 'pink',
+              marginLeft: '10px'
+            });
+          } else if (data.level === 2) {
+            //console.log(data);
+            return _objectSpread({}, styles, {
               marginLeft: '20px'
+            });
+          } else if (data.level === 3) {
+            //console.log(data);
+            return _objectSpread({}, styles, {
+              marginLeft: '30px'
             });
           } else {
             return styles;

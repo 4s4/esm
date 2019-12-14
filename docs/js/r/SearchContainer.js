@@ -8,8 +8,6 @@ var _ThematicFocus = _interopRequireDefault(require("./ThematicFocus"));
 
 var _DocumentField = _interopRequireDefault(require("./DocumentField"));
 
-var _Charts = _interopRequireDefault(require("./Charts"));
-
 var _Map = _interopRequireDefault(require("./Map"));
 
 var _Results = _interopRequireDefault(require("./Results"));
@@ -54,6 +52,41 @@ require('es6-promise').polyfill();
 
 require('isomorphic-fetch');
 
+var cljs = require('../../js/cljs.js');
+
+var intersection = function intersection(setA, setB) {
+  var _intersection = new Set();
+
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = setB[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var elem = _step.value;
+
+      if (setA.has(elem)) {
+        _intersection.add(elem);
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return _intersection;
+};
+
 var SearchContainer =
 /*#__PURE__*/
 function (_Component) {
@@ -67,6 +100,11 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchContainer).call(this, props));
     _this.state = {
       qq: {},
+      filters: {
+        countries: null,
+        regions: null,
+        types: null
+      },
       reports: null,
       initialReports: null,
       regions: null,
@@ -80,6 +118,7 @@ function (_Component) {
     _this.onSelectChange = _this.onSelectChange.bind(_assertThisInitialized(_this));
     _this.search = _this.search.bind(_assertThisInitialized(_this));
     _this.saveReports = _this.saveReports.bind(_assertThisInitialized(_this));
+    _this.saveFilters = _this.saveFilters.bind(_assertThisInitialized(_this));
     _this.searchReports = _this.searchReports.bind(_assertThisInitialized(_this));
     _this.onCheckBoxChange = _this.onCheckBoxChange.bind(_assertThisInitialized(_this));
     _this.onSelectYear = _this.onSelectYear.bind(_assertThisInitialized(_this));
@@ -90,16 +129,22 @@ function (_Component) {
     key: "saveReports",
     value: function saveReports(r) {
       console.log('save reports!');
+      var rr = cljs.reports(this.state.thematicsFocus, r); //    console.log(rr.map(o => o.type));
+      //    console.log('first report', rr[0]);
+
       this.setState({
-        reports: r,
-        initialReports: r
+        reports: rr,
+        initialReports: rr
       });
     }
   }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      console.log('componentWillMount');
-      fetch('./js/data.json').then(function (response) {
+    key: "saveFilters",
+    value: function saveFilters(cc) {
+      //    console.log('regions', cljs.regions(cc));
+      var state = cljs.assocIn(this.state, [[["filters", "countries"], cljs.countries(cc)], [["filters", "types"], cljs.types(cc)], [["filters", "regions"], cljs.regions(cc)], [["filters", "sectors"], cljs.sectors(cc)], [["thematicsFocus"], cljs.thematicFocus(cc)]]); //    console.log(state);
+
+      this.setState(state);
+      fetch('./js/all-reports.json').then(function (response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
         }
@@ -108,8 +153,20 @@ function (_Component) {
       }).then(this.saveReports);
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log('componentDidMount');
+      fetch('./js/all-filters.json').then(function (response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+
+        return response.json();
+      }).then(this.saveFilters);
+    }
+  }, {
     key: "selectSelect",
-    value: function selectSelect(vals, kw) {
+    value: function selectSelect(vals, kw, isMultiple) {
       var picked = _extends({}, this.state.qq);
 
       if (vals !== undefined && vals !== null) {
@@ -117,9 +174,15 @@ function (_Component) {
           return o.value;
         }));
 
-        picked[kw] = function (o) {
-          return dict.has(o[kw]);
-        };
+        if (isMultiple) {
+          picked[kw] = function (o) {
+            return intersection(dict, new Set(o[kw])).size > 0;
+          };
+        } else {
+          picked[kw] = function (o) {
+            return dict.has(o[kw]);
+          };
+        }
       } else {
         delete picked[kw];
       }
@@ -133,6 +196,7 @@ function (_Component) {
         this.setState({
           regions: vals
         });
+        this.selectSelect.bind(this)(vals, 'region');
       } else if (selectType === "Country") {
         this.setState({
           countries: vals
@@ -147,6 +211,7 @@ function (_Component) {
         this.setState({
           sectors: vals
         });
+        this.selectSelect.bind(this)(vals, 'sectors', true);
       }
 
       console.log(selectType, "Option selected:", vals);
@@ -274,26 +339,16 @@ function (_Component) {
         style: {
           marginBottom: '18px'
         }
-      }, _react["default"].createElement("div", {
-        className: "col-xs-12"
-      }, _react["default"].createElement("div", {
-        className: "search-controls-wrapper"
-      }, _react["default"].createElement("div", {
-        className: "search-controls"
-      }, _react["default"].createElement("div", {
-        className: "row",
-        role: "form"
-      }, _react["default"].createElement("div", {
-        id: "main_select_filter"
       }, _react["default"].createElement(_MainSelectFilters["default"], {
         onChange: this.onSelectChange,
         reports: this.state.reports,
         initialReports: this.state.initialReports,
         regions: this.state.regions,
         types: this.state.types,
+        filters: this.state.filters,
         countries: this.state.countries,
         sectors: this.state.sectors
-      }))))))), _react["default"].createElement("div", {
+      })), _react["default"].createElement("div", {
         className: "row "
       }, _react["default"].createElement(_DocumentField["default"], {
         reports: this.state.reports,
@@ -302,26 +357,11 @@ function (_Component) {
         approval_year: this.state.approval_year
       }), _react["default"].createElement(_ThematicFocus["default"], {
         reports: this.state.reports,
+        thematicsFocus: this.state.thematicsFocus,
         onCheck: this.onCheckBoxChange
-      })), _react["default"].createElement("div", {
-        className: "row filters",
-        style: {
-          marginTop: '0px'
-        }
-      }, _react["default"].createElement("div", {
-        className: "text-center search-controls-wrapper"
-      }, _react["default"].createElement("button", {
-        className: "btn btn-primary btn-filter",
-        id: "apply_filters",
-        onClick: this.search
-      }, "Apply filters"), _react["default"].createElement("a", {
-        id: "clear_filters",
-        className: "btn-clear-filters",
-        title: "Clear filters"
-      }, _react["default"].createElement("i", {
-        className: "fa fa-times-circle"
-      })))))), _react["default"].createElement(_Results["default"], {
-        reports: this.state.reports
+      })))), _react["default"].createElement(_Results["default"], {
+        reports: this.state.reports,
+        filters: this.state.filters
       }))));
     }
   }]);
