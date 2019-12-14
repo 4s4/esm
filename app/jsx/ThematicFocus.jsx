@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 const cljs = require('../../js/cljs.js');
 
+const newsTM = ["environment", "focus_on_trade", "gender", "poverty_reduction", "quality", "regional_integration", "trade_facilitation",
+"trade_finance", "trade_information", "trade_promotion", "tvet", "youth"];
 
 function CheckBox(props){
   return <div className="checkbox" data-toggle="tooltip" title={props.title}>
