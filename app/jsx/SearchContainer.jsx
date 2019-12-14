@@ -202,7 +202,10 @@ class SearchContainer extends Component {
                   </div>
 
                   {/* <Charts /> */}
-                  {/* <Results reports={this.state.reports} /> */}
+                  <Results 
+                  reports={this.state.reports}
+                  filters={this.state.filters}
+                  />
                 </section>
               </div>
             </div>;

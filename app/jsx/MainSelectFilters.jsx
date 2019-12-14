@@ -25,7 +25,7 @@ class MainSelectFilters extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const newState = {};
+    const newState = state || {};
     if (
       props.reports !== state.reports 
     ) {

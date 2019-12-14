@@ -2,17 +2,9 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import { countries } from './data/countries';
-import {findRegion} from './data/regions';
-import {findSector} from './data/sectors';
-import {findCountry} from './data/countries';
-import {findType} from './data/types';
-
 
 //import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 
 class Results extends Component {
   constructor(props) {
@@ -21,20 +13,29 @@ class Results extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    const newState = state || {};
     if (
       props.reports !== null && props.reports !== state.reports 
     ) {
-      return {
-        reports: props.reports,
-      };
+      newState.reports = props.reports;
+    }
+    if (
+      props.filters !== state.filters 
+    ) {
+      newState.filters = props.filters;
     }
     return state;
   }
 
 
   render() {
-    const country= (countryValue, cc) => {
-      const c = findCountry(countryValue).label;
+    const findRegion = (regions, v) => {return {label: "HOla region"+v}};
+    const findCountry = (countries, v) => {return {label: "HOla region"+v}};
+    const findType = (types, v) => {return {label: "HOla region"+v}};
+    const findSector = (sectors, v) => {return {label: "HOla region"+v}};
+
+    const country= (countries, countryValue, cc) => {
+      const c = findCountry(countries, countryValue).label;
       if (c.length<7) {
         return (<div  style={{marginTop:"8px"}} className="left-first-colum-first-row">
                   <span className="left-table-row-title">Country:</span>
@@ -72,21 +73,21 @@ class Results extends Component {
                 </div>
               </div> );
     };
-    const leftFormatter = (c, o) => { 
-      const r = findRegion(o.region);
+    const leftFormatter = (countries, regions) => (c, o) => { 
+      const r = findRegion(regions, o.region);
       return (<div key={`left-${o.id}`}>
                 <div className="left-first-colum-first-row" > 
                   <span className="left-table-row-title">Region:</span>
                 <div className="span-region table-value boldi" >{r.label}</div>
                 </div>
-                {country(o.country, o.countryCode)}
+                {country(countries, o.country, o.countryCode)}
                 <div style={{ marginTop:"18px", padding:"10px", border:"1px solid rgb(187, 187, 187)", textAlign: "center" }} > 
                   {/* <img className="world" src={`./img/maps/${r.label}.png`} /> */}
                 </div>
               </div>);
     };
-    const rightFormatter = (c, o) => {
-      const t = findType(o.type);
+    const rightFormatter = (types) => (c, o) => {
+      const t = findType(types, o.type);
       return (<div>
                 <div className="first-colum-first-row first-colum-first-row-bis" >
                 <span className="table-row-title " >Type: </span><span style={{float:"right"}} className="table-value " >{t.label}</span>
@@ -107,7 +108,7 @@ class Results extends Component {
               </div>
         );
     };
-    const sectorsFormatter = (value) => {
+    const sectorsFormatter = (sectors, value) => {
       const screen_bigger = $( window ).width()>760;
 //      let chunk = 3;
       let css_class = "col-sm-4";
@@ -119,7 +120,7 @@ class Results extends Component {
       const extractRowData = (value, idx) => {  
             return (<div className={css_class} key={`one-${idx}`} >
                       <div className={`label label-default label-table ${css_class}`} key={`two-${idx}`} >
-                        <div className="" key={`three-${idx}`} >{findSector(value).label}</div>
+                        <div className="" key={`three-${idx}`} >{findSector(sectors, value).label}</div>
                       </div>
                     </div>);
       };
@@ -128,12 +129,12 @@ class Results extends Component {
       return (<div className="container-fluid">{value.map(r)}</div>);
   }
 
-    const middleFormatter = (c, o) => {
+    const middleFormatter = (sectors) => (c, o) => {
       return (<div className="middle-column">
       <h2 className="middle-column-title"><a href="search_details.html#">{o.title}</a></h2>
       {o.description}
     <h3 className="middle-column-seectors" >Sectors:</h3>
-      {sectorsFormatter(o.sectors)}
+      {sectorsFormatter(sectors, o.sectors)}
       </div>);
     };
 
@@ -141,23 +142,25 @@ class Results extends Component {
       return null;
     };
               
-    const columns = [{
-      formatter:leftFormatter,
-      sort: false,
-      dataField: 'region',
-      text: ""
-    }, {
-      formatter:middleFormatter,
-      sort: false, 
-      dataField: 'title',
-      text: ""
-
-    }, {
-      formatter:rightFormatter,
-      sort: false,
-      dataField: 'type',
-      text: ""
-    }];
+    const columns = (filters) => {
+      return [{
+        formatter:leftFormatter(filters.countries, filters.reginos),
+        sort: false,
+        dataField: 'region',
+        text: ""
+      }, {
+        formatter:middleFormatter(filters.sectors),
+        sort: false, 
+        dataField: 'title',
+        text: ""
+  
+      }, {
+        formatter:rightFormatter(filters.types),
+        sort: false,
+        dataField: 'type',
+        text: ""
+      }]
+    };
     
     const defaultSorted = [{
       dataField: 'title',
@@ -221,7 +224,7 @@ class Results extends Component {
       //  bootstrap4
         keyField="id"
         data={ this.state.reports }
-        columns={ columns }
+        columns={ columns(this.state.filters) }
         classes="table-no-hover table-disable-hover search-table"
         defaultSorted={ defaultSorted } 
         pagination={ paginationFactory() }
