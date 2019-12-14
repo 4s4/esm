@@ -17,7 +17,6 @@
                             c))) cont collection))]
     (fun fun [] data (or level 0))))
 
-
 (defn read-resource [resource-url]
   (parse-string (slurp (io/resource resource-url)) keyword))
 
@@ -27,16 +26,7 @@
 
 (defn rename-ks [ks]
   (fn [x] (set/rename-keys x ks)))
-(->> (:regionGroups (read-resource "filters.json"))
-     (map #(set/rename-keys % {:name :label :id :value :regions :options}))
-     (map #(update % :options
-                   (fn [ops]
-                     (map (fn [x] (-> x
-                                      ((rename-ks {:name :label :id :value :countries :options}))
-                                      (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
-                                      )) ops))))
-     extract-rec
-     )
+
 (comment
 
 
@@ -46,9 +36,6 @@
   
 
   )
-{:id "6ddfbd90-5c29-4828-a83e-03f74b92ae0d", :name "Namibia", :code "NAM"}
-(:id :name :countries)
-
 
 (comment "thematicFocus"
   (let [dict (->> (:thematicFocus (read-resource "filters.json"))
@@ -112,6 +99,7 @@
 
   
 )
+
 (comment
 
   (:description :sectorIds :regionId :lastUpdate :typeId :title :year :id :countryId :implementationPeriod :thematicFocus)
@@ -134,8 +122,11 @@
 
   )
 
+(defn all-reports []
+  (read-resource "oll.json"))
+
 (defn freqs []
-  (let [res (->> (read-resource "oll.json")
+  (let [res (->> (all-reports)
                  (map #(set/rename-keys % {:sectorIds :sectors
                                            :regionId :region
                                            :typeId :type
@@ -154,11 +145,15 @@
         (update :regions frequencies)
         (update :sectors frequencies))
     ))
+
+(defn all-filters []
+  (read-resource "filters.json"))
+
 (defn types []
-  (extract-rec (:types (read-resource "filters.json"))))
+  (extract-rec (:types (all-filters))))
 
 (defn regions []
-  (->> (:regionGroups (read-resource "filters.json"))
+  (->> (:regionGroups (all-filters))
       (map #(set/rename-keys % {:name :label :id :value :regions :options}))
       (map #(update % :options  (fn [ops]
                                   (map (fn [x] (-> x
@@ -172,7 +167,7 @@
       ))
 
 (defn countries []
-  (let [geographical (first (filter #(= "Geographical" (:label %)) (:regionGroups (read-resource "filters.json"))))
+  (let [geographical (first (filter #(= "Geographical" (:label %)) (:regionGroups (all-filters))))
         countries (reduce (fn [c reg]
                             (apply conj c (map (fn [c] (-> c
                                                            (dissoc :name)
@@ -186,7 +181,7 @@
     ))
 
 (defn sectors []
-  (extract-rec (:sectors (read-resource "filters.json"))))
+  (extract-rec (:sectors (all-filters))))
 
 (comment "intersections"
 
@@ -266,56 +261,3 @@
   
   
  )
-
-
-
-
-
-(def r (take 100 (cycle [true false false true])))
-
-(def checks [:environment :export_strategy :gender :poverty_reduction
-             :quality :regional :regional_integration :trade_facilitation
-             :trade_finance :trade_focus :trade_information :trade_promotion :tvet :youth])
-
-(defn more-checks []
-  (reduce  (fn [c a] (assoc c a (rand-nth r)))  {}
-           checks))
-
-(more-checks)
-
-(defn few [c]
- (vec (take (rand-int 5) (shuffle c))))
-
-(defn one [c]
- (first (shuffle c)))
-
-
-(def keys* (apply conj
-                  [:country :countryCode
-                   :recordDocumentDescription :impStartDate
-                   :impEndDate
-                   :lastUpdate :region
-                   :sectorName :recordName :year]
-                  checks))
-
-(defn report []
-  (let [i-p (one cols/implementation-periods)]
-    (-> (more-checks)
-        (assoc :region (one cols/regions))
-        (assoc :documentType (one cols/types))
-        (assoc :country (one cols/countries))
-        (assoc :countryCode (one cols/country-codes))
-        (assoc :title (one cols/titles))
-        (assoc :recordDocumentDescription (one cols/descriptions))
-        (assoc :sectorName (few cols/sectors))
-        (assoc :year (- (Integer/parseInt (first (str/split i-p #"-"))) (rand-int 3)))
-        (assoc :implementationPeriod i-p)
-        (assoc :lastUpdate (one cols/last-updates)))))
-
-(defn generate-file []
-  (let [data (atom [])]
-    (doseq [_ (range 1800)]
-      (swap! data conj (report)))
-    (with-open [wrtr (io/writer "/Users/tangrammer/git/6s6/esm/app/js/data.json")]
-      (.write wrtr (generate-string @data))
-      )))
