@@ -10,6 +10,15 @@ require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const cljs = require('../../js/cljs.js');
+const  intersection = (setA, setB) => {
+  var _intersection = new Set();
+  for (var elem of setB) {
+      if (setA.has(elem)) {
+          _intersection.add(elem);
+      }
+  }
+  return _intersection;
+};
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -67,11 +76,15 @@ class SearchContainer extends Component {
     .then(this.saveFilters);
   }
   
-  selectSelect(vals, kw){
+  selectSelect(vals, kw, isMultiple){
     const { ...picked } = this.state.qq;
     if (vals !== undefined && vals !== null ){
       const dict= new Set(vals.map(o => o.value));
-      picked[kw] = o => dict.has(o[kw]);
+      if(isMultiple){
+        picked[kw] = o => intersection(dict, new Set(o[kw])).size > 0;      
+      } else{
+        picked[kw] = o => dict.has(o[kw]);
+      }
     } else {
       delete picked[kw];
     }
@@ -90,6 +103,7 @@ class SearchContainer extends Component {
       this.selectSelect.bind(this)(vals, 'type');
     } else if(selectType === "Sector") {
       this.setState( { sectors: vals } );
+      this.selectSelect.bind(this)(vals, 'sectors', true);
     }
     console.log(selectType, `Option selected:`, vals)
   };

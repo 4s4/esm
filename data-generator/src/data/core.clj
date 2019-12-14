@@ -183,6 +183,12 @@
 (defn sectors []
   (extract-rec (:sectors (all-filters))))
 
+(comment "sectors consistency"
+ (let [reps (take 10 (set (mapcat :sectorIds (all-reports))))
+       fils (set (map :value (sectors) ))]
+   (count (set/intersection reps fils))))
+
+
 (defn parse-int [s]
   (try
     (Integer. (re-find  #"\d+" s ))
