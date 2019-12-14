@@ -45,7 +45,7 @@ class SearchContainer extends Component {
       ]); 
 //    console.log(state);
     this.setState( state);   
-    fetch('./js/oll.json')
+    fetch('./js/all-reports.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
@@ -57,7 +57,7 @@ class SearchContainer extends Component {
 
   componentDidMount() {
     console.log('componentDidMount');
-    fetch('./js/filters.json')
+    fetch('./js/all-filters.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
