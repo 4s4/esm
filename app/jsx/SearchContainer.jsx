@@ -194,7 +194,7 @@ class SearchContainer extends Component {
                           />
                         </div>
                         <div className="row ">
-                          {/*  <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/> */}
+                          <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
                           <ThematicFocus reports={this.state.reports} 
                           thematicsFocus={this.state.thematicsFocus}                          
                           onCheck={this.onCheckBoxChange}/>

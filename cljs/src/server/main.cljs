@@ -1,4 +1,3 @@
-
 (ns server.main
   (:require [clojure.set :as set]
             [clojure.string :as str]))
@@ -118,9 +117,11 @@
                                    )
                                  ) cs (keys cs))
                        ) counters reports))))
+(defn to-clj [o]
+  (js->clj o :keywordize-keys true))
 
 (defn count-selects [reports]
-  (let [reports (js->clj reports :keywordize-keys true)
+  (let [reports (to-clj reports)
         ret (reduce (fn [c r]
                       (-> c
                           (update :countries conj (:country r))
@@ -146,6 +147,20 @@
     )
   )
 
+(defn parse-int [s]
+  (when (and (some? s))
+    (let [res (js/parseInt  (re-find  #"\d+" s))]
+      (when (integer? res) res))))
+
+(defn approval-years [reports]
+ (->> (to-clj reports)
+      (filter #(parse-int (:year %)))
+      (map #(update % :year parse-int))
+      (group-by :year)
+      (reduce (fn [c [k vs]]
+                (assoc c k (count vs))) (sorted-map))
+      (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k " (" v ")")} )) [])
+      (clj->js)))
 
 (defn generate-exports []
   #js {:hello hello
@@ -157,7 +172,8 @@
        :regions regions
        :countries countries
        :countThematicFocus count-thematic-focus
-       :countSelects count-selects})
+       :countSelects count-selects
+       :approvalYears approval-years})
 
 (comment "test types"
          (types #js {:types [{:value "1284f11c-beee-49f3-91ff-95d42691fa1f", :label "National", :options nil} {:value "00000000-0000-0000-0000-000000000000", :label "International", :options [{:value "916e18cc-8dbc-4358-8fe6-2dd57b054a09", :label "DTIS", :options nil} {:value "09ab7c4e-49ee-425d-92fe-9661d79fb004", :label "NES-ITC", :options nil} {:value "2faaa754-89be-46f2-8468-e15cb7924d28", :label "Other", :options nil} {:value "f783f867-7cac-46e4-83d4-f2a50774d984", :label "PRSP", :options nil} {:value "e0c2b847-ffc5-421f-a0aa-4a2f90ad8408", :label "SES-ITC", :options nil} {:value "a70487e5-9325-4255-b770-8b9ceca4ce89", :label "UNDAF", :options nil}]}]}))

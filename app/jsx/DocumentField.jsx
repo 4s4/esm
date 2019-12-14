@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import Childo from './Childo';
-import {countIt} from './MainSelectFilters';
+const cljs = require('../../js/cljs.js');
 
 const range = (start, stop, step = 1) =>
 Array(Math.ceil((stop - start) / step)).fill(start).map((x, y) => x + y * step);
@@ -17,14 +17,12 @@ class DocumentField extends Component {
     if (
      props.reports && props.reports !== state.reports 
     ) {
-      let approvals = props.reports.reduce( (c, o) => {c.add(o['year']); return c;}, new Set());
-      const approvals_counts= countIt(props.reports, 'year');
-      approvals = Array.from(approvals).sort().map((o) => {return { value: o, label: `${o} (${approvals_counts[o]})`, level: 0 }});
-
+      let approvals = cljs.approvalYears(props.reports);
       const approval_year = approvals.filter( o => o.value === props.approval_year ); 
 
 
-      let actives = props.reports.map( r => r['implementationPeriod'].split("-")).reduce( (c, o) => {
+      let actives = []
+      /*props.reports.map( r => r['implementationPeriod'].split("-")).reduce( (c, o) => {
         range(parseInt(o[0], 10 ), parseInt(o[1], 10)).map(x => {
           c.add(x);
         });
@@ -37,13 +35,12 @@ class DocumentField extends Component {
           actives[x]++;});
       });
       actives = Object.keys(actives).map((o) => {return { value: o, label: `${o} (${actives[o]})`, level: 0 }});
+      */
       const active_year = actives.filter( o => o.value === props.active_year ); 
       return {reports: props.reports, approvals, actives, active_year, approval_year};
     }
     return null;
   }
-
-
 
 
   render() {

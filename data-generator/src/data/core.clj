@@ -183,6 +183,19 @@
 (defn sectors []
   (extract-rec (:sectors (all-filters))))
 
+(defn parse-int [s]
+  (Integer. (re-find  #"\d+" s )))
+
+(defn approval-years []
+ (->> (all-reports)
+      (filter #(and (some? (:year %)) (not= "" (str/trim (:year %)))))
+      (map #(update % :year parse-int))
+      (group-by :year)
+      (reduce (fn [c [k vs]]
+                (assoc c k (count vs))) (sorted-map))
+      (reduce (fn [c [k v]] (conj c {:value (str k) :label (format "%s (%s)" k v)} )) [])))
+
+
 (comment "intersections"
 
   (set/intersection (set (filter some? (map :value (sectors))))
