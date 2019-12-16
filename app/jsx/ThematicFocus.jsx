@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip'
 
 const cljs = require('../../js/cljs.js');
-import RGL, { WidthProvider } from "react-grid-layout";
+import RGL from "react-grid-layout";
 
 function CheckBox(props){
   return <div className="checkbox" >

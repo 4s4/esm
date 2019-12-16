@@ -9,7 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactTooltip = _interopRequireDefault(require("react-tooltip"));
 
-var _reactGridLayout = _interopRequireWildcard(require("react-grid-layout"));
+var _reactGridLayout = _interopRequireDefault(require("react-grid-layout"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 

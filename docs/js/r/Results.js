@@ -11,6 +11,8 @@ var _reactBootstrapTableNext = _interopRequireDefault(require("react-bootstrap-t
 
 var _reactBootstrapTable2Paginator = _interopRequireDefault(require("react-bootstrap-table2-paginator"));
 
+var _reactGridLayout = require("react-grid-layout");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -35,8 +37,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-//import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+var cljs = require('../../js/cljs.js');
+
+var ResponsiveGridLayout = (0, _reactGridLayout.WidthProvider)(_reactGridLayout.Responsive); //import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
+
 var Results =
 /*#__PURE__*/
 function (_Component) {
@@ -212,43 +217,43 @@ function (_Component) {
           css_class = "col-sm-2";
         }
 
-        var row = function row(row_data, idx) {
-          return _react["default"].createElement("div", {
-            key: idx,
-            className: "row",
-            style: {
-              marginLeft: "-38px",
-              marginBottom: "10px"
-            }
-          }, row_data);
-        };
-
         var extractRowData = function extractRowData(value, idx) {
           var s = sectors.find(function (x) {
             return x.value === value;
           });
-          return _react["default"].createElement("div", {
-            className: css_class,
-            key: "one-".concat(idx)
-          }, _react["default"].createElement("div", {
-            className: "label label-default label-table ".concat(css_class),
-            key: "two-".concat(idx)
-          }, _react["default"].createElement("div", {
-            className: "",
-            key: "three-".concat(idx)
-          }, s.label)));
+          return s.label;
         };
 
-        var r = function r(i, idx) {
-          return row(_react["default"].createElement("ul", {
-            id: "grid",
-            key: idx
-          }, extractRowData(i, idx)), idx);
-        };
-
+        var vals = value.map(function (o) {
+          return {
+            id: o
+          };
+        });
         return _react["default"].createElement("div", {
           className: "container-fluid"
-        }, value.map(r));
+        }, _react["default"].createElement(ResponsiveGridLayout, {
+          className: "layout",
+          rowHeight: 30,
+          cols: {
+            lg: 12,
+            md: 10,
+            sm: 6,
+            xs: 4,
+            xxs: 2
+          }
+        }, cljs.grid(vals, 2).map(function (i, idx) {
+          return _react["default"].createElement("div", {
+            className: "label label-default label-table ",
+            key: "ks-".concat(idx),
+            "data-grid": {
+              x: i.col * 3,
+              y: i.row,
+              w: 3,
+              h: 1,
+              "static": true
+            }
+          }, extractRowData(i.id, idx));
+        })));
       };
 
       var middleFormatter = function middleFormatter(sectors) {

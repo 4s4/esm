@@ -331,7 +331,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react["default"].createElement("div", null, _react["default"].createElement("div", {
+      return _react["default"].createElement("div", null, _react["default"].createElement(_Map["default"], {
+        reports: this.state.initialReports
+      }), _react["default"].createElement("div", {
         className: "container"
       }, _react["default"].createElement("section", {
         className: "search-controls "

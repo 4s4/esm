@@ -33,11 +33,17 @@
     (clj->js res)
     ))
 
+(defn to-grid [n col*]
+  (map #(assoc %2 :col (mod % n) :row (quot % n)) (range) col*))
+
 (defn thematic-focus [data]
   (->> (:thematicFocus (js->clj data :keywordize-keys true))
        (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x))))
-       (map #(assoc %2 :col (mod % 3) :row (quot % 3)) (range))
+       (to-grid 3)
        clj->js))
+
+(defn grid [data n]
+  (clj->js (to-grid n (js->clj data))))
 
 (defn countries [data]
   (let [filters (:regionGroups (js->clj data :keywordize-keys true))
@@ -190,6 +196,7 @@
        :assocIn assoc-in-state
        :thematicFocus thematic-focus
        :types types
+       :grid grid
        :sectors sectors
        :regions regions
        :countries countries
