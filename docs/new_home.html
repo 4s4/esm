@@ -20,7 +20,6 @@
 			<!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
 			<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 			<script src="js/vendor/modernizr-2.6.2.min.js" />
-			<script src="js/jquery-2.1.4.js"></script>
 			<script src='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.js'></script>
 			<link href='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.css' rel='stylesheet'/>
 	       </head>
@@ -83,83 +82,17 @@
   </div>
 </footer>
 <!--</form> -->
-<script src="js/vendor/jquery-1.10.1.min.js"></script>
-<script src="js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/vendor/bootstrap-modalmanager.js"></script>
-<script src="js/vendor/selectize.js"></script>
-
-<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
-<script src="bower_components/bootstrap-table/src/bootstrap-table.js"></script>
-<script src="bower_components/bootstrap3-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="js/commons.js"></script>
-<script src="js/CommonUI.js"></script>
-<script src="js/afgan.js"></script>
-<script src="js/search-advanced.js"></script>
-<script src="js/result-table.js"></script>
-
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-
-    var map;
-    $(document).ready(function () {
-        
-//        PopulateWorldMap(jsonHome);
-//        PopulateFilteredMap(afganJson);
-    });
-    
-
-      /*
-      $('select').selectize({
-	  openOnFocus: true
-      });
-*/
-
-      $('#update').datepicker();
-
-      $('[data-toggle="tooltip"]').tooltip({
-	  container: 'body'
-      });
-
-      //        $('ul.tree.root').find('ul.tree').hide();
-      //        $('.tree-toggler').click(function () {
-      //            $(this).parent().children('ul.tree').toggle(300);
-      //        });
-
-      $('.slider').slider({});
-
-      $('.pagination-detail').empty();
-
+	$('[data-toggle="tooltip"]').tooltip({
+	   container: 'body'
+       });
   });
-
-
-
-
-  // change icon plus/minus on collapse or expand tabs
-
-  $('.collapseDiv').on('shown.bs.collapse', function (t) {
-
-      var th =$(t.target);
-      $('.collap',th.parent()).toggleClass('glyphicon-plus ');;
-      $('.collap',th.parent()).toggleClass('glyphicon-minus ');;
-
-  })
-
-  $('.collapseDiv').on('hidden.bs.collapse', function (t) {
-
-      var th =$(t.target);
-      $('.collap',th.parent()).toggleClass('glyphicon-plus ');;
-      $('.collap',th.parent()).toggleClass('glyphicon-minus ');;
-
-  })
-  evaluate_show_less("short-text full-text");
-
-
 </script>
-
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 <script src="js/r.js"></script>
 
 <script>
