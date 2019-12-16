@@ -1,13 +1,16 @@
 'use strict';
 import React, { Component } from 'react';
-const cljs = require('../../js/cljs.js');
+import ReactTooltip from 'react-tooltip'
 
-const newsTM = ["environment", "focus_on_trade", "gender", "poverty_reduction", "quality", "regional_integration", "trade_facilitation",
-"trade_finance", "trade_information", "trade_promotion", "tvet", "youth"];
+const cljs = require('../../js/cljs.js');
+import RGL, { WidthProvider } from "react-grid-layout";
 
 function CheckBox(props){
-  return <div className="checkbox" data-toggle="tooltip" title={props.title}>
-    <label>
+  return <div className="checkbox" >
+    <ReactTooltip id={props.id} type='info' effect='solid'>
+    <span>{props.title}</span>
+    </ReactTooltip>
+    <label data-tip data-for={props.id}>
       <input type="checkbox" id={props.id} onChange={props.onChange(props.id)}/>
       {props.name} ({props.count.counter[props.id] ? props.count.counter[props.id] : 0})
     </label>
@@ -30,6 +33,7 @@ class ThematicFocus extends Component {
     return state;
   }
 
+
   check(kw){
     return event => this.props.onCheck(kw, event.target.checked);
   }
@@ -43,67 +47,18 @@ class ThematicFocus extends Component {
         <span className="collapse-title">Thematic focus</span>
       </a>
       <div className="collapse collapseDiv row" id="collapseTheme">
-        <div className="col-xs-2"></div>
-        <div className="col-xs-2">
-          <div className="form-group" data-toggle="tooltip" title="">
-            <CheckBox id="environment" name="Environment" onChange={this.check} count={this.state}
-                      title="The strategy focuses on environmental sustainability"
-            />
-            <CheckBox id="gender" name="Gender" onChange={this.check} count={this.state}
-                      title="The strategy focuses on gender equality"
-            />
-            <CheckBox id="poverty_reduction" name="Poverty Reduction" onChange={this.check} count={this.state}
-                      title="The strategy focuses on poverty reduction"
-            />
-          </div>
-        </div>
-        <div className="col-xs-2">
-          <div className="form-group" data-toggle="tooltip" title="">
-
-            <CheckBox id="export_strategy" name="Export Strategy" onChange={this.check} count={this.state}
-                      title="The trade export strategy"
-            />
-            <CheckBox id="trade_focus" name="Focus on trade" onChange={this.check} count={this.state}
-                      title="Trade focus"
-            />
-            <CheckBox id="youth" name="Youth" onChange={this.check} count={this.state}
-                      title="The strategy focuses on youth integration"
-            />
-          </div>
-        </div>
-        <div className="col-xs-2">
-	  <CheckBox id="trade_facilitation" name="Trade Facilitation" onChange={this.check} count={this.state}
-                    title="The document focuses on trade facilitation."
-          />
-	  <CheckBox id="trade_finance" name="Trade Finance" onChange={this.check} count={this.state}
-                    title="The document focuses on trade finance and/or access to credit."
-          />
-	  <CheckBox id="trade_information" name="Trade Information" onChange={this.check} count={this.state}
-                    title="The document focuses on trade information and/or market intelligence."
-          />
-        </div>
-        <div className="col-xs-2">
-	  <CheckBox id="trade_promotion" name="Trade Promotion" onChange={this.check} count={this.state}
-                    title="The document focuses on trade promotion."
-          />
-	  <CheckBox id="quality" name="Quality" onChange={this.check} count={this.state}
-                    title="The document focuses on standards and/or quality management."
-          />
-	  <CheckBox id="tvet" name="TVET" onChange={this.check} count={this.state}
-                    title="The strategy focuses on Technical and Vocational Education and Training (TVET)."
-          />
-
-        </div>
-        <div className="col-xs-2">
-	  <CheckBox id="regional" name="Regional Scope" onChange={this.check} count={this.state}
-                    title="The document has a regional scope. The information included applies to a group of countries."
-          />
-	  <CheckBox id="regional_integration" name="Regional Integration" onChange={this.check} count={this.state}
-                    title="The document focuses on regional integration."
-          />
+      <div className="col-xs-2"></div>
+      <div className="col-xs-10">
+        <RGL className="layout" cols={12}  rowHeight={30} width={1200}>
+          {this.props.thematicsFocus && this.props.thematicsFocus.map((o) => {
+            return (<div key={`ks-${o.kw}`} data-grid={{x: (o.col * 3) , y: o.row, w: 3, h: 1, static: true}}  >
+                      <CheckBox id={o.kw} name={o.name} onChange={this.check} count={this.state} title={o.description} />
+                    </div>)})}
+        </RGL>
         </div>
       </div>
     </div>);
   }
 }
+
 export default ThematicFocus;

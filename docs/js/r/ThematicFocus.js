@@ -7,6 +7,12 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactTooltip = _interopRequireDefault(require("react-tooltip"));
+
+var _reactGridLayout = _interopRequireWildcard(require("react-grid-layout"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -31,14 +37,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var cljs = require('../../js/cljs.js');
 
-var newsTM = ["environment", "focus_on_trade", "gender", "poverty_reduction", "quality", "regional_integration", "trade_facilitation", "trade_finance", "trade_information", "trade_promotion", "tvet", "youth"];
-
 function CheckBox(props) {
   return _react["default"].createElement("div", {
-    className: "checkbox",
-    "data-toggle": "tooltip",
-    title: props.title
-  }, _react["default"].createElement("label", null, _react["default"].createElement("input", {
+    className: "checkbox"
+  }, _react["default"].createElement(_reactTooltip["default"], {
+    id: props.id,
+    type: 'info',
+    effect: 'solid'
+  }, _react["default"].createElement("span", null, props.title)), _react["default"].createElement("label", {
+    "data-tip": true,
+    "data-for": props.id
+  }, _react["default"].createElement("input", {
     type: "checkbox",
     id: props.id,
     onChange: props.onChange(props.id)
@@ -76,6 +85,8 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return _react["default"].createElement("div", {
         className: "well search-tab"
       }, _react["default"].createElement("a", {
@@ -103,108 +114,30 @@ function (_Component) {
       }, _react["default"].createElement("div", {
         className: "col-xs-2"
       }), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "form-group",
-        "data-toggle": "tooltip",
-        title: ""
-      }, _react["default"].createElement(CheckBox, {
-        id: "environment",
-        name: "Environment",
-        onChange: this.check,
-        count: this.state,
-        title: "The strategy focuses on environmental sustainability"
-      }), _react["default"].createElement(CheckBox, {
-        id: "gender",
-        name: "Gender",
-        onChange: this.check,
-        count: this.state,
-        title: "The strategy focuses on gender equality"
-      }), _react["default"].createElement(CheckBox, {
-        id: "poverty_reduction",
-        name: "Poverty Reduction",
-        onChange: this.check,
-        count: this.state,
-        title: "The strategy focuses on poverty reduction"
-      }))), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement("div", {
-        className: "form-group",
-        "data-toggle": "tooltip",
-        title: ""
-      }, _react["default"].createElement(CheckBox, {
-        id: "export_strategy",
-        name: "Export Strategy",
-        onChange: this.check,
-        count: this.state,
-        title: "The trade export strategy"
-      }), _react["default"].createElement(CheckBox, {
-        id: "trade_focus",
-        name: "Focus on trade",
-        onChange: this.check,
-        count: this.state,
-        title: "Trade focus"
-      }), _react["default"].createElement(CheckBox, {
-        id: "youth",
-        name: "Youth",
-        onChange: this.check,
-        count: this.state,
-        title: "The strategy focuses on youth integration"
-      }))), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement(CheckBox, {
-        id: "trade_facilitation",
-        name: "Trade Facilitation",
-        onChange: this.check,
-        count: this.state,
-        title: "The document focuses on trade facilitation."
-      }), _react["default"].createElement(CheckBox, {
-        id: "trade_finance",
-        name: "Trade Finance",
-        onChange: this.check,
-        count: this.state,
-        title: "The document focuses on trade finance and/or access to credit."
-      }), _react["default"].createElement(CheckBox, {
-        id: "trade_information",
-        name: "Trade Information",
-        onChange: this.check,
-        count: this.state,
-        title: "The document focuses on trade information and/or market intelligence."
-      })), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement(CheckBox, {
-        id: "trade_promotion",
-        name: "Trade Promotion",
-        onChange: this.check,
-        count: this.state,
-        title: "The document focuses on trade promotion."
-      }), _react["default"].createElement(CheckBox, {
-        id: "quality",
-        name: "Quality",
-        onChange: this.check,
-        count: this.state,
-        title: "The document focuses on standards and/or quality management."
-      }), _react["default"].createElement(CheckBox, {
-        id: "tvet",
-        name: "TVET",
-        onChange: this.check,
-        count: this.state,
-        title: "The strategy focuses on Technical and Vocational Education and Training (TVET)."
-      })), _react["default"].createElement("div", {
-        className: "col-xs-2"
-      }, _react["default"].createElement(CheckBox, {
-        id: "regional",
-        name: "Regional Scope",
-        onChange: this.check,
-        count: this.state,
-        title: "The document has a regional scope. The information included applies to a group of countries."
-      }), _react["default"].createElement(CheckBox, {
-        id: "regional_integration",
-        name: "Regional Integration",
-        onChange: this.check,
-        count: this.state,
-        title: "The document focuses on regional integration."
-      }))));
+        className: "col-xs-10"
+      }, _react["default"].createElement(_reactGridLayout["default"], {
+        className: "layout",
+        cols: 12,
+        rowHeight: 30,
+        width: 1200
+      }, this.props.thematicsFocus && this.props.thematicsFocus.map(function (o) {
+        return _react["default"].createElement("div", {
+          key: "ks-".concat(o.kw),
+          "data-grid": {
+            x: o.col * 3,
+            y: o.row,
+            w: 3,
+            h: 1,
+            "static": true
+          }
+        }, _react["default"].createElement(CheckBox, {
+          id: o.kw,
+          name: o.name,
+          onChange: _this3.check,
+          count: _this3.state,
+          title: o.description
+        }));
+      })))));
     }
   }], [{
     key: "getDerivedStateFromProps",

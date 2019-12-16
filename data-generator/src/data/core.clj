@@ -28,6 +28,11 @@
 (defn rename-ks [ks]
   (fn [x] (set/rename-keys x ks)))
 
+(let [data (take 10 (read-resource "geo-countries.json"))]
+  (mapv #(parse-string (:GeoJSON %) keyword) data)
+ )
+[:CountryID :CountryName :CountryCode :GeoJSON :RecordCount :FillOpacity :MinRecord :MaxRecord]
+
 (comment
 
 
@@ -56,13 +61,6 @@
               ) one (:thematicFocus one))
 
     )
-
-
-  
-
-  
-
-  
 (let [dict (->> (:thematicFocus (read-resource "filters.json"))
                   (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))
       res (->> (read-resource "oll.json")
@@ -183,6 +181,21 @@
 
 (defn sectors []
   (extract-rec (:sectors (all-filters))))
+
+
+(defn thematics-focus []
+  (let [tfs (->> (:thematicFocus (all-filters))
+                 (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x)))))]
+
+    (map #(assoc % :col (mod %2 3) :row (quot %2 3)) tfs (range))
+
+    
+
+    )
+
+  )
+
+
 
 
 

@@ -36,6 +36,7 @@
 (defn thematic-focus [data]
   (->> (:thematicFocus (js->clj data :keywordize-keys true))
        (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x))))
+       (map #(assoc %2 :col (mod % 3) :row (quot % 3)) (range))
        clj->js))
 
 (defn countries [data]

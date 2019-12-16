@@ -141,8 +141,7 @@ function (_Component) {
     key: "saveFilters",
     value: function saveFilters(cc) {
       //    console.log('regions', cljs.regions(cc));
-      var state = cljs.assocIn(this.state, [[["filters", "countries"], cljs.countries(cc)], [["filters", "types"], cljs.types(cc)], [["filters", "regions"], cljs.regions(cc)], [["filters", "sectors"], cljs.sectors(cc)], [["thematicsFocus"], cljs.thematicFocus(cc)]]); //    console.log(state);
-
+      var state = cljs.assocIn(this.state, [[["filters", "countries"], cljs.countries(cc)], [["filters", "types"], cljs.types(cc)], [["filters", "regions"], cljs.regions(cc)], [["filters", "sectors"], cljs.sectors(cc)], [["thematicsFocus"], cljs.thematicFocus(cc)]]);
       this.setState(state);
       fetch('./js/all-reports.json').then(function (response) {
         if (response.status >= 400) {
@@ -166,13 +165,23 @@ function (_Component) {
     }
   }, {
     key: "selectSelect",
-    value: function selectSelect(vals, kw, isMultiple) {
+    value: function selectSelect(col, vals, kw, isRecursive, isMultiple) {
       var picked = _extends({}, this.state.qq);
 
       if (vals !== undefined && vals !== null) {
-        var dict = new Set(vals.map(function (o) {
+        var selectedValues = vals.map(function (o) {
           return o.value;
-        }));
+        });
+        var dict = new Set(selectedValues); //      console.log('initial values', selectedValues);
+
+        if (isRecursive) {
+          dict = new Set();
+          selectedValues.map(function (x) {
+            return cljs.findChildrenRec(col, x).map(function (y) {
+              return dict.add(y);
+            });
+          }); //        console.log('recursive', dict);
+        }
 
         if (isMultiple) {
           picked[kw] = function (o) {
@@ -196,22 +205,22 @@ function (_Component) {
         this.setState({
           regions: vals
         });
-        this.selectSelect.bind(this)(vals, 'region');
+        this.selectSelect.bind(this)(this.state.filters.regions, vals, 'region', false);
       } else if (selectType === "Country") {
         this.setState({
           countries: vals
         });
-        this.selectSelect.bind(this)(vals, 'country');
+        this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', false);
       } else if (selectType === "Type") {
         this.setState({
           types: vals
         });
-        this.selectSelect.bind(this)(vals, 'type');
+        this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', true, false);
       } else if (selectType === "Sector") {
         this.setState({
           sectors: vals
         });
-        this.selectSelect.bind(this)(vals, 'sectors', true);
+        this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', true, true);
       }
 
       console.log(selectType, "Option selected:", vals);
@@ -322,9 +331,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react["default"].createElement("div", null, _react["default"].createElement(_Map["default"], {
-        reports: this.state.initialReports
-      }), _react["default"].createElement("div", {
+      return _react["default"].createElement("div", null, _react["default"].createElement("div", {
         className: "container"
       }, _react["default"].createElement("section", {
         className: "search-controls "
