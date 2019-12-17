@@ -7,24 +7,6 @@ import ReactHighcharts from 'react-highcharts';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-const thematicFocus = {
-  'environment': 'Environment',
-  'gender': 'Gender',
-  'poverty_reduction': 'Poverty Reduction',
-  'export_strategy': 'Export Strategy',
-  'trade_focus': 'Focus on trade',
-  'youth': 'Youth',
-  'trade_facilitation': 'Trade Facilitation',
-  'trade_finance': 'Trade Finance',
-  'trade_information': 'Trade Information',
-  'trade_promotion': 'Trade Promotion',
-  'quality': 'Quality',
-  'tvet': 'TVET',
-  'regional': 'Regional Scope',
-  'regional_integration': 'Regional Integration'};
-
-const thematicFocusKeys = Object.keys(thematicFocus);
-
 function countProp(col, kw) {
   if(col){
     return col.filter(o => o[kw]).length;
@@ -56,13 +38,22 @@ class Map extends Component {
     this._onClick = this._onClick.bind(this);
     this.saveCountries = this.saveCountries.bind(this);
   }
+  static getDerivedStateFromProps(props, state) {
+    if (
+      props.thematicsFocus !== state.thematicsFocus 
+    ) {
+      state.thematicsFocus = props.thematicsFocus;
+    }
+    return state;
+  }
+
   saveCountries(cc){
         console.log('countries', cc);
         this.setState( {countries: cc.map(x => {x.GeoJSON = JSON.parse(x.GeoJSON); return x})});   
   }
     
   componentDidMount() {
-    console.log('componentDidMount');
+    console.log('Map', 'componentDidMount', this.props.thematicsFocus);
     fetch('./js/countries.json')
     .then(function(response) {
       if (response.status >= 400) {
@@ -152,14 +143,15 @@ class Map extends Component {
         const {label, value, coords} = feature.layer.metadata;
         console.log("selecting country value", value);
         const reportsFiltered = this.props.reports.filter( o => o.country === value);
-        const search = thematicFocusKeys.reduce( (c, o) => {
-          c[o]=countProp(reportsFiltered, o);
+        const search = this.state.thematicsFocus.reduce( (c, o) => {
+          c[o.kw]=countProp(reportsFiltered, o.kw);
           return c; } , {});
 
           const keysSorted = Object.keys(search).sort(function(a,b){return search[b]-search[a]})
           console.log('sortedSearch', keysSorted);     // bar,me,you,foo
           const dataChart = keysSorted.slice(0, keysSorted.length > 5 ? 5 : keysSorted.length);
-          const xAxisCategories = dataChart.map(o => thematicFocus[o]);
+          const findTF = (x) => this.state.thematicsFocus.find( o => o.kw === x);
+          const xAxisCategories = dataChart.map(o => findTF(o).name);
           const seriesData = dataChart.reduce( (c, o) => { c.push(search[o]); return c;}, []);
 
           console.log('xAxisCategories', xAxisCategories, 'seriesData', seriesData);
@@ -181,6 +173,7 @@ class Map extends Component {
   };
   
   render() {
+    console.log('renderMap', this.state.thematicsFocus);
     if (this.state.countries){
 
     return (
