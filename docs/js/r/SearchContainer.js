@@ -180,7 +180,7 @@ function (_Component) {
             return cljs.findChildrenRec(col, x).map(function (y) {
               return dict.add(y);
             });
-          }); //        console.log('recursive', dict);
+          }); //        console.log('recursive', selectedValues, dict);
         }
 
         if (isMultiple) {

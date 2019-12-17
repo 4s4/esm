@@ -96,10 +96,14 @@
     (clj->js (extract-rec sectors))))
 
 (defn rename-ks [ks] (fn [x] (set/rename-keys x ks)))
+
 (defn regions [data]
   (clj->js
    (extract-rec
     (->> (:regionGroups (js->clj data :keywordize-keys true))
+         (map #(if-not (:id %)
+                 (assoc %2 :id (str %))
+                 %) (range))
          (map #(set/rename-keys % {:name :label :id :value :regions :options}))
          (map #(update % :options
                        (fn [ops]
@@ -138,26 +142,50 @@
                                  ) cs (keys cs))
                        ) counters reports))))
 
-(defn count-selects [reports]
+(defn- find-v [c v]
+  (first (filter #(= v (:value %)) c)))
+
+(defn ups! [e]
+  (fn[o]
+    (if e
+      (if o
+        (conj o e)
+        #{e})
+      o)))
+
+(defn extract-vals [col type-id report-id]
+  (fn [xx]
+    (let [entity (find-v col type-id)]
+      (cond-> xx
+          true (update type-id (ups! report-id))
+          (:parent-value entity) (update (:parent-value entity) (ups! report-id))))))
+
+(defn count-selects [reports types sectors regions]
   (let [reports (to-clj reports)
+        types (to-clj types)
+        regions (to-clj regions)
+        sectors (to-clj sectors)
+        count! #(reduce (fn [c [uuid s]]
+                            (assoc c uuid (count s))) {} %)
         ret (reduce (fn [c r]
-                      (-> c
-                          (update :countries conj (:country r))
-                          (update :types conj (:type r))
-                          (update :regions conj (:region r))
-                          (update :sectors #(apply conj % (:sectors r)))
-                          )) {:countries [] :types [] :regions [] :sectors []}
+                      (let [report-id (:id r)]
+                        (-> c
+                            (update :countries conj (:country r))
+                            (update :types (extract-vals types (:type r) report-id))
+                            (update :regions (extract-vals regions (:region r) report-id))
+                            (update
+                             :sectors
+                             (fn [x]
+                               (reduce (fn [c s]
+                                         ((extract-vals sectors s report-id) c)) x (:sectors r))))
+                            )))
+                    {:countries [] :types {} :regions {} :sectors {}}
                     reports)]
-    (clj->js
-     (-> ret
-         (update :countries frequencies)
-         (update :types frequencies)
-         (update :regions frequencies)
-         (update :sectors frequencies)))
-    ;; (get (frequencies (map :type res)) nil)
-    ;; (get (frequencies (map :region res)) nil)
-    ;; (get (frequencies (mapcat :sectors res)) nil)
-    ))
+    (clj->js (-> ret
+                 (update :countries frequencies)
+                 (update :types count!)
+                 (update :regions count!)
+                 (update :sectors count!)))))
 
 (defn parse-int [s]
   (when (and (some? s))

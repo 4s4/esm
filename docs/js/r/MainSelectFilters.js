@@ -148,18 +148,14 @@ function (_Component) {
     value: function getDerivedStateFromProps(props, state) {
       var newState = state || {};
 
-      if (props.reports !== state.reports) {
+      if (props.reports !== state.reports || props.filters !== state.filters) {
         newState.reports = props.reports;
         newState.initialReports = props.initialReports;
-        newState.frequencies = cljs.countSelects(props.reports);
-      }
-
-      ;
-
-      if (props.filters !== state.filters) {
+        newState.frequencies = cljs.countSelects(props.reports, props.filters.types, props.filters.sectors, props.filters.regions);
         newState.filters = props.filters;
       }
 
+      ;
       return newState;
     }
   }]);

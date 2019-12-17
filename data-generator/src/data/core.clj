@@ -124,26 +124,90 @@
 (defn all-reports []
   (read-resource "oll.json"))
 
-(defn freqs []
-  (let [res (->> (all-reports)
+(defn conj* [c v]
+  (apply conj c v))
+
+(defn find-v [c v]
+  (let [r (first (filter #(= v (:value %)) c))]
+    r))
+
+(defn ups! [e]
+  (fn[o]
+    (if e
+      (if o
+        (conj o e)
+        #{e})
+      o)))
+
+
+(assert (= {:a #{:xx}}
+           (-> {}
+               (update :a (ups! nil))
+               (update :a (ups! :xx)))))
+
+(defn extract-vals [col type-id report-id]
+  (fn [xx]
+    (let [entity (find-v col type-id)]
+      (cond-> xx
+          true (update type-id (ups! report-id))
+          (:parent-value entity) (update (:parent-value entity) (ups! report-id))))))
+
+(defn freqs [types* sectors* regions*]
+  (let [count! #(reduce (fn [c [uuid s]]
+                            (assoc c uuid (count s))) {} %)
+
+        res (->> (all-reports)
                  (map #(set/rename-keys % {:sectorIds :sectors
                                            :regionId :region
                                            :typeId :type
                                            :countryId :country})))
         ret (reduce (fn [c r]
-                      (-> c
-                          (update :countries conj (:country r))
-                          (update :types conj (:type r))
-                          (update :regions conj (:region r))
-                          (update :sectors #(apply conj % (:sectors r)))
-                          )) {:countries [] :types [] :regions [] :sectors []} res)
+                      (let [report-id (:id r)]
+                        (-> c
+                            (update :countries conj (:country r))
+                            (update :types (extract-vals types* (:type r) report-id))
+                            (update :regions (extract-vals regions* (:region r) report-id))
+                            (update
+                             :sectors
+                             (fn [x]
+                               (reduce (fn [c s]
+                                         ((extract-vals sectors* s report-id) c)) x (:sectors r))))
+                            ))) {:countries [] :types {} :regions {} :sectors {}} res)
         ]
     (-> ret
         (update :countries frequencies)
-        (update :types frequencies)
-        (update :regions frequencies)
-        (update :sectors frequencies))
-    ))
+        (update :types count!)
+        (update :regions count!)
+        (update :sectors count!))))
+
+
+
+(comment
+(:sectors (freqs (types) (sectors) (regions)))
+(count (all-reports))
+(filter (partial = "663ae2bf-fc55-4064-a1e2-db0af580b635" ) (map :value (regions)))
+  1108
+
+  (find-v (sectors) "663ae2bf-fc55-4064-a1e2-db0af580b635") ;; parent
+  (find-v (sectors) "2ee2c112-e8be-44fe-b0d8-13169edcf2f4") ;; child
+  (find-v (sectors) "80e60b8d-b762-4608-8766-cfd54d3cc282") ;; child 
+  (get h "663ae2bf-fc55-4064-a1e2-db0af580b635")
+  (get h "2ee2c112-e8be-44fe-b0d8-13169edcf2f4")
+  (get h "80e60b8d-b762-4608-8766-cfd54d3cc282")
+  (get (:regions (freqs (types) (sectors) (regions))) "663ae2bf-fc55-4064-a1e2-db0af580b635") ;; 47
+  (get (:sectors (freqs)) "2ee2c112-e8be-44fe-b0d8-13169edcf2f4") ;; 18
+  (get (:sectors (freqs)) "80e60b8d-b762-4608-8766-cfd54d3cc282") ;; 46
+  (+ 47 18 46)
+
+  (comment "xample count rec"
+           (get ss "2ee2c112-e8be-44fe-b0d8-13169edcf2f4")
+           (find-v (sectors) "80e60b8d-b762-4608-8766-cfd54d3cc282")
+           (get (count-rec (sectors) (:sectors (freqs))) "663ae2bf-fc55-4064-a1e2-db0af580b635") ;; 94
+           (get (count-rec (sectors) (:sectors (freqs))) "80e60b8d-b762-4608-8766-cfd54d3cc282") ;; 46
+           (get (count-rec (sectors) (:sectors (freqs))) "2ee2c112-e8be-44fe-b0d8-13169edcf2f4") ;; 18         
+           ))
+
+
 
 (defn all-filters []
   (read-resource "filters.json"))
@@ -153,17 +217,19 @@
 
 (defn regions []
   (->> (:regionGroups (all-filters))
-      (map #(set/rename-keys % {:name :label :id :value :regions :options}))
-      (map #(update % :options  (fn [ops]
-                                  (map (fn [x] (-> x
-                                                   (dissoc :countries)
-                                                   (set/rename-keys {:name :label :id :value})
-                                                   (update :options (fn [cops]
-                                                                      (map                                                   (fn [cop] (set/rename-keys cop {:name :label :id :value})) cops)
-                                                                      ))
-                                                   )) ops))))
-      extract-rec
-      ))
+       (map #(assoc %2 :id (str %)) (range))
+       (map #(set/rename-keys % {:name :label :id :value :regions :options}))
+       (map #(update % :options  (fn [ops]
+                                   (map (fn [x] (-> x
+                                                    (dissoc :countries)
+                                                    (set/rename-keys {:name :label :id :value})
+                                                    (update :options (fn [cops]
+                                                                       (map (fn [cop] (set/rename-keys cop {:name :label :id :value})) cops)))
+                                                    )) ops))))
+       extract-rec
+       ))
+
+(regions)
 
 (defn countries []
   (let [geographical (first (filter #(= "Geographical" (:label %)) (:regionGroups (all-filters))))
@@ -196,16 +262,16 @@
   )
 
 
-
-
-
 (defn find-parent-rec [col* v]
   (loop [res [v]
-         selected (first (filter #(= v (:value %)) col*))]
+         selected (find-v col* v)]
     (if-let [parent (:parent-value selected)]
-      (recur (conj res parent) (first (filter #(= parent (:value %)) col*)))
+      (recur (conj res parent) (find-v col* parent))
       res)))
 
+(find-parent-rec (sectors) "2403af10-fa09-4ba6-9d19-4b6bc0dfab33")
+
+ 
 
 (defn find-children-rec [col* v]
   (let [fun (fn [f* res childs]
@@ -223,7 +289,9 @@
 
 (comment
   (find-parent-rec (sectors) "d2bb2c05-faf3-45dd-b735-97ef1a4e7b44")
-  (find-children-rec (sectors) "83ba4a90-18ee-4a63-bed4-5cea6afc7bd6"))
+  (find-children-rec (sectors) "7f21856c-6ff6-4ffa-9796-0082549bd11f")
+
+  )
 
 
 

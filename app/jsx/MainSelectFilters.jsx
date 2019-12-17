@@ -24,21 +24,17 @@ class MainSelectFilters extends Component {
       filters: props.filters, frequencies: {}, options:{} };
   }
 
+  
   static getDerivedStateFromProps(props, state) {
     const newState = state || {};
     if (
-      props.reports !== state.reports 
+      props.reports !== state.reports || props.filters !== state.filters 
     ) {
       newState.reports = props.reports;
       newState.initialReports =  props.initialReports;
-      newState.frequencies = cljs.countSelects(props.reports);
-    };
-
-    if (
-      props.filters !== state.filters 
-    ) {
+      newState.frequencies = cljs.countSelects(props.reports, props.filters.types, props.filters.sectors, props.filters.regions);
       newState.filters = props.filters;
-    }
+    };
     return newState;
   }
 
