@@ -51,9 +51,46 @@
                                       (if (-> cc first sequential?)
                                         (-> cc first)
                                         cc))) data2)
+        ff (->>  (all-reports)
+                 (map #(set/rename-keys % {:sectorIds :sectors
+                                           :regionId :region
+                                           :typeId :type
+                                           :countryId :country}))
+                 (map :country)
+                 frequencies)
+        max* (apply max (vals ff))
+        min* (apply min (vals ff))
+        fill-fun (fn [x] (double (* 90  x (/ min* max*))))
+        
         ]
-   
-   )
+    (:CountryID (first data))
+    (filter #(= "3a04839a-890e-4d7b-bad4-40f29b2b9d3c" (:CountryID %)) data)
+    (->> data
+         (map #(let [c (get ff (:CountryID %) 0)]
+                 (assoc  %  :RecordCount c :FillOpacity (fill-fun c))))
+         (map :FillOpacity ))
+
+    
+    )
+
+  {0.25 8, 0.5 8, 0.45 8, 0.9 2, 0.2 3, 0.55 1, 0.27 3, 0.66 1, 0.24 5, 0.48 11, 0.34 7, 0.57 3, 0.41 5, 0.46 9, 0.67 1, 0.58 3, 0.29 4, 0.52 4, 0.39 4, 0.78 1, 0.53 5, 0.36 11, 0.38 14, 0.74 2, 0.64 1, 0.32 3, 0.43 2, 0.22 2, 0.31 6}
+  (let [ff (->>  (all-reports)
+                 (map #(set/rename-keys % {:sectorIds :sectors
+                                           :regionId :region
+                                           :typeId :type
+                                           :countryId :country}))
+                 (map :country)
+                 frequencies)
+        max* (apply max (vals ff))
+        min* (apply min (vals ff))
+        fill-fun (fn [x] (double (* 0.9  x (/ min* max*))))
+        ]
+    [min* max*]
+    ff
+
+    )
+
+(double (* 0.9  0 (/ 1 12)))
 
 #{"Polygon" "MultiPolygon"}
 )

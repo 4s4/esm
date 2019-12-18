@@ -332,7 +332,8 @@ function (_Component) {
     key: "render",
     value: function render() {
       return _react["default"].createElement("div", null, _react["default"].createElement(_Map["default"], {
-        reports: this.state.initialReports
+        reports: this.state.initialReports,
+        thematicsFocus: this.state.thematicsFocus
       }), _react["default"].createElement("div", {
         className: "container"
       }, _react["default"].createElement("section", {

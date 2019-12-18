@@ -19,6 +19,7 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      geoCountries:[],
       viewport: {
         attributionControl: false,
         scrollWheelZoom: true,
@@ -39,16 +40,24 @@ class Map extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     if (
-      props.thematicsFocus !== state.thematicsFocus 
+      props.thematicsFocus !== state.thematicsFocus || props.reports !== state.reports
     ) {
       state.thematicsFocus = props.thematicsFocus;
+      state.reports = props.reports;
+      if(state.countries){
+        state.geoCountries = cljs.geoCountries(state.countries, state.reports);
+      }
     }
     return state;
   }
 
-  saveCountries(cc){
+  saveCountries(c){
+        const cc = c.map(x => {x.GeoJSON = JSON.parse(x.GeoJSON); return x});
         console.log('countries', cc);
-        this.setState( {countries: cljs.geoCountries(cc.map(x => {x.GeoJSON = JSON.parse(x.GeoJSON); return x}))});   
+        this.setState( {countries: cc});   
+        if(!this.state.geoCountries){
+          this.setState( {geoCountries: cljs.geoCountries(cc, this.state.reports)});   
+        }
   }
     
   componentDidMount() {
@@ -110,7 +119,7 @@ class Map extends Component {
   }
 
   _renderCountry(country, idx){
-    const {value, label, coords} = country;
+    const {value, label, coords, fillOpacity} = country;
 
     const conf = {
       id: `layer-${idx}`,
@@ -119,8 +128,8 @@ class Map extends Component {
       metadata: {value, label, coords},
       source: {type: 'geojson',  data: country.geoJSON},
       paint: {
-        "fill-color": "#1FCB4A",
-        "fill-opacity": 0.30
+        "fill-color": "#BF0154",
+        "fill-opacity": fillOpacity
       }
     };
     return (<Layer key={`layer-${idx}`} {...conf}  ></Layer>);
@@ -159,45 +168,39 @@ class Map extends Component {
   };
   
   render() {
-    console.log('renderMap', this.state.thematicsFocus);
     if (this.state.countries){
-
     return (
       <div className="container">
-<ol className="breadcrumb pull-right">
-<li><a href="#">Home</a></li>
-</ol>
-<h2>Search documents</h2>
-<section className="map-container map-container-details">
-<div className="container">
-<div id="map">
-
-
-    
-    <ReactMapGL
-      {...this.state.viewport}
-      onClick={this._onClick}
-      mapStyle="mapbox://styles/mapbox/streets-v10"
-      mapboxApiAccessToken="pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA"
-      onViewportChange={(viewport) => this.setState({viewport})}
-    > 
-        <div style={{position: 'absolute', left: "10px", top: "10px"}}>
-          <NavigationControl />
-        </div>
-        {this.state.countries.map( (o, idx) => {
-            return this._renderCountry({geoJSON: o.GeoJSON,
-                                        value: o.CountryID,
-                                        label: o.CountryName,
-                                        coords: o.coords,
-                                      }, idx);
-        } )}
-        {this._renderPopup()}
-
-      </ReactMapGL>
+        <ol className="breadcrumb pull-right">
+        <li><a href="#">Home</a></li>
+        </ol>
+        <h2>Search documents</h2>
+        <section className="map-container map-container-details">
+        <div className="container">
+          <div id="map">
+            <ReactMapGL
+              {...this.state.viewport}
+              onClick={this._onClick}
+              mapStyle="mapbox://styles/mapbox/streets-v10"
+              mapboxApiAccessToken="pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA"
+              onViewportChange={(viewport) => this.setState({viewport})}
+            > 
+            <div style={{position: 'absolute', left: "10px", top: "10px"}}>
+              <NavigationControl />
+            </div>
+            {this.state.geoCountries.map( (o, idx) => {
+                return this._renderCountry({geoJSON: o.GeoJSON,
+                                            value: o.CountryID,
+                                            label: o.CountryName,
+                                            coords: o.coords,   
+                                            fillOpacity: o.FillOpacity                                   
+                                          }, idx);
+            } )}
+            {this._renderPopup()}
+          </ReactMapGL>
       </div>
-</div>
-
-</section>
+    </div>
+  </section>
 </div>
      );
             }

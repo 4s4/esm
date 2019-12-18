@@ -217,14 +217,23 @@
        (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k " (" v ")")} )) [])
        (clj->js)))
 
-(defn geo-countries [data]
-  (let[d (to-clj data)
-       d2 (filter #(and ((complement seq?) (:GeoJSON %)) (some? (-> (:GeoJSON %) :features first :id))) d)
-       d3 (map #(assoc % :coords (let [cc (-> % :GeoJSON :features first :geometry :coordinates first first)]
-                                   (if (-> cc first sequential?)
-                                     (-> cc first)
-                                     cc))) d2)]
-    (clj->js d3)))
+(defn geo-countries [data reports]
+  (let[d         (to-clj data)
+       d2        (filter #(and ((complement seq?) (:GeoJSON %)) (some? (-> (:GeoJSON %) :features first :id))) d)
+       d3        (map #(assoc % :coords (let [cc (-> % :GeoJSON :features first :geometry :coordinates first first)]
+                                          (if (-> cc first sequential?)
+                                            (-> cc first)
+                                            cc))) d2)
+       ff       (->>  (to-clj reports)
+                      (map :country)
+                      frequencies)
+       max*     (apply max (vals ff))
+       min*     (apply min (vals ff))
+       fill-fun (fn [x] (double (* 0.9  x (/ min* max*))))
+       d4        (map #(let [c (get ff (:CountryID %) 0)]
+                         (assoc  %  :RecordCount c :FillOpacity (fill-fun c)))
+                      d3)]
+    (clj->js (filter #(pos? (:RecordCount %)) d4))))
 
 (defn generate-exports []
   #js {:reports reports

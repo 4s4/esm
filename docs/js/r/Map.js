@@ -9,8 +9,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactMapGl = _interopRequireWildcard(require("react-map-gl"));
 
-var _cityPin = _interopRequireDefault(require("./city-pin"));
-
 var _reactHighcharts = _interopRequireDefault(require("react-highcharts"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -39,27 +37,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var cljs = require('../../js/cljs.js');
+
 require('es6-promise').polyfill();
 
 require('isomorphic-fetch');
-
-var thematicFocus = {
-  'environment': 'Environment',
-  'gender': 'Gender',
-  'poverty_reduction': 'Poverty Reduction',
-  'export_strategy': 'Export Strategy',
-  'trade_focus': 'Focus on trade',
-  'youth': 'Youth',
-  'trade_facilitation': 'Trade Facilitation',
-  'trade_finance': 'Trade Finance',
-  'trade_information': 'Trade Information',
-  'trade_promotion': 'Trade Promotion',
-  'quality': 'Quality',
-  'tvet': 'TVET',
-  'regional': 'Regional Scope',
-  'regional_integration': 'Regional Integration'
-};
-var thematicFocusKeys = Object.keys(thematicFocus);
 
 function countProp(col, kw) {
   if (col) {
@@ -83,6 +65,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Map).call(this, props));
     _this.state = {
+      geoCountries: [],
       viewport: {
         attributionControl: false,
         scrollWheelZoom: true,
@@ -96,7 +79,6 @@ function (_Component) {
       },
       popupInfo: null
     };
-    _this._renderCityMarker = _this._renderCityMarker.bind(_assertThisInitialized(_this));
     _this._renderPopup = _this._renderPopup.bind(_assertThisInitialized(_this));
     _this._onClick = _this._onClick.bind(_assertThisInitialized(_this));
     _this.saveCountries = _this.saveCountries.bind(_assertThisInitialized(_this));
@@ -105,20 +87,27 @@ function (_Component) {
 
   _createClass(Map, [{
     key: "saveCountries",
-    value: function saveCountries(cc) {
+    value: function saveCountries(c) {
+      var cc = c.map(function (x) {
+        x.GeoJSON = JSON.parse(x.GeoJSON);
+        return x;
+      });
       console.log('countries', cc);
       this.setState({
-        countries: cc.map(function (x) {
-          x.GeoJSON = JSON.parse(x.GeoJSON);
-          return x;
-        })
+        countries: cc
       });
+
+      if (!this.state.geoCountries) {
+        this.setState({
+          geoCountries: cljs.geoCountries(cc, this.state.reports)
+        });
+      }
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log('componentDidMount');
-      fetch('./js/countries.json').then(function (response) {
+      console.log('Map', 'componentDidMount');
+      fetch('./js/geo-countries.json').then(function (response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
         }
@@ -176,29 +165,12 @@ function (_Component) {
       }));
     }
   }, {
-    key: "_renderCityMarker",
-    value: function _renderCityMarker(city, index) {
-      var _this3 = this;
-
-      return _react["default"].createElement(_reactMapGl.Marker, {
-        key: "marker-".concat(index),
-        longitude: city.longitude,
-        latitude: city.latitude
-      }, _react["default"].createElement(_cityPin["default"], {
-        size: 20,
-        onClick: function onClick() {
-          return _this3.setState({
-            popupInfo: city
-          });
-        }
-      }));
-    }
-  }, {
     key: "_renderCountry",
     value: function _renderCountry(country, idx) {
       var value = country.value,
           label = country.label,
-          coords = country.coords;
+          coords = country.coords,
+          fillOpacity = country.fillOpacity;
       var conf = {
         id: "layer-".concat(idx),
         type: 'fill',
@@ -213,8 +185,8 @@ function (_Component) {
           data: country.geoJSON
         },
         paint: {
-          "fill-color": "#1FCB4A",
-          "fill-opacity": 0.30
+          "fill-color": "#BF0154",
+          "fill-opacity": fillOpacity
         }
       };
       return _react["default"].createElement(_reactMapGl.Layer, _extends({
@@ -224,6 +196,8 @@ function (_Component) {
   }, {
     key: "_onClick",
     value: function _onClick(event) {
+      var _this3 = this;
+
       var feature = event.features && event.features[0];
 
       if (feature) {
@@ -238,8 +212,8 @@ function (_Component) {
           var reportsFiltered = this.props.reports.filter(function (o) {
             return o.country === value;
           });
-          var search = thematicFocusKeys.reduce(function (c, o) {
-            c[o] = countProp(reportsFiltered, o);
+          var search = this.state.thematicsFocus.reduce(function (c, o) {
+            c[o.kw] = countProp(reportsFiltered, o.kw);
             return c;
           }, {});
           var keysSorted = Object.keys(search).sort(function (a, b) {
@@ -248,8 +222,15 @@ function (_Component) {
           console.log('sortedSearch', keysSorted); // bar,me,you,foo
 
           var dataChart = keysSorted.slice(0, keysSorted.length > 5 ? 5 : keysSorted.length);
+
+          var findTF = function findTF(x) {
+            return _this3.state.thematicsFocus.find(function (o) {
+              return o.kw === x;
+            });
+          };
+
           var xAxisCategories = dataChart.map(function (o) {
-            return thematicFocus[o];
+            return findTF(o).name;
           });
           var seriesData = dataChart.reduce(function (c, o) {
             c.push(search[o]);
@@ -305,22 +286,32 @@ function (_Component) {
             left: "10px",
             top: "10px"
           }
-        }, _react["default"].createElement(_reactMapGl.NavigationControl, null)), this.state.countries.map(function (o, idx) {
-          var coords = o.GeoJSON.features ? o.GeoJSON.features[0].geometry.coordinates[0][0] : o.GeoJSON[0].geometry.coordinates[0][0];
-
-          if (o.GeoJSON.features && !Array.isArray(coords[0])) {
-            return _this4._renderCountry({
-              geoJSON: o.GeoJSON,
-              value: o.CountryID,
-              label: o.CountryName,
-              coords: coords
-            }, idx);
-          } else {// console.log("ahhhh", o.CountryName, coords, o.GeoJSON)
-          }
+        }, _react["default"].createElement(_reactMapGl.NavigationControl, null)), this.state.geoCountries.map(function (o, idx) {
+          return _this4._renderCountry({
+            geoJSON: o.GeoJSON,
+            value: o.CountryID,
+            label: o.CountryName,
+            coords: o.coords,
+            fillOpacity: o.FillOpacity
+          }, idx);
         }), this._renderPopup())))));
       }
 
       return _react["default"].createElement("div", null);
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      if (props.thematicsFocus !== state.thematicsFocus || props.reports !== state.reports) {
+        state.thematicsFocus = props.thematicsFocus;
+        state.reports = props.reports;
+
+        if (state.countries) {
+          state.geoCountries = cljs.geoCountries(state.countries, state.reports);
+        }
+      }
+
+      return state;
     }
   }]);
 
