@@ -1,8 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
-import ReactMapGL, {Layer, Marker, Popup, NavigationControl} from 'react-map-gl';
-import CityPin from './city-pin';
+import ReactMapGL, {Layer, Popup, NavigationControl} from 'react-map-gl';
 import ReactHighcharts from 'react-highcharts';
+const cljs = require('../../js/cljs.js');
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -33,7 +33,6 @@ class Map extends Component {
         popupInfo: null
 
     };
-    this._renderCityMarker = this._renderCityMarker.bind(this);
     this._renderPopup = this._renderPopup.bind(this);
     this._onClick = this._onClick.bind(this);
     this.saveCountries = this.saveCountries.bind(this);
@@ -49,12 +48,12 @@ class Map extends Component {
 
   saveCountries(cc){
         console.log('countries', cc);
-        this.setState( {countries: cc.map(x => {x.GeoJSON = JSON.parse(x.GeoJSON); return x})});   
+        this.setState( {countries: cljs.geoCountries(cc.map(x => {x.GeoJSON = JSON.parse(x.GeoJSON); return x}))});   
   }
     
   componentDidMount() {
-    console.log('Map', 'componentDidMount', this.props.thematicsFocus);
-    fetch('./js/countries.json')
+    console.log('Map', 'componentDidMount');
+    fetch('./js/geo-countries.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
@@ -110,15 +109,6 @@ class Map extends Component {
     );
   }
 
-
-  _renderCityMarker(city, index){
-    return (
-      <Marker key={`marker-${index}`} longitude={city.longitude} latitude={city.latitude}>
-        <CityPin size={20} onClick={() => this.setState({popupInfo: city})} />
-      </Marker>
-    );
-  };
-
   _renderCountry(country, idx){
     const {value, label, coords} = country;
 
@@ -146,17 +136,13 @@ class Map extends Component {
         const search = this.state.thematicsFocus.reduce( (c, o) => {
           c[o.kw]=countProp(reportsFiltered, o.kw);
           return c; } , {});
-
           const keysSorted = Object.keys(search).sort(function(a,b){return search[b]-search[a]})
           console.log('sortedSearch', keysSorted);     // bar,me,you,foo
           const dataChart = keysSorted.slice(0, keysSorted.length > 5 ? 5 : keysSorted.length);
           const findTF = (x) => this.state.thematicsFocus.find( o => o.kw === x);
           const xAxisCategories = dataChart.map(o => findTF(o).name);
           const seriesData = dataChart.reduce( (c, o) => { c.push(search[o]); return c;}, []);
-
           console.log('xAxisCategories', xAxisCategories, 'seriesData', seriesData);
-
-
         console.log('search', search);
 //        this.props.reports.filter( o => o.country === "010d6483-d82d-48de-88c4-030fc5e7f81e").map(o => console.log(o));
           this.setState(
@@ -199,19 +185,12 @@ class Map extends Component {
           <NavigationControl />
         </div>
         {this.state.countries.map( (o, idx) => {
-          const coords = o.GeoJSON.features ? o.GeoJSON.features[0].geometry.coordinates[0][0] : o.GeoJSON[0].geometry.coordinates[0][0]; 
-          if(o.GeoJSON.features && !Array.isArray(coords[0])){
             return this._renderCountry({geoJSON: o.GeoJSON,
-              value: o.CountryID,
-              label: o.CountryName,
-              coords,
-            }, idx);
-          } else {
-           // console.log("ahhhh", o.CountryName, coords, o.GeoJSON)
-
-          }
+                                        value: o.CountryID,
+                                        label: o.CountryName,
+                                        coords: o.coords,
+                                      }, idx);
         } )}
-        {/* cities.map(this._renderCityMarker) */}
         {this._renderPopup()}
 
       </ReactMapGL>

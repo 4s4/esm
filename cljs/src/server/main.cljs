@@ -217,7 +217,14 @@
        (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k " (" v ")")} )) [])
        (clj->js)))
 
-
+(defn geo-countries [data]
+  (let[d (to-clj data)
+       d2 (filter #(and ((complement seq?) (:GeoJSON %)) (some? (-> (:GeoJSON %) :features first :id))) d)
+       d3 (map #(assoc % :coords (let [cc (-> % :GeoJSON :features first :geometry :coordinates first first)]
+                                   (if (-> cc first sequential?)
+                                     (-> cc first)
+                                     cc))) d2)]
+    (clj->js d3)))
 
 (defn generate-exports []
   #js {:reports reports
@@ -232,6 +239,7 @@
        :countSelects count-selects
        :approvalYears approval-years
        :activeYears active-years
+       :geoCountries geo-countries
        :findChildrenRec find-children-rec})
 
 (comment "test types"

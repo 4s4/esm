@@ -28,9 +28,41 @@
 (defn rename-ks [ks]
   (fn [x] (set/rename-keys x ks)))
 
-(let [data (take 10 (read-resource "geo-countries.json"))]
-  (mapv #(parse-string (:GeoJSON %) keyword) data)
- )
+(comment "test find country inside geo-countries.json"
+ (let [cs (countries)]
+   (map :label
+        (reduce (fn [c x]
+                  (conj c (first (filter #(= x (:value %)) cs))))
+                []
+                (map :CountryID (map #(dissoc % :GeoJSON)  (read-resource "geo-countries.json")))))))
+
+
+(comment
+  "seq vs map GeoJSON"
+  (let [data  (read-resource "geo-countries.json")]
+     (map (comp first first :coordinates :geometry first :features) (mapv #(parse-string (:GeoJSON %) keyword) data))
+     )
+  (let [data  (read-resource "geo-countries.json")]
+     (nth (mapv #(parse-string (:GeoJSON %) keyword) data))
+    )
+  (let [data1 (mapv #(update % :GeoJSON (fn [o] (parse-string o keyword))) (read-resource "geo-countries.json"))
+        data2 (filter #(and ((complement seq?) (:GeoJSON %)) (some? (-> (:GeoJSON %) :features first :id))) data1)
+        data (map #(assoc % :coords (let [cc (-> % :GeoJSON :features first :geometry :coordinates first first)]
+                                      (if (-> cc first sequential?)
+                                        (-> cc first)
+                                        cc))) data2)
+        ]
+   
+   )
+
+#{"Polygon" "MultiPolygon"}
+)
+(let [x #{"GUY" "TGO" "BFA" "ARM" "IDN" "MWI" "BGD" "MAR" "SRB" "IRN" "SYR" "JOR" "MOZ" "UGA" "COG" "POL" "OMN" "MRT" "DOM" "MNG" "SLE" "YEM" "ARE" "EGY" "ZAF" "IRQ" "TKM" "BLR" "CHN" "TWN" "CRI" "VNM" "HTI" "LKA" "ARG" "DJI" "ZWE" "LBY" "SAU" "GMB" "BEN" "GTM" "ROU" "ESH" "KGZ" "FJI" "MKD" "HRV" "IND" "GNQ" "NPL" "AFG" "PNG" "ZMB" "UKR" "SUR" "BGR" "TUN" "GHA" "MDA" "AGO" "CAN" "PAK" "VUT" "KHM" "ERI" "MNE" "CMR" "SDN" "CUB" "THA" "URY" "AZE" "TCD" "BWA" "BHS" "TJK" "BDI" "PSE" "BTN" "KOR" "SLB" "KAZ" "SWZ" "NAM" "PHL" "RUS" "MMR" "LSO" "HND" "MEX" "CAF" "ETH" "KWT" "ECU" "RWA" "NER" "SOM" "GNB" "GEO" "SLV" "QAT" "BRA" "BIH" "PER" "LBN" "TUR" "VEN" "TTO" "AIA" "SEN" "MDG" "USA" "ALB" "LBR" "BOL" "SSD" "CHL" "PAN" "COD" "CIV" "MLI" "MYS" "BLZ" "UZB" "JAM" "NIC" "TZA" "COL" "NGA" "PRY" "KEN" "GIN" "PRK" "DZA" "LAO" "GAB"}]
+   (= x (set/intersection x (set (map :code (countries))))))
+
+(filter (partial = "ZWE") (map :code (countries)))
+(filter (partial = "Zimbabwe") (map :label (countries)))
+
 [:CountryID :CountryName :CountryCode :GeoJSON :RecordCount :FillOpacity :MinRecord :MaxRecord]
 
 (comment
@@ -122,7 +154,7 @@
   )
 
 (defn all-reports []
-  (read-resource "oll.json"))
+  (read-resource "ill.json"))
 
 (defn conj* [c v]
   (apply conj c v))
@@ -229,8 +261,11 @@
        extract-rec
        ))
 
-(regions)
+(filter (fn [[l v]]
+          (contains? (set (map :regionId (all-reports))) v))
+        (map (juxt :label :value) (regions)))
 
+#{"d380856d-ddca-4995-9cc5-51179abc00f6" "a9051429-6a0a-46de-ac0e-f3117cbe5c73" "1a7644bb-7cab-48d6-be14-a08a987bb394" "3f5ceef1-92b1-4378-b9d9-8b6486154219" "604fdd0d-ccfb-4c2c-8676-8778e373f3c5"}
 (defn countries []
   (let [geographical (first (filter #(= "Geographical" (:label %)) (:regionGroups (all-filters))))
         countries (reduce (fn [c reg]
