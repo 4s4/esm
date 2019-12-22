@@ -81,7 +81,7 @@ class Map extends Component {
       chart: {
           type: 'bar',
           height: 200,
-          width: 400,
+          width: 400      
       },
       title: {
           text: undefined,
@@ -97,7 +97,10 @@ class Map extends Component {
 
       series: [{
           name: seriesName,
-          data: seriesData //[1, 0, 4]
+          data: seriesData, //[1, 0, 4]
+          events:{
+            click: (e) => console.log(popupInfo.country, e.point.series.name, e.point.category, e.point.y,  e.point)
+          }
       }]
   };
     
@@ -131,6 +134,7 @@ class Map extends Component {
         "fill-color": "#BF0154",
         "fill-opacity": fillOpacity
       }
+      
     };
     return (<Layer key={`layer-${idx}`} {...conf}  ></Layer>);
   }
