@@ -79,6 +79,70 @@ class Arma extends Component {
                     }]
                   };
                 chartConfig = regionChartConfig; rightSidebarVisible=true; rightSidebarWidth= 'wide'}
+                if (index === 3 ) { 
+                    const dd = this.props.filters.types.map(o => {
+                        return {id: o.value, 
+                                parent: o['parent-value'] || '0.0',
+                                name: o.label, 
+                                value: this.state.frequencies.types[o.value]};});
+                            dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })
+                            
+                    const sectorChartConfig = {
+                        chart: {
+                            height: 500,
+                            width: 500      
+                        },
+                        series: [{
+                            type: "sunburst",
+                            data: dd,
+                            allowDrillToNode: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                format: '{point.name}',
+                                filter: {
+                                    property: 'innerArcLength',
+                                    operator: '>',
+                                    value: 16
+                                }
+                            },
+                            levels: [{
+                                level: 1,
+                                levelIsConstant: false,
+                                dataLabels: {
+                                    filter: {
+                                        property: 'outerArcLength',
+                                        operator: '>',
+                                        value: 64
+                                    }
+                                }
+                            }, {
+                                level: 2,
+                                colorByPoint: true
+                            },
+                            {
+                                level: 3,
+                                colorVariation: {
+                                    key: 'brightness',
+                                    to: -0.5
+                                }
+                            }, {
+                                level: 4,
+                                colorVariation: {
+                                    key: 'brightness',
+                                    to: 0.5
+                                }
+                            }]
+                    
+                        }],
+                        tooltip: {
+                            headerFormat: "",
+                            pointFormat: 'Reports of <b>{point.name}</b> is <b>{point.value}</b>'
+                        }
+                    
+                      };
+                    chartConfig = sectorChartConfig; rightSidebarVisible=true; rightSidebarWidth= 'very wide'}
+
+    
                 if (index === 2 ) { 
                     const dd = this.props.filters.sectors.map(o => {
                         return {id: o.value, 
@@ -86,7 +150,6 @@ class Arma extends Component {
                                 name: o.label, 
                                 value: this.state.frequencies.sectors[o.value]};});
                             dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })
-                            console.log('dd', dd);
                             
                     const sectorChartConfig = {
                         chart: {
