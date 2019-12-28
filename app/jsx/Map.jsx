@@ -1,9 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
 import ReactMapGL, {Layer, Popup, NavigationControl} from 'react-map-gl';
-import ReactHighcharts from 'react-highcharts';
+// import ReactHighcharts from 'react-highcharts';
 const cljs = require('../../js/cljs.js');
-
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -115,7 +114,7 @@ class Map extends Component {
           closeOnClick={false}
           onClose={() => this.setState({popupInfo: null})}
         >
-          <ReactHighcharts config ={config} />
+          {/*<ReactHighcharts config ={config} />*/}
         </Popup>
       )
     );
@@ -136,7 +135,7 @@ class Map extends Component {
       }
       
     };
-    return (<Layer key={`layer-${idx}`} {...conf}  ></Layer>);
+  return ({/*<Layer key={`layer-${idx}`} {...conf}  ></Layer>*/});
   }
   _onClick(event){
     const feature = event.features && event.features[0];
@@ -174,14 +173,7 @@ class Map extends Component {
   render() {
     if (this.state.countries){
     return (
-      <div className="container">
-        <ol className="breadcrumb pull-right">
-        <li><a href="#">Home</a></li>
-        </ol>
-        <h2>Search documents</h2>
-        <section className="map-container map-container-details">
-        <div className="container">
-          <div id="map">
+          
             <ReactMapGL
               {...this.state.viewport}
               onClick={this._onClick}
@@ -190,22 +182,20 @@ class Map extends Component {
               onViewportChange={(viewport) => this.setState({viewport})}
             > 
             <div style={{position: 'absolute', left: "10px", top: "10px"}}>
-              <NavigationControl />
+            <NavigationControl showCompass={false}/>
+              
             </div>
-            {this.state.geoCountries.map( (o, idx) => {
+            {/*this.state.geoCountries.map( (o, idx) => {
                 return this._renderCountry({geoJSON: o.GeoJSON,
                                             value: o.CountryID,
                                             label: o.CountryName,
                                             coords: o.coords,   
                                             fillOpacity: o.FillOpacity                                   
                                           }, idx);
-            } )}
+            } )*/}
             {this._renderPopup()}
-          </ReactMapGL>
-      </div>
-    </div>
-  </section>
-</div>
+          </ReactMapGL> 
+      
      );
             }
             return (<div></div>);

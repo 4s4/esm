@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import Select from 'react-select';
+//import Select from 'react-select';
 
 class Childo extends Component {
   constructor(props) {
@@ -76,7 +76,7 @@ class Childo extends Component {
 
     const options = this.props.options;
     return <div>
-      <Select
+      {/*<Select
         id={this.props.id || this.props.placeholder}
         value={this.props.value}
         onChange={this.onChange}
@@ -86,7 +86,7 @@ class Childo extends Component {
         styles={colourStyles}
         isMulti={this.props.isMulti}
         isClearable={this.props.isClearable}
-      />
+      />*/}
     </div>
     ;
   }

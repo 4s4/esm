@@ -1,13 +1,18 @@
-'use strict';
-import React, { Component } from 'react';
-import MainSelectFilter from './MainSelectFilters';
-import ThematicFocus from './ThematicFocus';
-import DocumentField from './DocumentField';
-import Map from './Map';
-import Results from './Results';
+import { Component} from 'react';
 
+// import Results from './Results';
+//import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon';
+//import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordion';
+//import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown';
+//import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
+//import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
+//import Sidebar from 'semantic-ui-react/dist/commonjs/modules/Sidebar/Sidebar';
+import Container from 'semantic-ui-react/dist/commonjs/elements/Container/Container';
+
+import Arma from './Arma';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+
 
 const cljs = require('../../js/cljs.js');
 const  intersection = (setA, setB) => {
@@ -23,7 +28,7 @@ const  intersection = (setA, setB) => {
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { qq:{}, filters: {countries:null, regions:null, types: null}, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
+    this.state = { activeIndex:0 , qq:{}, filters: {countries:null, regions:null, types: null}, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
@@ -31,6 +36,7 @@ class SearchContainer extends Component {
     this.searchReports = this.searchReports.bind(this);
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
     this.onSelectYear = this.onSelectYear.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
 
@@ -52,9 +58,9 @@ class SearchContainer extends Component {
         [["filters", "sectors"], cljs.sectors(cc)],
         [["thematicsFocus"], cljs.thematicFocus(cc)]
       ]); 
-//    console.log(state);
+    console.log(state.filters.regions);
     this.setState( state);   
-    fetch('./js/all-reports.json')
+    fetch('./js/all-records.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
@@ -194,47 +200,23 @@ class SearchContainer extends Component {
     alert(JSON.stringify(search));
   }
 
+  handleClick (e, titleProps) {
+    const { index } = titleProps
+    const { activeIndex } = this.state
+    const newIndex = activeIndex === index ? -1 : index
+    this.setState({ activeIndex: newIndex })
+  }
 
-  render() {    
-    return <div>
-           <Map reports={this.state.initialReports} 
-                thematicsFocus={this.state.thematicsFocus}
-                /> 
-            <div className="container">
-                <section className="search-controls ">
-                  <div className="overlay"></div>
-                    <div className="card">
-                      <div className="card-content">
-                        <div className="row" style={{ marginBottom: '18px' }}>
-                          <MainSelectFilter
-                            onChange={this.onSelectChange} 
-                            reports={this.state.reports}
-                            initialReports={this.state.initialReports}
-                            regions={this.state.regions} 
-                            types={this.state.types}
-                            filters={this.state.filters}
-                            countries={this.state.countries}
-                            sectors={this.state.sectors}
-                          />
-                        </div>
-                        <div className="row ">
-                          <DocumentField reports={this.state.reports} onChange={this.onSelectYear} active_year={this.state.active_year} approval_year={this.state.approval_year}/>
-                          <ThematicFocus reports={this.state.reports} 
-                          thematicsFocus={this.state.thematicsFocus}                          
-                          onCheck={this.onCheckBoxChange}/>
-                        </div>
-                      </div>
-                  </div>
-
-                  {/* <Charts /> */}
-                  <Results 
-                  reports={this.state.reports}
-                  filters={this.state.filters}
-                  />
-                </section>
-              </div>
-            </div>;
+  render() {   
+    const { activeIndex } = this.state
+    const { activeItem } = this.state
+    const visible = true;
+    return <Container style={{width:"100%", height:"100%"}}>
+            <Arma filters={this.state.filters} 
+                  onCheck={this.onCheckBoxChange}
+                  reports={this.state.initialReports} 
+                  thematicsFocus={this.state.thematicsFocus}/>
+            </Container>;
   }
 }
-
-global.window.SearchContainer=SearchContainer;
+export default SearchContainer;

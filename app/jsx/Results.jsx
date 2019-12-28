@@ -1,11 +1,11 @@
 'use strict';
 import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+// import BootstrapTable from 'react-bootstrap-table-next';
+// import paginationFactory from 'react-bootstrap-table2-paginator';
 const cljs = require('../../js/cljs.js');
-import { Responsive, WidthProvider } from 'react-grid-layout';
+//import { Responsive, WidthProvider } from 'react-grid-layout';
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
+//const ResponsiveGridLayout = WidthProvider(Responsive);
 
 //import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
@@ -222,7 +222,7 @@ class Results extends Component {
       </div>
     </div>
     */}
-    <BootstrapTable
+    {/*<BootstrapTable
       //  bootstrap4
         keyField="id"
         data={ this.state.reports }
@@ -230,7 +230,7 @@ class Results extends Component {
         classes="table-no-hover table-disable-hover search-table"
         defaultSorted={ defaultSorted } 
         pagination={ paginationFactory() }
-      />
+    />*/}
     </div>
   </div>);
             }
