@@ -42,7 +42,7 @@ class SearchContainer extends Component {
 
   saveReports(r){
     console.log('save reports!');
-    const rr = cljs.reports(this.state.thematicsFocus, r);
+    const rr = cljs.reports(this.state.filters.thematicsFocus, r);
 //    console.log(rr.map(o => o.type));
 //    console.log('first report', rr[0]);
     this.setState( { reports: rr, initialReports: rr});
@@ -56,7 +56,7 @@ class SearchContainer extends Component {
         [["filters", "types"], cljs.types(cc)],
         [["filters", "regions"], cljs.regions(cc)],
         [["filters", "sectors"], cljs.sectors(cc)],
-        [["thematicsFocus"], cljs.thematicFocus(cc)]
+        [["filters", "thematicsFocus"], cljs.thematicFocus(cc)]
       ]); 
     console.log(state.filters.regions);
     this.setState( state);   
@@ -206,16 +206,13 @@ class SearchContainer extends Component {
     const newIndex = activeIndex === index ? -1 : index
     this.setState({ activeIndex: newIndex })
   }
-
+ 
   render() {   
-    const { activeIndex } = this.state
-    const { activeItem } = this.state
-    const visible = true;
     return <Container style={{width:"100%", height:"100%"}}>
             <Arma filters={this.state.filters} 
                   onCheck={this.onCheckBoxChange}
                   reports={this.state.initialReports} 
-                  thematicsFocus={this.state.thematicsFocus}/>
+            />
             </Container>;
   }
 }
