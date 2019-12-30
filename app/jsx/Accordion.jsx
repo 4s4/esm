@@ -1,10 +1,12 @@
 import {pieChart, barChart, sunburstChart} from './Charts';
+import WorldMap from './WorldMap';
+import RegionsMap from './RegionsMap';
 
 
 export function geoRegionAccordion(regionsFilters, regionsFrequencies){
     const catt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => o.label);
     const datt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => regionsFrequencies[o.value]);
-    return [pieChart(400, 400, catt, datt), 'wide', true];
+    return [pieChart(400, 400, catt, datt), 'wide', true, RegionsMap];
 }
 
 export function ecoRegionAccordion(regionsFilters, regionsFrequencies){
@@ -18,7 +20,7 @@ export function countryAccordion(countryFilters, countriesFrequencies){
     const base = countryFilters.filter(o => dict.has(o.value));
     const catt = base.map(o => o.label);
     const datt = base.map(o => countriesFrequencies[o.value] || 0);
-    return [barChart(400, 400, catt, datt),'wide', true];
+    return [barChart(400, 400, catt, datt),'wide', true, WorldMap];
 }
 
 export function typeAccordion(typesFilters, typesFrequencies){

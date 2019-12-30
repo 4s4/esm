@@ -4,24 +4,15 @@ const theMap = require('@highcharts/map-collection/custom/world-continents.geo.j
 import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 // https://jsfiddle.net/user2314737/uhp2wgkn/
-
-const dataT = [
-  {code: 'eu', codeId:1, value:0, codeName:"EU"},
-  {code: 'as', codeId:2, value:0, codeName:"AS"},
-  {code: 'af', codeId:3, value:0, codeName:"AF"},
-  {code: 'na', codeId:4, value:0, codeName:"AM"},
-  {code: 'sa', codeId:4, value:0, codeName:"AM"},
-  {code: 'oc', codeId:5, value:0, codeName:"OC"}
-  ]
   
 function mapData(data) {
   return {
     chart: {
-      map: 'custom/world-continents'
+      map: theMap
     },
   
     title: {
-      text: 'Highmap: group two regions NA and SA'
+      text: 'Regional map'
     },
   
     plotOptions: {
@@ -29,12 +20,10 @@ function mapData(data) {
         point: {
           events: {
             mouseOver: function() {
-              var v = this.codeId;
-              console.log('v', v);
+              var v = this.codeName;
               Highcharts.each(this.series.points, function(p) {
-                if (v == p.codeId) {
+                if (v == p.codeName) {
                   p.setState('hover')
-  
                 }
               })
             },
@@ -47,7 +36,7 @@ function mapData(data) {
         },
         tooltip: {
                   headerFormat: '',
-                  pointFormat: '{point.codeName}: <b>{series.name}</b>'
+                  pointFormat: '{point.codeName}: <b>{point.value}</b>'
               },
         allAreas: false,
       }
@@ -95,11 +84,23 @@ class RegionsMap extends Component {
       props !== state
     ) {
       if(props.countries && props.frequencies){
-        const data= Object.keys(props.frequencies).map((o) => { 
+        const d ={"Europe": 0, "Asia":0, "Africa":0, "Oceania":0, "America":0};
+    
+        const data= Object.keys(props.frequencies).reduce((x,o) => {
                     const c = props.countries.find(e => e.value === o);
-                    return  {'name':c.label, 'value':props.frequencies[o], 'code': c.code};
-                    })
-        return {data};
+                     console.log('data-o', o, c);
+                    x[c.region.label]+=props.frequencies[o];
+                    return x;
+                    }, d);
+        const dataT = [
+          {code: 'eu', value:data["Europe"], codeName:"Europe"},
+          {code: 'as', value:data["Asia"], codeName:"Asia"},
+          {code: 'af', value:data["Africa"], codeName:"Africa"},
+          {code: 'na', value:data["America"], codeName:"America"},
+          {code: 'sa', value:data["America"], codeName:"America"},
+          {code: 'oc', value:data["Oceania"],  codeName:"Oceania"}
+          ];
+        return {data: dataT};
       }
     }
     return state;
@@ -108,7 +109,7 @@ class RegionsMap extends Component {
   render() {
     const {data} = this.state;
     return (<HighchartsReact
-    options = { mapData(dataT) }
+    options = { mapData(data) }
     highcharts = { Highcharts }
     constructorType = { 'mapChart' }
     allowChartUpdate = { true }
@@ -116,6 +117,5 @@ class RegionsMap extends Component {
     updateArgs = { [true, true, true] }
     />);
   }
-
 }
 export default RegionsMap;

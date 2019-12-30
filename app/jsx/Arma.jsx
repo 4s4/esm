@@ -4,7 +4,6 @@ import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion,
 const cljs = require('../../js/cljs.js');
 import ThematicFocus from './ThematicFocus';
 import WorldMap from './WorldMap';
-import RegionsMap from './RegionsMap';
 import Highcharts from 'highcharts/highmaps'
 const addSunburst = require('highcharts/modules/sunburst');
 import HighchartsReact from 'highcharts-react-official'
@@ -15,7 +14,7 @@ import {rightOption, centerOption, tableData} from './TableResults';
 class Arma extends Component {
     constructor(props) {
         super(props);
-        this.state = {visibleOptions:false, direction:null, column:null, data: tableData, activeItem: 'section1', activeIndex:-1, sidebar:true, leftSidebarWidth:'wide' , rigthSidebarWidth:'wide',leftSidebarVisible:true};
+        this.state = {visibleOptions:false, direction:null, column:null, data: tableData, activeItem: 'section1', activeIndex:-1, sidebar:true, leftSidebarWidth:'wide' , rigthSidebarWidth:'wide',leftSidebarVisible:true, m: WorldMap};
         this.handleAccordion = this.handleAccordion.bind(this);
         this.closeSidebars = this.closeSidebars.bind(this);
         this.handleOver = this.handleOver.bind(this);
@@ -52,8 +51,8 @@ class Arma extends Component {
 
         console.log('index', index);
           if (index === 0 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = geoRegionAccordion(filters.regions, frequencies.regions);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = geoRegionAccordion(filters.regions, frequencies.regions);
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
             return;
           }
           if (index === 11 ) { 
@@ -62,8 +61,8 @@ class Arma extends Component {
             return;
           }
           if (index === 1 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = countryAccordion(filters.countries, frequencies.countries);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = countryAccordion(filters.countries, frequencies.countries);
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
             return;
           }
           if (index === 2 ) { 
@@ -326,9 +325,9 @@ class Arma extends Component {
       }
 
      render (){
-        const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies } = this.state
+        const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies , m} = this.state
         const { filters, onCheck } = this.props;
-        
+        const Element = m;
       return (
         <div style={{height:'100%'}}>{ visibleOptions &&
           <Menu icon vertical >
@@ -383,7 +382,7 @@ class Arma extends Component {
             <Segment attached> {this.reportsTable(this.state.column, this.state.data, this.state.direction)}</Segment> }
             {activeItem === 'section1' && 
             <Segment attached>              
-              <WorldMap countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
+              <Element countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
               </Segment> }
             {this.innerMenu('bottom', activeItem)}
             </Segment>
