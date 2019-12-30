@@ -1,7 +1,5 @@
 'use strict';
 import React, { Component } from 'react';
-import ReactMapGL, {Layer, Popup, NavigationControl} from 'react-map-gl';
-// import ReactHighcharts from 'react-highcharts';
 const cljs = require('../../js/cljs.js');
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -171,35 +169,7 @@ class Map extends Component {
   };
   
   render() {
-    if (this.state.countries){
-    return (
-          
-            <ReactMapGL
-              {...this.state.viewport}
-              onClick={this._onClick}
-              mapStyle="mapbox://styles/mapbox/streets-v10"
-              mapboxApiAccessToken="pk.eyJ1IjoiZGViYWppdG11a2hlcmplZSIsImEiOiJjaWV2YzVlMWowd2N3czltMm43aGt5Z2t5In0.AeB5WR5Tl0bGXHr-A7iyJA"
-              onViewportChange={(viewport) => this.setState({viewport})}
-            > 
-            <div style={{position: 'absolute', left: "10px", top: "10px"}}>
-            <NavigationControl showCompass={false}/>
-              
-            </div>
-            {/*this.state.geoCountries.map( (o, idx) => {
-                return this._renderCountry({geoJSON: o.GeoJSON,
-                                            value: o.CountryID,
-                                            label: o.CountryName,
-                                            coords: o.coords,   
-                                            fillOpacity: o.FillOpacity                                   
-                                          }, idx);
-            } )*/}
-            {this._renderPopup()}
-          </ReactMapGL> 
-      
-     );
-            }
-            return (<div></div>);
-          }
+  }
 
 }
 export default Map;

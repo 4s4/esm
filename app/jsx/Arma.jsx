@@ -1,75 +1,130 @@
-import React, {Component, useRef, useEffect} from 'react'
-import { List, Dropdown, Header, Icon, Image, Card, Menu, Segment, Sidebar, Accordion, Table, Container, Statistic, Divider } from 'semantic-ui-react'
-import Map from './Map';
-import {pieChart, barChart, sunburstChart} from './Charts';
+import React, {Component} from 'react'
+import { Label, Rail, List, Dropdown, Header, Icon, Image, Card, Menu, Segment, Sidebar, Accordion, Table, Container, Statistic, Divider } from 'semantic-ui-react'
 import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion} from './Accordion';
 const cljs = require('../../js/cljs.js');
 import ThematicFocus from './ThematicFocus';
-import Highcharts from 'highcharts'
+import WorldMap from './WorldMap';
+import RegionsMap from './RegionsMap';
+import Highcharts from 'highcharts/highmaps'
 const addSunburst = require('highcharts/modules/sunburst');
 import HighchartsReact from 'highcharts-react-official'
+const items = [
+  {
+    header: 'Geographical Region',
+    description: 'This option gets: 1000 documents',
+    meta: 'selected Oceania',
+    extra: (<a><Icon name='user' />22 Friends</a>)
+  },
+  {
+    header: 'Economical Region',
+    description:
+      'Bring to the table win-win survival strategies to ensure proactive domination.',
+    meta: 'ROI: 34%',
+  },
+  {
+    header: 'Country',
+    description:
+      'Bring to the table win-win survival strategies to ensure proactive domination.',
+    meta: 'ROI: 34%',
+  },
+  {
+    header: 'Sector',
+    description:
+      'Bring to the table win-win survival strategies to ensure proactive domination.',
+    meta: 'ROI: 34%',
+  },
+  {
+    header: 'Type',
+    description:
+      'Bring to the table win-win survival strategies to ensure proactive domination.',
+    meta: 'ROI: 34%',
+  },
+  {
+    header: 'Active year',
+    description:
+      'Bring to the table win-win survival strategies to ensure proactive domination.',
+    meta: 'ROI: 34%',
+  },
+  {
+    header: 'Approval year',
+    description:
+      'Bring to the table win-win survival strategies to ensure proactive domination.',
+    meta: 'ROI: 34%',
+  },
+  {
+    header: 'Thematic Focus',
+    description:
+      'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test.',
+    meta: 'ROI: 27%',
+  },
+]
 
-//import HighchartsSunburst from "highcharts/modules/sunburst";
+
 const rightOption = (  
+       
 <List>
+<List.Item>
+      <List horizontal link>
+        <List.Item><Label color='blue' basic as='b'>Oceania:<Label.Detail >Thailand(THA)</Label.Detail></Label></List.Item>
+      </List>
+    </List.Item>
+
     <List.Item>
-      <List.Header>Type</List.Header>A lovely city
+      <List horizontal link>
+        <List.Item><Label basic color='blue' as='b'>Year:<Label.Detail >2014</Label.Detail></Label></List.Item>
+      </List>
     </List.Item>
     <List.Item>
-      <List.Header>Year</List.Header>
-      Also quite a lovely city
+      <List horizontal link>
+      <List.Item><Label basic color='blue' as='b'>Period:<Label.Detail >2016-2020</Label.Detail></Label></List.Item>
+      </List>
     </List.Item>
     <List.Item>
-      <List.Header>Period</List.Header>
-      Sometimes can be a lovely city
+      <List horizontal link>
+        <List.Item><Label color='blue' as='b'>Type:<Label.Detail >Terms and Conditions</Label.Detail></Label></List.Item>
+      </List>
     </List.Item>
   </List>
 );
-const leftOption = (  
-  <List>
-      <List.Item>
-        <List.Header>Region</List.Header>Oceania
-      </List.Item>
-      <List.Item>
-        <List.Header>Country</List.Header>
-        Thailand(THA)
-      </List.Item>
-    </List>
-  );
 const centerOption = (  
     <List>
         <List.Item>
-          <List.Header>UNPAF Thailand 2012-2016</List.Header>
+          <List.Header>
+          <Header as='h3' dividing>
+          UNPAF Thailand 2012-2016
+          </Header>
+          </List.Header>
           The ADB presents the business plan for 2015-2017 with the country partnership strategy, updated country partnership strategy results framework and summary of changes to lending and nonlending programs in the country.
 
         </List.Item>
         <List.Item>
           <List.Header>Sectors:</List.Header>
-          <List bulleted horizontal link>
-            <List.Item as='a'>Terms and Conditions</List.Item>
-            <List.Item as='a'>Privacy Policy</List.Item>
-            <List.Item as='a'>Contact Us</List.Item>
+          <List horizontal link>
+            <List.Item><Label basic color='blue'>Terms and Conditions</Label></List.Item>
+            <List.Item><Label basic color='blue'>Privacy Policy</Label></List.Item>
+            <List.Item><Label basic color='blue'>Contact Us</Label></List.Item>
           </List>
         </List.Item>
       </List>
     );
   
 const tableData = [
-  { id:1, lo: leftOption, co: centerOption, ro: rightOption },
-  { id:2, lo: leftOption, co: centerOption, ro: rightOption },
-  { id:3, lo: leftOption, co: centerOption, ro: rightOption },
-  { id:4, lo: leftOption, co: centerOption, ro: rightOption },
+  { id:1,  co: centerOption, ro: rightOption },
+  { id:2,  co: centerOption, ro: rightOption },
+  { id:3, co: centerOption, ro: rightOption },
+  { id:4, co: centerOption, ro: rightOption },
 ]
 
 class Arma extends Component {
     constructor(props) {
         super(props);
-        this.state = { direction:null, column:null, data: tableData, activeItem: 'section1', activeIndex:-1, sidebar:true, leftSidebarWidth:'wide' , rigthSidebarWidth:'wide',leftSidebarVisible:true};
+        this.state = {visibleOptions:false, direction:null, column:null, data: tableData, activeItem: 'section1', activeIndex:-1, sidebar:true, leftSidebarWidth:'wide' , rigthSidebarWidth:'wide',leftSidebarVisible:true};
         this.handleAccordion = this.handleAccordion.bind(this);
         this.closeSidebars = this.closeSidebars.bind(this);
         this.handleOver = this.handleOver.bind(this);
         this.handleItemClick = this.handleItemClick.bind(this);
         this.handleSort = this.handleSort.bind(this);
+        this.handleOptions = this.handleOptions.bind(this);
       }
 
       static getDerivedStateFromProps(props, state) {
@@ -91,7 +146,7 @@ class Arma extends Component {
       }
     
       handleAccordion (e, titleProps) {
-        addSunburst(Highcharts);
+        console.log('sunnn', addSunburst(Highcharts));
 
         const { index } = titleProps;
         const { activeIndex, frequencies } = this.state;      
@@ -101,40 +156,43 @@ class Arma extends Component {
         console.log('index', index);
           if (index === 0 ) { 
             let [chartConfig, rightSidebarWidth, rightSidebarVisible] = geoRegionAccordion(filters.regions, frequencies.regions);
-            this.setState({ activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
           if (index === 11 ) { 
             let [chartConfig, rightSidebarWidth, rightSidebarVisible] = ecoRegionAccordion(filters.regions, frequencies.regions);
-            this.setState({ activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
           if (index === 1 ) { 
             let [chartConfig, rightSidebarWidth, rightSidebarVisible] = countryAccordion(filters.countries, frequencies.countries);
-            this.setState({ activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
           if (index === 2 ) { 
             let [chartConfig, rightSidebarWidth, rightSidebarVisible] = sectorAccordion(filters.sectors, frequencies.sectors);
-            this.setState({ activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            this.setState({ isSunburst: true, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
 
           if (index === 3 ) { 
             let [chartConfig, rightSidebarWidth, rightSidebarVisible] = typeAccordion(filters.types, frequencies.types);
-            this.setState({ activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            this.setState({ isSunburst: true, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
 
           if (index === 6 ) { 
             let [chartConfig, rightSidebarWidth, rightSidebarVisible] = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus);
-            this.setState({ activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
       }
       
       closeSidebars (e) {
-        this.setState({ leftSidebarWidth: 'wide', rightSidebarVisible:false, leftSidebarVisible:false })
+        this.setState({ visibleOptions:true, leftSidebarWidth: 'wide', rightSidebarVisible:false, leftSidebarVisible:false })
+      }
+      handleOptions(e){
+        this.setState({visibleOptions:false, leftSidebarVisible:true, leftSidebarWidth: 'wide'});
       }
 
       handleOver (e) {
@@ -341,35 +399,28 @@ class Arma extends Component {
     }
     
       reportsTable(column, data, direction){
-        return ( <Table sortable celled fixed striped>
+        return ( <Table sortable fixed striped>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell
-                sorted={column === 'name' ? direction : null}
-                onClick={this.handleSort('name')}
-              >
-                Name
-              </Table.HeaderCell>
-              <Table.HeaderCell
+              <Table.HeaderCell width='12'
                 sorted={column === 'age' ? direction : null}
                 onClick={this.handleSort('age')}
               >
-                Age
+                Document
               </Table.HeaderCell>
-              <Table.HeaderCell
+              <Table.HeaderCell width='4'
                 sorted={column === 'gender' ? direction : null}
                 onClick={this.handleSort('gender')}
               >
-                Gender
+                Type/Year/Period/Region/Country
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {data.map(({id, lo, co, ro }) => (
+            {data.map(({id, co, ro }) => (
               <Table.Row key={id}>
-                <Table.Cell>{lo}</Table.Cell>
                 <Table.Cell>{co}</Table.Cell>
-                <Table.Cell>{ro}</Table.Cell>
+                <Table.Cell textAlign='right'>{ro}</Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -378,63 +429,21 @@ class Arma extends Component {
       }
 
      render (){
-        const { reports, approvals, activeItem, activeIndex, rightSidebarWidth, rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig } = this.state
+        const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies } = this.state
         const { filters, onCheck } = this.props;
-        const cardVisible = true;
-        const items = [
-          {
-            header: 'Geographical Region',
-            description: 'This option gets: 1000 documents',
-            meta: 'selected Oceania',
-            extra: (<a><Icon name='user' />22 Friends</a>)
-          },
-          {
-            header: 'Project Report - May',
-            description:
-              'Bring to the table win-win survival strategies to ensure proactive domination.',
-            meta: 'ROI: 34%',
-          },
-          {
-            header: 'Project Report - May',
-            description:
-              'Bring to the table win-win survival strategies to ensure proactive domination.',
-            meta: 'ROI: 34%',
-          },
-          {
-            header: 'Project Report - May',
-            description:
-              'Bring to the table win-win survival strategies to ensure proactive domination.',
-            meta: 'ROI: 34%',
-          },
-          {
-            header: 'Project Report - May',
-            description:
-              'Bring to the table win-win survival strategies to ensure proactive domination.',
-            meta: 'ROI: 34%',
-          },
-          {
-            header: 'Project Report - May',
-            description:
-              'Bring to the table win-win survival strategies to ensure proactive domination.',
-            meta: 'ROI: 34%',
-          },
-          {
-            header: 'Project Report - May',
-            description:
-              'Bring to the table win-win survival strategies to ensure proactive domination.',
-            meta: 'ROI: 34%',
-          },
-          {
-            header: 'Project Report - June',
-            description:
-              'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test.',
-            meta: 'ROI: 27%',
-          },
-        ]
         
       return (
-        <Sidebar.Pushable as={Segment} >
+        <div style={{height:'100%'}}>{ visibleOptions &&
+          <Menu icon vertical >
+        <Menu.Item
+          name='options' onClick={this.handleOptions}        
+        >
+          <Icon name='options'  size='small'  />
+        </Menu.Item>
+      </Menu>
+       }<Sidebar.Pushable as={Segment} >
          <Sidebar
+
             onMouseOver={this.handleOver}
             animation='push'
             onHide={() => console.log('setVisible(false)')}
@@ -442,7 +451,6 @@ class Arma extends Component {
             width={leftSidebarWidth}
           >
           <Card
-          visible={cardVisible}
             link
             header='TSM'
             meta='The Trade Strategy Map (TSM) is a repository of strategic policy documents dealing with trade and development issues from around the world.'
@@ -458,9 +466,12 @@ class Arma extends Component {
             width={rightSidebarWidth}
             visible={rightSidebarVisible}
           >
-         { chartConfig && <HighchartsReact highcharts={Highcharts} options={chartConfig} />}
+         { chartConfig && isSunburst ? <HighchartsReact highcharts={Highcharts} options={chartConfig} /> : 
+         <HighchartsReact highcharts={Highcharts} options={chartConfig} />}
           </Sidebar>
           <Sidebar.Pusher onClick={this.closeSidebars}>
+          
+
             <Segment basic onClick={this.closeSidebars} style={{height:"100%"}}>
               <Segment>
                 <Header as='h2'>
@@ -471,14 +482,16 @@ class Arma extends Component {
               </Segment>
 
             {this.innerMenu('top', activeItem)}
-            {activeItem === 'section1' && 
-            <Segment attached> {this.reportsTable(this.state.column, this.state.data, this.state.direction)}</Segment> }
             {activeItem === 'section2' && 
-            <Segment attached><Map reports={this.state.initialReports} /></Segment> }
+            <Segment attached> {this.reportsTable(this.state.column, this.state.data, this.state.direction)}</Segment> }
+            {activeItem === 'section1' && 
+            <Segment attached>              
+              <WorldMap countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
+              </Segment> }
             {this.innerMenu('bottom', activeItem)}
             </Segment>
           </Sidebar.Pusher>
-        </Sidebar.Pushable>
+        </Sidebar.Pushable></div>
       )
     }
     }
