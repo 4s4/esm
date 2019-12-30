@@ -3,64 +3,86 @@ import React, { Component } from 'react';
 const theMap = require('@highcharts/map-collection/custom/world-continents.geo.json');
 import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
+// https://jsfiddle.net/user2314737/uhp2wgkn/
 
+const dataT = [
+  {code: 'eu', codeId:1, value:0, codeName:"EU"},
+  {code: 'as', codeId:2, value:0, codeName:"AS"},
+  {code: 'af', codeId:3, value:0, codeName:"AF"},
+  {code: 'na', codeId:4, value:0, codeName:"AM"},
+  {code: 'sa', codeId:4, value:0, codeName:"AM"},
+  {code: 'oc', codeId:5, value:0, codeName:"OC"}
+  ]
+  
 function mapData(data) {
   return {
-  chart: {
-      map: theMap,
-      borderWidth: 1
-  },
-  mapNavigation: {
-    enabled: true
-},
-colorAxis: {
-  min: 0,
-  stops: [
-      [0, '#EFEFFF'],
-      [0.5, Highcharts.getOptions().colors[0]],
-      [1, Highcharts.Color(Highcharts.getOptions().colors[0]).brighten(-0.5).get()]
-  ]
-},
-
-  title: {
-      text: 'World map'
-  },
-
-  subtitle: {
-      text: 'Explore the documents by country'
-  },
-
-  legend: {
-    layout: 'vertical',
-    align: 'left',
-    verticalAlign: 'bottom'
-},
-
-  series: [{
-      name: 'Country',
-      joinBy: ['iso-a3', 'code'],
-
-      data,
-      dataLabels: {
-          enabled: true,
-          color: '#FFFFFF',
-          formatter: function () {
-              if (this.point.value) {
-                  return this.point.name;
-              }
+    chart: {
+      map: 'custom/world-continents'
+    },
+  
+    title: {
+      text: 'Highmap: group two regions NA and SA'
+    },
+  
+    plotOptions: {
+      map: {
+        point: {
+          events: {
+            mouseOver: function() {
+              var v = this.codeId;
+              console.log('v', v);
+              Highcharts.each(this.series.points, function(p) {
+                if (v == p.codeId) {
+                  p.setState('hover')
+  
+                }
+              })
+            },
+            mouseOut: function() {
+              Highcharts.each(this.series.points, function(p) {
+                p.setState('')
+              })
+            }
           }
-      },
+        },
+        tooltip: {
+                  headerFormat: '',
+                  pointFormat: '{point.codeName}: <b>{series.name}</b>'
+              },
+        allAreas: false,
+      }
+    },
+    subtitle: {
+      text: 'Source map: <a href="http://code.highcharts.com/mapdata/custom/world-continents.js">World continents</a>'
+    },
+  
+    mapNavigation: {
+      enabled: true,
+      buttonOptions: {
+        verticalAlign: 'bottom'
+      }
+    },
+  
+    colorAxis: {
+      min: 0
+    },
+  
+    series: [{
+      data: data,
+      name: 'Random data',
+      joinBy: ['hc-key', 'code'],
+  
       states: {
         hover: {
-            borderWidth: 1
+          color: '#BADA55'
         }
-    },
-      tooltip: {
-          headerFormat: '',
-          pointFormat: '{point.name}: {point.value}'
+      },
+      dataLabels: {
+        enabled: true,
+        format: '{point.codeName}'
       }
-      }]
-};
+    }]
+  };
 }
 class RegionsMap extends Component {
   constructor(props) {
@@ -86,7 +108,7 @@ class RegionsMap extends Component {
   render() {
     const {data} = this.state;
     return (<HighchartsReact
-    options = { mapData(data) }
+    options = { mapData(dataT) }
     highcharts = { Highcharts }
     constructorType = { 'mapChart' }
     allowChartUpdate = { true }
