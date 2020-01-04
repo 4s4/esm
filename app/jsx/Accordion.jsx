@@ -2,17 +2,17 @@ import {pieChart, barChart, sunburstChart} from './Charts';
 import WorldMap from './WorldMap';
 import RegionsMap from './RegionsMap';
 
-
 export function geoRegionAccordion(regionsFilters, regionsFrequencies){
     const catt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => o.label);
     const datt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => regionsFrequencies[o.value]);
+    console.log('geoRegionAccordion', catt, datt);
     return [pieChart(400, 400, catt, datt), 'wide', true, RegionsMap];
 }
 
 export function ecoRegionAccordion(regionsFilters, regionsFrequencies){
     const catt = regionsFilters.filter(o => o["parent-value"]==="1").map(o => o.label);
     const datt = regionsFilters.filter(o => o["parent-value"]==="1").map(o => regionsFrequencies[o.value]);
-    return [barChart(400, 400, catt, datt), 'wide', true];
+    return [pieChart(400, 400, catt, datt), 'wide', true];
 }
 
 export function countryAccordion(countryFilters, countriesFrequencies){

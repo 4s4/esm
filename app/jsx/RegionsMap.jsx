@@ -88,7 +88,6 @@ class RegionsMap extends Component {
     
         const data= Object.keys(props.frequencies).reduce((x,o) => {
                     const c = props.countries.find(e => e.value === o);
-                     console.log('data-o', o, c);
                     x[c.region.label]+=props.frequencies[o];
                     return x;
                     }, d);

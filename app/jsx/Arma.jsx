@@ -4,9 +4,8 @@ import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion,
 const cljs = require('../../js/cljs.js');
 import ThematicFocus from './ThematicFocus';
 import WorldMap from './WorldMap';
-import Highcharts from 'highcharts/highmaps'
-const addSunburst = require('highcharts/modules/sunburst');
-import HighchartsReact from 'highcharts-react-official'
+import SunCharty from './SunCharty';
+import Charty from './Charty';
 import {items} from './Query';
 
 import {rightOption, centerOption, tableData} from './TableResults';
@@ -41,8 +40,9 @@ class Arma extends Component {
         return state;
       }
     
+    
       handleAccordion (e, titleProps) {
-        console.log('sunnn', addSunburst(Highcharts));
+        console.log('sunnn1');
 
         const { index } = titleProps;
         const { activeIndex, frequencies } = this.state;      
@@ -323,11 +323,11 @@ class Arma extends Component {
         </Table>);
 
       }
-
      render (){
         const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies , m} = this.state
         const { filters, onCheck } = this.props;
         const Element = m;
+        console.log('chartConfig', isSunburst, chartConfig);
       return (
         <div style={{height:'100%'}}>{ visibleOptions &&
           <Menu icon vertical >
@@ -362,8 +362,7 @@ class Arma extends Component {
             width={rightSidebarWidth}
             visible={rightSidebarVisible}
           >
-         { chartConfig && isSunburst ? <HighchartsReact highcharts={Highcharts} options={chartConfig} /> : 
-         <HighchartsReact highcharts={Highcharts} options={chartConfig} />}
+         { chartConfig && isSunburst ? <SunCharty chartOpts={chartConfig}/> : <Charty  chartOpts={chartConfig}/> }
           </Sidebar>
           <Sidebar.Pusher onClick={this.closeSidebars}>
           

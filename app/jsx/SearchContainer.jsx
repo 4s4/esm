@@ -13,7 +13,6 @@ import Arma from './Arma';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-
 const cljs = require('../../js/cljs.js');
 const  intersection = (setA, setB) => {
   var _intersection = new Set();
@@ -33,6 +32,7 @@ class SearchContainer extends Component {
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
     this.saveFilters = this.saveFilters.bind(this);
+    this.saveWorld = this.saveWorld.bind(this);
     this.searchReports = this.searchReports.bind(this);
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
     this.onSelectYear = this.onSelectYear.bind(this);
@@ -44,12 +44,11 @@ class SearchContainer extends Component {
     console.log('save reports!');
     const rr = cljs.reports(this.state.filters.thematicsFocus, r);
 //    console.log(rr.map(o => o.type));
-//    console.log('first report', rr[0]);
+     console.log('first report', rr[0]);
     this.setState( { reports: rr, initialReports: rr});
   }
-
   saveFilters(cc){
-//    console.log('regions', cljs.regions(cc));
+    console.log('economical Regions', cc.regionGroups[1]);
     const state = cljs.assocIn(this.state, 
       [
         [["filters", "countries"], cljs.countries(cc)],
@@ -58,7 +57,7 @@ class SearchContainer extends Component {
         [["filters", "sectors"], cljs.sectors(cc)],
         [["filters", "thematicsFocus"], cljs.thematicFocus(cc)]
       ]); 
-    console.log(state.filters.regions);
+    console.log('filters', state.filters);
     this.setState( state);   
     fetch('./js/all-records.json')
     .then(function(response) {
@@ -70,6 +69,12 @@ class SearchContainer extends Component {
     .then(this.saveReports);
   }
 
+  saveWorld(cc){
+        console.log('world', cc);
+    this.setState({world:cc});
+    }
+    
+
   componentDidMount() {
     console.log('componentDidMount');
     fetch('./js/all-filters.json')
@@ -80,6 +85,7 @@ class SearchContainer extends Component {
       return response.json();
     })
     .then(this.saveFilters);
+    
   }
   
   selectSelect(col, vals, kw, isRecursive, isMultiple){
@@ -212,6 +218,7 @@ class SearchContainer extends Component {
             <Arma filters={this.state.filters} 
                   onCheck={this.onCheckBoxChange}
                   reports={this.state.initialReports} 
+                  world={this.state.world} 
             />
             </Container>;
   }
