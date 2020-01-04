@@ -61,11 +61,12 @@
 
 (defn extract-rec [data & [level]]
   (let [fun (fn [f* cont collection level parent-value]
-              (reduce (fn [c {:keys [value label options] :as it}]
-                        (let [c (conj c (-> it
-                                            (select-keys [:label :value])
-                                            (assoc :level level)
-                                            (cond-> parent-value (assoc :parent-value parent-value))))]
+              (reduce (fn [c {:keys [value label options countries] :as it}]
+                        (let [c (conj c (cond-> it
+                                            true (select-keys [:label :value])
+                                            true (assoc :level level)
+                                            countries (assoc :countries countries)
+                                            parent-value (assoc :parent-value parent-value)))]
                           (if (and (some? options) (not-empty options))
                             (f* f* c options (inc level) value)
                             c))) cont collection))]
@@ -97,6 +98,7 @@
 
 (defn rename-ks [ks] (fn [x] (set/rename-keys x ks)))
 
+
 (defn regions [data]
   (clj->js
    (extract-rec
@@ -108,7 +110,6 @@
          (map #(update % :options
                        (fn [ops]
                          (map (fn [x] (-> x
-                                          (dissoc :countries)
                                           ((rename-ks {:name :label :id :value}))
                                           (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
                                           )) ops))))))))
@@ -180,12 +181,22 @@
                                          ((extract-vals sectors s report-id) c)) x (:sectors r))))
                             )))
                     {:countries [] :types {} :regions {} :sectors {}}
-                    reports)]
-    (clj->js (-> ret
+                    reports)
+        ret2 (-> ret
                  (update :countries frequencies)
                  (update :types count!)
                  (update :regions count!)
-                 (update :sectors count!)))))
+                 (update :sectors count!))
+
+        eco (let [freqs* (:countries ret2)
+                  eco-regions (filter #(= "1" (:parent-value %)) regions)]
+              (reduce (fn [c reg]
+                        (assoc c (:value reg) (reduce (fn [x co]
+                                                        (+  x (or (get freqs* (:id co)) 0))
+                                                        ) 0 (:countries reg)))
+                        ) {} eco-regions))
+        ]
+    (clj->js (update ret2 :regions merge eco))))
 
 (defn parse-int [s]
   (when (and (some? s))
