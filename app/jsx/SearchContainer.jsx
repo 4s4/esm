@@ -24,10 +24,36 @@ const  intersection = (setA, setB) => {
   return _intersection;
 };
 
+function doSearch (reports, queries){
+  return reports.filter(
+    function (r) {
+     return queries.reduce(
+      function (c, f){
+        if(c){
+          return f(r);
+        }
+        return false;
+      }, true
+      );
+    }
+  );
+}
+
+
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeIndex:0 , qq:{}, filters: {countries:null, regions:null, types: null}, reports: null, initialReports:null, regions:null, countries:null, sectors:null, types:null, searchResults: null, approval_year:null, active_year: null };
+    this.state = { activeIndex:0 , 
+      qq:{}, 
+      selections:{regions: [], countries: [], sectors:[], types: []},
+      results:{regions: [], countries: [], sectors:[], types: []},
+      filters: {countries:null, regions:null, types: null, sectors: null}, 
+      reports: null, 
+      initialReports:null, 
+      regions:null, 
+      searchResults: null, 
+      approval_year:null, 
+      active_year: null };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
@@ -109,21 +135,36 @@ class SearchContainer extends Component {
       delete picked[kw];
     }
     this.searchReports(picked);
+    return picked[kw];
   }
 
   onSelectChange (selectType, vals) {
     if(selectType === "Region"){
       this.setState({ regions: vals });
       this.selectSelect.bind(this)(this.state.filters.regions, vals, 'region', false);
-    } else if(selectType === "Country") {
-      this.setState( { countries: vals } );
-      this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', false);
-    } else if(selectType === "Type") {
-      this.setState( { types: vals } );
-      this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', true, false);
-    } else if(selectType === "Sector") {
-      this.setState( { sectors: vals } );
-      this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', true, true);
+    } else if(selectType === "country") {
+      const q = this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', false);
+      const { ...sels } = this.state.selections;
+      sels.countries = vals;
+      const { ...res } = this.state.results;
+      res.countries = doSearch(this.state.initialReports, [q]);      
+      this.setState({ selections: sels, results: res });
+    } else if(selectType === "type") {
+      const q = this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', true, false);
+      const { ...sels } = this.state.selections;
+      sels.types = vals;
+      const { ...res } = this.state.results;
+      res.types = doSearch(this.state.initialReports, [q]);      
+      this.setState({ selections: sels, results: res });
+
+    } else if(selectType === "sectors") {
+      const q = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', true, true);
+      const { ...sels } = this.state.selections;
+      sels.sectors = vals;
+      const { ...res } = this.state.results;
+      res.sectors = doSearch(this.state.initialReports, [q]);      
+      this.setState({ selections: sels, results: res });
+
     }
     console.log(selectType, `Option selected:`, vals)
   };
@@ -159,30 +200,16 @@ class SearchContainer extends Component {
   };
 
 
-
-
   searchReports(qqs){
     const queries = Object.values(qqs); 
     let reports;
     if (queries.length > 0){
-      reports = this.state.initialReports.filter(
-        function (r) {
-         return queries.reduce(
-          function (c, f){
-            if(c){
-              return f(r);
-            }
-            return false;
-          }, true
-          );
-        }
-      );
+      reports = doSearch(this.state.initialReports, queries);
     } else {
       reports = this.state.initialReports;
     }
-    this.setState({reports, 
-      qq: qqs});
-    console.log('current results....' ,reports.length);
+    this.setState({reports, qq: qqs});
+    console.log('current results....' ,reports.length, qqs, queries);
 
   }
 
@@ -217,10 +244,15 @@ class SearchContainer extends Component {
     return <Container style={{width:"100%", height:"100%"}}>
             <Arma filters={this.state.filters} 
                   onCheck={this.onCheckBoxChange}
+                  onSelectChange={this.onSelectChange}
                   reports={this.state.initialReports} 
                   world={this.state.world} 
+                  query={this.state.qq}
+                  selections={this.state.selections}
+                  results={this.state.results}
             />
             </Container>;
   }
 }
+
 export default SearchContainer;

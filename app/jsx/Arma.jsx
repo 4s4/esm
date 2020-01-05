@@ -15,7 +15,19 @@ import {rightOption, centerOption, tableData} from './TableResults';
 class Arma extends Component {
     constructor(props) {
         super(props);
-        this.state = {visibleOptions:false, direction:null, column:null, data: tableData, activeItem: 'section1', activeIndex:-1, sidebar:true, leftSidebarWidth:'wide' , rigthSidebarWidth:'wide',leftSidebarVisible:true, m: WorldMap};
+        this.state = {
+          visibleOptions:false, 
+          direction:null, 
+          column:null, 
+          data: tableData, 
+          activeItem: 'section1', 
+          activeIndex:-1, 
+          sidebar:true, 
+          leftSidebarWidth:'wide' , 
+          rigthSidebarWidth:'wide',
+          leftSidebarVisible:true, 
+          m: WorldMap
+          };
         this.handleAccordion = this.handleAccordion.bind(this);
         this.closeSidebars = this.closeSidebars.bind(this);
         this.handleOver = this.handleOver.bind(this);
@@ -96,6 +108,7 @@ class Arma extends Component {
       handleOver (e) {
           this.setState({ leftSidebarWidth: 'wide' })
       }
+
       handleItemClick (e, { name }) { this.setState({ activeItem: name })}
 
       innerMenu(where, activeItem){
@@ -119,7 +132,7 @@ class Arma extends Component {
 );
       }
 
-      accordion(activeIndex, filters, approvals, onCheck, reports){
+      accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange){
         return (<Accordion styled>
           <Accordion.Title
       index={0}
@@ -173,6 +186,7 @@ class Arma extends Component {
         multiple
         search
         selection
+        onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
         options={filters.countries && filters.countries.map(o => {return {text: o.label, value: o.value}})}
       />
                 </Accordion.Content> 
@@ -191,6 +205,7 @@ class Arma extends Component {
         multiple
         search
         selection
+        onChange={(ev, o) => onSelectChange('sectors', o.value.map(id => o.options.find( e => e.value === id)))}
         options={filters.sectors && filters.sectors.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
       />
                 </Accordion.Content> 
@@ -209,6 +224,7 @@ class Arma extends Component {
         multiple
         search
         selection
+        onChange={(ev, o) => onSelectChange('type', o.value.map(id => o.options.find( e => e.value === id)))}
         options={filters.types && filters.types.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
       />
                 </Accordion.Content> 
@@ -326,10 +342,13 @@ class Arma extends Component {
 
       }
      render (){
-        const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies , m} = this.state
-        const { filters, onCheck } = this.props;
+        const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, 
+          rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies , m} = this.state
+        const { filters, onCheck, query, onSelectChange, selections, results } = this.props;
         const Element = m;
-        console.log('chartConfig', isSunburst, chartConfig);
+//        console.log('query', query);
+//        console.log('selections', selections);
+//        console.log('results', results);
       return (
         <div style={{height:'100%'}}>{ visibleOptions &&
           <Menu icon vertical >
@@ -356,7 +375,7 @@ class Arma extends Component {
             meta='The Trade Strategy Map (TSM) is a repository of strategic policy documents dealing with trade and development issues from around the world.'
             description='Use the options below to search the TSM repository'
           />
-          {this.accordion(activeIndex, filters, approvals, onCheck, reports)}
+          {this.accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange)}
           </Sidebar>
 
 
@@ -373,13 +392,13 @@ class Arma extends Component {
           
 
             <Segment basic onClick={this.closeSidebars} style={{height:"100%"}}>
-              <Segment>
-                <Header as='h2'>
-              <Icon name='search' />
-              <Header.Content>Current Query: </Header.Content>            
+              {Object.keys(query).length > 0 && <Segment>
+              <Header as='h2'>
+                <Icon name='search' />
+                <Header.Content>Current Query: </Header.Content>            
               </Header>
-              <Card.Group items={items} itemsPerRow="8" stackable/>
-              </Segment>
+              <Card.Group items={items(query, selections, results)} itemsPerRow="8" stackable/>
+              </Segment>}
 
             {this.innerMenu('top', activeItem)}
             {activeItem === 'section2' && 
