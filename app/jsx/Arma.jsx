@@ -191,7 +191,7 @@ class Arma extends Component {
         multiple
         search
         selection
-        options={filters.sectors && filters.sectors.map(o => {return {text: o.label, value: o.value}})}
+        options={filters.sectors && filters.sectors.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
       />
                 </Accordion.Content> 
                 <Accordion.Title
@@ -209,7 +209,7 @@ class Arma extends Component {
         multiple
         search
         selection
-        options={filters.types && filters.types.map(o => {return {text: o.label, value: o.value}})}
+        options={filters.types && filters.types.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
       />
                 </Accordion.Content> 
   
@@ -339,7 +339,8 @@ class Arma extends Component {
           <Icon name='options'  size='small'  />
         </Menu.Item>
       </Menu>
-       }<Sidebar.Pushable as={Segment} >
+       }
+       <Sidebar.Pushable as={Segment} >
          <Sidebar
 
             onMouseOver={this.handleOver}
@@ -347,6 +348,7 @@ class Arma extends Component {
             onHide={() => console.log('setVisible(false)')}
             visible={leftSidebarVisible}
             width={leftSidebarWidth}
+            style={{backgroundColor:'white'}}
           >
           <Card
             link
@@ -363,6 +365,7 @@ class Arma extends Component {
             direction='right'
             width={rightSidebarWidth}
             visible={rightSidebarVisible}
+            style={{backgroundColor:'white'}}
           >
          { chartConfig && isSunburst ? <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> : <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> }
           </Sidebar>

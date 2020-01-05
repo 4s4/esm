@@ -50,8 +50,9 @@
 @import (less) "../bower_components/bootstrap-table/src/bootstrap-table.css";
 @import (less) "../bower_components/bootstrap3-datepicker/css/datepicker.css";
 
-@import (less) "../../node_modules/react-grid-layout/css/styles.css";
-@import (less) "../../node_modules/react-resizable/css/styles.css";
+//@import "../../node_modules/mapbox-gl/dist/mapbox-gl.css";
+//@import (less) "../../node_modules/react-grid-layout/css/styles.css";
+//@import (less) "../../node_modules/react-resizable/css/styles.css";
 
 
 .collapse {
@@ -1842,7 +1843,7 @@ div.text-container {
     border-bottom:1px solid @itc-cyan;
     color:@itc-cyan;
     font-size:20px;
-    margin-top:-15px;
+//    margin-top:-15px;
 }
 
 .last-update-div{
@@ -2161,4 +2162,45 @@ h3.document-detail{
     vertical-align: middle;
     width: 200px;
     }
+}
+.dropdown-level-0 {
+    margin-left: 0px;
+    &:before{
+        content: "> ";
+      }
+}
+.dropdown-level-1 {
+    margin-left: 2px;
+    &:before{
+        content: ">> ";
+      }
+
+}
+.dropdown-level-2 {
+    margin-left: 4px;
+    &:before{
+        content: ">>> ";
+      }
+
+}
+.dropdown-level-3 {
+    margin-left: 6px;
+    &:before{
+        content: ">>>> ";
+      }
+
+}
+.dropdown-level-4 {
+    margin-left: 8px;
+    &:before{
+        content: ">>>>> ";
+      }
+
+}
+.dropdown-level-5 {
+    margin-left: 10px;
+    &:before{
+        content: ">>>>>> ";
+      }
+
 }
