@@ -7,6 +7,8 @@ import WorldMap from './WorldMap';
 import SunCharty from './SunCharty';
 import Charty from './Charty';
 import {items} from './Query';
+import Highcharts from 'highcharts';
+
 
 import {rightOption, centerOption, tableData} from './TableResults';
 
@@ -362,7 +364,7 @@ class Arma extends Component {
             width={rightSidebarWidth}
             visible={rightSidebarVisible}
           >
-         { chartConfig && isSunburst ? <SunCharty chartOpts={chartConfig}/> : <Charty  chartOpts={chartConfig}/> }
+         { chartConfig && isSunburst ? <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> : <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> }
           </Sidebar>
           <Sidebar.Pusher onClick={this.closeSidebars}>
           

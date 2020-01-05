@@ -9,7 +9,7 @@ export function pieChart(width, height, cat, dat){
       categories: cat
     },
     series: [{
-      data: dat
+      data: dat.map( (o, idx) => { return {name: cat[idx], y: o}})
     }]
   }
 }
