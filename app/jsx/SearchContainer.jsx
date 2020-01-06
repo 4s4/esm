@@ -147,7 +147,8 @@ class SearchContainer extends Component {
       res.geoRegions = doSearch(this.state.initialReports, [q]);      
       this.setState({ selections: sels, results: res });
     } else if(selectType === "ecoRegion"){
-      const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), vals, 'ecoRegion', 'country', false);
+      const countryVals = vals.reduce((c, x) => c.concat(x.countries) ,[]).map( v => { return { value: v.id, text: v.name }});
+      const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
       const { ...sels } = this.state.selections;
       sels.ecoRegions = vals;
       const { ...res } = this.state.results;

@@ -2,7 +2,7 @@ import { Label, Rail, List, Dropdown, Header, Icon, Image, Card, Menu, Segment, 
 
 export function items (query, selections, results) {
   const visible = false;
-  const geoItem = query.region && {
+  const geoItem = query.geoRegion && {
     header: `Geographical regions: ${selections.geoRegions.length}`,
     description: selections.geoRegions.map(o => o.text).join(','),
     extra: (<a><Icon name='user' />Results: {results.geoRegions.length}</a>)
