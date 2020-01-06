@@ -45,8 +45,8 @@ class SearchContainer extends Component {
     super(props);
     this.state = { activeIndex:0 , 
       qq:{}, 
-      selections:{regions: [], countries: [], sectors:[], types: []},
-      results:{regions: [], countries: [], sectors:[], types: []},
+      selections:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
+      results:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
       filters: {countries:null, regions:null, types: null, sectors: null}, 
       reports: null, 
       initialReports:null, 
@@ -114,12 +114,12 @@ class SearchContainer extends Component {
     
   }
   
-  selectSelect(col, vals, kw, isRecursive, isMultiple){
+  selectSelect(col, vals, qkw, kw, isRecursive, isMultiple){
     const { ...picked } = this.state.qq;
     if (vals !== undefined && vals !== null ){
       const selectedValues = vals.map(o => o.value);
       let dict = new Set(selectedValues);
-//      console.log('initial values', selectedValues);
+//    console.log('initial values', selectedValues);
 
       if (isRecursive){
         dict = new Set();
@@ -127,30 +127,41 @@ class SearchContainer extends Component {
 //        console.log('recursive', dict);
       }
       if(isMultiple){
-        picked[kw] = o => intersection(dict, new Set(o[kw])).size > 0;      
+        picked[qkw] = o => intersection(dict, new Set(o[kw])).size > 0;      
       } else{
-        picked[kw] = o => dict.has(o[kw]);
+        picked[qkw] = o => dict.has(o[kw]);
       }
     } else {
-      delete picked[kw];
+      delete picked[qkw];
     }
     this.searchReports(picked);
-    return picked[kw];
+    return picked[qkw];
   }
 
   onSelectChange (selectType, vals) {
-    if(selectType === "Region"){
-      this.setState({ regions: vals });
-      this.selectSelect.bind(this)(this.state.filters.regions, vals, 'region', false);
+    if(selectType === "geoRegion"){
+      const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="0"), vals, 'geoRegion', 'region', false);
+      const { ...sels } = this.state.selections;
+      sels.geoRegions = vals;
+      const { ...res } = this.state.results;
+      res.geoRegions = doSearch(this.state.initialReports, [q]);      
+      this.setState({ selections: sels, results: res });
+    } else if(selectType === "ecoRegion"){
+      const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), vals, 'ecoRegion', 'country', false);
+      const { ...sels } = this.state.selections;
+      sels.ecoRegions = vals;
+      const { ...res } = this.state.results;
+      res.ecoRegions = doSearch(this.state.initialReports, [q]);      
+      this.setState({ selections: sels, results: res });
     } else if(selectType === "country") {
-      const q = this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', false);
+      const q = this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', 'country', false);
       const { ...sels } = this.state.selections;
       sels.countries = vals;
       const { ...res } = this.state.results;
       res.countries = doSearch(this.state.initialReports, [q]);      
       this.setState({ selections: sels, results: res });
     } else if(selectType === "type") {
-      const q = this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', true, false);
+      const q = this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', 'type', true, false);
       const { ...sels } = this.state.selections;
       sels.types = vals;
       const { ...res } = this.state.results;
@@ -158,7 +169,7 @@ class SearchContainer extends Component {
       this.setState({ selections: sels, results: res });
 
     } else if(selectType === "sectors") {
-      const q = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', true, true);
+      const q = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', 'sectors', true, true);
       const { ...sels } = this.state.selections;
       sels.sectors = vals;
       const { ...res } = this.state.results;

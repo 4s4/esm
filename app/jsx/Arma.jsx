@@ -149,6 +149,8 @@ class Arma extends Component {
         multiple
         search
         selection
+        onChange={(ev, o) => onSelectChange('geoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
+
         options={filters.regions && filters.regions.filter(o => o["parent-value"]==="0").map(o => {return {text: o.label, value: o.value}})}
       />
                 </Accordion.Content>
@@ -167,7 +169,8 @@ class Arma extends Component {
         multiple
         search
         selection
-        options={filters.regions && filters.regions.filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value}})}
+        onChange={(ev, o) => onSelectChange('ecoRegion', o.value.map(id => o.options.find( e => e.value === id)).reduce((c, x) => c.concat(x.countries) ,[]).map( v => { return { value: v.id, text: v.name }}))}
+        options={filters.regions && filters.regions.filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value, countries: o.countries}})}
       />
                 </Accordion.Content> 
   

@@ -2,17 +2,15 @@ import { Label, Rail, List, Dropdown, Header, Icon, Image, Card, Menu, Segment, 
 
 export function items (query, selections, results) {
   const visible = false;
-  const geoItem = visible && {
-    header: 'Geographical Region',
-    description: 'This option gets: 1000 documents',
-    meta: 'selected Oceania',
-    extra: (<a><Icon name='user' />22 Friends</a>)
+  const geoItem = query.region && {
+    header: `Geographical regions: ${selections.geoRegions.length}`,
+    description: selections.geoRegions.map(o => o.text).join(','),
+    extra: (<a><Icon name='user' />Results: {results.geoRegions.length}</a>)
   };
-  const ecoItem = visible && {
-    header: 'Economical Region',
-    description:
-      'Bring to the table win-win survival strategies to ensure proactive domination.',
-    meta: 'ROI: 34%',
+  const ecoItem = query.ecoRegion && {
+    header: `Economical regions: ${selections.ecoRegions.length}`,
+    description: selections.ecoRegions.map(o => o.text).join(','),
+    extra: (<a><Icon name='user' />Results: {results.ecoRegions.length}</a>)
   };
   const countryItem = query.country && {
     header: `Countries selected: ${selections.countries.length}`,
