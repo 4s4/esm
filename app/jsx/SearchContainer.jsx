@@ -225,16 +225,29 @@ class SearchContainer extends Component {
 
   }
 
-  onCheckBoxChange (opt, v){
-    console.log('listening' , opt, v);
+  onCheckBoxChange (opt, y){
+    const v = y.checked;
+    console.log('listening' , opt, v.checked);
     const q = v ?  r => r[opt] : null;
     const { ...picked } = this.state.qq;
+    const { ...sels } = this.state.selections;
+    const { ...res } = this.state.results;
+
     if (v){
       picked[opt] = q;
+      sels[opt] = true;
+      res[opt] = doSearch(this.state.initialReports, [q]);      
+
     } else {
+      delete sels[opt];      
       delete picked[opt];
     }
     console.log('keys:', Object.keys(picked));
+
+   
+    this.setState({ selections: sels, results: res });
+
+
     this.searchReports(picked);
   }
 

@@ -26,7 +26,7 @@ class ThematicFocus extends Component {
 
 
   check(kw){
-    return event => this.props.onCheck(kw, event.target.checked);
+    return (event, o) => this.props.onCheck(kw, o);
   }
 
   r(o){

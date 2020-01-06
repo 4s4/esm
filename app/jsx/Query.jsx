@@ -1,6 +1,17 @@
 import { Label, Rail, List, Dropdown, Header, Icon, Image, Card, Menu, Segment, Sidebar, Accordion, Table, Container, Statistic, Divider } from 'semantic-ui-react'
 
-export function items (query, selections, results) {
+const  intersection = (setA, setB) => {
+  var _intersection = new Set();
+  for (var elem of setB) {
+      if (setA.has(elem)) {
+          _intersection.add(elem);
+      }
+  }
+  return _intersection;
+};
+
+
+export function items (query, selections, results, thematicFocus) {
   const visible = false;
   const geoItem = query.geoRegion && {
     header: `Geographical regions: ${selections.geoRegions.length}`,
@@ -39,11 +50,14 @@ export function items (query, selections, results) {
       'Bring to the table win-win survival strategies to ensure proactive domination.',
     meta: 'ROI: 34%',
   };
-  const thematicFocusItem = visible && {
-    header: 'Thematic Focus',
-    description:
-      'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test.',
-    meta: 'ROI: 27%',
+  const qks= new Set(Object.keys(query));
+  const them = new Set(thematicFocus.map(o => o.kw));
+  const themIntersection = intersection(qks, them);
+  const themIntersectionA = Array.from(themIntersection);
+  const thematicFocusItem = themIntersection.size > 0 && {
+    header: `Thematics Focus: ${themIntersection.size}`,
+    description: themIntersectionA.map(o => thematicFocus.find(x => x.kw === o).name).join(',')
+//    extra: (<a><Icon name='user' />Results: {results.types.length}</a>)
   };
  return [
     geoItem,

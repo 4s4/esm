@@ -391,16 +391,14 @@ class Arma extends Component {
           >
          { chartConfig && isSunburst ? <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> : <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> }
           </Sidebar>
-          <Sidebar.Pusher onClick={this.closeSidebars}>
-          
-
+          <Sidebar.Pusher onClick={this.closeSidebars}>        
             <Segment basic onClick={this.closeSidebars} style={{height:"100%"}}>
               {Object.keys(query).length > 0 && <Segment>
               <Header as='h2'>
                 <Icon name='search' />
                 <Header.Content>Current Query: </Header.Content>            
               </Header>
-              <Card.Group items={items(query, selections, results)} itemsPerRow="8" stackable/>
+              <Card.Group items={items(query, selections, results, filters.thematicsFocus)} itemsPerRow="8" stackable/>
               </Segment>}
 
             {this.innerMenu('top', activeItem)}
