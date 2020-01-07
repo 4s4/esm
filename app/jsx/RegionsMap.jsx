@@ -108,13 +108,13 @@ class RegionsMap extends Component {
   render() {
     const {data} = this.state;
     return (<HighchartsReact
-    options = { mapData(data) }
-    highcharts = { Highcharts }
-    constructorType = { 'mapChart' }
-    allowChartUpdate = { true }
-    immutable = { false }
-    updateArgs = { [true, true, true] }
-    />);
+            options = { mapData(data) }
+            highcharts = { Highcharts }
+            constructorType = { 'mapChart' }
+            allowChartUpdate = { true }
+            immutable = { false }
+            updateArgs = { [true, true, true] }
+            />);
   }
 }
 export default RegionsMap;

@@ -1,7 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
 import { Popup, Checkbox, Segment } from 'semantic-ui-react'
-const cljs = require('../../js/cljs.js');
 
 function CheckBox(props){
   return <Popup key={props.id}  content={props.title} trigger={<Segment vertical size='mini'><Checkbox onChange={props.onChange(props.id)} label={props.name} /></Segment>} />;
@@ -18,7 +17,7 @@ class ThematicFocus extends Component {
     if (
       props.reports !== state.reports 
     ) {
-      console.log('them', cljs.countThematicFocus(props.reports, props.thematicsFocus));
+//      console.log('them', cljs.countThematicFocus(props.reports, props.thematicsFocus));
       return {reports: props.reports};
     }
     return state;

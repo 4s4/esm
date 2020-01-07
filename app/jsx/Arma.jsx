@@ -21,7 +21,7 @@ class Arma extends Component {
           column:null, 
           data: tableData, 
           activeItem: 'section1', 
-          activeIndex:-1, 
+          activeIndex:1, 
           sidebar:true, 
           leftSidebarWidth:'wide' , 
           rigthSidebarWidth:'wide',
@@ -51,10 +51,9 @@ class Arma extends Component {
         }
         return state;
       }
-    
-    
+        
       handleAccordion (e, titleProps) {
-        console.log('sunnn1');
+        console.log('accordion selected', titleProps.index, titleProps.active );
 
         const { index } = titleProps;
         const { activeIndex, frequencies, actives, approvals } = this.state;      
@@ -89,20 +88,20 @@ class Arma extends Component {
             return;
           }
           if (index === 4 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = activesAccordion(actives);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = activesAccordion(actives);
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
             return;
           }
           
           if (index === 5 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = approvalsAccordion(approvals);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = approvalsAccordion(approvals);
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
             return;
           }
 
           if (index === 6 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus);
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
             return;
           }
 
@@ -143,167 +142,153 @@ class Arma extends Component {
       }
 
       accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear){
-        return (<Accordion styled>
-          <Accordion.Title
-      index={0}
-      active={activeIndex === 0}
-      onClick={this.handleAccordion}
-                >
-      <Icon name='dropdown' />
-      Geographical Region
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 0}>
-      <Dropdown
-        placeholder='Region'
-        fluid
-        multiple
-        search
-        selection
-        onChange={(ev, o) => onSelectChange('geoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
-
-        options={filters.regions && filters.regions.filter(o => o["parent-value"]==="0").map(o => {return {text: o.label, value: o.value}})}
-      />
-                </Accordion.Content>
-                <Accordion.Title
-      index={11}
-      active={activeIndex === 11}
-      onClick={this.handleAccordion}
-                >
-      <Icon name='dropdown' />
-      Economical Region
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 11}>
-      <Dropdown
-        placeholder='Region'
-        fluid
-        multiple
-        search
-        selection
-        onChange={(ev, o) => onSelectChange('ecoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
-        options={filters.regions && filters.regions.filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value, countries: o.countries}})}
-      />
-                </Accordion.Content> 
-  
-                <Accordion.Title
-      index={1}
-      active={activeIndex === 1}
-      onClick={this.handleAccordion}
-                >
-      <Icon name='dropdown' />
-      Country
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 1}>
-      <Dropdown
-        placeholder='Country'
-        fluid
-        multiple
-        search
-        selection
-        onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
-        options={filters.countries && filters.countries.map(o => {return {text: o.label, value: o.value}})}
-      />
-                </Accordion.Content> 
-                <Accordion.Title
-      index={2}
-      active={activeIndex === 2}
-      onClick={this.handleAccordion}
-                >
-      <Icon name='dropdown' />
-      Sector
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 2}>
-      <Dropdown
-        placeholder='Sector'
-        fluid
-        multiple
-        search
-        selection
-        onChange={(ev, o) => onSelectChange('sectors', o.value.map(id => o.options.find( e => e.value === id)))}
-        options={filters.sectors && filters.sectors.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
-      />
-                </Accordion.Content> 
-                <Accordion.Title
-      index={3}
-      active={activeIndex === 3}
-      onClick={this.handleAccordion}
-                >
-      <Icon name='dropdown' />
-      Type
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 3}>
-      <Dropdown
-        placeholder='Type'
-        fluid
-        multiple
-        search
-        selection
-        onChange={(ev, o) => onSelectChange('type', o.value.map(id => o.options.find( e => e.value === id)))}
-        options={filters.types && filters.types.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
-      />
-                </Accordion.Content> 
-  
-  
-                <Accordion.Title
-                  index={4}
-                  active={activeIndex === 4}
-                  onClick={this.handleAccordion}
-                >
+        return (<Accordion styled onTitleClick={this.handleAcoordionTitleClick}>
+                  <Accordion.Title
+                    index={1}
+                    active={activeIndex === 1}
+                    onClick={this.handleAccordion}
+                  >
                   <Icon name='dropdown' />
-                  Active year
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 4}>
-      <Dropdown
-        placeholder='Year'
-        fluid
-        search
-        selection
-        onChange={(ev, o) => onYear('active_year', o)}
-
-        options={this.state.actives && this.state.actives.map(o => {return {text: o.label, value: o.value}})}
-      />
-                </Accordion.Content> 
-  
-  
-                <Accordion.Title
-      index={5}
-      active={activeIndex === 5}
-      onClick={this.handleAccordion}
-                >
-      <Icon name='dropdown' />
-      Approval year
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 5}>
-      <Dropdown
-        placeholder='Year'
-        fluid
-        search
-        selection
-        onChange={(ev, o) => onYear('approval_year', o)}
-
-        options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
-      />
-                </Accordion.Content> 
-  
-  
-                <Accordion.Title
-      index={6}
-      active={activeIndex === 6}
-      onClick={this.handleAccordion}
-                >
-      <Icon name='dropdown' />
-      Thematic Focus
-                </Accordion.Title>
-                <Accordion.Content active={activeIndex === 6}>
-      <ThematicFocus reports={reports} 
-               thematicsFocus={filters.thematicsFocus}                          
-               onCheck={onCheck}
-      />
-                </Accordion.Content> 
-  
-  
-              </Accordion>   
-        
-  );
+                  Country
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 1}>
+                  <Dropdown
+                    placeholder='Country'
+                    fluid
+                    multiple
+                    search
+                    selection
+                    onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
+                    options={filters.countries && filters.countries.map(o => {return {text: o.label, value: o.value}})}
+                  />
+                  </Accordion.Content> 
+                  <Accordion.Title
+                    index={0}
+                    active={activeIndex === 0}
+                    onClick={this.handleAccordion}
+                    >
+                    <Icon name='dropdown' />
+                    Geographical Region
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 0}>
+                  <Dropdown
+                    placeholder='Region'
+                    fluid
+                    multiple
+                    search
+                    selection
+                    onChange={(ev, o) => onSelectChange('geoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
+                    options={filters.regions && filters.regions.filter(o => o["parent-value"]==="0").map(o => {return {text: o.label, value: o.value}})}
+                  />
+                </Accordion.Content>
+                  <Accordion.Title
+                    index={11}
+                    active={activeIndex === 11}
+                    onClick={this.handleAccordion}
+                  >
+        <Icon name='dropdown' />
+        Economical Region
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 11}>
+                    <Dropdown
+                      placeholder='Region'
+                      fluid
+                      multiple
+                      search
+                      selection
+                      onChange={(ev, o) => onSelectChange('ecoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
+                      options={filters.regions && filters.regions.filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value, countries: o.countries}})}
+                    />
+                  </Accordion.Content>   
+                  <Accordion.Title
+                    index={2}
+                    active={activeIndex === 2}
+                    onClick={this.handleAccordion}
+                              >
+                    <Icon name='dropdown' />
+                    Sector
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 2}>
+                    <Dropdown
+                      placeholder='Sector'
+                      fluid
+                      multiple
+                      search
+                      selection
+                      onChange={(ev, o) => onSelectChange('sectors', o.value.map(id => o.options.find( e => e.value === id)))}
+                      options={filters.sectors && filters.sectors.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
+                    />
+                  </Accordion.Content> 
+                  <Accordion.Title
+                    index={3}
+                    active={activeIndex === 3}
+                    onClick={this.handleAccordion}
+                    >
+                    <Icon name='dropdown' />
+                    Type
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 3}>
+                    <Dropdown
+                      placeholder='Type'
+                      fluid
+                      multiple
+                      search
+                      selection
+                      onChange={(ev, o) => onSelectChange('type', o.value.map(id => o.options.find( e => e.value === id)))}
+                      options={filters.types && filters.types.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
+                    />
+                  </Accordion.Content> 
+                  <Accordion.Title
+                    index={4}
+                    active={activeIndex === 4}
+                    onClick={this.handleAccordion}
+                  >
+                    <Icon name='dropdown' />
+                    Active year
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 4}>
+                    <Dropdown
+                      placeholder='Year'
+                      fluid
+                      search
+                      selection
+                      onChange={(ev, o) => onYear('active_year', o)}
+                      options={this.state.actives && this.state.actives.map(o => {return {text: o.label, value: o.value}})}
+                    />
+                  </Accordion.Content> 
+                  <Accordion.Title
+                    index={5}
+                    active={activeIndex === 5}
+                    onClick={this.handleAccordion}
+                  >
+                    <Icon name='dropdown' />
+                    Approval year
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 5}>
+                    <Dropdown
+                      placeholder='Year'
+                      fluid
+                      search
+                      selection
+                      onChange={(ev, o) => onYear('approval_year', o)}
+                      options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
+                    />
+                  </Accordion.Content> 
+                  <Accordion.Title
+                    index={6}
+                    active={activeIndex === 6}
+                    onClick={this.handleAccordion}
+                  >
+                    <Icon name='dropdown' />
+                    Thematic Focus
+                  </Accordion.Title>
+                  <Accordion.Content active={activeIndex === 6}>
+                    <ThematicFocus reports={reports} 
+                            thematicsFocus={filters.thematicsFocus}                          
+                            onCheck={onCheck}
+                    />
+                  </Accordion.Content> 
+                 </Accordion>);
       }
 
       handleSort(clickedColumn) {
@@ -395,15 +380,6 @@ class Arma extends Component {
           </Sidebar>
 
 
-          <Sidebar        
-            animation='overlay'
-            direction='right'
-            width={rightSidebarWidth}
-            visible={rightSidebarVisible}
-            style={{backgroundColor:'white'}}
-          >
-         { chartConfig && isSunburst ? <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> : <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> }
-          </Sidebar>
           <Sidebar.Pusher onClick={this.closeSidebars}>        
             <Segment basic onClick={this.closeSidebars} style={{height:"100%"}}>
               {Object.keys(query).length > 0 && <Segment>
@@ -418,8 +394,17 @@ class Arma extends Component {
             {activeItem === 'section2' && 
             <Segment attached> {this.reportsTable(this.state.column, this.state.data, this.state.direction)}</Segment> }
             {activeItem === 'section1' && 
-            <Segment attached>              
-              <Element countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
+            <Segment attached>
+        { chartConfig ? 
+          isSunburst ? 
+         <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> 
+         : 
+         <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
+         :
+         <Element countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
+         }
+              
+              
               </Segment> }
             {this.innerMenu('bottom', activeItem)}
             </Segment>

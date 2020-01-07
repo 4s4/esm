@@ -11,17 +11,19 @@ function mapData(data) {
       map: theMap,
       borderWidth: 1
   },
+  
   mapNavigation: {
     enabled: true
-},
-colorAxis: {
-  min: 0,
-  stops: [
-      [0, '#EFEFFF'],
-      [0.5, Highcharts.getOptions().colors[0]],
-      [1, Highcharts.Color(Highcharts.getOptions().colors[0]).brighten(-0.5).get()]
-  ]
-},
+  },
+
+  colorAxis: {
+    min: 0,
+    stops: [
+        [0, '#EFEFFF'],
+        [0.5, Highcharts.getOptions().colors[0]],
+        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).brighten(-0.5).get()]
+    ]
+  },
 
   title: {
       text: 'World map'
@@ -87,13 +89,13 @@ class WorldMap extends Component {
   render() {
     const {data} = this.state;
     return (<HighchartsReact
-    options = { mapData(data) }
-    highcharts = { Highcharts }
-    constructorType = { 'mapChart' }
-    allowChartUpdate = { true }
-    immutable = { false }
-    updateArgs = { [true, true, true] }
-    />);
+              options = { mapData(data) }
+              highcharts = { Highcharts }
+              constructorType = { 'mapChart' }
+              allowChartUpdate = { true }
+              immutable = { false }
+              updateArgs = { [true, true, true] }
+           />);
   }
 
 }
