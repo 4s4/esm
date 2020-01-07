@@ -49,3 +49,19 @@ export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFreque
     const datt = thematicFocusFilters.map( o => thematicFocusFrequencies[o.kw]); 
     return [barChart(400, 400, cats, datt), 'very wide', true];
 }
+
+export function approvalsAccordion(countryFilters, countriesFrequencies){
+    const dict = new Set(Object.keys(countriesFrequencies));
+    const base = countryFilters.filter(o => dict.has(o.value));
+    const catt = base.map(o => o.label);
+    const datt = base.map(o => countriesFrequencies[o.value] || 0);
+    return [barChart(400, 400, catt, datt),'wide', true];
+}
+export function activesAccordion(countryFilters, countriesFrequencies){
+    const dict = new Set(Object.keys(countriesFrequencies));
+    const base = countryFilters.filter(o => dict.has(o.value));
+    const catt = base.map(o => o.label);
+    const datt = base.map(o => countriesFrequencies[o.value] || 0);
+    return [barChart(400, 400, catt, datt),'wide', true];
+}
+

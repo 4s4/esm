@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Label, Rail, List, Dropdown, Header, Icon, Image, Card, Menu, Segment, Sidebar, Accordion, Table, Container, Statistic, Divider } from 'semantic-ui-react'
-import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion} from './Accordion';
+import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
 const cljs = require('../../js/cljs.js');
 import ThematicFocus from './ThematicFocus';
 import WorldMap from './WorldMap';
@@ -90,12 +90,23 @@ class Arma extends Component {
             this.setState({ isSunburst: true, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
+          if (index === 4 ) { 
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = activesAccordion(filters.countries, frequencies.countries);
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            return;
+          }
+          if (index === 5 ) { 
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = approvalsAccordion(filters.countries, frequencies.countries);
+            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            return;
+          }
 
           if (index === 6 ) { 
             let [chartConfig, rightSidebarWidth, rightSidebarVisible] = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus);
             this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
+
       }
       
       closeSidebars (e) {
@@ -132,7 +143,7 @@ class Arma extends Component {
 );
       }
 
-      accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange){
+      accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear){
         return (<Accordion styled>
           <Accordion.Title
       index={0}
@@ -234,20 +245,21 @@ class Arma extends Component {
   
   
                 <Accordion.Title
-      index={4}
-      active={activeIndex === 4}
-      onClick={this.handleAccordion}
+                  index={4}
+                  active={activeIndex === 4}
+                  onClick={this.handleAccordion}
                 >
-      <Icon name='dropdown' />
-      Active year
+                  <Icon name='dropdown' />
+                  Active year
                 </Accordion.Title>
                 <Accordion.Content active={activeIndex === 4}>
       <Dropdown
         placeholder='Year'
         fluid
-        multiple
         search
         selection
+        onChange={(ev, o) => onYear('active_year', o)}
+
         options={this.state.actives && this.state.actives.map(o => {return {text: o.label, value: o.value}})}
       />
                 </Accordion.Content> 
@@ -265,9 +277,10 @@ class Arma extends Component {
       <Dropdown
         placeholder='Year'
         fluid
-        multiple
         search
         selection
+        onChange={(ev, o) => onYear('approval_year', o)}
+
         options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
       />
                 </Accordion.Content> 
@@ -347,11 +360,12 @@ class Arma extends Component {
      render (){
         const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, 
           rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies , m} = this.state
-        const { filters, onCheck, query, onSelectChange, selections, results } = this.props;
+        const { filters, onCheck, query, onSelectChange, selections, results, onYear } = this.props;
         const Element = m;
 //        console.log('query', query);
 //        console.log('selections', selections);
-//        console.log('results', results);
+//       console.log('results', results);
+
       return (
         <div style={{height:'100%'}}>{ visibleOptions &&
           <Menu icon vertical >
@@ -378,7 +392,7 @@ class Arma extends Component {
             meta='The Trade Strategy Map (TSM) is a repository of strategic policy documents dealing with trade and development issues from around the world.'
             description='Use the options below to search the TSM repository'
           />
-          {this.accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange)}
+          {this.accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear)}
           </Sidebar>
 
 

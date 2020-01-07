@@ -46,14 +46,14 @@ class SearchContainer extends Component {
     this.state = { activeIndex:0 , 
       qq:{}, 
       selections:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
-      results:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
+      results:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: [], approval_year:[], active_year:[]},
       filters: {countries:null, regions:null, types: null, sectors: null}, 
       reports: null, 
       initialReports:null, 
       regions:null, 
       searchResults: null, 
-      approval_year:null, 
-      active_year: null };
+       
+       };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
@@ -184,28 +184,40 @@ class SearchContainer extends Component {
   onSelectYear (selectType, val) {
     const v = val ? val.value : null ;
     const { ...picked } = this.state.qq;
+    const { ...sels } =  this.state.selections;
+    const { ...res } = this.state.results;
 
     if(selectType === "approval_year"){
-      this.setState({ approval_year: v });
       if(v){
         const q = v ?  r => r['year'] === v : null;
         picked['approval_year'] = q;
+        res['approval_year'] = doSearch(this.state.initialReports, [q]);      
+        sels['approval_year'] = v;      
+
       } else {
         delete picked['approval_year'];
+        delete res['approval_year'];
+        delete sels['approval_year'];
       }
     } else {
-      this.setState({ active_year: v });
       if(v){
         const q = v ?  (r) => { 
           const dates = r['implementationPeriod'].split('-').map(o => parseInt(o, 10));
           return v >= dates[0] && v <= dates[1];
           } : null;
         picked['active_year'] = q;
+        res['active_year'] = doSearch(this.state.initialReports, [q]);      
+        sels['active_year'] = v;      
+
       } else {
         delete picked['active_year'];
+        delete res['active_year'];
+        delete sels['active_year'];
+
       }
 
     }
+    this.setState({ selections: sels, results: res });
     console.log(selectType, `Option selected:`, val)
     this.searchReports(picked);
 
@@ -269,6 +281,7 @@ class SearchContainer extends Component {
     return <Container style={{width:"100%", height:"100%"}}>
             <Arma filters={this.state.filters} 
                   onCheck={this.onCheckBoxChange}
+                  onYear={this.onSelectYear}
                   onSelectChange={this.onSelectChange}
                   reports={this.state.initialReports} 
                   world={this.state.world} 

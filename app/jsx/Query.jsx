@@ -38,17 +38,13 @@ export function items (query, selections, results, thematicFocus) {
     description: selections.types.map(o => o.text).join(','),
     extra: (<a><Icon name='user' />Results: {results.types.length}</a>)
   };
-  const activeYearItem = visible && {
-    header: 'Active year',
-    description:
-      'Bring to the table win-win survival strategies to ensure proactive domination.',
-    meta: 'ROI: 34%',
+  const activeYearItem = query.active_year && {
+    header: `Active year: ${selections.active_year}`,
+    extra: (<a><Icon name='user' />Results: {results.active_year.length}</a>)
   };
-  const approvalYearItem = visible && {
-    header: 'Approval year',
-    description:
-      'Bring to the table win-win survival strategies to ensure proactive domination.',
-    meta: 'ROI: 34%',
+  const approvalYearItem = query.approval_year && {
+    header: `Approval year: ${selections.approval_year}`,
+    extra: (<a><Icon name='user' />Results: {results.approval_year.length}</a>)
   };
   const qks= new Set(Object.keys(query));
   const them = new Set(thematicFocus.map(o => o.kw));
