@@ -210,7 +210,7 @@
       (group-by :year)
       (reduce (fn [c [k vs]]
                 (assoc c k (count vs))) (sorted-map))
-      (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k " (" v ")")} )) [])
+      (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k) :count v} )) [])
       (clj->js)))
 
 (defn current-year []
@@ -225,7 +225,7 @@
        (mapcat #(range (:implementationInit %) (inc (:implementationEnd %))))
        frequencies
        sort
-       (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k " (" v ")")} )) [])
+       (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k) :count v} )) [])
        (clj->js)))
 
 (defn geo-countries [data reports]

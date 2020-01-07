@@ -41,15 +41,13 @@ class Arma extends Component {
           props.reports !== state.reports 
         ) {
             let approvals = cljs.approvalYears(props.reports);
-            const approval_year = approvals.filter( o => o.value === props.approval_year ); 
             let actives = cljs.activeYears(props.reports);
-            const active_year = actives.filter( o => o.value === props.active_year ); 
             const tt = cljs.countThematicFocus(props.reports, props.filters.thematicsFocus);
             const frequencies = cljs.countSelects(props.reports, props.filters.types, props.filters.sectors, props.filters.regions);
             frequencies.thematicsFocus = tt;
             console.log('frequencies', frequencies);
             console.log('filters', props.filters)
-            return {frequencies, reports: props.reports, approvals, actives, active_year, approval_year};
+            return {frequencies, reports: props.reports, approvals, actives};
         }
         return state;
       }
@@ -59,7 +57,7 @@ class Arma extends Component {
         console.log('sunnn1');
 
         const { index } = titleProps;
-        const { activeIndex, frequencies } = this.state;      
+        const { activeIndex, frequencies, actives, approvals } = this.state;      
         const newIndex = activeIndex === index ? -1 : index
         const {filters} = this.props;
 
@@ -91,12 +89,13 @@ class Arma extends Component {
             return;
           }
           if (index === 4 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = activesAccordion(filters.countries, frequencies.countries);
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = activesAccordion(actives);
             this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }
+          
           if (index === 5 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = approvalsAccordion(filters.countries, frequencies.countries);
+            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = approvalsAccordion(approvals);
             this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
             return;
           }

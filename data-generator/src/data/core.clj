@@ -217,7 +217,7 @@
       (group-by :year)
       (reduce (fn [c [k vs]]
                 (assoc c k (count vs))) (sorted-map))
-      (reduce (fn [c [k v]] (conj c {:value (str k) :label (format "%s (%s)" k v)} )) [])))
+      (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k) :count v} )) [])))
 
 (defn current-year []
   2019)
