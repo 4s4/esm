@@ -1,15 +1,31 @@
-export function pieChart(width, height, cat, dat){
+export function pieChart(title, width, height, cat, dat, onClick, selections){
  return {
+    title: {
+        text: title
+    },
     chart: {
-        type: 'pie',
-        height: height,
-        width: width      
+        type: 'pie'
     },
     xAxis: {
       categories: cat
     },
+    plotOptions: {
+        series: {
+            allowPointSelect: true
+        }
+    },
     series: [{
-      data: dat.map( (o, idx) => { return {name: cat[idx], y: o}})
+        cursor: 'pointer',
+        point: {
+            events: {
+               click: function(e) {
+                    onClick(e.point.options);
+               }
+           }
+       },
+
+      data: dat.map( (o, idx) => { 
+        return {name: cat[idx], y: o.count, id: o.value, sliced: selections.find(s => s.value === o.value) !==undefined}})
     }]
   }
 }
@@ -33,7 +49,6 @@ export function barChart(w, h, cat, dat){
 export function sunburstChart(h, w, d){
     return {
         chart: {
-            height: h,
             width: w      
         },
         series: [{

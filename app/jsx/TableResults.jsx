@@ -1,4 +1,6 @@
-import { Label, Rail, List, Dropdown, Header, Icon, Image, Card, Menu, Segment, Sidebar, Accordion, Table, Container, Statistic, Divider } from 'semantic-ui-react'
+import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label';
+import List from 'semantic-ui-react/dist/commonjs/elements/List/List';
+import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 
 const rightOption = (  
        

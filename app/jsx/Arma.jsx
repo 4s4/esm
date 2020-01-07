@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { Label, Rail, List, Dropdown, Header, Icon, Image, Card, Menu, Segment, Sidebar, Accordion, Table, Container, Statistic, Divider } from 'semantic-ui-react'
 import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
 const cljs = require('../../js/cljs.js');
 import ThematicFocus from './ThematicFocus';
@@ -8,6 +7,15 @@ import SunCharty from './SunCharty';
 import Charty from './Charty';
 import {items} from './Query';
 import Highcharts from 'highcharts';
+import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid/Grid';
+import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
+import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table';
+import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown';
+import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordion';
+import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
+import Card from 'semantic-ui-react/dist/commonjs/views/Card/Card';
 
 
 import {rightOption, centerOption, tableData} from './TableResults';
@@ -29,11 +37,10 @@ class Arma extends Component {
           m: WorldMap
           };
         this.handleAccordion = this.handleAccordion.bind(this);
-        this.closeSidebars = this.closeSidebars.bind(this);
-        this.handleOver = this.handleOver.bind(this);
         this.handleItemClick = this.handleItemClick.bind(this);
         this.handleSort = this.handleSort.bind(this);
-        this.handleOptions = this.handleOptions.bind(this);
+        this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
+        this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
       }
 
       static getDerivedStateFromProps(props, state) {
@@ -51,14 +58,26 @@ class Arma extends Component {
         }
         return state;
       }
-        
+
+      ecoRegionsClick(d){
+        const { filters, selections, onSelectChange } = this.props;
+        const reg = filters.regions.find(r => r.value === d.id);
+        let data = selections.ecoRegions;
+        if(data.find(d => d.value === reg.value) === undefined){
+          data.push(reg);
+        } else {
+          data = data.filter(d => d.value !== reg.value);
+        }
+        onSelectChange('ecoRegion', data); 
+      }
+      
       handleAccordion (e, titleProps) {
         console.log('accordion selected', titleProps.index, titleProps.active );
 
         const { index } = titleProps;
         const { activeIndex, frequencies, actives, approvals } = this.state;      
         const newIndex = activeIndex === index ? -1 : index
-        const {filters} = this.props;
+        const {filters, selections} = this.props;
 
         console.log('index', index);
           if (index === 0 ) { 
@@ -67,8 +86,8 @@ class Arma extends Component {
             return;
           }
           if (index === 11 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = ecoRegionAccordion(filters.regions, frequencies.regions);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let chartConfig = ecoRegionAccordion(filters.regions, frequencies.regions, this.ecoRegionsClick, selections.ecoRegions);
+            this.setState({ isSunburst: false, chartConfig, activeIndex: newIndex})
             return;
           }
           if (index === 1 ) { 
@@ -107,16 +126,6 @@ class Arma extends Component {
 
       }
       
-      closeSidebars (e) {
-        this.setState({ visibleOptions:true, leftSidebarWidth: 'wide', rightSidebarVisible:false, leftSidebarVisible:false })
-      }
-      handleOptions(e){
-        this.setState({visibleOptions:false, leftSidebarVisible:true, leftSidebarWidth: 'wide'});
-      }
-
-      handleOver (e) {
-          this.setState({ leftSidebarWidth: 'wide' })
-      }
 
       handleItemClick (e, { name }) { this.setState({ activeItem: name })}
 
@@ -141,7 +150,8 @@ class Arma extends Component {
 );
       }
 
-      accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear){
+      accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear, selections){
+        console.log('selections', selections);
         return (<Accordion styled onTitleClick={this.handleAcoordionTitleClick}>
                   <Accordion.Title
                     index={1}
@@ -196,6 +206,7 @@ class Arma extends Component {
                       multiple
                       search
                       selection
+                      value={selections.ecoRegions.map(o => o.value)}
                       onChange={(ev, o) => onSelectChange('ecoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
                       options={filters.regions && filters.regions.filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value, countries: o.countries}})}
                     />
@@ -341,47 +352,43 @@ class Arma extends Component {
         </Table>);
 
       }
+
+     onAccordionSelectChange (t, d){
+       this.props.onSelectChange(t, d);
+       const { filters } = this.props;
+       const { frequencies } = this.state
+      console.log('onAccordionSelectChange', t, d);
+       if(t === 'ecoRegion'){
+        console.log('onAccordionSelectChange', 'ecoRegion');
+        this.setState({ 
+          isSunburst: false, 
+          chartConfig: ecoRegionAccordion(filters.regions, frequencies.regions, this.ecoRegionsClick, d)})
+       }     
+     }
+
      render (){
-        const { visibleOptions, reports, approvals, activeItem, activeIndex, rightSidebarWidth, 
-          rightSidebarVisible,leftSidebarVisible, leftSidebarWidth, chartConfig, isSunburst, frequencies , m} = this.state
-        const { filters, onCheck, query, onSelectChange, selections, results, onYear } = this.props;
+        const {  reports, approvals, activeItem, activeIndex,
+        chartConfig, isSunburst, frequencies , m} = this.state
+        const { filters, onCheck, query, selections, results, onYear } = this.props;
         const Element = m;
 //        console.log('query', query);
 //        console.log('selections', selections);
 //       console.log('results', results);
 
       return (
-        <div style={{height:'100%'}}>{ visibleOptions &&
-          <Menu icon vertical >
-        <Menu.Item
-          name='options' onClick={this.handleOptions}        
-        >
-          <Icon name='options'  size='small'  />
-        </Menu.Item>
-      </Menu>
-       }
-       <Sidebar.Pushable as={Segment} >
-         <Sidebar
-
-            onMouseOver={this.handleOver}
-            animation='push'
-            onHide={() => console.log('setVisible(false)')}
-            visible={leftSidebarVisible}
-            width={leftSidebarWidth}
-            style={{backgroundColor:'white'}}
-          >
-          <Card
+        <div style={{height:'100%'}}>
+       <Grid stackable columns={2}>
+       <Grid.Column width={4}>
+         <Card
             link
             header='TSM'
             meta='The Trade Strategy Map (TSM) is a repository of strategic policy documents dealing with trade and development issues from around the world.'
             description='Use the options below to search the TSM repository'
           />
-          {this.accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear)}
-          </Sidebar>
-
-
-          <Sidebar.Pusher onClick={this.closeSidebars}>        
-            <Segment basic onClick={this.closeSidebars} style={{height:"100%"}}>
+          {this.accordion(activeIndex, filters, approvals, onCheck, reports, this.onAccordionSelectChange, onYear, selections)}
+        </Grid.Column>
+       <Grid.Column width={12}>
+            <Segment basic style={{height:"100%"}}>
               {Object.keys(query).length > 0 && <Segment>
               <Header as='h2'>
                 <Icon name='search' />
@@ -408,8 +415,9 @@ class Arma extends Component {
               </Segment> }
             {this.innerMenu('bottom', activeItem)}
             </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable></div>
+            </Grid.Column>
+        </Grid>
+          </div>
       )
     }
     }

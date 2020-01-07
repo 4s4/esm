@@ -1,12 +1,5 @@
 import { Component} from 'react';
 
-// import Results from './Results';
-//import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon';
-//import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordion';
-//import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown';
-//import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
-//import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
-//import Sidebar from 'semantic-ui-react/dist/commonjs/modules/Sidebar/Sidebar';
 import Container from 'semantic-ui-react/dist/commonjs/elements/Container/Container';
 
 import Arma from './Arma';
@@ -147,6 +140,7 @@ class SearchContainer extends Component {
       res.geoRegions = doSearch(this.state.initialReports, [q]);      
       this.setState({ selections: sels, results: res });
     } else if(selectType === "ecoRegion"){
+      console.log('vals', vals);
       const countryVals = vals.reduce((c, x) => c.concat(x.countries) ,[]).map( v => { return { value: v.id, text: v.name }});
       const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
       const { ...sels } = this.state.selections;

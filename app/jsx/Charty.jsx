@@ -6,6 +6,7 @@ class Charty extends Component {
         super(props);
     }
     render(){
+        console.log('Charty', this.props.chartOpts);
         return (<HighchartsReact highcharts={this.props.Highcharts} options={this.props.chartOpts} />)
     }
 

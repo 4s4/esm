@@ -1,6 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
-import { Popup, Checkbox, Segment } from 'semantic-ui-react'
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
+import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
+import Checkbox from 'semantic-ui-react/dist/commonjs/modules/Checkbox/Checkbox';
+
 
 function CheckBox(props){
   return <Popup key={props.id}  content={props.title} trigger={<Segment vertical size='mini'><Checkbox onChange={props.onChange(props.id)} label={props.name} /></Segment>} />;

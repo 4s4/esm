@@ -10,10 +10,12 @@ export function geoRegionAccordion(regionsFilters, regionsFrequencies){
     return [null, 'wide', true, RegionsMap];
 }
 
-export function ecoRegionAccordion(regionsFilters, regionsFrequencies){
+export function ecoRegionAccordion(regionsFilters, regionsFrequencies, onClick, selections){
     const catt = regionsFilters.filter(o => o["parent-value"]==="1").map(o => o.label);
-    const datt = regionsFilters.filter(o => o["parent-value"]==="1").map(o => regionsFrequencies[o.value]);
-    return [pieChart(400, 400, catt, datt), 'wide', true];
+    const datt = regionsFilters.filter(o => o["parent-value"]==="1").map(o => {        
+        return {count: regionsFrequencies[o.value],
+                value: o.value}});
+    return pieChart('Economical Regions', 400, 400, catt, datt, onClick, selections);
 }
 
 export function countryAccordion(countryFilters, countriesFrequencies){
