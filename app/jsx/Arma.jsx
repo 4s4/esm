@@ -28,7 +28,6 @@ class Arma extends Component {
           direction:null, 
           column:null, 
           data: tableData, 
-          activeItem: 'section1', 
           activeIndex:1, 
           sidebar:true, 
           leftSidebarWidth:'wide' , 
@@ -37,7 +36,6 @@ class Arma extends Component {
           m: WorldMap
           };
         this.handleAccordion = this.handleAccordion.bind(this);
-        this.handleItemClick = this.handleItemClick.bind(this);
         this.handleSort = this.handleSort.bind(this);
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
@@ -126,29 +124,6 @@ class Arma extends Component {
 
       }
       
-
-      handleItemClick (e, { name }) { this.setState({ activeItem: name })}
-
-      innerMenu(where, activeItem){
-        return (<Menu attached={where}>
-        <Menu.Item
-          name='section1'
-          active={activeItem === 'section1'}
-          onClick={this.handleItemClick}
-        >
-          Section 1
-        </Menu.Item>
-
-        <Menu.Item
-          name='section2'
-          active={activeItem === 'section2'}
-          onClick={this.handleItemClick}
-        >
-          Section 2
-        </Menu.Item>
-        </Menu>
-);
-      }
 
       accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear, selections){
         console.log('selections', selections);
@@ -367,7 +342,7 @@ class Arma extends Component {
      }
 
      render (){
-        const {  reports, approvals, activeItem, activeIndex,
+        const {  reports, approvals, activeIndex,
         chartConfig, isSunburst, frequencies , m} = this.state
         const { filters, onCheck, query, selections, results, onYear } = this.props;
         const Element = m;
@@ -390,30 +365,23 @@ class Arma extends Component {
        <Grid.Column width={12}>
             <Segment basic style={{height:"100%"}}>
               {Object.keys(query).length > 0 && <Segment>
-              <Header as='h2'>
+              <Header as='h4'>
                 <Icon name='search' />
-                <Header.Content>Current Query: </Header.Content>            
+                <Header.Content>Search options: </Header.Content>            
               </Header>
               <Card.Group items={items(query, selections, results, filters.thematicsFocus)} itemsPerRow="8" stackable/>
-              </Segment>}
+            </Segment>}
 
-            {this.innerMenu('top', activeItem)}
-            {activeItem === 'section2' && 
-            <Segment attached> {this.reportsTable(this.state.column, this.state.data, this.state.direction)}</Segment> }
-            {activeItem === 'section1' && 
             <Segment attached>
-        { chartConfig ? 
-          isSunburst ? 
-         <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> 
-         : 
-         <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
-         :
-         <Element countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
-         }
-              
-              
-              </Segment> }
-            {this.innerMenu('bottom', activeItem)}
+                { chartConfig ? 
+                  isSunburst ? 
+                <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> 
+                : 
+                <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
+                :
+                <Element countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
+                }
+              </Segment>
             </Segment>
             </Grid.Column>
         </Grid>

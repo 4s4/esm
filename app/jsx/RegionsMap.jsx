@@ -12,7 +12,7 @@ function mapData(data) {
     },
   
     title: {
-      text: 'Regional map'
+      text: 'Geographical regions'
     },
   
     plotOptions: {
@@ -40,9 +40,6 @@ function mapData(data) {
               },
         allAreas: false,
       }
-    },
-    subtitle: {
-      text: 'Source map: <a href="http://code.highcharts.com/mapdata/custom/world-continents.js">World continents</a>'
     },
   
     mapNavigation: {
