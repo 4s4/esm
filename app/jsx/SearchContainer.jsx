@@ -78,7 +78,7 @@ class SearchContainer extends Component {
       ]); 
     console.log('filters', state.filters);
     this.setState( state);   
-    fetch('./js/all-records.json')
+    fetch(window.production ? '/home/GetAllRecords' : './js/all-records.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
@@ -95,8 +95,9 @@ class SearchContainer extends Component {
     
 
   componentDidMount() {
+    console.log('window.production', window.production);
     console.log('componentDidMount');
-    fetch('./js/all-filters.json')
+    fetch(window.production ? '/home/GetAllFilters' : './js/all-filters.json')
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");

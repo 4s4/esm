@@ -1,14 +1,5 @@
 import React, {Component} from 'react'
-import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
-const cljs = require('../../js/cljs.js');
-import ThematicFocus from './ThematicFocus';
-import WorldMap from './WorldMap';
-import SunCharty from './SunCharty';
-import Charty from './Charty';
-import {items} from './Query';
-import Highcharts from 'highcharts';
 import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid/Grid';
-import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table';
 import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown';
 import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordion';
@@ -16,7 +7,14 @@ import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
 import Card from 'semantic-ui-react/dist/commonjs/views/Card/Card';
-
+import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
+const cljs = require('../../js/cljs.js');
+import ThematicFocus from './ThematicFocus';
+import WorldMap from './maps/WorldMap';
+import SunCharty from './charts/SunCharty';
+import Charty from './charts/Charty';
+import {items} from './Query';
+import Highcharts from 'highcharts';
 
 import {rightOption, centerOption, tableData} from './TableResults';
 
@@ -39,6 +37,7 @@ class Arma extends Component {
         this.handleSort = this.handleSort.bind(this);
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
+        this.onChangeMapCountry = this.onChangeMapCountry.bind(this);
       }
 
       static getDerivedStateFromProps(props, state) {
@@ -56,7 +55,18 @@ class Arma extends Component {
         }
         return state;
       }
-
+      onChangeMapCountry(d){
+        const { filters, selections, onSelectChange } = this.props;
+        console.log('onChangeMapCountry', d);
+        const reg = filters.countries.find(c => c.value===d.id);
+        let data = selections.countries;
+        if(data.find(d => d.value === reg.value) === undefined){
+          data.push(reg);
+        } else {
+          data = data.filter(d => d.value !== reg.value);
+        }
+        onSelectChange('country', data);       
+      }
       ecoRegionsClick(d){
         const { filters, selections, onSelectChange } = this.props;
         const reg = filters.regions.find(r => r.value === d.id);
@@ -79,8 +89,8 @@ class Arma extends Component {
 
         console.log('index', index);
           if (index === 0 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = geoRegionAccordion(filters.regions, frequencies.regions);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
+            let  m = geoRegionAccordion(filters.regions, frequencies.regions);
+            this.setState({ isSunburst: false, activeIndex: newIndex, chartConfig: null, m})
             return;
           }
           if (index === 11 ) { 
@@ -89,42 +99,41 @@ class Arma extends Component {
             return;
           }
           if (index === 1 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = countryAccordion(filters.countries, frequencies.countries);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
+            let m = countryAccordion(filters.countries, frequencies.countries);
+            this.setState({ isSunburst: false, activeIndex: newIndex,  chartConfig:null, m})
             return;
           }
           if (index === 2 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = sectorAccordion(filters.sectors, frequencies.sectors);
-            this.setState({ isSunburst: true, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let chartConfig = sectorAccordion(filters.sectors, frequencies.sectors);
+            this.setState({ isSunburst: true, activeIndex: newIndex, chartConfig})
             return;
           }
 
           if (index === 3 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible] = typeAccordion(filters.types, frequencies.types);
-            this.setState({ isSunburst: true, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig})
+            let chartConfig = typeAccordion(filters.types, frequencies.types);
+            this.setState({ isSunburst: true, activeIndex: newIndex, chartConfig})
             return;
           }
           if (index === 4 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = activesAccordion(actives);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
+            let chartConfig  = activesAccordion(actives);
+            this.setState({ isSunburst: false, activeIndex: newIndex,  chartConfig})
             return;
           }
           
           if (index === 5 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = approvalsAccordion(approvals);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
+            let chartConfig  = approvalsAccordion(approvals);
+            this.setState({ isSunburst: false, activeIndex: newIndex,  chartConfig})
             return;
           }
 
           if (index === 6 ) { 
-            let [chartConfig, rightSidebarWidth, rightSidebarVisible, m] = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus);
-            this.setState({ isSunburst: false, activeIndex: newIndex, rightSidebarVisible, rightSidebarWidth, chartConfig, m})
+            let chartConfig = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus);
+            this.setState({ isSunburst: false, activeIndex: newIndex, chartConfig})
             return;
           }
 
       }
       
-
       accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear, selections){
         console.log('selections', selections);
         return (<Accordion styled onTitleClick={this.handleAcoordionTitleClick}>
@@ -143,6 +152,7 @@ class Arma extends Component {
                     multiple
                     search
                     selection
+                    value={selections.countries.map(o => o.value)}
                     onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
                     options={filters.countries && filters.countries.map(o => {return {text: o.label, value: o.value}})}
                   />
@@ -296,7 +306,7 @@ class Arma extends Component {
           direction: direction === 'ascending' ? 'descending' : 'ascending',
         })
       }
-    }
+      }
     
       reportsTable(column, data, direction){
         return ( <Table sortable fixed striped>
@@ -334,10 +344,12 @@ class Arma extends Component {
        const { frequencies } = this.state
       console.log('onAccordionSelectChange', t, d);
        if(t === 'ecoRegion'){
-        console.log('onAccordionSelectChange', 'ecoRegion');
         this.setState({ 
           isSunburst: false, 
           chartConfig: ecoRegionAccordion(filters.regions, frequencies.regions, this.ecoRegionsClick, d)})
+       } else if (t === 'country'){
+       // TODO
+
        }     
      }
 
@@ -379,7 +391,9 @@ class Arma extends Component {
                 : 
                 <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
                 :
-                <Element countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
+                <Element 
+                onChangeCountry={this.onChangeMapCountry}
+                countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
                 }
               </Segment>
             </Segment>

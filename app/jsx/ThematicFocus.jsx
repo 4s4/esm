@@ -1,4 +1,3 @@
-'use strict';
 import React, { Component } from 'react';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';

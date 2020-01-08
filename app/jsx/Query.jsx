@@ -24,7 +24,7 @@ export function items (query, selections, results, thematicFocus) {
     description: (<List as='ul'>{selections.ecoRegions.map((o, idx) => (<List.Item  key={`ecoReg-${idx}`} as='li'>{o.text || o.label}</List.Item>))}</List>),
     extra: (<a><Icon name='bolt' />{results.ecoRegions.length} docs</a>)
   };
-  const countryItem = query.country && {
+  const countryItem = query.country && selections.countries.length > 0 && {
     header: `Countries`,
     description: (<List as='ul'>{selections.countries.map((o, idx) => (<List.Item key={`country-${idx}`}  as='li'>{o.text || o.label}</List.Item>))}</List>),
     extra: (<a><Icon name='bolt' />{results.countries.length} docs</a>)

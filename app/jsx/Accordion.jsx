@@ -1,13 +1,13 @@
-import {pieChart, barChart, sunburstChart} from './Charts';
-import WorldMap from './WorldMap';
-import RegionsMap from './RegionsMap';
+import {pieChart, barChart, sunburstChart} from './charts/Charts';
+import WorldMap from './maps/WorldMap';
+import RegionsMap from './maps/RegionsMap';
 
 export function geoRegionAccordion(regionsFilters, regionsFrequencies){
 //    const catt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => o.label);
 //    const datt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => regionsFrequencies[o.value]);
 //    console.log('geoRegionAccordion', catt, datt);
     // pieChart(400, 400, catt, datt)
-    return [null, 'wide', true, RegionsMap];
+    return RegionsMap;
 }
 
 export function ecoRegionAccordion(regionsFilters, regionsFrequencies, onClick, selections){
@@ -24,7 +24,7 @@ export function countryAccordion(countryFilters, countriesFrequencies){
     // const catt = base.map(o => o.label);
     // const datt = base.map(o => countriesFrequencies[o.value] || 0);
     // barChart(400, 400, catt, datt)
-    return [null,'wide', true, WorldMap];
+    return WorldMap;
 }
 
 export function typeAccordion(typesFilters, typesFrequencies){
@@ -35,7 +35,7 @@ export function typeAccordion(typesFilters, typesFrequencies){
                 value: typesFrequencies[o.value]};});
     dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })
             
-    return [sunburstChart(500, 500, dd), 'very wide', true];
+    return sunburstChart(500, 500, dd);
 }
 
 export function sectorAccordion(sectorFilters, sectorFrequencies){
@@ -45,23 +45,23 @@ export function sectorAccordion(sectorFilters, sectorFrequencies){
                 name: o.label, 
                 value: sectorFrequencies[o.value]};});
       dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })                    
-    return[sunburstChart(500, 500, dd),'very wide', true];
+    return sunburstChart(500, 500, dd);
 }
 
 export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFrequencies){
     const cats = thematicFocusFilters.map( o => o.name);
     const datt = thematicFocusFilters.map( o => thematicFocusFrequencies[o.kw]); 
-    return [barChart(400, 400, cats, datt), 'very wide', true, WorldMap];
+    return barChart(400, 400, cats, datt);
 }
 
 export function approvalsAccordion(approvals){
     const catt = approvals.map(o => o.label);
     const datt = approvals.map(o => o.count || 0);
-    return [barChart(400, 400, catt, datt),'wide', true, WorldMap];
+    return barChart(400, 400, catt, datt);
 }
 export function activesAccordion(actives){
     const catt = actives.map(o => o.label);
     const datt = actives.map(o => o.count || 0);
-    return [barChart(400, 400, catt, datt),'wide', true, WorldMap];
+    return barChart(400, 400, catt, datt);
 }
 
