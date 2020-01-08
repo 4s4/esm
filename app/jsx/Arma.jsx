@@ -6,6 +6,7 @@ import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordi
 import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Card from 'semantic-ui-react/dist/commonjs/views/Card/Card';
 import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
 const cljs = require('../../js/cljs.js');
@@ -38,6 +39,7 @@ class Arma extends Component {
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
         this.onChangeMapCountry = this.onChangeMapCountry.bind(this);
+        this.showCombinedResults = this.showCombinedResults.bind(this);
       }
 
       static getDerivedStateFromProps(props, state) {
@@ -352,10 +354,16 @@ class Arma extends Component {
 
        }     
      }
-
+     showCombinedResults(v){
+       return () => {
+         if(this.state.showCombinedResults!==v){
+          this.setState({showCombinedResults:v})
+         }
+       };
+     }
      render (){
         const {  reports, approvals, activeIndex,
-        chartConfig, isSunburst, frequencies , m} = this.state
+        chartConfig, isSunburst, frequencies , m, showCombinedResults} = this.state
         const { filters, onCheck, query, selections, results, onYear } = this.props;
         const Element = m;
 //        console.log('query', query);
@@ -363,7 +371,6 @@ class Arma extends Component {
 //       console.log('results', results);
 
       return (
-        <div style={{height:'100%'}}>
        <Grid stackable columns={2}>
        <Grid.Column width={4}>
          <Card
@@ -375,16 +382,22 @@ class Arma extends Component {
           {this.accordion(activeIndex, filters, approvals, onCheck, reports, this.onAccordionSelectChange, onYear, selections)}
         </Grid.Column>
        <Grid.Column width={12}>
-            <Segment basic style={{height:"100%"}}>
+            <Segment basic>
               {Object.keys(query).length > 0 && <Segment>
-              <Header as='h4'>
-                <Icon name='search' />
-                <Header.Content>Search options: </Header.Content>            
+              <Header as='h5' dividing>
+              <Button.Group>
+                <Button onClick={this.showCombinedResults(false)} color={!showCombinedResults ? 'blue' : 'grey'}>Keep searching</Button>
+                <Button.Or />
+                <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List 1800 results</Button>
+              </Button.Group>
               </Header>
-              <Card.Group items={items(query, selections, results, filters.thematicsFocus)} itemsPerRow="8" stackable/>
+              <Card.Group items={items(query, selections, results, filters.thematicsFocus)} itemsPerRow="8" stackable />
             </Segment>}
-
-            <Segment attached>
+          
+           {showCombinedResults?
+           this.reportsTable(this.state.column, this.state.data, this.state.direction)
+           : 
+           <Segment attached>
                 { chartConfig ? 
                   isSunburst ? 
                 <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> 
@@ -393,13 +406,15 @@ class Arma extends Component {
                 :
                 <Element 
                 onChangeCountry={this.onChangeMapCountry}
-                countries={filters && filters.countries} frequencies={frequencies && frequencies.countries}/>
+                countries={filters && filters.countries} 
+                frequencies={frequencies && frequencies.countries}/>
                 }
-              </Segment>
             </Segment>
-            </Grid.Column>
+          }
+          
+          </Segment>
+          </Grid.Column>
         </Grid>
-          </div>
       )
     }
     }

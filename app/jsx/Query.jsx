@@ -11,43 +11,45 @@ const  intersection = (setA, setB) => {
   return _intersection;
 };
 
-
+function resultsIcon(col){
+  return (<a><Icon name='bolt' />{col.length} docs</a>);
+}
 
 export function items (query, selections, results, thematicFocus) {
   const geoItem = query.geoRegion && {
     header: `Geographical regions`,
     description: (<List as='ul'>{selections.geoRegions.map((o, idx) => (<List.Item  key={`geoReg-${idx}`} as='li'>{o.text || o.label}</List.Item>))}</List>),
-    extra: (<a><Icon name='bolt' />{results.geoRegions.length} docs</a>)
+    extra: resultsIcon(results.geoRegions)
   };
   const ecoItem = query.ecoRegion && {
     header: `Economical regions`,
     description: (<List as='ul'>{selections.ecoRegions.map((o, idx) => (<List.Item  key={`ecoReg-${idx}`} as='li'>{o.text || o.label}</List.Item>))}</List>),
-    extra: (<a><Icon name='bolt' />{results.ecoRegions.length} docs</a>)
+    extra: resultsIcon(results.ecoRegions)
   };
   const countryItem = query.country && selections.countries.length > 0 && {
     header: `Countries`,
     description: (<List as='ul'>{selections.countries.map((o, idx) => (<List.Item key={`country-${idx}`}  as='li'>{o.text || o.label}</List.Item>))}</List>),
-    extra: (<a><Icon name='bolt' />{results.countries.length} docs</a>)
+    extra: resultsIcon(results.countries)
   };
   const sectorItem = query.sectors && {
     header: `Sectors`,
     description: (<List as='ul'>{selections.sectors.map((o, idx) => (<List.Item key={`sector-${idx}`}  as='li'>{o.text || o.label}</List.Item>))}</List>),
-    extra: (<a><Icon name='bolt' />{results.sectors.length} docs</a>)
+    extra: resultsIcon(results.sectors)
   };
   const typeItem = query.type && {
     header: `Types`,
     description: (<List as='ul'>{selections.types.map((o, idx) => (<List.Item key={`type-${idx}`}  as='li'>{o.text || o.label}</List.Item>))}</List>),
-    extra: (<a><Icon name='bolt' />{results.types.length} docs</a>)
+    extra: resultsIcon(results.types)
   };
   const activeYearItem = query.active_year && {
     header: `Active year`,
     description: selections.active_year,
-    extra: (<a><Icon name='bolt' />{results.active_year.length} docs</a>)
+    extra: resultsIcon(results.active_year) 
   };
   const approvalYearItem = query.approval_year && {
     header: `Approval year`,
     description: selections.approval_year,
-    extra: (<a><Icon name='bolt' />{results.approval_year.length} docs</a>)
+    extra: resultsIcon(results.approval_year) 
   };
   const qks= new Set(Object.keys(query));
   const them = new Set(thematicFocus.map(o => o.kw));
