@@ -5169,16 +5169,17 @@ fieldset legend {
   opacity: 0.75;
 }
 footer {
-  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: left;
   color: #fff;
   margin: 5px 0 0 0;
   padding: 25px 20px;
-  z-index: 1600;
   font-size: 12px;
-  background: #002b54;
+  background: #3081c8;
 }
 footer .footer-top {
-  background: #002b55;
+  background: #3081c8;
   padding: 10px 0;
 }
 footer .footer-top ul {
@@ -5201,8 +5202,8 @@ footer .footer-top .footer-nav li {
   height: 40px;
   vertical-align: middle;
   line-height: 40px;
-  border-left: 1px solid #001d43;
-  border-right: 1px solid #163862;
+  border-left: 1px solid #3081c8;
+  border-right: 1px solid #3081c8;
 }
 footer .footer-top .footer-nav li:first-child {
   border-left: none;
@@ -6688,7 +6689,6 @@ div.text-container {
 }
 .label {
   line-height: 2;
-  width: 100%;
   border-radius: .75em;
 }
 .label-type {
