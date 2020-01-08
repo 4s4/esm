@@ -56,9 +56,9 @@ export function items (query, selections, results, thematicFocus) {
   const themIntersection = intersection(qks, them);
   const themIntersectionA = Array.from(themIntersection);
   const thematicFocusItem = themIntersection.size > 0 && {
-    header: `Thematics Focus: ${themIntersection.size}`,
-    description: themIntersectionA.map(o => thematicFocus.find(x => x.kw === o).name).join(',')
-//    extra: (<a><Icon name='user' />Results: {results.types.length}</a>)
+    header: `Thematics Focus:`,
+    description: (<List as='ul'>{themIntersectionA.map((o, idx) => (<List.Item key={`tm-${idx}`}  as='li'>{thematicFocus.find(x => x.kw === o).name}</List.Item>))}</List>),
+    extra: (<a><Icon name='bolt' />Results: xxx</a>)
   };
  return [
     geoItem,

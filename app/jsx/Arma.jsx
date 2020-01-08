@@ -53,7 +53,9 @@ class Arma extends Component {
             frequencies.thematicsFocus = tt;
             console.log('frequencies', frequencies);
             console.log('filters', props.filters)
-            return {frequencies, reports: props.reports, approvals, actives};
+            return {frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
+        }else if(props.combinedResults !== state.combinedResults){
+          return {combinedResults: props.combinedResults};
         }
         return state;
       }
@@ -363,13 +365,13 @@ class Arma extends Component {
      }
      render (){
         const {  reports, approvals, activeIndex,
-        chartConfig, isSunburst, frequencies , m, showCombinedResults} = this.state
-        const { filters, onCheck, query, selections, results, onYear } = this.props;
+        chartConfig, isSunburst, frequencies , m, showCombinedResults, combinedResults} = this.state
+        const { filters, onCheck, query, selections, results, onYear  } = this.props;
         const Element = m;
 //        console.log('query', query);
 //        console.log('selections', selections);
 //       console.log('results', results);
-
+          console.log('combinedResuls', combinedResults);
       return (
        <Grid stackable columns={2}>
        <Grid.Column width={4}>
@@ -388,7 +390,7 @@ class Arma extends Component {
               <Button.Group>
                 <Button onClick={this.showCombinedResults(false)} color={!showCombinedResults ? 'blue' : 'grey'}>Keep searching</Button>
                 <Button.Or />
-                <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List 1800 results</Button>
+              <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List {combinedResults && combinedResults.length} results</Button>
               </Button.Group>
               </Header>
               <Card.Group items={items(query, selections, results, filters.thematicsFocus)} itemsPerRow="8" stackable />

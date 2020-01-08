@@ -48,7 +48,6 @@ class SearchContainer extends Component {
        
        };
     this.onSelectChange = this.onSelectChange.bind(this);
-    this.search = this.search.bind(this);
     this.saveReports = this.saveReports.bind(this);
     this.saveFilters = this.saveFilters.bind(this);
     this.saveWorld = this.saveWorld.bind(this);
@@ -110,7 +109,7 @@ class SearchContainer extends Component {
   
   selectSelect(col, vals, qkw, kw, isRecursive, isMultiple){
     const { ...picked } = this.state.qq;
-    if (vals !== undefined && vals !== null ){
+    if (vals !== undefined && vals !== null  && vals.length > 0  ){
       const selectedValues = vals.map(o => o.value);
       let dict = new Set(selectedValues);
 //    console.log('initial values', selectedValues);
@@ -125,53 +124,44 @@ class SearchContainer extends Component {
       } else{
         picked[qkw] = o => dict.has(o[kw]);
       }
+      this.searchReports(picked);
+      return picked[qkw];
     } else {
       delete picked[qkw];
+      this.searchReports(picked);
+      return null;
     }
-    this.searchReports(picked);
-    return picked[qkw];
+  }
+
+  fun(q, vals, kw){
+    const { ...sels } = this.state.selections;
+    sels[kw] = vals;
+    const { ...res } = this.state.results;
+    if(q){
+      res[kw] = doSearch(this.state.initialReports, [q]);      
+    }else{
+      res[kw] = [];      
+    }
+    this.setState({ selections: sels, results: res });
   }
 
   onSelectChange (selectType, vals) {
     if(selectType === "geoRegion"){
       const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="0"), vals, 'geoRegion', 'region', false);
-      const { ...sels } = this.state.selections;
-      sels.geoRegions = vals;
-      const { ...res } = this.state.results;
-      res.geoRegions = doSearch(this.state.initialReports, [q]);      
-      this.setState({ selections: sels, results: res });
+      this.fun.bind(this)(q, vals, 'geoRegions');
     } else if(selectType === "ecoRegion"){
-      console.log('vals', vals);
       const countryVals = vals.reduce((c, x) => c.concat(x.countries) ,[]).map( v => { return { value: v.id, text: v.name }});
       const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
-      const { ...sels } = this.state.selections;
-      sels.ecoRegions = vals;
-      const { ...res } = this.state.results;
-      res.ecoRegions = doSearch(this.state.initialReports, [q]);      
-      this.setState({ selections: sels, results: res });
+      this.fun.bind(this)(q, vals, 'ecoRegions');
     } else if(selectType === "country") {
       const q = this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', 'country', false);
-      const { ...sels } = this.state.selections;
-      sels.countries = vals;
-      const { ...res } = this.state.results;
-      res.countries = doSearch(this.state.initialReports, [q]);      
-      this.setState({ selections: sels, results: res });
+      this.fun.bind(this)(q, vals, 'countries');
     } else if(selectType === "type") {
       const q = this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', 'type', true, false);
-      const { ...sels } = this.state.selections;
-      sels.types = vals;
-      const { ...res } = this.state.results;
-      res.types = doSearch(this.state.initialReports, [q]);      
-      this.setState({ selections: sels, results: res });
-
+      this.fun.bind(this)(q, vals, 'types');
     } else if(selectType === "sectors") {
       const q = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', 'sectors', true, true);
-      const { ...sels } = this.state.selections;
-      sels.sectors = vals;
-      const { ...res } = this.state.results;
-      res.sectors = doSearch(this.state.initialReports, [q]);      
-      this.setState({ selections: sels, results: res });
-
+      this.fun.bind(this)(q, vals, 'sectors');
     }
     console.log(selectType, `Option selected:`, vals)
   };
@@ -258,13 +248,6 @@ class SearchContainer extends Component {
     this.searchReports(picked);
   }
 
-  search(){
-    const reportsLength = this.state.reports.length;
-    const { reports, initialReports, ...picked} = this.state;
-    const search = {reportsLength, ...picked}
-    alert(JSON.stringify(search));
-  }
-
   handleClick (e, titleProps) {
     const { index } = titleProps
     const { activeIndex } = this.state
@@ -283,6 +266,7 @@ class SearchContainer extends Component {
                   query={this.state.qq}
                   selections={this.state.selections}
                   results={this.state.results}
+                  combinedResults={this.state.reports}
             />
             </Container>;
   }
