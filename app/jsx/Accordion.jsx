@@ -35,7 +35,7 @@ export function typeAccordion(typesFilters, typesFrequencies){
                 value: typesFrequencies[o.value]};});
     dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })
             
-    return sunburstChart('Explore the TSM by Type', 500, 500, dd);
+    return sunburstChart('Explore the TSM by Type', dd, false);
 }
 
 export function sectorAccordion(sectorFilters, sectorFrequencies){
@@ -45,7 +45,7 @@ export function sectorAccordion(sectorFilters, sectorFrequencies){
                 name: o.label, 
                 value: sectorFrequencies[o.value]};});
       dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })                    
-    return sunburstChart('Explore the TSM by Sector', 500, 500, dd);
+    return sunburstChart('Explore the TSM by Sector', dd, true);
 }
 
 export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFrequencies){

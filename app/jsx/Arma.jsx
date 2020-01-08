@@ -59,6 +59,7 @@ class Arma extends Component {
         }
         return state;
       }
+
       onChangeMapCountry(d){
         const { filters, selections, onSelectChange } = this.props;
         console.log('onChangeMapCountry', d);
@@ -71,6 +72,7 @@ class Arma extends Component {
         }
         onSelectChange('country', data);       
       }
+
       ecoRegionsClick(d){
         const { filters, selections, onSelectChange } = this.props;
         const reg = filters.regions.find(r => r.value === d.id);
@@ -391,10 +393,10 @@ class Arma extends Component {
               <Button.Group>
                 <Button onClick={this.showCombinedResults(false)} color={!showCombinedResults ? 'blue' : 'grey'}>Keep searching</Button>
                 <Button.Or />
-              <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List {combinedResults && combinedResults.length} results</Button>
+              <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List query result: {combinedResults && combinedResults.length} docs </Button>
               </Button.Group>
               </Header>
-              <Card.Group items={items(query, selections, results, filters.thematicsFocus)} itemsPerRow="8" stackable />
+              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMapCountry)} itemsPerRow="8" stackable />
             </Segment>}
           
            {showCombinedResults?
