@@ -18,10 +18,10 @@
 			<meta name="viewport" content="width=device-width">
 			<link rel="stylesheet" href="styles/bootstrap.css">
 			<!--<link rel="stylesheet/less" type="text/css" href="styles/main.less" />-->
-			<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 			<script src="js/vendor/modernizr-2.6.2.min.js" />
-			<script src='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.js'></script>
-			<link href='https://api.tiles.mapbox.com/mapbox.js/v3.2.1/mapbox.css' rel='stylesheet'/>
+			<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
+			<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+			<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 	       </head>
 	       <body>
 		 <!--<form role="form"> -->
@@ -65,39 +65,21 @@
 		       <!--/.navbar-collapse -->
 		     </div>
 		   </nav>
-		   <div id="search_container">
+		   <div id="search_container" style="height:100%;">
            </div>
-
-
-
-<section class="results-table results-table-preview ">
-  <div class="container">
-    
-  </div>
-</section>
-
 <footer>
   <div class="container">
     <p>&copy; International Trade Centre 2015</p>
   </div>
 </footer>
 <!--</form> -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-	$('[data-toggle="tooltip"]').tooltip({
-	   container: 'body'
-       });
-  });
-</script>
 <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-<script src="js/r.js"></script>
+<script type="text/javascript">
+	window.production=false;
+</script>
+<script src="js/r.min.js"></script>
 
-<script>
-  ReactDOM.render(React.createElement(SearchContainer), $('#search_container')[0]);
-  </script>
 </body>
 
 
