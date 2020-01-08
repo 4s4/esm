@@ -252,6 +252,7 @@ class Arma extends Component {
                       fluid
                       search
                       selection
+                      clearable
                       onChange={(ev, o) => onYear('active_year', o)}
                       options={this.state.actives && this.state.actives.map(o => {return {text: o.label, value: o.value}})}
                     />
@@ -270,6 +271,7 @@ class Arma extends Component {
                       fluid
                       search
                       selection
+                      clearable
                       onChange={(ev, o) => onYear('approval_year', o)}
                       options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
                     />
@@ -384,7 +386,6 @@ class Arma extends Component {
           {this.accordion(activeIndex, filters, approvals, onCheck, reports, this.onAccordionSelectChange, onYear, selections)}
         </Grid.Column>
        <Grid.Column width={12}>
-            <Segment basic>
               {Object.keys(query).length > 0 && <Segment>
               <Header as='h5' dividing>
               <Button.Group>
@@ -399,8 +400,8 @@ class Arma extends Component {
            {showCombinedResults?
            this.reportsTable(this.state.column, this.state.data, this.state.direction)
            : 
-           <Segment attached>
-                { chartConfig ? 
+           
+                 chartConfig ? 
                   isSunburst ? 
                 <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> 
                 : 
@@ -410,11 +411,10 @@ class Arma extends Component {
                 onChangeCountry={this.onChangeMapCountry}
                 countries={filters && filters.countries} 
                 frequencies={frequencies && frequencies.countries}/>
-                }
-            </Segment>
+                
+           
           }
           
-          </Segment>
           </Grid.Column>
         </Grid>
       )

@@ -15,7 +15,7 @@ export function ecoRegionAccordion(regionsFilters, regionsFrequencies, onClick, 
     const datt = regionsFilters.filter(o => o["parent-value"]==="1").map(o => {        
         return {count: regionsFrequencies[o.value],
                 value: o.value}});
-    return pieChart('Economical Regions', 400, 400, catt, datt, onClick, selections);
+    return pieChart('Explore the TSM by Economical Region', 400, 400, catt, datt, onClick, selections);
 }
 
 export function countryAccordion(countryFilters, countriesFrequencies){
@@ -35,7 +35,7 @@ export function typeAccordion(typesFilters, typesFrequencies){
                 value: typesFrequencies[o.value]};});
     dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })
             
-    return sunburstChart(500, 500, dd);
+    return sunburstChart('Explore the TSM by Type', 500, 500, dd);
 }
 
 export function sectorAccordion(sectorFilters, sectorFrequencies){
@@ -45,23 +45,23 @@ export function sectorAccordion(sectorFilters, sectorFrequencies){
                 name: o.label, 
                 value: sectorFrequencies[o.value]};});
       dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })                    
-    return sunburstChart(500, 500, dd);
+    return sunburstChart('Explore the TSM by Sector', 500, 500, dd);
 }
 
 export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFrequencies){
     const cats = thematicFocusFilters.map( o => o.name);
     const datt = thematicFocusFilters.map( o => thematicFocusFrequencies[o.kw]); 
-    return barChart(400, 400, cats, datt);
+    return barChart('Explore the TSM by Thematic Focus', 400, 400, cats, datt);
 }
 
 export function approvalsAccordion(approvals){
     const catt = approvals.map(o => o.label);
     const datt = approvals.map(o => o.count || 0);
-    return barChart(400, 400, catt, datt);
+    return barChart('Explore the TSM by Approval Year', 400, 400, catt, datt);
 }
 export function activesAccordion(actives){
     const catt = actives.map(o => o.label);
     const datt = actives.map(o => o.count || 0);
-    return barChart(400, 400, catt, datt);
+    return barChart('Explore the TSM by Active Year', 400, 400, catt, datt);
 }
 
