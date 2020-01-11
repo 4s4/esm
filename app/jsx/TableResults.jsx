@@ -4,6 +4,7 @@ import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
 import Item from 'semantic-ui-react/dist/commonjs/views/Item/Item';
 import Image from 'semantic-ui-react/dist/commonjs/elements/Image/Image';
+import CollapsableData from './CollapsableData';
 
 function rightOption (d, filters) {
   const type = filters.types.find( o => o.value === d.type);
@@ -24,6 +25,18 @@ function toUrl(s){
   const res = [...s.matchAll(regexp)];
   return res.map(v => v[0]).join('-').toLowerCase();
 }
+
+function summarise(str, wordMax){
+  const descReg = /[^\s]+/g;
+  const res = [...str.matchAll(descReg)];
+  if(res.length > wordMax){
+    return res.slice(0, wordMax).map(v => v[0]).join(' ')+' ...';
+  }else{
+    return str;
+  }
+}
+
+
 export function centerOption(d, filters){ 
   const sectors = d.sectors.map(s => filters.sectors.find( o => o.value === s));
   const country = filters.countries.find( o => o.value === d.country);
@@ -34,10 +47,10 @@ export function centerOption(d, filters){
     <Item>
     <Item.Content>
       <Item.Header >
-      <Header as='h3' color='blue' ><a href={`./document/${d.id}/${toUrl(d.title)}`}> {d.title} </a></Header>
+      <Popup size='mini' key={`pop-up-detail-${d.value}`} inverted content='Go to document page detail' trigger={<Header as='h3' color='blue' ><a href={`./document/${d.id}/${toUrl(d.title)}`}> {d.title} </a></Header>} />
       <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={<Label as='b' color='blue' tag>{country.label} ({country.code})</Label>} />
       </Item.Header>
-      <Item.Meta>{d.description}</Item.Meta>
+      <Item.Meta><CollapsableData collapsed={summarise(d.description, 30)} expanded={d.description}/></Item.Meta>
       <Item.Extra>
       {sectors && sectors.length > 0 && <Header as='h5'>Sectors</Header>}
       {sectors.map((s, idx) => (<Label key={idx} size='tiny' basic >{s.label}</Label>))}
