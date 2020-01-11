@@ -26,7 +26,6 @@ class Arma extends Component {
           visibleOptions:false, 
           direction:null, 
           column:null, 
-          data: tableData, 
           activeIndex:1, 
           sidebar:true, 
           leftSidebarWidth:'wide' , 
@@ -317,32 +316,35 @@ class Arma extends Component {
       }
     
       reportsTable(column, data, direction){
-        return ( <Table sortable fixed striped>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell width='12'
-                sorted={column === 'age' ? direction : null}
-                onClick={this.handleSort('age')}
-              >
-                Document
-              </Table.HeaderCell>
-              <Table.HeaderCell width='4'
-                sorted={column === 'gender' ? direction : null}
-                onClick={this.handleSort('gender')}
-              >
-                Type/Year/Period/Region/Country
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {data.map(({id, co, ro }) => (
-              <Table.Row key={id}>
-                <Table.Cell>{co}</Table.Cell>
-                <Table.Cell textAlign='right'>{ro}</Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>);
+        return ( <Table sortable fixed striped basic='very'>
+                  <Table.Header style={{visibility:'hidden'}}>
+                    <Table.Row>
+                    <Table.HeaderCell width='2' />
+
+                      <Table.HeaderCell width='10'
+                        sorted={column === 'age' ? direction : null}
+                        onClick={this.handleSort('age')}
+                      >
+                        Document
+                      </Table.HeaderCell>
+                      <Table.HeaderCell width='4'
+                        sorted={column === 'gender' ? direction : null}
+                        onClick={this.handleSort('gender')}
+                      >
+                        Type/Year/Period/Region/Country
+                      </Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {data.map(({id, le, co, ro }) => (
+                      <Table.Row key={id}>
+                        <Table.Cell>{le}</Table.Cell>
+                        <Table.Cell>{co}</Table.Cell>
+                        <Table.Cell textAlign='right'>{ro}</Table.Cell>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>);
 
       }
 
@@ -399,23 +401,20 @@ class Arma extends Component {
               <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMapCountry)} itemsPerRow="8" stackable />
             </Segment>}
           
-           {showCombinedResults?
-           this.reportsTable(this.state.column, this.state.data, this.state.direction)
-           : 
-           
-                 chartConfig ? 
-                  isSunburst ? 
+           {true && reports ?
+            this.reportsTable(this.state.column, tableData(reports.slice(0,10), filters), this.state.direction)
+           :            
+            chartConfig ? 
+              isSunburst ? 
                 <SunCharty Highcharts={Highcharts} chartOpts={chartConfig}/> 
-                : 
+              : 
                 <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
-                :
-                <Element 
-                onChangeCountry={this.onChangeMapCountry}
-                countries={filters && filters.countries} 
-                frequencies={frequencies && frequencies.countries}/>
-                
-           
-          }
+              :
+              <Element 
+              onChangeCountry={this.onChangeMapCountry}
+              countries={filters && filters.countries} 
+              frequencies={frequencies && frequencies.countries}/>
+            }
           
           </Grid.Column>
         </Grid>
