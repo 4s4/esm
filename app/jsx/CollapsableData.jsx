@@ -17,7 +17,7 @@ class CollapsableData extends Component {
   render() {
     const data = this.state.closed ? this.props.collapsed : this.props.expanded;
     const icon = this.state.closed ? 'plus' : 'minus';
-    const button = this.props.collapsed === this.props.expanded ? '' : (<Button style={{fontSize: '.48571429rem'}} circular basic size='mini' icon={icon} onClick={this.check}/>); 
+    const button = this.props.collapsed === this.props.expanded ? '' : (<Button color='blue' style={{fontSize: '.48571429rem'}} circular basic size='mini' icon={icon} onClick={this.check}/>); 
   return (<div>{data} {button}</div>);
   }
 }

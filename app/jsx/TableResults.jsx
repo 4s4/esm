@@ -3,15 +3,22 @@ import List from 'semantic-ui-react/dist/commonjs/elements/List/List';
 import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
 import Item from 'semantic-ui-react/dist/commonjs/views/Item/Item';
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
+
 import Image from 'semantic-ui-react/dist/commonjs/elements/Image/Image';
 import CollapsableData from './CollapsableData';
+import React, { Component } from 'react';
+import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table';
+import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
+
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 
 function rightOption (d, filters) {
   const type = filters.types.find( o => o.value === d.type);
   return (  
        
   <List>
-  <List.Item><Label basic color='blue' as='b'>Type:<Label.Detail >{type.label}</Label.Detail></Label></List.Item>
+  <List.Item><Label basic color='blue' as='b'>Type:<Label.Detail >{type && type.label}</Label.Detail></Label></List.Item>
   <List.Item><Label basic  as='b'>Year:<Label.Detail >{d.year}</Label.Detail></Label></List.Item>
   <List.Item><Label basic  as='b'>Period:<Label.Detail >{d.implementationPeriod}</Label.Detail></Label></List.Item>
   </List>
@@ -27,6 +34,7 @@ function toUrl(s){
 }
 
 function summarise(str, wordMax){
+  if(str === null) return "";
   const descReg = /[^\s]+/g;
   const res = [...str.matchAll(descReg)];
   if(res.length > wordMax){
@@ -36,8 +44,7 @@ function summarise(str, wordMax){
   }
 }
 
-
-export function centerOption(d, filters){ 
+ function centerOption(d, filters){ 
   const sectors = d.sectors.map(s => filters.sectors.find( o => o.value === s));
   const country = filters.countries.find( o => o.value === d.country);
   const region = filters.regions.find( o => o.value === d.region);
@@ -61,19 +68,130 @@ export function centerOption(d, filters){
     
     );
   }
-  
 
-
-  export function leftOption(d, filters){ 
-    const region = filters.regions.find( o => o.value === d.region);
-    const dict = {"Africa": "Africa", "America": "Americas", "Asia": "Asia", "Europe": "Europe", "Oceania": "Southeast_Asia"};
-    return (      
-    <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={ <Image size='tiny' src={`../img/maps/${dict[region.label]}.png`} />} />      
-      );
-    }
-    
-  export function tableData (dd, filters) {
-    return dd.map( d => ({ id:d.id,  le: leftOption(d, filters), co: centerOption(d, filters), ro: rightOption(d, filters) })
+ function leftOption(d, filters){ 
+  const region = filters.regions.find( o => o.value === d.region);
+  const dict = {"Africa": "Africa", "America": "Americas", "Asia": "Asia", "Europe": "Europe", "Oceania": "Southeast_Asia"};
+  return (      
+  <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={ <Image size='tiny' src={`../img/maps/${dict[region.label]}.png`} />} />      
     );
-  } 
+  }
   
+ function tableData (dd, filters) {
+  return dd.map( d => ({ id:d.id,  le: leftOption(d, filters), co: centerOption(d, filters), ro: rightOption(d, filters) })
+  );
+} 
+  
+const maxRows = 10;
+
+class TableResults extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { closed: true, data: [], pagination: false, pages:0, currentPage:0 };
+    this.check = this.check.bind(this);
+
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (
+      props.data !== state.data || props.filters !== state.filters
+    ) {
+      const totalRows = props.data.length;
+      const pagination = totalRows > maxRows;
+
+      const quotient = Math.floor(totalRows/maxRows);
+      const remainder = totalRows % maxRows;
+      const pages = quotient + (remainder > 0 ? 1 : 0 );
+      const currentPage = 0;
+      return { data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
+    }
+    return state;
+  }
+
+
+
+  handleSort(clickedColumn) {
+    return function() {
+      const { column, data, direction } = this.state
+  
+      if (column !== clickedColumn) {
+        this.setState({
+          column: clickedColumn,
+          data: data, //_.sortBy(data, [clickedColumn]),
+          direction: 'ascending',
+        })
+  
+        return
+      }
+  
+      this.setState({
+        data: data.reverse(),
+        direction: direction === 'ascending' ? 'descending' : 'ascending',
+      })
+    }
+    }
+  
+  check(x){
+    this.setState({currentPage: x});  
+  }
+
+  render(){
+    const {column, direction} = this.props;
+    const {processedData, pagination, pages, currentPage} = this.state;
+    let currentData;
+    if (pagination){
+      const init = currentPage * maxRows;
+      currentData = processedData.slice(init, init + maxRows);
+    } else {
+      currentData = processedData;
+    }
+    return ( <Table sortable fixed striped basic='very'>
+              <Table.Header >
+              <Table.Row style={{visibility:'hidden'}}>
+                <Table.HeaderCell width='2'  />
+
+                  <Table.HeaderCell width='10' 
+                    sorted={column === 'age' ? direction : null}
+                  >
+                    Document
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width='4' 
+                    sorted={column === 'gender' ? direction : null}
+                  >
+                    Type/Year/Period/Region/Country
+                  </Table.HeaderCell>
+                </Table.Row>                   
+              </Table.Header>
+              <Table.Body>
+                {currentData.map(({id, le, co, ro }) => (
+                  <Table.Row key={id}>
+                    <Table.Cell>{le}</Table.Cell>
+                    <Table.Cell>{co}</Table.Cell>
+                    <Table.Cell textAlign='right'>{ro}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+              <Table.Footer>
+                { pagination && <Table.Row>
+                  <Table.HeaderCell colSpan='3'>
+                    <Menu floated='right' pagination>
+                      <Menu.Item as='a' icon onClick={() => this.check(0)}>
+                        <Icon name='chevron left' />
+                      </Menu.Item>
+                      {[...Array(pages).keys()].map( x => (<Menu.Item as='a' key={x} onClick={() => this.check(x)}>{x+1}</Menu.Item>))}                
+                      <Menu.Item as='a' icon onClick={() => this.check(pages-1)}>
+                        <Icon name='chevron right' />
+                      </Menu.Item>
+                    </Menu>
+                  </Table.HeaderCell>
+                </Table.Row>}
+              </Table.Footer>
+
+            </Table>);
+
+  }
+
+
+}
+
+export default TableResults;

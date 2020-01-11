@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid/Grid';
-import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table';
 import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown';
 import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordion';
 import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
@@ -17,7 +16,7 @@ import Charty from './charts/Charty';
 import {items} from './Query';
 import Highcharts from 'highcharts';
 
-import {rightOption, centerOption, tableData} from './TableResults';
+import TableResults from './TableResults';
 
 class Arma extends Component {
     constructor(props) {
@@ -34,7 +33,6 @@ class Arma extends Component {
           m: WorldMap
           };
         this.handleAccordion = this.handleAccordion.bind(this);
-        this.handleSort = this.handleSort.bind(this);
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
         this.onChangeMapCountry = this.onChangeMapCountry.bind(this);
@@ -294,59 +292,6 @@ class Arma extends Component {
                  </Accordion>);
       }
 
-      handleSort(clickedColumn) {
-      return function() {
-        const { column, data, direction } = this.state
-    
-        if (column !== clickedColumn) {
-          this.setState({
-            column: clickedColumn,
-            data: data, //_.sortBy(data, [clickedColumn]),
-            direction: 'ascending',
-          })
-    
-          return
-        }
-    
-        this.setState({
-          data: data.reverse(),
-          direction: direction === 'ascending' ? 'descending' : 'ascending',
-        })
-      }
-      }
-    
-      reportsTable(column, data, direction){
-        return ( <Table sortable fixed striped basic='very'>
-                  <Table.Header style={{visibility:'hidden'}}>
-                    <Table.Row>
-                    <Table.HeaderCell width='2' />
-
-                      <Table.HeaderCell width='10'
-                        sorted={column === 'age' ? direction : null}
-                        onClick={this.handleSort('age')}
-                      >
-                        Document
-                      </Table.HeaderCell>
-                      <Table.HeaderCell width='4'
-                        sorted={column === 'gender' ? direction : null}
-                        onClick={this.handleSort('gender')}
-                      >
-                        Type/Year/Period/Region/Country
-                      </Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {data.map(({id, le, co, ro }) => (
-                      <Table.Row key={id}>
-                        <Table.Cell>{le}</Table.Cell>
-                        <Table.Cell>{co}</Table.Cell>
-                        <Table.Cell textAlign='right'>{ro}</Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>);
-
-      }
 
      onAccordionSelectChange (t, d){
        this.props.onSelectChange(t, d);
@@ -402,7 +347,7 @@ class Arma extends Component {
             </Segment>}
           
            {true && reports ?
-            this.reportsTable(this.state.column, tableData(reports.slice(0,10), filters), this.state.direction)
+            <TableResults column={this.state.column} data={reports} filters={filters} direction={this.state.direction} />
            :            
             chartConfig ? 
               isSunburst ? 
