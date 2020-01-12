@@ -5,7 +5,7 @@ import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 // https://jsfiddle.net/user2314737/uhp2wgkn/
   
-function mapData(data) {
+function mapData(data, onChangeMapRegion) {
   return {
     chart: {
       map: theMap
@@ -57,7 +57,15 @@ function mapData(data) {
       data: data,
       name: 'Random data',
       joinBy: ['hc-key', 'code'],
-  
+      point: {
+        events: {
+           click: function(e) {
+                console.log('region map click', e.point.options);
+                onChangeMapRegion(e.point.options);
+            }
+        }
+      },
+
       states: {
         hover: {
           color: '#BADA55'
@@ -80,7 +88,7 @@ class RegionsMap extends Component {
     if (
       props !== state
     ) {
-      if(props.countries && props.frequencies){
+      if(props.countries && props.frequencies && props.regions){
         const d ={"Europe": 0, "Asia":0, "Africa":0, "Oceania":0, "America":0};
     
         const data= Object.keys(props.frequencies).reduce((x,o) => {
@@ -88,13 +96,16 @@ class RegionsMap extends Component {
                     x[c.region.label]+=props.frequencies[o];
                     return x;
                     }, d);
+
+        console.log('props.regions', props.regions);
+        const regionValue = (x) => props.regions.find(r => r.label === x).value;
         const dataT = [
-          {code: 'eu', value:data["Europe"], codeName:"Europe"},
-          {code: 'as', value:data["Asia"], codeName:"Asia"},
-          {code: 'af', value:data["Africa"], codeName:"Africa"},
-          {code: 'na', value:data["America"], codeName:"America"},
-          {code: 'sa', value:data["America"], codeName:"America"},
-          {code: 'oc', value:data["Oceania"],  codeName:"Oceania"}
+          {code: 'eu', value:data["Europe"], codeName:"Europe", regValue:regionValue("Europe") },
+          {code: 'as', value:data["Asia"], codeName:"Asia", regValue:regionValue("Asia")},
+          {code: 'af', value:data["Africa"], codeName:"Africa", regValue:regionValue("Africa")},
+          {code: 'na', value:data["America"], codeName:"America",  regValue:regionValue("America")},
+          {code: 'sa', value:data["America"], codeName:"America", regValue:regionValue("America")},
+          {code: 'oc', value:data["Oceania"],  codeName:"Oceania", regValue:regionValue("Oceania")}
           ];
         return {data: dataT};
       }
@@ -105,7 +116,7 @@ class RegionsMap extends Component {
   render() {
     const {data} = this.state;
     return (<HighchartsReact
-            options = { mapData(data) }
+            options = { mapData(data, this.props.onChangeMapRegion) }
             highcharts = { Highcharts }
             constructorType = { 'mapChart' }
             allowChartUpdate = { true }

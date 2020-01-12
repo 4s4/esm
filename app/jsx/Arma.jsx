@@ -36,6 +36,7 @@ class Arma extends Component {
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
         this.onChangeMapCountry = this.onChangeMapCountry.bind(this);
+        this.onChangeMapRegion = this.onChangeMapRegion.bind(this);
         this.showCombinedResults = this.showCombinedResults.bind(this);
       }
 
@@ -68,6 +69,19 @@ class Arma extends Component {
           data = data.filter(d => d.value !== reg.value);
         }
         onSelectChange('country', data);       
+      }
+
+      onChangeMapRegion(d){
+        const { filters, selections, onSelectChange } = this.props;
+        console.log('onChangeMapRegion', d);
+        const reg = filters.regions.find(c => c.value===d.regValue);
+        let data = selections.geoRegions;
+        if(data.find(d => d.value === reg.value) === undefined){
+          data.push(reg);
+        } else {
+          data = data.filter(d => d.value !== reg.value);
+        }
+        onSelectChange('geoRegion', data);       
       }
 
       ecoRegionsClick(d){
@@ -322,7 +336,7 @@ class Arma extends Component {
 //        console.log('query', query);
 //        console.log('selections', selections);
 //       console.log('results', results);
-          console.log('combinedResuls', combinedResults);
+//          console.log('combinedResuls', combinedResults);
       return (
        <Grid stackable columns={2}>
        <Grid.Column width={4}>
@@ -357,7 +371,9 @@ class Arma extends Component {
               :
               <Element 
               onChangeCountry={this.onChangeMapCountry}
+              onChangeMapRegion={this.onChangeMapRegion}
               countries={filters && filters.countries} 
+              regions={filters && filters.regions && filters.regions.filter(x => x['parent-value'] === '0')} 
               frequencies={frequencies && frequencies.countries}/>
             }
           
