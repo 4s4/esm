@@ -73,7 +73,7 @@ function summarise(str, wordMax){
   const region = filters.regions.find( o => o.value === d.region);
   const dict = {"Africa": "Africa", "America": "Americas", "Asia": "Asia", "Europe": "Europe", "Oceania": "Southeast_Asia"};
   return (      
-  <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={ <Image size='tiny' src={`../img/maps/${dict[region.label]}.png`} />} />      
+  <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={ <Image size='tiny' src={`img/maps/${dict[region.label]}.png`} />} />      
     );
   }
   
