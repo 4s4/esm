@@ -5,7 +5,7 @@ const theMap = require('@highcharts/map-collection/custom/world.geo.json');
 import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 
-function mapData(data, onChangeCountry) {
+function mapData(data, onChangeMap) {
   return {
   chart: {
       map: theMap
@@ -45,7 +45,7 @@ function mapData(data, onChangeCountry) {
           events: {
              click: function(e) {
                   console.log('worldmap click', e.point.options);
-                  onChangeCountry(e.point.options);
+                  onChangeMap('country', e.point.options);
              }
          }
      },
@@ -96,7 +96,7 @@ class WorldMap extends Component {
   render() {
     const {data} = this.state;
     return (<HighchartsReact
-              options = { mapData(data, this.props.onChangeCountry) }
+              options = { mapData(data, this.props.onChangeMap) }
               highcharts = { Highcharts }
               constructorType = { 'mapChart' }
               allowChartUpdate = { true }

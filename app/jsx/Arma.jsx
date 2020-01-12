@@ -35,8 +35,7 @@ class Arma extends Component {
         this.handleAccordion = this.handleAccordion.bind(this);
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
-        this.onChangeMapCountry = this.onChangeMapCountry.bind(this);
-        this.onChangeMapRegion = this.onChangeMapRegion.bind(this);
+        this.onChangeMap = this.onChangeMap.bind(this);
         this.showCombinedResults = this.showCombinedResults.bind(this);
       }
 
@@ -57,31 +56,21 @@ class Arma extends Component {
         }
         return state;
       }
-
-      onChangeMapCountry(d){
+      onChangeMap(t, d){
         const { filters, selections, onSelectChange } = this.props;
-        console.log('onChangeMapCountry', d);
-        const reg = filters.countries.find(c => c.value===d.id);
-        let data = selections.countries;
+        console.log('onChangeMap', d);
+        const kks = t === 'country' ? ['countries', 'countries'] : ['regions', 'geoRegions'];
+        const filters_ = filters[kks[0]];
+        let reg = filters_.find(c => c.value === d.id);
+        let data = selections[kks[1]];
         if(data.find(d => d.value === reg.value) === undefined){
           data.push(reg);
         } else {
           data = data.filter(d => d.value !== reg.value);
         }
-        onSelectChange('country', data);       
-      }
+        onSelectChange(t, data);       
 
-      onChangeMapRegion(d){
-        const { filters, selections, onSelectChange } = this.props;
-        console.log('onChangeMapRegion', d);
-        const reg = filters.regions.find(c => c.value===d.regValue);
-        let data = selections.geoRegions;
-        if(data.find(d => d.value === reg.value) === undefined){
-          data.push(reg);
-        } else {
-          data = data.filter(d => d.value !== reg.value);
-        }
-        onSelectChange('geoRegion', data);       
+
       }
 
       ecoRegionsClick(d){
@@ -189,6 +178,7 @@ class Arma extends Component {
                     multiple
                     search
                     selection
+                    value={selections.geoRegions.map(o => o.value)}
                     onChange={(ev, o) => onSelectChange('geoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
                     options={filters.regions && filters.regions.filter(o => o["parent-value"]==="0").map(o => {return {text: o.label, value: o.value}})}
                   />
@@ -269,7 +259,7 @@ class Arma extends Component {
                       value={selections.active_year}
                       onChange={(ev, o) => onYear('active_year', o)}
                       options={this.state.actives && this.state.actives.map(o => {return {text: o.label, value: o.value}})}
-                    />
+                    />                    
                   </Accordion.Content> 
                   <Accordion.Title
                     index={5}
@@ -359,7 +349,7 @@ class Arma extends Component {
               <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List query result: {combinedResults && combinedResults.length} docs </Button>
               </Button.Group>
               </Header>
-              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMapCountry)} itemsPerRow="8" stackable />
+              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMap)} itemsPerRow="8" stackable />
             </Segment>}
           
            {showCombinedResults && combinedResults.length > 0 ?
@@ -372,8 +362,7 @@ class Arma extends Component {
                 <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
               :
               <Element 
-              onChangeCountry={this.onChangeMapCountry}
-              onChangeMapRegion={this.onChangeMapRegion}
+              onChangeMap={this.onChangeMap}
               countries={filters && filters.countries} 
               regions={filters && filters.regions && filters.regions.filter(x => x['parent-value'] === '0')} 
               frequencies={frequencies && frequencies.countries}/>

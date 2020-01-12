@@ -17,10 +17,17 @@ function resultsIcon(col){
   return (<a><Icon name='bolt' />{col.length} docs</a>);
 }
 
-export function items (query, selections, results, thematicFocus, onChangeMapCountry) {
+export function items (query, selections, results, thematicFocus, onChangeMap) {
   const geoItem = query.geoRegion && {
     header: `Geographical regions`,
-    description: (<List >{selections.geoRegions.map((o, idx) => (<List.Item  key={`geoReg-${idx}`} as='li'><Label as='a' color='blue'>{o.text || o.label} <Icon name='delete' /></Label></List.Item>))}</List>),
+    description: (<List >
+                  {selections.geoRegions.map((o, idx) => 
+                  (<List.Item  key={`geoReg-${idx}`} as='li' style={{paddingBottom:'2px'}}>
+                    <Label as='a' color='blue'>{o.text || o.label} 
+                    <Icon name='delete' onClick={() => onChangeMap('geoRegion', {id:o.value})}/>
+                    </Label>
+                    </List.Item>))}
+                  </List>),
     extra: <Popup trigger={resultsIcon(results.geoRegions)}
           content='Include all docs that match ANY of the selected regions'/>
 
@@ -35,7 +42,14 @@ export function items (query, selections, results, thematicFocus, onChangeMapCou
 
   const countryItem = query.country && {
     header: `Countries`,
-    description: (<List >{selections.countries.map((o, idx) => (<List.Item key={`country-${idx}`} style={{paddingBottom:'2px'}}  as='li' ><Label as='a' color='blue'>{o.text || o.label} <Icon name='delete' onClick={() => onChangeMapCountry({id:o.value})}/></Label></List.Item>))}</List>),
+    description: (<List >
+                  {selections.countries.map((o, idx) => 
+                    (<List.Item key={`country-${idx}`} style={{paddingBottom:'2px'}}  as='li' >
+                      <Label as='a' color='blue'>{o.text || o.label} 
+                        <Icon name='delete' onClick={() => onChangeMap('country', {id:o.value})}/>
+                      </Label>
+                    </List.Item>))}
+                  </List>),
     extra: <Popup trigger={resultsIcon(results.countries)} 
             content='Include all docs that match ANY of the selected countries'/>
   };

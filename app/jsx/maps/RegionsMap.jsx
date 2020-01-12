@@ -5,7 +5,7 @@ import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 // https://jsfiddle.net/user2314737/uhp2wgkn/
   
-function mapData(data, onChangeMapRegion) {
+function mapData(data, onChangeMap) {
   return {
     chart: {
       map: theMap
@@ -61,7 +61,8 @@ function mapData(data, onChangeMapRegion) {
         events: {
            click: function(e) {
                 console.log('region map click', e.point.options);
-                onChangeMapRegion(e.point.options);
+
+                onChangeMap('geoRegion', {id: e.point.options.regValue});
             }
         }
       },
@@ -116,7 +117,7 @@ class RegionsMap extends Component {
   render() {
     const {data} = this.state;
     return (<HighchartsReact
-            options = { mapData(data, this.props.onChangeMapRegion) }
+            options = { mapData(data, this.props.onChangeMap) }
             highcharts = { Highcharts }
             constructorType = { 'mapChart' }
             allowChartUpdate = { true }
