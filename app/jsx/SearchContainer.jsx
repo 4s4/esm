@@ -185,10 +185,12 @@ class SearchContainer extends Component {
         delete sels['approval_year'];
       }
     } else {
+      const currentYear = new Date().getFullYear();
       if(v){
         const q = v ?  (r) => { 
           const dates = r['implementationPeriod'].split('-').map(o => parseInt(o, 10));
-          return v >= dates[0] && v <= dates[1];
+          const end = isNaN(dates[1]) ? currentYear : dates[1];
+          return v >= dates[0] && v <= end;
           } : null;
         picked['active_year'] = q;
         res['active_year'] = doSearch(this.state.initialReports, [q]);      
