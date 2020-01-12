@@ -171,14 +171,12 @@ class SearchContainer extends Component {
     const { ...picked } = this.state.qq;
     const { ...sels } =  this.state.selections;
     const { ...res } = this.state.results;
-
     if(selectType === "approval_year"){
       if(v){
         const q = v ?  r => r['year'] === v : null;
         picked['approval_year'] = q;
         res['approval_year'] = doSearch(this.state.initialReports, [q]);      
         sels['approval_year'] = v;      
-
       } else {
         delete picked['approval_year'];
         delete res['approval_year'];
@@ -195,21 +193,16 @@ class SearchContainer extends Component {
         picked['active_year'] = q;
         res['active_year'] = doSearch(this.state.initialReports, [q]);      
         sels['active_year'] = v;      
-
       } else {
         delete picked['active_year'];
         delete res['active_year'];
         delete sels['active_year'];
-
       }
-
     }
     this.setState({ selections: sels, results: res });
     console.log(selectType, `Option selected:`, val)
     this.searchReports(picked);
-
   };
-
 
   searchReports(qqs){
     const queries = Object.values(qqs); 

@@ -35,7 +35,7 @@ class Arma extends Component {
         this.handleAccordion = this.handleAccordion.bind(this);
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
-        this.onChangeMap = this.onChangeMap.bind(this);
+        this.onChangeSelect = this.onChangeSelect.bind(this);
         this.showCombinedResults = this.showCombinedResults.bind(this);
       }
 
@@ -56,10 +56,18 @@ class Arma extends Component {
         }
         return state;
       }
-      onChangeMap(t, d){
+
+      onChangeSelect(t, d){
         const { filters, selections, onSelectChange } = this.props;
-        console.log('onChangeMap', d);
-        const kks = t === 'country' ? ['countries', 'countries'] : ['regions', 'geoRegions'];
+        console.log('onChangeSelect', d);
+        let kks;        
+        switch(t){
+          case 'country': kks = ['countries', 'countries']; break;
+          case 'geoRegion': kks = ['regions', 'geoRegions']; break;
+          case 'type': kks = ['types', 'types']; break;
+          default:
+            console.log('ERROR', 'type not expected!', t);        
+        } 
         const filters_ = filters[kks[0]];
         let reg = filters_.find(c => c.value === d.id);
         let data = selections[kks[1]];
@@ -69,8 +77,6 @@ class Arma extends Component {
           data = data.filter(d => d.value !== reg.value);
         }
         onSelectChange(t, data);       
-
-
       }
 
       ecoRegionsClick(d){
@@ -237,6 +243,7 @@ class Arma extends Component {
                       multiple
                       search
                       selection
+                      value={selections.types.map(o => o.value)}
                       onChange={(ev, o) => onSelectChange('type', o.value.map(id => o.options.find( e => e.value === id)))}
                       options={filters.types && filters.types.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
                     />
@@ -350,7 +357,7 @@ class Arma extends Component {
               <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List query result: {combinedResults && combinedResults.length} docs </Button>
               </Button.Group>
               </Header>
-              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMap, onYear)} itemsPerRow="8" stackable />
+              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear)} itemsPerRow="8" stackable />
             </Segment>}
           
            {showCombinedResults && combinedResults.length > 0 ?
@@ -363,7 +370,7 @@ class Arma extends Component {
                 <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
               :
               <Element 
-              onChangeMap={this.onChangeMap}
+              onChangeMap={this.onChangeSelect}
               countries={filters && filters.countries} 
               regions={filters && filters.regions && filters.regions.filter(x => x['parent-value'] === '0')} 
               frequencies={frequencies && frequencies.countries}/>

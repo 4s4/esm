@@ -17,14 +17,14 @@ function resultsIcon(col){
   return (<a><Icon name='bolt' />{col.length} docs</a>);
 }
 
-export function items (query, selections, results, thematicFocus, onChangeMap, onYear) {
+export function items (query, selections, results, thematicFocus, onChangeSelect, onYear) {
   const geoItem = query.geoRegion && {
     header: `Geographical regions`,
     description: (<List >
                   {selections.geoRegions.map((o, idx) => 
                   (<List.Item  key={`geoReg-${idx}`} as='li' style={{paddingBottom:'2px'}}>
                     <Label as='a' color='blue'>{o.text || o.label} 
-                    <Icon name='delete' onClick={() => onChangeMap('geoRegion', {id:o.value})}/>
+                    <Icon name='delete' onClick={() => onChangeSelect('geoRegion', {id:o.value})}/>
                     </Label>
                     </List.Item>))}
                   </List>),
@@ -46,7 +46,7 @@ export function items (query, selections, results, thematicFocus, onChangeMap, o
                   {selections.countries.map((o, idx) => 
                     (<List.Item key={`country-${idx}`} style={{paddingBottom:'2px'}}  as='li' >
                       <Label as='a' color='blue'>{o.text || o.label} 
-                        <Icon name='delete' onClick={() => onChangeMap('country', {id:o.value})}/>
+                        <Icon name='delete' onClick={() => onChangeSelect('country', {id:o.value})}/>
                       </Label>
                     </List.Item>))}
                   </List>),
@@ -62,7 +62,13 @@ export function items (query, selections, results, thematicFocus, onChangeMap, o
   };
   const typeItem = query.type && {
     header: `Types`,
-    description: (<List as='ul'>{selections.types.map((o, idx) => (<List.Item key={`type-${idx}`}  as='li'>{o.text || o.label}</List.Item>))}</List>),
+    description: (<List as='ul'>{selections.types.map((o, idx) => 
+      (<List.Item key={`country-${idx}`} style={{paddingBottom:'2px'}}  as='li' >
+      <Label as='a' color='blue'>{o.text || o.label} 
+        <Icon name='delete' onClick={() => onChangeSelect('type', {id:o.value})}/>
+      </Label>
+    </List.Item>))}
+      </List>),
     extra: <Popup trigger={resultsIcon(results.types)}
           content='Include all docs that match ANY of the selected types'/>
 
