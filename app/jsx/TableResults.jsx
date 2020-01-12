@@ -186,7 +186,6 @@ class TableResults extends Component {
                   </Table.HeaderCell>
                 </Table.Row>}
               </Table.Footer>
-
             </Table>);
 
   }

@@ -346,8 +346,8 @@ class Arma extends Component {
               <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMapCountry)} itemsPerRow="8" stackable />
             </Segment>}
           
-           {true && reports ?
-            <TableResults column={this.state.column} data={reports} filters={filters} direction={this.state.direction} />
+           {showCombinedResults && combinedResults.length > 0 ?
+            <TableResults column={this.state.column} data={combinedResults} filters={filters} direction={this.state.direction} />
            :            
             chartConfig ? 
               isSunburst ? 
