@@ -27,15 +27,18 @@ export function countryAccordion(countryFilters, countriesFrequencies){
     return WorldMap;
 }
 
-export function typeAccordion(typesFilters, typesFrequencies){
+export function typeAccordion(typesFilters, typesFrequencies, onSelect){
     const dd = typesFilters.map(o => {
         return {id: o.value, 
                 parent: o['parent-value'] || '0.0',
                 name: o.label, 
                 value: typesFrequencies[o.value]};});
     dd.unshift({id: '0.0', parent:'', name:'all', value: 1800 })
-            
-    return sunburstChart('Explore the TSM by Type', dd, false);
+    const finder = (x) => {const h = typesFilters.find(y => y.value === x); 
+        h.id= h.value;
+    return h;};
+
+    return sunburstChart('Explore the TSM by Type', dd, false, finder, onSelect);
 }
 
 export function sectorAccordion(sectorFilters, sectorFrequencies){

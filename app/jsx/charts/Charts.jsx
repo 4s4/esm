@@ -57,10 +57,21 @@ export function barChart(title, cat, dat, finder, onSelect){
 }
 
 
-export function sunburstChart(title, d, drill){
+export function sunburstChart(title, d, drill, finder, onSelect){
     const serie = {
         type: "sunburst",
         data: d,
+        point: {
+            events: {
+               click: function(e) {
+//                   const selection = finder(e.point.category);
+
+!drill && console.log('sunburstChart', onSelect('type', finder(e.point.id)));
+                    
+//                    onSelect(selection);
+                }
+            }
+          },
         cursor: 'pointer',
         dataLabels: {
             format: '{point.name}',

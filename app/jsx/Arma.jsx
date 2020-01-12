@@ -122,7 +122,7 @@ class Arma extends Component {
           }
 
           if (index === 3 ) { 
-            let chartConfig = typeAccordion(filters.types, frequencies.types);
+            let chartConfig = typeAccordion(filters.types, frequencies.types, this.onChangeSelect);
             this.setState({ isSunburst: true, activeIndex: newIndex, chartConfig})
             return;
           }
