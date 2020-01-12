@@ -30,7 +30,7 @@ export function pieChart(title, width, height, cat, dat, onClick, selections){
   }
 }
 
-export function barChart(title, w, h, cat, dat){
+export function barChart(title, cat, dat, finder, onSelect){
     return {
         chart: {
             type: 'bar'
@@ -42,10 +42,20 @@ export function barChart(title, w, h, cat, dat){
           categories: cat
         },
         series: [{
-          data: dat
+          data: dat,
+          point: {
+            events: {
+               click: function(e) {
+                   const selection = finder(e.point.category);
+                    console.log('bar chart click', selection);
+                    onSelect(selection);
+                }
+            }
+          }
         }]
       }
 }
+
 
 export function sunburstChart(title, d, drill){
     const serie = {
