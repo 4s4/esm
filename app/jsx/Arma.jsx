@@ -41,7 +41,7 @@ class Arma extends Component {
 
       static getDerivedStateFromProps(props, state) {
         if (
-          props.reports !== state.reports 
+          props.reports !== state.reports || props.selections !== state.selections
         ) {
             let approvals = cljs.approvalYears(props.reports);
             let actives = cljs.activeYears(props.reports);
@@ -50,7 +50,7 @@ class Arma extends Component {
             frequencies.thematicsFocus = tt;
             console.log('frequencies', frequencies);
             console.log('filters', props.filters)
-            return {frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
+            return {selections: props.selections, frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
         }else if(props.combinedResults !== state.combinedResults){
           return {combinedResults: props.combinedResults};
         }
@@ -92,7 +92,7 @@ class Arma extends Component {
         const { activeIndex, frequencies, actives, approvals } = this.state;      
         const newIndex = activeIndex === index ? -1 : index
         const {filters, selections} = this.props;
-
+        this.setState({showCombinedResults: false});
         console.log('index', index);
           if (index === 0 ) { 
             let  m = geoRegionAccordion(filters.regions, frequencies.regions);
@@ -256,7 +256,7 @@ class Arma extends Component {
                       search
                       selection
                       clearable
-                      value={selections.active_year}
+                      value={selections.active_year !== undefined ? selections.active_year : null}
                       onChange={(ev, o) => onYear('active_year', o)}
                       options={this.state.actives && this.state.actives.map(o => {return {text: o.label, value: o.value}})}
                     />                    
@@ -276,7 +276,7 @@ class Arma extends Component {
                       search
                       selection
                       clearable
-                      value={selections.approval_year}
+                      value={selections.approval_year !== undefined ? selections.approval_year : null}
                       onChange={(ev, o) => onYear('approval_year', o)}
                       options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
                     />
@@ -340,6 +340,7 @@ class Arma extends Component {
           />
           {this.accordion(activeIndex, filters, approvals, onCheck, reports, this.onAccordionSelectChange, onYear, selections)}
         </Grid.Column>
+
        <Grid.Column width={12}>
               {Object.keys(query).length > 0 && <Segment>
               <Header as='h5' dividing>
@@ -349,7 +350,7 @@ class Arma extends Component {
               <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List query result: {combinedResults && combinedResults.length} docs </Button>
               </Button.Group>
               </Header>
-              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMap)} itemsPerRow="8" stackable />
+              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeMap, onYear)} itemsPerRow="8" stackable />
             </Segment>}
           
            {showCombinedResults && combinedResults.length > 0 ?

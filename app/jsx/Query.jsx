@@ -17,7 +17,7 @@ function resultsIcon(col){
   return (<a><Icon name='bolt' />{col.length} docs</a>);
 }
 
-export function items (query, selections, results, thematicFocus, onChangeMap) {
+export function items (query, selections, results, thematicFocus, onChangeMap, onYear) {
   const geoItem = query.geoRegion && {
     header: `Geographical regions`,
     description: (<List >
@@ -69,14 +69,21 @@ export function items (query, selections, results, thematicFocus, onChangeMap) {
   };
   const activeYearItem = query.active_year && {
     header: `Active year`,
-    description: selections.active_year,
+    description: 
+    <Label as='a' color='blue'>{selections.active_year} 
+    <Icon name='delete' onClick={() => onYear('active_year', null)}/>
+    </Label>,
     extra: <Popup trigger={resultsIcon(results.active_year)}
           content='Include all docs were actived on the selected year'/>
 
   };
+//  'approval_year', 'active_year'
   const approvalYearItem = query.approval_year && {
     header: `Approval year`,
-    description: selections.approval_year,
+    description: 
+    <Label as='a' color='blue'>{selections.approval_year} 
+    <Icon name='delete' onClick={() => onYear('approval_year', null)}/>
+    </Label>,
     extra: <Popup trigger={resultsIcon(results.approval_year)}
         content='Include all docs were approved on the selected year'/>
 
