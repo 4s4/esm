@@ -53,17 +53,17 @@ export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFreque
     const cats = thematicFocusFilters.map( o => o.name);
     const datt = thematicFocusFilters.map( o => thematicFocusFrequencies[o.kw]); 
     const finder = (x) => thematicFocusFilters.find(y => y.name === x);
-    return barChart('Explore the TSM by Thematic Focus', cats, datt, finder, mockSelection);
+    return barChart('Explore the TSM by Thematic Focus', cats, datt, finder, onSelect);
 }
 const mockFinder = (x) => {console.log('mockFinder', x); return x;};
-export function approvalsAccordion(approvals){
+export function approvalsAccordion(approvals, onYear){
     const catt = approvals.map(o => o.label);
     const datt = approvals.map(o => o.count || 0);
-    return barChart('Explore the TSM by Approval Year', catt, datt, mockFinder, mockSelection);
+    return barChart('Explore the TSM by Approval Year', catt, datt, mockFinder, onYear);
 }
-export function activesAccordion(actives){
+export function activesAccordion(actives, onYear){
     const catt = actives.map(o => o.label);
     const datt = actives.map(o => o.count || 0);
-    return barChart('Explore the TSM by Active Year', catt, datt, mockFinder, mockSelection);
+    return barChart('Explore the TSM by Active Year', catt, datt, mockFinder, onYear);
 }
 

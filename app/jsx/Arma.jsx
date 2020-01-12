@@ -132,19 +132,19 @@ class Arma extends Component {
             return;
           }
           if (index === 4 ) { 
-            let chartConfig  = activesAccordion(actives);
+            let chartConfig  = activesAccordion(actives, o => this.props.onYear('active_year', {value: o}));
             this.setState({ isSunburst: false, activeIndex: newIndex,  chartConfig})
             return;
           }
           
           if (index === 5 ) { 
-            let chartConfig  = approvalsAccordion(approvals);
+            let chartConfig  = approvalsAccordion(approvals, o => this.props.onYear('approval_year', {value: o}));
             this.setState({ isSunburst: false, activeIndex: newIndex,  chartConfig})
             return;
           }
 
           if (index === 6 ) { 
-            let chartConfig = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus);
+            let chartConfig = thematicFocusAccordion(filters.thematicsFocus, frequencies.thematicsFocus, (o) => this.props.onCheck(o.kw, {checked: true}));
             this.setState({ isSunburst: false, activeIndex: newIndex, chartConfig})
             return;
           }
@@ -266,6 +266,7 @@ class Arma extends Component {
                       search
                       selection
                       clearable
+                      value={selections.active_year}
                       onChange={(ev, o) => onYear('active_year', o)}
                       options={this.state.actives && this.state.actives.map(o => {return {text: o.label, value: o.value}})}
                     />
@@ -285,6 +286,7 @@ class Arma extends Component {
                       search
                       selection
                       clearable
+                      value={selections.approval_year}
                       onChange={(ev, o) => onYear('approval_year', o)}
                       options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
                     />

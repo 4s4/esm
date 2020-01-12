@@ -224,7 +224,7 @@ class SearchContainer extends Component {
 
   onCheckBoxChange (opt, y){
     const v = y.checked;
-    console.log('listening' , opt, v.checked);
+    console.log('listening' , opt, v);
     const q = v ?  r => r[opt] : null;
     const { ...picked } = this.state.qq;
     const { ...sels } = this.state.selections;
