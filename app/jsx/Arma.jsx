@@ -64,7 +64,9 @@ class Arma extends Component {
         switch(t){
           case 'country': kks = ['countries', 'countries']; break;
           case 'geoRegion': kks = ['regions', 'geoRegions']; break;
+          case 'ecoRegion': kks = ['regions', 'ecoRegions']; break;
           case 'type': kks = ['types', 'types']; break;
+          case 'sectors': kks = ['sectors', 'sectors']; break;
           default:
             console.log('ERROR', 'type not expected!', t);        
         } 
@@ -224,6 +226,7 @@ class Arma extends Component {
                       multiple
                       search
                       selection
+                      value={selections.sectors.map(o => o.value)}
                       onChange={(ev, o) => onSelectChange('sectors', o.value.map(id => o.options.find( e => e.value === id)))}
                       options={filters.sectors && filters.sectors.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
                     />
