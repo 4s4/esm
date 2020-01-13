@@ -308,8 +308,10 @@ class Arma extends Component {
                   <Accordion.Content active={activeIndex === 6}>
                     <ThematicFocus reports={reports} 
                             thematicsFocus={filters.thematicsFocus}                          
+                            selections={selections}
                             onCheck={onCheck}
                     />
+                    
                   </Accordion.Content> 
                  </Accordion>);
       }

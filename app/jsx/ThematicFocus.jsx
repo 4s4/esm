@@ -5,7 +5,7 @@ import Checkbox from 'semantic-ui-react/dist/commonjs/modules/Checkbox/Checkbox'
 
 
 function CheckBox(props){
-  return <Popup key={props.id}  content={props.title} trigger={<Segment vertical size='mini'><Checkbox onChange={props.onChange(props.id)} label={props.name} /></Segment>} />;
+  return <Popup key={props.id}  content={props.title} trigger={<Segment vertical size='mini'><Checkbox checked={props.checked} onChange={props.onChange(props.id)} label={props.name} /></Segment>} />;
 }
 
 class ThematicFocus extends Component {
@@ -17,10 +17,10 @@ class ThematicFocus extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     if (
-      props.reports !== state.reports 
+      props.reports !== state.reports || props.selections !== state.selections
     ) {
 //      console.log('them', cljs.countThematicFocus(props.reports, props.thematicsFocus));
-      return {reports: props.reports};
+      return {reports: props.reports, selections: props.selections};
     }
     return state;
   }
@@ -31,7 +31,7 @@ class ThematicFocus extends Component {
   }
 
   r(o){
-      return <CheckBox key={o.kw} id={o.kw} name={o.name} onChange={this.check} count={this.state} title={o.description} />;
+      return <CheckBox checked={Boolean(this.state.selections[o.kw])} key={o.kw} id={o.kw} name={o.name} onChange={this.check} count={this.state} title={o.description} />;
   }
   render() {
     return (<div>{this.props.thematicsFocus && this.props.thematicsFocus.map(this.r)}</div>);
