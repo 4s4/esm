@@ -7,6 +7,8 @@ import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Card from 'semantic-ui-react/dist/commonjs/views/Card/Card';
+import Portal from 'semantic-ui-react/dist/commonjs/addons/Portal/Portal';
+
 import {geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
 const cljs = require('../../js/cljs.js');
 import ThematicFocus from './ThematicFocus';
@@ -30,13 +32,17 @@ class Arma extends Component {
           leftSidebarWidth:'wide' , 
           rigthSidebarWidth:'wide',
           leftSidebarVisible:true, 
-          m: WorldMap
+          m: WorldMap,
+          open:false,
+          selectedSector:null
           };
         this.handleAccordion = this.handleAccordion.bind(this);
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
         this.ecoRegionsClick = this.ecoRegionsClick.bind(this);
         this.onChangeSelect = this.onChangeSelect.bind(this);
         this.showCombinedResults = this.showCombinedResults.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
       }
 
       static getDerivedStateFromProps(props, state) {
@@ -118,7 +124,7 @@ class Arma extends Component {
             return;
           }
           if (index === 2 ) { 
-            let chartConfig = sectorAccordion(filters.sectors, frequencies.sectors);
+            let chartConfig = sectorAccordion(filters.sectors, frequencies.sectors, this.handleOpen);
             this.setState({ isSunburst: true, activeIndex: newIndex, chartConfig})
             return;
           }
@@ -330,8 +336,13 @@ class Arma extends Component {
          }
        };
      }
+     handleClose(){this.setState({ open: false, selectedSector: null })}
+     handleOpen(sector){
+      console.log('handle open sector', sector); 
+      this.setState({ open: true, selectedSector: sector })}
+   
      render (){
-        const {  reports, approvals, activeIndex,
+        const { selectedSector, open, reports, approvals, activeIndex,
         chartConfig, isSunburst, frequencies , m, showCombinedResults, combinedResults} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;
         const Element = m;
@@ -362,7 +373,29 @@ class Arma extends Component {
               </Header>
               <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear)} itemsPerRow="8" stackable />
             </Segment>}
-          
+            <Portal onClose={this.handleClose} open={selectedSector && !selections.sectors.find(s => s.id === selectedSector.id ) && open}>
+            <Segment
+              style={{
+                left: '40%',
+                position: 'fixed',
+                top: '50%',
+                zIndex: 1000,
+              }}
+            >
+     <Header>Would you like to add "{selectedSector && selectedSector.label}" to your search query?</Header>
+     <Button
+                content='No'
+                negative
+                onClick={this.handleClose}
+              />
+              <Button
+                content='Yes'
+                positive
+                onClick={() => { this.onChangeSelect('sectors', selectedSector); this.handleClose();}}
+              />
+            </Segment>
+          </Portal>
+
            {showCombinedResults && combinedResults.length > 0 ?
             <TableResults column={this.state.column} data={combinedResults} filters={filters} direction={this.state.direction} />
            :            

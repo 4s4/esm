@@ -64,11 +64,16 @@ export function sunburstChart(title, d, drill, finder, onSelect){
         point: {
             events: {
                click: function(e) {
-//                   const selection = finder(e.point.category);
+                    if (drill){ 
+                        const sector = finder(e.point.id);
 
-!drill && console.log('sunburstChart', onSelect('type', finder(e.point.id)));
-                    
-//                    onSelect(selection);
+                        console.log('sunburstChart', e.point, sector);
+                        sector && onSelect(sector);
+                    } else {
+                        const type = finder(e.point.id);
+                        console.log('sunburstChart',type);
+                        type && onSelect('type', type);
+                    }
                 }
             }
           },
