@@ -34,7 +34,9 @@ class Arma extends Component {
           leftSidebarVisible:true, 
           m: WorldMap,
           open:false,
-          selectedSector:null
+          selectedSector:null,
+          splitSearchResults:null,
+          splitSearchKey:null
           };
         this.handleAccordion = this.handleAccordion.bind(this);
         this.onAccordionSelectChange = this.onAccordionSelectChange.bind(this);
@@ -43,6 +45,7 @@ class Arma extends Component {
         this.showCombinedResults = this.showCombinedResults.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
+        this.splitSearch = this.splitSearch.bind(this);
       }
 
       static getDerivedStateFromProps(props, state) {
@@ -61,6 +64,15 @@ class Arma extends Component {
           return {combinedResults: props.combinedResults};
         }
         return state;
+      }
+
+      splitSearch(kw){
+        console.log('splitSearch', kw, this.props.results)
+        if(kw){
+          this.setState({splitSearchKey:kw, splitSearchResults:this.props.results[kw], showCombinedResults:false})
+        } else {
+          this.setState({splitSearchResults:null, splitSearchKey:null});
+        }
       }
 
       onChangeSelect(t, d){
@@ -106,7 +118,7 @@ class Arma extends Component {
         const { activeIndex, frequencies, actives, approvals } = this.state;      
         const newIndex = activeIndex === index ? -1 : index
         const {filters, selections} = this.props;
-        this.setState({showCombinedResults: false});
+        this.setState({showCombinedResults: false, splitSearchResults:null, splitSearchKey:null});
         console.log('index', index);
           if (index === 0 ) { 
             let  m = geoRegionAccordion(filters.regions, frequencies.regions);
@@ -335,6 +347,9 @@ class Arma extends Component {
        return () => {
          if(this.state.showCombinedResults!==v){
           this.setState({showCombinedResults:v})
+          if(v){
+            this.setState({splitSearchResults:null, splitSearchKey:null});
+          }
          }
        };
      }
@@ -344,14 +359,16 @@ class Arma extends Component {
       this.setState({ open: true, selectedSector: sector })}
    
      render (){
-        const { selectedSector, open, reports, approvals, activeIndex,
+        const { splitSearchKey, splitSearchResults, selectedSector, open, reports, approvals, activeIndex,
         chartConfig, isSunburst, frequencies , m, showCombinedResults, combinedResults} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;
         const Element = m;
-//        console.log('query', query);
+       console.log('query', query);
+       console.log('splitSearchResults', splitSearchResults);
 //        console.log('selections', selections);
 //       console.log('results', results);
 //          console.log('combinedResuls', combinedResults);
+const finalData = showCombinedResults && combinedResults.length > 0 ? showCombinedResults : splitSearchResults && splitSearchResults.length > 0 ? splitSearchResults : [];
       return (
        <Grid stackable columns={2}>
        <Grid.Column width={4}>
@@ -373,7 +390,7 @@ class Arma extends Component {
               <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List query result: {combinedResults && combinedResults.length} docs </Button>
               </Button.Group>
               </Header>
-              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear, onCheck)} itemsPerRow="8" stackable />
+             <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear, onCheck, this.splitSearch, splitSearchKey)} itemsPerRow="8" stackable />
             </Segment>}
             <Portal onClose={this.handleClose} open={selectedSector && !selections.sectors.find(s => s.id === selectedSector.id ) && open}>
             <Segment
@@ -398,8 +415,8 @@ class Arma extends Component {
             </Segment>
           </Portal>
 
-           {showCombinedResults && combinedResults.length > 0 ?
-            <TableResults column={this.state.column} data={combinedResults} filters={filters} direction={this.state.direction} />
+           {finalData.length > 0 ?
+            <TableResults column={this.state.column} data={finalData} filters={filters} direction={this.state.direction} />
            :            
             chartConfig ? 
               isSunburst ? 

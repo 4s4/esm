@@ -2,6 +2,8 @@ import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
 import List from 'semantic-ui-react/dist/commonjs/elements/List/List';
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 
 const  intersection = (setA, setB) => {
   var _intersection = new Set();
@@ -13,11 +15,11 @@ const  intersection = (setA, setB) => {
   return _intersection;
 };
 
-function resultsIcon(col){
-  return (<a><Icon name='bolt' />{col.length} docs</a>);
+function resultsIcon(t, col, splitSearch, splitSearchKey){
+  return (<div><Button color='blue' style={{fontSize: '.48571429rem'}} circular basic={t !== splitSearchKey} size='mini' icon='bolt' onClick={() => { splitSearch(t === splitSearchKey ? null : t); console.log('yay!',t, col.length);}}/>{col.length} docs</div>);
 }
 
-export function items (query, selections, results, thematicFocus, onChangeSelect, onYear, onCheck) {
+export function items (query, selections, results, thematicFocus, onChangeSelect, onYear, onCheck, splitSearch, splitSearchKey) {
   const geoItem = query.geoRegion && {
     header: `Geographical regions`,
     description: (<List >
@@ -28,7 +30,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
                     </Label>
                     </List.Item>))}
                   </List>),
-    extra: <Popup trigger={resultsIcon(results.geoRegions)}
+    extra: <Popup trigger={resultsIcon('geoRegions', results.geoRegions, splitSearch, splitSearchKey)}
           content='Include all docs that match ANY of the selected regions'/>
 
   };
@@ -42,7 +44,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
         </Label>
         </List.Item>))}
       </List>),
-    extra: <Popup trigger={resultsIcon(results.ecoRegions)}
+    extra: <Popup trigger={resultsIcon('ecoRegions', results.ecoRegions, splitSearch, splitSearchKey)}
           content='Include all docs that match ANY of the selected regions'/>
 
   };
@@ -57,7 +59,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
                       </Label>
                     </List.Item>))}
                   </List>),
-    extra: <Popup trigger={resultsIcon(results.countries)} 
+    extra: <Popup trigger={resultsIcon('countries', results.countries, splitSearch, splitSearchKey)} 
             content='Include all docs that match ANY of the selected countries'/>
   };
   const sectorItem = query.sectors && {
@@ -69,7 +71,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
       </Label>
     </List.Item>))}
       </List>),
-    extra: <Popup trigger={resultsIcon(results.sectors)}
+    extra: <Popup trigger={resultsIcon('sectors', results.sectors, splitSearch, splitSearchKey)}
       content='Include all docs that match ANY of the selected sectors'/>
 
   };
@@ -82,7 +84,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
       </Label>
     </List.Item>))}
       </List>),
-    extra: <Popup trigger={resultsIcon(results.types)}
+    extra: <Popup trigger={resultsIcon('types', results.types, splitSearch, splitSearchKey)}
           content='Include all docs that match ANY of the selected types'/>
 
   };
@@ -92,7 +94,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
     <Label as='a' color='blue'  style={{marginTop:'5px'}}>{selections.active_year} 
     <Icon name='delete' onClick={() => onYear('active_year', null)}/>
     </Label>,
-    extra: <Popup trigger={resultsIcon(results.active_year)}
+    extra: <Popup trigger={resultsIcon('active_year', results.active_year, splitSearch, splitSearchKey)}
           content='Include all docs were actived on the selected year'/>
 
   };
@@ -103,7 +105,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
     <Label as='a' color='blue'  style={{marginTop:'5px'}}>{selections.approval_year} 
     <Icon name='delete' onClick={() => onYear('approval_year', null)}/>
     </Label>,
-    extra: <Popup trigger={resultsIcon(results.approval_year)}
+    extra: <Popup trigger={resultsIcon('approval_year', results.approval_year, splitSearch, splitSearchKey)}
         content='Include all docs were approved on the selected year'/>
 
 
@@ -124,7 +126,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
                     </List.Item>);
                     }
                    )}</List>),
-    extra:  <Popup trigger={resultsIcon(results.thematicFocus)}
+    extra:  <Popup trigger={resultsIcon('thematicFocus', results.thematicFocus, splitSearch, splitSearchKey)}
     content='Include all docs that match ALL of the following focuses'/>
 
   };

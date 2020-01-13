@@ -237,9 +237,11 @@ class SearchContainer extends Component {
 
     const thematicsFocusSelected = this.state.filters.thematicsFocus.filter(t => sels[t.kw]);
     if(thematicsFocusSelected.length > 0){
+      sels['thematicFocus'] = thematicsFocusSelected;
       res['thematicFocus'] = doSearch(this.state.initialReports, thematicsFocusSelected.map(t => picked[t.kw]));
     } else {
       delete res['thematicFocus'];
+      delete sels['thematicFocus'];
     }
     console.log('keys:', Object.keys(picked));
     this.setState({ selections: sels, results: res });
