@@ -311,7 +311,7 @@ class Arma extends Component {
                             selections={selections}
                             onCheck={onCheck}
                     />
-                    
+
                   </Accordion.Content> 
                  </Accordion>);
       }
@@ -373,7 +373,7 @@ class Arma extends Component {
               <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List query result: {combinedResults && combinedResults.length} docs </Button>
               </Button.Group>
               </Header>
-              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear)} itemsPerRow="8" stackable />
+              <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear, onCheck)} itemsPerRow="8" stackable />
             </Segment>}
             <Portal onClose={this.handleClose} open={selectedSector && !selections.sectors.find(s => s.id === selectedSector.id ) && open}>
             <Segment

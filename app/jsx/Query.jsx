@@ -17,7 +17,7 @@ function resultsIcon(col){
   return (<a><Icon name='bolt' />{col.length} docs</a>);
 }
 
-export function items (query, selections, results, thematicFocus, onChangeSelect, onYear) {
+export function items (query, selections, results, thematicFocus, onChangeSelect, onYear, onCheck) {
   const geoItem = query.geoRegion && {
     header: `Geographical regions`,
     description: (<List >
@@ -114,7 +114,16 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
   const themIntersectionA = Array.from(themIntersection);
   const thematicFocusItem = themIntersection.size > 0 && {
     header: `Thematics Focus:`,
-    description: (<List as='ul'>{themIntersectionA.map((o, idx) => (<List.Item key={`tm-${idx}`}  as='li'>{thematicFocus.find(x => x.kw === o).name}</List.Item>))}</List>),
+    description: (<List as='ul'>{themIntersectionA.map((o, idx) => 
+                    {
+                      const it = thematicFocus.find(x => x.kw === o);
+                      return (<List.Item key={`tm-${idx}`} style={{paddingBottom:'2px'}}  as='li'>
+                      <Label as='a' color='blue'>{it.name}
+                        <Icon name='delete' onClick={() => onCheck(it.kw, false)}/>
+                      </Label>                    
+                    </List.Item>);
+                    }
+                   )}</List>),
     extra:  <Popup trigger={<a><Icon name='bolt' />Results: xxx</a>}
     content='Include all docs that match ALL of the following focuses'/>
 
