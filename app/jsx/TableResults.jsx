@@ -4,6 +4,7 @@ import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
 import Item from 'semantic-ui-react/dist/commonjs/views/Item/Item';
 import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
+import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown';
 
 import Image from 'semantic-ui-react/dist/commonjs/elements/Image/Image';
 import CollapsableData from './CollapsableData';
@@ -12,6 +13,7 @@ import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table';
 import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
 
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 
 function rightOption (d, filters) {
   const type = filters.types.find( o => o.value === d.type);
@@ -87,9 +89,15 @@ const maxRows = 10;
 class TableResults extends Component {
   constructor(props) {
     super(props);
-    this.state = { closed: true, data: [], pagination: false, pages:0, currentPage:0 };
-    this.check = this.check.bind(this);
-
+    this.state = { data: [], 
+                   pagination: false, 
+                   pages:0, 
+                   currentPage:0,
+                   sortColumn:null,
+                   sortDirection:null
+                  };
+    this.setPage = this.setPage.bind(this);
+    this.sortTable = this.sortTable.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -103,12 +111,48 @@ class TableResults extends Component {
       const remainder = totalRows % maxRows;
       const pages = quotient + (remainder > 0 ? 1 : 0 );
       const currentPage = 0;
-      return { data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
+      return { dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
     }
     return state;
   }
 
+  sortTable(t){
+    const { data, filters, dicts } = this.state;
+    console.log('sortTable:', t);
+    let sorted = [];
+    if (t) {
+      if (t === 'title'){
+      sorted = data.sort((a, b) =>{
+        const i = a[t] || '';
+        return i.localeCompare(b[t]);});
+      } else if (t === 'year'){
+        sorted = data.sort((a, b) =>{
+          const i = a[t] || 0;
+          return i.localeCompare(b[t]);});
+      } else if (t === 'regions' || t === 'countries' || t === 'types' ){
+        let kw;
+        if(t === 'regions') {
+          kw = 'region';
+        }else if(t === 'countries'){
+          kw = 'country';
+        }else if(t === 'types'){
+          kw = 'type';
+        }
+        const d = dicts[t];
+          sorted = data.sort((a, b) =>{
+            const i = a[kw] ? d[a[kw]].label : '';
+            return i.localeCompare(b[kw] ? d[b[kw]].label : '');});
+      }
 
+    } else {
+      sorted = data;
+    }
+
+    this.setState({
+      currentPage:0,
+      processedData: tableData(sorted, filters) 
+    });
+  }
 
   handleSort(clickedColumn) {
     return function() {
@@ -120,7 +164,6 @@ class TableResults extends Component {
           data: data, //_.sortBy(data, [clickedColumn]),
           direction: 'ascending',
         })
-  
         return
       }
   
@@ -131,7 +174,7 @@ class TableResults extends Component {
     }
     }
   
-  check(x){
+  setPage(x){
     this.setState({currentPage: x});  
   }
 
@@ -148,7 +191,6 @@ class TableResults extends Component {
       if((pages - (currentPage + 1 ))  > 0){
         rightNavigator = true;
       }
-
     }
     let currentData;
     if (pagination){
@@ -157,7 +199,20 @@ class TableResults extends Component {
     } else {
       currentData = processedData;
     }
-    return ( <Table sortable fixed striped basic='very'>
+    const options = [
+      { key: 1, text: 'Document Name', value: 'title' },
+      { key: 2, text: 'Type', value: 'types' },
+      { key: 3, text: 'Year', value: 'year' },
+      { key: 4, text: 'Country', value: 'countries' },
+      { key: 5, text: 'Region', value: 'regions' },
+    ];
+    
+    return ( <Segment>
+        <Header as='h3' block color='blue'>Listing {processedData.length} documents:</Header>
+
+        <Dropdown placeholder='Sort Results by ... ' onChange={ (o, d) => { console.log('searching by:', d.value); this.sortTable(d.value)}} clearable options={options} selection />
+
+              <Table sortable fixed striped basic='very'>
               <Table.Header >
               <Table.Row style={{visibility:'hidden'}}>
                 <Table.HeaderCell width='2'  />
@@ -187,17 +242,17 @@ class TableResults extends Component {
                 { pagination && <Table.Row>
                   <Table.HeaderCell colSpan='3'>
                     <Menu floated='right' pagination>
-                    {leftNavigator && currentPage > 4 && <Menu.Item as='a' icon onClick={() => this.check(0)}>
+                    {leftNavigator && currentPage > 4 && <Menu.Item as='a' icon onClick={() => this.setPage(0)}>
                         <Icon name='angle double left' />
                       </Menu.Item>}
-                      {leftNavigator && <Menu.Item as='a' icon onClick={() => this.check((currentPage - 1) < 0 ? 0 : (currentPage - 1))}>
+                      {leftNavigator && <Menu.Item as='a' icon onClick={() => this.setPage((currentPage - 1) < 0 ? 0 : (currentPage - 1))}>
                         <Icon name='chevron left' />
                       </Menu.Item>}
-                      {[...Array(pages).keys()].filter(x => ( x === currentPage ||((currentPage - x < 5) && x < currentPage)) || ((x - currentPage < 4)  && x > currentPage) ).map( x => (<Menu.Item as='a' active={x === currentPage} key={x} onClick={() => this.check(x)}>{x+1}</Menu.Item>))}                
-                      { rightNavigator && <Menu.Item as='a' icon onClick={() => this.check((currentPage + 1) > (pages - 1) ? (pages - 1) : (currentPage + 1) )}>
+                      {[...Array(pages).keys()].filter(x => ( x === currentPage ||((currentPage - x < 5) && x < currentPage)) || ((x - currentPage < 4)  && x > currentPage) ).map( x => (<Menu.Item as='a' active={x === currentPage} key={x} onClick={() => this.setPage(x)}>{x+1}</Menu.Item>))}                
+                      { rightNavigator && <Menu.Item as='a' icon onClick={() => this.setPage((currentPage + 1) > (pages - 1) ? (pages - 1) : (currentPage + 1) )}>
                         <Icon name='chevron right' />
                       </Menu.Item>}
-                      { rightNavigator && pages - currentPage  > 4 && <Menu.Item as='a' icon onClick={() => this.check(pages - 1)}>
+                      { rightNavigator && pages - currentPage  > 4 && <Menu.Item as='a' icon onClick={() => this.setPage(pages - 1)}>
                         <Icon name='angle double right' />
                       </Menu.Item>}
                     </Menu>

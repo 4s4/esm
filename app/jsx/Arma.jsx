@@ -59,7 +59,7 @@ class Arma extends Component {
             frequencies.thematicsFocus = tt;
             console.log('frequencies', frequencies);
             console.log('filters', props.filters)
-            return {selections: props.selections, frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
+            return {dicts: props.dicts, selections: props.selections, frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
         }else if(props.combinedResults !== state.combinedResults){
           return {combinedResults: props.combinedResults};
         }
@@ -416,7 +416,7 @@ const finalData = showCombinedResults && combinedResults.length > 0 ? showCombin
           </Portal>
 
            {finalData.length > 0 ?
-            <TableResults column={this.state.column} data={finalData} filters={filters} direction={this.state.direction} />
+            <TableResults dicts={this.state.dicts} column={this.state.column} data={finalData} filters={filters} direction={this.state.direction} />
            :            
             chartConfig ? 
               isSunburst ? 

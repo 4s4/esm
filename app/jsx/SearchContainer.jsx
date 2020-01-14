@@ -16,7 +16,10 @@ const  intersection = (setA, setB) => {
   }
   return _intersection;
 };
-
+function assoc(o, k, v){
+  o[k] = v;
+  return o;
+}
 function doSearch (reports, queries){
   return reports.filter(
     function (r) {
@@ -65,18 +68,28 @@ class SearchContainer extends Component {
      console.log('first report', rr[0]);
     this.setState( { reports: rr, initialReports: rr});
   }
+
   saveFilters(cc){
     console.log('economical Regions', cc.regionGroups[1]);
+    const countries = cljs.countries(cc);
+    const types = cljs.types(cc);
+    const regions = cljs.regions(cc);
+    const sectors = cljs.sectors(cc);
     const state = cljs.assocIn(this.state, 
       [
-        [["filters", "countries"], cljs.countries(cc)],
-        [["filters", "types"], cljs.types(cc)],
-        [["filters", "regions"], cljs.regions(cc)],
-        [["filters", "sectors"], cljs.sectors(cc)],
+        [["filters", "countries"], countries],
+        [["filters", "types"], types],
+        [["filters", "regions"], regions],
+        [["filters", "sectors"], sectors],
         [["filters", "thematicsFocus"], cljs.thematicFocus(cc)]
       ]); 
-    console.log('filters', state.filters);
-    this.setState( state);   
+      console.log('filters', state.filters);
+      state.dicts = {'countries': countries.reduce((c, x) => assoc(c, x.value, x),{}),
+                     'types': types.reduce((c, x) => assoc(c, x.value, x),{}),
+                     'regions': regions.reduce((c, x) => assoc(c, x.value, x),{}),
+                     'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
+                    };
+      this.setState( state);   
     fetch(window.production ? '/home/GetAllRecords' : './js/all-records.json')
     .then(function(response) {
       if (response.status >= 400) {
@@ -266,6 +279,7 @@ class SearchContainer extends Component {
                   query={this.state.qq}
                   selections={this.state.selections}
                   results={this.state.results}
+                  dicts={this.state.dicts}
                   combinedResults={this.state.reports}
             />
             </Container>;
