@@ -187,18 +187,25 @@ class TableResults extends Component {
                 { pagination && <Table.Row>
                   <Table.HeaderCell colSpan='3'>
                     <Menu floated='right' pagination>
+                    {leftNavigator && currentPage > 4 && <Menu.Item as='a' icon onClick={() => this.check(0)}>
+                        <Icon name='angle double left' />
+                      </Menu.Item>}
                       {leftNavigator && <Menu.Item as='a' icon onClick={() => this.check((currentPage - 1) < 0 ? 0 : (currentPage - 1))}>
                         <Icon name='chevron left' />
                       </Menu.Item>}
-                      {[...Array(pages).keys()].filter(x => ( x === currentPage ||((currentPage - x < (currentPage > 5)) && x < currentPage)) || ((x - currentPage < 4)  && x > currentPage) ).map( x => (<Menu.Item as='a' active={x === currentPage} key={x} onClick={() => this.check(x)}>{x+1}</Menu.Item>))}                
+                      {[...Array(pages).keys()].filter(x => ( x === currentPage ||((currentPage - x < 5) && x < currentPage)) || ((x - currentPage < 4)  && x > currentPage) ).map( x => (<Menu.Item as='a' active={x === currentPage} key={x} onClick={() => this.check(x)}>{x+1}</Menu.Item>))}                
                       { rightNavigator && <Menu.Item as='a' icon onClick={() => this.check((currentPage + 1) > (pages - 1) ? (pages - 1) : (currentPage + 1) )}>
                         <Icon name='chevron right' />
+                      </Menu.Item>}
+                      { rightNavigator && pages - currentPage  > 4 && <Menu.Item as='a' icon onClick={() => this.check(pages - 1)}>
+                        <Icon name='angle double right' />
                       </Menu.Item>}
                     </Menu>
                   </Table.HeaderCell>
                 </Table.Row>}
               </Table.Footer>
-            </Table>);
+            </Table>
+            </Segment>);
 
   }
 
