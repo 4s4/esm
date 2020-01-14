@@ -138,6 +138,18 @@ class TableResults extends Component {
   render(){
     const {column, direction} = this.props;
     const {processedData, pagination, pages, currentPage} = this.state;
+    const tooMuchPages = pages > 10;
+    let leftNavigator = false;
+    let rightNavigator = false;
+    if (tooMuchPages){
+      if(currentPage > 0){
+        leftNavigator = true;
+      }
+      if((pages - (currentPage + 1 ))  > 0){
+        rightNavigator = true;
+      }
+
+    }
     let currentData;
     if (pagination){
       const init = currentPage * maxRows;
@@ -175,13 +187,13 @@ class TableResults extends Component {
                 { pagination && <Table.Row>
                   <Table.HeaderCell colSpan='3'>
                     <Menu floated='right' pagination>
-                      <Menu.Item as='a' icon onClick={() => this.check(0)}>
+                      {leftNavigator && <Menu.Item as='a' icon onClick={() => this.check((currentPage - 1) < 0 ? 0 : (currentPage - 1))}>
                         <Icon name='chevron left' />
-                      </Menu.Item>
-                      {[...Array(pages).keys()].map( x => (<Menu.Item as='a' key={x} onClick={() => this.check(x)}>{x+1}</Menu.Item>))}                
-                      <Menu.Item as='a' icon onClick={() => this.check(pages-1)}>
+                      </Menu.Item>}
+                      {[...Array(pages).keys()].filter(x => ( x === currentPage ||((currentPage - x < (currentPage > 5)) && x < currentPage)) || ((x - currentPage < 4)  && x > currentPage) ).map( x => (<Menu.Item as='a' active={x === currentPage} key={x} onClick={() => this.check(x)}>{x+1}</Menu.Item>))}                
+                      { rightNavigator && <Menu.Item as='a' icon onClick={() => this.check((currentPage + 1) > (pages - 1) ? (pages - 1) : (currentPage + 1) )}>
                         <Icon name='chevron right' />
-                      </Menu.Item>
+                      </Menu.Item>}
                     </Menu>
                   </Table.HeaderCell>
                 </Table.Row>}
