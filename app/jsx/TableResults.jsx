@@ -186,18 +186,20 @@ class TableResults extends Component {
     this.setState({currentPage: x});  
   }
   downloadData(d) {
-    console.log('donwloading type', d);
-    fetch(window.production ? '/home/GetAllFilters' : './js/result-table.js')
-// ...     ,{method: 'POST', body:'hola'})
-    .then(function(response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      console.log('response', response);
-      downloadFile("/img/itc-logo.png");
-      this.setState({downloadSelection:null});
-      return null;
-    })  
+    if(d !== ""){
+      console.log('donwloading type', d);
+      fetch(window.production ? '/home/GetAllFilters' : './js/result-table.js')
+  // ...     ,{method: 'POST', body:'hola'})
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        console.log('response', response);
+        downloadFile(`/js/download/637146162549547838.${d.value}`);
+        return null;
+      }.bind(this));  
+      this.setState({downloadSelection: d.value});
+    }
   }
 
   render(){
@@ -232,7 +234,7 @@ class TableResults extends Component {
         <Header as='h3' block color='blue'>Listing {processedData.length} documents:</Header>
 
         <Dropdown placeholder='Sort Results by ... ' onChange={ (o, d) => { console.log('searching by:', d.value); this.sortTable(d.value)}} clearable options={options} selection />
-        <Dropdown placeholder='Download ' onChange={ (o, d) => {this.setState({downloadSelection:d}); this.downloadData(d); }}  options={[{label:'EXCEL', value:'EXCEL'}, {label:'CSV', value:'CSV'}]} selection value={downloadSelection}/>
+        <Dropdown placeholder='Download ' onChange={ (o, d) => {this.downloadData(d); }}  options={[{label:'EXCEL', value:'xlsx'}, {label:'CSV', value:'csv'}]} value={downloadSelection} selection />
 
               <Table sortable fixed striped basic='very'>
               <Table.Header >
