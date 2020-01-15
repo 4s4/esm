@@ -46,6 +46,7 @@ class Arma extends Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.splitSearch = this.splitSearch.bind(this);
+        
       }
 
       static getDerivedStateFromProps(props, state) {
@@ -65,6 +66,7 @@ class Arma extends Component {
         }
         return state;
       }
+      
 
       splitSearch(kw){
         console.log('splitSearch', kw, this.props.results)
@@ -360,15 +362,16 @@ class Arma extends Component {
    
      render (){
         const { splitSearchKey, splitSearchResults, selectedSector, open, reports, approvals, activeIndex,
-        chartConfig, isSunburst, frequencies , m, showCombinedResults, combinedResults} = this.state
+        chartConfig, isSunburst, frequencies , m, combinedResults} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;
         const Element = m;
        console.log('query', query);
        console.log('splitSearchResults', splitSearchResults);
 //        console.log('selections', selections);
 //       console.log('results', results);
-//          console.log('combinedResuls', combinedResults);
-const finalData = showCombinedResults && combinedResults.length > 0 ? showCombinedResults : splitSearchResults && splitSearchResults.length > 0 ? splitSearchResults : [];
+          let { showCombinedResults } = this.state
+          console.log('showCombinedResults', showCombinedResults, 'combinedResuls', combinedResults && combinedResults.length);
+      const finalData = showCombinedResults && combinedResults.length > 0 ? combinedResults : splitSearchResults && splitSearchResults.length > 0 ? splitSearchResults : [];
       return (
        <Grid stackable columns={2}>
        <Grid.Column width={4}>

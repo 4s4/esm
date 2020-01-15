@@ -51,7 +51,8 @@
     "time-grunt": "~1.0.0",
     "highcharts": "^8.0.0",
     "highcharts-react-official": "2.2.2",
-    "@highcharts/map-collection": "1.1.2"
+    "@highcharts/map-collection": "1.1.2",
+    "downloadjs": "1.4.7"
   },
   "engines": {
     "node": ">=0.8.0"

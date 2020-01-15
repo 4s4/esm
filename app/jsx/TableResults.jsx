@@ -14,6 +14,13 @@ import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
 
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
+import download from 'downloadjs';
+
+function downloadFile(url){
+  console.log('before download');
+  download(url);
+  console.log('after download');
+}
 
 function rightOption (d, filters) {
   const type = filters.types.find( o => o.value === d.type);
@@ -94,12 +101,13 @@ class TableResults extends Component {
                    pages:0, 
                    currentPage:0,
                    sortColumn:null,
-                   sortDirection:null
+                   sortDirection:null,
+                   downloadSelection:null
                   };
     this.setPage = this.setPage.bind(this);
     this.sortTable = this.sortTable.bind(this);
+    this.downloadData = this.downloadData.bind(this);
   }
-
   static getDerivedStateFromProps(props, state) {
     if (
       props.data !== state.data || props.filters !== state.filters
@@ -177,10 +185,24 @@ class TableResults extends Component {
   setPage(x){
     this.setState({currentPage: x});  
   }
+  downloadData(d) {
+    console.log('donwloading type', d);
+    fetch(window.production ? '/home/GetAllFilters' : './js/result-table.js')
+// ...     ,{method: 'POST', body:'hola'})
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      console.log('response', response);
+      downloadFile("/img/itc-logo.png");
+      this.setState({downloadSelection:null});
+      return null;
+    })  
+  }
 
   render(){
     const {column, direction} = this.props;
-    const {processedData, pagination, pages, currentPage} = this.state;
+    const {processedData, pagination, pages, currentPage, downloadSelection} = this.state;
     const tooMuchPages = pages > 10;
     let leftNavigator = false;
     let rightNavigator = false;
@@ -206,11 +228,11 @@ class TableResults extends Component {
       { key: 4, text: 'Country', value: 'countries' },
       { key: 5, text: 'Region', value: 'regions' },
     ];
-    
     return ( <Segment>
         <Header as='h3' block color='blue'>Listing {processedData.length} documents:</Header>
 
         <Dropdown placeholder='Sort Results by ... ' onChange={ (o, d) => { console.log('searching by:', d.value); this.sortTable(d.value)}} clearable options={options} selection />
+        <Dropdown placeholder='Download ' onChange={ (o, d) => {this.setState({downloadSelection:d}); this.downloadData(d); }}  options={[{label:'EXCEL', value:'EXCEL'}, {label:'CSV', value:'CSV'}]} selection value={downloadSelection}/>
 
               <Table sortable fixed striped basic='very'>
               <Table.Header >
