@@ -233,8 +233,8 @@ class TableResults extends Component {
     return ( <Segment>
         <Header as='h3' block color='blue'>Listing {processedData.length} documents:</Header>
 
-        <Dropdown placeholder='Sort Results by ... ' onChange={ (o, d) => { console.log('searching by:', d.value); this.sortTable(d.value)}} clearable options={options} selection />
-        <Dropdown placeholder='Download ' onChange={ (o, d) => {this.downloadData(d); }}  options={[{label:'EXCEL', value:'xlsx'}, {label:'CSV', value:'csv'}]} value={downloadSelection} selection />
+        <Dropdown text='Sort Results by ...' onChange={ (o, d) => { console.log('searching by:', d.value); this.sortTable(d.value)}} clearable options={options} selection />
+        <Dropdown  onChange={ (o, d) => {this.downloadData(d); }}  options={[{label:'EXCEL', value:'xlsx'}, {label:'CSV', value:'csv'}]} text='Download File' selection />
 
               <Table sortable fixed striped basic='very'>
               <Table.Header >
