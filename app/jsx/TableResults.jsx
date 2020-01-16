@@ -110,7 +110,7 @@ class TableResults extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     if (
-      props.data !== state.data || props.filters !== state.filters
+      props.data !== state.data || props.filters !== state.filters || props.selections !== state.selections
     ) {
       const totalRows = props.data.length;
       const pagination = totalRows > maxRows;
@@ -119,7 +119,7 @@ class TableResults extends Component {
       const remainder = totalRows % maxRows;
       const pages = quotient + (remainder > 0 ? 1 : 0 );
       const currentPage = 0;
-      return { dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
+      return { selections: props.selections , dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
     }
     return state;
   }
@@ -186,19 +186,65 @@ class TableResults extends Component {
     this.setState({currentPage: x});  
   }
   downloadData(d) {
+    // region[]: uuid , 
+    // country[]: uuid, 
+    // Sector[]:uuid, 
+    // document[]: typeLabel, 
+
+
+    // year: int, 
+    // period: int, int
+    // thematicCheckboxData[]: uuid, 
+    // sortColumnIndex:0->N, 
+    // page:0->N, 
+    // sortDirection: 0:1
+
+    // decoded => "region[]=d380856d-ddca-4995-9cc5-51179abc00f6&region[]=3f5ceef1-92b1-4378-b9d9-8b6486154219&country[]=c709fae3-f171-4185-8990-1ecc3b076f83&country[]=34a881a1-3438-46e8-8ef3-3b7f5e80bec2&Sector[]=831fe888-5e70-4d2f-8cd1-37d68b6ab8cf&Sector[]=5f13d462-d292-4340-9295-1673e0c2b781&document[]=NES-ITC&document[]=PRSP&year=2013&period=2001%2C2023&last_Update=&counterpart=&thematicCheckboxData[]=f0d58caa-196e-4f43-bfda-c33d4366221a&thematicCheckboxData[]=9b26e5d5-a4e7-4160-8674-0bcaaf5809b0&thematicCheckboxData[]=de0cd883-9619-44df-871d-af45b413d6ec&designProcessCheckboxData[]=de6323d2-c464-432a-9693-7eb66956b39d&designProcessCheckboxData[]=ac882c5a-7294-4527-bc04-c2c3e12a7c83&sortColumnIndex=&page=&sortDirection="
+    // decodeURI(u) or encodeURI(u)
+    // encoded "region%5B%5D=d380856d-ddca-4995-9cc5-51179abc00f6&region%5B%5D=3f5ceef1-92b1-4378-b9d9-8b6486154219&country%5B%5D=c709fae3-f171-4185-8990-1ecc3b076f83&country%5B%5D=34a881a1-3438-46e8-8ef3-3b7f5e80bec2&Sector%5B%5D=831fe888-5e70-4d2f-8cd1-37d68b6ab8cf&Sector%5B%5D=5f13d462-d292-4340-9295-1673e0c2b781&document%5B%5D=NES-ITC&document%5B%5D=PRSP&year=2013&period=2001%2C2023&last_Update=&counterpart=&thematicCheckboxData%5B%5D=f0d58caa-196e-4f43-bfda-c33d4366221a&thematicCheckboxData%5B%5D=9b26e5d5-a4e7-4160-8674-0bcaaf5809b0&thematicCheckboxData%5B%5D=de0cd883-9619-44df-871d-af45b413d6ec&designProcessCheckboxData%5B%5D=de6323d2-c464-432a-9693-7eb66956b39d&designProcessCheckboxData%5B%5D=ac882c5a-7294-4527-bc04-c2c3e12a7c83&sortColumnIndex=&page=&sortDirection=";
+
     if(d !== ""){
+      const selections = this.state.selections;
+      let churro="filetype="+d.value;
+      function extractColection(col, urlKw){
+        if(col.length > 0) { churro += col.map( o => urlKw+"="+o.value).join("&"); } 
+
+      }
+      extractColection(selections.ecoRegions, "region[]");
+      extractColection(selections.geoRegions, "region[]");
+      extractColection(selections.countries, "country[]");
+      extractColection(selections.sectors, "Sector[]");
+      if(selections.types.length > 0) { churro += selections.types.map( o => "document[]="+o.label).join("&"); } 
+      if(selections.thematicFocus.length > 0) { churro += selections.thematicFocus.map( o => "thematicCheckboxData[]="+o.id).join("&"); } 
+      if(selections.active_year){ 
+        const active_year= parseInt(selections.active_year, 10);
+        churro += "period="+active_year+","+(active_year + 1);}
+      if(selections.approval_year){ churro += "year="+selections.approval_year;}
+      console.log('churro', churro, encodeURI(churro));
       console.log('donwloading type', d);
-      fetch(window.production ? '/home/GetAllFilters' : './js/result-table.js')
-  // ...     ,{method: 'POST', body:'hola'})
+      let opts = {};
+      if (window.production){
+        opts = {
+          method: 'POST', 
+        body:encodeURI(churro),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }; 
+      }
+      fetch(window.production ? '/Search/ExportPDF' : './js/download/response.js', opts)
       .then(function(response) {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
         }
-        console.log('response', response);
-        downloadFile(`/js/download/637146162549547838.${d.value}`);
-        return null;
+        return response.text();
+      }.bind(this))
+      .then(function(responseText){
+        console.log('responseText', responseText);
+        const ext = window.production ? '' : d.value;
+        downloadFile(`${responseText}.${ext}`);
+        this.setState({downloadSelection: d.value});
       }.bind(this));  
-      this.setState({downloadSelection: d.value});
     }
   }
 

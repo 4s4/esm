@@ -419,7 +419,7 @@ class Arma extends Component {
           </Portal>
 
            {finalData.length > 0 ?
-            <TableResults dicts={this.state.dicts} column={this.state.column} data={finalData} filters={filters} direction={this.state.direction} />
+            <TableResults dicts={this.state.dicts} selections={selections} column={this.state.column} data={finalData} filters={filters} direction={this.state.direction} />
            :            
             chartConfig ? 
               isSunburst ? 

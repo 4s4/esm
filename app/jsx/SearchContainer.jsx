@@ -41,7 +41,7 @@ class SearchContainer extends Component {
     super(props);
     this.state = { activeIndex:0 , 
       qq:{}, 
-      selections:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
+      selections:{thematicFocus:[], ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
       results:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: [], approval_year:[], active_year:[]},
       filters: {countries:null, regions:null, types: null, sectors: null}, 
       reports: null, 
