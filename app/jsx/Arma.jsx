@@ -19,6 +19,7 @@ import {items} from './Query';
 import Highcharts from 'highcharts';
 
 import TableResults from './TableResults';
+const analytics = window.analytics;
 
 class Arma extends Component {
     constructor(props) {
@@ -70,7 +71,9 @@ class Arma extends Component {
 
       splitSearch(kw){
         console.log('splitSearch', kw, this.props.results)
+
         if(kw){
+          analytics('ShowSplittedQueryResults', {resultsSize: this.props.results[kw].length});
           this.setState({splitSearchKey:kw, splitSearchResults:this.props.results[kw], showCombinedResults:false})
         } else {
           this.setState({splitSearchResults:null, splitSearchKey:null});
@@ -348,6 +351,7 @@ class Arma extends Component {
      showCombinedResults(v){
        return () => {
          if(this.state.showCombinedResults!==v){
+          analytics('ShowCombinedQueryResults', {resultsSize: this.state.combinedResults.length});
           this.setState({showCombinedResults:v})
           if(v){
             this.setState({splitSearchResults:null, splitSearchKey:null});

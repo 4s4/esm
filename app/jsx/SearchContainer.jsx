@@ -34,7 +34,7 @@ function doSearch (reports, queries){
     }
   );
 }
-
+const analytics = window.analytics;
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -57,7 +57,6 @@ class SearchContainer extends Component {
     this.searchReports = this.searchReports.bind(this);
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
     this.onSelectYear = this.onSelectYear.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
 
@@ -107,6 +106,8 @@ class SearchContainer extends Component {
     
 
   componentDidMount() {
+    analytics('appStart', {});
+
     console.log('window.production', window.production);
     console.log('componentDidMount');
     fetch(window.production ? '/home/GetAllFilters' : './js/all-filters.json')
@@ -159,6 +160,9 @@ class SearchContainer extends Component {
   }
 
   onSelectChange (selectType, vals) {
+  
+    vals.length > 0 && analytics(`SelectChange-${selectType.toUpperCase()}`, {vals: vals.map(o => o.value)});
+
     if(selectType === "geoRegion"){
       const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="0"), vals, 'geoRegion', 'region', false);
       this.fun.bind(this)(q, vals, 'geoRegions');
@@ -186,6 +190,8 @@ class SearchContainer extends Component {
     const { ...res } = this.state.results;
     if(selectType === "approval_year"){
       if(v){
+        analytics(`approval_year`, {year: v});
+
         const q = v ?  r => r['year'] === v : null;
         picked['approval_year'] = q;
         res['approval_year'] = doSearch(this.state.initialReports, [q]);      
@@ -198,6 +204,7 @@ class SearchContainer extends Component {
     } else {
       const currentYear = new Date().getFullYear();
       if(v){
+        analytics(`active_year`, {year: v});
         const q = v ?  (r) => { 
           const dates = r['implementationPeriod'].split('-').map(o => parseInt(o, 10));
           const end = isNaN(dates[1]) ? currentYear : dates[1];
@@ -234,11 +241,14 @@ class SearchContainer extends Component {
     const v = y.checked;
     console.log('listening' , opt, v);
     const q = v ?  r => r[opt] : null;
+
     const { ...picked } = this.state.qq;
     const { ...sels } = this.state.selections;
     const { ...res } = this.state.results;
 
     if (v){
+      analytics('ThematicFocusSelected', {id: opt});
+
       picked[opt] = q;
       sels[opt] = true;
       res[opt] = doSearch(this.state.initialReports, [q]);      
@@ -259,13 +269,6 @@ class SearchContainer extends Component {
     console.log('keys:', Object.keys(picked));
     this.setState({ selections: sels, results: res });
     this.searchReports(picked);
-  }
-
-  handleClick (e, titleProps) {
-    const { index } = titleProps
-    const { activeIndex } = this.state
-    const newIndex = activeIndex === index ? -1 : index
-    this.setState({ activeIndex: newIndex })
   }
  
   render() {   
