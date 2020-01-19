@@ -11,6 +11,8 @@ import CollapsableData from './CollapsableData';
 import React, { Component } from 'react';
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table';
 import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
+import {summarise} from './utils';
+import ShortContent from './ShortContent'
 
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
@@ -42,16 +44,6 @@ function toUrl(s){
   return res.map(v => v[0]).join('-').toLowerCase();
 }
 
-function summarise(str, wordMax){
-  if(str === null) return "";
-  const descReg = /[^\s]+/g;
-  const res = [...str.matchAll(descReg)];
-  if(res.length > wordMax){
-    return res.slice(0, wordMax).map(v => v[0]).join(' ')+' ...';
-  }else{
-    return str;
-  }
-}
 
  function centerOption(d, filters){ 
   const sectors = d.sectors.map(s => filters.sectors.find( o => o.value === s));
@@ -69,7 +61,7 @@ function summarise(str, wordMax){
       <Item.Meta><CollapsableData collapsed={summarise(d.description, 30)} expanded={d.description}/></Item.Meta>
       <Item.Extra>
       {sectors && sectors.length > 0 && <Header as='h5'>Sectors</Header>}
-      {sectors.map((s, idx) => (<Label key={idx} size='tiny' basic >{s.label}</Label>))}
+      {sectors.map((s, idx) => (<ShortContent color='gray' key={idx} size='tiny' basic={true} v={s.label} maxWords="2" />))}
       </Item.Extra>
     </Item.Content>
   </Item> 

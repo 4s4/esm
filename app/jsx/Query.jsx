@@ -4,7 +4,9 @@ import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
+import ShortContent from './ShortContent'
 
+console.log('ShortContent', ShortContent);
 const  intersection = (setA, setB) => {
   var _intersection = new Set();
   for (var elem of setB) {
@@ -25,9 +27,9 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
     description: (<List >
                   {selections.geoRegions.map((o, idx) => 
                   (<List.Item  key={`geoReg-${idx}`} style={{paddingBottom:'2px'}}>
-                    <Label as='a' color='blue'>{o.text || o.label} 
-                    <Icon name='delete' onClick={() => onChangeSelect('geoRegion', {id:o.value})}/>
-                    </Label>
+                      <ShortContent v={o.text || o.label} maxWords="2" >
+                          <Icon name='delete' onClick={() => onChangeSelect('geoRegion', {id:o.value})}/>
+                      </ShortContent>
                     </List.Item>))}
                   </List>),
     extra: <Popup trigger={resultsIcon('geoRegions', results.geoRegions, splitSearch, splitSearchKey)}
@@ -39,9 +41,9 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
     description: (<List >
       {selections.ecoRegions.map((o, idx) => 
       (<List.Item  key={`ecoReg-${idx}`} style={{paddingBottom:'2px'}}>
-        <Label as='a' color='blue'>{o.text || o.label} 
-        <Icon name='delete' onClick={() => onChangeSelect('ecoRegion', {id:o.value})}/>
-        </Label>
+      <ShortContent v={o.text || o.label} maxWords="2" >
+      <Icon name='delete' onClick={() => onChangeSelect('ecoRegion', {id:o.value})}/>
+        </ShortContent>       
         </List.Item>))}
       </List>),
     extra: <Popup trigger={resultsIcon('ecoRegions', results.ecoRegions, splitSearch, splitSearchKey)}
@@ -54,9 +56,9 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
     description: (<List >
                   {selections.countries.map((o, idx) => 
                     (<List.Item key={`country-${idx}`} style={{paddingBottom:'2px'}}  >
-                      <Label as='a' color='blue'>{o.text || o.label} 
-                        <Icon name='delete' onClick={() => onChangeSelect('country', {id:o.value})}/>
-                      </Label>
+                      <ShortContent v={o.text || o.label} maxWords="2" >
+                      <Icon name='delete' onClick={() => onChangeSelect('country', {id:o.value})}/>
+                      </ShortContent>       
                     </List.Item>))}
                   </List>),
     extra: <Popup trigger={resultsIcon('countries', results.countries, splitSearch, splitSearchKey)} 
@@ -66,9 +68,9 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
     header: `Sectors`,
     description: (<List >{selections.sectors.map((o, idx) => 
       (<List.Item key={`sector-${idx}`} style={{paddingBottom:'2px'}} >
-      <Label as='a' color='blue'>{o.text || o.label} 
+        <ShortContent v={o.text || o.label} maxWords="2" >
         <Icon name='delete' onClick={() => onChangeSelect('sectors', {id:o.value})}/>
-      </Label>
+        </ShortContent>       
     </List.Item>))}
       </List>),
     extra: <Popup trigger={resultsIcon('sectors', results.sectors, splitSearch, splitSearchKey)}
@@ -79,9 +81,9 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
     header: `Types`,
     description: (<List >{selections.types.map((o, idx) => 
       (<List.Item key={`type-${idx}`} style={{paddingBottom:'2px'}}   >
-      <Label as='a' color='blue'>{o.text || o.label} 
+        <ShortContent v={o.text || o.label} maxWords="2" >
         <Icon name='delete' onClick={() => onChangeSelect('type', {id:o.value})}/>
-      </Label>
+        </ShortContent>       
     </List.Item>))}
       </List>),
     extra: <Popup trigger={resultsIcon('types', results.types, splitSearch, splitSearchKey)}
@@ -111,7 +113,7 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
 
   };
   const qks= new Set(Object.keys(query));
-  const them = new Set(thematicFocus.map(o => o.kw));
+  const them = thematicFocus && new Set(thematicFocus.map(o => o.kw)) || new Set([]);
   const themIntersection = intersection(qks, them);
   const themIntersectionA = Array.from(themIntersection);
   const thematicFocusItem = themIntersection.size > 0 && {
@@ -120,9 +122,9 @@ export function items (query, selections, results, thematicFocus, onChangeSelect
                     {
                       const it = thematicFocus.find(x => x.kw === o);
                       return (<List.Item key={`tm-${idx}`} style={{paddingBottom:'2px'}}  >
-                      <Label as='a' color='blue'>{it.name}
-                        <Icon name='delete' onClick={() => onCheck(it.kw, false)}/>
-                      </Label>                    
+                              <ShortContent v={it.name} maxWords="2" >
+                              <Icon name='delete' onClick={() => onCheck(it.kw, false)}/>
+                              </ShortContent>       
                     </List.Item>);
                     }
                    )}</List>),

@@ -376,6 +376,8 @@ class Arma extends Component {
           let { showCombinedResults } = this.state
           console.log('showCombinedResults', showCombinedResults, 'combinedResuls', combinedResults && combinedResults.length);
       const finalData = showCombinedResults && combinedResults.length > 0 ? combinedResults : splitSearchResults && splitSearchResults.length > 0 ? splitSearchResults : [];
+      const itemsToShow = items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear, onCheck, this.splitSearch, splitSearchKey);
+
       return (
        <Grid stackable columns={2}>
        <Grid.Column width={4}>
@@ -397,7 +399,7 @@ class Arma extends Component {
               <Button onClick={this.showCombinedResults(true)} color={showCombinedResults ? 'blue' : 'grey'}>List query result: {combinedResults && combinedResults.length} docs </Button>
               </Button.Group>
               </Header>
-             <Card.Group items={items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear, onCheck, this.splitSearch, splitSearchKey)} itemsPerRow="8" stackable />
+             <Card.Group items={itemsToShow} itemsPerRow={itemsToShow.length < 6 ? 6 : itemsToShow.length} stackable />
             </Segment>}
             <Portal onClose={this.handleClose} open={selectedSector && !selections.sectors.find(s => s.id === selectedSector.id ) && open}>
             <Segment
