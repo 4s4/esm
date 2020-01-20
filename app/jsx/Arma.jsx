@@ -433,9 +433,11 @@ class Arma extends Component {
               : 
                 <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
               :
-              <Element 
+              <Element
               onChangeMap={this.onChangeSelect}
               countries={filters && filters.countries} 
+              countrySelections={selections && selections.countries}
+              regionsSelections={selections && selections.geoRegions}
               regions={filters && filters.regions && filters.regions.filter(x => x['parent-value'] === '0')} 
               frequencies={frequencies && frequencies.countries}/>
             }

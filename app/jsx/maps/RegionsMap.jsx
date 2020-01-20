@@ -55,7 +55,7 @@ function mapData(data, onChangeMap) {
   
     series: [{
       data: data,
-      name: 'Random data',
+      name: 'Documents by region',
       joinBy: ['hc-key', 'code'],
       point: {
         events: {
@@ -66,10 +66,10 @@ function mapData(data, onChangeMap) {
             }
         }
       },
-
+    
       states: {
         hover: {
-          color: '#BADA55'
+          color: '#ED7DAE'
         }
       },
       dataLabels: {
@@ -89,7 +89,7 @@ class RegionsMap extends Component {
     if (
       props !== state
     ) {
-      if(props.countries && props.frequencies && props.regions){
+      if(props.countries && props.frequencies && props.regions && props.regionsSelections){
         const d ={"Europe": 0, "Asia":0, "Africa":0, "Oceania":0, "America":0};
     
         const data= Object.keys(props.frequencies).reduce((x,o) => {
@@ -108,16 +108,16 @@ class RegionsMap extends Component {
           {code: 'sa', value:data["America"], codeName:"America", regValue:regionValue("America")},
           {code: 'oc', value:data["Oceania"],  codeName:"Oceania", regValue:regionValue("Oceania")}
           ];
-        return {data: dataT};
+        return {data: dataT, selections: new Set(props.regionsSelections.map(x => x.label))};
       }
     }
     return state;
   }
     
   render() {
-    const {data} = this.state;
+    const {data, selections} = this.state;
     return (<HighchartsReact
-            options = { mapData(data, this.props.onChangeMap) }
+            options = { mapData(data.map(x => { selections.has(x.codeName) ? x.color="#ED7DAE" : null; return x}), this.props.onChangeMap) }
             highcharts = { Highcharts }
             constructorType = { 'mapChart' }
             allowChartUpdate = { true }
@@ -126,4 +126,5 @@ class RegionsMap extends Component {
             />);
   }
 }
+
 export default RegionsMap;

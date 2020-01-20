@@ -1,14 +1,21 @@
 'use strict';
 import React, { Component } from 'react';
 //const theMap = require('@highcharts/map-collection/custom/world-continents.geo.json');
-const theMap = require('@highcharts/map-collection/custom/world.geo.json');
+const theMap = require('@highcharts/map-collection/custom/world-highres.geo.json');
 import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 
 function mapData(data, onChangeMap) {
+  const h = window.innerHeight-150;
   return {
   chart: {
-      map: theMap
+      map: theMap,
+      height: h,
+      events: {
+        load: function () {
+          this.mapZoom(0.5);          
+        }
+    }
   },
   
   mapNavigation: {
@@ -23,13 +30,16 @@ function mapData(data, onChangeMap) {
     stops: [
         [0, '#EFEFFF'],
         [0.5, Highcharts.getOptions().colors[0]],
-        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).brighten(-0.5).get()]
+        [1, '#0470D9']
     ]
   },
 
-  title: {
-      text: 'Explore the TSM by country'
-  },
+  subtitle: {
+    text: ''
+},
+title: {
+  text: ''
+},
 
   legend: {
     layout: 'horizontal',
@@ -37,37 +47,33 @@ function mapData(data, onChangeMap) {
     verticalAlign: 'bottom'
 },
 
-  series: [{
-      name: 'Country',
+  series: [
+    {
+      name: 'Documents by country',
       joinBy: ['iso-a3', 'code'],
       cursor: 'pointer',
       point: {
           events: {
              click: function(e) {
-                  console.log('worldmap click', e.point.options);
                   onChangeMap('country', e.point.options);
              }
          }
      },
 
       data,
-      dataLabels: {
-          enabled: true,
-          color: '#FFFFFF',
-          formatter: function () {
-              if (this.point.value) {
-                  return this.point.name;
-              }
-          }
-      },
       states: {
         hover: {
-            borderWidth: 1
+            borderWidth: 1,
+            color: '#ED7DAE'
         }
     },
+    mapNavigation: {
+      enabled: true
+  },
+
       tooltip: {
           headerFormat: '',
-          pointFormat: '{point.name}: {point.value}'
+          pointFormat: '{point.name}: {point.value} documents'
       }
       }]
 };
@@ -87,16 +93,16 @@ class WorldMap extends Component {
                     const c = props.countries.find(e => e.value === o);
                     return  {'name':c.label, 'value':props.frequencies[o], 'code': c.code, 'id': c.value};
                     })
-        return {data};
+        return {data, selections: new Set(props.countrySelections.map(x => x.code))};
       }
     }
     return state;
   }
     
   render() {
-    const {data} = this.state;
-    return (<HighchartsReact
-              options = { mapData(data, this.props.onChangeMap) }
+    const {data, selections} = this.state;
+    return (data && data.length >0 && <HighchartsReact
+              options = { mapData(data.map(x => { selections.has(x.code) ? x.color="#ED7DAE" : null; return x}), this.props.onChangeMap) }
               highcharts = { Highcharts }
               constructorType = { 'mapChart' }
               allowChartUpdate = { true }
