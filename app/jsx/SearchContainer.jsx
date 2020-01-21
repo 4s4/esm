@@ -64,14 +64,15 @@ class SearchContainer extends Component {
   }
 
   updateStateWithVersion(m){
-    m.version = this.state.version++;
+    console.log('updateStateWithVersion', this.state.version);
+    m.version = ++this.state.version;
     this.setState(m);
   }
 
   saveReports(x){
     return (r) => {
       const t0 = performance.now();
-      const rr = cljs.reports(this.state.filters.thematicsFocus, r);
+      const rr = cljs.reports(x.filters.thematicsFocus, r);
       const t1 = look('cljs.reports', t0);
       console.log('first report', rr[0]);
       x.reports = rr;
@@ -147,16 +148,14 @@ class SearchContainer extends Component {
       } else{
         picked[qkw] = o => dict.has(o[kw]);
       }
-      this.searchReports(picked, {});
-      return picked[qkw];
+      return [picked[qkw], picked];
     } else {
       delete picked[qkw];
-      this.searchReports(picked, {});
-      return null;
+      return [null, picked];
     }
   }
 
-  fun(q, vals, kw){
+  fun(q, picked, vals, kw){
     const t0 = performance.now();
     const { ...sels } = this.state.selections;
     sels[kw] = vals;
@@ -166,8 +165,9 @@ class SearchContainer extends Component {
     }else{
       res[kw] = [];      
     }
+
     const t1 = look('SearchContainer/fun beforeSetState', t0);
-    this.updateStateWithVersion({ selections: sels, results: res});
+    this.searchReports(picked, { selections: sels, results: res});
     look('SearchContainer/fun afterSetState', t1);
   }
 
@@ -177,21 +177,21 @@ class SearchContainer extends Component {
     vals.length > 0 && analytics(`SelectChange-${selectType.toUpperCase()}`, {vals: vals.map(o => o.value)});
 
     if(selectType === "geoRegion"){
-      const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="0"), vals, 'geoRegion', 'region', false);
-      this.fun.bind(this)(q, vals, 'geoRegions');
+      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="0"), vals, 'geoRegion', 'region', false);
+      this.fun.bind(this)(q, picked, vals, 'geoRegions');
     } else if(selectType === "ecoRegion"){
       const countryVals = vals.reduce((c, x) => c.concat(x.countries) ,[]).map( v => { return { value: v.id, text: v.name }});
-      const q = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
-      this.fun.bind(this)(q, vals, 'ecoRegions');
+      const [q, picked]  = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
+      this.fun.bind(this)(q, picked, vals, 'ecoRegions');
     } else if(selectType === "country") {
-      const q = this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', 'country', false);
-      this.fun.bind(this)(q, vals, 'countries');
+      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', 'country', false);
+      this.fun.bind(this)(q,picked, vals, 'countries');
     } else if(selectType === "type") {
-      const q = this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', 'type', true, false);
-      this.fun.bind(this)(q, vals, 'types');
+      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', 'type', true, false);
+      this.fun.bind(this)(q, picked, vals, 'types');
     } else if(selectType === "sectors") {
-      const q = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', 'sectors', true, true);
-      this.fun.bind(this)(q, vals, 'sectors');
+      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', 'sectors', true, true);
+      this.fun.bind(this)(q, picked, vals, 'sectors');
     }
     look('onSelectChange', t0);
     console.log(selectType, `Option selected:`, vals)
@@ -294,7 +294,8 @@ class SearchContainer extends Component {
  
   render() {   
     return <Container style={{width:"100%", height:"100%"}}>
-            <Arma filters={this.state.filters} 
+            <Arma filters={this.state.filters}
+                  version={this.state.version}            
                   onCheck={this.onCheckBoxChange}
                   onYear={this.onSelectYear}
                   onSelectChange={this.onSelectChange}

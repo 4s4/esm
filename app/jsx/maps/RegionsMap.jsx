@@ -82,12 +82,12 @@ function mapData(data, onChangeMap) {
 class RegionsMap extends Component {
   constructor(props) {
     super(props);
-    this.state = {data:[]};
+    this.state = {data:[], version: -1};
   }
   
   static getDerivedStateFromProps(props, state) {
     if (
-      props !== state
+      props.version !== state.version
     ) {
       if(props.countries && props.frequencies && props.regions && props.regionsSelections){
         const d ={"Europe": 0, "Asia":0, "Africa":0, "Oceania":0, "America":0};
@@ -108,7 +108,7 @@ class RegionsMap extends Component {
           {code: 'sa', value:data["America"], codeName:"America", regValue:regionValue("America")},
           {code: 'oc', value:data["Oceania"],  codeName:"Oceania", regValue:regionValue("Oceania")}
           ];
-        return {data: dataT, selections: new Set(props.regionsSelections.map(x => x.label))};
+        return {version: props.version, data: dataT, selections: new Set(props.regionsSelections.map(x => x.label))};
       }
     }
     return state;

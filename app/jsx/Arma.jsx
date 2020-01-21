@@ -25,6 +25,7 @@ class Arma extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          version: -1,
           visibleOptions:false, 
           direction:null, 
           column:null, 
@@ -52,7 +53,7 @@ class Arma extends Component {
 
       static getDerivedStateFromProps(props, state) {
         if (
-          props.reports !== state.reports || props.selections !== state.selections
+          props.version !== state.version
         ) {
             let approvals = cljs.approvalYears(props.reports);
             let actives = cljs.activeYears(props.reports);
@@ -61,9 +62,7 @@ class Arma extends Component {
             frequencies.thematicsFocus = tt;
             console.log('frequencies', frequencies);
             console.log('filters', props.filters)
-            return {dicts: props.dicts, selections: props.selections, frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
-        }else if(props.combinedResults !== state.combinedResults){
-          return {combinedResults: props.combinedResults};
+            return {version: props.version, dicts: props.dicts, selections: props.selections, frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
         }
         return state;
       }
@@ -324,6 +323,7 @@ class Arma extends Component {
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 6}>
                     <ThematicFocus reports={reports} 
+                    version={this.state.version}
                             thematicsFocus={filters.thematicsFocus}                          
                             selections={selections}
                             onCheck={onCheck}
@@ -425,7 +425,7 @@ class Arma extends Component {
           </Portal>
 
            {finalData.length > 0 ?
-            <TableResults dicts={this.state.dicts} selections={selections} column={this.state.column} data={finalData} filters={filters} direction={this.state.direction} />
+            <TableResults version={this.state.version} dicts={this.state.dicts} selections={selections} column={this.state.column} data={finalData} filters={filters} direction={this.state.direction} />
            :            
             chartConfig ? 
               isSunburst ? 
@@ -434,6 +434,7 @@ class Arma extends Component {
                 <Charty  Highcharts={Highcharts} chartOpts={chartConfig}/> 
               :
               <Element
+              version={this.state.version}
               onChangeMap={this.onChangeSelect}
               countries={filters && filters.countries} 
               countrySelections={selections && selections.countries}

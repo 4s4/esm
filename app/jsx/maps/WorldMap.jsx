@@ -81,23 +81,24 @@ title: {
 class WorldMap extends Component {
   constructor(props) {
     super(props);
-    this.state = {data:[]};
+    this.state = {data:[], version: -1};
   }
   
   static getDerivedStateFromProps(props, state) {
     if (
-      props !== state
+      props.version !== state.version
     ) {
       if(props.countries && props.frequencies){
         const data= Object.keys(props.frequencies).map((o) => { 
                     const c = props.countries.find(e => e.value === o);
                     return  {'name':c.label, 'value':props.frequencies[o], 'code': c.code, 'id': c.value};
                     })
-        return {data, selections: new Set(props.countrySelections.map(x => x.code))};
+        return {version: props.version, data, selections: new Set(props.countrySelections.map(x => x.code))};
       }
     }
     return state;
   }
+
     
   render() {
     const {data, selections} = this.state;

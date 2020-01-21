@@ -61,7 +61,7 @@ function toUrl(s){
       <Item.Meta><CollapsableData collapsed={summarise(d.description, 30)} expanded={d.description}/></Item.Meta>
       <Item.Extra>
       {sectors && sectors.length > 0 && <Header as='h5'>Sectors</Header>}
-      {sectors.map((s, idx) => (<ShortContent color='gray' key={idx} size='tiny' basic={true} v={s.label} maxWords="2" />))}
+      {sectors.map((s, idx) => (<ShortContent color='grey' key={idx} size='tiny' basic={true} v={s.label} maxWords="2" />))}
       </Item.Extra>
     </Item.Content>
   </Item> 
@@ -103,7 +103,7 @@ class TableResults extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     if (
-      props.data !== state.data || props.filters !== state.filters || props.selections !== state.selections
+      props.version !== state.version
     ) {
       const totalRows = props.data.length;
       const pagination = totalRows > maxRows;
@@ -112,7 +112,7 @@ class TableResults extends Component {
       const remainder = totalRows % maxRows;
       const pages = quotient + (remainder > 0 ? 1 : 0 );
       const currentPage = 0;
-      return { selections: props.selections , dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
+      return { version:props.version, selections: props.selections , dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
     }
     return state;
   }

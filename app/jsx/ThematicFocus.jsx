@@ -11,16 +11,16 @@ function CheckBox(props){
 class ThematicFocus extends Component {
   constructor(props) {
     super(props);
-    this.state = { reports:[] };
+    this.state = { reports:[], version: -1 };
     this.check = this.check.bind(this);
     this.r = this.r.bind(this);
   }
   static getDerivedStateFromProps(props, state) {
     if (
-      props.reports !== state.reports || props.selections !== state.selections
+      props.version !== state.version
     ) {
 //      console.log('them', cljs.countThematicFocus(props.reports, props.thematicsFocus));
-      return {reports: props.reports, selections: props.selections};
+      return {version: props.version, reports: props.reports, selections: props.selections};
     }
     return state;
   }
