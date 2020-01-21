@@ -1,6 +1,10 @@
 import { Component} from 'react';
 
 import Container from 'semantic-ui-react/dist/commonjs/elements/Container/Container';
+import Loader from 'semantic-ui-react/dist/commonjs/elements/Loader/Loader';
+import Dimmer from 'semantic-ui-react/dist/commonjs/modules/Dimmer/Dimmer';
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
+
 import {look} from './utils';
 
 import Arma from './Arma';
@@ -44,6 +48,7 @@ class SearchContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { 
+      loading: true,
       version: 0,
       qq:{}, 
       selections:{thematicFocus:[], ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
@@ -77,6 +82,7 @@ class SearchContainer extends Component {
       console.log('first report', rr[0]);
       x.reports = rr;
       x.initialReports = rr;
+      x.loading = false;
       this.updateStateWithVersion(x);
       look('cljs.reports setState', t1);
     }
@@ -294,6 +300,10 @@ class SearchContainer extends Component {
  
   render() {   
     return <Container style={{width:"100%", height:"100%"}}>
+      {this.state.loading ?
+             <Dimmer active={this.state.loading} inverted>
+              <Loader inline='centered' inverted />
+            </Dimmer>  : 
             <Arma filters={this.state.filters}
                   version={this.state.version}            
                   onCheck={this.onCheckBoxChange}
@@ -306,8 +316,8 @@ class SearchContainer extends Component {
                   results={this.state.results}
                   dicts={this.state.dicts}
                   combinedResults={this.state.reports}
-            />
-            </Container>;
+      />}
+      </Container> ;
   }
 }
 

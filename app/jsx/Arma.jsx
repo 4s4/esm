@@ -20,6 +20,7 @@ import Highcharts from 'highcharts';
 
 import TableResults from './TableResults';
 const analytics = window.analytics;
+import {look} from './utils';
 
 class Arma extends Component {
     constructor(props) {
@@ -55,13 +56,21 @@ class Arma extends Component {
         if (
           props.version !== state.version
         ) {
+          const t0 = performance.now();
+
             let approvals = cljs.approvalYears(props.reports);
+            const t1 = look('Arma/getDerivedStateFromProps/approvals', t0);
+
             let actives = cljs.activeYears(props.reports);
+            const t2 = look('Arma/getDerivedStateFromProps/actives', t1);
             const tt = cljs.countThematicFocus(props.reports, props.filters.thematicsFocus);
+            const t3 = look('Arma/getDerivedStateFromProps/thematicFocus', t2);
             const frequencies = cljs.countSelects(props.reports, props.filters.types, props.filters.sectors, props.filters.regions);
+            const t4 = look('Arma/getDerivedStateFromProps/frequencies', t3);
             frequencies.thematicsFocus = tt;
-            console.log('frequencies', frequencies);
-            console.log('filters', props.filters)
+//            console.log('frequencies', frequencies);
+//            console.log('filters', props.filters)
+            look('Arma/getDerivedStateFromProps', t0);
             return {version: props.version, dicts: props.dicts, selections: props.selections, frequencies, reports: props.reports, approvals, actives, combinedResults: props.combinedResults};
         }
         return state;

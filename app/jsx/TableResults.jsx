@@ -17,6 +17,7 @@ import ShortContent from './ShortContent'
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import download from 'downloadjs';
+import {look} from './utils';
 
 function downloadFile(url){
   console.log('before download');
@@ -105,6 +106,8 @@ class TableResults extends Component {
     if (
       props.version !== state.version
     ) {
+      const t0 = performance.now();
+
       const totalRows = props.data.length;
       const pagination = totalRows > maxRows;
 
@@ -112,6 +115,8 @@ class TableResults extends Component {
       const remainder = totalRows % maxRows;
       const pages = quotient + (remainder > 0 ? 1 : 0 );
       const currentPage = 0;
+      look('TableResults/getDerivedStateFromProps', t0);
+
       return { version:props.version, selections: props.selections , dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
     }
     return state;
