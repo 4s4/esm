@@ -57,17 +57,8 @@ class Arma extends Component {
           props.version !== state.version
         ) {
           const t0 = performance.now();
-
-            let approvals = cljs.approvalYears(props.reports);
-            const t1 = look('Arma/getDerivedStateFromProps/approvals', t0);
-
-            let actives = cljs.activeYears(props.reports);
-            const t2 = look('Arma/getDerivedStateFromProps/actives', t1);
-            const tt = cljs.countThematicFocus(props.reports, props.filters.thematicsFocus);
-            const t3 = look('Arma/getDerivedStateFromProps/thematicFocus', t2);
-            const frequencies = cljs.countSelects(props.reports, props.filters.types, props.filters.sectors, props.filters.regions);
-            const t4 = look('Arma/getDerivedStateFromProps/frequencies', t3);
-            frequencies.thematicsFocus = tt;
+          const {approvals, actives, thematicFocus, frequencies} = cljs.arma(props.reports, props.filters );
+            frequencies.thematicsFocus = thematicFocus;
 //            console.log('frequencies', frequencies);
 //            console.log('filters', props.filters)
             look('Arma/getDerivedStateFromProps', t0);
@@ -76,7 +67,6 @@ class Arma extends Component {
         return state;
       }
       
-
       splitSearch(kw){
         console.log('splitSearch', kw, this.props.results)
 
