@@ -8,4 +8,10 @@ export const summarise = function(str, wordMax){
       return str;
     }
   }
+
+  export const look = function(m, t0){
+    const t1 = performance.now();
+    console.log(`performance to do ${m} took: ` + (t1 - t0) + " milliseconds.");
+    return t1;
+  }
   

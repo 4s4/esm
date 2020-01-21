@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 //const theMap = require('@highcharts/map-collection/custom/world-continents.geo.json');
-const theMap = require('@highcharts/map-collection/custom/world-highres.geo.json');
+const theMap = require('@highcharts/map-collection/custom/world.geo.json');
 import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 

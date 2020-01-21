@@ -1,6 +1,7 @@
 import { Component} from 'react';
 
 import Container from 'semantic-ui-react/dist/commonjs/elements/Container/Container';
+import {look} from './utils';
 
 import Arma from './Arma';
 require('es6-promise').polyfill();
@@ -21,7 +22,8 @@ function assoc(o, k, v){
   return o;
 }
 function doSearch (reports, queries){
-  return reports.filter(
+  const t0 = performance.now();
+  const res = reports.filter(
     function (r) {
      return queries.reduce(
       function (c, f){
@@ -33,13 +35,16 @@ function doSearch (reports, queries){
       );
     }
   );
+  look('SearchContainer/doSearch', t0);
+  return res;
 }
 const analytics = window.analytics;
 
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeIndex:0 , 
+    this.state = { 
+      version: 0,
       qq:{}, 
       selections:{thematicFocus:[], ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
       results:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: [], approval_year:[], active_year:[]},
@@ -48,32 +53,42 @@ class SearchContainer extends Component {
       initialReports:null, 
       regions:null, 
       searchResults: null, 
-       
-       };
+      };
     this.onSelectChange = this.onSelectChange.bind(this);
     this.saveReports = this.saveReports.bind(this);
     this.saveFilters = this.saveFilters.bind(this);
-    this.saveWorld = this.saveWorld.bind(this);
     this.searchReports = this.searchReports.bind(this);
     this.onCheckBoxChange = this.onCheckBoxChange.bind(this);
     this.onSelectYear = this.onSelectYear.bind(this);
+    this.updateStateWithVersion = this.updateStateWithVersion.bind(this);
   }
 
-
-  saveReports(r){
-    console.log('save reports!');
-    const rr = cljs.reports(this.state.filters.thematicsFocus, r);
-//    console.log(rr.map(o => o.type));
-     console.log('first report', rr[0]);
-    this.setState( { reports: rr, initialReports: rr});
+  updateStateWithVersion(m){
+    m.version = this.state.version++;
+    this.setState(m);
   }
+
+  saveReports(x){
+    return (r) => {
+      const t0 = performance.now();
+      const rr = cljs.reports(this.state.filters.thematicsFocus, r);
+      const t1 = look('cljs.reports', t0);
+      console.log('first report', rr[0]);
+      x.reports = rr;
+      x.initialReports = rr;
+      this.updateStateWithVersion(x);
+      look('cljs.reports setState', t1);
+    }
+  } 
 
   saveFilters(cc){
+    const t0 = performance.now();
     console.log('economical Regions', cc.regionGroups[1]);
     const countries = cljs.countries(cc);
     const types = cljs.types(cc);
     const regions = cljs.regions(cc);
     const sectors = cljs.sectors(cc);
+
     const state = cljs.assocIn(this.state, 
       [
         [["filters", "countries"], countries],
@@ -82,43 +97,38 @@ class SearchContainer extends Component {
         [["filters", "sectors"], sectors],
         [["filters", "thematicsFocus"], cljs.thematicFocus(cc)]
       ]); 
-      console.log('filters', state.filters);
-      state.dicts = {'countries': countries.reduce((c, x) => assoc(c, x.value, x),{}),
-                     'types': types.reduce((c, x) => assoc(c, x.value, x),{}),
-                     'regions': regions.reduce((c, x) => assoc(c, x.value, x),{}),
-                     'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
-                    };
-      this.setState( state);   
+
+    state.dicts = {'countries': countries.reduce((c, x) => assoc(c, x.value, x),{}),
+                    'types': types.reduce((c, x) => assoc(c, x.value, x),{}),
+                    'regions': regions.reduce((c, x) => assoc(c, x.value, x),{}),
+                    'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
+                  };      
+    const t1 = look('cljs.filters... ', t0);
+
+    console.log('filters', state.filters);
     fetch(window.production ? '/home/GetAllRecords' : './js/all-records.json')
     .then(function(response) {
+      look('fetch all records... ', t1);
       if (response.status >= 400) {
         throw new Error("Bad response from server");
       }
       return response.json();
     })
-    .then(this.saveReports);
+    .then(this.saveReports(state));
   }
-
-  saveWorld(cc){
-        console.log('world', cc);
-    this.setState({world:cc});
-    }
-    
 
   componentDidMount() {
     analytics('appStart', {});
-
-    console.log('window.production', window.production);
-    console.log('componentDidMount');
+    const t0 = performance.now();
     fetch(window.production ? '/home/GetAllFilters' : './js/all-filters.json')
     .then(function(response) {
+      look('fetch all filters', t0);
       if (response.status >= 400) {
         throw new Error("Bad response from server");
       }
       return response.json();
     })
-    .then(this.saveFilters);
-    
+    .then(this.saveFilters);    
   }
   
   selectSelect(col, vals, qkw, kw, isRecursive, isMultiple){
@@ -127,7 +137,6 @@ class SearchContainer extends Component {
       const selectedValues = vals.map(o => o.value);
       let dict = new Set(selectedValues);
 //    console.log('initial values', selectedValues);
-
       if (isRecursive){
         dict = new Set();
         selectedValues.map( x => cljs.findChildrenRec(col, x).map( y => dict.add(y)));
@@ -138,16 +147,17 @@ class SearchContainer extends Component {
       } else{
         picked[qkw] = o => dict.has(o[kw]);
       }
-      this.searchReports(picked);
+      this.searchReports(picked, {});
       return picked[qkw];
     } else {
       delete picked[qkw];
-      this.searchReports(picked);
+      this.searchReports(picked, {});
       return null;
     }
   }
 
   fun(q, vals, kw){
+    const t0 = performance.now();
     const { ...sels } = this.state.selections;
     sels[kw] = vals;
     const { ...res } = this.state.results;
@@ -156,11 +166,14 @@ class SearchContainer extends Component {
     }else{
       res[kw] = [];      
     }
-    this.setState({ selections: sels, results: res });
+    const t1 = look('SearchContainer/fun beforeSetState', t0);
+    this.updateStateWithVersion({ selections: sels, results: res});
+    look('SearchContainer/fun afterSetState', t1);
   }
 
   onSelectChange (selectType, vals) {
-  
+    const t0 = performance.now();
+
     vals.length > 0 && analytics(`SelectChange-${selectType.toUpperCase()}`, {vals: vals.map(o => o.value)});
 
     if(selectType === "geoRegion"){
@@ -180,10 +193,13 @@ class SearchContainer extends Component {
       const q = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', 'sectors', true, true);
       this.fun.bind(this)(q, vals, 'sectors');
     }
+    look('onSelectChange', t0);
     console.log(selectType, `Option selected:`, vals)
   };
 
   onSelectYear (selectType, val) {
+    const t0 = performance.now();
+
     const v = val ? val.value : null ;
     const { ...picked } = this.state.qq;
     const { ...sels } =  this.state.selections;
@@ -219,12 +235,13 @@ class SearchContainer extends Component {
         delete sels['active_year'];
       }
     }
-    this.setState({ selections: sels, results: res });
+
     console.log(selectType, `Option selected:`, val)
-    this.searchReports(picked);
+    this.searchReports(picked, { selections: sels, results: res });
+    look('onSelectYear', t0);
   };
 
-  searchReports(qqs){
+  searchReports(qqs, extraState){
     const queries = Object.values(qqs); 
     let reports;
     if (queries.length > 0){
@@ -232,12 +249,16 @@ class SearchContainer extends Component {
     } else {
       reports = this.state.initialReports;
     }
-    this.setState({reports, qq: qqs});
+    extraState.reports = reports;
+    extraState.qq = qqs; 
+    this.updateStateWithVersion(extraState);
     console.log('current results....' ,reports.length, qqs, queries);
 
   }
 
   onCheckBoxChange (opt, y){
+    const t0 = performance.now();
+
     const v = y.checked;
     console.log('listening' , opt, v);
     const q = v ?  r => r[opt] : null;
@@ -267,8 +288,8 @@ class SearchContainer extends Component {
       delete sels['thematicFocus'];
     }
     console.log('keys:', Object.keys(picked));
-    this.setState({ selections: sels, results: res });
-    this.searchReports(picked);
+    this.searchReports(picked, { selections: sels, results: res });
+    look('onCheckBoxChange', t0);
   }
  
   render() {   
