@@ -1,14 +1,4 @@
 import {pieChart, barChart, sunburstChart} from './charts/Charts';
-import WorldMap from './maps/WorldMap';
-import RegionsMap from './maps/RegionsMap';
-
-export function geoRegionAccordion(regionsFilters, regionsFrequencies){
-//    const catt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => o.label);
-//    const datt = regionsFilters.filter(o => o["parent-value"]==="0").map(o => regionsFrequencies[o.value]);
-//    console.log('geoRegionAccordion', catt, datt);
-    // pieChart(400, 400, catt, datt)
-    return RegionsMap;
-}
 
 export function ecoRegionAccordion(regionsFilters, regionsFrequencies, onClick, selections){
     const catt = regionsFilters.filter(o => o["parent-value"]==="1").map(o => o.label);
@@ -18,14 +8,22 @@ export function ecoRegionAccordion(regionsFilters, regionsFrequencies, onClick, 
     return pieChart('Explore the TSM by Economical Region', 400, 400, catt, datt, onClick, selections);
 }
 
-export function countryAccordion(countryFilters, countriesFrequencies){
-    // const dict = new Set(Object.keys(countriesFrequencies));
-    // const base = countryFilters.filter(o => dict.has(o.value));
-    // const catt = base.map(o => o.label);
-    // const datt = base.map(o => countriesFrequencies[o.value] || 0);
-    // barChart(400, 400, catt, datt)
-    return WorldMap;
+export function tab(i, activeIndex, title, content, onClick){
+    const res = {
+        key: `panel-${i}`,
+        active: activeIndex === i,
+        title: {
+          content: title,
+          onClick,
+        },
+        content: {
+          active: activeIndex === i,
+          content,
+        },
+      };
+    return res;
 }
+
 
 export function typeAccordion(typesFilters, typesFrequencies, onSelect){
     const dd = typesFilters.map(o => {
