@@ -6,7 +6,6 @@ import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import ShortContent from './ShortContent'
 
-console.log('ShortContent', ShortContent);
 const  intersection = (setA, setB) => {
   var _intersection = new Set();
   for (var elem of setB) {

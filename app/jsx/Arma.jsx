@@ -280,7 +280,7 @@ class Arma extends Component {
                     console.log('yuhu', o.active, o.index)                          
                     const t0 = performance.now();         
                     let chartConfig = sectorAccordion(filters.sectors, cljs.countSectors(reports, filters.sectors).sectors, this.handleOpen);
-                
+              
                     this.setState({ isSunburst: true, 
                                     activeIndex:  o.active ? null : 2,
                                     mapConfig: null, 

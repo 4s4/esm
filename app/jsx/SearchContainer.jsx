@@ -91,20 +91,15 @@ class SearchContainer extends Component {
 
   saveFilters(cc){
     const t0 = performance.now();
-    const countries = cljs.countries(cc);
-    const types = cljs.types(cc);
-    const regions = cljs.regions(cc);
-    const sectors = cljs.sectors(cc);
-
-    const state = cljs.assocIn(this.state, 
-      [
-        [["filters", "countries"], countries],
-        [["filters", "types"], types],
-        [["filters", "regions"], regions],
-        [["filters", "sectors"], sectors],
-        [["filters", "thematicsFocus"], cljs.thematicFocus(cc)]
-      ]); 
-
+    cljs.filtersToAtom(cc);
+    const countries = cljs.countries();
+    const types = cljs.types();
+    const regions = cljs.regions();
+    const sectors = cljs.sectors();
+    const thematicsFocus = cljs.thematicFocus();
+    const filters = {countries, types, regions, sectors, thematicsFocus}
+    const state = this.state;
+    state.filters = filters;
     state.dicts = {'countries': countries.reduce((c, x) => assoc(c, x.value, x),{}),
                     'types': types.reduce((c, x) => assoc(c, x.value, x),{}),
                     'regions': regions.reduce((c, x) => assoc(c, x.value, x),{}),
