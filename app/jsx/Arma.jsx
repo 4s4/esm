@@ -149,20 +149,26 @@ class Arma extends Component {
             return;
           }
       }
-      activeTab(activeIndex, selections, activesFun, onYear){
-        const actives = activesFun();
-        return tab.bind(this)(4, activeIndex, 
-        <span>Active year</span>,
-        <Dropdown placeholder='Year'
+      activeContent (selections, activesFun, activeIndex, onYear){
+        if (activeIndex === 4) {
+          const actives = activesFun();
+          return <Dropdown placeholder='Year'
           fluid search selection clearable
           value={selections.active_year !== undefined ? selections.active_year : null}
           onChange={(ev, o) => onYear('active_year', o)}
           options={actives && actives.map(o => {return {text: o.label, value: o.value}})}
-        /> , 
+        />
+        } else { return ''}
+      }
+      activeTab(activeIndex, selections, activesFun, onYear){
+        console.log("elapsed ... ", activeIndex === 4);
+        return tab.bind(this)(4, activeIndex, 
+        <span>Active year</span>,
+        this.activeContent.bind(this)(selections, activesFun, activeIndex, onYear),
         (x, o) => {
           console.log('yuhu', o.active, o.index)                          
           const t0 = performance.now();    
-          let chartConfig  = activesAccordion(actives, o => onYear('active_year', {value: o}));            
+          let chartConfig  = activesAccordion(activesFun(), o => onYear('active_year', {value: o}));            
           this.setState({ isSunburst: false, 
                           activeIndex:  o.active ? null : 4,
                           mapConfig: null, 
@@ -172,18 +178,26 @@ class Arma extends Component {
           look('Accordion/activesTab', t0);                
         });}
 
-        approvalTab(activeIndex, selections, approvalsFun, onYear){
-          const approvals = approvalsFun();
-          return tab.bind(this)(5, activeIndex, 
-          <span>Approval year</span>, 
-          <Dropdown placeholder='Year'
+      approvalContent (selections, approvalsFun, activeIndex, onYear){
+          if (activeIndex === 5) {
+            const approvals = approvalsFun();
+            return <Dropdown placeholder='Year'
             fluid search selection clearable
             value={selections.approval_year !== undefined ? selections.approval_year : null}
             onChange={(ev, o) => onYear('approval_year', o)}
             options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
-          /> , 
+          />
+          } else { return ''}
+        }
+  
+        approvalTab(activeIndex, selections, approvalsFun, onYear){
+          return tab.bind(this)(5, activeIndex, 
+          <span>Approval year</span>, 
+          this.approvalContent.bind(this)(selections, approvalsFun, activeIndex, onYear),
+           
           (x, o) => {
-            console.log('yuhu', o.active, o.index)                          
+            console.log('yuhu', o.active, o.index);
+            const approvals = approvalsFun();                         
             const t0 = performance.now(); 
             let chartConfig  = approvalsAccordion(approvals, o => this.props.onYear('approval_year', {value: o}));
             this.setState({ isSunburst: false, 
