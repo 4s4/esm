@@ -58,10 +58,6 @@ class Arma extends Component {
           props.version !== state.version
         ) {
           const t0 = performance.now();
-          //const {approvals, actives, thematicFocus, frequencies} = cljs.arma(props.reports, props.filters );
-//            frequencies.thematicsFocus = thematicFocus;
-//            console.log('frequencies', frequencies);
-//            console.log('filters', props.filters)
             look('Arma/getDerivedStateFromProps', t0);
             return {version: props.version, dicts: props.dicts, selections: props.selections, 
               //frequencies, 
@@ -152,11 +148,11 @@ class Arma extends Component {
           if (index === 6 ) { 
             return;
           }
-
       }
-      activeTab(activeIndex, selections, actives, onYear){
+      activeTab(activeIndex, selections, activesFun, onYear){
+        const actives = activesFun();
         return tab.bind(this)(4, activeIndex, 
-        <span>Active year</span>, 
+        <span>Active year</span>,
         <Dropdown placeholder='Year'
           fluid search selection clearable
           value={selections.active_year !== undefined ? selections.active_year : null}
@@ -176,7 +172,8 @@ class Arma extends Component {
           look('Accordion/activesTab', t0);                
         });}
 
-        approvalTab(activeIndex, selections, approvals, onYear){
+        approvalTab(activeIndex, selections, approvalsFun, onYear){
+          const approvals = approvalsFun();
           return tab.bind(this)(5, activeIndex, 
           <span>Approval year</span>, 
           <Dropdown placeholder='Year'
@@ -297,9 +294,9 @@ class Arma extends Component {
                                        m: null});
                       this.handleAccordion(3); 
                       look('Accordion/typeTab', t0);                
-                    }),
-                    this.activeTab.bind(this)(activeIndex, selections, cljs.activeYears(reports), onYear),                    
-                    this.approvalTab.bind(this)(activeIndex, selections, cljs.approvalYears(reports), onYear),
+                    }), 
+                    this.activeTab.bind(this)(activeIndex, selections, () => cljs.activeYears(reports), onYear),                    
+                    this.approvalTab.bind(this)(activeIndex, selections, () => cljs.approvalYears(reports), onYear),
                     tab.bind(this)(6, activeIndex, 
                       <span>Thematic Focus</span>, 
                       <ThematicFocus reports={reports} 

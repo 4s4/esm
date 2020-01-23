@@ -88,9 +88,9 @@ class SearchContainer extends Component {
     }
   } 
 
+
   saveFilters(cc){
     const t0 = performance.now();
-    console.log('economical Regions', cc.regionGroups[1]);
     const countries = cljs.countries(cc);
     const types = cljs.types(cc);
     const regions = cljs.regions(cc);
@@ -111,7 +111,6 @@ class SearchContainer extends Component {
                     'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
                   };      
     const t1 = look('cljs.filters... ', t0);
-
     console.log('filters', state.filters);
     fetch(window.production ? '/home/GetAllRecords' : './js/all-records.json')
     .then(function(response) {
@@ -145,8 +144,11 @@ class SearchContainer extends Component {
       let dict = new Set(selectedValues);
 //    console.log('initial values', selectedValues);
       if (isRecursive){
+        const t0 = performance.now();
         dict = new Set();
         selectedValues.map( x => cljs.findChildrenRec(col, x).map( y => dict.add(y)));
+        look('selectSelect/recursive', t0);
+
 //        console.log('recursive', dict);
       }
       if(isMultiple){

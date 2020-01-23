@@ -19,7 +19,6 @@ class ThematicFocus extends Component {
     if (
       props.version !== state.version
     ) {
-//      console.log('them', cljs.countThematicFocus(props.reports, props.thematicsFocus));
       return {version: props.version, reports: props.reports, selections: props.selections};
     }
     return state;
