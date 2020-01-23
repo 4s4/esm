@@ -1,9 +1,9 @@
 (ns server.main
   (:require [clojure.set :as set]
+            [server.utils :refer [rename-ks extract-rec to-grid extract-vals
+                                  to-clj ->>to-js ->to-js current-year elapsed
+                                  parse-int count!]]
             [clojure.string :as str]))
-
-(defn elapsed [m]
-  (println "elapsed " m))
 
 (def value-a 4)
 
@@ -15,21 +15,6 @@
 
 (defn main! []
   (println "App loaded!"))
-
-(defn to-clj [o]
-  (time
-   (do
-     (elapsed "to-clj")
-     (js->clj o :keywordize-keys true))))
-
-(defn ->>to-js [no-convert? o]
-  (if no-convert? o (time
-                     (do
-                       (elapsed "clj->js")
-                       (clj->js o)))))
-
-(defn ->to-js [o no-convert?]
-  (->>to-js no-convert? o))
 
 (def at-thematic-focuses (atom nil))
 
@@ -62,9 +47,6 @@
             (reset! at-reports res)
             (->to-js res false)))))
 
-(defn to-grid [n col*]
-  (map #(assoc %2 :col (mod % n) :row (quot % n)) (range) col*))
-
 (defn thematic-focus [data converted no-convert?]
   (time (do (elapsed "thematic-focus")
            (->> (:thematicFocus (if converted data (to-clj data)))
@@ -90,20 +72,6 @@
                                                               (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
                                ) [] (:regions geographical))]
        (->to-js (sort-by :label countries) false)))))
-
-(defn extract-rec [data & [level]]
-  (let [fun (fn [f* cont collection level parent-value]
-              (reduce (fn [c {:keys [value label options countries] :as it}]
-                        (let [c (conj c (cond-> it
-                                          true (select-keys [:label :value])
-                                          true (assoc :level level)
-                                          countries (assoc :countries countries)
-                                          parent-value (assoc :parent-value parent-value)))]
-                          (if (and (some? options) (not-empty options))
-                            (f* f* c options (inc level) value)
-                            c))) cont collection))]
-    (fun fun [] data (or level 0) nil)))
-
 
 (defn find-children-rec [col* v]
   (time
@@ -136,8 +104,6 @@
      (let [sectors (:sectors (or @at-filters (to-clj data)))]
          (->to-js (extract-rec sectors) false)))))
 
-(defn rename-ks [ks] (fn [x] (set/rename-keys x ks)))
-
 (defn regions [data]
   (time
    (do
@@ -156,22 +122,6 @@
                                              (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
                                              )) ops))))))))))
 
-(defn assoc-in-state [state path-value-col]
-  (time
-   (do
-     (elapsed "assoc-in-state")
-     (let [
-          state (to-clj state)
-          path-value-col (to-clj path-value-col)
-          res (reduce (fn [c [path value]]
-                        (assoc-in c (map keyword path) value)) state path-value-col)]
-      (->to-js res false)))))
-
-(comment (println #js ["a" "b"])
-         (println  (assoc-in-state #js {:a 1 :b {:c 5}} #js [[["a"] 3] [["b" "c"] 8]]))
-         
-         (println "ja"))
-
 (defn count-thematic-focus [reports thematic-focus-col converted no-convert?]
   (let [reports (if converted reports (to-clj reports))
         thematic-focus-col (if converted thematic-focus-col (to-clj thematic-focus-col)) 
@@ -187,26 +137,6 @@
                ) counters reports)
      no-convert?)))
 
-(defn- find-v [c v]
-  (first (filter #(= v (:value %)) c)))
-
-(defn ups! [e]
-  (fn[o]
-    (if e
-      (if o
-        (conj o e)
-        #{e})
-      o)))
-
-(defn extract-vals [col type-id report-id]
-  (fn [xx]
-    (let [entity (find-v col type-id)]
-      (cond-> xx
-          true (update type-id (ups! report-id))
-          (:parent-value entity) (update (:parent-value entity) (ups! report-id))))))
-
-(def count! #(reduce (fn [c [uuid s]]
-                       (assoc c uuid (count s))) {} %))
 (defn count-countries [reports converted no-convert?] 
   (println "count countries empty reports???" (count @at-reports))
   (time
@@ -327,11 +257,6 @@
         ]
     (->to-js (update ret2 :regions merge eco) no-convert?)))
 
-(defn parse-int [s]
-  (when (and (some? s))
-    (let [res (js/parseInt  (re-find  #"\d+" s))]
-      (when (integer? res) res))))
-
 (defn approval-years [reports converted no-convert?]
   (time
    (do
@@ -347,9 +272,6 @@
                       (reduce (fn [c [k v]] (conj c {:value (str k) :label (str k) :count v} )) []))]
          (reset! at-approvals res)
          (->>to-js no-convert? res))))))
-
-(defn current-year []
-  (.getFullYear (js/Date.)))
 
 (defn active-years [reports converted no-convert?]
   (time
@@ -389,7 +311,6 @@
 
 (defn generate-exports []
   #js {:reports reports
-       :assocIn assoc-in-state
        :thematicFocus thematic-focus
        :types types
        :sectors sectors
@@ -405,5 +326,3 @@
        :activeYears active-years
        :geoCountries geo-countries
        :findChildrenRec find-children-rec})
-
-
