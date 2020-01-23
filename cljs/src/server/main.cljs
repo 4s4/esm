@@ -22,6 +22,14 @@
 
 (def at-filters (atom nil))
 
+(def at-countries (atom nil))
+
+(def at-types (atom nil))
+
+(def at-sectors (atom nil))
+
+(def at-regions (atom nil))
+
 (def at-approvals (atom nil))
 
 (def at-actives (atom nil))
@@ -47,31 +55,39 @@
             (reset! at-reports res)
             (->to-js res false)))))
 
-(defn thematic-focus [data converted no-convert?]
+(defn thematic-focus [converted no-convert?]
   (time (do (elapsed "thematic-focus")
-           (->> (:thematicFocus (if converted data (to-clj data)))
+           (->> (:thematicFocus @at-filters)
                 (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x))))
                 (to-grid 3)
                 (reset! at-thematic-focuses)
                 (->>to-js no-convert?)))))
 
-(defn countries [data]
+(defn filters-to-atom [data]
+  (time
+   (do
+     (elapsed "filters-to-atom")
+     (reset! at-filters (to-clj data)))))
+
+(defn countries []
   (time
    (do
      (elapsed "countries")
-     (let [data (to-clj data)
-           _ (reset! at-filters data)
-           filters (:regionGroups data)
-           geographical (first (filter #(= "Geographical" (:label %)) filters))
-           countries (reduce (fn [c reg]
-                               (apply conj c (map (fn [c] (-> c
-                                                              (dissoc :name)
-                                                              (dissoc :id)
-                                                              (assoc :value (:id c))
-                                                              (assoc :label (:name c))
-                                                              (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
-                               ) [] (:regions geographical))]
-       (->to-js (sort-by :label countries) false)))))
+     (if @at-countries
+       (->to-js @at-countries false)       
+       (let [filters (:regionGroups @at-filters)
+             geographical (first (filter #(= "Geographical" (:label %)) filters))
+             countries (reduce (fn [c reg]
+                                 (apply conj c (map (fn [c] (-> c
+                                                                (dissoc :name)
+                                                                (dissoc :id)
+                                                                (assoc :value (:id c))
+                                                                (assoc :label (:name c))
+                                                                (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
+                                 ) [] (:regions geographical))
+             countries (sort-by :label countries)]
+         (reset! at-countries countries)
+         (->to-js countries false))))))
 
 (defn find-children-rec [col* v]
   (time
@@ -90,27 +106,27 @@
           children (fun fun [v] (filter #(= v (:parent-value %)) col*))]
       (clj->js children)))))
 
-(defn types [data]
+(defn types []
   (time
    (do
      (elapsed "types")
-     (let [filters (:types (or @at-filters (to-clj data)))]
+     (let [filters (:types @at-filters)]
        (->to-js (extract-rec filters) false)))))
 
-(defn sectors [data]
+(defn sectors []
   (time
    (do
      (elapsed "sectors")          
-     (let [sectors (:sectors (or @at-filters (to-clj data)))]
+     (let [sectors (:sectors @at-filters)]
          (->to-js (extract-rec sectors) false)))))
 
-(defn regions [data]
+(defn regions []
   (time
    (do
      (elapsed "regions")          
      (->>to-js false
       (extract-rec
-       (->> (:regionGroups (or @at-filters (to-clj data)))
+       (->> (:regionGroups @at-filters)
             (map #(if-not (:id %)
                     (assoc %2 :id (str %))
                     %) (range))
@@ -123,8 +139,9 @@
                                              )) ops))))))))))
 
 (defn count-thematic-focus [reports thematic-focus-col converted no-convert?]
-  (let [reports (if converted reports (to-clj reports))
-        thematic-focus-col (if converted thematic-focus-col (to-clj thematic-focus-col)) 
+  (let [reports (if converted reports (or @at-reports (to-clj reports)))
+        thematic-focus-col (if converted thematic-focus-col (or @at-thematic-focuses
+                                                                (to-clj thematic-focus-col))) 
         counters  (reduce #(assoc % (keyword (:kw %2)) 0) {} thematic-focus-col)]
     (->to-js
      (reduce (fn [cs r]
@@ -222,41 +239,6 @@
                     (update :types count!))]
        (->to-js ret2 no-convert?)))))
 
-(defn count-selects [reports types sectors regions converted no-convert?]
-  (let [reports (if converted reports (to-clj reports))
-        types (if converted types (to-clj types))
-        regions (if converted regions (to-clj regions))
-        sectors (if converted sectors (to-clj sectors))
-        ret (reduce (fn [c r]
-                      (let [report-id (:id r)]
-                        (-> c
-                            (update :countries conj (:country r))
-                            (update :types (extract-vals types (:type r) report-id))
-                            (update :regions (extract-vals regions (:region r) report-id))
-                            (update
-                             :sectors
-                             (fn [x]
-                               (reduce (fn [c s]
-                                         ((extract-vals sectors s report-id) c)) x (:sectors r))))
-                            )))
-                    {:countries [] :types {} :regions {} :sectors {}}
-                    reports)
-        ret2 (-> ret
-                 (update :countries frequencies)
-                 (update :types count!)
-                 (update :regions count!)
-                 (update :sectors count!))
-
-        eco (let [freqs* (:countries ret2)
-                  eco-regions (filter #(= "1" (:parent-value %)) regions)]
-              (reduce (fn [c reg]
-                        (assoc c (:value reg) (reduce (fn [x co]
-                                                        (+  x (or (get freqs* (:id co)) 0))
-                                                        ) 0 (:countries reg)))
-                        ) {} eco-regions))
-        ]
-    (->to-js (update ret2 :regions merge eco) no-convert?)))
-
 (defn approval-years [reports converted no-convert?]
   (time
    (do
@@ -310,14 +292,14 @@
     (->to-js (filter #(pos? (:RecordCount %)) d4) false)))
 
 (defn generate-exports []
-  #js {:reports reports
+  #js {:filtersToAtom filters-to-atom
+       :reports reports
        :thematicFocus thematic-focus
        :types types
        :sectors sectors
        :regions regions
        :countries countries
        :countThematicFocus count-thematic-focus
-       :countSelects count-selects
        :countCountries count-countries
        :countSectors count-sectors
        :countTypes count-types
