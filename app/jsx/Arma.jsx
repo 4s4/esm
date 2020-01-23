@@ -212,13 +212,13 @@ class Arma extends Component {
       accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear, selections){
         const panels = [
           tab.bind(this)(1, activeIndex, 
-                        <span  >Country</span>, 
+                        <span>Country</span>, 
                         <Dropdown placeholder='Country'
                                   fluid multiple search selection
                                   value={selections.countries.map(o => o.value)}
                                   onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
                                   options={filters.countries && filters.countries.map(o => {return {text: o.label, value: o.value}})}
-                        />, 
+                        />,
                         (x, o) => {
                           console.log('yuhu', o.active, o.index)                          
                           const t0 = performance.now();                

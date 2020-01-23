@@ -36,6 +36,12 @@
 
 (def at-count-countries (atom nil))
 
+(def at-count-regions (atom nil))
+
+(def at-count-sectors (atom nil))
+
+(def at-count-types (atom nil))
+
 (defn reports [dict data]
   (time (do
           (elapsed "reports")
@@ -176,68 +182,74 @@
   (time
    (do
      (elapsed "count-regions")
-     (let [reports (if converted reports (or @at-reports (to-clj reports)))
-          regions (if converted regions (to-clj regions))
-          ret (reduce (fn [c r]
-                        (let [report-id (:id r)]
-                          (-> c
-                              (update :countries conj (:country r))
-                              (update :regions (extract-vals regions (:region r) report-id))
+     (if @at-count-regions (->to-js @at-count-regions false)
+         (let [reports (if converted reports (or @at-reports (to-clj reports)))
+               regions (if converted regions (or @at-regions (to-clj regions)))
+               ret (reduce (fn [c r]
+                             (let [report-id (:id r)]
+                               (-> c
+                                   (update :countries conj (:country r))
+                                   (update :regions (extract-vals regions (:region r) report-id))
 
-                              )))
-                      {:regions {} :countries []}
-                      reports)
-          ret2 (-> ret
-                   (update :countries frequencies)
-                   (update :regions count!))
+                                   )))
+                           {:regions {} :countries []}
+                           reports)
+               ret2 (-> ret
+                        (update :countries frequencies)
+                        (update :regions count!))
 
-          eco (let [freqs* (:countries ret2)
-                    eco-regions (filter #(= "1" (:parent-value %)) regions)]
-                (reduce (fn [c reg]
-                          (assoc c (:value reg) (reduce (fn [x co]
-                                                          (+  x (or (get freqs* (:id co)) 0))
-                                                          ) 0 (:countries reg)))
-                          ) {} eco-regions))
-          ]
-      (->to-js (update ret2 :regions merge eco) no-convert?)))))
+               eco (let [freqs* (:countries ret2)
+                         eco-regions (filter #(= "1" (:parent-value %)) regions)]
+                     (reduce (fn [c reg]
+                               (assoc c (:value reg) (reduce (fn [x co]
+                                                               (+  x (or (get freqs* (:id co)) 0))
+                                                               ) 0 (:countries reg)))
+                               ) {} eco-regions))
+               res (update ret2 :regions merge eco)]
+           (reset! at-count-regions res)
+           (->to-js res no-convert?))))))
 
 (defn count-sectors [reports sectors converted no-convert?]
   (time
    (do
      (elapsed "count-sectors")
-     (let [reports (if converted reports (to-clj reports))
-          sectors (if converted sectors (to-clj sectors))
-          ret (reduce (fn [c r]
-                        (let [report-id (:id r)]
-                          (-> c
-                              (update
-                               :sectors
-                               (fn [x]
-                                 (reduce (fn [c s]
-                                           ((extract-vals sectors s report-id) c)) x (:sectors r))))
-                              )))
-                      {:sectors {}}
-                      reports)
-          ret2 (-> ret
-                   (update :sectors count!))]
-      (->to-js ret2 no-convert?)))))
+     (if @at-count-sectors (->to-js @at-count-regions false)
+         (let [reports (if converted reports (to-clj reports))
+               sectors (if converted sectors (to-clj sectors))
+               ret (reduce (fn [c r]
+                             (let [report-id (:id r)]
+                               (-> c
+                                   (update
+                                    :sectors
+                                    (fn [x]
+                                      (reduce (fn [c s]
+                                                ((extract-vals sectors s report-id) c)) x (:sectors r))))
+                                   )))
+                           {:sectors {}}
+                           reports)
+               ret2 (-> ret
+                        (update :sectors count!))]
+           (reset! at-count-sectors ret2)
+           (->to-js ret2 no-convert?))))))
 
 (defn count-types [reports types converted no-convert?]
   (time
    (do
      (elapsed "count-types")
-     (let [reports (if converted reports (to-clj reports))
-           types (if converted types (to-clj types))
-           ret (reduce (fn [c r]
-                         (let [report-id (:id r)]
-                           (-> c
-                               (update :types (extract-vals types (:type r) report-id))
-                               )))
-                       { :types {}}
-                       reports)
-           ret2 (-> ret
-                    (update :types count!))]
-       (->to-js ret2 no-convert?)))))
+     (if @at-count-types (->to-js @at-count-types false)
+         (let [reports (if converted reports (to-clj reports))
+               types (if converted types (to-clj types))
+               ret (reduce (fn [c r]
+                             (let [report-id (:id r)]
+                               (-> c
+                                   (update :types (extract-vals types (:type r) report-id))
+                                   )))
+                           { :types {}}
+                           reports)
+               ret2 (-> ret
+                        (update :types count!))]
+           (reset! at-count-types ret2)
+           (->to-js ret2 no-convert?))))))
 
 (defn approval-years [reports converted no-convert?]
   (time
