@@ -80,7 +80,7 @@
    (do
      (elapsed "countries")
      (if @at-countries
-       (->to-js @at-countries false)       
+       @at-countries
        (let [filters (:regionGroups @at-filters)
              geographical (first (filter #(= "Geographical" (:label %)) filters))
              countries (reduce (fn [c reg]
@@ -92,8 +92,8 @@
                                                                 (assoc :region {:id (:id reg) :label (:name reg)}))) (:countries reg)))
                                  ) [] (:regions geographical))
              countries (sort-by :label countries)]
-         (reset! at-countries countries)
-         (->to-js countries false))))))
+         (reset! at-countries (->to-js countries false))
+         )))))
 
 (defn find-children-rec [col* v]
   (time
@@ -116,33 +116,37 @@
   (time
    (do
      (elapsed "types")
-     (let [filters (:types @at-filters)]
-       (->to-js (extract-rec filters) false)))))
+     (if @at-types @at-types
+         (let [filters (:types @at-filters)]
+           (reset! at-types (->to-js (extract-rec filters) false)))))))
 
 (defn sectors []
   (time
    (do
      (elapsed "sectors")          
-     (let [sectors (:sectors @at-filters)]
-         (->to-js (extract-rec sectors) false)))))
+     (if @at-sectors @at-sectors
+         (let [sectors (:sectors @at-filters)]
+           (reset! at-sectors (->to-js (extract-rec sectors) false)))))))
 
 (defn regions []
   (time
    (do
      (elapsed "regions")          
-     (->>to-js false
-      (extract-rec
-       (->> (:regionGroups @at-filters)
-            (map #(if-not (:id %)
-                    (assoc %2 :id (str %))
-                    %) (range))
-            (map #(set/rename-keys % {:name :label :id :value :regions :options}))
-            (map #(update % :options
-                          (fn [ops]
-                            (map (fn [x] (-> x
-                                             ((rename-ks {:name :label :id :value}))
-                                             (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
-                                             )) ops))))))))))
+     (if @at-regions @at-regions
+         (reset! at-regions
+                 (->>to-js false
+                           (extract-rec
+                            (->> (:regionGroups @at-filters)
+                                 (map #(if-not (:id %)
+                                         (assoc %2 :id (str %))
+                                         %) (range))
+                                 (map #(set/rename-keys % {:name :label :id :value :regions :options}))
+                                 (map #(update % :options
+                                               (fn [ops]
+                                                 (map (fn [x] (-> x
+                                                                  ((rename-ks {:name :label :id :value}))
+                                                                  (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
+                                                                  )) ops))))))))))))
 
 (defn count-thematic-focus [reports thematic-focus-col converted no-convert?]
   (let [reports (if converted reports (or @at-reports (to-clj reports)))
@@ -166,7 +170,7 @@
    (do
      (elapsed "count-countries")
      (if @at-count-countries
-       (->to-js @at-count-countries false)
+       @at-count-countries
        (let [reports (if converted reports (or @at-reports (to-clj reports)))
              ret (reduce (fn [c r]
                            (let [report-id (:id r)]
@@ -175,16 +179,15 @@
                          {:countries []}
                          reports)
              ret2 (-> ret (update :countries frequencies))]
-         (reset! at-count-countries ret2)
-         (->to-js ret2 no-convert?))))))
+         (reset! at-count-countries (->to-js ret2 no-convert?)))))))
 
-(defn count-regions [reports regions converted no-convert?]
+(defn count-regions [reports converted no-convert?]
   (time
    (do
      (elapsed "count-regions")
-     (if @at-count-regions (->to-js @at-count-regions false)
+     (if @at-count-regions @at-count-regions
          (let [reports (if converted reports (or @at-reports (to-clj reports)))
-               regions (if converted regions (or @at-regions (to-clj regions)))
+               regions (to-clj @at-regions)
                ret (reduce (fn [c r]
                              (let [report-id (:id r)]
                                (-> c
@@ -206,8 +209,7 @@
                                                                ) 0 (:countries reg)))
                                ) {} eco-regions))
                res (update ret2 :regions merge eco)]
-           (reset! at-count-regions res)
-           (->to-js res no-convert?))))))
+           (reset! at-count-regions (->to-js res no-convert?)))))))
 
 (defn count-sectors [reports sectors converted no-convert?]
   (time
@@ -232,13 +234,13 @@
            (reset! at-count-sectors ret2)
            (->to-js ret2 no-convert?))))))
 
-(defn count-types [reports types converted no-convert?]
+(defn count-types [reports converted no-convert?]
   (time
    (do
      (elapsed "count-types")
      (if @at-count-types (->to-js @at-count-types false)
-         (let [reports (if converted reports (to-clj reports))
-               types (if converted types (to-clj types))
+         (let [reports (if converted reports (or @at-reports (to-clj reports)))
+               types (to-clj @at-types)
                ret (reduce (fn [c r]
                              (let [report-id (:id r)]
                                (-> c

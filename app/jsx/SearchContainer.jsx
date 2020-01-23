@@ -93,16 +93,16 @@ class SearchContainer extends Component {
     const t0 = performance.now();
     cljs.filtersToAtom(cc);
     const countries = cljs.countries();
-    const types = cljs.types();
-    const regions = cljs.regions();
+//    const types = cljs.types();
+//    const regions = cljs.regions();
     const sectors = cljs.sectors();
     const thematicsFocus = cljs.thematicFocus();
-    const filters = {countries, types, regions, sectors, thematicsFocus}
+    const filters = { sectors, thematicsFocus}
     const state = this.state;
     state.filters = filters;
     state.dicts = {'countries': countries.reduce((c, x) => assoc(c, x.value, x),{}),
-                    'types': types.reduce((c, x) => assoc(c, x.value, x),{}),
-                    'regions': regions.reduce((c, x) => assoc(c, x.value, x),{}),
+//                    'types': types.reduce((c, x) => assoc(c, x.value, x),{}),
+//                    'regions': regions.reduce((c, x) => assoc(c, x.value, x),{}),
                     'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
                   };      
     const t1 = look('cljs.filters... ', t0);
@@ -180,17 +180,17 @@ class SearchContainer extends Component {
     vals.length > 0 && analytics(`SelectChange-${selectType.toUpperCase()}`, {vals: vals.map(o => o.value)});
 
     if(selectType === "geoRegion"){
-      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="0"), vals, 'geoRegion', 'region', false);
+      const [q, picked] = this.selectSelect.bind(this)(cljs.regions().filter(o => o["parent-value"]==="0"), vals, 'geoRegion', 'region', false);
       this.fun.bind(this)(q, picked, vals, 'geoRegions');
     } else if(selectType === "ecoRegion"){
       const countryVals = vals.reduce((c, x) => c.concat(x.countries) ,[]).map( v => { return { value: v.id, text: v.name }});
-      const [q, picked]  = this.selectSelect.bind(this)(this.state.filters.regions.filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
+      const [q, picked]  = this.selectSelect.bind(this)(cljs.regions().filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
       this.fun.bind(this)(q, picked, vals, 'ecoRegions');
     } else if(selectType === "country") {
-      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.countries, vals, 'country', 'country', false);
+      const [q, picked] = this.selectSelect.bind(this)(cljs.countries(), vals, 'country', 'country', false);
       this.fun.bind(this)(q,picked, vals, 'countries');
     } else if(selectType === "type") {
-      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.types, vals, 'type', 'type', true, false);
+      const [q, picked] = this.selectSelect.bind(this)(cljs.types(), vals, 'type', 'type', true, false);
       this.fun.bind(this)(q, picked, vals, 'types');
     } else if(selectType === "sectors") {
       const [q, picked] = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', 'sectors', true, true);

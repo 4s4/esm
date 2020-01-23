@@ -105,7 +105,7 @@ class Arma extends Component {
 
       ecoRegionsClick(d){
         const { filters, selections, onSelectChange } = this.props;
-        const reg = filters.regions.find(r => r.value === d.id);
+        const reg = cljs.regions().find(r => r.value === d.id);
         let data = selections.ecoRegions;
         if(data.find(d => d.value === reg.value) === undefined){
           data.push(reg);
@@ -217,7 +217,7 @@ class Arma extends Component {
                                   fluid multiple search selection
                                   value={selections.countries.map(o => o.value)}
                                   onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
-                                  options={filters.countries && filters.countries.map(o => {return {text: o.label, value: o.value}})}
+                                  options={cljs.countries() && cljs.countries().map(o => {return {text: o.label, value: o.value}})}
                         />,
                         (x, o) => {
                           console.log('yuhu', o.active, o.index)                          
@@ -235,7 +235,7 @@ class Arma extends Component {
                         fluid multiple search selection
                         value={selections.geoRegions.map(o => o.value)}
                         onChange={(ev, o) => onSelectChange('geoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
-                        options={filters.regions && filters.regions.filter(o => o["parent-value"]==="0").map(o => {return {text: o.label, value: o.value}})}
+                        options={cljs.regions() && cljs.regions().filter(o => o["parent-value"]==="0").map(o => {return {text: o.label, value: o.value}})}
               />, 
               (x, o) => {
                 console.log('yuhu', o.active, o.index)                          
@@ -253,7 +253,7 @@ class Arma extends Component {
                     fluid multiple search selection
                     value={selections.ecoRegions.map(o => o.value)}
                     onChange={(ev, o) => onSelectChange('ecoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
-                    options={filters.regions && filters.regions.filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value, countries: o.countries}})}
+                    options={cljs.regions() && cljs.regions().filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value, countries: o.countries}})}
                   />, 
                 (x, o) => {
                   console.log('yuhu', o.active, o.index)                          
@@ -261,8 +261,8 @@ class Arma extends Component {
                   this.setState({ isSunburst: false, 
                                   activeIndex:  o.active ? null : 11,
                                   mapConfig: null, 
-                                  chartConfig:ecoRegionAccordion(filters.regions, 
-                                    cljs.countRegions(reports, filters.regions).regions, 
+                                  chartConfig:ecoRegionAccordion(cljs.regions(), 
+                                    cljs.countRegions(reports).regions, 
                                     this.ecoRegionsClick, selections.ecoRegions),
                                    m: null});
                   this.handleAccordion(11); 
@@ -295,12 +295,12 @@ class Arma extends Component {
                     fluid multiple search selection
                     value={selections.types.map(o => o.value)}
                     onChange={(ev, o) => onSelectChange('type', o.value.map(id => o.options.find( e => e.value === id)))}
-                    options={filters.types && filters.types.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
+                    options={cljs.types() && cljs.types().map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
                   />, 
                     (x, o) => {
                       console.log('yuhu', o.active, o.index)                          
                       const t0 = performance.now();    
-                      let chartConfig = typeAccordion(filters.types, cljs.countTypes(reports, filters.types).types, this.onChangeSelect);                                 
+                      let chartConfig = typeAccordion(cljs.types(), cljs.countTypes(reports).types, this.onChangeSelect);                                 
                       this.setState({ isSunburst: true, 
                                       activeIndex:  o.active ? null : 3,
                                       mapConfig: null, 
@@ -353,7 +353,7 @@ class Arma extends Component {
        if(t === 'ecoRegion'){
         this.setState({ 
           isSunburst: false, 
-          chartConfig: ecoRegionAccordion(filters.regions, frequencies.regions, this.ecoRegionsClick, d)})
+          chartConfig: ecoRegionAccordion(cljs.regions(), frequencies.regions, this.ecoRegionsClick, d)})
        } else if (t === 'country'){
        // TODO
 
@@ -447,10 +447,10 @@ class Arma extends Component {
               <Element
               version={this.state.version}
               onChangeMap={this.onChangeSelect}
-              countries={filters && filters.countries} 
+              countries={cljs.countries()} 
               countrySelections={selections && selections.countries}
               regionsSelections={selections && selections.geoRegions}
-              regions={filters && filters.regions && filters.regions.filter(x => x['parent-value'] === '0')} 
+              regions={cljs.regions() && cljs.regions().filter(x => x['parent-value'] === '0')} 
               {...mapConfig}
               //frequencies={frequencies && frequencies.countries}
               />

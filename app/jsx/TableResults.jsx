@@ -18,6 +18,7 @@ import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import download from 'downloadjs';
 import {look} from './utils';
+const cljs = require('../../js/cljs.js');
 
 function downloadFile(url){
   console.log('before download');
@@ -26,7 +27,7 @@ function downloadFile(url){
 }
 
 function rightOption (d, filters) {
-  const type = filters.types.find( o => o.value === d.type);
+  const type = cljs.types().find( o => o.value === d.type);
   return (  
        
   <List>
@@ -48,8 +49,8 @@ function toUrl(s){
 
  function centerOption(d, filters){ 
   const sectors = d.sectors.map(s => filters.sectors.find( o => o.value === s));
-  const country = filters.countries.find( o => o.value === d.country);
-  const region = filters.regions.find( o => o.value === d.region);
+  const country = cljs.countries().find( o => o.value === d.country);
+  const region = cljs.regions().find( o => o.value === d.region);
 
   return (
     <Item.Group>
@@ -72,7 +73,7 @@ function toUrl(s){
   }
 
  function leftOption(d, filters){ 
-  const region = filters.regions.find( o => o.value === d.region);
+  const region = cljs.regions().find( o => o.value === d.region);
   const dict = {"Africa": "Africa", "America": "Americas", "Asia": "Asia", "Europe": "Europe", "Oceania": "Southeast_Asia"};
   return (      
   <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={ <Image size='tiny' src={`img/maps/${dict[region.label]}.png`} />} />      
