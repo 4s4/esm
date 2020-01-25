@@ -24,7 +24,6 @@ export function tab(i, activeIndex, title, content, onClick){
     return res;
 }
 
-
 export function typeAccordion(typesFilters, typesFrequencies, onSelect){
     const dd = typesFilters.map(o => {
         return {id: o.value, 
@@ -55,7 +54,6 @@ export function sectorAccordion(sectorFilters, sectorFrequencies, handleOpen){
     return h;};                    
     return sunburstChart('Explore the TSM by Sector', dd, true, finder, handleOpen);
 }
-const mockSelection = (x) => {console.log('mockSelection', x); return x; };
 
 export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFrequencies, onSelect){
     const cats = thematicFocusFilters.map( o => o.name);
@@ -64,6 +62,7 @@ export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFreque
     return barChart('Explore the TSM by Thematic Focus', cats, datt, finder, onSelect);
 }
 const mockFinder = (x) => {console.log('mockFinder', x); return x;};
+
 export function approvalsAccordion(approvals, onYear){
     const catt = approvals.map(o => o.label);
     const datt = approvals.map(o => o.count || 0);

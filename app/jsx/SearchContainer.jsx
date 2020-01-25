@@ -53,7 +53,7 @@ class SearchContainer extends Component {
       qq:{}, 
       selections:{thematicFocus:[], ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: []},
       results:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: [], approval_year:[], active_year:[]},
-      filters: {countries:null, regions:null, types: null, sectors: null}, 
+      filters: {}, 
       reports: null, 
       initialReports:null, 
       regions:null, 
@@ -77,7 +77,7 @@ class SearchContainer extends Component {
   saveReports(x){
     return (r) => {
       const t0 = performance.now();
-      const rr = cljs.reports(x.filters.thematicsFocus, r);
+      const rr = cljs.reports(cljs.thematicFocus(), r);
       const t1 = look('cljs.reports', t0);
       console.log('first report', rr[0]);
       x.reports = rr;
@@ -95,15 +95,15 @@ class SearchContainer extends Component {
     const countries = cljs.countries();
 //    const types = cljs.types();
 //    const regions = cljs.regions();
-    const sectors = cljs.sectors();
-    const thematicsFocus = cljs.thematicFocus();
-    const filters = { sectors, thematicsFocus}
+//    const sectors = cljs.sectors();
+//    const thematicsFocus = cljs.thematicFocus();
+    const filters = { }
     const state = this.state;
     state.filters = filters;
     state.dicts = {'countries': countries.reduce((c, x) => assoc(c, x.value, x),{}),
 //                    'types': types.reduce((c, x) => assoc(c, x.value, x),{}),
 //                    'regions': regions.reduce((c, x) => assoc(c, x.value, x),{}),
-                    'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
+//                    'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
                   };      
     const t1 = look('cljs.filters... ', t0);
     console.log('filters', state.filters);
@@ -193,7 +193,7 @@ class SearchContainer extends Component {
       const [q, picked] = this.selectSelect.bind(this)(cljs.types(), vals, 'type', 'type', true, false);
       this.fun.bind(this)(q, picked, vals, 'types');
     } else if(selectType === "sectors") {
-      const [q, picked] = this.selectSelect.bind(this)(this.state.filters.sectors, vals, 'sectors', 'sectors', true, true);
+      const [q, picked] = this.selectSelect.bind(this)(cljs.sectors(), vals, 'sectors', 'sectors', true, true);
       this.fun.bind(this)(q, picked, vals, 'sectors');
     }
     look('onSelectChange', t0);
@@ -282,7 +282,7 @@ class SearchContainer extends Component {
       delete picked[opt];
     }
 
-    const thematicsFocusSelected = this.state.filters.thematicsFocus.filter(t => sels[t.kw]);
+    const thematicsFocusSelected = cljs.thematicFocus().filter(t => sels[t.kw]);
     if(thematicsFocusSelected.length > 0){
       sels['thematicFocus'] = thematicsFocusSelected;
       res['thematicFocus'] = doSearch(this.state.initialReports, thematicsFocusSelected.map(t => picked[t.kw]));

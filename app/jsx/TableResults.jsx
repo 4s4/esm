@@ -48,7 +48,7 @@ function toUrl(s){
 
 
  function centerOption(d, filters){ 
-  const sectors = d.sectors.map(s => filters.sectors.find( o => o.value === s));
+  const sectors = d.sectors.map(s => cljs.sectors().find( o => o.value === s));
   const country = cljs.countries().find( o => o.value === d.country);
   const region = cljs.regions().find( o => o.value === d.region);
 

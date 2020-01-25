@@ -4,13 +4,12 @@ import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown'
 import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordion';
 import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Card from 'semantic-ui-react/dist/commonjs/views/Card/Card';
 import Portal from 'semantic-ui-react/dist/commonjs/addons/Portal/Portal';
-import RegionsMap from './maps/RegionsMap';
 
-import {tab, geoRegionAccordion, ecoRegionAccordion, countryAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
+import {tab, ecoRegionAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
+import {activeTab, approvalTab, sectorTab, typeTab, ecoRegionTab, geoRegionTab} from './AccordionTab';
 const cljs = require('../../js/cljs.js');
 import ThematicFocus from './ThematicFocus';
 import WorldMap from './maps/WorldMap';
@@ -104,7 +103,7 @@ class Arma extends Component {
       }
 
       ecoRegionsClick(d){
-        const { filters, selections, onSelectChange } = this.props;
+        const { selections, onSelectChange } = this.props;
         const reg = cljs.regions().find(r => r.value === d.id);
         let data = selections.ecoRegions;
         if(data.find(d => d.value === reg.value) === undefined){
@@ -116,98 +115,11 @@ class Arma extends Component {
       }
       
       handleAccordion (index) {
-        console.log('accordion selected', index,  );
-        const { activeIndex, frequencies, actives, approvals } = this.state;      
-        const newIndex = activeIndex === index ? -1 : index
-        const {filters, selections} = this.props;
+        console.log('accordion selected', index);
         this.setState({showCombinedResults: false, splitSearchResults:null, splitSearchKey:null});
         console.log('index', index);
-          if (index === 0 ) { 
-            return;
-          }
-          if (index === 11 ) { 
-            return;
-          }
-          if (index === 1 ) { 
-            return;
-          }
-          if (index === 2 ) { 
-            return;
-          }
-
-          if (index === 3 ) { 
-            return;
-          }
-          if (index === 4 ) { 
-            return;
-          }          
-          if (index === 5 ) { 
-            return;
-          }
-
-          if (index === 6 ) { 
-            return;
-          }
       }
-      activeContent (selections, activesFun, activeIndex, onYear){
-        if (activeIndex === 4) {
-          const actives = activesFun();
-          return <Dropdown placeholder='Year'
-          fluid search selection clearable
-          value={selections.active_year !== undefined ? selections.active_year : null}
-          onChange={(ev, o) => onYear('active_year', o)}
-          options={actives && actives.map(o => {return {text: o.label, value: o.value}})}
-        />
-        } else { return ''}
-      }
-      activeTab(activeIndex, selections, activesFun, onYear){
-        console.log("elapsed ... ", activeIndex === 4);
-        return tab.bind(this)(4, activeIndex, 
-        <span>Active year</span>,
-        this.activeContent.bind(this)(selections, activesFun, activeIndex, onYear),
-        (x, o) => {
-          console.log('yuhu', o.active, o.index)                          
-          const t0 = performance.now();    
-          let chartConfig  = activesAccordion(activesFun(), o => onYear('active_year', {value: o}));            
-          this.setState({ isSunburst: false, 
-                          activeIndex:  o.active ? null : 4,
-                          mapConfig: null, 
-                          chartConfig,
-                           m: null});
-          this.handleAccordion(4); 
-          look('Accordion/activesTab', t0);                
-        });}
 
-      approvalContent (selections, approvalsFun, activeIndex, onYear){
-          if (activeIndex === 5) {
-            const approvals = approvalsFun();
-            return <Dropdown placeholder='Year'
-            fluid search selection clearable
-            value={selections.approval_year !== undefined ? selections.approval_year : null}
-            onChange={(ev, o) => onYear('approval_year', o)}
-            options={approvals && approvals.map(o => {return {text: o.label, value: o.value}})}
-          />
-          } else { return ''}
-        }
-  
-        approvalTab(activeIndex, selections, approvalsFun, onYear){
-          return tab.bind(this)(5, activeIndex, 
-          <span>Approval year</span>, 
-          this.approvalContent.bind(this)(selections, approvalsFun, activeIndex, onYear),
-           
-          (x, o) => {
-            console.log('yuhu', o.active, o.index);
-            const approvals = approvalsFun();                         
-            const t0 = performance.now(); 
-            let chartConfig  = approvalsAccordion(approvals, o => this.props.onYear('approval_year', {value: o}));
-            this.setState({ isSunburst: false, 
-                            activeIndex:  o.active ? null : 5,
-                            mapConfig: null, 
-                            chartConfig,
-                             m: null});
-            this.handleAccordion(5); 
-            look('Accordion/approvalsTab', t0);                
-          });}
 
       accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear, selections){
         const panels = [
@@ -224,106 +136,30 @@ class Arma extends Component {
                           const t0 = performance.now();                
                           this.setState({ isSunburst: false, 
                                           activeIndex:  o.active ? null : 1,
-                                          mapConfig: {frequencies: cljs.countCountries(reports).countries}, 
+                                          mapConfig: {frequencies: cljs.countCountries().countries}, 
                                                       chartConfig:null, m: WorldMap});
                           this.handleAccordion(1); 
                           look('Accordion/countryTab', t0);                
                         }),
-            tab.bind(this)(0, activeIndex, 
-              <span  >Geographical Region</span>, 
-              <Dropdown placeholder='Region'
-                        fluid multiple search selection
-                        value={selections.geoRegions.map(o => o.value)}
-                        onChange={(ev, o) => onSelectChange('geoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
-                        options={cljs.regions() && cljs.regions().filter(o => o["parent-value"]==="0").map(o => {return {text: o.label, value: o.value}})}
-              />, 
-              (x, o) => {
-                console.log('yuhu', o.active, o.index)                          
-                const t0 = performance.now();                
-                this.setState({ isSunburst: false, 
-                                activeIndex:  o.active ? null : 0,
-                                mapConfig: {frequencies: cljs.countCountries(reports).countries}, 
-                                            chartConfig:null, m: RegionsMap});
-                this.handleAccordion(0); 
-                look('Accordion/geoRegionsTab', t0);                
-              }),                    
-            tab.bind(this)(11, activeIndex, 
-                <span  >Economical Region</span>, 
-                <Dropdown placeholder='Region'
-                    fluid multiple search selection
-                    value={selections.ecoRegions.map(o => o.value)}
-                    onChange={(ev, o) => onSelectChange('ecoRegion', o.value.map(id => o.options.find( e => e.value === id)))}
-                    options={cljs.regions() && cljs.regions().filter(o => o["parent-value"]==="1").map(o => {return {text: o.label, value: o.value, countries: o.countries}})}
-                  />, 
-                (x, o) => {
-                  console.log('yuhu', o.active, o.index)                          
-                  const t0 = performance.now();                 
-                  this.setState({ isSunburst: false, 
-                                  activeIndex:  o.active ? null : 11,
-                                  mapConfig: null, 
-                                  chartConfig:ecoRegionAccordion(cljs.regions(), 
-                                    cljs.countRegions(reports).regions, 
-                                    this.ecoRegionsClick, selections.ecoRegions),
-                                   m: null});
-                  this.handleAccordion(11); 
-                  look('Accordion/ecoRegionsTab', t0);                
-                }),
-                tab.bind(this)(2, activeIndex, 
-                  <span>Sector</span>, 
-                  <Dropdown placeholder='Sector'
-                    fluid multiple search selection
-                    value={selections.sectors.map(o => o.value)}
-                    onChange={(ev, o) => onSelectChange('sectors', o.value.map(id => o.options.find( e => e.value === id)))}
-                    options={filters.sectors && filters.sectors.map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
-                  />, 
-                  (x, o) => {
-                    console.log('yuhu', o.active, o.index)                          
-                    const t0 = performance.now();         
-                    let chartConfig = sectorAccordion(filters.sectors, cljs.countSectors(reports, filters.sectors).sectors, this.handleOpen);
-              
-                    this.setState({ isSunburst: true, 
-                                    activeIndex:  o.active ? null : 2,
-                                    mapConfig: null, 
-                                    chartConfig,
-                                     m: null});
-                    this.handleAccordion(2); 
-                    look('Accordion/sectorsTab', t0);                
-                  }),
-                  tab.bind(this)(3, activeIndex, 
-                    <span>Type</span>, 
-                    <Dropdown placeholder='Type'
-                    fluid multiple search selection
-                    value={selections.types.map(o => o.value)}
-                    onChange={(ev, o) => onSelectChange('type', o.value.map(id => o.options.find( e => e.value === id)))}
-                    options={cljs.types() && cljs.types().map(o => {return {text: o.label, value: o.value, className:`dropdown-level-${o.level}`}})}
-                  />, 
-                    (x, o) => {
-                      console.log('yuhu', o.active, o.index)                          
-                      const t0 = performance.now();    
-                      let chartConfig = typeAccordion(cljs.types(), cljs.countTypes(reports).types, this.onChangeSelect);                                 
-                      this.setState({ isSunburst: true, 
-                                      activeIndex:  o.active ? null : 3,
-                                      mapConfig: null, 
-                                      chartConfig,
-                                       m: null});
-                      this.handleAccordion(3); 
-                      look('Accordion/typeTab', t0);                
-                    }), 
-                    this.activeTab.bind(this)(activeIndex, selections, () => cljs.activeYears(reports), onYear),                    
-                    this.approvalTab.bind(this)(activeIndex, selections, () => cljs.approvalYears(reports), onYear),
+              geoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
+              ecoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
+              typeTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
+                sectorTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
+                activeTab.bind(this)(activeIndex, selections, reports, onYear),                    
+                    approvalTab.bind(this)(activeIndex, selections, reports, onYear),
                     tab.bind(this)(6, activeIndex, 
                       <span>Thematic Focus</span>, 
                       <ThematicFocus reports={reports} 
                           version={this.state.version}
-                          thematicsFocus={filters.thematicsFocus}                          
+                          thematicsFocus={cljs.thematicFocus()}                          
                           selections={selections}
                           onCheck={onCheck}
                           />, 
                       (x, o) => {
                         console.log('yuhu', o.active, o.index)                          
                         const t0 = performance.now();    
-                        let chartConfig = thematicFocusAccordion(filters.thematicsFocus, 
-                          cljs.countThematicFocus(reports, filters.thematicsFocus), 
+                        let chartConfig = thematicFocusAccordion(cljs.thematicFocus(), 
+                          cljs.countThematicFocus(cljs.thematicFocus()), 
                           (o) => this.props.onCheck(o.kw, {checked: true}));
                         this.setState({ isSunburst: false, 
                                         activeIndex:  o.active ? null : 6,
@@ -387,7 +223,7 @@ class Arma extends Component {
           let { showCombinedResults } = this.state
           console.log('showCombinedResults', showCombinedResults, 'combinedResuls', combinedResults && combinedResults.length);
       const finalData = showCombinedResults && combinedResults.length > 0 ? combinedResults : splitSearchResults && splitSearchResults.length > 0 ? splitSearchResults : [];
-      const itemsToShow = items(query, selections, results, filters.thematicsFocus, this.onChangeSelect, onYear, onCheck, this.splitSearch, splitSearchKey);
+      const itemsToShow = items(query, selections, results, cljs.thematicFocus(), this.onChangeSelect, onYear, onCheck, this.splitSearch, splitSearchKey);
 
       return (
        <Grid stackable columns={2}>
