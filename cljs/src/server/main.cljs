@@ -18,11 +18,13 @@
 
 (def at-thematic-focuses (atom nil))
 
-(def at-reports-clj (atom []))
+(def at-reports-clj (atom nil))
 
-(def at-reports (atom []))
+(def at-reports (atom nil))
 
 (def at-filters (atom nil))
+
+(def at-raw-reports (atom nil))
 
 (def at-countries (atom nil))
 
@@ -44,11 +46,16 @@
 
 (def at-count-types (atom nil))
 
-(defn reports [dict data]
-  (time (do
-          (elapsed "reports")
-          (let [dict  (or (to-clj @at-thematic-focuses) (to-clj dict)) 
-                res (->> (to-clj data) 
+(defn reports []
+  (time
+   (do
+     (elapsed "reports")
+     (if (and @at-raw-reports @at-reports)
+       @at-reports
+       (if-not @at-raw-reports
+         (->to-js [] false)
+         (let [dict (to-clj @at-thematic-focuses) 
+                res (->> @at-raw-reports 
                          (map #(set/rename-keys % {:sectorIds :sectors
                                                    :regionId :region
                                                    :typeId :type
@@ -58,19 +65,18 @@
                                          (assoc rep (keyword (:kw (first (filter (fn [x] (= id(:id x))) dict)))) true)
                                          ) % (:thematicFocus %)))
                          (map #(dissoc %  :thematicFocus))
-                         )    
-                ]
+                         )]
             (reset! at-reports-clj res)
-            (reset! at-reports (->to-js res false))))))
+            (reset! at-reports (->to-js res false))))))))
 
-(defn thematic-focus [converted no-convert?]
+(defn thematic-focus []
   (time
    (do
      (elapsed "thematic-focus")
      (->> (:thematicFocus @at-filters)
           (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x))))
           (to-grid 3)          
-          (->>to-js no-convert?)
+          (->>to-js false)
           (reset! at-thematic-focuses)))))
 
 (defn filters-to-atom [data]
@@ -78,6 +84,12 @@
    (do
      (elapsed "filters-to-atom")
      (reset! at-filters (to-clj data)))))
+
+(defn reports-to-atom [data]
+  (time
+   (do
+     (elapsed "raw-reports-to-atom")
+     (reset! at-raw-reports (to-clj data)))))
 
 (defn countries []
   (time
@@ -287,7 +299,8 @@
          (reset! at-actives (->>to-js false res)))))))
 
 (defn generate-exports []
-  #js {:filtersToAtom filters-to-atom
+  #js {:reportsToAtom reports-to-atom
+       :filtersToAtom filters-to-atom
        :reports reports
        :thematicFocus thematic-focus
        :types types

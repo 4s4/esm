@@ -58,10 +58,10 @@ class Arma extends Component {
         ) {
           const t0 = performance.now();
             look('Arma/getDerivedStateFromProps', t0);
-            return {version: props.version, dicts: props.dicts, selections: props.selections, 
-              //frequencies, 
-              reports: props.reports, 
-//              approvals, actives, 
+            return {
+              version: props.version, 
+              dicts: props.dicts, 
+              selections: props.selections, 
               combinedResults: props.combinedResults};
         }
         return state;
@@ -212,7 +212,9 @@ class Arma extends Component {
       this.setState({ open: true, selectedSector: sector })}
    
      render (){
-        const { splitSearchKey, splitSearchResults, selectedSector, open, reports, approvals, activeIndex,
+        const reports = cljs.reports();
+        console.log('oh my ', reports);
+        const { splitSearchKey, splitSearchResults, selectedSector, open, approvals, activeIndex,
         chartConfig, isSunburst, frequencies , m, combinedResults, mapConfig} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;
         const Element = m;

@@ -38,7 +38,7 @@ function doSearch (reports, queries){
       }, true
       );
     }
-  );
+  ).map(r => r.id);
   look('SearchContainer/doSearch', t0);
   return res;
 }
@@ -55,7 +55,6 @@ class SearchContainer extends Component {
       results:{ecoRegions: [], geoRegions: [], countries: [], sectors:[], types: [], approval_year:[], active_year:[]},
       filters: {}, 
       reports: null, 
-      initialReports:null, 
       regions:null, 
       searchResults: null, 
       };
@@ -77,11 +76,10 @@ class SearchContainer extends Component {
   saveReports(x){
     return (r) => {
       const t0 = performance.now();
-      const rr = cljs.reports(cljs.thematicFocus(), r);
+      cljs.reportsToAtom(r);
+      cljs.reports();
       const t1 = look('cljs.reports', t0);
-      console.log('first report', rr[0]);
-      x.reports = rr;
-      x.initialReports = rr;
+      x.reports = [];
       x.loading = false;
       this.updateStateWithVersion(x);
       look('cljs.reports setState', t1);
@@ -162,15 +160,15 @@ class SearchContainer extends Component {
     const t0 = performance.now();
     const { ...sels } = this.state.selections;
     sels[kw] = vals;
-    const { ...res } = this.state.results;
+    const { ...results } = this.state.results;
     if(q){
-      res[kw] = doSearch(this.state.initialReports, [q]);      
+      results[kw] = doSearch(cljs.reports(), [q]);      
     }else{
-      res[kw] = [];      
+      results[kw] = [];      
     }
 
     const t1 = look('SearchContainer/fun beforeSetState', t0);
-    this.searchReports(picked, { selections: sels, results: res});
+    this.searchReports(picked, { selections: sels, results});
     look('SearchContainer/fun afterSetState', t1);
   }
 
@@ -213,7 +211,7 @@ class SearchContainer extends Component {
 
         const q = v ?  r => r['year'] === v : null;
         picked['approval_year'] = q;
-        res['approval_year'] = doSearch(this.state.initialReports, [q]);      
+        res['approval_year'] = doSearch(cljs.reports(), [q]);      
         sels['approval_year'] = v;      
       } else {
         delete picked['approval_year'];
@@ -230,7 +228,7 @@ class SearchContainer extends Component {
           return v >= dates[0] && v <= end;
           } : null;
         picked['active_year'] = q;
-        res['active_year'] = doSearch(this.state.initialReports, [q]);      
+        res['active_year'] = doSearch(cljs.reports(), [q]);      
         sels['active_year'] = v;      
       } else {
         delete picked['active_year'];
@@ -248,9 +246,9 @@ class SearchContainer extends Component {
     const queries = Object.values(qqs); 
     let reports;
     if (queries.length > 0){
-      reports = doSearch(this.state.initialReports, queries);
+      reports = doSearch(cljs.reports(), queries);
     } else {
-      reports = this.state.initialReports;
+      reports = [];
     }
     extraState.reports = reports;
     extraState.qq = qqs; 
@@ -275,7 +273,7 @@ class SearchContainer extends Component {
 
       picked[opt] = q;
       sels[opt] = true;
-      res[opt] = doSearch(this.state.initialReports, [q]);      
+      res[opt] = doSearch(cljs.reports(), [q]);      
 
     } else {
       delete sels[opt];      
@@ -285,7 +283,7 @@ class SearchContainer extends Component {
     const thematicsFocusSelected = cljs.thematicFocus().filter(t => sels[t.kw]);
     if(thematicsFocusSelected.length > 0){
       sels['thematicFocus'] = thematicsFocusSelected;
-      res['thematicFocus'] = doSearch(this.state.initialReports, thematicsFocusSelected.map(t => picked[t.kw]));
+      res['thematicFocus'] = doSearch(cljs.reports(), thematicsFocusSelected.map(t => picked[t.kw]));
     } else {
       delete res['thematicFocus'];
       delete sels['thematicFocus'];
@@ -295,8 +293,9 @@ class SearchContainer extends Component {
     look('onCheckBoxChange', t0);
   }
  
+
   render() {   
-    return <Container style={{width:"100%", height:"100%"}}>
+     return <Container style={{width:"100%", height:"100%"}}>
       {this.state.loading ?
              <Dimmer active={this.state.loading} inverted>
               <Loader inline='centered' inverted />
@@ -306,7 +305,6 @@ class SearchContainer extends Component {
                   onCheck={this.onCheckBoxChange}
                   onYear={this.onSelectYear}
                   onSelectChange={this.onSelectChange}
-                  reports={this.state.initialReports} 
                   world={this.state.world} 
                   query={this.state.qq}
                   selections={this.state.selections}
