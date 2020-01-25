@@ -46,6 +46,8 @@
 
 (def at-count-types (atom nil))
 
+(def at-count-thematic-focus (atom nil))
+
 (defn reports []
   (time
    (do
@@ -164,21 +166,24 @@
                                                                   (update :options (fn [cops] (map (rename-ks {:name :label :id :value}) cops)))
                                                                   )) ops))))))))))))
 
-(defn count-thematic-focus [thematic-focus-col]
-  (let [reports @at-reports-clj 
-        thematic-focus-col (or (to-clj @at-thematic-focuses)
-                               (to-clj thematic-focus-col)) 
-        counters  (reduce #(assoc % (keyword (:kw %2)) 0) {} thematic-focus-col)]
-    (->to-js
-     (reduce (fn [cs r]
-                       (reduce (fn [c1 c2]
-                                 (if (c2 r)
-                                   (update c1 c2 inc)
-                                   c1
-                                   )
-                                 ) cs (keys cs))
-               ) counters reports)
-     false)))
+(defn count-thematic-focus []
+  (time
+   (do
+     (elapsed "count-thematic-focus")
+     (if @at-count-thematic-focus
+       @at-count-thematic-focus
+       (if-not (or @at-reports-clj @at-thematic-focuses)
+         (->to-js [] false)
+         (let [reports @at-reports-clj 
+               thematic-focus-col (to-clj @at-thematic-focuses) 
+               counters  (reduce #(assoc % (keyword (:kw %2)) 0) {} thematic-focus-col)]
+           (reset! at-count-thematic-focus (->>to-js false
+                                                     (reduce (fn [cs r]
+                                                               (reduce (fn [c1 c2]
+                                                                         (if (c2 r)
+                                                                           (update c1 c2 inc)
+                                                                           c1)) cs (keys cs)))
+                                                             counters reports)))))))))
 
 (defn count-countries [] 
   (time

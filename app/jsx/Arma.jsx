@@ -144,9 +144,9 @@ class Arma extends Component {
               geoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
               ecoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
               typeTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
-                sectorTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
-                activeTab.bind(this)(activeIndex, selections, reports, onYear),                    
-                    approvalTab.bind(this)(activeIndex, selections, reports, onYear),
+              sectorTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
+              activeTab.bind(this)(activeIndex, selections, reports, onYear),                    
+              approvalTab.bind(this)(activeIndex, selections, reports, onYear),
                     tab.bind(this)(6, activeIndex, 
                       <span>Thematic Focus</span>, 
                       <ThematicFocus reports={reports} 
@@ -158,8 +158,7 @@ class Arma extends Component {
                       (x, o) => {
                         console.log('yuhu', o.active, o.index)                          
                         const t0 = performance.now();    
-                        let chartConfig = thematicFocusAccordion(cljs.thematicFocus(), 
-                          cljs.countThematicFocus(cljs.thematicFocus()), 
+                        let chartConfig = thematicFocusAccordion(cljs.thematicFocus() , cljs.countThematicFocus(), 
                           (o) => this.props.onCheck(o.kw, {checked: true}));
                         this.setState({ isSunburst: false, 
                                         activeIndex:  o.active ? null : 6,
@@ -169,7 +168,8 @@ class Arma extends Component {
                         this.handleAccordion(6); 
                         look('Accordion/thematicFocusTab', t0);                
                       }),
-    
+  
+                    
                       
   
                         
@@ -213,7 +213,6 @@ class Arma extends Component {
    
      render (){
         const reports = cljs.reports();
-        console.log('oh my ', reports);
         const { splitSearchKey, splitSearchResults, selectedSector, open, approvals, activeIndex,
         chartConfig, isSunburst, frequencies , m, combinedResults, mapConfig} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;

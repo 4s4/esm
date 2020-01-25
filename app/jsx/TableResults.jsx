@@ -13,8 +13,6 @@ import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table';
 import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu/Menu';
 import {summarise} from './utils';
 import ShortContent from './ShortContent'
-
-import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import download from 'downloadjs';
 import {look} from './utils';
@@ -26,8 +24,8 @@ function downloadFile(url){
   console.log('after download');
 }
 
-function rightOption (d, filters) {
-  const type = cljs.types().find( o => o.value === d.type);
+function rightOption (d, types) {
+  const type = types.find( o => o.value === d.type);
   return (  
        
   <List>
@@ -47,10 +45,10 @@ function toUrl(s){
 }
 
 
- function centerOption(d, filters){ 
-  const sectors = d.sectors.map(s => cljs.sectors().find( o => o.value === s));
-  const country = cljs.countries().find( o => o.value === d.country);
-  const region = cljs.regions().find( o => o.value === d.region);
+ function centerOption(d, sectors_, countries, regions){ 
+  const sectors = d.sectors.map(s => sectors_.find( o => o.value === s));
+  const country = countries.find( o => o.value === d.country);
+  const region = regions.find( o => o.value === d.region);
 
   return (
     <Item.Group>
@@ -72,16 +70,22 @@ function toUrl(s){
     );
   }
 
- function leftOption(d, filters){ 
-  const region = cljs.regions().find( o => o.value === d.region);
+ function leftOption(d, regions){ 
+  const region = regions.find( o => o.value === d.region);
   const dict = {"Africa": "Africa", "America": "Americas", "Asia": "Asia", "Europe": "Europe", "Oceania": "Southeast_Asia"};
   return (      
   <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={ <Image size='tiny' src={`img/maps/${dict[region.label]}.png`} />} />      
     );
   }
   
- function tableData (dd, filters) {
-  return dd.map( d => ({ id:d.id,  le: leftOption(d, filters), co: centerOption(d, filters), ro: rightOption(d, filters) })
+ function tableData (dd) {
+   const dict = new Set(dd);
+   const finalData = cljs.reports().filter( o => dict.has(o.id));
+   const regions = cljs.regions();
+   const types = cljs.types();
+   const sectors = cljs.sectors();
+   const countries = cljs.countries();
+  return finalData.map( d => ({ id:d.id,  le: leftOption(d, regions), co: centerOption(d, sectors, countries, regions), ro: rightOption(d, types) })
   );
 } 
   
@@ -118,7 +122,7 @@ class TableResults extends Component {
       const currentPage = 0;
       look('TableResults/getDerivedStateFromProps', t0);
 
-      return { version:props.version, selections: props.selections , dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data, props.filters) };
+      return { version:props.version, selections: props.selections , dicts: props.dicts, data: props.data, pagination, pages, currentPage, filters: props.filters, processedData: tableData(props.data) };
     }
     return state;
   }
@@ -157,7 +161,7 @@ class TableResults extends Component {
 
     this.setState({
       currentPage:0,
-      processedData: tableData(sorted, filters) 
+      processedData: tableData(sorted) 
     });
   }
 

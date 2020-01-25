@@ -56,6 +56,7 @@ export function sectorAccordion(sectorFilters, sectorFrequencies, handleOpen){
 }
 
 export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFrequencies, onSelect){
+    console.log('yay', thematicFocusFrequencies);
     const cats = thematicFocusFilters.map( o => o.name);
     const datt = thematicFocusFilters.map( o => thematicFocusFrequencies[o.kw]); 
     const finder = (x) => thematicFocusFilters.find(y => y.name === x);

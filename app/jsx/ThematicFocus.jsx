@@ -8,6 +8,7 @@ function CheckBox(props){
   return <Popup key={props.id}  content={props.title} trigger={<Segment vertical size='mini'><Checkbox checked={props.checked} onChange={props.onChange(props.id)} label={props.name} /></Segment>} />;
 }
 
+
 class ThematicFocus extends Component {
   constructor(props) {
     super(props);
