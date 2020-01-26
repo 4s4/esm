@@ -22,6 +22,8 @@ import TableResults from './TableResults';
 const analytics = window.analytics;
 import {look} from './utils';
 
+
+
 class Arma extends Component {
     constructor(props) {
         super(props);
@@ -66,7 +68,12 @@ class Arma extends Component {
         }
         return state;
       }
-      
+      componentDidMount(){
+        this.setState({ isSunburst: false, 
+          activeIndex:  1,
+          mapConfig: {frequencies: cljs.countCountries().countries}, 
+                      chartConfig:null, m: WorldMap});
+      }
       splitSearch(kw){
         console.log('splitSearch', kw, this.props.results)
 
@@ -77,21 +84,21 @@ class Arma extends Component {
           this.setState({splitSearchResults:null, splitSearchKey:null});
         }
       }
-
       onChangeSelect(t, d){
-        const { filters, selections, onSelectChange } = this.props;
-        console.log('onChangeSelect', d);
+        const {  selections, onSelectChange } = this.props;
+        console.log('onChangeSelect', t, d);
+
         let kks;        
         switch(t){
-          case 'country': kks = ['countries', 'countries']; break;
-          case 'geoRegion': kks = ['regions', 'geoRegions']; break;
-          case 'ecoRegion': kks = ['regions', 'ecoRegions']; break;
-          case 'type': kks = ['types', 'types']; break;
-          case 'sectors': kks = ['sectors', 'sectors']; break;
+          case 'country': kks = ['countries', 'countries',cljs.countries]; break;
+          case 'geoRegion': kks = ['regions', 'geoRegions', cljs.regions]; break;
+          case 'ecoRegion': kks = ['regions', 'ecoRegions', cljs.regions]; break;
+          case 'type': kks = ['types', 'types', cljs.types]; break;
+          case 'sectors': kks = ['sectors', 'sectors', cljs.sectors]; break;
           default:
             console.log('ERROR', 'type not expected!', t);        
         } 
-        const filters_ = filters[kks[0]];
+        const filters_ = kks[2]();
         let reg = filters_.find(c => c.value === d.id);
         let data = selections[kks[1]];
         if(data.find(d => d.value === reg.value) === undefined){
@@ -121,7 +128,7 @@ class Arma extends Component {
       }
 
 
-      accordion(activeIndex, filters, approvals, onCheck, reports, onSelectChange, onYear, selections){
+      accordion(activeIndex, onCheck, reports, onSelectChange, onYear, selections){
         const panels = [
           tab.bind(this)(1, activeIndex, 
                         <span>Country</span>, 
@@ -147,33 +154,27 @@ class Arma extends Component {
               sectorTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
               activeTab.bind(this)(activeIndex, selections, reports, onYear),                    
               approvalTab.bind(this)(activeIndex, selections, reports, onYear),
-                    tab.bind(this)(6, activeIndex, 
-                      <span>Thematic Focus</span>, 
-                      <ThematicFocus reports={reports} 
-                          version={this.state.version}
-                          thematicsFocus={cljs.thematicFocus()}                          
-                          selections={selections}
-                          onCheck={onCheck}
-                          />, 
-                      (x, o) => {
-                        console.log('yuhu', o.active, o.index)                          
-                        const t0 = performance.now();    
-                        let chartConfig = thematicFocusAccordion(cljs.thematicFocus() , cljs.countThematicFocus(), 
-                          (o) => this.props.onCheck(o.kw, {checked: true}));
-                        this.setState({ isSunburst: false, 
-                                        activeIndex:  o.active ? null : 6,
-                                        mapConfig: null, 
-                                        chartConfig,
-                                         m: null});
-                        this.handleAccordion(6); 
-                        look('Accordion/thematicFocusTab', t0);                
-                      }),
-  
-                    
-                      
-  
-                        
-          ];
+              tab.bind(this)(6, activeIndex, 
+                <span>Thematic Focus</span>, 
+                <ThematicFocus reports={reports} 
+                    version={this.state.version}
+                    thematicsFocus={cljs.thematicFocus()}                          
+                    selections={selections}
+                    onCheck={onCheck}
+                    />, 
+                (x, o) => {
+                  console.log('yuhu', o.active, o.index)                          
+                  const t0 = performance.now();    
+                  let chartConfig = thematicFocusAccordion(cljs.thematicFocus() , cljs.countThematicFocus(), 
+                    (o) => this.props.onCheck(o.kw, {checked: true}));
+                  this.setState({ isSunburst: false, 
+                                  activeIndex:  o.active ? null : 6,
+                                  mapConfig: null, 
+                                  chartConfig,
+                                  m: null});
+                  this.handleAccordion(6); 
+                  look('Accordion/thematicFocusTab', t0);                
+                })];
         () => {}
         console.log('selections', selections);
         return (<Accordion styled onTitleClick={this.handleAcoordionTitleClick} panels={panels}>
@@ -213,8 +214,8 @@ class Arma extends Component {
    
      render (){
         const reports = cljs.reports();
-        const { splitSearchKey, splitSearchResults, selectedSector, open, approvals, activeIndex,
-        chartConfig, isSunburst, frequencies , m, combinedResults, mapConfig} = this.state
+        const { splitSearchKey, splitSearchResults, selectedSector, open, activeIndex,
+        chartConfig, isSunburst,  m, combinedResults, mapConfig} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;
         const Element = m;
        console.log('query', query);
@@ -235,7 +236,7 @@ class Arma extends Component {
             meta='The Trade Strategy Map (TSM) is a repository of strategic policy documents dealing with trade and development issues from around the world.'
             description='Use the options below to search the TSM repository'
           />
-          {this.accordion(activeIndex, filters, approvals, onCheck, reports, this.onAccordionSelectChange, onYear, selections)}
+          {this.accordion(activeIndex, onCheck, reports, this.onAccordionSelectChange, onYear, selections)}
         </Grid.Column>
 
        <Grid.Column width={12}>
