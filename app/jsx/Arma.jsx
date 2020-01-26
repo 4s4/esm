@@ -127,17 +127,17 @@ class Arma extends Component {
       }
 
 
-      accordion(activeIndex, onCheck, reports, onSelectChange, onYear, selections){
+      accordion(activeIndex, onCheck,  onSelectChange, onYear, selections){
         const panels = [
-          countryTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
+          countryTab.bind(this)(activeIndex, selections,   onSelectChange),                    
 
-              geoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
-              ecoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
-              typeTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
-              sectorTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
-              activeTab.bind(this)(activeIndex, selections, reports, onYear),                    
-              approvalTab.bind(this)(activeIndex, selections, reports, onYear),
-              thematicFocusTab.bind(this)(activeIndex, selections, reports, onCheck)];
+              geoRegionTab.bind(this)(activeIndex, selections,  onSelectChange),                    
+              ecoRegionTab.bind(this)(activeIndex, selections,  onSelectChange),                    
+              typeTab.bind(this)(activeIndex, selections,  onSelectChange),                    
+              sectorTab.bind(this)(activeIndex, selections,  onSelectChange),                    
+              activeTab.bind(this)(activeIndex, selections,  onYear),                    
+              approvalTab.bind(this)(activeIndex, selections,  onYear),
+              thematicFocusTab.bind(this)(activeIndex, selections,  onCheck)];
         () => {}
         console.log('selections', selections);
         return (<Accordion styled onTitleClick={this.handleAcoordionTitleClick} panels={panels}>
@@ -176,7 +176,6 @@ class Arma extends Component {
       this.setState({ open: true, selectedSector: sector })}
    
      render (){
-        const reports = cljs.reports();
         const { splitSearchKey, splitSearchResults, selectedSector, open, activeIndex,
         chartConfig, isSunburst,  m, combinedResults, mapConfig} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;
@@ -199,7 +198,7 @@ class Arma extends Component {
             meta='The Trade Strategy Map (TSM) is a repository of strategic policy documents dealing with trade and development issues from around the world.'
             description='Use the options below to search the TSM repository'
           />
-          {this.accordion(activeIndex, onCheck, reports, this.onAccordionSelectChange, onYear, selections)}
+          {this.accordion(activeIndex, onCheck, this.onAccordionSelectChange, onYear, selections)}
         </Grid.Column>
 
        <Grid.Column width={12}>

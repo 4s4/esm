@@ -9,7 +9,7 @@ const cljs = require('../../js/cljs.js');
 const analytics = window.analytics;
 import {look} from './utils';
 
-function activeContent (selections, reports, activeIndex, onYear){
+function activeContent (selections,activeIndex, onYear){
     if (activeIndex === 4) {
       const actives = cljs.activeYears();
       return <Dropdown placeholder='Year'
@@ -20,11 +20,11 @@ function activeContent (selections, reports, activeIndex, onYear){
     />
     } else { return ''}
   }
-export function activeTab(activeIndex, selections, reports, onYear){
+export function activeTab(activeIndex, selections, onYear){
     console.log("elapsed ... ", activeIndex === 4);
     return tab.bind(this)(4, activeIndex, 
     <span>Active year</span>,
-    activeContent.bind(this)(selections, reports, activeIndex, onYear),
+    activeContent.bind(this)(selections,  activeIndex, onYear),
     (x, o) => {
       console.log('yuhu', o.active, o.index)                          
       const t0 = performance.now();    
@@ -38,7 +38,7 @@ export function activeTab(activeIndex, selections, reports, onYear){
       look('Accordion/activesTab', t0);                
   });}
 
-function approvalContent (selections, reports, activeIndex, onYear){
+function approvalContent (selections,  activeIndex, onYear){
       if (activeIndex === 5) {
         const approvals = cljs.approvalYears();
         return <Dropdown placeholder='Year'
@@ -49,10 +49,10 @@ function approvalContent (selections, reports, activeIndex, onYear){
       />
       } else { return ''}
   }
-export function  approvalTab(activeIndex, selections, reports, onYear){
+export function  approvalTab(activeIndex, selections,  onYear){
       return tab.bind(this)(5, activeIndex, 
       <span>Approval year</span>, 
-      approvalContent.bind(this)(selections, reports, activeIndex, onYear),
+      approvalContent.bind(this)(selections,   activeIndex, onYear),
        
       (x, o) => {
         console.log('yuhu', o.active, o.index);
@@ -68,9 +68,9 @@ export function  approvalTab(activeIndex, selections, reports, onYear){
         look('Accordion/approvalsTab', t0);                
   });}
     
-function thematicFocusContent (selections, reports, activeIndex, onCheck){
+function thematicFocusContent (selections,   activeIndex, onCheck){
         if (activeIndex === 5) {
-          return <ThematicFocus reports={reports} 
+          return <ThematicFocus 
           version={this.state.version}
           thematicsFocus={cljs.thematicFocus()}                          
           selections={selections}
@@ -78,10 +78,10 @@ function thematicFocusContent (selections, reports, activeIndex, onCheck){
           />
         } else { return ''}
     }
-  export function  thematicFocusTab(activeIndex, selections, reports, onCheck){
+  export function  thematicFocusTab(activeIndex, selections,   onCheck){
         return tab.bind(this)(6, activeIndex, 
         <span>Thematic Focus</span>, 
-        thematicFocusContent.bind(this)(selections, reports, activeIndex, onCheck),
+        thematicFocusContent.bind(this)(selections,   activeIndex, onCheck),
         (x, o) => {
             console.log('yuhu', o.active, o.index)                          
             const t0 = performance.now();    
@@ -108,7 +108,7 @@ function sectorContent (selections, activeIndex, onSelectChange){
     } else { return ''}
 }
 
-export function sectorTab(activeIndex, selections, reports, onSelectChange){
+export function sectorTab(activeIndex, selections, onSelectChange){
     return tab.bind(this)(2, activeIndex, 
     <span>Sector</span>, 
     sectorContent.bind(this)(selections, activeIndex, onSelectChange),
@@ -138,7 +138,7 @@ function countryContent (selections, activeIndex, onSelectChange){
     } else { return ''}
 }
 
-export function countryTab(activeIndex, selections, reports, onSelectChange){
+export function countryTab(activeIndex, selections,  onSelectChange){
     return tab.bind(this)(1, activeIndex, 
     <span>Country</span>, 
     countryContent.bind(this)(selections, activeIndex, onSelectChange),
@@ -168,7 +168,7 @@ function typeContent (selections, activeIndex, onSelectChange){
     } else { return ''}
 }
 
-export function typeTab(activeIndex, selections, reports, onSelectChange){
+export function typeTab(activeIndex, selections,  onSelectChange){
     return tab.bind(this)(3, activeIndex, 
     <span>Type</span>, 
     typeContent.bind(this)(selections, activeIndex, onSelectChange),
@@ -198,7 +198,7 @@ function ecoRegionContent (selections, activeIndex, onSelectChange){
     } else { return ''}
 }
 
-export function ecoRegionTab(activeIndex, selections, reports, onSelectChange){
+export function ecoRegionTab(activeIndex, selections,   onSelectChange){
     return tab.bind(this)(11, activeIndex, 
     <span  >Economical Region</span>, 
         ecoRegionContent.bind(this)(selections, activeIndex, onSelectChange),
@@ -229,7 +229,7 @@ function geoRegionContent (selections, activeIndex, onSelectChange){
     } else { return ''}
 }
                 
-export function geoRegionTab(activeIndex, selections, reports, onSelectChange){
+export function geoRegionTab(activeIndex, selections, onSelectChange){
     return tab.bind(this)(0, activeIndex, 
     <span  >Geographical Region</span>, 
         geoRegionContent.bind(this)(selections, activeIndex, onSelectChange),

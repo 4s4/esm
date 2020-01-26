@@ -12,7 +12,7 @@ function CheckBox(props){
 class ThematicFocus extends Component {
   constructor(props) {
     super(props);
-    this.state = { reports:[], version: -1 };
+    this.state = { version: -1 };
     this.check = this.check.bind(this);
     this.r = this.r.bind(this);
   }
@@ -20,7 +20,7 @@ class ThematicFocus extends Component {
     if (
       props.version !== state.version
     ) {
-      return {version: props.version, reports: props.reports, selections: props.selections};
+      return {version: props.version,  selections: props.selections};
     }
     return state;
   }
@@ -31,7 +31,8 @@ class ThematicFocus extends Component {
   }
 
   r(o){
-      return <CheckBox checked={Boolean(this.state.selections[o.kw])} key={o.kw} id={o.kw} name={o.name} onChange={this.check} count={this.state} title={o.description} />;
+      return <CheckBox checked={Boolean(this.state.selections[o.kw])} 
+      key={o.kw} id={o.kw} name={o.name} onChange={this.check} count={this.state} title={o.description} />;
   }
   render() {
     return (<div>{this.props.thematicsFocus && this.props.thematicsFocus.map(this.r)}</div>);
