@@ -43,6 +43,7 @@ export function barChart(title, cat, dat, finder, onSelect){
         },
         series: [{
           data: dat,
+          name: 'TSM docs',
           point: {
             events: {
                click: function(e) {

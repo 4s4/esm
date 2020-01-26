@@ -70,9 +70,10 @@ class Arma extends Component {
       }
       componentDidMount(){
         this.setState({ isSunburst: false, 
-          activeIndex:  1,
-          mapConfig: {frequencies: cljs.countCountries().countries}, 
-                      chartConfig:null, m: WorldMap});
+                        activeIndex:  1,
+                        mapConfig: {frequencies: cljs.countCountries().countries}, 
+                                    chartConfig:null, 
+                                    m: WorldMap});
       }
       splitSearch(kw){
         console.log('splitSearch', kw, this.props.results)
