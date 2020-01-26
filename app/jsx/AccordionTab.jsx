@@ -3,6 +3,7 @@ import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown'
 
 import {tab, ecoRegionAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
 import RegionsMap from './maps/RegionsMap';
+import ThematicFocus from './ThematicFocus';
 
 const cljs = require('../../js/cljs.js');
 const analytics = window.analytics;
@@ -66,7 +67,35 @@ export function  approvalTab(activeIndex, selections, reports, onYear){
         this.handleAccordion(5); 
         look('Accordion/approvalsTab', t0);                
   });}
-
+    
+function thematicFocusContent (selections, reports, activeIndex, onCheck){
+        if (activeIndex === 5) {
+          return <ThematicFocus reports={reports} 
+          version={this.state.version}
+          thematicsFocus={cljs.thematicFocus()}                          
+          selections={selections}
+          onCheck={onCheck}
+          />
+        } else { return ''}
+    }
+  export function  thematicFocusTab(activeIndex, selections, reports, onCheck){
+        return tab.bind(this)(6, activeIndex, 
+        <span>Thematic Focus</span>, 
+        thematicFocusContent.bind(this)(selections, reports, activeIndex, onCheck),
+        (x, o) => {
+            console.log('yuhu', o.active, o.index)                          
+            const t0 = performance.now();    
+            let chartConfig = thematicFocusAccordion(cljs.thematicFocus() , cljs.countThematicFocus(), 
+              (o) => this.props.onCheck(o.kw, {checked: true}));
+            this.setState({ isSunburst: false, 
+                            activeIndex:  o.active ? null : 6,
+                            mapConfig: null, 
+                            chartConfig,
+                            m: null});
+            this.handleAccordion(6); 
+            look('Accordion/thematicFocusTab', t0);                
+          });}
+  
 function sectorContent (selections, activeIndex, onSelectChange){
     if (activeIndex === 2) {
       const sectors = cljs.sectors();
@@ -96,6 +125,35 @@ export function sectorTab(activeIndex, selections, reports, onSelectChange){
         this.handleAccordion(2); 
         look('Accordion/sectorsTab', t0);                
 });}
+
+function countryContent (selections, activeIndex, onSelectChange){
+    if (activeIndex === 1) {
+      const countries = cljs.countries();
+      return  <Dropdown placeholder='Country'
+      fluid multiple search selection
+      value={selections.countries.map(o => o.value)}
+      onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
+      options={countries && countries.map(o => {return {text: o.label, value: o.value}})}
+/>;
+    } else { return ''}
+}
+
+export function countryTab(activeIndex, selections, reports, onSelectChange){
+    return tab.bind(this)(1, activeIndex, 
+    <span>Country</span>, 
+    countryContent.bind(this)(selections, activeIndex, onSelectChange),
+    (x, o) => {
+        console.log('yuhu', o.active, o.index)                          
+        const t0 = performance.now();                
+        this.setState({ isSunburst: false, 
+                        activeIndex:  o.active ? null : 1,
+                        mapConfig: {frequencies: cljs.countCountries().countries}, 
+                                    chartConfig:null, m: WorldMap});
+        this.handleAccordion(1); 
+        look('Accordion/countryTab', t0);                
+      }
+    );}
+
 
 
 function typeContent (selections, activeIndex, onSelectChange){

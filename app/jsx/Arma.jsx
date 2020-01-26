@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid/Grid';
-import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown';
 import Accordion from 'semantic-ui-react/dist/commonjs/modules/Accordion/Accordion';
 import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
@@ -8,10 +7,9 @@ import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
 import Card from 'semantic-ui-react/dist/commonjs/views/Card/Card';
 import Portal from 'semantic-ui-react/dist/commonjs/addons/Portal/Portal';
 
-import {tab, ecoRegionAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
-import {activeTab, approvalTab, sectorTab, typeTab, ecoRegionTab, geoRegionTab} from './AccordionTab';
+import { ecoRegionAccordion} from './Accordion';
+import {activeTab, approvalTab, sectorTab, typeTab, ecoRegionTab, geoRegionTab, countryTab, thematicFocusTab} from './AccordionTab';
 const cljs = require('../../js/cljs.js');
-import ThematicFocus from './ThematicFocus';
 import WorldMap from './maps/WorldMap';
 import SunCharty from './charts/SunCharty';
 import Charty from './charts/Charty';
@@ -131,51 +129,15 @@ class Arma extends Component {
 
       accordion(activeIndex, onCheck, reports, onSelectChange, onYear, selections){
         const panels = [
-          tab.bind(this)(1, activeIndex, 
-                        <span>Country</span>, 
-                        <Dropdown placeholder='Country'
-                                  fluid multiple search selection
-                                  value={selections.countries.map(o => o.value)}
-                                  onChange={(ev, o) => onSelectChange('country', o.value.map(id => o.options.find( e => e.value === id)))}
-                                  options={cljs.countries() && cljs.countries().map(o => {return {text: o.label, value: o.value}})}
-                        />,
-                        (x, o) => {
-                          console.log('yuhu', o.active, o.index)                          
-                          const t0 = performance.now();                
-                          this.setState({ isSunburst: false, 
-                                          activeIndex:  o.active ? null : 1,
-                                          mapConfig: {frequencies: cljs.countCountries().countries}, 
-                                                      chartConfig:null, m: WorldMap});
-                          this.handleAccordion(1); 
-                          look('Accordion/countryTab', t0);                
-                        }),
+          countryTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
+
               geoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
               ecoRegionTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
               typeTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
               sectorTab.bind(this)(activeIndex, selections, reports, onSelectChange),                    
               activeTab.bind(this)(activeIndex, selections, reports, onYear),                    
               approvalTab.bind(this)(activeIndex, selections, reports, onYear),
-              tab.bind(this)(6, activeIndex, 
-                <span>Thematic Focus</span>, 
-                <ThematicFocus reports={reports} 
-                    version={this.state.version}
-                    thematicsFocus={cljs.thematicFocus()}                          
-                    selections={selections}
-                    onCheck={onCheck}
-                    />, 
-                (x, o) => {
-                  console.log('yuhu', o.active, o.index)                          
-                  const t0 = performance.now();    
-                  let chartConfig = thematicFocusAccordion(cljs.thematicFocus() , cljs.countThematicFocus(), 
-                    (o) => this.props.onCheck(o.kw, {checked: true}));
-                  this.setState({ isSunburst: false, 
-                                  activeIndex:  o.active ? null : 6,
-                                  mapConfig: null, 
-                                  chartConfig,
-                                  m: null});
-                  this.handleAccordion(6); 
-                  look('Accordion/thematicFocusTab', t0);                
-                })];
+              thematicFocusTab.bind(this)(activeIndex, selections, reports, onCheck)];
         () => {}
         console.log('selections', selections);
         return (<Accordion styled onTitleClick={this.handleAcoordionTitleClick} panels={panels}>
@@ -296,6 +258,7 @@ class Arma extends Component {
             }
           
           </Grid.Column>
+          
         </Grid>
       )
     }
