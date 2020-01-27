@@ -3,6 +3,7 @@
             [server.utils :refer [rename-ks extract-rec to-grid extract-vals
                                   to-clj ->>to-js ->to-js current-year elapsed
                                   parse-int count!]]
+            [goog.object :as gobj]
             [clojure.string :as str]))
 
 (def value-a 4)
@@ -58,11 +59,6 @@
          (->to-js [] false)
          (let [dict (to-clj @at-thematic-focuses) 
                 res (->> @at-raw-reports 
-                         (map #(set/rename-keys % {:sectorIds :sectors
-                                                   :regionId :region
-                                                   :typeId :type
-                                                   :countryId :country}))
-
                          (map #(reduce (fn [rep id]
                                          (assoc rep (keyword (:kw (first (filter (fn [x] (= id(:id x))) dict)))) true)
                                          ) % (:thematicFocus %)))
@@ -91,7 +87,23 @@
   (time
    (do
      (elapsed "raw-reports-to-atom")
-     (reset! at-raw-reports (to-clj data)))))
+     (let [res (map
+                #(hash-map
+                  :sectors (vec (gobj/get % "sectorIds"))
+                  :region (gobj/get % "regionId")
+                  :title (gobj/get % "title")
+                  :description (gobj/get % "description")
+                  :lastUpdate (gobj/get % "lastUpdate")
+                  :implementationPeriod (gobj/get % "implementationPeriod")
+                  :type (gobj/get % "typeId")
+                  :id  (gobj/get % "id")
+                  :year  (gobj/get % "year")
+                  :thematicFocus  (vec (gobj/get % "thematicFocus"))
+                  :country  (gobj/get % "countryId"))
+                 data)]
+       (reset! at-raw-reports res)))))
+
+
 
 (defn countries []
   (time
