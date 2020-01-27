@@ -79,8 +79,9 @@ function toUrl(s){
   }
   
  function tableData (dd) {
-   const dict = new Set(dd);
-   const finalData = cljs.reports().filter( o => dict.has(o.id));
+  const t0 = performance.now();
+   const finalData = cljs.jsReports(dd);
+   look("TabkeResults/tableData", t0)
    const regions = cljs.regions();
    const types = cljs.types();
    const sectors = cljs.sectors();

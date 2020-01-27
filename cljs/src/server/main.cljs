@@ -3,8 +3,15 @@
             [server.utils :refer [rename-ks extract-rec to-grid extract-vals
                                   to-clj ->>to-js ->to-js current-year elapsed
                                   parse-int count!]]
-            [goog.object :as gobj]
+             [cljs.reader :as reader]
+             [goog.object :as gobj]
+             [goog.string :as gstring]
+             [goog.array :as garray]
+             [goog.string.format]
             [clojure.string :as str]))
+
+(defn >js [x]
+  (reader/read-string (gstring/format "#js %s" x)))
 
 (def value-a 4)
 
@@ -49,23 +56,46 @@
 
 (def at-count-thematic-focus (atom nil))
 
+(comment
+  (reset! at-reports (time
+                      (do
+                        (elapsed "yay to-js")
+                        (clj->js res)))))
+
+(defn search [qq]
+  (time
+   (do
+     (elapsed "search")
+     (clj->js (map :id (filter (fn [r]
+                                (let [rjs (clj->js r)]
+                                  (reduce (fn [b q] (if b
+                                                      (q rjs)
+                                                      false)) true qq))) @at-reports-clj))))))
+
+(defn js-reports [ids]
+  (time
+   (do
+     (elapsed "js-reports")
+     (let [s-ids (set ids)]
+       (clj->js (filter (fn [r] (contains? s-ids (:id r))) @at-reports-clj))))))
+
 (defn reports []
   (time
    (do
-     (elapsed "reports")
-     (if (and @at-raw-reports @at-reports)
-       @at-reports
+     (elapsed "reports-clj")
+     (if (and @at-raw-reports @at-reports-clj)
+       @at-reports-clj
        (if-not @at-raw-reports
          (->to-js [] false)
          (let [dict (to-clj @at-thematic-focuses) 
-                res (->> @at-raw-reports 
-                         (map #(reduce (fn [rep id]
-                                         (assoc rep (keyword (:kw (first (filter (fn [x] (= id(:id x))) dict)))) true)
-                                         ) % (:thematicFocus %)))
-                         (map #(dissoc %  :thematicFocus))
-                         )]
-            (reset! at-reports-clj res)
-            (reset! at-reports (->to-js res false))))))))
+               res (->> @at-raw-reports 
+                        (map #(reduce (fn [rep id]
+                                        (assoc rep (keyword (:kw (first (filter (fn [x] (= id(:id x))) dict)))) true)
+                                        ) % (:thematicFocus %)))
+                        (map #(dissoc %  :thematicFocus))
+                        )]
+           (reset! at-reports-clj res)
+           nil))))))
 
 (defn thematic-focus []
   (time
@@ -102,8 +132,6 @@
                   :country  (gobj/get % "countryId"))
                  data)]
        (reset! at-raw-reports res)))))
-
-
 
 (defn countries []
   (time
@@ -319,6 +347,8 @@
   #js {:reportsToAtom reports-to-atom
        :filtersToAtom filters-to-atom
        :reports reports
+       :jsReports js-reports
+       :search search
        :thematicFocus thematic-focus
        :types types
        :sectors sectors

@@ -21,7 +21,6 @@ function activeContent (selections,activeIndex, onYear){
     } else { return ''}
   }
 export function activeTab(activeIndex, selections, onYear){
-    console.log("elapsed ... ", activeIndex === 4);
     return tab.bind(this)(4, activeIndex, 
     <span>Active year</span>,
     activeContent.bind(this)(selections,  activeIndex, onYear),
@@ -78,6 +77,7 @@ function thematicFocusContent (selections,   activeIndex, onCheck){
           />
         } else { return ''}
     }
+
   export function  thematicFocusTab(activeIndex, selections,   onCheck){
         return tab.bind(this)(6, activeIndex, 
         <span>Thematic Focus</span>, 

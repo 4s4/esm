@@ -25,20 +25,12 @@ function assoc(o, k, v){
   o[k] = v;
   return o;
 }
-function doSearch (reports, queries){
+
+
+function doSearch ( queries){
   const t0 = performance.now();
-  const res = reports.filter(
-    function (r) {
-     return queries.reduce(
-      function (c, f){
-        if(c){
-          return f(r);
-        }
-        return false;
-      }, true
-      );
-    }
-  ).map(r => r.id);
+//  console.log(queries);
+  const res = cljs.search(queries);
   look('SearchContainer/doSearch', t0);
   return res;
 }
@@ -68,10 +60,10 @@ class SearchContainer extends Component {
   }
 
   updateStateWithVersion(m){
-    console.log('updateStateWithVersion', this.state.version);
     m.version = ++this.state.version;
     this.setState(m);
   }
+
 
   saveReports(x){
     return (r) => {
@@ -79,11 +71,11 @@ class SearchContainer extends Component {
       cljs.reportsToAtom(r);
       cljs.thematicFocus(); // thematics are necessary thus reports are transformed and stored in atom
       cljs.reports();
-      const t1 = look('cljs.reports', t0);
+      const t1 = look('cljsreports', t0);
       x.reports = [];
       x.loading = false;
       this.updateStateWithVersion(x);
-      look('cljs.reports setState', t1);
+      look('cljsreports setState', t1);
     }
   } 
 
@@ -163,7 +155,7 @@ class SearchContainer extends Component {
     sels[kw] = vals;
     const { ...results } = this.state.results;
     if(q){
-      results[kw] = doSearch(cljs.reports(), [q]);      
+      results[kw] = doSearch([q]);      
     }else{
       results[kw] = [];      
     }
@@ -212,7 +204,7 @@ class SearchContainer extends Component {
 
         const q = v ?  r => r['year'] === v : null;
         picked['approval_year'] = q;
-        res['approval_year'] = doSearch(cljs.reports(), [q]);      
+        res['approval_year'] = doSearch([q]);      
         sels['approval_year'] = v;      
       } else {
         delete picked['approval_year'];
@@ -229,7 +221,7 @@ class SearchContainer extends Component {
           return v >= dates[0] && v <= end;
           } : null;
         picked['active_year'] = q;
-        res['active_year'] = doSearch(cljs.reports(), [q]);      
+        res['active_year'] = doSearch([q]);      
         sels['active_year'] = v;      
       } else {
         delete picked['active_year'];
@@ -237,7 +229,6 @@ class SearchContainer extends Component {
         delete sels['active_year'];
       }
     }
-
     console.log(selectType, `Option selected:`, val)
     this.searchReports(picked, { selections: sels, results: res });
     look('onSelectYear', t0);
@@ -247,7 +238,7 @@ class SearchContainer extends Component {
     const queries = Object.values(qqs); 
     let reports;
     if (queries.length > 0){
-      reports = doSearch(cljs.reports(), queries);
+      reports = doSearch( queries);
     } else {
       reports = [];
     }
@@ -274,7 +265,7 @@ class SearchContainer extends Component {
 
       picked[opt] = q;
       sels[opt] = true;
-      res[opt] = doSearch(cljs.reports(), [q]);      
+      res[opt] = doSearch([q]);      
 
     } else {
       delete sels[opt];      
@@ -284,7 +275,7 @@ class SearchContainer extends Component {
     const thematicsFocusSelected = cljs.thematicFocus().filter(t => sels[t.kw]);
     if(thematicsFocusSelected.length > 0){
       sels['thematicFocus'] = thematicsFocusSelected;
-      res['thematicFocus'] = doSearch(cljs.reports(), thematicsFocusSelected.map(t => picked[t.kw]));
+      res['thematicFocus'] = doSearch(thematicsFocusSelected.map(t => picked[t.kw]));
     } else {
       delete res['thematicFocus'];
       delete sels['thematicFocus'];
