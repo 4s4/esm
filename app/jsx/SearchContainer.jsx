@@ -71,6 +71,8 @@ class SearchContainer extends Component {
       cljs.reportsToAtom(r);
       cljs.thematicFocus(); // thematics are necessary thus reports are transformed and stored in atom
       cljs.reports();
+      cljs.countCountries();
+
       const t1 = look('cljsreports', t0);
       x.reports = [];
       x.loading = false;

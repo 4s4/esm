@@ -60,7 +60,7 @@ class Arma extends Component {
             const newState = {
               isSunburst: false,
               activeIndex:  1,
-              mapConfig: {frequencies: cljs.countCountries().countries}, 
+//              mapConfig: {frequencies: cljs.countCountries().countries}, 
               chartConfig:null, 
               m: WorldMap,
               version: props.version, 

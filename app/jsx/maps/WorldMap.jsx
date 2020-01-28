@@ -5,6 +5,7 @@ const theMap = require('@highcharts/map-collection/custom/world.geo.json');
 import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 import {look} from './../utils';
+const cljs = require('../../../js/cljs.js');
 
 function mapData(data, onChangeMap) {
   const h = window.innerHeight-150;
@@ -91,10 +92,11 @@ class WorldMap extends Component {
     ) {
       const t0 = performance.now();
 
-      if(props.countries && props.frequencies){
-        const data= Object.keys(props.frequencies).map((o) => { 
+      if(props.countries ){
+        const freqs = cljs.countCountries().countries;
+        const data= Object.keys(freqs).map((o) => { 
                     const c = props.countries.find(e => e.value === o);
-                    return  {'name':c.label, 'value':props.frequencies[o], 'code': c.code, 'id': c.value};
+                    return  {'name':c.label, 'value':freqs[o], 'code': c.code, 'id': c.value};
                     })
         look('WorlMap/getDerivedStateFromProps', t0);
 
