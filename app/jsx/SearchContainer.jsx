@@ -84,10 +84,6 @@ class SearchContainer extends Component {
     const t0 = performance.now();
     cljs.filtersToAtom(cc);
     const countries = cljs.countries();
-//    const types = cljs.types();
-//    const regions = cljs.regions();
-//    const sectors = cljs.sectors();
-//    const thematicsFocus = cljs.thematicFocus();
     const filters = { }
     const state = this.state;
     state.filters = filters;

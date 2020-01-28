@@ -57,21 +57,32 @@ class Arma extends Component {
           props.version !== state.version
         ) {
           const t0 = performance.now();
-            look('Arma/getDerivedStateFromProps', t0);
-            return {
+            const newState = {
+              isSunburst: false,
+              activeIndex:  1,
+              mapConfig: {frequencies: cljs.countCountries().countries}, 
+              chartConfig:null, 
+              m: WorldMap,
               version: props.version, 
               dicts: props.dicts, 
               selections: props.selections, 
               combinedResults: props.combinedResults};
+              look('Arma/getDerivedStateFromProps', t0);
+
+            return newState;
         }
         return state;
       }
       componentDidMount(){
-        this.setState({ isSunburst: false, 
-                        activeIndex:  1,
-                        mapConfig: {frequencies: cljs.countCountries().countries}, 
-                                    chartConfig:null, 
-                                    m: WorldMap});
+        const t0 = performance.now();
+
+        // this.setState({ isSunburst: false, 
+        //                 activeIndex:  1,
+        //                 mapConfig: {frequencies: cljs.countCountries().countries}, 
+        //                             chartConfig:null, 
+        //                             m: WorldMap});
+       look('Arma/componentDidMount', t0);
+
       }
       splitSearch(kw){
         console.log('splitSearch', kw, this.props.results)

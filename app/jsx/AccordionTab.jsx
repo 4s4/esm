@@ -4,6 +4,7 @@ import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown/Dropdown'
 import {tab, ecoRegionAccordion, typeAccordion, sectorAccordion, thematicFocusAccordion, approvalsAccordion, activesAccordion} from './Accordion';
 import RegionsMap from './maps/RegionsMap';
 import ThematicFocus from './ThematicFocus';
+import WorldMap from './maps/WorldMap';
 
 const cljs = require('../../js/cljs.js');
 const analytics = window.analytics;
