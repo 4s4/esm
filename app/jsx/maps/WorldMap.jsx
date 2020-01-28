@@ -109,7 +109,7 @@ class WorldMap extends Component {
     
   render() {
     const {data, selections} = this.state;
-    return (data && data.length >0 && <HighchartsReact
+    return (data  && <HighchartsReact
               options = { mapData(data.map(x => { selections.has(x.code) ? x.color="#ED7DAE" : null; return x}), this.props.onChangeMap) }
               highcharts = { Highcharts }
               constructorType = { 'mapChart' }

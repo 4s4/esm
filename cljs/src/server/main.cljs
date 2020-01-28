@@ -26,13 +26,13 @@
 
 (def at-thematic-focuses (atom nil))
 
-(def at-reports-clj (atom nil))
+(def at-reports-clj nil)
 
 (def at-reports (atom nil))
 
-(def at-filters (atom nil))
+(def at-filters nil)
 
-(def at-raw-reports (atom nil))
+(def at-raw-reports nil)
 
 (def at-countries (atom nil))
 
@@ -70,38 +70,44 @@
                                 (let [rjs (clj->js r)]
                                   (reduce (fn [b q] (if b
                                                       (q rjs)
-                                                      false)) true qq))) @at-reports-clj))))))
+                                                      false)) true qq))) at-reports-clj))))))
 
 (defn js-reports [ids]
   (time
    (do
      (elapsed "js-reports")
      (let [s-ids (set ids)]
-       (clj->js (filter (fn [r] (contains? s-ids (:id r))) @at-reports-clj))))))
+       (clj->js (filter (fn [r] (contains? s-ids (:id r))) at-reports-clj))))))
+
+
+
 
 (defn reports []
   (time
    (do
      (elapsed "reports-clj")
-     (if (and @at-raw-reports @at-reports-clj)
-       @at-reports-clj
-       (if-not @at-raw-reports
+     (if (and at-raw-reports at-reports-clj)
+       at-reports-clj
+       (if-not at-raw-reports
          (->to-js [] false)
-         (let [dict (to-clj @at-thematic-focuses) 
-               res (->> @at-raw-reports 
-                        (map #(reduce (fn [rep id]
-                                        (assoc rep (keyword (:kw (first (filter (fn [x] (= id(:id x))) dict)))) true)
-                                        ) % (:thematicFocus %)))
-                        (map #(dissoc %  :thematicFocus))
-                        )]
-           (reset! at-reports-clj res)
+         (let [dict (to-clj @at-thematic-focuses)
+               dict (reduce #(assoc % (:id %2) (keyword (:kw %2))) {} dict)
+               res (->> at-raw-reports 
+                        (map #(dissoc (reduce (fn [rep id]
+                                         (let [kw (get dict id "NULL")]
+                                           (assoc rep kw true)))
+                                       %
+                                       (:thematicFocus %))
+                                      :thematicFocus)))]
+           (def at-reports-clj res)
+           (count at-reports-clj)
            nil))))))
 
 (defn thematic-focus []
   (time
    (do
      (elapsed "thematic-focus")
-     (->> (:thematicFocus @at-filters)
+     (->> (:thematicFocus at-filters)
           (map (fn [x] (assoc x :kw ((comp #(str/replace % " " "_") str/lower-case str/trimr :name) x))))
           (to-grid 3)          
           (->>to-js false)
@@ -111,7 +117,9 @@
   (time
    (do
      (elapsed "filters-to-atom")
-     (reset! at-filters (to-clj data)))))
+     (def at-filters (to-clj data))
+     at-filters
+     )))
 
 (defn reports-to-atom [data]
   (time
@@ -131,7 +139,8 @@
                   :thematicFocus  (vec (gobj/get % "thematicFocus"))
                   :country  (gobj/get % "countryId"))
                  data)]
-       (reset! at-raw-reports res)))))
+       (def at-raw-reports res)
+       res))))
 
 (defn countries []
   (time
@@ -139,7 +148,7 @@
      (elapsed "countries")
      (if @at-countries
        @at-countries
-       (let [filters (:regionGroups @at-filters)
+       (let [filters (:regionGroups at-filters)
              geographical (first (filter #(= "Geographical" (:label %)) filters))
              countries (reduce (fn [c reg]
                                  (apply conj c (map (fn [c] (-> c
@@ -175,7 +184,7 @@
    (do
      (elapsed "types")
      (if @at-types @at-types
-         (let [filters (:types @at-filters)]
+         (let [filters (:types at-filters)]
            (reset! at-types (->to-js (extract-rec filters) false)))))))
 
 (defn sectors []
@@ -183,7 +192,7 @@
    (do
      (elapsed "sectors")          
      (if @at-sectors @at-sectors
-         (let [sectors (:sectors @at-filters)]
+         (let [sectors (:sectors at-filters)]
            (reset! at-sectors (->to-js (extract-rec sectors) false)))))))
 
 (defn regions []
@@ -194,7 +203,7 @@
          (reset! at-regions
                  (->>to-js false
                            (extract-rec
-                            (->> (:regionGroups @at-filters)
+                            (->> (:regionGroups at-filters)
                                  (map #(if-not (:id %)
                                          (assoc %2 :id (str %))
                                          %) (range))
@@ -212,9 +221,9 @@
      (elapsed "count-thematic-focus")
      (if @at-count-thematic-focus
        @at-count-thematic-focus
-       (if-not (or @at-reports-clj @at-thematic-focuses)
+       (if-not (or at-reports-clj @at-thematic-focuses)
          (->to-js [] false)
-         (let [reports @at-reports-clj 
+         (let [reports at-reports-clj 
                thematic-focus-col (to-clj @at-thematic-focuses) 
                counters  (reduce #(assoc % (keyword (:kw %2)) 0) {} thematic-focus-col)]
            (reset! at-count-thematic-focus (->>to-js false
@@ -231,25 +240,28 @@
      (elapsed "count-countries")
      (if @at-count-countries
        @at-count-countries
-       (let [reports @at-reports-clj
-             ret (reduce (fn [c r]
-                           (let [report-id (:id r)]
-                             (-> c
-                                 (update :countries conj (:country r)))))
-                         {:countries []}
-                         reports)
-             ret2 (-> ret (update :countries frequencies))
+       (let [reports (time                      
+                      (let [countries (map :country at-reports-clj)]
+                        (elapsed (str "deref-reports-count-countries: " (count countries)))                   
+                        countries))
+             ret2 (time (do
+                     (elapsed "frequencies-count-countries")                        
+                     (frequencies reports)))
              o (js/Object.)]
-         (doseq [[k v] (seq (:countries ret2))]
-               (gobj/add o (name k) v))
+         (time (do
+            (elapsed "gobj/add-count-countries")                        
+
+            (doseq [[k v] (seq ret2)]
+              (gobj/add o (name k) v))))
          (reset! at-count-countries o))))))
+
 
 (defn count-regions []
   (time
    (do
      (elapsed "count-regions")
      (if @at-count-regions @at-count-regions
-         (let [reports @at-reports-clj
+         (let [reports at-reports-clj
                regions (to-clj @at-regions)
                ret (reduce (fn [c r]
                              (let [report-id (:id r)]
@@ -279,7 +291,7 @@
    (do
      (elapsed "count-sectors")
      (if @at-count-sectors @at-count-sectors
-         (let [reports @at-reports-clj
+         (let [reports at-reports-clj
                sectors (to-clj @at-sectors)
                ret (reduce (fn [c r]
                              (let [report-id (:id r)]
@@ -301,7 +313,7 @@
    (do
      (elapsed "count-types")
      (if @at-count-types @at-count-types
-         (let [reports @at-reports-clj
+         (let [reports at-reports-clj
                types (to-clj @at-types)
                ret (reduce (fn [c r]
                              (let [report-id (:id r)]
@@ -320,7 +332,7 @@
      (elapsed "approval-years")
      (if @at-approvals
        @at-approvals
-       (let [res (->> @at-reports-clj
+       (let [res (->> at-reports-clj
                       (filter #(parse-int (:year %)))
                       (map #(update % :year parse-int))
                       (group-by :year)
@@ -335,7 +347,7 @@
      (elapsed "active-years")
      (if @at-actives
        @at-actives
-       (let [res (->> @at-reports-clj
+       (let [res (->> at-reports-clj
                       (map (fn [r]
                              (let [[init end] (str/split (:implementationPeriod r) #"-")]
                                (assoc r :implementationInit (parse-int init) :implementationEnd (or (parse-int end) (current-year))))))

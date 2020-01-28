@@ -73,6 +73,7 @@ class SearchContainer extends Component {
       cljs.reports();
 //      console.log(cljs.countCountries());
 
+
       const t1 = look('cljsreports', t0);
       x.reports = [];
       x.loading = false;
