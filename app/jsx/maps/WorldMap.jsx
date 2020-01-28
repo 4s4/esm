@@ -93,7 +93,7 @@ class WorldMap extends Component {
       const t0 = performance.now();
 
       if(props.countries ){
-        const freqs = cljs.countCountries().countries;
+        const freqs = cljs.countCountries();
         const data= Object.keys(freqs).map((o) => { 
                     const c = props.countries.find(e => e.value === o);
                     return  {'name':c.label, 'value':freqs[o], 'code': c.code, 'id': c.value};

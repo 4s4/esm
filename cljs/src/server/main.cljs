@@ -238,8 +238,11 @@
                                  (update :countries conj (:country r)))))
                          {:countries []}
                          reports)
-             ret2 (-> ret (update :countries frequencies))]
-         (reset! at-count-countries (->to-js ret2 false)))))))
+             ret2 (-> ret (update :countries frequencies))
+             o (js/Object.)]
+         (doseq [[k v] (seq (:countries ret2))]
+               (gobj/add o (name k) v))
+         (reset! at-count-countries o))))))
 
 (defn count-regions []
   (time
