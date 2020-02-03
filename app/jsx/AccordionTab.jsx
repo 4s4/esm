@@ -235,12 +235,14 @@ export function geoRegionTab(activeIndex, selections, onSelectChange){
     <span  >Geographical Region</span>, 
         geoRegionContent.bind(this)(selections, activeIndex, onSelectChange),
         (x, o) => {
-            console.log('yuhu', o.active, o.index)                          
+            console.log('yuhu geoRegionTab', o.active, o.index);
             const t0 = performance.now();                
             this.setState({ isSunburst: false, 
                             activeIndex:  o.active ? null : 0,
-                            mapConfig: {frequencies: cljs.countCountries().countries}, 
-                                        chartConfig:null, m: RegionsMap});
+                            mapConfig: {frequencies: cljs.countRegions().regions}, 
+                            chartConfig:null,
+                            m: RegionsMap
+                                        });
             this.handleAccordion(0); 
             look('Accordion/geoRegionsTab', t0);                
             }

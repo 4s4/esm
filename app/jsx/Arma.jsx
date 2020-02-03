@@ -62,7 +62,6 @@ class Arma extends Component {
               activeIndex:  1,
 //              mapConfig: {frequencies: cljs.countCountries().countries}, 
               chartConfig:null, 
-              m: WorldMap,
               version: props.version, 
               dicts: props.dicts, 
               selections: props.selections, 

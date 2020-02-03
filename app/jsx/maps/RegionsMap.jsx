@@ -93,12 +93,12 @@ class RegionsMap extends Component {
         const d ={"Europe": 0, "Asia":0, "Africa":0, "Oceania":0, "America":0};
     
         const data= Object.keys(props.frequencies).reduce((x,o) => {
-                    const c = props.countries.find(e => e.value === o);
-                    x[c.region.label]+=props.frequencies[o];
+                    const c = props.countries.find(e => e.region.id === o);
+                    if(c){
+                      x[c.region.label]+=props.frequencies[o];
+                    }
                     return x;
                     }, d);
-
-        console.log('props.regions', props.regions);
         const regionValue = (x) => props.regions.find(r => r.label === x).value;
         const dataT = [
           {code: 'eu', value:data["Europe"], codeName:"Europe", regValue:regionValue("Europe") },
