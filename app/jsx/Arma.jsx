@@ -61,7 +61,6 @@ class Arma extends Component {
               isSunburst: false,
               activeIndex:  1,
 //              mapConfig: {frequencies: cljs.countCountries().countries}, 
-              chartConfig:null, 
               version: props.version, 
               dicts: props.dicts, 
               selections: props.selections, 
