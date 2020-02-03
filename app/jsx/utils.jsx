@@ -1,3 +1,7 @@
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("utils");
+log.setLevel("INFO");
+
 export const summarise = function(str, wordMax){
     if(str === null) return "";
     const descReg = /[^\s]+/g;
@@ -11,7 +15,7 @@ export const summarise = function(str, wordMax){
 
   export const look = function(m, t0){
     const t1 = performance.now();
-    console.log(`performance to do ${m} took: ` + (t1 - t0) + " milliseconds.");
+    log.debug(`performance to do ${m} took: ` + (t1 - t0) + " milliseconds.");
     return t1;
   }
   

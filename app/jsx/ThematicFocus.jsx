@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
 import Checkbox from 'semantic-ui-react/dist/commonjs/modules/Checkbox/Checkbox';
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("ThematicFocus");
+log.setLevel("INFO");
 
 
 function CheckBox(props){

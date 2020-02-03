@@ -4,7 +4,10 @@ const theMap = require('@highcharts/map-collection/custom/world-continents.geo.j
 import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 // https://jsfiddle.net/user2314737/uhp2wgkn/
-  
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("RegionsMap");
+log.setLevel("INFO");
+
 function mapData(data, onChangeMap) {
   return {
     chart: {
@@ -60,7 +63,7 @@ function mapData(data, onChangeMap) {
       point: {
         events: {
            click: function(e) {
-                console.log('region map click', e.point.options);
+                log.debug('region map click', e.point.options);
 
                 onChangeMap('geoRegion', {id: e.point.options.regValue});
             }

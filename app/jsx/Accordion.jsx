@@ -1,3 +1,7 @@
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("Accordion");
+log.setLevel("INFO");
+
 import {pieChart, barChart, sunburstChart} from './charts/Charts';
 
 export function ecoRegionAccordion(regionsFilters, regionsFrequencies, onClick, selections){
@@ -56,13 +60,13 @@ export function sectorAccordion(sectorFilters, sectorFrequencies, handleOpen){
 }
 
 export function thematicFocusAccordion(thematicFocusFilters, thematicFocusFrequencies, onSelect){
-    console.log('yay', thematicFocusFrequencies);
+    log.debug('yay', thematicFocusFrequencies);
     const cats = thematicFocusFilters.map( o => o.name);
     const datt = thematicFocusFilters.map( o => thematicFocusFrequencies[o.kw]); 
     const finder = (x) => thematicFocusFilters.find(y => y.name === x);
     return barChart('Explore the TSM by Thematic Focus', cats, datt, finder, onSelect);
 }
-const mockFinder = (x) => {console.log('mockFinder', x); return x;};
+const mockFinder = (x) => {log.debug('mockFinder', x); return x;};
 
 export function approvalsAccordion(approvals, onYear){
     const catt = approvals.map(o => o.label);

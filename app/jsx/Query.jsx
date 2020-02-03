@@ -3,8 +3,10 @@ import List from 'semantic-ui-react/dist/commonjs/elements/List/List';
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label';
 import Popup from 'semantic-ui-react/dist/commonjs/modules/Popup/Popup';
 import Button from 'semantic-ui-react/dist/commonjs/elements/Button/Button';
-import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import ShortContent from './ShortContent'
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("Query");
+log.setLevel("INFO");
 
 const  intersection = (setA, setB) => {
   var _intersection = new Set();
@@ -17,7 +19,7 @@ const  intersection = (setA, setB) => {
 };
 
 function resultsIcon(t, col, splitSearch, splitSearchKey){
-  return (<div><Button color='blue' style={{fontSize: '.48571429rem'}} circular basic={t !== splitSearchKey} size='mini' icon='bolt' onClick={() => { splitSearch(t === splitSearchKey ? null : t); console.log('yay!',t, col.length);}}/>{col.length} docs</div>);
+  return (<div><Button color='blue' style={{fontSize: '.48571429rem'}} circular basic={t !== splitSearchKey} size='mini' icon='bolt' onClick={() => { splitSearch(t === splitSearchKey ? null : t); log.debug('yay!',t, col.length);}}/>{col.length} docs</div>);
 }
 
 export function items (query, selections, results, thematicFocus, onChangeSelect, onYear, onCheck, splitSearch, splitSearchKey) {

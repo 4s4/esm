@@ -6,6 +6,9 @@ import Highcharts from 'highcharts/highmaps'
 import HighchartsReact from 'highcharts-react-official'
 import {look} from './../utils';
 const cljs = require('../../../js/cljs.js');
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("WorldMap");
+log.setLevel("INFO");
 
 function mapData(data, onChangeMap) {
   const h = window.innerHeight-150;

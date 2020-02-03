@@ -1,3 +1,7 @@
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("Charts");
+log.setLevel("WARN");
+
 export function pieChart(title, width, height, cat, dat, onClick, selections){
  return {
     title: {
@@ -48,7 +52,7 @@ export function barChart(title, cat, dat, finder, onSelect){
             events: {
                click: function(e) {
                    const selection = finder(e.point.category);
-                    console.log('bar chart click', selection);
+                   log.info('bar chart click', selection);
                     onSelect(selection);
                 }
             }
@@ -68,11 +72,11 @@ export function sunburstChart(title, d, drill, finder, onSelect){
                     if (drill){ 
                         const sector = finder(e.point.id);
 
-                        console.log('sunburstChart', e.point, sector);
+                        log.info('sunburstChart', e.point, sector);
                         sector && onSelect(sector);
                     } else {
                         const type = finder(e.point.id);
-                        console.log('sunburstChart',type);
+                        log.info('sunburstChart',type);
                         type && onSelect('type', type);
                     }
                 }

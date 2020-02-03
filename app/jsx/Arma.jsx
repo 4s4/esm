@@ -19,9 +19,10 @@ import Highcharts from 'highcharts';
 import TableResults from './TableResults';
 const analytics = window.analytics;
 import {look} from './utils';
-
-
-
+import RegionsMap from './maps/RegionsMap';
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("Arma");
+log.setLevel("INFO");
 class Arma extends Component {
     constructor(props) {
         super(props);
@@ -83,7 +84,7 @@ class Arma extends Component {
 
       }
       splitSearch(kw){
-        console.log('splitSearch', kw, this.props.results)
+        log.debug('splitSearch', kw, this.props.results)
 
         if(kw){
           analytics('ShowSplittedQueryResults', {resultsSize: this.props.results[kw].length});
@@ -94,7 +95,7 @@ class Arma extends Component {
       }
       onChangeSelect(t, d){
         const {  selections, onSelectChange } = this.props;
-        console.log('onChangeSelect', t, d);
+        log.debug('onChangeSelect', t, d);
 
         let kks;        
         switch(t){
@@ -104,7 +105,7 @@ class Arma extends Component {
           case 'type': kks = ['types', 'types', cljs.types]; break;
           case 'sectors': kks = ['sectors', 'sectors', cljs.sectors]; break;
           default:
-            console.log('ERROR', 'type not expected!', t);        
+            log.debug('ERROR', 'type not expected!', t);        
         } 
         const filters_ = kks[2]();
         let reg = filters_.find(c => c.value === d.id);
@@ -130,9 +131,9 @@ class Arma extends Component {
       }
       
       handleAccordion (index) {
-        console.log('accordion selected', index);
+        log.debug('accordion selected', index);
         this.setState({showCombinedResults: false, splitSearchResults:null, splitSearchKey:null});
-        console.log('index', index);
+        log.debug('index', index);
       }
 
 
@@ -148,7 +149,7 @@ class Arma extends Component {
               approvalTab.bind(this)(activeIndex, selections,  onYear),
               thematicFocusTab.bind(this)(activeIndex, selections,  onCheck)];
         () => {}
-        console.log('selections', selections);
+        log.debug('selections', selections);
         return (<Accordion styled onTitleClick={this.handleAcoordionTitleClick} panels={panels}>
                 </Accordion>);
       }
@@ -158,7 +159,7 @@ class Arma extends Component {
        this.props.onSelectChange(t, d);
        const { filters } = this.props;
        const { frequencies } = this.state
-      console.log('onAccordionSelectChange', t, d);
+      log.debug('onAccordionSelectChange', t, d);
        if(t === 'ecoRegion'){
         this.setState({ 
           isSunburst: false, 
@@ -181,7 +182,7 @@ class Arma extends Component {
      }
      handleClose(){this.setState({ open: false, selectedSector: null })}
      handleOpen(sector){
-      console.log('handle open sector', sector); 
+      log.debug('handle open sector', sector); 
       this.setState({ open: true, selectedSector: sector })}
    
      render (){
@@ -189,12 +190,12 @@ class Arma extends Component {
         chartConfig, isSunburst,  m, combinedResults, mapConfig} = this.state
         const { filters, onCheck, query, selections, results, onYear  } = this.props;
         const Element = m;
-       console.log('query', query);
-       console.log('splitSearchResults', splitSearchResults);
-//        console.log('selections', selections);
-//       console.log('results', results);
+       log.debug('query', query);
+       log.debug('splitSearchResults', splitSearchResults);
+//        log.debug('selections', selections);
+//       log.debug('results', results);
           let { showCombinedResults } = this.state
-          console.log('showCombinedResults', showCombinedResults, 'combinedResuls', combinedResults && combinedResults.length);
+          log.debug('showCombinedResults', showCombinedResults, 'combinedResuls', combinedResults && combinedResults.length);
       const finalData = showCombinedResults && combinedResults.length > 0 ? combinedResults : splitSearchResults && splitSearchResults.length > 0 ? splitSearchResults : [];
       const itemsToShow = items(query, selections, results, cljs.thematicFocus(), this.onChangeSelect, onYear, onCheck, this.splitSearch, splitSearchKey);
 

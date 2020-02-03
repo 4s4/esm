@@ -5,6 +5,9 @@ import {tab, ecoRegionAccordion, typeAccordion, sectorAccordion, thematicFocusAc
 import RegionsMap from './maps/RegionsMap';
 import ThematicFocus from './ThematicFocus';
 import WorldMap from './maps/WorldMap';
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("AccordionTab");
+log.setLevel("INFO");
 
 const cljs = require('../../js/cljs.js');
 const analytics = window.analytics;
@@ -26,7 +29,7 @@ export function activeTab(activeIndex, selections, onYear){
     <span>Active year</span>,
     activeContent.bind(this)(selections,  activeIndex, onYear),
     (x, o) => {
-      console.log('yuhu', o.active, o.index)                          
+      log.debug('yuhu', o.active, o.index)                          
       const t0 = performance.now();    
       let chartConfig  = activesAccordion(cljs.activeYears(), o => onYear('active_year', {value: o}));            
       this.setState({ isSunburst: false, 
@@ -55,7 +58,7 @@ export function  approvalTab(activeIndex, selections,  onYear){
       approvalContent.bind(this)(selections,   activeIndex, onYear),
        
       (x, o) => {
-        console.log('yuhu', o.active, o.index);
+        log.debug('yuhu', o.active, o.index);
         const approvals = cljs.approvalYears();                         
         const t0 = performance.now(); 
         let chartConfig  = approvalsAccordion(approvals, o => this.props.onYear('approval_year', {value: o}));
@@ -84,7 +87,7 @@ function thematicFocusContent (selections,   activeIndex, onCheck){
         <span>Thematic Focus</span>, 
         thematicFocusContent.bind(this)(selections,   activeIndex, onCheck),
         (x, o) => {
-            console.log('yuhu', o.active, o.index)                          
+            log.debug('yuhu', o.active, o.index)                          
             const t0 = performance.now();    
             let chartConfig = thematicFocusAccordion(cljs.thematicFocus() , cljs.countThematicFocus(), 
               (o) => this.props.onCheck(o.kw, {checked: true}));
@@ -114,7 +117,7 @@ export function sectorTab(activeIndex, selections, onSelectChange){
     <span>Sector</span>, 
     sectorContent.bind(this)(selections, activeIndex, onSelectChange),
     (x, o) => {
-        console.log('yuhu', o.active, o.index)                          
+        log.debug('yuhu', o.active, o.index)                          
         const t0 = performance.now();         
         let chartConfig = sectorAccordion(cljs.sectors(), cljs.countSectors().sectors, this.handleOpen);
   
@@ -144,7 +147,7 @@ export function countryTab(activeIndex, selections,  onSelectChange){
     <span>Country</span>, 
     countryContent.bind(this)(selections, activeIndex, onSelectChange),
     (x, o) => {
-        console.log('yuhu', o.active, o.index)                          
+        log.debug('yuhu', o.active, o.index)                          
         const t0 = performance.now();                
         this.setState({ isSunburst: false, 
                         activeIndex:  o.active ? null : 1,
@@ -174,7 +177,7 @@ export function typeTab(activeIndex, selections,  onSelectChange){
     <span>Type</span>, 
     typeContent.bind(this)(selections, activeIndex, onSelectChange),
     (x, o) => {
-        console.log('yuhu', o.active, o.index)                          
+        log.debug('yuhu', o.active, o.index)                          
         const t0 = performance.now();    
         let chartConfig = typeAccordion(cljs.types(), cljs.countTypes().types, this.onChangeSelect);                                 
         this.setState({ isSunburst: true, 
@@ -204,7 +207,7 @@ export function ecoRegionTab(activeIndex, selections,   onSelectChange){
     <span  >Economical Region</span>, 
         ecoRegionContent.bind(this)(selections, activeIndex, onSelectChange),
         (x, o) => {
-        console.log('yuhu', o.active, o.index)                          
+        log.debug('yuhu', o.active, o.index)                          
         const t0 = performance.now();                 
         this.setState({ isSunburst: false, 
                         activeIndex:  o.active ? null : 11,
@@ -235,7 +238,7 @@ export function geoRegionTab(activeIndex, selections, onSelectChange){
     <span  >Geographical Region</span>, 
         geoRegionContent.bind(this)(selections, activeIndex, onSelectChange),
         (x, o) => {
-            console.log('yuhu geoRegionTab', o.active, o.index);
+            log.debug('yuhu geoRegionTab', o.active, o.index);
             const t0 = performance.now();                
             this.setState({ isSunburst: false, 
                             activeIndex:  o.active ? null : 0,

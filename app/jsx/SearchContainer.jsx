@@ -10,6 +10,9 @@ import {look} from './utils';
 import Arma from './Arma';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("SearchContainer");
+log.setLevel("INFO");
 
 const cljs = require('../../js/cljs.js');
 const  intersection = (setA, setB) => {
@@ -29,7 +32,7 @@ function assoc(o, k, v){
 
 function doSearch ( queries){
   const t0 = performance.now();
-//  console.log(queries);
+//  log.debug(queries);
   const res = cljs.search(queries);
   look('SearchContainer/doSearch', t0);
   return res;
@@ -71,13 +74,14 @@ class SearchContainer extends Component {
       cljs.reportsToAtom(r);
       cljs.thematicFocus(); // thematics are necessary thus reports are transformed and stored in atom
       cljs.reports();
-//      console.log(cljs.countCountries());
-
+//      log.debug(cljs.countCountries());
 
       const t1 = look('cljsreports', t0);
       x.reports = [];
       x.loading = false;
       this.updateStateWithVersion(x);
+      
+      
       look('cljsreports setState', t1);
     }
   } 
@@ -96,7 +100,7 @@ class SearchContainer extends Component {
 //                    'sectors': sectors.reduce((c, x) => assoc(c, x.value, x),{})
                   };      
     const t1 = look('cljs.filters... ', t0);
-    console.log('filters', state.filters);
+    log.debug('filters', state.filters);
     fetch(window.production ? '/home/GetAllRecords' : './js/all-records.json')
     .then(function(response) {
       look('fetch all records... ', t1);
@@ -127,14 +131,14 @@ class SearchContainer extends Component {
     if (vals !== undefined && vals !== null  && vals.length > 0  ){
       const selectedValues = vals.map(o => o.value);
       let dict = new Set(selectedValues);
-//    console.log('initial values', selectedValues);
+//    log.debug('initial values', selectedValues);
       if (isRecursive){
         const t0 = performance.now();
         dict = new Set();
         selectedValues.map( x => cljs.findChildrenRec(col, x).map( y => dict.add(y)));
         look('selectSelect/recursive', t0);
 
-//        console.log('recursive', dict);
+//        log.debug('recursive', dict);
       }
       if(isMultiple){
         picked[qkw] = o => intersection(dict, new Set(o[kw])).size > 0;      
@@ -187,7 +191,7 @@ class SearchContainer extends Component {
       this.fun.bind(this)(q, picked, vals, 'sectors');
     }
     look('onSelectChange', t0);
-    console.log(selectType, `Option selected:`, vals)
+    log.debug(selectType, `Option selected:`, vals)
   };
 
   onSelectYear (selectType, val) {
@@ -228,7 +232,7 @@ class SearchContainer extends Component {
         delete sels['active_year'];
       }
     }
-    console.log(selectType, `Option selected:`, val)
+    log.debug(selectType, `Option selected:`, val)
     this.searchReports(picked, { selections: sels, results: res });
     look('onSelectYear', t0);
   };
@@ -244,7 +248,7 @@ class SearchContainer extends Component {
     extraState.reports = reports;
     extraState.qq = qqs; 
     this.updateStateWithVersion(extraState);
-    console.log('current results....' ,reports.length, qqs, queries);
+    log.debug('current results....' ,reports.length, qqs, queries);
 
   }
 
@@ -252,7 +256,7 @@ class SearchContainer extends Component {
     const t0 = performance.now();
 
     const v = y.checked;
-    console.log('listening' , opt, v);
+    log.debug('listening' , opt, v);
     const q = v ?  r => r[opt] : null;
 
     const { ...picked } = this.state.qq;
@@ -279,7 +283,7 @@ class SearchContainer extends Component {
       delete res['thematicFocus'];
       delete sels['thematicFocus'];
     }
-    console.log('keys:', Object.keys(picked));
+    log.debug('keys:', Object.keys(picked));
     this.searchReports(picked, { selections: sels, results: res });
     look('onCheckBoxChange', t0);
   }

@@ -17,11 +17,14 @@ import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment/Segment';
 import download from 'downloadjs';
 import {look} from './utils';
 const cljs = require('../../js/cljs.js');
+import logLevel from 'loglevel';
+var log = logLevel.getLogger("TableResults");
+log.setLevel("INFO");
 
 function downloadFile(url){
-  console.log('before download');
+  log.debug('before download');
   download(url);
-  console.log('after download');
+  log.debug('after download');
 }
 
 function rightOption (d, types) {
@@ -130,7 +133,7 @@ class TableResults extends Component {
 
   sortTable(t){
     const { data, filters, dicts } = this.state;
-    console.log('sortTable:', t);
+    log.debug('sortTable:', t);
     let sorted = [];
     if (t) {
       if (t === 'title'){
@@ -223,8 +226,8 @@ class TableResults extends Component {
         const active_year= parseInt(selections.active_year, 10);
         churro += "period="+active_year+","+(active_year + 1);}
       if(selections.approval_year){ churro += "year="+selections.approval_year;}
-      console.log('churro', churro, encodeURI(churro));
-      console.log('donwloading type', d);
+      log.debug('churro', churro, encodeURI(churro));
+      log.debug('donwloading type', d);
       let opts = {};
       if (window.production){
         opts = {
@@ -243,7 +246,7 @@ class TableResults extends Component {
         return response.text();
       }.bind(this))
       .then(function(responseText){
-        console.log('responseText', responseText);
+        log.debug('responseText', responseText);
         const ext = window.production ? '' : d.value;
         const file = `${responseText}.${ext}`;
         analytics('donwloading', {file: file});
@@ -284,7 +287,7 @@ class TableResults extends Component {
     return ( <Segment>
         <Header as='h3' block color='blue'>Listing {processedData.length} documents:</Header>
 
-        <Dropdown text='Sort Results by ...' onChange={ (o, d) => { console.log('searching by:', d.value); this.sortTable(d.value)}} clearable options={options} selection />
+        <Dropdown text='Sort Results by ...' onChange={ (o, d) => { log.debug('searching by:', d.value); this.sortTable(d.value)}} clearable options={options} selection />
         <Dropdown  onChange={ (o, d) => {this.downloadData(d); }}  options={[{label:'EXCEL', value:'xlsx'}, {label:'CSV', value:'csv'}]} text='Download File' selection />
 
               <Table sortable fixed striped basic='very'>
