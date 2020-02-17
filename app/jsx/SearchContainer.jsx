@@ -71,10 +71,13 @@ class SearchContainer extends Component {
   saveReports(x){
     return (r) => {
       const t0 = performance.now();
+
       cljs.reportsToAtom(r);
       cljs.thematicFocus(); // thematics are necessary thus reports are transformed and stored in atom
+      cljs.regions();
       cljs.reports();
 //      log.debug(cljs.countCountries());
+
 
       const t1 = look('cljsreports', t0);
       x.reports = [];
@@ -178,7 +181,8 @@ class SearchContainer extends Component {
       this.fun.bind(this)(q, picked, vals, 'geoRegions');
     } else if(selectType === "ecoRegion"){
       const countryVals = vals.reduce((c, x) => c.concat(x.countries) ,[]).map( v => { return { value: v.id, text: v.name }});
-      const [q, picked]  = this.selectSelect.bind(this)(cljs.regions().filter(o => o["parent-value"]==="1"), countryVals, 'ecoRegion', 'country', false);
+      const [q, picked]  = this.selectSelect.bind(this)(cljs.regions().filter(o => o["parent-value"]==="1"), vals, 
+      'ecoRegion', 'regions', false, true);
       this.fun.bind(this)(q, picked, vals, 'ecoRegions');
     } else if(selectType === "country") {
       const [q, picked] = this.selectSelect.bind(this)(cljs.countries(), vals, 'country', 'country', false);

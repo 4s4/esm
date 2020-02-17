@@ -51,7 +51,10 @@ function toUrl(s){
  function centerOption(d, sectors_, countries, regions){ 
   const sectors = d.sectors.map(s => sectors_.find( o => o.value === s));
   const country = countries.find( o => o.value === d.country);
-  const region = regions.find( o => o.value === d.region);
+  let region = regions.find( o => o.value === d.region);
+  if (!region) {
+    region = {};
+  }
 
   return (
     <Item.Group>
@@ -73,14 +76,23 @@ function toUrl(s){
     );
   }
 
+
  function leftOption(d, regions){ 
-  const region = regions.find( o => o.value === d.region);
+  let region = regions.find( o => o.value === d.region);
+
+//  console.log('GEO-REG', cljs.regions().filter(o => o["parent-value"]==="0"));
+  if(!region){
+    console.log('NO REGION', d);
+    region = {};
+  }
+
   const dict = {"Africa": "Africa", "America": "Americas", "Asia": "Asia", "Europe": "Europe", "Oceania": "Southeast_Asia"};
+  
   return (      
   <Popup key={d.value} inverted content={`Region: ${region.label}`} trigger={ <Image size='tiny' src={`img/maps/${dict[region.label]}.png`} />} />      
     );
   }
-  
+
  function tableData (dd) {
   const t0 = performance.now();
    const finalData = cljs.jsReports(dd);
